@@ -2,5 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:UntappdViewer">
     
-    <SolidColorBrush x:Key="MainColor" Color="#fcbf0e"/>
+    <LinearGradientBrush x:Key="MainColor" SpreadMethod="Reflect" EndPoint="0,1">
+        <GradientStop Color="#ffc100" Offset="0" />
+        <GradientStop Color="#fd9532" Offset="1" />
+    </LinearGradientBrush>
 </ResourceDictionary>
