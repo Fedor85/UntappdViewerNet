@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using Prism.Unity;
 using Unity;
+using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Views;
 
 namespace UntappdViewer
@@ -21,6 +22,17 @@ namespace UntappdViewer
                 Application.Current.MainWindow = window;
                 Application.Current.MainWindow.Show();
             }
+        }
+
+        protected override void ConfigureContainer()
+        {
+            base.ConfigureContainer();
+            RegisterServices();
+        }
+
+        private void RegisterServices()
+        {
+            Container.RegisterType<IDialogService, Services.DialogService>();
         }
     }
 }

@@ -91,6 +91,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Interfaces\ICloseable.cs" />
+    <Compile Include="Services\DialogService.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Page Include="Views\Shell.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -145,6 +146,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\pbu_320_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UntappdViewer.Interfaces\UntappdViewer.Interfaces.csproj">
+      <Project>{bb613be0-ae21-4a41-836a-c904d16444f6}</Project>
+      <Name>UntappdViewer.Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
