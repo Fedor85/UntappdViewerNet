@@ -8,7 +8,7 @@ namespace UntappdViewer
     {
         protected override DependencyObject CreateShell()
         {
-            return this.Container.Resolve<MainWindow>();
+            return this.Container.Resolve<Shell>();
         }
 
         protected override void InitializeShell()
