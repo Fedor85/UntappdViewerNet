@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using UntappdViewer.Interfaces;
 
 namespace UntappdViewer.Views
 {
@@ -10,6 +11,9 @@ namespace UntappdViewer.Views
         public Shell()
         {
             InitializeComponent();
+            ICloseable closeable = DataContext as ICloseable;
+            if (closeable != null)
+                Closing += closeable.Closing;
         }
     }
 }
