@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="UntappdViewer" Height="600" Width="800" Background="{StaticResource MainColor}" WindowStartupLocation ="CenterScreen">
     <Grid>
-        
+        <Image Height="300" Width="300" Source="Resources\pbu_320_white.png"/>
     </Grid>
 </Window>
