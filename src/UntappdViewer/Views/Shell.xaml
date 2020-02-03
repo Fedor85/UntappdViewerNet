@@ -1,13 +1,15 @@
-﻿<Window x:Class="UntappdViewer.Shell"
+﻿<Window x:Class="UntappdViewer.Views.Shell"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UntappdViewer"
+        xmlns:views="clr-namespace:UntappdViewer.Views"
         xmlns:prism="http://prismlibrary.com/"
         mc:Ignorable="d"
-        Title="UntappdViewer" Height="600" Width="800" Background="{StaticResource MainColor}" WindowStartupLocation ="CenterScreen">
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        Title="{Binding Title}" Height="600" Width="800" Background="{StaticResource MainColor}" WindowStartupLocation ="CenterScreen">
     <ItemsControl prism:RegionManager.RegionName="{x:Static local:RegionNames.RootControlRegion}" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Image Height="300" Width="300" Source="Resources\pbu_320_white.png"/>
+        <Image Height="300" Width="300" Source="..\Resources\pbu_320_white.png"/>
     </ItemsControl>
 </Window>
