@@ -14,11 +14,11 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Content="как твое имя?" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Foreground="#ffffff"/>
+        <Label Grid.Row="0" Content="{x:Static properties:Resources.UntappdUserName}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Foreground="#ffffff"/>
         <ItemsControl Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Image Height="80" Width="300" Source="..\Resources\pbu_320_white.png"/>
             <Label Content="{x:Static properties:Resources.Signature}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Foreground="#ffffff"/>
         </ItemsControl>
-        <Label Grid.Row="2" Content="открыть файл:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Foreground="#ffffff"/>
+        <Label Grid.Row="2" Content="{x:Static properties:Resources.OpenFile}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Foreground="#ffffff"/>
     </Grid>
 </UserControl>

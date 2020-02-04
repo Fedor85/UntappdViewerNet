@@ -79,6 +79,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open file project/untappd data:.
+        /// </summary>
+        public static string OpenFile {
+            get {
+                return ResourceManager.GetString("OpenFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap pbu_320_white {
@@ -104,6 +113,15 @@ namespace UntappdViewer.Properties {
             get {
                 object obj = ResourceManager.GetObject("untappd_bottles", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Untappd user name:.
+        /// </summary>
+        public static string UntappdUserName {
+            get {
+                return ResourceManager.GetString("UntappdUserName", resourceCulture);
             }
         }
         
