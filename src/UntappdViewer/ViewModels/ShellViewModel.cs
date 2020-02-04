@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.Reflection;
 using System.Windows;
 using Prism.Mvvm;
 using UntappdViewer.Interfaces;
@@ -10,7 +12,7 @@ namespace UntappdViewer.ViewModels
     {
         private IDialogService dialogService;
 
-        public string Title { get; set; } = "UntappdViewer";
+        public string Title { get; set; } = String.Format("{0} ({1})",Properties.Resources.AppName, Assembly.GetEntryAssembly().GetName().Version);
 
         public ShellViewModel(IDialogService dialogService)
         {
