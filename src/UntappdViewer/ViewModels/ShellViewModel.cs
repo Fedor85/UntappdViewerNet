@@ -19,7 +19,7 @@ namespace UntappdViewer.ViewModels
 
         public void Closing(object sender, CancelEventArgs e)
         {
-            e.Cancel = dialogService.Ask("Внимание!", "Вы желаете закрыть приложение?") != MessageBoxResult.OK;
+            e.Cancel = dialogService.Ask(Properties.Resources.Warning, Properties.Resources.AskCloseApp) != MessageBoxResult.OK;
         }
     }
 }
