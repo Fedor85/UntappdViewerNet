@@ -1,7 +1,9 @@
 ﻿using System.Windows;
+using Prism.Modularity;
 using Prism.Unity;
 using Unity;
 using UntappdViewer.Interfaces.Services;
+using UntappdViewer.Modules;
 using UntappdViewer.Views;
 
 namespace UntappdViewer
@@ -28,6 +30,17 @@ namespace UntappdViewer
         {
             base.ConfigureContainer();
             RegisterServices();
+        }
+
+        protected override void ConfigureModuleCatalog()
+        {
+            base.ConfigureModuleCatalog();
+            RegisterModules(ModuleCatalog);
+        }
+
+        private void RegisterModules(IModuleCatalog moduleCatalog)
+        {
+            moduleCatalog.AddModule(typeof(ShellModule));
         }
 
         private void RegisterServices()

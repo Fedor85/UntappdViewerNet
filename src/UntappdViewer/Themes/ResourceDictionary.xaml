@@ -6,4 +6,9 @@
         <GradientStop Color="#ffc100" Offset="0" />
         <GradientStop Color="#fd9532" Offset="1" />
     </LinearGradientBrush>
+    <ImageBrush x:Key="MainBackground" ImageSource="..\Resources\untappd_bottles.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0 0 80 80" Opacity="0.4">
+        <ImageBrush.Transform>
+            <RotateTransform Angle="-45"/>
+        </ImageBrush.Transform>
+    </ImageBrush>
 </ResourceDictionary>

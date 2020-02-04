@@ -4,22 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UntappdViewer"
-        xmlns:views="clr-namespace:UntappdViewer.Views"
+        xmlns:properties="clr-namespace:UntappdViewer.Properties"
         xmlns:prism="http://prismlibrary.com/"
         mc:Ignorable="d"
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="{Binding Title}" Height="600" Width="800" MinHeight="600" MinWidth="800" Background="{StaticResource MainColor}" WindowStartupLocation ="CenterScreen">
-    <Grid>
-        <Grid.Background >
-            <ImageBrush ImageSource="..\Resources\untappd_bottles.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0 0 80 80" Opacity="0.4">
-                <ImageBrush.Transform>
-                    <RotateTransform Angle="-45"/>
-                </ImageBrush.Transform>
-            </ImageBrush>
-        </Grid.Background>
-        <ItemsControl prism:RegionManager.RegionName="{x:Static local:RegionNames.RootControlRegion}" HorizontalAlignment="Center" VerticalAlignment="Center" >
+    <Grid Background="{StaticResource MainBackground}">
+        <ItemsControl HorizontalAlignment="Center" VerticalAlignment="Center" >
             <Image Height="80" Width="300" Source="..\Resources\pbu_320_white.png"/>
-            <Label x:Name="SignatureLabel" Content="{Binding Signature}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Foreground="#ffffff"/>
+            <Label Content="{x:Static properties:Resources.Signature}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Foreground="#ffffff"/>
         </ItemsControl>
+        <ContentControl prism:RegionManager.RegionName="{x:Static local:RegionNames.RootControlRegion}"/>
     </Grid>
 </Window>
