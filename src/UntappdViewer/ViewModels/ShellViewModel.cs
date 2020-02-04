@@ -13,6 +13,8 @@ namespace UntappdViewer.ViewModels
 
         public string Title  => $"{Properties.Resources.AppName} ({Assembly.GetEntryAssembly()?.GetName().Version})";
 
+        public string Signature => Properties.Resources.Signature;
+
         public ShellViewModel(IDialogService dialogService)
         {
             this.dialogService = dialogService;

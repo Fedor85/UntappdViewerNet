@@ -133,4 +133,8 @@
     <value>Предупреждение.</value>
     <comment>ru-ru</comment>
   </data>
+  <data name="Signature" xml:space="preserve">
+    <value>created by fvasilets@gmail.com</value>
+    <comment>en-en</comment>
+  </data>
 </root>
