@@ -11,9 +11,9 @@ namespace UntappdViewer.Views
         public Shell()
         {
             InitializeComponent();
-            ICloseable closeable = DataContext as ICloseable;
-            if (closeable != null)
-                Closing += closeable.Closing;
+            IClosable closable = DataContext as IClosable;
+            if (closable != null)
+                Closing += closable.Closing;
         }
     }
 }

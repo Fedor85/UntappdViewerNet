@@ -6,7 +6,7 @@ using UntappdViewer.Interfaces.Services;
 
 namespace UntappdViewer.ViewModels
 {
-    public class ShellViewModel: BindableBase, ICloseable
+    public class ShellViewModel: BindableBase, IClosable
     {
         private IDialogService dialogService;
 
