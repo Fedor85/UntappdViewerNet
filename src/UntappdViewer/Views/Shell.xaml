@@ -8,7 +8,7 @@
         xmlns:prism="http://prismlibrary.com/"
         mc:Ignorable="d"
         prism:ViewModelLocator.AutoWireViewModel="True"
-        Title="{Binding Title}" Height="600" Width="800" Background="{StaticResource MainColor}" WindowStartupLocation ="CenterScreen">
+        Title="{Binding Title}" Height="600" Width="800" MinHeight="600" MinWidth="800" Background="{StaticResource MainColor}" WindowStartupLocation ="CenterScreen">
     <ItemsControl prism:RegionManager.RegionName="{x:Static local:RegionNames.RootControlRegion}" HorizontalAlignment="Center" VerticalAlignment="Center">
         <Image Height="80" Width="300" Source="..\Resources\pbu_320_white.png"/>
         <Label x:Name="SignatureLabel" Content="{Binding Signature}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Foreground="#ffffff"/>
