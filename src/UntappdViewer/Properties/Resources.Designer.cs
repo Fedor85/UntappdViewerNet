@@ -79,11 +79,20 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open file project/untappd data:.
+        ///   Looks up a localized string similar to Open file.
         /// </summary>
         public static string OpenFile {
             get {
                 return ResourceManager.GetString("OpenFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open file project/untappd data:.
+        /// </summary>
+        public static string OpenFileCaption {
+            get {
+                return ResourceManager.GetString("OpenFileCaption", resourceCulture);
             }
         }
         

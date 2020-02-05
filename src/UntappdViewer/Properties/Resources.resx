@@ -131,7 +131,7 @@
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Warning.</value>
-    <comment>ru-ru</comment>
+    <comment>en-en</comment>
   </data>
   <data name="Signature" xml:space="preserve">
     <value>created by fvasilets@gmail.com</value>
@@ -144,8 +144,12 @@
     <value>Untappd user name:</value>
     <comment>en-en</comment>
   </data>
-  <data name="OpenFile" xml:space="preserve">
+  <data name="OpenFileCaption" xml:space="preserve">
     <value>Open file project/untappd data:</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="OpenFile" xml:space="preserve">
+    <value>Open file</value>
     <comment>en-en</comment>
   </data>
 </root>
