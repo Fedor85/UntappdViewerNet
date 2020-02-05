@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 
 namespace UntappdViewer.Interfaces.Services
 {
@@ -6,6 +7,6 @@ namespace UntappdViewer.Interfaces.Services
     {
         MessageBoxResult Ask(string caption, string message);
 
-        string OpenFile(string initialDirectory, params string[] extensions);
+        string OpenFile(string initialDirectory, List<string> extensions);
     }
 }

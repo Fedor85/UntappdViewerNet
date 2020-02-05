@@ -1,15 +1,22 @@
-﻿namespace UntappdViewer
+﻿using System.Collections.Generic;
+
+namespace UntappdViewer
 {
     public static class Extensions
     {
         /// <summary>
         /// Import untappd data
         /// </summary>
-        public static string CVS = "cvs";
+        private static string CVS = "cvs";
 
         /// <summary>
         /// Проект данных по Untappd
         /// </summary>
-        public static string UNTP = "untp";
+        private static string UNTP = "untp";
+
+        public static List<string> GetExtensions()
+        {
+            return new List<string> { CVS, UNTP };
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 using UntappdViewer.Interfaces;
 
 namespace UntappdViewer.Views
@@ -13,7 +14,13 @@ namespace UntappdViewer.Views
             InitializeComponent();
             IWelcomeViewModel welcomeViewModel = DataContext as IWelcomeViewModel;
             if (welcomeViewModel != null)
-                OpenFileButton.Click += welcomeViewModel.OpenFileButtonClick;
+                AttachHendlers(welcomeViewModel);
+        }
+
+        private void AttachHendlers(IWelcomeViewModel welcomeViewModel)
+        {
+            OpenFileButton.Click += welcomeViewModel.OpenFileButtonClick;
+            Drop += welcomeViewModel.FileOnDrop;
         }
     }
 }

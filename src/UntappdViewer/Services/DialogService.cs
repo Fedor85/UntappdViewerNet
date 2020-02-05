@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using Microsoft.Win32;
@@ -13,7 +14,7 @@ namespace UntappdViewer.Services
             return MessageBox.Show(message, caption, MessageBoxButton.OKCancel);
         }
 
-        public string OpenFile(string initialDirectory, params string[] extensions)
+        public string OpenFile(string initialDirectory, List<string> extensions)
          {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (!String.IsNullOrEmpty(initialDirectory))
@@ -24,9 +25,9 @@ namespace UntappdViewer.Services
             return openFileDialog.FileName;
         }
 
-        private string GetFilter(params string[] extensions)
+        private string GetFilter(List<string> extensions)
         {
-            if (extensions.Length == 0)
+            if (extensions.Count == 0)
                 return String.Empty;
 
             StringBuilder filter = new StringBuilder();
