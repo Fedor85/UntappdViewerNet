@@ -6,6 +6,6 @@ namespace UntappdViewer.Interfaces.Services
     {
         MessageBoxResult Ask(string caption, string message);
 
-        string OpenFile(params string[] extensions);
+        string OpenFile(string initialDirectory, params string[] extensions);
     }
 }

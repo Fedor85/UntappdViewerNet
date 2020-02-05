@@ -17,7 +17,7 @@ namespace UntappdViewer.ViewModels
 
         public void OpenFileButtonClick(object sender, RoutedEventArgs e)
         {
-            string filePath = dialogService.OpenFile(Extensions.CVS, Extensions.UNTP);
+            string filePath = dialogService.OpenFile(String.Empty, Extensions.CVS, Extensions.UNTP);
             if (String.IsNullOrEmpty(filePath))
                 return;
         }

@@ -13,9 +13,12 @@ namespace UntappdViewer.Services
             return MessageBox.Show(message, caption, MessageBoxButton.OKCancel);
         }
 
-        public string OpenFile(params string[] extensions)
+        public string OpenFile(string initialDirectory, params string[] extensions)
          {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (!String.IsNullOrEmpty(initialDirectory))
+                 openFileDialog.InitialDirectory = initialDirectory;
+
             openFileDialog.Filter = GetFilter(extensions);
             openFileDialog.ShowDialog();
             return openFileDialog.FileName;
