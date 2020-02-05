@@ -98,6 +98,9 @@
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\WelcomeViewModel.cs" />
+    <Compile Include="Views\Untappd.xaml.cs">
+      <DependentUpon>Untappd.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Welcome.xaml.cs">
       <DependentUpon>Welcome.xaml</DependentUpon>
     </Compile>
@@ -116,6 +119,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Themes\ResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Untappd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

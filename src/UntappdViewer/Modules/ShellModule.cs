@@ -1,6 +1,9 @@
-﻿using Prism.Ioc;
+﻿using System;
+using System.Windows.Controls;
+using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
+using UntappdViewer.Properties;
 using UntappdViewer.Views;
 
 namespace UntappdViewer.Modules
@@ -20,7 +23,12 @@ namespace UntappdViewer.Modules
 
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            Welcome view = containerProvider.Resolve<Welcome>();
+            UserControl view;
+            if(String.IsNullOrEmpty(Settings.Default.OpenFileInitialDirectory))
+                view = containerProvider.Resolve<Welcome>();
+            else
+                view = containerProvider.Resolve<Untappd>();
+
             regionManager.Regions[RegionNames.RootControlRegion].Add(view);
         }
     }
