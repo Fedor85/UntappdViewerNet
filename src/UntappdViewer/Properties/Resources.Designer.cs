@@ -70,7 +70,7 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Закрыть программу?.
+        ///   Looks up a localized string similar to Close application?.
         /// </summary>
         public static string AskCloseApp {
             get {
@@ -126,7 +126,7 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Предупреждение..
+        ///   Looks up a localized string similar to Warning..
         /// </summary>
         public static string Warning {
             get {
