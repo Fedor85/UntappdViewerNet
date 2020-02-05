@@ -92,6 +92,7 @@
     </ApplicationDefinition>
     <Compile Include="Different\ModuleNames.cs" />
     <Compile Include="Interfaces\IClosable.cs" />
+    <Compile Include="Interfaces\IWelcomeViewModel.cs" />
     <Compile Include="Modules\ShellModule.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />

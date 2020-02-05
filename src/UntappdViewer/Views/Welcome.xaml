@@ -32,7 +32,8 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Content="{x:Static properties:Resources.OpenFileCaption}" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="15" Foreground="#ffffff"/>
-            <Button Grid.Row="1" Height="20" Width="80" Content="{x:Static properties:Resources.OpenFile}" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#ffffff"/>
+            <Button Name="OpenFileButton" Grid.Row="1" Height="20" Width="80" Content="{x:Static properties:Resources.OpenFile}"
+                    HorizontalAlignment="Center" VerticalAlignment="Top" Background="#ffffff"/>
         </Grid>
     </Grid>
 </UserControl>
