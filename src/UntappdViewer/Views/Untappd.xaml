@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
     <UserControl.Background>
-        <SolidColorBrush Opacity="0.3" Color="White"/>
+        <SolidColorBrush Opacity="0.3" Color="#ffffff"/>
     </UserControl.Background>
     <Grid>
         <Grid.RowDefinitions>
