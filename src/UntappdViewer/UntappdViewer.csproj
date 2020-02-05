@@ -90,6 +90,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Different\Extensions.cs" />
     <Compile Include="Different\ModuleNames.cs" />
     <Compile Include="Interfaces\IClosable.cs" />
     <Compile Include="Interfaces\IWelcomeViewModel.cs" />

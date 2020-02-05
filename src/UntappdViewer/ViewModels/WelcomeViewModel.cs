@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using Prism.Mvvm;
 using UntappdViewer.Interfaces;
 using UntappdViewer.Interfaces.Services;
@@ -16,7 +17,9 @@ namespace UntappdViewer.ViewModels
 
         public void OpenFileButtonClick(object sender, RoutedEventArgs e)
         {
-
+            string filePath = dialogService.OpenFile(Extensions.CVS, Extensions.UNTP);
+            if (String.IsNullOrEmpty(filePath))
+                return;
         }
     }
 }
