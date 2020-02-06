@@ -4,25 +4,27 @@ using System.Windows;
 using System.Windows.Input;
 using Prism.Commands;
 using Prism.Mvvm;
-using UntappdViewer.Interfaces;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Properties;
 
 namespace UntappdViewer.ViewModels
 {
-    public class WelcomeViewModel : BindableBase, IWelcomeViewModel
+    public class WelcomeViewModel : BindableBase
     {
         private IDialogService dialogService;
 
         public ICommand OpenFileCommand { get; }
 
+        public ICommand DropFileCommand { get; }
+
         public WelcomeViewModel(IDialogService dialogService)
         {
             this.dialogService = dialogService;
             OpenFileCommand = new DelegateCommand(OpenFile);
+            DropFileCommand = new DelegateCommand<DragEventArgs>(DropFile);
         }
 
-        public void OpenFile()
+        private void OpenFile()
         {
             string openFilePath = dialogService.OpenFile(Settings.Default.OpenFileInitialDirectory, Extensions.GetExtensions());
             if (String.IsNullOrEmpty(openFilePath))
@@ -31,7 +33,7 @@ namespace UntappdViewer.ViewModels
             SaveSettings(openFilePath);
         }
 
-        public void FileOnDrop(object sender, DragEventArgs e)
+        private void DropFile(DragEventArgs e)
         {
             if (!e.Data.GetDataPresent(DataFormats.FileDrop))
                 return;

@@ -1,6 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using UntappdViewer.Interfaces;
+﻿using System.Windows.Controls;
 
 namespace UntappdViewer.Views
 {
@@ -12,14 +10,6 @@ namespace UntappdViewer.Views
         public Welcome()
         {
             InitializeComponent();
-            IWelcomeViewModel welcomeViewModel = DataContext as IWelcomeViewModel;
-            if (welcomeViewModel != null)
-                AttachHendlers(welcomeViewModel);
-        }
-
-        private void AttachHendlers(IWelcomeViewModel welcomeViewModel)
-        {
-            Drop += welcomeViewModel.FileOnDrop;
         }
     }
 }
