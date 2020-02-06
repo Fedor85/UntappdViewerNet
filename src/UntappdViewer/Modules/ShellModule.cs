@@ -27,7 +27,7 @@ namespace UntappdViewer.Modules
             if(String.IsNullOrEmpty(Settings.Default.OpenFileInitialDirectory))
                 view = containerProvider.Resolve<Welcome>();
             else
-                view = containerProvider.Resolve<Untappd>();
+                view = containerProvider.Resolve<Main>();
 
             regionManager.Regions[RegionNames.RootRegion].Add(view);
         }

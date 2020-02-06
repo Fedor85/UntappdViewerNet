@@ -6,6 +6,10 @@
 
         public const string MenuRegion = "MenuRegion";
 
+        public const string MainRegion = "MainRegion";
+
         public const string StatusBarRegion = "StatusBarRegion";
+
+        public const string UntappdRegion = "UntappdRegion";
     }
 }
