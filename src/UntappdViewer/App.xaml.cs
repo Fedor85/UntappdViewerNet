@@ -11,8 +11,8 @@ namespace UntappdViewer
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            if (Debugger.IsAttached)
-                Settings.Default.Reset();
+            //if (Debugger.IsAttached)
+            //    Settings.Default.Reset();
 
             base.OnStartup(e);
             BootStrapper bootstrapper = new BootStrapper();

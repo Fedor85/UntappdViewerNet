@@ -14,6 +14,6 @@
             <Image Height="80" Width="300" Source="..\Resources\pbu_320_white.png"/>
             <Label Content="{x:Static properties:Resources.Signature}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Foreground="#ffffff"/>
         </ItemsControl>
-        <ContentControl prism:RegionManager.RegionName="{x:Static local:RegionNames.RootControlRegion}"/>
+        <ContentControl prism:RegionManager.RegionName="{x:Static local:RegionNames.RootRegion}"/>
     </Grid>
 </Window>

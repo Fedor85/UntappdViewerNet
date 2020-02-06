@@ -29,7 +29,7 @@ namespace UntappdViewer.Modules
             else
                 view = containerProvider.Resolve<Untappd>();
 
-            regionManager.Regions[RegionNames.RootControlRegion].Add(view);
+            regionManager.Regions[RegionNames.RootRegion].Add(view);
         }
     }
 }

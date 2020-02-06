@@ -2,6 +2,10 @@
 {
     public static class RegionNames
     {
-        public const string RootControlRegion = "RootControlRegion";
+        public const string RootRegion = "RootRegion";
+
+        public const string MenuRegion = "MenuRegion";
+
+        public const string StatusBarRegion = "StatusBarRegion";
     }
 }
