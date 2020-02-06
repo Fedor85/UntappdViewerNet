@@ -1,7 +1,8 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Windows;
+using System.Windows.Input;
+using Prism.Commands;
 using Prism.Mvvm;
 using UntappdViewer.Interfaces;
 using UntappdViewer.Interfaces.Services;
@@ -13,12 +14,15 @@ namespace UntappdViewer.ViewModels
     {
         private IDialogService dialogService;
 
+        public ICommand OpenFileCommand { get; }
+
         public WelcomeViewModel(IDialogService dialogService)
         {
             this.dialogService = dialogService;
+            OpenFileCommand = new DelegateCommand(OpenFile);
         }
 
-        public void OpenFileButtonClick(object sender, RoutedEventArgs e)
+        public void OpenFile()
         {
             string openFilePath = dialogService.OpenFile(Settings.Default.OpenFileInitialDirectory, Extensions.GetExtensions());
             if (String.IsNullOrEmpty(openFilePath))

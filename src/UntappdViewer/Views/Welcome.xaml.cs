@@ -19,7 +19,6 @@ namespace UntappdViewer.Views
 
         private void AttachHendlers(IWelcomeViewModel welcomeViewModel)
         {
-            OpenFileButton.Click += welcomeViewModel.OpenFileButtonClick;
             Drop += welcomeViewModel.FileOnDrop;
         }
     }
