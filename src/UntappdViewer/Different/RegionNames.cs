@@ -10,6 +10,8 @@
 
         public const string StatusBarRegion = "StatusBarRegion";
 
-        public const string UntappdRegion = "UntappdRegion";
+        public const string TreeRegion = "TreeRegion";
+
+        public const string ContentRegion = "ContentRegion";
     }
 }

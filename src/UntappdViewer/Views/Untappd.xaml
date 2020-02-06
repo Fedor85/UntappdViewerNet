@@ -7,5 +7,14 @@
              xmlns:untappdViewer="clr-namespace:UntappdViewer"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
-    <ContentControl regions:RegionManager.RegionName="{x:Static untappdViewer:RegionNames.UntappdRegion}"/>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <ContentControl Grid.Column="0" regions:RegionManager.RegionName="{x:Static untappdViewer:RegionNames.TreeRegion}"/>
+        <GridSplitter Grid.Column="1" ShowsPreview="False" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch" />
+        <ContentControl Grid.Column="2" regions:RegionManager.RegionName="{x:Static untappdViewer:RegionNames.ContentRegion}"/>
+    </Grid>
 </UserControl>
