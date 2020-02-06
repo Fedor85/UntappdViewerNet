@@ -41,6 +41,7 @@ namespace UntappdViewer
         private void RegisterModules(IModuleCatalog moduleCatalog)
         {
             moduleCatalog.AddModule(typeof(ShellModule));
+            moduleCatalog.AddModule(typeof(MainModule), InitializationMode.OnDemand);
         }
 
         private void RegisterServices()

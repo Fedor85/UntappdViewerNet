@@ -3,12 +3,11 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 using Prism.Commands;
-using Prism.Mvvm;
 using UntappdViewer.Interfaces.Services;
 
 namespace UntappdViewer.ViewModels
 {
-    public class ShellViewModel: BindableBase
+    public class ShellViewModel
     {
         private IDialogService dialogService;
 
