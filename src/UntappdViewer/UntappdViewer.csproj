@@ -101,7 +101,6 @@
     </ApplicationDefinition>
     <Compile Include="Different\Extensions.cs" />
     <Compile Include="Different\ModuleNames.cs" />
-    <Compile Include="Interfaces\IClosable.cs" />
     <Compile Include="Modules\ShellModule.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
