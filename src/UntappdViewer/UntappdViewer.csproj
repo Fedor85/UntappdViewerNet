@@ -107,6 +107,7 @@
     <Compile Include="Mappers\CheckinParser\ParameterNames.cs" />
     <Compile Include="Mappers\CheckinParser\ParameterNumber.cs" />
     <Compile Include="Mappers\CheckinParser\ParameterValue.cs" />
+    <Compile Include="Modules\BaseModue.cs" />
     <Compile Include="Modules\MainModule.cs" />
     <Compile Include="Modules\StatusBarModule.cs" />
     <Compile Include="Modules\UntappdModule.cs" />
