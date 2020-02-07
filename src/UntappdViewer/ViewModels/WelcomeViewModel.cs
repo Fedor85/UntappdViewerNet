@@ -71,7 +71,6 @@ namespace UntappdViewer.ViewModels
                 return;
 
             settingService.SetLastOpenedFilePath(openFilePath);
-            OnPropertyChanged("UntappdUserName");
             untappdService.Initialize(UntappdUserName, openFilePath);
         }
     }
