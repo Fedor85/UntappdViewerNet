@@ -152,4 +152,8 @@
     <value>Open file</value>
     <comment>en-en</comment>
   </data>
+  <data name="LoadingFrom" xml:space="preserve">
+    <value>Loading from:</value>
+    <comment>en-en</comment>
+  </data>
 </root>

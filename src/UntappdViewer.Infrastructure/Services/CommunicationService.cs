@@ -7,8 +7,13 @@ using UntappdViewer.Interfaces.Services;
 
 namespace UntappdViewer.Infrastructure.Services
 {
-    public class DialogService : IDialogService
+    public class CommunicationService : ICommunicationService
     {
+        public CommunicationService()
+        {
+            
+        }
+
         public MessageBoxResult Ask(string caption, string message)
         {
             return MessageBox.Show(message, caption, MessageBoxButton.OKCancel);
@@ -23,6 +28,22 @@ namespace UntappdViewer.Infrastructure.Services
             openFileDialog.Filter = GetFilter(extensions);
             openFileDialog.ShowDialog();
             return openFileDialog.FileName;
+        }
+
+        public event Action<string> ShowMessageEnvent;
+
+        public event Action ClearMessageEnvent;
+
+        public void ShowMessage(string message)
+        {
+            if (ShowMessageEnvent != null)
+                ShowMessageEnvent.Invoke(message);
+        }
+
+        public void ClearMessage()
+        {
+            if (ClearMessageEnvent != null)
+                ClearMessageEnvent.Invoke();
         }
 
         private string GetFilter(List<string> extensions)

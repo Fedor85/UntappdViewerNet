@@ -11,8 +11,11 @@ namespace UntappdViewer.Services
 
         public event Action<Untappd> InitializeUntappd;
 
+        public string FIlePath { get; private set; }
+
         public void Initialize(string userName, string filePath)
         {
+            FIlePath = filePath;
             Untappd = new Untappd(String.IsNullOrEmpty(userName) ? "NoName" : userName);
             Untappd.Checkins.AddRange(CheckinTextMapper.GetCheckins(FileHelper.GetTextForFile(filePath)));
             if (InitializeUntappd != null)

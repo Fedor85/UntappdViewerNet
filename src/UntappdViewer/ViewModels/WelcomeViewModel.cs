@@ -19,7 +19,7 @@ namespace UntappdViewer.ViewModels
     {
         private UntappdService untappdService;
 
-        private IDialogService dialogService;
+        private ICommunicationService communicationService;
 
         private ISettingService settingService;
 
@@ -43,10 +43,10 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public WelcomeViewModel(UntappdService untappdService, IDialogService dialogService, ISettingService settingService, IModuleManager moduleManager, IRegionManager regionManager)
+        public WelcomeViewModel(UntappdService untappdService, ICommunicationService communicationService, ISettingService settingService, IModuleManager moduleManager, IRegionManager regionManager)
         {
             this.untappdService = untappdService;
-            this.dialogService = dialogService;
+            this.communicationService = communicationService;
             this.settingService = settingService;
             this.moduleManager = moduleManager;
             this.regionManager = regionManager;
@@ -57,7 +57,7 @@ namespace UntappdViewer.ViewModels
         private void OpenFile()
         {
             string saveOpenFilePath = settingService.GetLastOpenedFilePath();
-            string openFilePath = dialogService.OpenFile(String.IsNullOrEmpty(saveOpenFilePath) ? String.Empty : Path.GetDirectoryName(saveOpenFilePath), Extensions.GetExtensions());
+            string openFilePath = communicationService.OpenFile(String.IsNullOrEmpty(saveOpenFilePath) ? String.Empty : Path.GetDirectoryName(saveOpenFilePath), Extensions.GetExtensions());
             if (String.IsNullOrEmpty(openFilePath))
                 return;
 

@@ -79,6 +79,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading from:.
+        /// </summary>
+        public static string LoadingFrom {
+            get {
+                return ResourceManager.GetString("LoadingFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open file.
         /// </summary>
         public static string OpenFile {

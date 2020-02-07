@@ -19,7 +19,7 @@ namespace UntappdViewer.ViewModels
     {
         private UntappdService untappdService;
 
-        private IDialogService dialogService;
+        private ICommunicationService communicationService;
 
         private IRegionManager regionManager;
 
@@ -41,10 +41,10 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public ShellViewModel(UntappdService untappdService, IDialogService dialogService, IRegionManager regionManager, ISettingService settingService, IModuleManager moduleManager)
+        public ShellViewModel(UntappdService untappdService, ICommunicationService communicationService, IRegionManager regionManager, ISettingService settingService, IModuleManager moduleManager)
         {
             this.untappdService = untappdService;
-            this.dialogService = dialogService;
+            this.communicationService = communicationService;
             this.regionManager = regionManager;
             this.settingService = settingService;
             this.moduleManager = moduleManager;
@@ -75,7 +75,7 @@ namespace UntappdViewer.ViewModels
 
         private void Closing(CancelEventArgs e)
         {
-            if (dialogService.Ask(Properties.Resources.Warning, Properties.Resources.AskCloseApp) == MessageBoxResult.OK)
+            if (communicationService.Ask(Properties.Resources.Warning, Properties.Resources.AskCloseApp) == MessageBoxResult.OK)
                 DeactivateViews();
             else
                 e.Cancel = true;

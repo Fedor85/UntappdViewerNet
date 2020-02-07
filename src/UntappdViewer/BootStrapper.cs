@@ -51,7 +51,7 @@ namespace UntappdViewer
 
         private void RegisterServices()
         {
-            Container.RegisterType<IDialogService, DialogService>();
+            Container.RegisterInstance<ICommunicationService>(new CommunicationService());
 
             ISettingService settingService = new SettingService();
             //if (Debugger.IsAttached)
