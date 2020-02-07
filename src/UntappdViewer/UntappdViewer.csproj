@@ -101,6 +101,12 @@
     </ApplicationDefinition>
     <Compile Include="Different\Extensions.cs" />
     <Compile Include="Different\ModuleNames.cs" />
+    <Compile Include="Mappers\CheckinTextMapper.cs" />
+    <Compile Include="Mappers\CheckinParser\CheckinParser.cs" />
+    <Compile Include="Mappers\CheckinParser\CheckinParserFactory.cs" />
+    <Compile Include="Mappers\CheckinParser\ParameterNames.cs" />
+    <Compile Include="Mappers\CheckinParser\ParameterNumber.cs" />
+    <Compile Include="Mappers\CheckinParser\ParameterValue.cs" />
     <Compile Include="Modules\MainModule.cs" />
     <Compile Include="Modules\ShellModule.cs" />
     <Compile Include="Services\DialogService.cs" />
@@ -198,6 +204,10 @@
     <ProjectReference Include="..\UntappdViewer.Interfaces\UntappdViewer.Interfaces.csproj">
       <Project>{bb613be0-ae21-4a41-836a-c904d16444f6}</Project>
       <Name>UntappdViewer.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UntappdViewer.Models\UntappdViewer.Models.csproj">
+      <Project>{b1584484-7648-4349-b8f8-47352dd85ff1}</Project>
+      <Name>UntappdViewer.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
