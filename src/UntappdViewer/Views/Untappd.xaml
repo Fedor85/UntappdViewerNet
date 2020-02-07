@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:regions="http://prismlibrary.com/"
+             xmlns:prism="http://prismlibrary.com/"
              xmlns:untappdViewer="clr-namespace:UntappdViewer"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
+             prism:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="600" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -13,8 +14,8 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <ContentControl Grid.Column="0" regions:RegionManager.RegionName="{x:Static untappdViewer:RegionNames.TreeRegion}"/>
+        <ContentControl Grid.Column="0" prism:RegionManager.RegionName="{x:Static untappdViewer:RegionNames.TreeRegion}"/>
         <GridSplitter Grid.Column="1" ShowsPreview="False" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch" />
-        <ContentControl Grid.Column="2" regions:RegionManager.RegionName="{x:Static untappdViewer:RegionNames.ContentRegion}"/>
+        <ContentControl Grid.Column="2" prism:RegionManager.RegionName="{x:Static untappdViewer:RegionNames.ContentRegion}"/>
     </Grid>
 </UserControl>
