@@ -1,12 +1,17 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using Prism.Commands;
+using Prism.Modularity;
 using Prism.Mvvm;
+using Prism.Regions;
 using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
+using UntappdViewer.Modules;
 using UntappdViewer.Services;
+using UntappdViewer.Views;
 
 namespace UntappdViewer.ViewModels
 {
@@ -17,6 +22,10 @@ namespace UntappdViewer.ViewModels
         private IDialogService dialogService;
 
         private ISettingService settingService;
+
+        private IModuleManager moduleManager;
+
+        private IRegionManager regionManager;
 
         private string untappdUserName;
 
@@ -34,11 +43,13 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public WelcomeViewModel(UntappdService untappdService, IDialogService dialogService, ISettingService settingService)
+        public WelcomeViewModel(UntappdService untappdService, IDialogService dialogService, ISettingService settingService, IModuleManager moduleManager, IRegionManager regionManager)
         {
             this.untappdService = untappdService;
             this.dialogService = dialogService;
             this.settingService = settingService;
+            this.moduleManager = moduleManager;
+            this.regionManager = regionManager;
             OpenFileCommand = new DelegateCommand(OpenFile);
             DropFileCommand = new DelegateCommand<DragEventArgs>(DropFile);
         }
@@ -50,8 +61,7 @@ namespace UntappdViewer.ViewModels
             if (String.IsNullOrEmpty(openFilePath))
                 return;
 
-            settingService.SetLastOpenedFilePath(openFilePath);
-            untappdService.Initialize(UntappdUserName, openFilePath);
+            RunUntappd(openFilePath);
         }
 
         private void DropFile(DragEventArgs e)
@@ -70,8 +80,18 @@ namespace UntappdViewer.ViewModels
             if (!Extensions.GetExtensions().Contains(FileHelper.GetExtensionWihtoutPoint(openFilePath)))
                 return;
 
+            RunUntappd(openFilePath);
+        }
+
+        private void RunUntappd(string openFilePath)
+        {
             settingService.SetLastOpenedFilePath(openFilePath);
             untappdService.Initialize(UntappdUserName, openFilePath);
+
+            moduleManager.LoadModule(typeof(MainModule).Name);
+            IRegion requestInfoRegion = regionManager.Regions[RegionNames.RootRegion];
+            object newView = requestInfoRegion.Views.First(i => i.GetType().Equals(typeof(Main)));
+            requestInfoRegion.Activate(newView);
         }
     }
 }
