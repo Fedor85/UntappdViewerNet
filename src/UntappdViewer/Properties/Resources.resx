@@ -145,7 +145,7 @@
     <comment>en-en</comment>
   </data>
   <data name="OpenFileCaption" xml:space="preserve">
-    <value>Open file project/untappd data:</value>
+    <value>Open or drop file project/untappd data:</value>
     <comment>en-en</comment>
   </data>
   <data name="OpenFile" xml:space="preserve">
