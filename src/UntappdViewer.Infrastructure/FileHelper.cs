@@ -10,13 +10,18 @@ namespace UntappdViewer.Infrastructure
             return File.ReadAllText(filePath);
         }
 
-        public static string GetExtensionWihtoutPoint(string path)
+        public static string GetExtensionWihtoutPoint(string filePath)
         {
-            string extension = Path.GetExtension(path);
+            string extension = Path.GetExtension(filePath);
             if (String.IsNullOrEmpty(extension))
                 return extension;
 
             return extension.Replace(".", String.Empty).Trim().ToLower();
+        }
+
+        public static bool FileExists(string filePat)
+        {
+            return File.Exists(filePat);
         }
     }
 }

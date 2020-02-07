@@ -7,6 +7,7 @@ using Prism.Commands;
 using Prism.Modularity;
 using Prism.Mvvm;
 using Prism.Regions;
+using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
 using UntappdViewer.Services;
@@ -52,7 +53,8 @@ namespace UntappdViewer.ViewModels
 
         private void Activate()
         {
-            if (String.IsNullOrEmpty(settingService.GetLastOpenedFilePath()))
+            string filePath = settingService.GetLastOpenedFilePath();
+            if (String.IsNullOrEmpty(filePath) && FileHelper.FileExists(filePath))
                 moduleManager.LoadModule(typeof(WelcomeModule).Name);
             else
                 moduleManager.LoadModule(typeof(MainModule).Name);
