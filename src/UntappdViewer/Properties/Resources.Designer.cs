@@ -128,9 +128,9 @@ namespace UntappdViewer.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Untappd user name:.
         /// </summary>
-        public static string UntappdUserName {
+        public static string UntappdUserNameCaption {
             get {
-                return ResourceManager.GetString("UntappdUserName", resourceCulture);
+                return ResourceManager.GetString("UntappdUserNameCaption", resourceCulture);
             }
         }
         

@@ -6,6 +6,7 @@ using Unity;
 using UntappdViewer.Infrastructure.Services;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
+using UntappdViewer.Services;
 using UntappdViewer.Views;
 
 namespace UntappdViewer
@@ -51,10 +52,11 @@ namespace UntappdViewer
             Container.RegisterType<IDialogService, DialogService>();
 
             ISettingService settingService = new SettingService();
-            //if (Debugger.IsAttached)
-            //    settingService.Reset();
+            if (Debugger.IsAttached)
+                settingService.Reset();
 
             Container.RegisterInstance(settingService);
+            Container.RegisterInstance(new UntappdService());
         }
     }
 }

@@ -3,22 +3,40 @@ using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using Prism.Commands;
+using Prism.Mvvm;
+using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
+using UntappdViewer.Services;
 
 namespace UntappdViewer.ViewModels
 {
-    public class WelcomeViewModel
+    public class WelcomeViewModel: BindableBase
     {
+        private UntappdService untappdService;
+
         private IDialogService dialogService;
 
         private ISettingService settingService;
+
+        private string untappdUserName;
 
         public ICommand OpenFileCommand { get; }
 
         public ICommand DropFileCommand { get; }
 
-        public WelcomeViewModel(IDialogService dialogService, ISettingService settingService)
+        public string UntappdUserName
         {
+            get { return untappdUserName; }
+            set
+            {
+                untappdUserName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public WelcomeViewModel(UntappdService untappdService, IDialogService dialogService, ISettingService settingService)
+        {
+            this.untappdService = untappdService;
             this.dialogService = dialogService;
             this.settingService = settingService;
             OpenFileCommand = new DelegateCommand(OpenFile);
@@ -33,6 +51,7 @@ namespace UntappdViewer.ViewModels
                 return;
 
             settingService.SetLastOpenedFilePath(openFilePath);
+            untappdService.Initialize(UntappdUserName, openFilePath);
         }
 
         private void DropFile(DragEventArgs e)
@@ -48,19 +67,12 @@ namespace UntappdViewer.ViewModels
             if (String.IsNullOrEmpty(openFilePath))
                 return;
 
-            if (!Extensions.GetExtensions().Contains(GetExtensionWihtoutPoint(openFilePath)))
+            if (!Extensions.GetExtensions().Contains(FileHelper.GetExtensionWihtoutPoint(openFilePath)))
                 return;
 
             settingService.SetLastOpenedFilePath(openFilePath);
-        }
-
-        public static string GetExtensionWihtoutPoint(string path)
-        {
-            string extension = Path.GetExtension(path);
-            if (String.IsNullOrEmpty(extension))
-                return extension;
-
-            return extension.Replace(".", String.Empty).Trim().ToLower();
+            OnPropertyChanged("UntappdUserName");
+            untappdService.Initialize(UntappdUserName, openFilePath);
         }
     }
 }
