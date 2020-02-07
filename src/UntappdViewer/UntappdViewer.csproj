@@ -113,6 +113,7 @@
     <Compile Include="Modules\UntappdModule.cs" />
     <Compile Include="Modules\WelcomeModule.cs" />
     <Compile Include="Services\UntappdService.cs" />
+    <Compile Include="ViewModels\ActiveAwareBaseModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\StatusBarViewModel.cs" />
@@ -177,6 +178,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config">
       <SubType>Designer</SubType>

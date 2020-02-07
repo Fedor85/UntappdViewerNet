@@ -1,16 +1,11 @@
-﻿using System;
-using System.Windows;
-using Prism;
-using Prism.Mvvm;
+﻿using System.Windows;
 using UntappdViewer.Interfaces.Services;
 
 namespace UntappdViewer.ViewModels
 {
-    public class UntappdViewModel : BindableBase, IActiveAware
+    public class UntappdViewModel: ActiveAwareBaseModel
     {
         private ISettingService settingService;
-
-        private bool active;
 
         private GridLength treeRegionWidth;
 
@@ -24,38 +19,20 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public bool IsActive
-        {
-            get
-            {
-                return active;
-            }
-            set
-            {
-                if (active != value)
-                {
-                    active = value;
-                    if (active)
-                        Activate();
-                    else
-                        DeActivate();
-                }
-            }
-        }
-
-        public event EventHandler IsActiveChanged;
-
         public UntappdViewModel(ISettingService settingService)
         {
             this.settingService = settingService;
         }
-        private void Activate()
+
+        protected override void Activate()
         {
+            base.Activate();
             TreeRegionWidth = new GridLength(settingService.GetTreeRegionWidth());
         }
 
-        private void DeActivate()
+        protected override void DeActivate()
         {
+            base.DeActivate();
             settingService.SetTreeRegionWidth(TreeRegionWidth.Value);
         }
     }
