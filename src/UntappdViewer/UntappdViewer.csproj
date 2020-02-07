@@ -104,6 +104,7 @@
     <Compile Include="Modules\MainModule.cs" />
     <Compile Include="Modules\ShellModule.cs" />
     <Compile Include="Services\DialogService.cs" />
+    <Compile Include="Services\SettingService.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\UntappdViewModel.cs" />

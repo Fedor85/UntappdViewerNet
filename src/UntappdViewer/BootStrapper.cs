@@ -1,9 +1,11 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.Windows;
 using Prism.Modularity;
 using Prism.Unity;
 using Unity;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
+using UntappdViewer.Services;
 using UntappdViewer.Views;
 
 namespace UntappdViewer
@@ -46,7 +48,13 @@ namespace UntappdViewer
 
         private void RegisterServices()
         {
-            Container.RegisterType<IDialogService, Services.DialogService>();
+            Container.RegisterType<IDialogService, DialogService>();
+
+            ISettingService settingService = new SettingService();
+            //if (Debugger.IsAttached)
+            //    settingService.Reset();
+
+            Container.RegisterInstance(settingService);
         }
     }
 }

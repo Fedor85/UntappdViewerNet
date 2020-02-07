@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Input;
 using Prism.Commands;
 using UntappdViewer.Interfaces.Services;
-using UntappdViewer.Properties;
 
 namespace UntappdViewer.ViewModels
 {
@@ -12,25 +11,28 @@ namespace UntappdViewer.ViewModels
     {
         private IDialogService dialogService;
 
+        private ISettingService settingService;
+
         public ICommand OpenFileCommand { get; }
 
         public ICommand DropFileCommand { get; }
 
-        public WelcomeViewModel(IDialogService dialogService)
+        public WelcomeViewModel(IDialogService dialogService, ISettingService settingService)
         {
             this.dialogService = dialogService;
+            this.settingService = settingService;
             OpenFileCommand = new DelegateCommand(OpenFile);
             DropFileCommand = new DelegateCommand<DragEventArgs>(DropFile);
         }
 
         private void OpenFile()
         {
-            string saveOpenFilePath = Settings.Default.LastOpenedFilePath;
+            string saveOpenFilePath = settingService.GetLastOpenedFilePath();
             string openFilePath = dialogService.OpenFile(String.IsNullOrEmpty(saveOpenFilePath) ? String.Empty : Path.GetDirectoryName(saveOpenFilePath), Extensions.GetExtensions());
             if (String.IsNullOrEmpty(openFilePath))
                 return;
 
-            SaveSettings(openFilePath);
+            settingService.SetLastOpenedFilePath(openFilePath);
         }
 
         private void DropFile(DragEventArgs e)
@@ -49,7 +51,7 @@ namespace UntappdViewer.ViewModels
             if (!Extensions.GetExtensions().Contains(GetExtensionWihtoutPoint(openFilePath)))
                 return;
 
-            SaveSettings(openFilePath);
+            settingService.SetLastOpenedFilePath(openFilePath);
         }
 
         public static string GetExtensionWihtoutPoint(string path)
@@ -59,12 +61,6 @@ namespace UntappdViewer.ViewModels
                 return extension;
 
             return extension.Replace(".", String.Empty).Trim().ToLower();
-        }
-
-        private void SaveSettings(string filePath)
-        {
-            Settings.Default.LastOpenedFilePath = filePath;
-            Settings.Default.Save();
         }
     }
 }
