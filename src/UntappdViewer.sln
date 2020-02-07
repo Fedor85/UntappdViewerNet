@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UntappdViewer", "UntappdVie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UntappdViewer.Interfaces", "UntappdViewer.Interfaces\UntappdViewer.Interfaces.csproj", "{BB613BE0-AE21-4A41-836A-C904D16444F6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UntappdViewer.Models", "UntappdViewer.Models\UntappdViewer.Models.csproj", "{B1584484-7648-4349-B8F8-47352DD85FF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{BB613BE0-AE21-4A41-836A-C904D16444F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB613BE0-AE21-4A41-836A-C904D16444F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB613BE0-AE21-4A41-836A-C904D16444F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1584484-7648-4349-B8F8-47352DD85FF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1584484-7648-4349-B8F8-47352DD85FF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1584484-7648-4349-B8F8-47352DD85FF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1584484-7648-4349-B8F8-47352DD85FF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
