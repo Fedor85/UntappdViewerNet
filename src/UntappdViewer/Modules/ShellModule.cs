@@ -24,7 +24,7 @@ namespace UntappdViewer.Modules
         public void OnInitialized(IContainerProvider containerProvider)
         {
             UserControl view;
-            if(String.IsNullOrEmpty(Settings.Default.OpenFileInitialDirectory))
+            if(String.IsNullOrEmpty(Settings.Default.LastOpenedFilePath))
                 view = containerProvider.Resolve<Welcome>();
             else
                 view = containerProvider.Resolve<Main>();

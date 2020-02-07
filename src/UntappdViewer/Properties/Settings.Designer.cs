@@ -26,12 +26,12 @@ namespace UntappdViewer.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string OpenFileInitialDirectory {
+        public string LastOpenedFilePath {
             get {
-                return ((string)(this["OpenFileInitialDirectory"]));
+                return ((string)(this["LastOpenedFilePath"]));
             }
             set {
-                this["OpenFileInitialDirectory"] = value;
+                this["LastOpenedFilePath"] = value;
             }
         }
         

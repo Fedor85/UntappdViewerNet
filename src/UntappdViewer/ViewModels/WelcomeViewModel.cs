@@ -25,7 +25,8 @@ namespace UntappdViewer.ViewModels
 
         private void OpenFile()
         {
-            string openFilePath = dialogService.OpenFile(Settings.Default.OpenFileInitialDirectory, Extensions.GetExtensions());
+            string saveOpenFilePath = Settings.Default.LastOpenedFilePath;
+            string openFilePath = dialogService.OpenFile(String.IsNullOrEmpty(saveOpenFilePath) ? String.Empty : Path.GetDirectoryName(saveOpenFilePath), Extensions.GetExtensions());
             if (String.IsNullOrEmpty(openFilePath))
                 return;
 
@@ -62,7 +63,7 @@ namespace UntappdViewer.ViewModels
 
         private void SaveSettings(string filePath)
         {
-            Settings.Default.OpenFileInitialDirectory = Path.GetDirectoryName(filePath);
+            Settings.Default.LastOpenedFilePath = filePath;
             Settings.Default.Save();
         }
     }
