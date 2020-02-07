@@ -22,6 +22,7 @@ namespace UntappdViewer.Modules
         public void OnInitialized(IContainerProvider containerProvider)
         {
             regionManager.RegisterViewWithRegion(RegionNames.MainRegion, () => containerProvider.Resolve<Untappd>());
+            regionManager.RegisterViewWithRegion(RegionNames.StatusBarRegion, () => containerProvider.Resolve<StatusBar>());
         }
     }
 }

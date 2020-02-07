@@ -3,7 +3,6 @@ using System.Windows;
 using Prism;
 using Prism.Mvvm;
 using UntappdViewer.Interfaces.Services;
-using UntappdViewer.Properties;
 
 namespace UntappdViewer.ViewModels
 {
