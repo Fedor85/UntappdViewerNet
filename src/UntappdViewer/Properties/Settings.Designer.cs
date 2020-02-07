@@ -34,5 +34,17 @@ namespace UntappdViewer.Properties {
                 this["OpenFileInitialDirectory"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double TreeRegionWidth {
+            get {
+                return ((double)(this["TreeRegionWidth"]));
+            }
+            set {
+                this["TreeRegionWidth"] = value;
+            }
+        }
     }
 }
