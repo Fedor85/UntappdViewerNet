@@ -1,28 +1,49 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 using Prism.Commands;
+using Prism.Mvvm;
 using Prism.Regions;
 using UntappdViewer.Interfaces.Services;
+using UntappdViewer.Models;
+using UntappdViewer.Services;
 
 namespace UntappdViewer.ViewModels
 {
-    public class ShellViewModel
+    public class ShellViewModel : BindableBase
     {
         private IDialogService dialogService;
 
         private IRegionManager regionManager;
 
+        private string title;
+
         public ICommand ClosingCommand { get; }
 
-        public string Title  => $"{Properties.Resources.AppName} ({Assembly.GetEntryAssembly()?.GetName().Version})";
+        public string Title
+        {
+            get { return title; }
+            set
+            {
+                title = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public ShellViewModel(IDialogService dialogService, IRegionManager regionManager)
+        public ShellViewModel(UntappdService untappdService, IDialogService dialogService, IRegionManager regionManager)
         {
             this.dialogService = dialogService;
             this.regionManager = regionManager;
             ClosingCommand = new DelegateCommand<CancelEventArgs>(Closing);
+            untappdService.InitializeUntappd += UntappdServiceInitializeUntappd;
+            Title = GetTitle(String.Empty);
+        }
+
+        private void UntappdServiceInitializeUntappd(Untappd untappd)
+        {
+            Title = GetTitle(untappd.UserName);
         }
 
         private void Closing(CancelEventArgs e)
@@ -40,6 +61,11 @@ namespace UntappdViewer.ViewModels
                 foreach (object view in region.Views)
                     region.Deactivate(view);
             }
+        }
+
+        private string GetTitle(string userName)
+        {
+            return  $"{Properties.Resources.AppName} {(String.IsNullOrEmpty(userName) ? String.Empty : userName)} ({Assembly.GetEntryAssembly()?.GetName().Version})";
         }
     }
 }

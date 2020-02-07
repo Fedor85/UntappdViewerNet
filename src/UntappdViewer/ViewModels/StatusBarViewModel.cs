@@ -12,7 +12,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 message = value;
-                OnPropertyChanged("Message");
+                OnPropertyChanged();
             }
         }
     }
