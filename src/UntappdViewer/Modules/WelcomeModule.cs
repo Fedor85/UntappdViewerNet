@@ -5,11 +5,11 @@ using UntappdViewer.Views;
 
 namespace UntappdViewer.Modules
 {
-    public class MainModule : IModule
+    public class WelcomeModule: IModule
     {
         private IRegionManager regionManager;
 
-        public MainModule(IRegionManager regionManager)
+        public WelcomeModule(IRegionManager regionManager)
         {
             this.regionManager = regionManager;
         }
@@ -20,7 +20,7 @@ namespace UntappdViewer.Modules
 
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            regionManager.RegisterViewWithRegion(RegionNames.RootRegion, () => containerProvider.Resolve<Main>());
+            regionManager.RegisterViewWithRegion(RegionNames.RootRegion, () => containerProvider.Resolve<Welcome>());
         }
     }
 }

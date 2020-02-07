@@ -108,7 +108,9 @@
     <Compile Include="Mappers\CheckinParser\ParameterNumber.cs" />
     <Compile Include="Mappers\CheckinParser\ParameterValue.cs" />
     <Compile Include="Modules\MainModule.cs" />
-    <Compile Include="Modules\ShellModule.cs" />
+    <Compile Include="Modules\StatusBarModule.cs" />
+    <Compile Include="Modules\UntappdModule.cs" />
+    <Compile Include="Modules\WelcomeModule.cs" />
     <Compile Include="Services\UntappdService.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />

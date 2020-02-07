@@ -43,8 +43,10 @@ namespace UntappdViewer
 
         private void RegisterModules(IModuleCatalog moduleCatalog)
         {
-            moduleCatalog.AddModule(typeof(ShellModule));
             moduleCatalog.AddModule(typeof(MainModule), InitializationMode.OnDemand);
+            moduleCatalog.AddModule(typeof(WelcomeModule), InitializationMode.OnDemand);
+            moduleCatalog.AddModule(typeof(UntappdModule), InitializationMode.OnDemand);
+            moduleCatalog.AddModule(typeof(StatusBarModule), InitializationMode.OnDemand);
         }
 
         private void RegisterServices()
@@ -52,8 +54,8 @@ namespace UntappdViewer
             Container.RegisterType<IDialogService, DialogService>();
 
             ISettingService settingService = new SettingService();
-            if (Debugger.IsAttached)
-                settingService.Reset();
+            //if (Debugger.IsAttached)
+            //    settingService.Reset();
 
             Container.RegisterInstance(settingService);
             Container.RegisterInstance(new UntappdService());

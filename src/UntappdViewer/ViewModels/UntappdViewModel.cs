@@ -43,21 +43,20 @@ namespace UntappdViewer.ViewModels
             }
         }
 
+        public event EventHandler IsActiveChanged;
+
         public UntappdViewModel(ISettingService settingService)
         {
             this.settingService = settingService;
+        }
+        private void Activate()
+        {
+            TreeRegionWidth = new GridLength(settingService.GetTreeRegionWidth());
         }
 
         private void DeActivate()
         {
             settingService.SetTreeRegionWidth(TreeRegionWidth.Value);
         }
-
-        private void Activate()
-        {
-            TreeRegionWidth = new GridLength(settingService.GetTreeRegionWidth());
-        }
-
-        public event EventHandler IsActiveChanged;
     }
 }

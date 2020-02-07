@@ -1,21 +1,49 @@
-﻿using Prism.Modularity;
+﻿using System;
+using Prism;
+using Prism.Modularity;
 using UntappdViewer.Modules;
 
 namespace UntappdViewer.ViewModels
 {
-    public class MainViewModel
+    public class MainViewModel: IActiveAware
     {
-        private IModuleManager moduleManager { get; }
+        private IModuleManager moduleManager;
+
+        private bool active;
+
+        public event EventHandler IsActiveChanged;
 
         public MainViewModel(IModuleManager moduleManager)
         {
             this.moduleManager = moduleManager;
-            InitializeModules();
         }
 
-        private void InitializeModules()
+        public bool IsActive
         {
-            moduleManager.LoadModule(typeof(MainModule).Name);
+            get
+            {
+                return active;
+            }
+            set
+            {
+                if (active != value)
+                {
+                    active = value;
+                    if (active)
+                        Activate();
+                    else
+                        DeActivate();
+                }
+            }
+        }
+        private void Activate()
+        {
+            moduleManager.LoadModule(typeof(UntappdModule).Name);
+            moduleManager.LoadModule(typeof(StatusBarModule).Name);
+        }
+
+        private void DeActivate()
+        {
         }
     }
 }

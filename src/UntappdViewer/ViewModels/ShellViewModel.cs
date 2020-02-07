@@ -4,11 +4,13 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 using Prism.Commands;
+using Prism.Modularity;
 using Prism.Mvvm;
 using Prism.Regions;
 using UntappdViewer.Interfaces.Services;
-using UntappdViewer.Models;
+using UntappdViewer.Modules;
 using UntappdViewer.Services;
+using Untappd = UntappdViewer.Models.Untappd;
 
 namespace UntappdViewer.ViewModels
 {
@@ -17,6 +19,10 @@ namespace UntappdViewer.ViewModels
         private IDialogService dialogService;
 
         private IRegionManager regionManager;
+
+        private ISettingService settingService;
+
+        private IModuleManager moduleManager;
 
         private string title;
 
@@ -32,13 +38,24 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public ShellViewModel(UntappdService untappdService, IDialogService dialogService, IRegionManager regionManager)
+        public ShellViewModel(UntappdService untappdService, IDialogService dialogService, IRegionManager regionManager, ISettingService settingService, IModuleManager moduleManager)
         {
             this.dialogService = dialogService;
             this.regionManager = regionManager;
+            this.settingService = settingService;
+            this.moduleManager = moduleManager;
             ClosingCommand = new DelegateCommand<CancelEventArgs>(Closing);
             untappdService.InitializeUntappd += UntappdServiceInitializeUntappd;
             Title = GetTitle(String.Empty);
+            Activate();
+        }
+
+        private void Activate()
+        {
+            if (String.IsNullOrEmpty(settingService.GetLastOpenedFilePath()))
+                moduleManager.LoadModule(typeof(WelcomeModule).Name);
+            else
+                moduleManager.LoadModule(typeof(MainModule).Name);
         }
 
         private void UntappdServiceInitializeUntappd(Untappd untappd)
