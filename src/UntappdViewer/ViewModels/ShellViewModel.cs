@@ -17,6 +17,8 @@ namespace UntappdViewer.ViewModels
 {
     public class ShellViewModel : BindableBase
     {
+        private UntappdService untappdService;
+
         private IDialogService dialogService;
 
         private IRegionManager regionManager;
@@ -41,6 +43,7 @@ namespace UntappdViewer.ViewModels
 
         public ShellViewModel(UntappdService untappdService, IDialogService dialogService, IRegionManager regionManager, ISettingService settingService, IModuleManager moduleManager)
         {
+            this.untappdService = untappdService;
             this.dialogService = dialogService;
             this.regionManager = regionManager;
             this.settingService = settingService;
@@ -55,9 +58,14 @@ namespace UntappdViewer.ViewModels
         {
             string filePath = settingService.GetLastOpenedFilePath();
             if (!String.IsNullOrEmpty(filePath) && FileHelper.FileExists(filePath))
+            {
+                untappdService.Initialize(String.Empty, filePath);
                 moduleManager.LoadModule(typeof(MainModule).Name);
+            }
             else
+            {
                 moduleManager.LoadModule(typeof(WelcomeModule).Name);
+            }
         }
 
         private void UntappdServiceInitializeUntappd(Untappd untappd)
