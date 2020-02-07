@@ -109,8 +109,7 @@
     <Compile Include="Mappers\CheckinParser\ParameterValue.cs" />
     <Compile Include="Modules\MainModule.cs" />
     <Compile Include="Modules\ShellModule.cs" />
-    <Compile Include="Services\DialogService.cs" />
-    <Compile Include="Services\SettingService.cs" />
+    <Compile Include="Services\UntappdService.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\StatusBarViewModel.cs" />
@@ -172,21 +171,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -201,6 +191,10 @@
     <Resource Include="Resources\pbu_320_white.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\UntappdViewer.Infrastructure\UntappdViewer.Infrastructure.csproj">
+      <Project>{bdc0b7dd-2833-4b95-9b93-ea520003ebe1}</Project>
+      <Name>UntappdViewer.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UntappdViewer.Interfaces\UntappdViewer.Interfaces.csproj">
       <Project>{bb613be0-ae21-4a41-836a-c904d16444f6}</Project>
       <Name>UntappdViewer.Interfaces</Name>

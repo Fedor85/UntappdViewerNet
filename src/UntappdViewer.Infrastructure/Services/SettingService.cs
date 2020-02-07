@@ -1,7 +1,7 @@
-﻿using UntappdViewer.Interfaces.Services;
-using UntappdViewer.Properties;
+﻿using UntappdViewer.Infrastructure.Properties;
+using UntappdViewer.Interfaces.Services;
 
-namespace UntappdViewer.Services
+namespace UntappdViewer.Infrastructure.Services
 {
     public class SettingService: ISettingService
     {

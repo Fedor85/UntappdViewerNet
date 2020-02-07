@@ -3,9 +3,9 @@ using System.Windows;
 using Prism.Modularity;
 using Prism.Unity;
 using Unity;
+using UntappdViewer.Infrastructure.Services;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
-using UntappdViewer.Services;
 using UntappdViewer.Views;
 
 namespace UntappdViewer

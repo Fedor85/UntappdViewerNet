@@ -5,7 +5,7 @@ using System.Windows;
 using Microsoft.Win32;
 using UntappdViewer.Interfaces.Services;
 
-namespace UntappdViewer.Services
+namespace UntappdViewer.Infrastructure.Services
 {
     public class DialogService : IDialogService
     {
