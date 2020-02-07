@@ -54,10 +54,10 @@ namespace UntappdViewer.ViewModels
         private void Activate()
         {
             string filePath = settingService.GetLastOpenedFilePath();
-            if (String.IsNullOrEmpty(filePath) && FileHelper.FileExists(filePath))
-                moduleManager.LoadModule(typeof(WelcomeModule).Name);
-            else
+            if (!String.IsNullOrEmpty(filePath) && FileHelper.FileExists(filePath))
                 moduleManager.LoadModule(typeof(MainModule).Name);
+            else
+                moduleManager.LoadModule(typeof(WelcomeModule).Name);
         }
 
         private void UntappdServiceInitializeUntappd(Untappd untappd)
