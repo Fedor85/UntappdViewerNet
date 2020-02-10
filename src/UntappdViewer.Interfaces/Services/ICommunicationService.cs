@@ -8,14 +8,18 @@ namespace UntappdViewer.Interfaces.Services
     {
         MessageBoxResult Ask(string caption, string message);
 
+        void ShowMessage(string caption, string message);
+
+        void ShowError(string caption, string message);
+
         string OpenFile(string initialDirectory, List<string> extensions);
 
-        event Action<string> ShowMessageEnvent;
+        event Action<string> ShowMessageOnStatusBarEnvent;
          
-        event Action ClearMessageEnvent;
+        event Action ClearMessageOnStatusBarEnvent;
 
-        void ShowMessage(string message);
+        void ShowMessageOnStatusBar(string message);
 
-        void ClearMessage();
+        void ClearMessageOnStatusBar();
     }
 }

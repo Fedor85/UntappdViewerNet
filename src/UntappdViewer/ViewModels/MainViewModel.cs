@@ -26,7 +26,7 @@ namespace UntappdViewer.ViewModels
             base.Activate();
             moduleManager.LoadModule(typeof(StatusBarModule).Name);
             moduleManager.LoadModule(typeof(UntappdModule).Name);
-            communicationService.ShowMessage(GetLoadingMessage());
+            communicationService.ShowMessageOnStatusBar(GetLoadingMessage());
         }
 
         private string GetLoadingMessage()

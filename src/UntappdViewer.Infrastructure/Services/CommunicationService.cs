@@ -14,6 +14,16 @@ namespace UntappdViewer.Infrastructure.Services
             return MessageBox.Show(message, caption, MessageBoxButton.OKCancel);
         }
 
+        public void ShowMessage(string caption, string message)
+        {
+            MessageBox.Show(message, caption, MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
+
+        public void ShowError(string caption, string message)
+        {
+            MessageBox.Show(message, caption, MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
         public string OpenFile(string initialDirectory, List<string> extensions)
          {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -25,20 +35,20 @@ namespace UntappdViewer.Infrastructure.Services
             return openFileDialog.FileName;
         }
 
-        public event Action<string> ShowMessageEnvent;
+        public event Action<string> ShowMessageOnStatusBarEnvent;
 
-        public event Action ClearMessageEnvent;
+        public event Action ClearMessageOnStatusBarEnvent;
 
-        public void ShowMessage(string message)
+        public void ShowMessageOnStatusBar(string message)
         {
-            if (ShowMessageEnvent != null)
-                ShowMessageEnvent.Invoke(message);
+            if (ShowMessageOnStatusBarEnvent != null)
+                ShowMessageOnStatusBarEnvent.Invoke(message);
         }
 
-        public void ClearMessage()
+        public void ClearMessageOnStatusBar()
         {
-            if (ClearMessageEnvent != null)
-                ClearMessageEnvent.Invoke();
+            if (ClearMessageOnStatusBarEnvent != null)
+                ClearMessageOnStatusBarEnvent.Invoke();
         }
 
         private string GetFilter(List<string> extensions)

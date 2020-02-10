@@ -27,24 +27,24 @@ namespace UntappdViewer.ViewModels
         protected override void Activate()
         {
             base.Activate();
-            communicationService.ShowMessageEnvent += CommunicationServiceShowMessageEnvent;
-            communicationService.ClearMessageEnvent += CommunicationService_ClearMessageEnvent;
+            communicationService.ShowMessageOnStatusBarEnvent += ShowMessage;
+            communicationService.ClearMessageOnStatusBarEnvent += ClearMessage;
         }
 
         protected override void DeActivate()
         {
             base.DeActivate();
-            communicationService.ShowMessageEnvent -= CommunicationServiceShowMessageEnvent;
-            communicationService.ClearMessageEnvent -= CommunicationService_ClearMessageEnvent;
+            communicationService.ShowMessageOnStatusBarEnvent -= ShowMessage;
+            communicationService.ClearMessageOnStatusBarEnvent -= ClearMessage;
         }
 
 
-        private void CommunicationServiceShowMessageEnvent(string message)
+        private void ShowMessage(string message)
         {
             Message = message;
         }
 
-        private void CommunicationService_ClearMessageEnvent()
+        private void ClearMessage()
         {
             Message = String.Empty;
         }
