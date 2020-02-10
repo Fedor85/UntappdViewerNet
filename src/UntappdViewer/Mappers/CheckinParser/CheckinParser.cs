@@ -185,6 +185,9 @@ namespace UntappdViewer.Mappers.CheckinParser
 
         private List<string> GetValues(string valueLine)
         {
+            if (valueLine == null || String.IsNullOrEmpty(valueLine.Trim()))
+                return new List<string>();
+
             return valueLine.Split(',').Select(item => item.Trim()).ToList();
         }
     }
