@@ -7,7 +7,7 @@ namespace UntappdViewer
         /// <summary>
         /// Import untappd data
         /// </summary>
-        private static string CVS = "cvs";
+        private static string CSV = "csv";
 
         /// <summary>
         /// Проект данных по Untappd
@@ -16,7 +16,7 @@ namespace UntappdViewer
 
         public static List<string> GetExtensions()
         {
-            return new List<string> { CVS, UNTP };
+            return new List<string> { CSV, UNTP };
         }
     }
 }
