@@ -118,9 +118,9 @@ namespace UntappdViewer.Mappers.CheckinParser
         {
             return GetValue(ParameterNames.BreweryState);
         }
-        public string GeFlavorProfiles()
+        public List<string> GeFlavorProfiles()
         {
-            return GetValue(ParameterNames.FlavorProfiles);
+            return GetValues(GetValue(ParameterNames.FlavorProfiles));
         }
 
         public string GePurchaseVenues()
@@ -181,6 +181,11 @@ namespace UntappdViewer.Mappers.CheckinParser
                     sb.Append(ch);
 
             return sb.ToString();
+        }
+
+        private List<string> GetValues(string valueLine)
+        {
+            return valueLine.Split(',').Select(item => item.Trim()).ToList();
         }
     }
 }

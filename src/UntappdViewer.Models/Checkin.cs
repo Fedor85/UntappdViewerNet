@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace UntappdViewer.Models
 {
@@ -33,7 +34,7 @@ namespace UntappdViewer.Models
         /// <summary>
         /// профиль вкуса
         /// </summary>
-        public string FlavorPprofiles { get; set; }
+        public List<string> FlavorPprofiles { get; set; }
 
         /// <summary>
         /// место чекина
