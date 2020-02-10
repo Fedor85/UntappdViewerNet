@@ -100,7 +100,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Different\Extensions.cs" />
-    <Compile Include="Different\ModuleNames.cs" />
+    <Compile Include="Different\Utils.cs" />
     <Compile Include="Mappers\CheckinTextMapper.cs" />
     <Compile Include="Mappers\CheckinParser\CheckinParser.cs" />
     <Compile Include="Mappers\CheckinParser\CheckinParserFactory.cs" />

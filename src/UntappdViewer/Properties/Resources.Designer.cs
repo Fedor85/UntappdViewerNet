@@ -70,7 +70,7 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The number of parameters and values does not match: {0} / {1}.
+        ///   Looks up a localized string similar to The number of parameters and values does not match: {1} / {2}.{0}ParameterNumbers:{3}{0}ParameterValues:{3}.
         /// </summary>
         public static string ArgumentExceptionOnCheckinParser {
             get {
