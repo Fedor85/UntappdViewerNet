@@ -156,4 +156,12 @@
     <value>Loading from:</value>
     <comment>en-en</comment>
   </data>
+  <data name="ArgumentExceptionOnCheckinParser" xml:space="preserve">
+    <value>The number of parameters and values does not match: {0} / {1}</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error.</value>
+    <comment>en-en</comment>
+  </data>
 </root>

@@ -85,9 +85,17 @@ namespace UntappdViewer.ViewModels
 
         private void RunUntappd(string openFilePath)
         {
-            settingService.SetLastOpenedFilePath(openFilePath);
-            untappdService.Initialize(UntappdUserName, openFilePath);
+            try
+            {
+                untappdService.Initialize(UntappdUserName, openFilePath);
+            }
+            catch (ArgumentException ex)
+            {
+                communicationService.ShowError(Properties.Resources.Error, ex.Message);
+                return;
+            }
 
+            settingService.SetLastOpenedFilePath(openFilePath);
             moduleManager.LoadModule(typeof(MainModule).Name);
             IRegion requestInfoRegion = regionManager.Regions[RegionNames.RootRegion];
             object newView = requestInfoRegion.Views.First(i => i.GetType().Equals(typeof(Main)));

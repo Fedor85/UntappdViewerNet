@@ -59,8 +59,16 @@ namespace UntappdViewer.ViewModels
             string filePath = settingService.GetLastOpenedFilePath();
             if (!String.IsNullOrEmpty(filePath) && FileHelper.FileExists(filePath))
             {
-                untappdService.Initialize(String.Empty, filePath);
-                moduleManager.LoadModule(typeof(MainModule).Name);
+                try
+                {
+                    untappdService.Initialize(String.Empty, filePath);
+                    moduleManager.LoadModule(typeof(MainModule).Name);
+                }
+                catch (ArgumentException ex)
+                {
+                    communicationService.ShowError(Properties.Resources.Error, ex.Message);
+                    moduleManager.LoadModule(typeof(WelcomeModule).Name);
+                }
             }
             else
             {
