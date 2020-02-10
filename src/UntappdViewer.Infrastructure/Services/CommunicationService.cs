@@ -11,17 +11,17 @@ namespace UntappdViewer.Infrastructure.Services
     {
         public MessageBoxResult Ask(string caption, string message)
         {
-            return MessageBox.Show(message, caption, MessageBoxButton.OKCancel);
+            return MessageBox.Show(Application.Current.MainWindow, message, caption, MessageBoxButton.OKCancel);
         }
 
         public void ShowMessage(string caption, string message)
         {
-            MessageBox.Show(message, caption, MessageBoxButton.OK, MessageBoxImage.Warning);
+            MessageBox.Show(Application.Current.MainWindow, message, caption, MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         public void ShowError(string caption, string message)
         {
-            MessageBox.Show(message, caption, MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(Application.Current.MainWindow, message, caption, MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         public string OpenFile(string initialDirectory, List<string> extensions)
@@ -31,7 +31,7 @@ namespace UntappdViewer.Infrastructure.Services
                  openFileDialog.InitialDirectory = initialDirectory;
 
             openFileDialog.Filter = GetFilter(extensions);
-            openFileDialog.ShowDialog();
+            openFileDialog.ShowDialog(Application.Current.MainWindow);
             return openFileDialog.FileName;
         }
 
