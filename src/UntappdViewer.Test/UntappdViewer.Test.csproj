@@ -49,21 +49,10 @@
   <ItemGroup>
     <Compile Include="CheckinMapperFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Resource Include="Resources\78a7bb4694ba2d4c33ba2dc76d0fc60d.csv" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <EmbeddedResource Include="78a7bb4694ba2d4c33ba2dc76d0fc60d.csv" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UntappdViewer.Models\UntappdViewer.Models.csproj">
@@ -75,6 +64,7 @@
       <Name>UntappdViewer</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

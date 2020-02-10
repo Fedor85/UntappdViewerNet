@@ -6,14 +6,14 @@ namespace UntappdViewer.Mappers.CheckinParser
     {
         private List<ParameterNumber> parameterNumbers;
 
-        public CheckinParserFactory(string parametersLine)
+        public CheckinParserFactory(string parametersNameLine)
         {
-            parameterNumbers = GetParameterNumbers(parametersLine);
+            parameterNumbers = GetParameterNumbers(parametersNameLine);
         }
 
-        public CheckinParser GetCheckinParser(string parametersValueLine)
+        public CheckinParser GetCheckinParser(string[] parametersValue)
         {
-            return new CheckinParser(parameterNumbers, GetParameterValues(parametersValueLine));
+            return new CheckinParser(parameterNumbers, GetParameterValues(parametersValue));
         }
 
         private List<ParameterNumber> GetParameterNumbers(string parametersNameLine)
@@ -26,11 +26,11 @@ namespace UntappdViewer.Mappers.CheckinParser
             return parameterNumbers;
         }
 
-        private List<ParameterValue> GetParameterValues(string parametersValueLine)
+        private List<ParameterValue> GetParameterValues(string[] parametersValue)
         {
             List<ParameterValue> parameterValues = new List<ParameterValue>();
             int counter = 1;
-            foreach (string parameterValue in parametersValueLine.Split(','))
+            foreach (string parameterValue in parametersValue)
                 parameterValues.Add(new ParameterValue(parameterValue, counter++));
 
             return parameterValues;

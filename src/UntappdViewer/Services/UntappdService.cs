@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using UntappdViewer.Infrastructure;
 using UntappdViewer.Mappers;
 using UntappdViewer.Models;
@@ -17,7 +18,9 @@ namespace UntappdViewer.Services
         {
             FIlePath = filePath;
             Untappd = new Untappd(String.IsNullOrEmpty(userName) ? "NoName" : userName);
-            Untappd.Checkins.AddRange(CheckinTextMapper.GetCheckins(FileHelper.GetTextForFile(filePath)));
+            using (FileStream fileStream = File.OpenRead(filePath))
+                Untappd.Checkins.AddRange(CheckinCSVMapper.GetCheckins(fileStream));
+
             if (InitializeUntappd != null)
                 InitializeUntappd.Invoke(Untappd);
         }

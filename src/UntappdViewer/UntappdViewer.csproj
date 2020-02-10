@@ -50,6 +50,7 @@
     <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Prism, Version=7.2.0.1422, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Core.7.2.0.1422\lib\net45\Prism.dll</HintPath>
     </Reference>
@@ -101,7 +102,7 @@
     </ApplicationDefinition>
     <Compile Include="Different\Extensions.cs" />
     <Compile Include="Different\Utils.cs" />
-    <Compile Include="Mappers\CheckinTextMapper.cs" />
+    <Compile Include="Mappers\CheckinCSVMapper.cs" />
     <Compile Include="Mappers\CheckinParser\CheckinParser.cs" />
     <Compile Include="Mappers\CheckinParser\CheckinParserFactory.cs" />
     <Compile Include="Mappers\CheckinParser\ParameterNames.cs" />

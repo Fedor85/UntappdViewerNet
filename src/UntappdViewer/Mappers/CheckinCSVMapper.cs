@@ -1,25 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
+using System.IO;
+using Microsoft.VisualBasic.FileIO;
 using UntappdViewer.Mappers.CheckinParser;
 using UntappdViewer.Models;
 
 namespace UntappdViewer.Mappers
 {
-    public static class CheckinTextMapper
+    public static class CheckinCSVMapper
     {
-        public static List<Checkin> GetCheckins(string text)
+        public static List<Checkin> GetCheckins(Stream stream)
         {
             List<Checkin> checkins = new List<Checkin>();
-            List<string> lines = text.Split(Convert.ToChar(10)).ToList();
-            if (lines.Count < 2)
+            if (stream == null)
                 return checkins;
 
-            CheckinParserFactory checkinParserFactory = new CheckinParserFactory(lines[0]);
-            lines.RemoveAt(0);
-            foreach (string line in lines)
-                checkins.Add(GetCheckin(checkinParserFactory.GetCheckinParser(line)));
-
+            using (TextFieldParser csvParser = new TextFieldParser(stream))
+            {
+                csvParser.SetDelimiters(",");
+                csvParser.HasFieldsEnclosedInQuotes = true;
+                string parametersNameLine = csvParser.ReadLine();
+                CheckinParserFactory checkinParserFactory = new CheckinParserFactory(parametersNameLine);
+                while (!csvParser.EndOfData)
+                {
+                    string[] parametersValue = csvParser.ReadFields();
+                    checkins.Add(GetCheckin(checkinParserFactory.GetCheckinParser(parametersValue)));
+                }
+            }
             return checkins;
         }
 
