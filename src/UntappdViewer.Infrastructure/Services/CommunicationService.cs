@@ -9,11 +9,6 @@ namespace UntappdViewer.Infrastructure.Services
 {
     public class CommunicationService : ICommunicationService
     {
-        public CommunicationService()
-        {
-            
-        }
-
         public MessageBoxResult Ask(string caption, string message)
         {
             return MessageBox.Show(message, caption, MessageBoxButton.OKCancel);
