@@ -1,4 +1,6 @@
-﻿namespace UntappdViewer.Mappers.CheckinParser
+﻿using System;
+
+namespace UntappdViewer.Mappers.CheckinParser
 {
     public class ParameterValue
     {
@@ -10,6 +12,11 @@
         {
             Value = value;
             Number = number;
+        }
+
+        public override string ToString()
+        {
+            return String.Format("{0}:{1}", Number, Value);
         }
     }
 }
