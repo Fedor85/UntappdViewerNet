@@ -180,4 +180,8 @@
     <value>File path is empty</value>
     <comment>en-en</comment>
   </data>
+  <data name="StartPageMenuItem" xml:space="preserve">
+    <value>Start</value>
+    <comment>en-en</comment>
+  </data>
 </root>

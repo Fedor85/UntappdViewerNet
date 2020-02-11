@@ -8,5 +8,5 @@
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="23" d:DesignWidth="800">
-    <Label Content="{Binding Message, Mode=TwoWay}"/>
+    <Label Content="{Binding Message}"/>
 </UserControl>
