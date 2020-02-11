@@ -184,4 +184,12 @@
     <value>Start</value>
     <comment>en-en</comment>
   </data>
+  <data name="HelpMenuItem" xml:space="preserve">
+    <value>Help</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="ProjectMenuItem" xml:space="preserve">
+    <value>Project</value>
+    <comment>en-en</comment>
+  </data>
 </root>

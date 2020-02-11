@@ -97,6 +97,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Help.
+        /// </summary>
+        public static string HelpMenuItem {
+            get {
+                return ResourceManager.GetString("HelpMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File path is empty.
         /// </summary>
         public static string IsEmptyFilePath {
@@ -166,6 +175,15 @@ namespace UntappdViewer.Properties {
             get {
                 object obj = ResourceManager.GetObject("pbu_320_white", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project.
+        /// </summary>
+        public static string ProjectMenuItem {
+            get {
+                return ResourceManager.GetString("ProjectMenuItem", resourceCulture);
             }
         }
         
