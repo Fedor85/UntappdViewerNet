@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -58,9 +60,6 @@ namespace UntappdViewer.ViewModels
         {
             string saveOpenFilePath = settingService.GetLastOpenedFilePath();
             string openFilePath = communicationService.OpenFile(String.IsNullOrEmpty(saveOpenFilePath) ? String.Empty : Path.GetDirectoryName(saveOpenFilePath), Extensions.GetExtensions());
-            if (String.IsNullOrEmpty(openFilePath))
-                return;
-
             RunUntappd(openFilePath);
         }
 
@@ -73,18 +72,18 @@ namespace UntappdViewer.ViewModels
             if (filesPaths.Length == 0)
                 return;
 
-            string openFilePath = filesPaths[0];
-            if (String.IsNullOrEmpty(openFilePath))
+            RunUntappd(filesPaths[0]);
+        }
+
+        private void RunUntappd(string openFilePath)
+        {
+
+            if (FileHelper.Check(openFilePath) != FileStatus.Available)
                 return;
 
             if (!Extensions.GetExtensions().Contains(FileHelper.GetExtensionWihtoutPoint(openFilePath)))
                 return;
 
-            RunUntappd(openFilePath);
-        }
-
-        private void RunUntappd(string openFilePath)
-        {
             try
             {
                 untappdService.Initialize(UntappdUserName, openFilePath);

@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CheckinMapperFixture.cs" />
+    <Compile Include="FileHelperFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +56,10 @@
     <EmbeddedResource Include="78a7bb4694ba2d4c33ba2dc76d0fc60d.csv" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\UntappdViewer.Infrastructure\UntappdViewer.Infrastructure.csproj">
+      <Project>{bdc0b7dd-2833-4b95-9b93-ea520003ebe1}</Project>
+      <Name>UntappdViewer.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UntappdViewer.Models\UntappdViewer.Models.csproj">
       <Project>{B1584484-7648-4349-B8F8-47352DD85FF1}</Project>
       <Name>UntappdViewer.Models</Name>

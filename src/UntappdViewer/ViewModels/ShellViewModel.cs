@@ -57,7 +57,7 @@ namespace UntappdViewer.ViewModels
         private void Activate()
         {
             string filePath = settingService.GetLastOpenedFilePath();
-            if (!String.IsNullOrEmpty(filePath) && FileHelper.FileExists(filePath))
+            if (FileHelper.Check(filePath) == FileStatus.Available)
             {
                 try
                 {

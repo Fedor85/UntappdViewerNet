@@ -14,9 +14,22 @@ namespace UntappdViewer.Infrastructure
             return extension.Replace(".", String.Empty).Trim().ToLower();
         }
 
-        public static bool FileExists(string filePat)
+        public static FileStatus Check(string filePath)
         {
-            return File.Exists(filePat);
+            if (!File.Exists(filePath))
+                return FileStatus.NotExists;
+
+            try
+            {
+                using (FileStream stream = File.OpenRead(filePath)) { }
+
+            }
+            catch (IOException ex)
+            {
+                if (ex.HResult == -2147024864)
+                    return FileStatus.IsLocked;
+            }
+            return FileStatus.Available;
         }
     }
 }
