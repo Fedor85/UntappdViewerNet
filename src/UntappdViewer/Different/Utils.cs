@@ -1,28 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Text;
-using UntappdViewer.Mappers.CheckinParser;
 
 namespace UntappdViewer
 {
     public static class Utils
     {
-        public static string JoinParameterNumber(List<ParameterNumber> parameterNumbers)
+        public static string Join<T>(List<T> parameters)
         {
             StringBuilder text = new StringBuilder();
-            foreach (ParameterNumber parameterNumber in parameterNumbers)
+            foreach (T parameter in parameters)
             {
-                text.Append(parameterNumber);
-                text.Append(";");
-            }
-            return text.ToString();
-        }
-
-        public static string JoinParameterValue(List<ParameterValue> parameterValues)
-        {
-            StringBuilder text = new StringBuilder();
-            foreach (ParameterValue parameterValue in parameterValues)
-            {
-                text.Append(parameterValue);
+                text.Append(parameter);
                 text.Append(";");
             }
             return text.ToString();

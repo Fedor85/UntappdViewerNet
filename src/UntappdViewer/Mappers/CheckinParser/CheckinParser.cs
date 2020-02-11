@@ -15,7 +15,7 @@ namespace UntappdViewer.Mappers.CheckinParser
         {
             if (parameterNumbers.Count != parameterValues.Count)
                 throw new ArgumentException(String.Format(Properties.Resources.ArgumentExceptionOnCheckinParser,"\n", parameterNumbers.Count, parameterValues.Count,
-                                                                        Utils.JoinParameterNumber(parameterNumbers), Utils.JoinParameterValue(parameterValues)));
+                                                                                                            Utils.Join(parameterNumbers), Utils.Join(parameterValues)));
 
             this.parameterNumbers = parameterNumbers;
             this.parameterValues = parameterValues;
