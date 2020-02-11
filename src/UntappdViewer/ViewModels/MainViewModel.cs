@@ -1,5 +1,4 @@
-﻿using System;
-using Prism.Modularity;
+﻿using Prism.Modularity;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
 using UntappdViewer.Services;
@@ -26,6 +25,7 @@ namespace UntappdViewer.ViewModels
             base.Activate();
             moduleManager.LoadModule(typeof(StatusBarModule).Name);
             moduleManager.LoadModule(typeof(UntappdModule).Name);
+            moduleManager.LoadModule(typeof(MenuBarModule).Name);
             communicationService.ShowMessageOnStatusBar(GetLoadingMessage());
         }
 
