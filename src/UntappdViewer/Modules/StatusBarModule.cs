@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using Prism.Ioc;
-using Prism.Modularity;
+﻿using Prism.Ioc;
 using Prism.Regions;
 using UntappdViewer.Views;
 
@@ -8,11 +6,8 @@ namespace UntappdViewer.Modules
 {
     public class StatusBarModule : BaseModue
     {
-        private IModuleManager moduleManager;
-
-        public StatusBarModule(IRegionManager regionManager, IModuleManager moduleManager) : base(regionManager)
+        public StatusBarModule(IRegionManager regionManager) : base(regionManager)
         {
-            this.moduleManager = moduleManager;
         }
 
         public override void OnInitialized(IContainerProvider containerProvider)
