@@ -4,6 +4,7 @@ using System.Reflection;
 using NUnit.Framework;
 using UntappdViewer.Mappers;
 using UntappdViewer.Models;
+using UntappdViewer.Test.Properties;
 
 namespace UntappdViewer.Test
 {
@@ -13,12 +14,11 @@ namespace UntappdViewer.Test
         [Test]
         public void CheckinTextMapperTest()
         {
-            using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("UntappdViewer.Test.78a7bb4694ba2d4c33ba2dc76d0fc60d.csv"))
+            using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(Resources.ResourcesTestFileName))
             {
                 List<Checkin> checkins = CheckinCSVMapper.GetCheckins(stream);
                 Assert.IsTrue(checkins.Count > 0);
             }
-
         }
     }
 }
