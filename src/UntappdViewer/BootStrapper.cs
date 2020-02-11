@@ -43,11 +43,11 @@ namespace UntappdViewer
 
         private void RegisterModules(IModuleCatalog moduleCatalog)
         {
-            moduleCatalog.AddModule(typeof(MainModule), InitializationMode.OnDemand);
             moduleCatalog.AddModule(typeof(WelcomeModule), InitializationMode.OnDemand);
+            moduleCatalog.AddModule(typeof(MainModule), InitializationMode.OnDemand);
+            moduleCatalog.AddModule(typeof(MenuBarModule), InitializationMode.OnDemand);
             moduleCatalog.AddModule(typeof(UntappdModule), InitializationMode.OnDemand);
             moduleCatalog.AddModule(typeof(StatusBarModule), InitializationMode.OnDemand);
-            moduleCatalog.AddModule(typeof(MenuBarModule), InitializationMode.OnDemand);
         }
 
         private void RegisterServices()

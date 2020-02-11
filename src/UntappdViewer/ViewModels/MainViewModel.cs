@@ -23,9 +23,9 @@ namespace UntappdViewer.ViewModels
         protected override void Activate()
         {
             base.Activate();
-            moduleManager.LoadModule(typeof(StatusBarModule).Name);
-            moduleManager.LoadModule(typeof(UntappdModule).Name);
             moduleManager.LoadModule(typeof(MenuBarModule).Name);
+            moduleManager.LoadModule(typeof(UntappdModule).Name);
+            moduleManager.LoadModule(typeof(StatusBarModule).Name);
             communicationService.ShowMessageOnStatusBar(GetLoadingMessage());
         }
 
