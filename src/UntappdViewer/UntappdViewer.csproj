@@ -101,6 +101,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Different\Extensions.cs" />
+    <Compile Include="Different\Helpers\CommunicationHelper.cs" />
+    <Compile Include="Different\Helpers\EnumsHelper.cs" />
     <Compile Include="Different\Utils.cs" />
     <Compile Include="Mappers\CheckinCSVMapper.cs" />
     <Compile Include="Mappers\CheckinParser\CheckinParser.cs" />

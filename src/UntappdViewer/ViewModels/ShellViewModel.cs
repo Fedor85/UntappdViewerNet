@@ -57,7 +57,8 @@ namespace UntappdViewer.ViewModels
         private void Activate()
         {
             string filePath = settingService.GetLastOpenedFilePath();
-            if (FileHelper.Check(filePath, Extensions.GetSupportExtensions()) == FileStatus.Available)
+            FileStatus fileStatus = FileHelper.Check(filePath, Extensions.GetSupportExtensions());
+            if (EnumsHelper.IsValidFileStatus(fileStatus))
             {
                 try
                 {
@@ -72,6 +73,9 @@ namespace UntappdViewer.ViewModels
             }
             else
             {
+                if (fileStatus != FileStatus.IsEmptyPath)
+                    communicationService.ShowMessage(Properties.Resources.Warning, CommunicationHelper.GetFileStatusMessage(fileStatus, filePath));
+
                 moduleManager.LoadModule(typeof(WelcomeModule).Name);
             }
         }

@@ -57,8 +57,11 @@ namespace UntappdViewer.ViewModels
         private void OpenFile()
         {
             string saveOpenFilePath = settingService.GetLastOpenedFilePath();
-            string openFilePath = communicationService.OpenFile(String.IsNullOrEmpty(saveOpenFilePath) ? String.Empty : Path.GetDirectoryName(saveOpenFilePath), Extensions.GetSupportExtensions());
-            RunUntappd(openFilePath);
+            string filePath = communicationService.OpenFile(String.IsNullOrEmpty(saveOpenFilePath) ? String.Empty : Path.GetDirectoryName(saveOpenFilePath), Extensions.GetSupportExtensions());
+            if (String.IsNullOrEmpty(filePath))
+                return;
+
+            RunUntappd(filePath);
         }
 
         private void DropFile(DragEventArgs e)
@@ -73,15 +76,18 @@ namespace UntappdViewer.ViewModels
             RunUntappd(filesPaths[0]);
         }
 
-        private void RunUntappd(string openFilePath)
+        private void RunUntappd(string filePath)
         {
-
-            if (FileHelper.Check(openFilePath, Extensions.GetSupportExtensions()) != FileStatus.Available)
+            FileStatus fileStatus = FileHelper.Check(filePath, Extensions.GetSupportExtensions());
+            if (!EnumsHelper.IsValidFileStatus(fileStatus))
+            {
+                communicationService.ShowMessage(Properties.Resources.Warning, CommunicationHelper.GetFileStatusMessage(fileStatus, filePath));
                 return;
+            }
 
             try
             {
-                untappdService.Initialize(UntappdUserName, openFilePath);
+                untappdService.Initialize(UntappdUserName, filePath);
             }
             catch (ArgumentException ex)
             {
@@ -89,7 +95,7 @@ namespace UntappdViewer.ViewModels
                 return;
             }
 
-            settingService.SetLastOpenedFilePath(openFilePath);
+            settingService.SetLastOpenedFilePath(filePath);
             moduleManager.LoadModule(typeof(MainModule).Name);
             IRegion requestInfoRegion = regionManager.Regions[RegionNames.RootRegion];
             object newView = requestInfoRegion.Views.First(i => i.GetType().Equals(typeof(Main)));

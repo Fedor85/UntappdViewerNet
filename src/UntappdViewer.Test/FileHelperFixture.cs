@@ -16,7 +16,7 @@ namespace UntappdViewer.Test
             string filePathEmpty = string.Empty;
 
             FileStatus fileStatusEmpty = FileHelper.Check(filePathEmpty, extensions);
-            Assert.AreEqual(FileStatus.NotExists, fileStatusEmpty);
+            Assert.AreEqual(FileStatus.IsEmptyPath, fileStatusEmpty);
 
             string filePath = TestHelper.GetTempFilePath(Resources.ResourcesTestFileName);
             FileStatus fileStatus1= FileHelper.Check(filePath, extensions);

@@ -17,6 +17,9 @@ namespace UntappdViewer.Infrastructure
 
         public static FileStatus Check(string filePath, List<string> supportExtensions)
         {
+            if (String.IsNullOrEmpty(filePath))
+                return FileStatus.IsEmptyPath;
+
             if (!File.Exists(filePath))
                 return FileStatus.NotExists;
 

@@ -97,11 +97,47 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File path is empty.
+        /// </summary>
+        public static string IsEmptyFilePath {
+            get {
+                return ResourceManager.GetString("IsEmptyFilePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Is locked.
+        /// </summary>
+        public static string IsLockedFile {
+            get {
+                return ResourceManager.GetString("IsLockedFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading from:.
         /// </summary>
         public static string LoadingFrom {
             get {
                 return ResourceManager.GetString("LoadingFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File format not supported.
+        /// </summary>
+        public static string NoSupportedFile {
+            get {
+                return ResourceManager.GetString("NoSupportedFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File not exists.
+        /// </summary>
+        public static string NotExistsFile {
+            get {
+                return ResourceManager.GetString("NotExistsFile", resourceCulture);
             }
         }
         

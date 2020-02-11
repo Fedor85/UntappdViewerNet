@@ -164,4 +164,20 @@
     <value>Error.</value>
     <comment>en-en</comment>
   </data>
+  <data name="IsLockedFile" xml:space="preserve">
+    <value>File Is locked</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="NoSupportedFile" xml:space="preserve">
+    <value>File format not supported</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="NotExistsFile" xml:space="preserve">
+    <value>File not exists</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="IsEmptyFilePath" xml:space="preserve">
+    <value>File path is empty</value>
+    <comment>en-en</comment>
+  </data>
 </root>

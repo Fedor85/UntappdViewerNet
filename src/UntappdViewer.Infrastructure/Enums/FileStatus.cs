@@ -8,6 +8,8 @@
 
         IsLocked,
 
-        NoSupported
+        NoSupported,
+
+        IsEmptyPath
     }
 }
