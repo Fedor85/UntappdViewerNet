@@ -27,5 +27,10 @@ namespace UntappdViewer
             }
             return $"{statusMessage}:\n{filePath}";
         }
+
+        public static string GetLoadingMessage(string filePath)
+        {
+            return $"{Properties.Resources.LoadingFrom} {filePath}";
+        }
     }
 }

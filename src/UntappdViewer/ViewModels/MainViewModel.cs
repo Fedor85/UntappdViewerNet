@@ -26,12 +26,7 @@ namespace UntappdViewer.ViewModels
             moduleManager.LoadModule(typeof(MenuBarModule).Name);
             moduleManager.LoadModule(typeof(UntappdModule).Name);
             moduleManager.LoadModule(typeof(StatusBarModule).Name);
-            communicationService.ShowMessageOnStatusBar(GetLoadingMessage());
-        }
-
-        private string GetLoadingMessage()
-        {
-            return $"{Properties.Resources.LoadingFrom} {untappdService.FIlePath}";
+            communicationService.ShowMessageOnStatusBar(CommunicationHelper.GetLoadingMessage(untappdService.FIlePath));
         }
     }
 }
