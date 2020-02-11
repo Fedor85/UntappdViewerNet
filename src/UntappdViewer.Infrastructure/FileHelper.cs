@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace UntappdViewer.Infrastructure
@@ -14,10 +15,13 @@ namespace UntappdViewer.Infrastructure
             return extension.Replace(".", String.Empty).Trim().ToLower();
         }
 
-        public static FileStatus Check(string filePath)
+        public static FileStatus Check(string filePath, List<string> supportExtensions)
         {
             if (!File.Exists(filePath))
                 return FileStatus.NotExists;
+
+            if (!supportExtensions.Contains(FileHelper.GetExtensionWihtoutPoint(filePath)))
+                return FileStatus.NoSupported;
 
             try
             {

@@ -6,6 +6,8 @@
 
         NotExists,
 
-        IsLocked
+        IsLocked,
+
+        NoSupported
     }
 }

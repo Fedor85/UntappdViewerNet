@@ -14,7 +14,7 @@ namespace UntappdViewer
         /// </summary>
         private static string UNTP = "untp";
 
-        public static List<string> GetExtensions()
+        public static List<string> GetSupportExtensions()
         {
             return new List<string> { CSV, UNTP };
         }
