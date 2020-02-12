@@ -13,7 +13,6 @@ namespace UntappdViewer.Modules
         public override void OnInitialized(IContainerProvider containerProvider)
         {
             base.OnInitialized(containerProvider);
-            // call Activate
             regionManager.RegisterViewWithRegion(RegionNames.MenuRegion, () => containerProvider.Resolve<MenuBar>());
         }
     }

@@ -13,7 +13,6 @@ namespace UntappdViewer.Modules
         public override void OnInitialized(IContainerProvider containerProvider)
         {
             base.OnInitialized(containerProvider);
-            // call Activate
             regionManager.Regions[RegionNames.StatusBarRegion].Add(containerProvider.Resolve<StatusBar>());
         }
     }
