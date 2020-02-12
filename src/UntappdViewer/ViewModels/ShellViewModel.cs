@@ -88,12 +88,12 @@ namespace UntappdViewer.ViewModels
         private void Closing(CancelEventArgs e)
         {
             if (communicationService.Ask(Properties.Resources.Warning, Properties.Resources.AskCloseApp) == MessageBoxResult.OK)
-                DeactivateViews();
+                DeActivate();
             else
                 e.Cancel = true;
         }
 
-        private void DeactivateViews()
+        private void DeActivate()
         {
             foreach (IRegion region in regionManager.Regions)
             {
