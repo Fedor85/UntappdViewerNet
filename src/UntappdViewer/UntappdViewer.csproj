@@ -114,6 +114,7 @@
     <Compile Include="Modules\MainModule.cs" />
     <Compile Include="Modules\MenuBarModule.cs" />
     <Compile Include="Modules\StatusBarModule.cs" />
+    <Compile Include="Modules\TreeModue.cs" />
     <Compile Include="Modules\UntappdModule.cs" />
     <Compile Include="Modules\WelcomeModule.cs" />
     <Compile Include="Services\UntappdService.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="ViewModels\MenuBarViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\StatusBarViewModel.cs" />
+    <Compile Include="ViewModels\TreeViewModel.cs" />
     <Compile Include="ViewModels\UntappdViewModel.cs" />
     <Compile Include="ViewModels\WelcomeViewModel.cs" />
     <Compile Include="Views\Main.xaml.cs">
@@ -133,6 +135,9 @@
     </Compile>
     <Compile Include="Views\StatusBar.xaml.cs">
       <DependentUpon>StatusBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tree.xaml.cs">
+      <DependentUpon>Tree.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Untappd.xaml.cs">
       <DependentUpon>Untappd.xaml</DependentUpon>
@@ -167,6 +172,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\StatusBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tree.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
