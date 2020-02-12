@@ -29,13 +29,13 @@ namespace UntappdViewer.ViewModels
         protected override void Activate()
         {
             base.Activate();
-            untappdService.UpdateUntappd += UpdateTree;
+            untappdService.UpdateUntappdEvent += UpdateTree;
         }
 
         protected override void DeActivate()
         {
             base.DeActivate();
-            untappdService.UpdateUntappd -= UpdateTree;
+            untappdService.UpdateUntappdEvent -= UpdateTree;
             TreeItems.Clear();
         }
 

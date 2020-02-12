@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 using Prism.Commands;
@@ -49,8 +48,9 @@ namespace UntappdViewer.ViewModels
             this.settingService = settingService;
             this.moduleManager = moduleManager;
             ClosingCommand = new DelegateCommand<CancelEventArgs>(Closing);
-            untappdService.InitializeUntappd += UntappdServiceInitializeUntappd;
-            Title = GetTitle(String.Empty);
+            untappdService.InitializeUntappdEvent += UpdateTitle;
+            untappdService.CleanUntappdEvent += UpdateTitle;
+            Title = CommunicationHelper.GetTitle();
             Activate();
         }
 
@@ -80,9 +80,14 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        private void UntappdServiceInitializeUntappd(Untappd untappd)
+        private void UpdateTitle(Untappd untappd)
         {
-            Title = GetTitle(untappd.UserName);
+            Title = CommunicationHelper.GetTitle(untappd.UserName);
+        }
+
+        private void UpdateTitle()
+        {
+            Title = CommunicationHelper.GetTitle();
         }
 
         private void Closing(CancelEventArgs e)
@@ -100,11 +105,6 @@ namespace UntappdViewer.ViewModels
                 foreach (object view in region.Views)
                     region.Deactivate(view);
             }
-        }
-
-        private string GetTitle(string userName)
-        {
-            return  $"{Properties.Resources.AppName} {(String.IsNullOrEmpty(userName) ? String.Empty : userName)} ({Assembly.GetEntryAssembly()?.GetName().Version})";
         }
     }
 }

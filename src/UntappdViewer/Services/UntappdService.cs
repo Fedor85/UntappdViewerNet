@@ -9,9 +9,11 @@ namespace UntappdViewer.Services
     {
         public Untappd Untappd { get; set; }
 
-        public event Action<Untappd> InitializeUntappd;
+        public event Action<Untappd> InitializeUntappdEvent;
 
-        public event Action<Untappd> UpdateUntappd;
+        public event Action<Untappd> UpdateUntappdEvent;
+
+        public event Action CleanUntappdEvent;
 
         public string FIlePath { get; private set; }
 
@@ -22,14 +24,23 @@ namespace UntappdViewer.Services
             using (FileStream fileStream = File.OpenRead(filePath))
                 Untappd.Checkins.AddRange(CheckinCSVMapper.GetCheckins(fileStream));
 
-            if (InitializeUntappd != null)
-                InitializeUntappd.Invoke(Untappd);
+            if (InitializeUntappdEvent != null)
+                InitializeUntappdEvent.Invoke(Untappd);
+        }
+
+        public void CleanUpUntappd()
+        {
+            FIlePath = String.Empty;
+            Untappd = new Untappd(String.Empty);
+
+            if (CleanUntappdEvent != null)
+                CleanUntappdEvent.Invoke();
         }
 
         public void RunUpdateUntappd()
         {
-            if (UpdateUntappd != null)
-                UpdateUntappd.Invoke(Untappd);
+            if (UpdateUntappdEvent != null)
+                UpdateUntappdEvent.Invoke(Untappd);
         }
     }
 }

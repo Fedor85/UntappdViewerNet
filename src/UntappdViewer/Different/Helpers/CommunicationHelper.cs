@@ -1,4 +1,6 @@
-﻿using UntappdViewer.Infrastructure;
+﻿using System;
+using System.Reflection;
+using UntappdViewer.Infrastructure;
 
 namespace UntappdViewer
 {
@@ -31,6 +33,16 @@ namespace UntappdViewer
         public static string GetLoadingMessage(string filePath)
         {
             return $"{Properties.Resources.LoadingFrom} {filePath}";
+        }
+
+        public static string GetTitle()
+        {
+            return GetTitle(String.Empty);
+        }
+
+        public static string GetTitle(string userName)
+        {
+            return $"{Properties.Resources.AppName} {(String.IsNullOrEmpty(userName) ? String.Empty : userName)} ({Assembly.GetEntryAssembly()?.GetName().Version})";
         }
     }
 }

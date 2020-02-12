@@ -13,10 +13,9 @@ namespace UntappdViewer.ViewModels
 
         private IModuleManager moduleManager;
 
-
         private ICommunicationService communicationService;
 
-        public MainViewModel(UntappdService untappdService, IModuleManager moduleManager, IRegionManager regionManager, ICommunicationService communicationService): base(regionManager)
+        public MainViewModel(IModuleManager moduleManager, IRegionManager regionManager, ICommunicationService communicationService): base(regionManager)
         {
             this.untappdService = untappdService;
             this.moduleManager = moduleManager;
@@ -30,10 +29,8 @@ namespace UntappdViewer.ViewModels
             moduleManager.LoadModule(typeof(UntappdModule).Name);
             moduleManager.LoadModule(typeof(StatusBarModule).Name);
 
-            ActivateView(RegionNames.MainRegion, typeof(Untappd));
             ActivateView(RegionNames.StatusBarRegion, typeof(StatusBar));
-
-            communicationService.ShowMessageOnStatusBar(CommunicationHelper.GetLoadingMessage(untappdService.FIlePath));
+            ActivateView(RegionNames.MainRegion, typeof(Untappd));
         }
 
         protected override void DeActivate()
