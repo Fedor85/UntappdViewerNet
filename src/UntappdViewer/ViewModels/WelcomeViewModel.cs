@@ -97,9 +97,9 @@ namespace UntappdViewer.ViewModels
 
             settingService.SetLastOpenedFilePath(filePath);
             moduleManager.LoadModule(typeof(MainModule).Name);
-            IRegion requestInfoRegion = regionManager.Regions[RegionNames.RootRegion];
-            object newView = requestInfoRegion.Views.First(i => i.GetType().Equals(typeof(Main)));
-            requestInfoRegion.Activate(newView);
+            IRegion rootRegion = regionManager.Regions[RegionNames.RootRegion];
+            object mainView = rootRegion.Views.First(i => i.GetType().Equals(typeof(Main)));
+            rootRegion.Activate(mainView);
         }
     }
 }
