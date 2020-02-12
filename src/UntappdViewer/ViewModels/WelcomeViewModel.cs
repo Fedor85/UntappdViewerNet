@@ -1,11 +1,9 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using Prism.Commands;
 using Prism.Modularity;
-using Prism.Mvvm;
 using Prism.Regions;
 using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
@@ -15,7 +13,7 @@ using UntappdViewer.Views;
 
 namespace UntappdViewer.ViewModels
 {
-    public class WelcomeViewModel: BindableBase
+    public class WelcomeViewModel: RegionManagerBaseModel
     {
         private UntappdService untappdService;
 
@@ -24,8 +22,6 @@ namespace UntappdViewer.ViewModels
         private ISettingService settingService;
 
         private IModuleManager moduleManager;
-
-        private IRegionManager regionManager;
 
         private string untappdUserName;
 
@@ -43,13 +39,12 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public WelcomeViewModel(UntappdService untappdService, ICommunicationService communicationService, ISettingService settingService, IModuleManager moduleManager, IRegionManager regionManager)
+        public WelcomeViewModel(UntappdService untappdService, ICommunicationService communicationService, ISettingService settingService, IModuleManager moduleManager, IRegionManager regionManager): base(regionManager)
         {
             this.untappdService = untappdService;
             this.communicationService = communicationService;
             this.settingService = settingService;
             this.moduleManager = moduleManager;
-            this.regionManager = regionManager;
             OpenFileCommand = new DelegateCommand(OpenFile);
             DropFileCommand = new DelegateCommand<DragEventArgs>(DropFile);
         }
@@ -97,9 +92,7 @@ namespace UntappdViewer.ViewModels
 
             settingService.SetLastOpenedFilePath(filePath);
             moduleManager.LoadModule(typeof(MainModule).Name);
-            IRegion rootRegion = regionManager.Regions[RegionNames.RootRegion];
-            object mainView = rootRegion.Views.First(i => i.GetType().Equals(typeof(Main)));
-            rootRegion.Activate(mainView);
+            ActivateView(RegionNames.RootRegion, typeof(Main));
         }
     }
 }

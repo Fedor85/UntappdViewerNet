@@ -117,7 +117,8 @@
     <Compile Include="Modules\UntappdModule.cs" />
     <Compile Include="Modules\WelcomeModule.cs" />
     <Compile Include="Services\UntappdService.cs" />
-    <Compile Include="ViewModels\ActiveAwareBaseModel.cs" />
+    <Compile Include="ViewModels\Base\RegionManagerBaseModel.cs" />
+    <Compile Include="ViewModels\Base\ActiveAwareBaseModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MenuBarViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
