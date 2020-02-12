@@ -88,11 +88,11 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Beer.
+        ///   Looks up a localized string similar to Checkins:.
         /// </summary>
-        public static string Beer {
+        public static string Checkins {
             get {
-                return ResourceManager.GetString("Beer", resourceCulture);
+                return ResourceManager.GetString("Checkins", resourceCulture);
             }
         }
         

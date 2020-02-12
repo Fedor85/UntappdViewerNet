@@ -30,6 +30,7 @@ namespace UntappdViewer.ViewModels
             moduleManager.LoadModule(typeof(UntappdModule).Name);
             moduleManager.LoadModule(typeof(StatusBarModule).Name);
 
+            ActivateView(RegionNames.MainRegion, typeof(Untappd));
             ActivateView(RegionNames.StatusBarRegion, typeof(StatusBar));
 
             communicationService.ShowMessageOnStatusBar(CommunicationHelper.GetLoadingMessage(untappdService.FIlePath));
@@ -38,6 +39,7 @@ namespace UntappdViewer.ViewModels
         protected override void DeActivate()
         {
             base.DeActivate();
+            DeActivateAllViews(RegionNames.MainRegion);
             DeActivateAllViews(RegionNames.StatusBarRegion);
         }
     }

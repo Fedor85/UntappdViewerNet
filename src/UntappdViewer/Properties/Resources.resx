@@ -192,8 +192,8 @@
     <value>Project</value>
     <comment>en-en</comment>
   </data>
-  <data name="Beer" xml:space="preserve">
-    <value>Beer</value>
+  <data name="Checkins" xml:space="preserve">
+    <value>Checkins:</value>
     <comment>en-en</comment>
   </data>
 </root>

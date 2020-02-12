@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using UntappdViewer.Infrastructure;
 using UntappdViewer.Mappers;
 using UntappdViewer.Models;
 
@@ -11,6 +10,8 @@ namespace UntappdViewer.Services
         public Untappd Untappd { get; set; }
 
         public event Action<Untappd> InitializeUntappd;
+
+        public event Action<Untappd> UpdateUntappd;
 
         public string FIlePath { get; private set; }
 
@@ -23,6 +24,12 @@ namespace UntappdViewer.Services
 
             if (InitializeUntappd != null)
                 InitializeUntappd.Invoke(Untappd);
+        }
+
+        public void RunUpdateUntappd()
+        {
+            if (UpdateUntappd != null)
+                UpdateUntappd.Invoke(Untappd);
         }
     }
 }

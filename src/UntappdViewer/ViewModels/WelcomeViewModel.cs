@@ -93,6 +93,7 @@ namespace UntappdViewer.ViewModels
             settingService.SetLastOpenedFilePath(filePath);
             moduleManager.LoadModule(typeof(MainModule).Name);
             ActivateView(RegionNames.RootRegion, typeof(Main));
+            untappdService.RunUpdateUntappd();
         }
     }
 }

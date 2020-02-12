@@ -6,13 +6,12 @@
              xmlns:local="clr-namespace:UntappdViewer.Views"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:properties="clr-namespace:UntappdViewer.Properties"
+             xmlns:this="clr-namespace:UntappdViewer.ViewModels"
              mc:Ignorable="d" 
              prism:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="600" d:DesignWidth="250">
-    <ItemsControl VerticalAlignment="Stretch">
-        <Label Content="{x:Static properties:Resources.Beer}"/>
-        <TreeView>
-
-        </TreeView>
+    <ItemsControl>
+        <Label Content="{x:Static properties:Resources.Checkins}" FontWeight="Bold"/>
+        <TreeView ItemsSource ="{Binding TreeItems}"  Background="Transparent"/>
     </ItemsControl>
 </UserControl>

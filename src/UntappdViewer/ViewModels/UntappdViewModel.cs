@@ -1,11 +1,13 @@
 ﻿using System.Windows;
 using Prism.Modularity;
+using Prism.Regions;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
+using UntappdViewer.Views;
 
 namespace UntappdViewer.ViewModels
 {
-    public class UntappdViewModel: ActiveAwareBaseModel
+    public class UntappdViewModel: RegionManagerBaseModel
     {
         private IModuleManager moduleManager;
 
@@ -23,7 +25,7 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public UntappdViewModel(IModuleManager moduleManager, ISettingService settingService)
+        public UntappdViewModel(IModuleManager moduleManager, IRegionManager regionManager, ISettingService settingService) : base(regionManager)
         {
             this.moduleManager = moduleManager;
             this.settingService = settingService;
@@ -34,12 +36,14 @@ namespace UntappdViewer.ViewModels
             base.Activate();
             TreeRegionWidth = new GridLength(settingService.GetTreeRegionWidth());
             moduleManager.LoadModule(typeof(TreeModue).Name);
+            ActivateView(RegionNames.TreeRegion, typeof(Tree));
         }
 
         protected override void DeActivate()
         {
             base.DeActivate();
             settingService.SetTreeRegionWidth(TreeRegionWidth.Value);
+            DeActivateAllViews(RegionNames.TreeRegion);
         }
     }
 }
