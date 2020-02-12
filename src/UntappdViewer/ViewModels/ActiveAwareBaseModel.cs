@@ -4,9 +4,9 @@ using Prism.Mvvm;
 
 namespace UntappdViewer.ViewModels
 {
-    public class ActiveAwareBaseModel : BindableBase, IActiveAware
+    public abstract class ActiveAwareBaseModel : BindableBase, IActiveAware
     {
-        protected bool active;
+        private bool active;
 
         public event EventHandler IsActiveChanged;
 
