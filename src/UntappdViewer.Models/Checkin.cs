@@ -70,7 +70,7 @@ namespace UntappdViewer.Models
 
         public string GetDisplayName()
         {
-            return String.Format("{0:yyyy-MMM-dd}_{1}", CreatedDate, Beer.Name);
+            return $"{CreatedDate:yyyy-MMM-dd} {Beer.Name}";
         }
 
         public override string ToString()
