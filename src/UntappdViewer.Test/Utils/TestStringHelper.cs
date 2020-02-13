@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 using UntappdViewer.Utils;
 
@@ -32,6 +33,21 @@ namespace UntappdViewer.Test
             Assert.AreEqual("Paulaner Hefe-Weizen", shortNames[5]);
             Assert.AreEqual("Hoegaarden Wit", shortNames[6]);
             Assert.AreEqual("Spaten München", shortNames[7]);
+        }
+
+        [Test]
+        public void TestGeBreakForLongName()
+        {
+            string name1 = "Imperial Rye Porter Aged In Jack Daniels Barrels Batch #2";
+            string resultName11 = StringHelper.GeBreakForLongName(name1, 30, 5);
+            Assert.AreEqual("Imperial Rye Porter Aged In\n     Jack Daniels Barrels Batch #2", resultName11);
+
+            string resultName12 = StringHelper.GeBreakForLongName(name1, 30, 0);
+            Assert.AreEqual("Imperial Rye Porter Aged In\nJack Daniels Barrels Batch #2", resultName12);
+
+            string name2 = "LIDSKAE Nulevachka";
+            string resultName2 = StringHelper.GeBreakForLongName(name2, 30, 5);
+            Assert.AreEqual(name2, resultName2);
         }
     }
 }

@@ -13,5 +13,7 @@
         void SetTreeRegionWidth(double value);
 
         string GetDefaultUserName();
+
+        int GetTreeItemNameMaxLength();
     }
 }

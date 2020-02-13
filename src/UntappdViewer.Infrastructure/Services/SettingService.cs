@@ -36,5 +36,10 @@ namespace UntappdViewer.Infrastructure.Services
         {
             return Settings.Default.DefaultUserName;
         }
+
+        public int GetTreeItemNameMaxLength()
+        {
+            return Settings.Default.TreeItemNameMaxLength;
+        }
     }
 }

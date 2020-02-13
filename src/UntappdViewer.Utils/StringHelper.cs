@@ -33,5 +33,29 @@ namespace UntappdViewer.Utils
             name = nameItems[0];
             return name.Trim();
         }
+
+        public static string GeBreakForLongName(string name, int maxLength, int insertSpaceCount)
+        {
+            int index = maxLength;
+            if (name.Length > index)
+            {
+                index--;
+                while (index != 0)
+                {
+                    if (name[index] == Convert.ToChar(ControlChar.Space))
+                    {
+                        bool isInsertEmpty = insertSpaceCount == 0;
+                        if (isInsertEmpty)
+                            name = name.Remove(index, 1);
+
+                        name =name.Insert(index, String.Format("{0}{1}", Convert.ToChar(ControlChar.NewLine), isInsertEmpty ? String.Empty : 
+                                                                                                                new string(Convert.ToChar(ControlChar.Space), insertSpaceCount - 1)));
+                        break;;
+                    }
+                    index--;
+                }
+            }
+            return name;
+        }
     }
 }
