@@ -20,9 +20,14 @@ namespace UntappdViewer.Utils
 
         public static string GetShortName(string name)
         {
-            Regex regex = new Regex(@"\(.*?\)");
-            foreach (Match match in regex.Matches(name))
+            Regex parenthesesRegex = new Regex(@"\(.*?\)");
+            foreach (Match match in parenthesesRegex.Matches(name))
                 name = name.Replace(match.Value, String.Empty);
+
+            name = name.Replace("(", String.Empty).Replace(")", String.Empty);
+            Regex cpaceRegex = new Regex(@"\s{2,}");
+            foreach (Match match in cpaceRegex.Matches(name))
+                name = name.Remove(match.Index, match.Length - 1);
 
             return name.Trim();
         }

@@ -23,9 +23,9 @@ namespace UntappdViewer.Test
 
             Assert.AreEqual("LIDSKAE Nulevachka", shortNames[0]);
             Assert.AreEqual("Golden Bumblebee Blackberry Ale", shortNames[1]);
-            Assert.AreEqual("Stary Melnik Iz Bochonka Myagkoe )", shortNames[2]);
-            Assert.AreEqual("Seven Brewers  Cheshskoe Original", shortNames[3]);
-            Assert.AreEqual("Lidski Gingerbread kvass )", shortNames[4]);
+            Assert.AreEqual("Stary Melnik Iz Bochonka Myagkoe", shortNames[2]);
+            Assert.AreEqual("Seven Brewers Cheshskoe Original", shortNames[3]);
+            Assert.AreEqual("Lidski Gingerbread kvass", shortNames[4]);
         }
     }
 }
