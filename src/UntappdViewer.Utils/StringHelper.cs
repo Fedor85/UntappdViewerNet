@@ -20,7 +20,7 @@ namespace UntappdViewer.Utils
 
         public static string GetShortName(string name)
         {
-            Regex regex = new Regex(@"\(.*\)");
+            Regex regex = new Regex(@"\(.*?\)");
             foreach (Match match in regex.Matches(name))
                 name = name.Replace(match.Value, String.Empty);
 
