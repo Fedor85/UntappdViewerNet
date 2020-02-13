@@ -11,5 +11,7 @@
         double GetTreeRegionWidth();
 
         void SetTreeRegionWidth(double value);
+
+        string GetDefaultUserName();
     }
 }

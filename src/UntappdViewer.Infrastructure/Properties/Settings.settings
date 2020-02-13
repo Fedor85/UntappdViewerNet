@@ -8,5 +8,8 @@
     <Setting Name="TreeRegionWidth" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
+    <Setting Name="DefaultUserName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">NoName</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

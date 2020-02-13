@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UntappdViewer.Different;
 using UntappdViewer.Models;
 using UntappdViewer.Services;
 
@@ -8,9 +9,9 @@ namespace UntappdViewer.ViewModels
     {
         private UntappdService untappdService;
 
-        private List<Checkin> treeItems;
+        private List<TreeViewItem> treeItems;
 
-        public List<Checkin> TreeItems
+        public List<TreeViewItem> TreeItems
         {
             get { return treeItems; }
             set
@@ -23,7 +24,7 @@ namespace UntappdViewer.ViewModels
         public TreeViewModel(UntappdService untappdService)
         {
             this.untappdService = untappdService;
-            UpdateTree(untappdService.Untappd);
+            UpdateTree();
         }
 
         protected override void Activate()
@@ -39,9 +40,9 @@ namespace UntappdViewer.ViewModels
             TreeItems.Clear();
         }
 
-        private void UpdateTree(Untappd untappd)
+        private void UpdateTree()
         {
-            TreeItems = untappd.Checkins;
+            TreeItems = untappdService.GeTreeViewItems();
         }
     }
 }

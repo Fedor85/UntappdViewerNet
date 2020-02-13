@@ -62,7 +62,7 @@ namespace UntappdViewer
             //    settingService.Reset();
 
             Container.RegisterInstance(settingService);
-            Container.RegisterInstance(new UntappdService());
+            Container.RegisterInstance(new UntappdService(settingService));
         }
     }
 }

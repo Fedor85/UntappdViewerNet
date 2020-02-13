@@ -31,5 +31,10 @@ namespace UntappdViewer.Infrastructure.Services
             Settings.Default.TreeRegionWidth = value;
             Settings.Default.Save();
         }
+
+        public string GetDefaultUserName()
+        {
+            return Settings.Default.DefaultUserName;
+        }
     }
 }

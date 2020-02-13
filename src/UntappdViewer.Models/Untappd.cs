@@ -28,9 +28,25 @@ namespace UntappdViewer.Models
             CreatedDate = DateTime.Now;
         }
 
+        public void SortDataDescCheckins()
+        {
+            Checkins.Sort(SortDataDesc);
+        }
+
         public override string ToString()
         {
             return $"UserName:{UserName}/CreatedDate:{CreatedDate}/CheckinsCount:{Checkins.Count}";
+        }
+
+        private int SortDataDesc(Checkin x, Checkin y)
+        {
+            if (x.CreatedDate < y.CreatedDate)
+                return 1;
+
+            if (x.CreatedDate > y.CreatedDate)
+                return -1;
+
+            return 1;
         }
     }
 }

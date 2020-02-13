@@ -9,7 +9,7 @@
              regions:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="600" d:DesignWidth="800">
     <UserControl.Background>
-        <SolidColorBrush Opacity="0.3" Color="#ffffff"/>
+        <SolidColorBrush Opacity="0.5" Color="#ffffff"/>
     </UserControl.Background>
     <Grid>
         <Grid.RowDefinitions>

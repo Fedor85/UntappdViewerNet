@@ -46,5 +46,14 @@ namespace UntappdViewer.Infrastructure.Properties {
                 this["TreeRegionWidth"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("NoName")]
+        public string DefaultUserName {
+            get {
+                return ((string)(this["DefaultUserName"]));
+            }
+        }
     }
 }
