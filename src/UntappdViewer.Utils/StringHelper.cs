@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 
-namespace UntappdViewer
+namespace UntappdViewer.Utils
 {
-    public static class Utils
+    public static class StringHelper
     {
         public static string Join<T>(List<T> parameters)
         {

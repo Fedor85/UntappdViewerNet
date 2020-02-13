@@ -104,7 +104,6 @@
     <Compile Include="Different\Helpers\CommunicationHelper.cs" />
     <Compile Include="Different\Helpers\EnumsHelper.cs" />
     <Compile Include="Different\TreeViewItem.cs" />
-    <Compile Include="Different\Utils.cs" />
     <Compile Include="Mappers\CheckinCSVMapper.cs" />
     <Compile Include="Mappers\CheckinParser\CheckinParser.cs" />
     <Compile Include="Mappers\CheckinParser\CheckinParserFactory.cs" />
@@ -230,6 +229,10 @@
     <ProjectReference Include="..\UntappdViewer.Models\UntappdViewer.Models.csproj">
       <Project>{b1584484-7648-4349-b8f8-47352dd85ff1}</Project>
       <Name>UntappdViewer.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UntappdViewer.Utils\UntappdViewer.Utils.csproj">
+      <Project>{5fa116c9-7571-494c-a74d-7e121857ffe9}</Project>
+      <Name>UntappdViewer.Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

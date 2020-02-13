@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UntappdViewer.Utils;
 
 namespace UntappdViewer.Mappers.CheckinParser
 {
@@ -15,7 +16,7 @@ namespace UntappdViewer.Mappers.CheckinParser
         {
             if (parameterNumbers.Count != parameterValues.Count)
                 throw new ArgumentException(String.Format(Properties.Resources.ArgumentExceptionOnCheckinParser,"\n", parameterNumbers.Count, parameterValues.Count,
-                                                                                                            Utils.Join(parameterNumbers), Utils.Join(parameterValues)));
+                                                            StringHelper.Join(parameterNumbers), StringHelper.Join(parameterValues)));
 
             this.parameterNumbers = parameterNumbers;
             this.parameterValues = parameterValues;
