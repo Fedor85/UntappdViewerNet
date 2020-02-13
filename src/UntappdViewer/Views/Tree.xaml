@@ -12,6 +12,6 @@
              d:DesignHeight="600" d:DesignWidth="250">
     <ItemsControl>
         <Label Content="{x:Static properties:Resources.Checkins}" FontWeight="Bold"/>
-        <TreeView ItemsSource ="{Binding TreeItems}"  Background="Transparent"/>
+        <TreeView ItemsSource ="{Binding TreeItems}"  Background="Transparent" BorderBrush="Transparent"/>
     </ItemsControl>
 </UserControl>
