@@ -70,7 +70,7 @@ namespace UntappdViewer.Models
 
         public string GetDisplayName()
         {
-            return $"{CreatedDate:yyyy-MMM-dd} {Beer.Name}";
+            return $"{CreatedDate:yyyy-MMM-dd} {Beer.Name.Trim()}";
         }
 
 
