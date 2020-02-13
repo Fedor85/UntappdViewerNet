@@ -56,6 +56,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="TestHelper.cs" />
+    <Compile Include="Utils\TestStringHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -73,6 +74,10 @@
     <ProjectReference Include="..\UntappdViewer.Models\UntappdViewer.Models.csproj">
       <Project>{B1584484-7648-4349-B8F8-47352DD85FF1}</Project>
       <Name>UntappdViewer.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UntappdViewer.Utils\UntappdViewer.Utils.csproj">
+      <Project>{5fa116c9-7571-494c-a74d-7e121857ffe9}</Project>
+      <Name>UntappdViewer.Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\UntappdViewer\UntappdViewer.csproj">
       <Project>{0BFB86F3-F42B-4617-A2E4-DA2549F2EC75}</Project>

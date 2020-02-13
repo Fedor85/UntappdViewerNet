@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace UntappdViewer.Utils
 {
@@ -14,6 +16,15 @@ namespace UntappdViewer.Utils
                 text.Append(";");
             }
             return text.ToString();
+        }
+
+        public static string GetShortName(string name)
+        {
+            Regex regex = new Regex(@"\(.*\)");
+            foreach (Match match in regex.Matches(name))
+                name = name.Replace(match.Value, String.Empty);
+
+            return name.Trim();
         }
     }
 }
