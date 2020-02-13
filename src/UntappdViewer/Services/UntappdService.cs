@@ -64,7 +64,7 @@ namespace UntappdViewer.Services
         private string GetTreeViewCheckinDisplayName(Checkin checkin)
         {
             string date = checkin.CreatedDate.ToString("yyyy-MMM-dd");
-            return $"{date} {StringHelper.GeBreakForLongName(StringHelper.GetShortName(checkin.Beer.Name), settingService.GetTreeItemNameMaxLength(), date.Length*2)}";
+            return  $"{date} {StringHelper.GeBreakForLongName(StringHelper.GetShortName(checkin.Beer.Name), settingService.GetTreeItemNameMaxLength(), date.Length * 2)}";
         }
     }
 }
