@@ -19,13 +19,18 @@ namespace UntappdViewer.Models
         /// <summary>
         /// Дата создания проекта
         /// </summary>
-        public DateTime CreatedDate { get;}
+        private DateTime CreatedDate { get;}
 
         public Untappd(string userName)
         {
             Checkins = new List<Checkin>();
             UserName = userName;
             CreatedDate = DateTime.Now;
+        }
+
+        public void AddCheckins(List<Checkin> checkins)
+        {
+            Checkins.AddRange(checkins);
         }
 
         public void SortDataDescCheckins()

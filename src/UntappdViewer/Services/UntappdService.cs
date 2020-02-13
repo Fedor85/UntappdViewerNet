@@ -11,7 +11,8 @@ namespace UntappdViewer.Services
     public class UntappdService
     {
         private ISettingService settingService;
-        public Untappd Untappd { get; set; }
+
+        private Untappd Untappd { get; set; }
 
         public event Action<Untappd> InitializeUntappdEvent;
 
@@ -24,7 +25,7 @@ namespace UntappdViewer.Services
         public UntappdService(ISettingService settingService)
         {
             this.settingService = settingService;
-            Untappd = new Untappd(settingService.GetDefaultUserName());
+            Untappd = new Untappd(String.Empty);
         }
 
         public void Initialize(string userName, string filePath)
@@ -32,26 +33,22 @@ namespace UntappdViewer.Services
             FIlePath = filePath;
             Untappd = new Untappd(String.IsNullOrEmpty(userName) ? settingService.GetDefaultUserName() : userName);
             using (FileStream fileStream = File.OpenRead(filePath))
-                Untappd.Checkins.AddRange(CheckinCSVMapper.GetCheckins(fileStream));
+                Untappd.AddCheckins(CheckinCSVMapper.GetCheckins(fileStream));
 
             Untappd.SortDataDescCheckins();
-            if (InitializeUntappdEvent != null)
-                InitializeUntappdEvent.Invoke(Untappd);
+            InitializeUntappdEvent?.Invoke(Untappd);
         }
 
         public void CleanUpUntappd()
         {
             FIlePath = String.Empty;
             Untappd = new Untappd(String.Empty);
-
-            if (CleanUntappdEvent != null)
-                CleanUntappdEvent.Invoke();
+            CleanUntappdEvent?.Invoke();
         }
 
         public void RunUpdateUntappd()
         {
-            if (UpdateUntappdEvent != null)
-                UpdateUntappdEvent.Invoke();
+            UpdateUntappdEvent?.Invoke();
         }
 
         public List<TreeViewItem> GeTreeViewItems()

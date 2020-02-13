@@ -73,6 +73,7 @@ namespace UntappdViewer.Models
             return $"{CreatedDate:yyyy-MMM-dd} {Beer.Name}";
         }
 
+
         public override string ToString()
         {
             return  $"Beer:{Beer}/CreatedDate:{CreatedDate}/RatingScore:{(RatingScore.HasValue ? (object) RatingScore.Value : "no data")}";
