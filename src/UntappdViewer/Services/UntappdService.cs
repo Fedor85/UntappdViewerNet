@@ -5,6 +5,7 @@ using UntappdViewer.Different;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Mappers;
 using UntappdViewer.Models;
+using UntappdViewer.Utils;
 
 namespace UntappdViewer.Services
 {
@@ -55,9 +56,14 @@ namespace UntappdViewer.Services
         {
             List<TreeViewItem> treeViewItems = new List<TreeViewItem>();
             foreach (Checkin checkin in Untappd.Checkins)
-                treeViewItems.Add(new TreeViewItem(checkin.Id, checkin.GetDisplayName()));
+                treeViewItems.Add(new TreeViewItem(checkin.Id, GetTreeViewCheckinDisplayName(checkin)));
 
             return treeViewItems;
+        }
+
+        public string GetTreeViewCheckinDisplayName(Checkin checkin)
+        {
+            return $"{checkin.CreatedDate:yyyy-MMM-dd} {StringHelper.GetShortName(checkin.Beer.Name)}";
         }
     }
 }

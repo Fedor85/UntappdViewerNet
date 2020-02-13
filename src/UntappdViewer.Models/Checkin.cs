@@ -68,12 +68,6 @@ namespace UntappdViewer.Models
             Beer = new Beer();
         }
 
-        public string GetDisplayName()
-        {
-            return $"{CreatedDate:yyyy-MMM-dd} {Beer.Name.Trim()}";
-        }
-
-
         public override string ToString()
         {
             return  $"Beer:{Beer}/CreatedDate:{CreatedDate}/RatingScore:{(RatingScore.HasValue ? (object) RatingScore.Value : "no data")}";
