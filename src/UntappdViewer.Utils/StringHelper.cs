@@ -29,6 +29,8 @@ namespace UntappdViewer.Utils
             foreach (Match match in cpaceRegex.Matches(name))
                 name = name.Remove(match.Index, match.Length - 1);
 
+            string[] nameItems = name.Split('/');
+            name = nameItems[0];
             return name.Trim();
         }
     }

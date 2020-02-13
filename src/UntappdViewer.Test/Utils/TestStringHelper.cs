@@ -16,6 +16,9 @@ namespace UntappdViewer.Test
             fullNames.Add("Stary Melnik Iz Bochonka Myagkoe (Старый Мельник Из Бочонка Мягкое))");
             fullNames.Add("Seven Brewers (Семь Пивоваров) Cheshskoe Original (Чешское Оригинальное)");
             fullNames.Add("Lidski Gingerbread kvass (Квас Лидский Пряничный (медово-имбирный))");
+            fullNames.Add("Paulaner Hefe-Weizen / Hefe-Weißbier Naturtrüb / Natural Wheat");
+            fullNames.Add("Hoegaarden Wit / Blanche 0,0 %");
+            fullNames.Add("Spaten München / Münchner Hell / (Premium Lager)");
 
             List<string> shortNames = new List<string>();
             foreach (string fullName in fullNames)
@@ -26,6 +29,9 @@ namespace UntappdViewer.Test
             Assert.AreEqual("Stary Melnik Iz Bochonka Myagkoe", shortNames[2]);
             Assert.AreEqual("Seven Brewers Cheshskoe Original", shortNames[3]);
             Assert.AreEqual("Lidski Gingerbread kvass", shortNames[4]);
+            Assert.AreEqual("Paulaner Hefe-Weizen", shortNames[5]);
+            Assert.AreEqual("Hoegaarden Wit", shortNames[6]);
+            Assert.AreEqual("Spaten München", shortNames[7]);
         }
     }
 }
