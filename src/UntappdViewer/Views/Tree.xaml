@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
         <Label Grid.Row="0" Content="{x:Static properties:Resources.Checkins}" FontWeight="Bold"/>
         <ScrollViewer Grid.Row="1" CanContentScroll="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-            <TreeView ItemsSource ="{Binding TreeItems}"  Background="Transparent" BorderBrush="Transparent"/>
+            <TreeView ItemsSource ="{Binding TreeItems}"  Background="Transparent" BorderBrush="Transparent" PreviewMouseWheel="OnPreviewMouseWheel"/>
         </ScrollViewer>
     </Grid>
 </UserControl>
