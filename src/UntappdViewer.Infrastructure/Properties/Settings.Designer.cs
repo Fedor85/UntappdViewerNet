@@ -58,7 +58,7 @@ namespace UntappdViewer.Infrastructure.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        [global::System.Configuration.DefaultSettingValueAttribute("41")]
         public int TreeItemNameMaxLength {
             get {
                 return ((int)(this["TreeItemNameMaxLength"]));
