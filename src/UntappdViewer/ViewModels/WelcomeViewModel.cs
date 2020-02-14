@@ -49,6 +49,19 @@ namespace UntappdViewer.ViewModels
             DropFileCommand = new DelegateCommand<DragEventArgs>(DropFile);
         }
 
+        protected override void Activate()
+        {
+            base.Activate();
+            moduleManager.LoadModule(typeof(RecentFilesModule).Name);
+            ActivateView(RegionNames.RecentFiles, typeof(RecentFiles));
+        }
+
+        protected override void DeActivate()
+        {
+            base.DeActivate();
+            DeActivateAllViews(RegionNames.RecentFiles);
+        }
+
         private void OpenFile()
         {
             string saveOpenFilePath = settingService.GetLastOpenedFilePath();
