@@ -88,7 +88,7 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Checkins:.
+        ///   Looks up a localized string similar to Checkins.
         /// </summary>
         public static string Checkins {
             get {

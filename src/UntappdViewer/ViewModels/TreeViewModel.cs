@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UntappdViewer.Different;
-using UntappdViewer.Models;
 using UntappdViewer.Services;
 
 namespace UntappdViewer.ViewModels
@@ -10,6 +10,18 @@ namespace UntappdViewer.ViewModels
         private UntappdService untappdService;
 
         private List<TreeViewItem> treeItems;
+
+        public string treeViewCaption;
+
+        public string TreeViewCaption
+        {
+            get { return treeViewCaption; }
+            set
+            {
+                treeViewCaption = value;
+                OnPropertyChanged();
+            }
+        }
 
         public List<TreeViewItem> TreeItems
         {
@@ -43,6 +55,7 @@ namespace UntappdViewer.ViewModels
         private void UpdateTree()
         {
             TreeItems = untappdService.GeTreeViewItems();
+            TreeViewCaption = String.Format("{0} ({1}):", Properties.Resources.Checkins, TreeItems.Count);
         }
     }
 }

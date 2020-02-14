@@ -2,11 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:UntappdViewer.Views"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:prism="http://prismlibrary.com/"
-             xmlns:properties="clr-namespace:UntappdViewer.Properties"
-             xmlns:this="clr-namespace:UntappdViewer.ViewModels"
              mc:Ignorable="d" 
              prism:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="600" d:DesignWidth="250">
@@ -15,7 +12,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Content="{x:Static properties:Resources.Checkins}" FontWeight="Bold"/>
+        <Label Grid.Row="0" Content="{Binding TreeViewCaption}" FontWeight="Bold"/>
         <ScrollViewer Grid.Row="1" CanContentScroll="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
             <TreeView ItemsSource ="{Binding TreeItems}"  Background="Transparent" BorderBrush="Transparent" PreviewMouseWheel="OnPreviewMouseWheel"/>
         </ScrollViewer>
