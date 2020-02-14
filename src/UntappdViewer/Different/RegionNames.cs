@@ -13,5 +13,7 @@
         public const string TreeRegion = "TreeRegion";
 
         public const string ContentRegion = "ContentRegion";
+
+        public const string RecentFiles = "RecentFiles";
     }
 }
