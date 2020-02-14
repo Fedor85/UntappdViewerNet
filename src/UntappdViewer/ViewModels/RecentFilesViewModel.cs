@@ -2,17 +2,31 @@
 using System.Windows.Input;
 using Prism.Commands;
 using UntappdViewer.Infrastructure;
+using UntappdViewer.Interfaces.Services;
 
 namespace UntappdViewer.ViewModels
 {
     public class RecentFilesViewModel : ActiveAwareBaseModel
     {
+        private ISettingService settingService;
+
         public ICommand OpenRecentFileCommand { get; }
 
-        public List<FileItem> FileItems { get; set; }
+        private List<FileItem> fileItems;
 
-        public RecentFilesViewModel()
+        public List<FileItem> FileItems
         {
+            get { return fileItems; }
+            set
+            {
+                fileItems = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public RecentFilesViewModel(ISettingService settingService)
+        {
+            this.settingService = settingService;
             OpenRecentFileCommand = new DelegateCommand<FileItem>(OpenRecentFile);
         }
 
@@ -24,11 +38,13 @@ namespace UntappdViewer.ViewModels
         protected override void Activate()
         {
             base.Activate();
+            FileItems = FileHelper.GetExistsParseFilePaths(settingService.GetRecentFilePaths());
         }
 
         protected override void DeActivate()
         {
             base.DeActivate();
+            FileItems.Clear();
         }
     }
 }

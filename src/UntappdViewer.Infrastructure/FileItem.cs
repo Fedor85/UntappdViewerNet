@@ -5,7 +5,7 @@ namespace UntappdViewer.Infrastructure
 {
     public class FileItem: IComparable<FileItem>
     {
-        public string FileName { get; }
+        public string FileName { get; set; }
 
         public string FilePath { get; }
 

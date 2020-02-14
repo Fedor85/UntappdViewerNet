@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace UntappdViewer.Infrastructure
 {
@@ -57,6 +58,13 @@ namespace UntappdViewer.Infrastructure
             UpdateFileItemIndex(fileItems);
             if (fileItems.Count > maxItems)
                 fileItems.RemoveAt(fileItems.Count -1);
+        }
+
+        public static List<FileItem> GetExistsParseFilePaths(string filePaths)
+        {
+            List<FileItem> fileItems = GetParseFilePaths(filePaths).Where(item => File.Exists(item.FilePath)).ToList();
+            UpdateFileItemIndex(fileItems);
+            return fileItems;
         }
 
         public static List<FileItem> GetParseFilePaths(string filePaths)

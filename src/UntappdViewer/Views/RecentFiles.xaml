@@ -14,7 +14,7 @@
                 <TextBlock HorizontalAlignment="Center">
                     <Hyperlink Command="{Binding Path=DataContext.OpenRecentFileCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" Foreground="#ffffff">
                         <Hyperlink.Inlines>
-                            <Run Text="{Binding Path= FileName}"/>
+                            <Run Text="{Binding Path=FileName}"/>
                         </Hyperlink.Inlines>
                     </Hyperlink>
                 </TextBlock>
