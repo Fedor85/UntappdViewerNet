@@ -4,9 +4,9 @@
     {
         void Reset();
 
-        string GetLastOpenedFilePath();
+        string GetRecentFilePaths();
 
-        void SetLastOpenedFilePath(string value);
+        void SetRecentFilePaths(string value);
 
         double GetTreeRegionWidth();
 

@@ -101,7 +101,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Different\Extensions.cs" />
-    <Compile Include="Different\FileItem.cs" />
     <Compile Include="Different\Helpers\CommunicationHelper.cs" />
     <Compile Include="Different\Helpers\EnumsHelper.cs" />
     <Compile Include="Different\TreeViewItem.cs" />

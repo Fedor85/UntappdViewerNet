@@ -64,8 +64,8 @@ namespace UntappdViewer.ViewModels
 
         private void OpenFile()
         {
-            string saveOpenFilePath = settingService.GetLastOpenedFilePath();
-            string filePath = communicationService.OpenFile(String.IsNullOrEmpty(saveOpenFilePath) ? String.Empty : Path.GetDirectoryName(saveOpenFilePath), Extensions.GetSupportExtensions());
+            string lastOpenFilePath = FileHelper.GetFirstFileItemPath(settingService.GetRecentFilePaths());
+            string filePath = communicationService.OpenFile(String.IsNullOrEmpty(lastOpenFilePath) ? String.Empty : Path.GetDirectoryName(lastOpenFilePath), Extensions.GetSupportExtensions());
             if (String.IsNullOrEmpty(filePath))
                 return;
 
@@ -103,7 +103,7 @@ namespace UntappdViewer.ViewModels
                 return;
             }
 
-            settingService.SetLastOpenedFilePath(filePath);
+            settingService.SetRecentFilePaths(FileHelper.AddFilePath(settingService.GetRecentFilePaths(), filePath, 3));
             moduleManager.LoadModule(typeof(MainModule).Name);
             ActivateView(RegionNames.RootRegion, typeof(Main));
             untappdService.RunUpdateUntappd();

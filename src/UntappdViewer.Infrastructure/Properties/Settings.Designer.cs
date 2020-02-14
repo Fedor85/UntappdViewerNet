@@ -26,12 +26,12 @@ namespace UntappdViewer.Infrastructure.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string LastOpenedFilePath {
+        public string RecentFilePaths {
             get {
-                return ((string)(this["LastOpenedFilePath"]));
+                return ((string)(this["RecentFilePaths"]));
             }
             set {
-                this["LastOpenedFilePath"] = value;
+                this["RecentFilePaths"] = value;
             }
         }
         

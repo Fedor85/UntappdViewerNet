@@ -56,7 +56,7 @@ namespace UntappdViewer.ViewModels
 
         private void Activate()
         {
-            string filePath = settingService.GetLastOpenedFilePath();
+            string filePath = FileHelper.GetFirstFileItemPath(settingService.GetRecentFilePaths());
             FileStatus fileStatus = FileHelper.Check(filePath, Extensions.GetSupportExtensions());
             if (EnumsHelper.IsValidFileStatus(fileStatus))
             {

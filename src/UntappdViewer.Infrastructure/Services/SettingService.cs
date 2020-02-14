@@ -10,14 +10,14 @@ namespace UntappdViewer.Infrastructure.Services
             Settings.Default.Reset();
         }
 
-        public string GetLastOpenedFilePath()
+        public string GetRecentFilePaths()
         {
-            return Settings.Default.LastOpenedFilePath;
+            return Settings.Default.RecentFilePaths;
         }
 
-        public void SetLastOpenedFilePath(string value)
+        public void SetRecentFilePaths(string value)
         {
-            Settings.Default.LastOpenedFilePath = value;
+            Settings.Default.RecentFilePaths = value;
             Settings.Default.Save();
         }
 

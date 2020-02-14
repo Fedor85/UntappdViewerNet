@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using NUnit.Framework;
 using UntappdViewer.Infrastructure;
@@ -10,7 +11,7 @@ namespace UntappdViewer.Test
     public class FileHelperFixture
     {
         [Test]
-        public void Test()
+        public void TestFile()
         {
             List<string> extensions = Extensions.GetSupportExtensions();
             string filePathEmpty = string.Empty;
@@ -38,6 +39,46 @@ namespace UntappdViewer.Test
 
             FileStatus fileStatus3 = FileHelper.Check(filePath, extensions);
             Assert.AreEqual(FileStatus.NotExists, fileStatus3);
+        }
+
+        [Test]
+        public void ParseFilePaths()
+        {
+            List<FileItem> fileEmptyItems = FileHelper.GetParseFilePaths(String.Empty);
+            Assert.AreEqual(0, fileEmptyItems.Count);
+
+            List<string> filePaths = new List<string>();
+            filePaths.Add(@"1*C:\Windows\System32\AERTAC64.dll");
+            filePaths.Add(@"2*C:\Windows\System32\3082\vsjitdebuggerui.dll");
+            filePaths.Add(@"3*C:\Windows\System32\DAX2\DAX2.sdf");
+            string allPath = String.Empty;
+            foreach (string filePath in filePaths)
+                allPath += filePath + "|";
+
+            allPath = allPath.Remove(allPath.Length - 1, 1);
+            List<FileItem> fileItems = FileHelper.GetParseFilePaths(allPath);
+            Assert.AreEqual(3, fileItems.Count);
+            Assert.AreEqual("AERTAC64.dll", fileItems[0].FileName);
+            Assert.AreEqual("vsjitdebuggerui.dll", fileItems[1].FileName);
+            Assert.AreEqual("DAX2.sdf", fileItems[2].FileName);
+
+            Assert.AreEqual(String.Empty, FileHelper.GetMergedFilePaths(new List<FileItem>()));
+            Assert.AreEqual(allPath, FileHelper.GetMergedFilePaths(fileItems));
+
+            FileHelper.AddFile(fileItems, @"C:\Windows\System32\DAX2\DRTAIODAT2.DAT", 3);
+            Assert.AreEqual(3, fileItems.Count);
+            Assert.AreEqual("DRTAIODAT2.DAT", fileItems[0].FileName);
+            Assert.AreEqual("AERTAC64.dll", fileItems[1].FileName);
+            Assert.AreEqual("vsjitdebuggerui.dll", fileItems[2].FileName);
+
+            string file = @"C:\Windows\System32\AERTAC64.dll";
+            FileHelper.AddFile(fileItems, file, 3);
+            Assert.AreEqual(3, fileItems.Count);
+            Assert.AreEqual("AERTAC64.dll", fileItems[0].FileName);
+            Assert.AreEqual("DRTAIODAT2.DAT", fileItems[1].FileName);
+            Assert.AreEqual("vsjitdebuggerui.dll", fileItems[2].FileName);
+
+            Assert.AreEqual(file, FileHelper.GetFirstFileItemPath(FileHelper.GetMergedFilePaths(fileItems)));
         }
     }
 }
