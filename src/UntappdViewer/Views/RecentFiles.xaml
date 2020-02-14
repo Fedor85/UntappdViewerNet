@@ -8,4 +8,17 @@
              mc:Ignorable="d"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="200" d:DesignWidth="300">
+    <ItemsControl ItemsSource="{Binding FileItems}">
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <TextBlock HorizontalAlignment="Center">
+                    <Hyperlink Command="{Binding Path=DataContext.OpenRecentFileCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" Foreground="#ffffff">
+                        <Hyperlink.Inlines>
+                            <Run Text="{Binding Path= FileName}"/>
+                        </Hyperlink.Inlines>
+                    </Hyperlink>
+                </TextBlock>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
 </UserControl>

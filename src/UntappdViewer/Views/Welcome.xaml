@@ -14,7 +14,7 @@
              AllowDrop="True">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Drop">
-            <command:EventToCommand Command="{Binding DropFileCommand}"  PassEventArgsToCommand="True" />
+            <command:EventToCommand Command="{Binding DropFileCommand}" PassEventArgsToCommand="True" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid Background="{StaticResource MainBackground}">
