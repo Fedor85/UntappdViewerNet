@@ -41,5 +41,10 @@ namespace UntappdViewer.Infrastructure.Services
         {
             return Settings.Default.TreeItemNameMaxLength;
         }
+
+        public int GetMaxRecentFilePaths()
+        {
+            return Settings.Default.MaxRecentFilePaths;
+        }
     }
 }

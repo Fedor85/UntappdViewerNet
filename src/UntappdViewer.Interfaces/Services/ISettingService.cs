@@ -15,5 +15,7 @@
         string GetDefaultUserName();
 
         int GetTreeItemNameMaxLength();
+
+        int GetMaxRecentFilePaths();
     }
 }

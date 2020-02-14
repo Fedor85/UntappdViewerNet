@@ -39,14 +39,14 @@ namespace UntappdViewer.Infrastructure
             return FileStatus.Available;
         }
 
-        public static string AddFilePath(string allFilePaths, string filePath, int maxitems)
+        public static string AddFilePath(string allFilePaths, string filePath, int maxItems)
         {
             List<FileItem> fileItems = GetParseFilePaths(allFilePaths);
-            AddFile(fileItems, filePath, maxitems);
+            AddFile(fileItems, filePath, maxItems);
             return GetMergedFilePaths(fileItems);
         }
 
-        public static void AddFile(List<FileItem> fileItems, string filePath, int maxitems)
+        public static void AddFile(List<FileItem> fileItems, string filePath, int maxItems)
         {
             FileItem fileItem = fileItems.Find(item => item.FilePath.Equals(filePath));
             if (fileItem != null)
@@ -55,7 +55,7 @@ namespace UntappdViewer.Infrastructure
                 fileItems.Insert(0, new FileItem(-1, filePath));
 
             UpdateFileItemIndex(fileItems);
-            if (fileItems.Count > maxitems)
+            if (fileItems.Count > maxItems)
                 fileItems.RemoveAt(fileItems.Count -1);
         }
 
