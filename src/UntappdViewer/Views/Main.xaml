@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:regions="http://prismlibrary.com/"
+             xmlns:prism="http://prismlibrary.com/"
              xmlns:untappdViewer="clr-namespace:UntappdViewer"
              mc:Ignorable="d" 
-             regions:ViewModelLocator.AutoWireViewModel="True"
+             prism:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="600" d:DesignWidth="800">
     <UserControl.Background>
         <SolidColorBrush Opacity="0.5" Color="#ffffff"/>
@@ -17,8 +17,8 @@
             <RowDefinition/>
             <RowDefinition Height="23"/>
         </Grid.RowDefinitions>
-        <ContentControl Grid.Row="0" regions:RegionManager.RegionName="{x:Static untappdViewer:RegionNames.MenuRegion}"/>
-        <ContentControl Grid.Row="1" regions:RegionManager.RegionName="{x:Static untappdViewer:RegionNames.MainRegion}"/>
-        <ContentControl Grid.Row="2" regions:RegionManager.RegionName="{x:Static untappdViewer:RegionNames.StatusBarRegion}"/>
+        <ContentControl Grid.Row="0" prism:RegionManager.RegionName="{x:Static untappdViewer:RegionNames.MenuRegion}"/>
+        <ContentControl Grid.Row="1" prism:RegionManager.RegionName="{x:Static untappdViewer:RegionNames.MainRegion}"/>
+        <ContentControl Grid.Row="2" prism:RegionManager.RegionName="{x:Static untappdViewer:RegionNames.StatusBarRegion}"/>
     </Grid>
 </UserControl>

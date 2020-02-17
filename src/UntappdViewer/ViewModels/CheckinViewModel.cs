@@ -8,6 +8,18 @@ namespace UntappdViewer.ViewModels
     {
         private IEventAggregator eventAggregator;
 
+        private string checkinName;
+
+        public string CheckinName
+        {
+            get { return checkinName; }
+            set
+            {
+                checkinName = value;
+                OnPropertyChanged();
+            }
+        }
+
         public CheckinViewModel(IEventAggregator eventAggregator)
         {
             this.eventAggregator = eventAggregator;
@@ -27,6 +39,8 @@ namespace UntappdViewer.ViewModels
 
         private void ChekinUpdate(Checkin checkin)
         {
+            if (checkin != null)
+                CheckinName = checkin.ToString();
         }
     }
 }
