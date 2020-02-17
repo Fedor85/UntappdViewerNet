@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:properties="clr-namespace:UntappdViewer.Properties"
              mc:Ignorable="d" 
              prism:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="600" d:DesignWidth="250">
@@ -14,7 +15,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel  Grid.Row="0">
-            <CheckBox IsChecked="False" Content="Unique" Command="{Binding UniqueCheckedCommand}" CommandParameter="{Binding Path=IsChecked, RelativeSource={RelativeSource Self}}"/>
+            <CheckBox IsChecked="False" Content="{x:Static properties:Resources.UniqueCheckBoxContent}" Command="{Binding UniqueCheckedCommand}" CommandParameter="{Binding Path=IsChecked, RelativeSource={RelativeSource Self}}"/>
             <Label Content="{Binding TreeViewCaption}" FontWeight="Bold"/>
         </StackPanel>
         <ScrollViewer Grid.Row="1" CanContentScroll="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">

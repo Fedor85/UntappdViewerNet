@@ -215,6 +215,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unique.
+        /// </summary>
+        public static string UniqueCheckBoxContent {
+            get {
+                return ResourceManager.GetString("UniqueCheckBoxContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap untappd_bottles {

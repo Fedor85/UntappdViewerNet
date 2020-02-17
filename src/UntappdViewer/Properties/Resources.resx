@@ -196,4 +196,8 @@
     <value>Checkins</value>
     <comment>en-en</comment>
   </data>
+  <data name="UniqueCheckBoxContent" xml:space="preserve">
+    <value>Unique</value>
+    <comment>en-en</comment>
+  </data>
 </root>
