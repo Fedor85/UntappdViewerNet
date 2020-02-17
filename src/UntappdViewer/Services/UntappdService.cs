@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Mappers;
 using UntappdViewer.Models;
@@ -58,6 +59,11 @@ namespace UntappdViewer.Services
                 treeViewItems.Add(new TreeViewItem(checkin.Id, GetTreeViewCheckinDisplayName(checkin)));
 
             return treeViewItems;
+        }
+
+        public Checkin GetCheckin(long checkinId)
+        {
+            return Untappd.Checkins.FirstOrDefault(item => item.Id.Equals(checkinId));
         }
 
         private string GetTreeViewCheckinDisplayName(Checkin checkin)

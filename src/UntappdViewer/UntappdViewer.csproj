@@ -101,6 +101,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Different\Behaviors\SelectedTreeViewItemBehavior.cs" />
+    <Compile Include="Different\Events\ChekinUpdateEvent.cs" />
     <Compile Include="Different\Events\OpenFileEvent.cs" />
     <Compile Include="Different\Extensions.cs" />
     <Compile Include="Different\Helpers\CommunicationHelper.cs" />

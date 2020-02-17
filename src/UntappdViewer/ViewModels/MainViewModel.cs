@@ -1,6 +1,5 @@
 ﻿using Prism.Modularity;
 using Prism.Regions;
-using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
 using UntappdViewer.Views;
 

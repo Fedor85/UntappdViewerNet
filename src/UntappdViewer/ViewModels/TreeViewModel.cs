@@ -2,8 +2,10 @@
 using System.Linq;
 using System.Windows.Input;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Modularity;
 using Prism.Regions;
+using UntappdViewer.Events;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
 using UntappdViewer.Services;
@@ -16,6 +18,8 @@ namespace UntappdViewer.ViewModels
         private UntappdService untappdService;
 
         private IModuleManager moduleManager;
+
+        private IEventAggregator eventAggregator;
 
         private ISettingService settingService;
 
@@ -70,10 +74,11 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public TreeViewModel(UntappdService untappdService, IModuleManager moduleManager, IRegionManager regionManager, ISettingService settingService) : base(regionManager)
+        public TreeViewModel(UntappdService untappdService, IModuleManager moduleManager, IRegionManager regionManager, IEventAggregator eventAggregator, ISettingService settingService) : base(regionManager)
         {
             this.untappdService = untappdService;
             this.moduleManager = moduleManager;
+            this.eventAggregator = eventAggregator;
             this.settingService = settingService;
             UniqueCheckedCommand = new DelegateCommand<bool?>(UniqueChecked);
             TreeItems = new List<TreeViewItem>();
@@ -101,6 +106,7 @@ namespace UntappdViewer.ViewModels
         {
             moduleManager.LoadModule(typeof(CheckinModule).Name);
             ActivateView(RegionNames.ContentRegion, typeof(Checkin));
+            eventAggregator.GetEvent<ChekinUpdateEvent>().Publish(SelectedTreeItem != null ? untappdService.GetCheckin(SelectedTreeItem.Id) : null);
         }
 
         private void UniqueChecked(bool? isChecked)
