@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using UntappdViewer.Different;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Mappers;
 using UntappdViewer.Models;

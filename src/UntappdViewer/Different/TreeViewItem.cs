@@ -1,20 +1,13 @@
-﻿namespace UntappdViewer.Different
+﻿namespace UntappdViewer
 {
-    public class TreeViewItem
+    public class TreeViewItem : System.Windows.Controls.TreeViewItem
     {
         private long id;
 
-        private string displayName;
-
-        public TreeViewItem(long id, string displayName)
+        public TreeViewItem(long id, string header)
         {
             this.id = id;
-            this.displayName = displayName;
-        }
-
-        public override string ToString()
-        {
-            return displayName;
+            Header = header;
         }
     }
 }

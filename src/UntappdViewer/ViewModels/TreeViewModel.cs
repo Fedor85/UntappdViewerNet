@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Input;
 using Prism.Commands;
-using UntappdViewer.Different;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Services;
 
