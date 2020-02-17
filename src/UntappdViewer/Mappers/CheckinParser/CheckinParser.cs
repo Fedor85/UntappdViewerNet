@@ -62,24 +62,24 @@ namespace UntappdViewer.Mappers.CheckinParser
             return GetValue(ParameterNames.VenueCity);
         }
 
-        public string GeVenueState()
+        public string GetVenueState()
         {
             return GetValue(ParameterNames.VenueState);
         }
 
-        public string GeVenueCountry()
+        public string GetVenueCountry()
         {
             return GetValue(ParameterNames.VenueCountry);
         }
 
-        public string GeVenueLat()
+        public double? GetVenueLat()
         {
-            return GetValue(ParameterNames.VenueLat);
+            return GetDoubleValue(ParameterNames.VenueLat);
         }
 
-        public string GeVenueLng()
+        public double? GetVenueLng()
         {
-            return GetValue(ParameterNames.VenueLng);
+            return GetDoubleValue(ParameterNames.VenueLng);
         }
 
         public double? GetRatingScore()
@@ -92,44 +92,44 @@ namespace UntappdViewer.Mappers.CheckinParser
             return DateTime.Parse(GetValue(ParameterNames.CreatedData));
         }
 
-        public string GeCheckinURL()
+        public string GetCheckinURL()
         {
             return GetValue(ParameterNames.CheckinURL);
         }
 
-        public string GeBeerURL()
+        public string GetBeerURL()
         {
             return GetValue(ParameterNames.BeerURL);
         }
 
-        public string GeBreweryURL()
+        public string GetBreweryURL()
         {
             return GetValue(ParameterNames.BreweryURL);
         }
 
-        public string GeBreweryCountry()
+        public string GetBreweryCountry()
         {
             return GetValue(ParameterNames.BreweryCountry);
         }
-        public string GeBreweryCity()
+        public string GetBreweryCity()
         {
             return GetValue(ParameterNames.BreweryCity);
         }
-        public string GeBreweryState()
+        public string GetBreweryState()
         {
             return GetValue(ParameterNames.BreweryState);
         }
-        public List<string> GeFlavorProfiles()
+        public List<string> GetFlavorProfiles()
         {
             return GetValues(GetValue(ParameterNames.FlavorProfiles));
         }
 
-        public string GePurchaseVenues()
+        public string GetPurchaseVenues()
         {
             return GetValue(ParameterNames.PurchaseVenue);
         }
 
-        public string GeServingType()
+        public string GetServingType()
         {
             return GetValue(ParameterNames.ServingType);
         }
@@ -149,7 +149,7 @@ namespace UntappdViewer.Mappers.CheckinParser
             return Convert.ToInt64(GetValue(ParameterNames.BreweryID));
         }
 
-        public string GePhotoURL()
+        public string GetPhotoURL()
         {
             return GetValue(ParameterNames.PhotoURL);
         }

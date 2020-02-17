@@ -34,33 +34,35 @@ namespace UntappdViewer.Mappers
             Checkin checkin = new Checkin();
 
             checkin.Id = checkinParser.GetCheckinID();
-            checkin.Url = checkinParser.GeCheckinURL();
+            checkin.Url = checkinParser.GetCheckinURL();
             checkin.RatingScore = checkinParser.GetRatingScore();
             checkin.CreatedDate = checkinParser.GetCreatedData();
             checkin.Comment = checkinParser.GetComment();
-            checkin.UrlPhoto = checkinParser.GePhotoURL();
-            checkin.FlavorPprofiles = checkinParser.GeFlavorProfiles();
-            checkin.VenuePurchase.Name = checkinParser.GePurchaseVenues();
-            checkin.ServingType = checkinParser.GeServingType();
+            checkin.UrlPhoto = checkinParser.GetPhotoURL();
+            checkin.FlavorPprofiles = checkinParser.GetFlavorProfiles();
+            checkin.VenuePurchase.Name = checkinParser.GetPurchaseVenues();
+            checkin.ServingType = checkinParser.GetServingType();
 
             checkin.Beer.Name = checkinParser.GetBeerName();
             checkin.Beer.Id = checkinParser.GetBeerID();
-            checkin.Beer.Url = checkinParser.GeBeerURL();
+            checkin.Beer.Url = checkinParser.GetBeerURL();
             checkin.Beer.Type = checkinParser.GetBeerType();
             checkin.Beer.ABV = checkinParser.GetBeerABV();
             checkin.Beer.IBU = checkinParser.GetBeerIBU();
 
             checkin.Beer.Brewery.Id = checkinParser.GetBreweryID();
             checkin.Beer.Brewery.Name = checkinParser.GetBreweryName();
-            checkin.Beer.Brewery.Url = checkinParser.GeBreweryURL();
-            checkin.Beer.Brewery.Venue.Country = checkinParser.GeBreweryCountry();
-            checkin.Beer.Brewery.Venue.State = checkinParser.GeBreweryState();
-            checkin.Beer.Brewery.Venue.City = checkinParser.GeBreweryCity();
+            checkin.Beer.Brewery.Url = checkinParser.GetBreweryURL();
+            checkin.Beer.Brewery.Venue.Country = checkinParser.GetBreweryCountry();
+            checkin.Beer.Brewery.Venue.State = checkinParser.GetBreweryState();
+            checkin.Beer.Brewery.Venue.City = checkinParser.GetBreweryCity();
 
             checkin.Venue.Name = checkinParser.GetVenueName();
-            checkin.Venue.Country = checkinParser.GeVenueCountry();
-            checkin.Venue.State = checkinParser.GeVenueState();
+            checkin.Venue.Country = checkinParser.GetVenueCountry();
+            checkin.Venue.State = checkinParser.GetVenueState();
             checkin.Venue.City = checkinParser.GetVenueCity();
+            checkin.Venue.Latitude = checkinParser.GetVenueLat();
+            checkin.Venue.Longitude = checkinParser.GetVenueLng();
 
             return checkin;
         }

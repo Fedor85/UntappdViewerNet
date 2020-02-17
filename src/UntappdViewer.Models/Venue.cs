@@ -25,6 +25,16 @@ namespace UntappdViewer.Models
         /// </summary>
         public string City { get; set; }
 
+        /// <summary>
+        /// широта
+        /// </summary>
+        public double? Latitude { get; set; }
+
+        /// <summary>
+        /// долгота
+        /// </summary>
+        public double? Longitude { get; set; }
+
         public override string ToString()
         {
             return $"{GetDispayParameter("Name", Name)}/{GetDispayParameter("Country", Country)}/{GetDispayParameter("State", State)}/{GetDispayParameter("City", City)}";
