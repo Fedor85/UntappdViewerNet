@@ -38,12 +38,12 @@ namespace UntappdViewer.Mappers.CheckinParser
 
         public double GetBeerABV()
         {
-            return GetDoubleValue(ParameterNames.BeerABV).Value;
+            return GetValue<double>(ParameterNames.BeerABV);
         }
 
         public double GetBeerIBU()
         {
-            return GetDoubleValue(ParameterNames.BeerIBU).Value;
+            return GetValue<double>(ParameterNames.BeerIBU);
         }
 
         public string GetComment()
@@ -120,7 +120,7 @@ namespace UntappdViewer.Mappers.CheckinParser
         }
         public List<string> GetFlavorProfiles()
         {
-            return GetValues(GetValue(ParameterNames.FlavorProfiles));
+            return StringHelper.GetValues(GetValue(ParameterNames.FlavorProfiles));
         }
 
         public string GetPurchaseVenues()
@@ -135,17 +135,17 @@ namespace UntappdViewer.Mappers.CheckinParser
 
         public long GetCheckinID()
         {
-            return Convert.ToInt64(GetValue(ParameterNames.CheckinID));
+            return GetValue<long>(ParameterNames.CheckinID);
         }
 
         public long GetBeerID()
         {
-            return Convert.ToInt64(GetValue(ParameterNames.BeerID));
+            return GetValue<long>(ParameterNames.BeerID);
         }
 
         public long GetBreweryID()
         {
-            return Convert.ToInt64(GetValue(ParameterNames.BreweryID));
+            return GetValue<long>(ParameterNames.BreweryID);
         }
 
         public string GetPhotoURL()
@@ -153,30 +153,49 @@ namespace UntappdViewer.Mappers.CheckinParser
             return GetValue(ParameterNames.PhotoURL);
         }
 
+        public double GetGlobalRatingScore()
+        {
+            return GetValue<double>(ParameterNames.GlobalRatingScore);
+        }
+
+        public double GetGlobalWeightedRatingScore()
+        {
+            return GetValue<double>(ParameterNames.GlobalWeightedRatingScore);
+        }
+
+        public string GetTaggedFriends()
+        {
+            return GetValue(ParameterNames.TaggedFriends);
+        }
+
+        public int GetTotalToasts()
+        {
+            return GetValue<int>(ParameterNames.TotalToasts);
+        }
+
+        public int GetTotalComments()
+        {
+            return GetValue<int>(ParameterNames.TotalComments);
+        }
+
         private string GetValue(string name)
         {
-            ParameterNumber parameterNumber = parameterNumbers.First(i => i.Name.Equals(name));
+            ParameterNumber parameterNumber = parameterNumbers.FirstOrDefault(i => i.Name.Equals(name));
             if (parameterNumber == null)
                 return String.Empty;
 
             return parameterValues.First(i => i.Number == parameterNumber.Number).Value.Trim(Convert.ToChar(13)).Trim('"');
         }
 
+        private T GetValue<T>(string name)
+        {
+            return ParserAndConvertHelper.GetConvertValue <T>(GetValue(name));
+        }
+
         private double? GetDoubleValue(string name)
         {
             string value = GetValue(name);
-            if (String.IsNullOrEmpty(value))
-                return null;
-
-            return Convert.ToDouble(StringHelper.GetNormalizeDecimalSeparator(value, System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator, ",."));
-        }
-
-        private List<string> GetValues(string valueLine)
-        {
-            if (valueLine == null || String.IsNullOrEmpty(valueLine.Trim()))
-                return new List<string>();
-
-            return valueLine.Split(',').Select(item => item.Trim()).ToList();
+            return ParserAndConvertHelper.GetDoubleValue(value);
         }
     }
 }

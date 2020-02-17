@@ -42,9 +42,14 @@ namespace UntappdViewer.Mappers
             checkin.FlavorPprofiles = checkinParser.GetFlavorProfiles();
             checkin.VenuePurchase.Name = checkinParser.GetPurchaseVenues();
             checkin.ServingType = checkinParser.GetServingType();
+            checkin.TaggedFriends = checkinParser.GetTaggedFriends();
+            checkin.TotalToasts = checkinParser.GetTotalToasts();
+            checkin.TotalComments = checkinParser.GetTotalComments();
 
             checkin.Beer.Name = checkinParser.GetBeerName();
             checkin.Beer.Id = checkinParser.GetBeerID();
+            checkin.Beer.GlobalRatingScore = checkinParser.GetGlobalRatingScore();
+            checkin.Beer.GlobalWeightedRatingScore = checkinParser.GetGlobalWeightedRatingScore();
             checkin.Beer.Url = checkinParser.GetBeerURL();
             checkin.Beer.Type = checkinParser.GetBeerType();
             checkin.Beer.ABV = checkinParser.GetBeerABV();

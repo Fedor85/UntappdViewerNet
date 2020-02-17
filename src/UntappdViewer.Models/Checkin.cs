@@ -61,6 +61,21 @@ namespace UntappdViewer.Models
         /// </summary>
         public string UrlPhoto { get; set; }
 
+        /// <summary>
+        /// отмеченные друзья
+        /// </summary>
+        public string TaggedFriends { get; set; }
+
+        /// <summary>
+        /// количесво лайков
+        /// </summary>
+        public int TotalToasts { get; set; }
+
+        /// <summary>
+        /// количесво коментариев
+        /// </summary>
+        public int TotalComments { get; set; }
+
         public Checkin()
         {
             Venue = new Venue();

@@ -55,5 +55,15 @@
         public static string BreweryID = "brewery_id";
 
         public static string PhotoURL = "photo_url";
+
+        public static string GlobalRatingScore = "global_rating_score";
+
+        public static string GlobalWeightedRatingScore = "global_weighted_rating_score";
+
+        public static string TaggedFriends = "tagged_friends";
+
+        public static string TotalToasts = "total_toasts";
+
+        public static string TotalComments = "total_comments";
     }
 }
