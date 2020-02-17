@@ -55,7 +55,7 @@ namespace UntappdViewer.Services
         public List<TreeViewItem> GeTreeViewItems(bool isUniqueCheckins = false)
         {
             List<TreeViewItem> treeViewItems = new List<TreeViewItem>();
-            foreach (Checkin checkin in Untappd.Checkins)
+            foreach (Checkin checkin in isUniqueCheckins ? Untappd.GetUniqueCheckins() : Untappd.Checkins)
                 treeViewItems.Add(new TreeViewItem(checkin.Id, GetTreeViewCheckinDisplayName(checkin)));
 
             return treeViewItems;
