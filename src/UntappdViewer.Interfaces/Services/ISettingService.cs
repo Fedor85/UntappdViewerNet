@@ -21,5 +21,9 @@
         bool GetIsCheckedUniqueCheckBox();
 
         void SetIsCheckedUniqueCheckBox(bool isChecked);
+
+        long GetSelectedTreeItemId();
+
+        void SetSelectedTreeItemId(long itemId);
     }
 }

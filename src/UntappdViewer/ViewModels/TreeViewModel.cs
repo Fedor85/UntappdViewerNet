@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 using Prism.Commands;
 using UntappdViewer.Interfaces.Services;
@@ -76,6 +77,7 @@ namespace UntappdViewer.ViewModels
             IsCheckedUniqueCheckBox = settingService.GetIsCheckedUniqueCheckBox();
             untappdService.UpdateUntappdEvent += UpdateTree;
             UpdateTree();
+            SetSelectedTreeItem();
         }
 
         protected override void DeActivate()
@@ -83,6 +85,9 @@ namespace UntappdViewer.ViewModels
             base.DeActivate();
             untappdService.UpdateUntappdEvent -= UpdateTree;
             settingService.SetIsCheckedUniqueCheckBox(IsCheckedUniqueCheckBox);
+            if (SelectedTreeItem != null)
+                settingService.SetSelectedTreeItemId(SelectedTreeItem.Id);
+
             TreeItems.Clear();
         }
 
@@ -101,6 +106,14 @@ namespace UntappdViewer.ViewModels
         {
             TreeItems = untappdService.GeTreeViewItems(isUniqueCheckins);
             TreeViewCaption = $"{Properties.Resources.Checkins} ({TreeItems.Count}):";
+        }
+
+        private void SetSelectedTreeItem()
+        {
+            long selectedTreeItemId = settingService.GetSelectedTreeItemId();
+            TreeViewItem selectedTreeItem = TreeItems.FirstOrDefault(item => item.Id.Equals(selectedTreeItemId));
+            if (selectedTreeItem != null)
+                SelectedTreeItem = selectedTreeItem;
         }
     }
 }

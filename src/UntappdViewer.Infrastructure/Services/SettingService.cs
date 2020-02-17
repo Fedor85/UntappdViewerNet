@@ -57,5 +57,16 @@ namespace UntappdViewer.Infrastructure.Services
             Settings.Default.IsCheckedUniqueCheckBox = isChecked;
             Settings.Default.Save();
         }
+
+        public long GetSelectedTreeItemId()
+        {
+            return Settings.Default.SelectedTreeItemId;
+        }
+
+        public void SetSelectedTreeItemId(long itemId)
+        {
+            Settings.Default.SelectedTreeItemId = itemId;
+            Settings.Default.Save();
+        }
     }
 }

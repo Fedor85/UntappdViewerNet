@@ -85,5 +85,17 @@ namespace UntappdViewer.Infrastructure.Properties {
                 this["IsCheckedUniqueCheckBox"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public long SelectedTreeItemId {
+            get {
+                return ((long)(this["SelectedTreeItemId"]));
+            }
+            set {
+                this["SelectedTreeItemId"] = value;
+            }
+        }
     }
 }

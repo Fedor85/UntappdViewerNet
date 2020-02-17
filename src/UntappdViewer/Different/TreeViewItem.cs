@@ -2,11 +2,11 @@
 {
     public class TreeViewItem : System.Windows.Controls.TreeViewItem
     {
-        private long id;
+        public long Id { get; }
 
         public TreeViewItem(long id, string header)
         {
-            this.id = id;
+            Id = id;
             Header = header;
         }
     }
