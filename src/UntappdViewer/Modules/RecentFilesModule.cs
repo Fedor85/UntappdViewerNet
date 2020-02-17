@@ -13,7 +13,7 @@ namespace UntappdViewer.Modules
         public override void OnInitialized(IContainerProvider containerProvider)
         {
             base.OnInitialized(containerProvider);
-            regionManager.RegisterViewWithRegion(RegionNames.RecentFiles, () => containerProvider.Resolve<RecentFiles>());
+            regionManager.RegisterViewWithRegion(RegionNames.RecentFilesRegion, () => containerProvider.Resolve<RecentFiles>());
         }
     }
 }

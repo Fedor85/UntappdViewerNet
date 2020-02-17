@@ -60,14 +60,14 @@ namespace UntappdViewer.ViewModels
             base.Activate();
             eventAggregator.GetEvent<OpenFileEvent>().Subscribe(RunUntappd);
             moduleManager.LoadModule(typeof(RecentFilesModule).Name);
-            ActivateView(RegionNames.RecentFiles, typeof(RecentFiles));
+            ActivateView(RegionNames.RecentFilesRegion, typeof(RecentFiles));
         }
 
         protected override void DeActivate()
         {
             base.DeActivate();
             eventAggregator.GetEvent<OpenFileEvent>().Unsubscribe(RunUntappd);
-            DeActivateAllViews(RegionNames.RecentFiles);
+            DeActivateAllViews(RegionNames.RecentFilesRegion);
         }
 
         private void OpenFile()

@@ -14,6 +14,6 @@
 
         public const string ContentRegion = "ContentRegion";
 
-        public const string RecentFiles = "RecentFiles";
+        public const string RecentFilesRegion = "RecentFilesRegion";
     }
 }

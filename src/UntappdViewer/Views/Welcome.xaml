@@ -41,7 +41,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                <ContentControl prism:RegionManager.RegionName="{x:Static local:RegionNames.RecentFiles}"/>
+                <ContentControl prism:RegionManager.RegionName="{x:Static local:RegionNames.RecentFilesRegion}"/>
                 <Label Content="{x:Static properties:Resources.OpenFileCaption}" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="15" Foreground="#ffffff"/>
             </StackPanel>
             <Button Name="OpenFileButton" Grid.Row="1" Height="20" Width="80" Content="{x:Static properties:Resources.OpenFile}" Command="{Binding OpenFileCommand}"
