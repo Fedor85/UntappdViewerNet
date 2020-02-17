@@ -71,7 +71,7 @@ namespace UntappdViewer.Models
 
                 checkins.Add(addedCheckin);
             }
-
+            beers.Clear();
             checkins.Sort(SortCheckinsDataDesc);
             return checkins;
         }
