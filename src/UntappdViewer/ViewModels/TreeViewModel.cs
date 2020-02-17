@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Input;
+using Prism.Commands;
 using UntappdViewer.Different;
 using UntappdViewer.Services;
 
@@ -10,6 +12,8 @@ namespace UntappdViewer.ViewModels
         private UntappdService untappdService;
 
         private List<TreeViewItem> treeItems;
+
+        public ICommand UniqueCheckedCommand { get; }
 
         public string treeViewCaption;
 
@@ -36,6 +40,7 @@ namespace UntappdViewer.ViewModels
         public TreeViewModel(UntappdService untappdService)
         {
             this.untappdService = untappdService;
+            UniqueCheckedCommand = new DelegateCommand<bool?>(UniqueChecked);
             UpdateTree();
         }
 
@@ -50,6 +55,10 @@ namespace UntappdViewer.ViewModels
             base.DeActivate();
             untappdService.UpdateUntappdEvent -= UpdateTree;
             TreeItems.Clear();
+        }
+
+        private void UniqueChecked(bool? isChecked)
+        {
         }
 
         private void UpdateTree()
