@@ -14,12 +14,13 @@ namespace UntappdViewer.ViewModels
 
         private List<TreeViewItem> treeItems;
 
+        private TreeViewItem selectedTreeItem;
+
         private string treeViewCaption;
 
         private bool isCheckedUniqueCheckBox;
 
         public ICommand UniqueCheckedCommand { get; }
-
    
         public string TreeViewCaption
         {
@@ -47,6 +48,16 @@ namespace UntappdViewer.ViewModels
             set
             {
                 treeItems = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public TreeViewItem SelectedTreeItem
+        {
+            get { return selectedTreeItem; }
+            set
+            {
+                selectedTreeItem = value;
                 OnPropertyChanged();
             }
         }
