@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows.Input;
 using Prism.Commands;
 using UntappdViewer.Different;
@@ -58,6 +57,7 @@ namespace UntappdViewer.ViewModels
             this.untappdService = untappdService;
             this.settingService = settingService;
             UniqueCheckedCommand = new DelegateCommand<bool?>(UniqueChecked);
+            TreeItems = new List<TreeViewItem>();
         }
 
         protected override void Activate()
