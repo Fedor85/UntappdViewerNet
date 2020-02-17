@@ -3,8 +3,10 @@ using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Modularity;
 using Prism.Regions;
+using UntappdViewer.Events;
 using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
@@ -23,6 +25,8 @@ namespace UntappdViewer.ViewModels
 
         private IModuleManager moduleManager;
 
+        private IEventAggregator eventAggregator;
+
         private string untappdUserName;
 
         public ICommand OpenFileCommand { get; }
@@ -39,12 +43,14 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public WelcomeViewModel(UntappdService untappdService, ICommunicationService communicationService, ISettingService settingService, IModuleManager moduleManager, IRegionManager regionManager): base(regionManager)
+        public WelcomeViewModel(UntappdService untappdService, ICommunicationService communicationService, ISettingService settingService, IModuleManager moduleManager, IRegionManager regionManager, IEventAggregator eventAggregator) : base(regionManager)
         {
             this.untappdService = untappdService;
             this.communicationService = communicationService;
             this.settingService = settingService;
             this.moduleManager = moduleManager;
+            this.settingService = settingService;
+            this.eventAggregator = eventAggregator;
             OpenFileCommand = new DelegateCommand(OpenFile);
             DropFileCommand = new DelegateCommand<DragEventArgs>(DropFile);
         }
@@ -52,6 +58,7 @@ namespace UntappdViewer.ViewModels
         protected override void Activate()
         {
             base.Activate();
+            eventAggregator.GetEvent<OpenFileEvent>().Subscribe(RunUntappd);
             moduleManager.LoadModule(typeof(RecentFilesModule).Name);
             ActivateView(RegionNames.RecentFiles, typeof(RecentFiles));
         }
@@ -59,6 +66,7 @@ namespace UntappdViewer.ViewModels
         protected override void DeActivate()
         {
             base.DeActivate();
+            eventAggregator.GetEvent<OpenFileEvent>().Unsubscribe(RunUntappd);
             DeActivateAllViews(RegionNames.RecentFiles);
         }
 
