@@ -2,7 +2,7 @@
 using System.Reflection;
 using UntappdViewer.Infrastructure;
 
-namespace UntappdViewer
+namespace UntappdViewer.Helpers
 {
     public static class CommunicationHelper
     {

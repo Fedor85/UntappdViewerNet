@@ -1,6 +1,6 @@
 ﻿using UntappdViewer.Infrastructure;
 
-namespace UntappdViewer
+namespace UntappdViewer.Helpers
 {
     public static class EnumsHelper
     {
@@ -8,6 +8,5 @@ namespace UntappdViewer
         {
             return fileStatus == FileStatus.Available;
         }
-
     }
 }

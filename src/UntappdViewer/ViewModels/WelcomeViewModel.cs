@@ -7,6 +7,7 @@ using Prism.Events;
 using Prism.Modularity;
 using Prism.Regions;
 using UntappdViewer.Events;
+using UntappdViewer.Helpers;
 using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
