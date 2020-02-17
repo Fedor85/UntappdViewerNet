@@ -46,5 +46,16 @@ namespace UntappdViewer.Infrastructure.Services
         {
             return Settings.Default.MaxRecentFilePaths;
         }
+
+        public bool GetIsCheckedUniqueCheckBox()
+        {
+            return Settings.Default.IsCheckedUniqueCheckBox;
+        }
+
+        public void SetIsCheckedUniqueCheckBox(bool isChecked)
+        {
+            Settings.Default.IsCheckedUniqueCheckBox = isChecked;
+            Settings.Default.Save();
+        }
     }
 }

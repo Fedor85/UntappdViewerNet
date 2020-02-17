@@ -17,5 +17,9 @@
         int GetTreeItemNameMaxLength();
 
         int GetMaxRecentFilePaths();
+
+        bool GetIsCheckedUniqueCheckBox();
+
+        void SetIsCheckedUniqueCheckBox(bool isChecked);
     }
 }

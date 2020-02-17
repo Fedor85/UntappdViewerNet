@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Input;
 using Prism.Commands;
 using UntappdViewer.Different;
+using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Services;
 
 namespace UntappdViewer.ViewModels
@@ -11,18 +12,33 @@ namespace UntappdViewer.ViewModels
     {
         private UntappdService untappdService;
 
+        private ISettingService settingService;
+
         private List<TreeViewItem> treeItems;
+
+        private string treeViewCaption;
+
+        private bool isCheckedUniqueCheckBox;
 
         public ICommand UniqueCheckedCommand { get; }
 
-        public string treeViewCaption;
-
+   
         public string TreeViewCaption
         {
             get { return treeViewCaption; }
             set
             {
                 treeViewCaption = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsCheckedUniqueCheckBox
+        {
+            get { return isCheckedUniqueCheckBox; }
+            set
+            {
+                isCheckedUniqueCheckBox = value;
                 OnPropertyChanged();
             }
         }
@@ -37,34 +53,44 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public TreeViewModel(UntappdService untappdService)
+        public TreeViewModel(UntappdService untappdService, ISettingService settingService)
         {
             this.untappdService = untappdService;
+            this.settingService = settingService;
             UniqueCheckedCommand = new DelegateCommand<bool?>(UniqueChecked);
-            UpdateTree();
         }
 
         protected override void Activate()
         {
             base.Activate();
+            IsCheckedUniqueCheckBox = settingService.GetIsCheckedUniqueCheckBox();
             untappdService.UpdateUntappdEvent += UpdateTree;
+            UpdateTree();
         }
 
         protected override void DeActivate()
         {
             base.DeActivate();
             untappdService.UpdateUntappdEvent -= UpdateTree;
+            settingService.SetIsCheckedUniqueCheckBox(IsCheckedUniqueCheckBox);
             TreeItems.Clear();
         }
 
         private void UniqueChecked(bool? isChecked)
         {
+            if (isChecked.HasValue)
+                UpdateTree(isChecked.Value);
         }
 
         private void UpdateTree()
         {
-            TreeItems = untappdService.GeTreeViewItems();
-            TreeViewCaption = String.Format("{0} ({1}):", Properties.Resources.Checkins, TreeItems.Count);
+            UpdateTree(IsCheckedUniqueCheckBox);
+        }
+
+        private void UpdateTree(bool isUniqueCheckins)
+        {
+            TreeItems = untappdService.GeTreeViewItems(isUniqueCheckins);
+            TreeViewCaption = $"{Properties.Resources.Checkins} ({TreeItems.Count}):";
         }
     }
 }

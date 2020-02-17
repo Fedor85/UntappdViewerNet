@@ -52,7 +52,7 @@ namespace UntappdViewer.Services
             UpdateUntappdEvent?.Invoke();
         }
 
-        public List<TreeViewItem> GeTreeViewItems()
+        public List<TreeViewItem> GeTreeViewItems(bool isUniqueCheckins = false)
         {
             List<TreeViewItem> treeViewItems = new List<TreeViewItem>();
             foreach (Checkin checkin in Untappd.Checkins)

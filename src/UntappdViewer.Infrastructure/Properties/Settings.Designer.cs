@@ -73,5 +73,17 @@ namespace UntappdViewer.Infrastructure.Properties {
                 return ((int)(this["MaxRecentFilePaths"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsCheckedUniqueCheckBox {
+            get {
+                return ((bool)(this["IsCheckedUniqueCheckBox"]));
+            }
+            set {
+                this["IsCheckedUniqueCheckBox"] = value;
+            }
+        }
     }
 }
