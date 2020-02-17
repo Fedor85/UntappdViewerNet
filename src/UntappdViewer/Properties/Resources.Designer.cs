@@ -197,7 +197,7 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to created by fvasilets@gmail.com.
+        ///   Looks up a localized string similar to created by fvasilets@gmail.com (с) 2019.
         /// </summary>
         public static string Signature {
             get {
