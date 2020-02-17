@@ -77,7 +77,6 @@ namespace UntappdViewer.ViewModels
             IsCheckedUniqueCheckBox = settingService.GetIsCheckedUniqueCheckBox();
             untappdService.UpdateUntappdEvent += UpdateTree;
             UpdateTree();
-            SetSelectedTreeItem();
         }
 
         protected override void DeActivate()
@@ -85,16 +84,17 @@ namespace UntappdViewer.ViewModels
             base.DeActivate();
             untappdService.UpdateUntappdEvent -= UpdateTree;
             settingService.SetIsCheckedUniqueCheckBox(IsCheckedUniqueCheckBox);
-            if (SelectedTreeItem != null)
-                settingService.SetSelectedTreeItemId(SelectedTreeItem.Id);
-
+            SaveSelectedTreeItem();
             TreeItems.Clear();
         }
 
         private void UniqueChecked(bool? isChecked)
         {
             if (isChecked.HasValue)
+            {
+                SaveSelectedTreeItem();
                 UpdateTree(isChecked.Value);
+            }
         }
 
         private void UpdateTree()
@@ -105,6 +105,7 @@ namespace UntappdViewer.ViewModels
         private void UpdateTree(bool isUniqueCheckins)
         {
             TreeItems = untappdService.GeTreeViewItems(isUniqueCheckins);
+            SetSelectedTreeItem();
             TreeViewCaption = $"{Properties.Resources.Checkins} ({TreeItems.Count}):";
         }
 
@@ -114,6 +115,12 @@ namespace UntappdViewer.ViewModels
             TreeViewItem selectedTreeItem = TreeItems.FirstOrDefault(item => item.Id.Equals(selectedTreeItemId));
             if (selectedTreeItem != null)
                 SelectedTreeItem = selectedTreeItem;
+        }
+
+        private void SaveSelectedTreeItem()
+        {
+            if (SelectedTreeItem != null)
+                settingService.SetSelectedTreeItemId(SelectedTreeItem.Id);
         }
     }
 }
