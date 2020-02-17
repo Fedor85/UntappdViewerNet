@@ -81,7 +81,7 @@ namespace UntappdViewer.Models
             return $"UserName:{UserName}/CreatedDate:{CreatedDate}/CheckinsCount:{Checkins.Count}";
         }
 
-        public int SortCheckinsDataDesc(Checkin x, Checkin y)
+        private int SortCheckinsDataDesc(Checkin x, Checkin y)
         {
             if (x.CreatedDate < y.CreatedDate)
                 return 1;
