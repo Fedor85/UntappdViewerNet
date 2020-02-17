@@ -113,6 +113,7 @@
     <Compile Include="Mappers\CheckinParser\ParameterNumber.cs" />
     <Compile Include="Mappers\CheckinParser\ParameterValue.cs" />
     <Compile Include="Modules\BaseModue.cs" />
+    <Compile Include="Modules\CheckinModule.cs" />
     <Compile Include="Modules\MainModule.cs" />
     <Compile Include="Modules\MenuBarModule.cs" />
     <Compile Include="Modules\RecentFilesModule.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Services\UntappdService.cs" />
     <Compile Include="ViewModels\Base\RegionManagerBaseModel.cs" />
     <Compile Include="ViewModels\Base\ActiveAwareBaseModel.cs" />
+    <Compile Include="ViewModels\CheckinViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MenuBarViewModel.cs" />
     <Compile Include="ViewModels\RecentFilesViewModel.cs" />
@@ -131,6 +133,9 @@
     <Compile Include="ViewModels\TreeViewModel.cs" />
     <Compile Include="ViewModels\UntappdViewModel.cs" />
     <Compile Include="ViewModels\WelcomeViewModel.cs" />
+    <Compile Include="Views\Checkin.xaml.cs">
+      <DependentUpon>Checkin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
     </Compile>
@@ -152,6 +157,10 @@
     <Compile Include="Views\Welcome.xaml.cs">
       <DependentUpon>Welcome.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\Checkin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Main.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

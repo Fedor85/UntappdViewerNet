@@ -52,6 +52,8 @@ namespace UntappdViewer
 
             moduleCatalog.AddModule(typeof(TreeModue), InitializationMode.OnDemand);
             moduleCatalog.AddModule(typeof(RecentFilesModule), InitializationMode.OnDemand);
+
+            moduleCatalog.AddModule(typeof(CheckinModule), InitializationMode.OnDemand);
         }
 
         private void RegisterServices()

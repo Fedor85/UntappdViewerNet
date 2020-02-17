@@ -2,24 +2,17 @@
 using Prism.Regions;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
-using UntappdViewer.Services;
 using UntappdViewer.Views;
 
 namespace UntappdViewer.ViewModels
 {
     public class MainViewModel: RegionManagerBaseModel
     {
-        private UntappdService untappdService;
-
         private IModuleManager moduleManager;
 
-        private ICommunicationService communicationService;
-
-        public MainViewModel(IModuleManager moduleManager, IRegionManager regionManager, ICommunicationService communicationService): base(regionManager)
+        public MainViewModel(IModuleManager moduleManager, IRegionManager regionManager): base(regionManager)
         {
-            this.untappdService = untappdService;
             this.moduleManager = moduleManager;
-            this.communicationService = communicationService;
         }
 
         protected override void Activate()
