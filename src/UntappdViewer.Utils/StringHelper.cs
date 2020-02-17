@@ -18,6 +18,18 @@ namespace UntappdViewer.Utils
             return text.ToString();
         }
 
+        public static string GetNormalizeDecimalSeparator(string str, string requiredSeparator, string possibleSeparators)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (char ch in str)
+                if (possibleSeparators.IndexOf(ch) != -1)
+                    sb.Append(requiredSeparator);
+                else
+                    sb.Append(ch);
+
+            return sb.ToString();
+        }
+
         public static string GetShortName(string name)
         {
             Regex parenthesesRegex = new Regex(@"\(.*?\)");

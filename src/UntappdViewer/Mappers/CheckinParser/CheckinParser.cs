@@ -169,19 +169,7 @@ namespace UntappdViewer.Mappers.CheckinParser
             if (String.IsNullOrEmpty(value))
                 return null;
 
-            return Convert.ToDouble(NormalizeDecimalSeparator(value, System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator, ",."));
-        }
-
-        private static string NormalizeDecimalSeparator(string str, string requiredSeparator, string possibleSeparators)
-        {
-            StringBuilder sb = new StringBuilder();
-            foreach (char ch in str)
-                if (possibleSeparators.IndexOf(ch) != -1)
-                    sb.Append(requiredSeparator);
-                else
-                    sb.Append(ch);
-
-            return sb.ToString();
+            return Convert.ToDouble(StringHelper.GetNormalizeDecimalSeparator(value, System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator, ",."));
         }
 
         private List<string> GetValues(string valueLine)
