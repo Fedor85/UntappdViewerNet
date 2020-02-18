@@ -87,9 +87,8 @@ namespace UntappdViewer.ViewModels
         protected override void Activate()
         {
             base.Activate();
-            SetIsCheckedUnique();
-            UpdateTree(IsCheckedUniqueCheckBox);
-            SetSelectedTreeItem(null);
+            IsCheckedUniqueCheckBox = settingService.GetIsCheckedUniqueCheckBox();
+            UpdateTree(IsCheckedUniqueCheckBox, settingService.GetSelectedTreeItemId());
         }
 
         protected override void DeActivate()
@@ -110,31 +109,20 @@ namespace UntappdViewer.ViewModels
         private void UniqueChecked(bool? isChecked)
         {
             if (isChecked.HasValue)
-            {
-                long? selectedTreeItemId = SelectedTreeItem != null ? SelectedTreeItem.Id : (long?) null;
-                UpdateTree(isChecked.Value);
-                if (selectedTreeItemId.HasValue)
-                    SetSelectedTreeItem(selectedTreeItemId.Value);
-            }
+                UpdateTree(isChecked.Value, SelectedTreeItem?.Id);
         }
 
-        private void UpdateTree(bool isUniqueCheckins)
+        private void UpdateTree(bool isUniqueCheckins, long? selectedTreeItemId)
         {
             TreeItems = untappdService.GeTreeViewItems(isUniqueCheckins);
             TreeViewCaption = $"{Properties.Resources.Checkins} ({TreeItems.Count}):";
-        }
 
-        private void SetIsCheckedUnique()
-        {
-            IsCheckedUniqueCheckBox = settingService.GetIsCheckedUniqueCheckBox();
-        }
-
-        private void SetSelectedTreeItem(long? selectedTreeItemId)
-        {
-            long currentSelectedTreeItemId = selectedTreeItemId.HasValue ? selectedTreeItemId.Value : settingService.GetSelectedTreeItemId();
-            TreeViewItem selectedTreeItem = TreeItems.FirstOrDefault(item => item.Id.Equals(currentSelectedTreeItemId));
-            if (selectedTreeItem != null)
-                SelectedTreeItem = selectedTreeItem;
+            if (selectedTreeItemId.HasValue)
+            {
+                TreeViewItem selectedTreeItem = TreeItems.FirstOrDefault(item => item.Id.Equals(selectedTreeItemId.Value));
+                if (selectedTreeItem != null)
+                    SelectedTreeItem = selectedTreeItem;
+            }
         }
 
         private void SaveSettings()
