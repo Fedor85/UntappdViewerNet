@@ -103,6 +103,7 @@ namespace UntappdViewer.ViewModels
         {
             moduleManager.LoadModule(typeof(CheckinModule).Name);
             ActivateView(RegionNames.ContentRegion, typeof(Checkin));
+
             eventAggregator.GetEvent<ChekinUpdateEvent>().Publish(SelectedTreeItem != null ? untappdService.GetCheckin(SelectedTreeItem.Id) : null);
         }
 
@@ -119,9 +120,9 @@ namespace UntappdViewer.ViewModels
 
             if (selectedTreeItemId.HasValue)
             {
-                TreeViewItem selectedTreeItem = TreeItems.FirstOrDefault(item => item.Id.Equals(selectedTreeItemId.Value));
-                if (selectedTreeItem != null)
-                    SelectedTreeItem = selectedTreeItem;
+                TreeViewItem findSelectedTreeItem = TreeItems.FirstOrDefault(item => item.Id.Equals(selectedTreeItemId.Value));
+                if (findSelectedTreeItem != null)
+                    SelectedTreeItem = findSelectedTreeItem;
             }
         }
 
