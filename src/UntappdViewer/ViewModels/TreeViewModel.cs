@@ -86,9 +86,10 @@ namespace UntappdViewer.ViewModels
 
         protected override void Activate()
         {
-            base.Activate();    
-            UpdateTree();
-            LoadSettings();
+            base.Activate();
+            SetIsCheckedUnique();
+            UpdateTree(IsCheckedUniqueCheckBox);
+            SetSelectedTreeItem(null);
         }
 
         protected override void DeActivate()
@@ -110,15 +111,11 @@ namespace UntappdViewer.ViewModels
         {
             if (isChecked.HasValue)
             {
-                SaveSelectedTreeItem();
+                long? selectedTreeItemId = SelectedTreeItem != null ? SelectedTreeItem.Id : (long?) null;
                 UpdateTree(isChecked.Value);
-                SetSelectedTreeItem();
+                if (selectedTreeItemId.HasValue)
+                    SetSelectedTreeItem(selectedTreeItemId.Value);
             }
-        }
-
-        private void UpdateTree()
-        {
-            UpdateTree(IsCheckedUniqueCheckBox);
         }
 
         private void UpdateTree(bool isUniqueCheckins)
@@ -127,16 +124,15 @@ namespace UntappdViewer.ViewModels
             TreeViewCaption = $"{Properties.Resources.Checkins} ({TreeItems.Count}):";
         }
 
-        private void LoadSettings()
+        private void SetIsCheckedUnique()
         {
             IsCheckedUniqueCheckBox = settingService.GetIsCheckedUniqueCheckBox();
-            SetSelectedTreeItem();
         }
 
-        private void SetSelectedTreeItem()
+        private void SetSelectedTreeItem(long? selectedTreeItemId)
         {
-            long selectedTreeItemId = settingService.GetSelectedTreeItemId();
-            TreeViewItem selectedTreeItem = TreeItems.FirstOrDefault(item => item.Id.Equals(selectedTreeItemId));
+            long currentSelectedTreeItemId = selectedTreeItemId.HasValue ? selectedTreeItemId.Value : settingService.GetSelectedTreeItemId();
+            TreeViewItem selectedTreeItem = TreeItems.FirstOrDefault(item => item.Id.Equals(currentSelectedTreeItemId));
             if (selectedTreeItem != null)
                 SelectedTreeItem = selectedTreeItem;
         }
@@ -144,11 +140,6 @@ namespace UntappdViewer.ViewModels
         private void SaveSettings()
         {
             settingService.SetIsCheckedUniqueCheckBox(IsCheckedUniqueCheckBox);
-            SaveSelectedTreeItem();
-        }
-
-        private void SaveSelectedTreeItem()
-        {
             if (SelectedTreeItem != null)
                 settingService.SetSelectedTreeItemId(SelectedTreeItem.Id);
         }
