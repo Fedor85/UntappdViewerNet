@@ -3,9 +3,11 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Modularity;
 using Prism.Mvvm;
 using Prism.Regions;
+using UntappdViewer.Events;
 using UntappdViewer.Helpers;
 using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
@@ -22,6 +24,8 @@ namespace UntappdViewer.ViewModels
         private ICommunicationService communicationService;
 
         private IRegionManager regionManager;
+
+        private IEventAggregator eventAggregator;
 
         private ISettingService settingService;
 
@@ -41,16 +45,17 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public ShellViewModel(UntappdService untappdService, ICommunicationService communicationService, IRegionManager regionManager, ISettingService settingService, IModuleManager moduleManager)
+        public ShellViewModel(UntappdService untappdService, ICommunicationService communicationService, IRegionManager regionManager, IEventAggregator eventAggregator, ISettingService settingService, IModuleManager moduleManager)
         {
             this.untappdService = untappdService;
             this.communicationService = communicationService;
             this.regionManager = regionManager;
+            this.eventAggregator = eventAggregator;
             this.settingService = settingService;
             this.moduleManager = moduleManager;
             ClosingCommand = new DelegateCommand<CancelEventArgs>(Closing);
-            untappdService.InitializeUntappdEvent += UpdateTitle;
-            untappdService.CleanUntappdEvent += UpdateTitle;
+            eventAggregator.GetEvent<InitializeUntappdEvent>().Subscribe(UpdateTitle);
+            eventAggregator.GetEvent<CleanUntappdEvent>().Subscribe(UpdateTitle);
             Title = CommunicationHelper.GetTitle();
             Activate();
         }

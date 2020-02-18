@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Prism.Events;
+using UntappdViewer.Events;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Mappers;
 using UntappdViewer.Models;
@@ -13,19 +15,16 @@ namespace UntappdViewer.Services
     {
         private ISettingService settingService;
 
+        private IEventAggregator eventAggregator;
+
         private Untappd Untappd { get; set; }
-
-        public event Action<Untappd> InitializeUntappdEvent;
-
-        public event Action UpdateUntappdEvent;
-
-        public event Action CleanUntappdEvent;
 
         public string FIlePath { get; private set; }
 
-        public UntappdService(ISettingService settingService)
+        public UntappdService(ISettingService settingService, IEventAggregator eventAggregator)
         {
             this.settingService = settingService;
+            this.eventAggregator = eventAggregator;
             Untappd = new Untappd(String.Empty);
         }
 
@@ -37,19 +36,14 @@ namespace UntappdViewer.Services
                 Untappd.AddCheckins(CheckinCSVMapper.GetCheckins(fileStream));
 
             Untappd.SortDataDescCheckins();
-            InitializeUntappdEvent?.Invoke(Untappd);
+            eventAggregator.GetEvent<InitializeUntappdEvent>().Publish(Untappd);
         }
 
         public void CleanUpUntappd()
         {
             FIlePath = String.Empty;
             Untappd = new Untappd(String.Empty);
-            CleanUntappdEvent?.Invoke();
-        }
-
-        public void RunUpdateUntappd()
-        {
-            UpdateUntappdEvent?.Invoke();
+            eventAggregator.GetEvent<CleanUntappdEvent>().Publish();
         }
 
         public List<TreeViewItem> GeTreeViewItems(bool isUniqueCheckins = false)
@@ -70,7 +64,7 @@ namespace UntappdViewer.Services
         {
             string date = checkin.CreatedDate.ToString("yyyy-MMM-dd");
             string fullName = $"{date} {StringHelper.GetShortName(checkin.Beer.Name)}";
-            return  StringHelper.GeBreakForLongName(fullName, settingService.GetTreeItemNameMaxLength(), date.Length * 2);
+            return StringHelper.GeBreakForLongName(fullName, settingService.GetTreeItemNameMaxLength(), date.Length * 2);
         }
     }
 }

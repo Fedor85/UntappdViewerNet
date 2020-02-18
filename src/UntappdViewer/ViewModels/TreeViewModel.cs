@@ -86,8 +86,7 @@ namespace UntappdViewer.ViewModels
 
         protected override void Activate()
         {
-            base.Activate();
-            untappdService.UpdateUntappdEvent += UpdateTree;      
+            base.Activate();    
             UpdateTree();
             LoadSettings();
         }
@@ -95,7 +94,6 @@ namespace UntappdViewer.ViewModels
         protected override void DeActivate()
         {
             base.DeActivate();
-            untappdService.UpdateUntappdEvent -= UpdateTree;
             SaveSettings();
             DeActivateAllViews(RegionNames.ContentRegion);
             TreeItems.Clear();
