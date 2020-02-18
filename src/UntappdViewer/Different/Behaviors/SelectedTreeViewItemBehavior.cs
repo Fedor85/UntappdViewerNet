@@ -19,7 +19,6 @@ namespace UntappdViewer.Behaviors
                 item.Focus();
                 item.BringIntoView();
                 item.SetValue(System.Windows.Controls.TreeViewItem.IsSelectedProperty, true);
-
             }
         }
 

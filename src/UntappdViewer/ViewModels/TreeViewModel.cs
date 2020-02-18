@@ -87,18 +87,17 @@ namespace UntappdViewer.ViewModels
         protected override void Activate()
         {
             base.Activate();
-            IsCheckedUniqueCheckBox = settingService.GetIsCheckedUniqueCheckBox();
-            untappdService.UpdateUntappdEvent += UpdateTree;
+            untappdService.UpdateUntappdEvent += UpdateTree;      
             UpdateTree();
+            LoadSettings();
         }
 
         protected override void DeActivate()
         {
             base.DeActivate();
             untappdService.UpdateUntappdEvent -= UpdateTree;
-            settingService.SetIsCheckedUniqueCheckBox(IsCheckedUniqueCheckBox);
+            SaveSettings();
             DeActivateAllViews(RegionNames.ContentRegion);
-            SaveSelectedTreeItem();
             TreeItems.Clear();
         }
 
@@ -115,6 +114,7 @@ namespace UntappdViewer.ViewModels
             {
                 SaveSelectedTreeItem();
                 UpdateTree(isChecked.Value);
+                SetSelectedTreeItem();
             }
         }
 
@@ -126,8 +126,13 @@ namespace UntappdViewer.ViewModels
         private void UpdateTree(bool isUniqueCheckins)
         {
             TreeItems = untappdService.GeTreeViewItems(isUniqueCheckins);
-            SetSelectedTreeItem();
             TreeViewCaption = $"{Properties.Resources.Checkins} ({TreeItems.Count}):";
+        }
+
+        private void LoadSettings()
+        {
+            IsCheckedUniqueCheckBox = settingService.GetIsCheckedUniqueCheckBox();
+            SetSelectedTreeItem();
         }
 
         private void SetSelectedTreeItem()
@@ -136,6 +141,12 @@ namespace UntappdViewer.ViewModels
             TreeViewItem selectedTreeItem = TreeItems.FirstOrDefault(item => item.Id.Equals(selectedTreeItemId));
             if (selectedTreeItem != null)
                 SelectedTreeItem = selectedTreeItem;
+        }
+
+        private void SaveSettings()
+        {
+            settingService.SetIsCheckedUniqueCheckBox(IsCheckedUniqueCheckBox);
+            SaveSelectedTreeItem();
         }
 
         private void SaveSelectedTreeItem()
