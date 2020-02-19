@@ -25,8 +25,6 @@ namespace UntappdViewer.ViewModels
 
         private IRegionManager regionManager;
 
-        private IEventAggregator eventAggregator;
-
         private ISettingService settingService;
 
         private IModuleManager moduleManager;
@@ -50,7 +48,6 @@ namespace UntappdViewer.ViewModels
             this.untappdService = untappdService;
             this.communicationService = communicationService;
             this.regionManager = regionManager;
-            this.eventAggregator = eventAggregator;
             this.settingService = settingService;
             this.moduleManager = moduleManager;
             ClosingCommand = new DelegateCommand<CancelEventArgs>(Closing);
