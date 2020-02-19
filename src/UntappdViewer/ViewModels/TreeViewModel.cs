@@ -122,13 +122,14 @@ namespace UntappdViewer.ViewModels
         {
             TreeItems = untappdService.GeTreeViewItems(isUniqueCheckins);
             TreeViewCaption = $"{Properties.Resources.Checkins} ({TreeItems.Count}):";
+            if(TreeViewCaption.Length ==0)
+                return;
 
+            TreeViewItem findSelectedTreeItem = null;
             if (selectedTreeItemId.HasValue)
-            {
-                TreeViewItem findSelectedTreeItem = TreeItems.FirstOrDefault(item => item.Id.Equals(selectedTreeItemId.Value));
-                if (findSelectedTreeItem != null)
-                    SelectedTreeItem = findSelectedTreeItem;
-            }
+                findSelectedTreeItem = TreeItems.FirstOrDefault(item => item.Id.Equals(selectedTreeItemId.Value));
+
+            SelectedTreeItem = findSelectedTreeItem ?? TreeItems[0];
         }
 
         private void SaveSettings()
