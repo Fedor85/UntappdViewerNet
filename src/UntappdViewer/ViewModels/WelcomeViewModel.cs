@@ -44,7 +44,11 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public WelcomeViewModel(UntappdService untappdService, ICommunicationService communicationService, ISettingService settingService, IModuleManager moduleManager, IRegionManager regionManager, IEventAggregator eventAggregator) : base(regionManager)
+        public WelcomeViewModel(UntappdService untappdService, ICommunicationService communicationService,
+                                                                ISettingService settingService,
+                                                                IModuleManager moduleManager,
+                                                                IRegionManager regionManager,
+                                                                IEventAggregator eventAggregator) : base(regionManager)
         {
             this.untappdService = untappdService;
             this.communicationService = communicationService;
@@ -52,6 +56,7 @@ namespace UntappdViewer.ViewModels
             this.moduleManager = moduleManager;
             this.settingService = settingService;
             this.eventAggregator = eventAggregator;
+
             OpenFileCommand = new DelegateCommand(OpenFile);
             DropFileCommand = new DelegateCommand<DragEventArgs>(DropFile);
         }

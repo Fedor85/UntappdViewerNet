@@ -74,13 +74,18 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public TreeViewModel(UntappdService untappdService, IModuleManager moduleManager, IRegionManager regionManager, IEventAggregator eventAggregator, ISettingService settingService) : base(regionManager)
+        public TreeViewModel(UntappdService untappdService, IModuleManager moduleManager,
+                                                            IRegionManager regionManager,
+                                                            IEventAggregator eventAggregator,
+                                                            ISettingService settingService) : base(regionManager)
         {
             this.untappdService = untappdService;
             this.moduleManager = moduleManager;
             this.eventAggregator = eventAggregator;
             this.settingService = settingService;
+
             UniqueCheckedCommand = new DelegateCommand<bool?>(UniqueChecked);
+
             TreeItems = new List<TreeViewItem>();
         }
 

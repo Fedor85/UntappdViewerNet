@@ -31,7 +31,10 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public UntappdViewModel(UntappdService untappdService, IModuleManager moduleManager, IRegionManager regionManager, ICommunicationService communicationService, ISettingService settingService) : base(regionManager)
+        public UntappdViewModel(UntappdService untappdService, IModuleManager moduleManager,
+                                                                IRegionManager regionManager,
+                                                                ICommunicationService communicationService,
+                                                                ISettingService settingService) : base(regionManager)
         {
             this.untappdService = untappdService;
             this.moduleManager = moduleManager;

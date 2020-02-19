@@ -8,7 +8,7 @@ namespace UntappdViewer.ViewModels
     {
         private IRegionManager regionManager;
 
-        public RegionManagerBaseModel(IRegionManager regionManager)
+        protected RegionManagerBaseModel(IRegionManager regionManager)
         {
             this.regionManager = regionManager;
         }

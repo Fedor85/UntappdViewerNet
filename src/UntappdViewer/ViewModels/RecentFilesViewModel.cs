@@ -32,6 +32,7 @@ namespace UntappdViewer.ViewModels
         {
             this.settingService = settingService;
             this.eventAggregator = eventAggregator;
+
             OpenRecentFileCommand = new DelegateCommand<FileItem>(OpenRecentFile);
         }
 

@@ -16,6 +16,7 @@ namespace UntappdViewer.ViewModels
         public MenuBarViewModel(IModuleManager moduleManager, IRegionManager regionManager): base(regionManager)
         {
             this.moduleManager = moduleManager;
+
             GoToWelcomeCommand = new DelegateCommand(GoToWelcome);
         }
 

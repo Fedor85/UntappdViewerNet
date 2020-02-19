@@ -43,16 +43,23 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public ShellViewModel(UntappdService untappdService, ICommunicationService communicationService, IRegionManager regionManager, IEventAggregator eventAggregator, ISettingService settingService, IModuleManager moduleManager)
+        public ShellViewModel(UntappdService untappdService, ICommunicationService communicationService,
+                                                                IRegionManager regionManager,
+                                                                IEventAggregator eventAggregator,
+                                                                ISettingService settingService,
+                                                                IModuleManager moduleManager)
         {
             this.untappdService = untappdService;
             this.communicationService = communicationService;
             this.regionManager = regionManager;
             this.settingService = settingService;
             this.moduleManager = moduleManager;
+
             ClosingCommand = new DelegateCommand<CancelEventArgs>(Closing);
+
             eventAggregator.GetEvent<InitializeUntappdEvent>().Subscribe(UpdateTitle);
             eventAggregator.GetEvent<CleanUntappdEvent>().Subscribe(UpdateTitle);
+
             Title = CommunicationHelper.GetTitle();
             Activate();
         }
