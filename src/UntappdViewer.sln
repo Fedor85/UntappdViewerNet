@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UntappdViewer.Test", "Untap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UntappdViewer.Utils", "UntappdViewer.Utils\UntappdViewer.Utils.csproj", "{5FA116C9-7571-494C-A74D-7E121857FFE9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UntappdViewer.Domain", "UntappdViewer.Domain\UntappdViewer.Domain.csproj", "{4329B0DB-7CDF-4695-A54C-3CF230A0011F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{5FA116C9-7571-494C-A74D-7E121857FFE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FA116C9-7571-494C-A74D-7E121857FFE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FA116C9-7571-494C-A74D-7E121857FFE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4329B0DB-7CDF-4695-A54C-3CF230A0011F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4329B0DB-7CDF-4695-A54C-3CF230A0011F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4329B0DB-7CDF-4695-A54C-3CF230A0011F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4329B0DB-7CDF-4695-A54C-3CF230A0011F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
