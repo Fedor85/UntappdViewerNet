@@ -15,11 +15,9 @@ using UntappdViewer.Views;
 
 namespace UntappdViewer.ViewModels
 {
-    public class TreeViewModel : RegionManagerBaseModel
+    public class TreeViewModel : LoadingBaseModel
     {
         private UntappdService untappdService;
-
-        private IModuleManager moduleManager;
 
         private IEventAggregator eventAggregator;
 
@@ -79,10 +77,9 @@ namespace UntappdViewer.ViewModels
         public TreeViewModel(UntappdService untappdService, IModuleManager moduleManager,
                                                             IRegionManager regionManager,
                                                             IEventAggregator eventAggregator,
-                                                            ISettingService settingService) : base(regionManager)
+                                                            ISettingService settingService) : base(moduleManager, regionManager)
         {
             this.untappdService = untappdService;
-            this.moduleManager = moduleManager;
             this.eventAggregator = eventAggregator;
             this.settingService = settingService;
 
@@ -122,6 +119,7 @@ namespace UntappdViewer.ViewModels
 
         private void UpdateTree(bool isUniqueCheckins, long? selectedTreeItemId)
         {
+            LoadingChangeActivity(true);
             UpdateTreeAsync(isUniqueCheckins, selectedTreeItemId);
         }
 
@@ -129,6 +127,8 @@ namespace UntappdViewer.ViewModels
         {
             TreeItems = await Task.Run(() => GeTreeViewItems(isUniqueCheckins));
             TreeViewCaption = $"{Properties.Resources.Checkins} ({TreeItems.Count}):";
+
+            LoadingChangeActivity(false);
             if (TreeItems.Count == 0)
                 return;
 
@@ -137,6 +137,7 @@ namespace UntappdViewer.ViewModels
                 findSelectedTreeItem = TreeItems.FirstOrDefault(item => item.Id.Equals(selectedTreeItemId.Value));
 
             SelectedTreeItem = findSelectedTreeItem ?? TreeItems[0];
+  
         }
 
         private List<TreeViewItem> GeTreeViewItems(bool isUniqueCheckins)

@@ -6,7 +6,7 @@ namespace UntappdViewer.ViewModels
 {
     public abstract class RegionManagerBaseModel : ActiveAwareBaseModel
     {
-        private IRegionManager regionManager;
+        protected IRegionManager regionManager;
 
         protected RegionManagerBaseModel(IRegionManager regionManager)
         {

@@ -117,6 +117,7 @@
     <Compile Include="Modules\TreeModue.cs" />
     <Compile Include="Modules\UntappdModule.cs" />
     <Compile Include="Modules\WelcomeModule.cs" />
+    <Compile Include="ViewModels\Base\LoadingBaseModel.cs" />
     <Compile Include="ViewModels\Base\RegionManagerBaseModel.cs" />
     <Compile Include="ViewModels\Base\ActiveAwareBaseModel.cs" />
     <Compile Include="ViewModels\CheckinViewModel.cs" />
