@@ -109,6 +109,7 @@
     <Compile Include="Different\TreeViewItem.cs" />
     <Compile Include="Modules\BaseModue.cs" />
     <Compile Include="Modules\CheckinModule.cs" />
+    <Compile Include="Modules\LoadingModule.cs" />
     <Compile Include="Modules\MainModule.cs" />
     <Compile Include="Modules\MenuBarModule.cs" />
     <Compile Include="Modules\RecentFilesModule.cs" />

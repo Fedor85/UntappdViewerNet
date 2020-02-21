@@ -45,6 +45,7 @@ namespace UntappdViewer
         {
             moduleCatalog.AddModule(typeof(WelcomeModule), InitializationMode.OnDemand);
             moduleCatalog.AddModule(typeof(MainModule), InitializationMode.OnDemand);
+            moduleCatalog.AddModule(typeof(LoadingModule), InitializationMode.OnDemand);
 
             moduleCatalog.AddModule(typeof(MenuBarModule), InitializationMode.OnDemand);
             moduleCatalog.AddModule(typeof(UntappdModule), InitializationMode.OnDemand);
