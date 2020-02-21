@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 using System.Windows;
-using Prism.Events;
 using Prism.Modularity;
 using Prism.Unity;
 using Unity;
