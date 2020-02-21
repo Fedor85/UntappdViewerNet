@@ -5,10 +5,10 @@ using Prism.Commands;
 using Prism.Events;
 using Prism.Modularity;
 using Prism.Regions;
+using UntappdViewer.Domain.Services;
 using UntappdViewer.Events;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
-using UntappdViewer.Services;
 using UntappdViewer.Views;
 
 namespace UntappdViewer.ViewModels
@@ -120,7 +120,7 @@ namespace UntappdViewer.ViewModels
 
         private void UpdateTree(bool isUniqueCheckins, long? selectedTreeItemId)
         {
-            TreeItems = untappdService.GeTreeViewItems(isUniqueCheckins);
+            TreeItems = GeTreeViewItems(isUniqueCheckins);
             TreeViewCaption = $"{Properties.Resources.Checkins} ({TreeItems.Count}):";
             if(TreeViewCaption.Length ==0)
                 return;
@@ -130,6 +130,15 @@ namespace UntappdViewer.ViewModels
                 findSelectedTreeItem = TreeItems.FirstOrDefault(item => item.Id.Equals(selectedTreeItemId.Value));
 
             SelectedTreeItem = findSelectedTreeItem ?? TreeItems[0];
+        }
+
+        private List<TreeViewItem> GeTreeViewItems(bool isUniqueCheckins)
+        {
+            List<TreeViewItem> treeViewItems = new List<TreeViewItem>();
+            foreach (Models.Checkin checkin in untappdService.GeCheckins(isUniqueCheckins))
+                treeViewItems.Add(new TreeViewItem(checkin.Id, untappdService.GetTreeViewCheckinDisplayName(checkin)));
+
+            return treeViewItems;
         }
 
         private void SaveSettings()

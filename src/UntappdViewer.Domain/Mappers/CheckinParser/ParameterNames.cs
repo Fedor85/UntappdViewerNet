@@ -1,4 +1,4 @@
-﻿namespace UntappdViewer.Mappers.CheckinParser
+﻿namespace UntappdViewer.Domain.Mappers.CheckinParser
 {
     public static class ParameterNames
     {

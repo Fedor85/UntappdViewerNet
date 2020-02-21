@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace UntappdViewer.Mappers.CheckinParser
+namespace UntappdViewer.Domain.Mappers.CheckinParser
 {
     public class CheckinParserFactory
     {

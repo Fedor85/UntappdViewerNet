@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 using NUnit.Framework;
-using UntappdViewer.Mappers;
+using UntappdViewer.Domain.Mappers;
 using UntappdViewer.Models;
 using UntappdViewer.Test.Properties;
 

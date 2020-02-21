@@ -4,10 +4,10 @@ using Prism.Events;
 using Prism.Modularity;
 using Prism.Unity;
 using Unity;
+using UntappdViewer.Domain.Services;
 using UntappdViewer.Infrastructure.Services;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
-using UntappdViewer.Services;
 using UntappdViewer.Views;
 
 namespace UntappdViewer
@@ -66,7 +66,7 @@ namespace UntappdViewer
             //    settingService.Reset();
 
             Container.RegisterInstance(settingService);
-            Container.RegisterInstance(new UntappdService(settingService, Container.Resolve<IEventAggregator>()));
+            Container.RegisterInstance(new UntappdService(settingService));
         }
     }
 }

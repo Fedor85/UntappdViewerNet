@@ -1,10 +1,10 @@
 ﻿using System.Windows;
 using Prism.Modularity;
 using Prism.Regions;
+using UntappdViewer.Domain.Services;
 using UntappdViewer.Helpers;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
-using UntappdViewer.Services;
 using UntappdViewer.Views;
 
 namespace UntappdViewer.ViewModels

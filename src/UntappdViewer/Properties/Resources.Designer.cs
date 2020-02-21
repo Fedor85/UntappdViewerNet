@@ -70,15 +70,6 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The number of parameters and values does not match: {1} / {2}.{0}ParameterNumbers:{3}{0}ParameterValues:{4}.
-        /// </summary>
-        public static string ArgumentExceptionOnCheckinParser {
-            get {
-                return ResourceManager.GetString("ArgumentExceptionOnCheckinParser", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Close application?.
         /// </summary>
         public static string AskCloseApp {

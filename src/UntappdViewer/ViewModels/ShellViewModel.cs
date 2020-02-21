@@ -7,12 +7,12 @@ using Prism.Events;
 using Prism.Modularity;
 using Prism.Mvvm;
 using Prism.Regions;
+using UntappdViewer.Domain.Services;
 using UntappdViewer.Events;
 using UntappdViewer.Helpers;
 using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
-using UntappdViewer.Services;
 using Untappd = UntappdViewer.Models.Untappd;
 
 namespace UntappdViewer.ViewModels
@@ -45,7 +45,6 @@ namespace UntappdViewer.ViewModels
 
         public ShellViewModel(UntappdService untappdService, ICommunicationService communicationService,
                                                                 IRegionManager regionManager,
-                                                                IEventAggregator eventAggregator,
                                                                 ISettingService settingService,
                                                                 IModuleManager moduleManager)
         {
@@ -56,10 +55,8 @@ namespace UntappdViewer.ViewModels
             this.moduleManager = moduleManager;
 
             ClosingCommand = new DelegateCommand<CancelEventArgs>(Closing);
-
-            eventAggregator.GetEvent<InitializeUntappdEvent>().Subscribe(UpdateTitle);
-            eventAggregator.GetEvent<CleanUntappdEvent>().Subscribe(UpdateTitle);
-
+            untappdService.InitializeUntappdEvent += UpdateTitle;
+            untappdService.CleanUntappdEvent += UpdateTitle;
             Title = CommunicationHelper.GetTitle();
             Activate();
         }

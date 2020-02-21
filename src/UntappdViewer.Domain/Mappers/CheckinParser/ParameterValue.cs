@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UntappdViewer.Mappers.CheckinParser
+namespace UntappdViewer.Domain.Mappers.CheckinParser
 {
     public class ParameterValue
     {

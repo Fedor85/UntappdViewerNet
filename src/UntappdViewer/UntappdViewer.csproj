@@ -102,19 +102,11 @@
     </ApplicationDefinition>
     <Compile Include="Different\Behaviors\SelectedTreeViewItemBehavior.cs" />
     <Compile Include="Different\Events\ChekinUpdateEvent.cs" />
-    <Compile Include="Different\Events\CleanUntappdEvent.cs" />
-    <Compile Include="Different\Events\InitializeUntappdEvent.cs" />
     <Compile Include="Different\Events\OpenFileEvent.cs" />
     <Compile Include="Different\Extensions.cs" />
     <Compile Include="Different\Helpers\CommunicationHelper.cs" />
     <Compile Include="Different\Helpers\EnumsHelper.cs" />
     <Compile Include="Different\TreeViewItem.cs" />
-    <Compile Include="Mappers\CheckinCSVMapper.cs" />
-    <Compile Include="Mappers\CheckinParser\CheckinParser.cs" />
-    <Compile Include="Mappers\CheckinParser\CheckinParserFactory.cs" />
-    <Compile Include="Mappers\CheckinParser\ParameterNames.cs" />
-    <Compile Include="Mappers\CheckinParser\ParameterNumber.cs" />
-    <Compile Include="Mappers\CheckinParser\ParameterValue.cs" />
     <Compile Include="Modules\BaseModue.cs" />
     <Compile Include="Modules\CheckinModule.cs" />
     <Compile Include="Modules\MainModule.cs" />
@@ -124,7 +116,6 @@
     <Compile Include="Modules\TreeModue.cs" />
     <Compile Include="Modules\UntappdModule.cs" />
     <Compile Include="Modules\WelcomeModule.cs" />
-    <Compile Include="Services\UntappdService.cs" />
     <Compile Include="ViewModels\Base\RegionManagerBaseModel.cs" />
     <Compile Include="ViewModels\Base\ActiveAwareBaseModel.cs" />
     <Compile Include="ViewModels\CheckinViewModel.cs" />
@@ -241,6 +232,10 @@
     <Resource Include="Resources\pbu_320_white.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\UntappdViewer.Domain\UntappdViewer.Domain.csproj">
+      <Project>{4329b0db-7cdf-4695-a54c-3cf230a0011f}</Project>
+      <Name>UntappdViewer.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UntappdViewer.Infrastructure\UntappdViewer.Infrastructure.csproj">
       <Project>{bdc0b7dd-2833-4b95-9b93-ea520003ebe1}</Project>
       <Name>UntappdViewer.Infrastructure</Name>

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using Microsoft.VisualBasic.FileIO;
-using UntappdViewer.Mappers.CheckinParser;
+using UntappdViewer.Domain.Mappers.CheckinParser;
 using UntappdViewer.Models;
 
-namespace UntappdViewer.Mappers
+namespace UntappdViewer.Domain.Mappers
 {
     public static class CheckinCSVMapper
     {

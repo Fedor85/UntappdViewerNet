@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UntappdViewer.Utils;
 
-namespace UntappdViewer.Mappers.CheckinParser
+namespace UntappdViewer.Domain.Mappers.CheckinParser
 {
     public class CheckinParser
     {
