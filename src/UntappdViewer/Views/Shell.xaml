@@ -22,5 +22,6 @@
             <Label Content="{x:Static properties:Resources.Signature}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Foreground="#ffffff"/>
         </ItemsControl>
         <ContentControl prism:RegionManager.RegionName="{x:Static local:RegionNames.RootRegion}"/>
+        <ContentControl prism:RegionManager.RegionName="{x:Static local:RegionNames.LoadingRegion}"/>
     </Grid>
 </Window>
