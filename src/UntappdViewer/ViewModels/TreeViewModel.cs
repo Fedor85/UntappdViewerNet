@@ -122,7 +122,7 @@ namespace UntappdViewer.ViewModels
         {
             TreeItems = GeTreeViewItems(isUniqueCheckins);
             TreeViewCaption = $"{Properties.Resources.Checkins} ({TreeItems.Count}):";
-            if(TreeViewCaption.Length ==0)
+            if(TreeItems.Count ==0)
                 return;
 
             TreeViewItem findSelectedTreeItem = null;
