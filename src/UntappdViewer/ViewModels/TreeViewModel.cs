@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,9 +24,9 @@ namespace UntappdViewer.ViewModels
 
         private ISettingService settingService;
 
-        private List<TreeViewItem> treeItems;
+        private ObservableCollection<TreeItemViewModel> treeItems;
 
-        private TreeViewItem selectedTreeItem;
+        private TreeItemViewModel selectedTreeItem;
 
         private string treeViewCaption;
 
@@ -53,7 +54,7 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public List<TreeViewItem> TreeItems
+        public ObservableCollection<TreeItemViewModel> TreeItems
         {
             get { return treeItems; }
             set
@@ -63,7 +64,7 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public TreeViewItem SelectedTreeItem
+        public TreeItemViewModel SelectedTreeItem
         {
             get { return selectedTreeItem; }
             set
@@ -85,7 +86,7 @@ namespace UntappdViewer.ViewModels
 
             UniqueCheckedCommand = new DelegateCommand<bool?>(UniqueChecked);
 
-            TreeItems = new List<TreeViewItem>();
+            TreeItems = new ObservableCollection<TreeItemViewModel>();
         }
 
         protected override void Activate()
@@ -132,7 +133,7 @@ namespace UntappdViewer.ViewModels
             if (TreeItems.Count == 0)
                 return;
 
-            TreeViewItem findSelectedTreeItem = null;
+            TreeItemViewModel findSelectedTreeItem = null;
             if (selectedTreeItemId.HasValue)
                 findSelectedTreeItem = TreeItems.FirstOrDefault(item => item.Id.Equals(selectedTreeItemId.Value));
 
@@ -140,11 +141,12 @@ namespace UntappdViewer.ViewModels
   
         }
 
-        private List<TreeViewItem> GeTreeViewItems(bool isUniqueCheckins)
+        private ObservableCollection<TreeItemViewModel> GeTreeViewItems(bool isUniqueCheckins)
         {
-            List<TreeViewItem> treeViewItems = new List<TreeViewItem>();
-            Application.Current.Dispatcher.Invoke(() => treeViewItems = untappdService.GeCheckins(isUniqueCheckins)
-                                                        .ConvertAll(item => new TreeViewItem(item.Id, untappdService.GetTreeViewCheckinDisplayName(item))));
+            ObservableCollection<TreeItemViewModel> treeViewItems = new ObservableCollection<TreeItemViewModel>();
+            foreach (Models.Checkin checkin in untappdService.GeCheckins(isUniqueCheckins))
+                treeViewItems.Add(new TreeItemViewModel(checkin.Id, untappdService.GetTreeViewCheckinDisplayName(checkin)));
+
             return treeViewItems;
         }
 

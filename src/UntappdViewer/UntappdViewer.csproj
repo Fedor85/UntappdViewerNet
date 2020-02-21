@@ -109,7 +109,7 @@
     <Compile Include="Different\Extensions.cs" />
     <Compile Include="Different\Helpers\CommunicationHelper.cs" />
     <Compile Include="Different\Helpers\EnumsHelper.cs" />
-    <Compile Include="Different\TreeViewItem.cs" />
+    <Compile Include="Different\TreeViewModel.cs" />
     <Compile Include="Modules\BaseModue.cs" />
     <Compile Include="Modules\CheckinModule.cs" />
     <Compile Include="Modules\LoadingModule.cs" />

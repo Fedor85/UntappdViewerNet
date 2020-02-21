@@ -6,27 +6,26 @@ namespace UntappdViewer.Behaviors
 {
     public class SelectedTreeViewItemBehavior : Behavior<TreeView>
     {
-        public static readonly DependencyProperty SelectedItemProperty = DependencyProperty.Register("SelectedItem", typeof(TreeViewItem),
+        public static readonly DependencyProperty SelectedItemProperty = DependencyProperty.Register("SelectedItem", typeof(TreeItemViewModel),
                                                                                                         typeof(SelectedTreeViewItemBehavior),
                                                                                                         new PropertyMetadata(null, SelectedItemChanged));
 
-        private static void SelectedItemChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void SelectedItemChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
-            TreeViewItem item = e.NewValue as TreeViewItem;
-
-            if (item != null)
+            TreeViewItem treeViewItem = ((SelectedTreeViewItemBehavior)dependencyObject).AssociatedObject.ItemContainerGenerator.ContainerFromItem(e.NewValue) as TreeViewItem;
+            if (treeViewItem != null)
             {
-                item.Focus();
-                item.BringIntoView();
-                item.SetValue(System.Windows.Controls.TreeViewItem.IsSelectedProperty, true);
+                treeViewItem.Focus();
+                treeViewItem.BringIntoView();
+                treeViewItem.SetValue(TreeViewItem.IsSelectedProperty, true);
             }
         }
 
-        public TreeViewItem SelectedItem
+        public TreeItemViewModel SelectedItem
         {
             get
             {
-                return (TreeViewItem)GetValue(SelectedItemProperty);
+                return (TreeItemViewModel)GetValue(SelectedItemProperty);
             }
             set
             {
@@ -50,7 +49,7 @@ namespace UntappdViewer.Behaviors
 
         private void SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            SelectedItem = (TreeViewItem)e.NewValue;
+            SelectedItem = (TreeItemViewModel)e.NewValue;
         }
     }
 }
