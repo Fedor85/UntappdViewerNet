@@ -30,6 +30,8 @@ namespace UntappdViewer.ViewModels
 
         private string treeViewCaption;
 
+        private string search;
+
         private bool isCheckedUniqueCheckBox;
 
         public ICommand UniqueCheckedCommand { get; }
@@ -40,6 +42,16 @@ namespace UntappdViewer.ViewModels
             set
             {
                 treeViewCaption = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Search
+        {
+            get { return search; }
+            set
+            {
+                search = value;
                 OnPropertyChanged();
             }
         }
