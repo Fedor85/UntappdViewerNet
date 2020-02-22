@@ -55,10 +55,10 @@ namespace UntappdViewer.Domain.Services
             return untappd.Checkins.FirstOrDefault(item => item.Id.Equals(checkinId));
         }
 
-        public string GetTreeViewCheckinDisplayName(Checkin checkin)
+        public string GetTreeViewCheckinDisplayName(Checkin checkin, int number)
         {
             string date = checkin.CreatedDate.ToString("yyyy-MMM-dd");
-            string fullName = $"{date} {StringHelper.GetShortName(checkin.Beer.Name)}";
+            string fullName = $"#{number} {date} {StringHelper.GetShortName(checkin.Beer.Name)}";
             return StringHelper.GeBreakForLongName(fullName, settingService.GetTreeItemNameMaxLength(), date.Length * 2);
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -154,9 +155,12 @@ namespace UntappdViewer.ViewModels
         private ObservableCollection<TreeItemViewModel> GeTreeViewItems(bool isUniqueCheckins)
         {
             ObservableCollection<TreeItemViewModel> treeViewItems = new ObservableCollection<TreeItemViewModel>();
-            foreach (Models.Checkin checkin in untappdService.GeCheckins(isUniqueCheckins))
-                treeViewItems.Add(new TreeItemViewModel(checkin.Id, untappdService.GetTreeViewCheckinDisplayName(checkin)));
-
+            List<Models.Checkin> checkins = untappdService.GeCheckins(isUniqueCheckins);
+            for (int i = 0; i < checkins.Count; i++)
+            {
+                Models.Checkin checkin = checkins[i];
+                treeViewItems.Add(new TreeItemViewModel(checkin.Id, untappdService.GetTreeViewCheckinDisplayName(checkin, i + 1)));
+            }
             return treeViewItems;
         }
 
