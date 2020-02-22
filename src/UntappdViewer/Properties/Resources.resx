@@ -196,4 +196,8 @@
     <value>Unique</value>
     <comment>en-en</comment>
   </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Loading...</value>
+    <comment>en-en</comment>
+  </data>
 </root>
