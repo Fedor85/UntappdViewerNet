@@ -166,16 +166,17 @@ namespace UntappdViewer.ViewModels
 
         private void AppFilter(string filter)
         {
-            if (String.IsNullOrEmpty(filter))
+            if (String.IsNullOrEmpty(filter.Trim()))
             {
                 foreach (TreeItemViewModel model in TreeItems)
                     model.Visibility = Visibility.Visible;
             }
             else
             {
+                string lowerFilter = filter.Trim().ToLower();
                 foreach (TreeItemViewModel model in TreeItems)
                 {
-                    if (!model.Name.Contains(filter))
+                    if (!model.Name.ToLower().Contains(lowerFilter))
                         model.Visibility = Visibility.Collapsed;
                     else
                         model.Visibility = Visibility.Visible;
