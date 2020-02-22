@@ -197,6 +197,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rename project.
+        /// </summary>
+        public static string RenameProject {
+            get {
+                return ResourceManager.GetString("RenameProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to created by fvasilets@gmail.com (с) 2019.
         /// </summary>
         public static string Signature {

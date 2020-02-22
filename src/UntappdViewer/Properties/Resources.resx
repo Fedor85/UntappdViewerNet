@@ -200,4 +200,8 @@
     <value>Loading...</value>
     <comment>en-en</comment>
   </data>
+  <data name="RenameProject" xml:space="preserve">
+    <value>Rename project</value>
+    <comment>en-en</comment>
+  </data>
 </root>
