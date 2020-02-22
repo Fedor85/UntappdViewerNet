@@ -28,6 +28,21 @@ namespace UntappdViewer
             Visibility = Visibility.Visible;
         }
 
+        public void Hide()
+        {
+            Visibility = Visibility.Collapsed;
+        }
+
+        public void Visible()
+        {
+            Visibility = Visibility.Visible;
+        }
+
+        public bool IsHidden()
+        {
+            return Visibility == Visibility.Collapsed || Visibility == Visibility.Hidden; ;
+        }
+
         public override string ToString()
         {
             return Name;

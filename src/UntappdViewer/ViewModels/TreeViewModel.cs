@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 using Prism.Commands;
 using Prism.Events;
@@ -54,6 +52,7 @@ namespace UntappdViewer.ViewModels
             {
                 search = value;
                 AppFilter(value);
+                UpdateTreeViewCaption();
                 OnPropertyChanged();
             }
         }
@@ -116,6 +115,7 @@ namespace UntappdViewer.ViewModels
             SaveSettings();
             DeActivateAllViews(RegionNames.ContentRegion);
             TreeItems.Clear();
+            Search =String.Empty;
         }
 
         private void UpdateContent()
@@ -141,18 +141,14 @@ namespace UntappdViewer.ViewModels
         private async void UpdateTreeAsync(bool isUniqueCheckins, long? selectedTreeItemId)
         {
             TreeItems = await Task.Run(() => GeTreeViewItems(isUniqueCheckins));
-            TreeViewCaption = $"{Properties.Resources.Checkins} ({TreeItems.Count}):";
+            AppFilter(Search);
+            UpdateTreeViewCaption();
+            LoadingChangeActivity(false);
+
+            if (TreeItems.Count > 0)
+                UpdateSelectedTreeItem(selectedTreeItemId);
 
             LoadingChangeActivity(false);
-            if (TreeItems.Count == 0)
-                return;
-
-            TreeItemViewModel findSelectedTreeItem = null;
-            if (selectedTreeItemId.HasValue)
-                findSelectedTreeItem = TreeItems.FirstOrDefault(item => item.Id.Equals(selectedTreeItemId.Value));
-
-            SelectedTreeItem = findSelectedTreeItem ?? TreeItems[0];
-  
         }
 
         private ObservableCollection<TreeItemViewModel> GeTreeViewItems(bool isUniqueCheckins)
@@ -164,25 +160,41 @@ namespace UntappdViewer.ViewModels
             return treeViewItems;
         }
 
+        private void UpdateTreeViewCaption()
+        {
+            TreeViewCaption = $"{Properties.Resources.Checkins} ({TreeItems.Count(item => !item.IsHidden())}):";
+        }
+
+        private void UpdateSelectedTreeItem(long? selectedTreeItemId)
+        {
+            TreeItemViewModel findSelectedTreeItem = null;
+            if (selectedTreeItemId.HasValue)
+                findSelectedTreeItem = TreeItems.FirstOrDefault(item => item.Id.Equals(selectedTreeItemId.Value) && !item.IsHidden());
+
+            if (findSelectedTreeItem == null)
+                findSelectedTreeItem = TreeItems.FirstOrDefault(item => !item.IsHidden());
+
+            SelectedTreeItem = findSelectedTreeItem;
+        }
+
         private void AppFilter(string filter)
         {
-            if (String.IsNullOrEmpty(filter.Trim()))
+            if (String.IsNullOrEmpty(filter) || String.IsNullOrEmpty(filter.Trim()))
             {
                 foreach (TreeItemViewModel model in TreeItems)
-                    model.Visibility = Visibility.Visible;
+                    model.Visible();
             }
             else
             {
-                string lowerFilter = filter.Trim().ToLower();
+                string lowerFilter = filter.ToLower();
                 foreach (TreeItemViewModel model in TreeItems)
                 {
                     if (!model.Name.ToLower().Contains(lowerFilter))
-                        model.Visibility = Visibility.Collapsed;
+                        model.Hide();
                     else
-                        model.Visibility = Visibility.Visible;
+                        model.Visible();
                 }
             }
-
         }
 
         private void SaveSettings()
