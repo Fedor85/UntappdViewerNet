@@ -15,7 +15,6 @@ namespace UntappdViewer.Behaviors
             TreeViewItem treeViewItem = ((SelectedTreeViewItemBehavior)dependencyObject).AssociatedObject.ItemContainerGenerator.ContainerFromItem(e.NewValue) as TreeViewItem;
             if (treeViewItem != null)
             {
-                treeViewItem.Visibility = Visibility.Collapsed;
                 treeViewItem.Focus();
                 treeViewItem.BringIntoView();
                 treeViewItem.SetValue(TreeViewItem.IsSelectedProperty, true);
