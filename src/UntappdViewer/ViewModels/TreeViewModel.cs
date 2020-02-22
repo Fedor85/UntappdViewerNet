@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -52,6 +53,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 search = value;
+                AppFilter(value);
                 OnPropertyChanged();
             }
         }
@@ -160,6 +162,26 @@ namespace UntappdViewer.ViewModels
                 treeViewItems.Add(new TreeItemViewModel(checkin.Id, untappdService.GetTreeViewCheckinDisplayName(checkin)));
 
             return treeViewItems;
+        }
+
+        private void AppFilter(string filter)
+        {
+            if (String.IsNullOrEmpty(filter))
+            {
+                foreach (TreeItemViewModel model in TreeItems)
+                    model.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                foreach (TreeItemViewModel model in TreeItems)
+                {
+                    if (!model.Name.Contains(filter))
+                        model.Visibility = Visibility.Collapsed;
+                    else
+                        model.Visibility = Visibility.Visible;
+                }
+            }
+
         }
 
         private void SaveSettings()
