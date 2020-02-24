@@ -36,6 +36,8 @@ namespace UntappdViewer.ViewModels
 
         private string title;
 
+        private bool loadedWindow;
+
         public ICommand ClosingCommand { get; }
 
         public string Title
@@ -45,6 +47,18 @@ namespace UntappdViewer.ViewModels
             {
                 title = value;
                 OnPropertyChanged();
+            }
+        }
+
+        public bool LoadedWindow
+        {
+            get { return loadedWindow; }
+            set
+            {
+                loadedWindow = value;
+                OnPropertyChanged();
+                if(value)
+                    Activate();
             }
         }
 
@@ -65,12 +79,11 @@ namespace UntappdViewer.ViewModels
             ClosingCommand = new DelegateCommand<CancelEventArgs>(Closing);
             untappdService.InitializeUntappdEvent += UpdateTitle;
             untappdService.CleanUntappdEvent += UpdateTitle;
-            Title = CommunicationHelper.GetTitle();
-            Activate();
         }
 
         private void Activate()
         {
+            Title = CommunicationHelper.GetTitle();
             string filePath = FileHelper.GetFirstFileItemPath(settingService.GetRecentFilePaths());
             FileStatus fileStatus = FileHelper.Check(filePath, Extensions.GetSupportExtensions());
             if (EnumsHelper.IsValidFileStatus(fileStatus))
