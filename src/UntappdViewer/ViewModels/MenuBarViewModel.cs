@@ -41,13 +41,7 @@ namespace UntappdViewer.ViewModels
 
         private void RenameProject()
         {
-            interactionRequestService.NotificationRequest.Raise(
-                new Notification
-                {
-                    Content = "Data Received",
-                    Title = "Notification"
-                }
-            );
+            interactionRequestService.ShowMessage("Notification", "Data Received");
         }
     }
 }

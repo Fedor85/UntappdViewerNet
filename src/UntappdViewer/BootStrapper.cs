@@ -60,7 +60,7 @@ namespace UntappdViewer
 
         private void RegisterServices()
         {
-            Container.RegisterInstance<ICommunicationService>(new CommunicationService());
+            Container.RegisterInstance(new InteractionRequestService());
 
             ISettingService settingService = new SettingService();
             //if (Debugger.IsAttached)
@@ -68,7 +68,6 @@ namespace UntappdViewer
 
             Container.RegisterInstance(settingService);
             Container.RegisterInstance(new UntappdService(settingService));
-            Container.RegisterInstance(new InteractionRequestService());
         }
     }
 }

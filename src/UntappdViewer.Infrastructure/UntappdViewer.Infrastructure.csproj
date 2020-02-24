@@ -53,7 +53,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Services\CommunicationService.cs" />
     <Compile Include="Services\SettingService.cs" />
   </ItemGroup>
   <ItemGroup>

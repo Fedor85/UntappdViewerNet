@@ -12,6 +12,7 @@ using UntappdViewer.Helpers;
 using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
+using UntappdViewer.Services;
 using UntappdViewer.Views;
 
 namespace UntappdViewer.ViewModels
@@ -20,7 +21,7 @@ namespace UntappdViewer.ViewModels
     {
         private UntappdService untappdService;
 
-        private ICommunicationService communicationService;
+        private InteractionRequestService interactionRequestService;
 
         private ISettingService settingService;
 
@@ -44,14 +45,14 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public WelcomeViewModel(UntappdService untappdService, ICommunicationService communicationService,
+        public WelcomeViewModel(UntappdService untappdService, InteractionRequestService interactionRequestService,
                                                                 ISettingService settingService,
                                                                 IModuleManager moduleManager,
                                                                 IRegionManager regionManager,
                                                                 IEventAggregator eventAggregator) : base(regionManager)
         {
             this.untappdService = untappdService;
-            this.communicationService = communicationService;
+            this.interactionRequestService = interactionRequestService;
             this.settingService = settingService;
             this.moduleManager = moduleManager;
             this.settingService = settingService;
@@ -79,7 +80,7 @@ namespace UntappdViewer.ViewModels
         private void OpenFile()
         {
             string lastOpenFilePath = FileHelper.GetFirstFileItemPath(settingService.GetRecentFilePaths());
-            string filePath = communicationService.OpenFile(String.IsNullOrEmpty(lastOpenFilePath) ? String.Empty : Path.GetDirectoryName(lastOpenFilePath), Extensions.GetSupportExtensions());
+            string filePath = interactionRequestService.OpenFile(String.IsNullOrEmpty(lastOpenFilePath) ? String.Empty : Path.GetDirectoryName(lastOpenFilePath), Extensions.GetSupportExtensions());
             if (String.IsNullOrEmpty(filePath))
                 return;
 
@@ -103,7 +104,7 @@ namespace UntappdViewer.ViewModels
             FileStatus fileStatus = FileHelper.Check(filePath, Extensions.GetSupportExtensions());
             if (!EnumsHelper.IsValidFileStatus(fileStatus))
             {
-                communicationService.ShowMessage(Properties.Resources.Warning, CommunicationHelper.GetFileStatusMessage(fileStatus, filePath));
+                interactionRequestService.ShowMessage(Properties.Resources.Warning, CommunicationHelper.GetFileStatusMessage(fileStatus, filePath));
                 return;
             }
 
@@ -113,7 +114,8 @@ namespace UntappdViewer.ViewModels
             }
             catch (ArgumentException ex)
             {
-                communicationService.ShowError(Properties.Resources.Error, ex.Message);
+                //TODO: нужно вызывать сообщение об ошибке
+                interactionRequestService.ShowMessage(Properties.Resources.Error, ex.Message);
                 return;
             }
 

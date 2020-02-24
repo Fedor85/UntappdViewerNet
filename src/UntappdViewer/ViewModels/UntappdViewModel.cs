@@ -5,6 +5,7 @@ using UntappdViewer.Domain.Services;
 using UntappdViewer.Helpers;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
+using UntappdViewer.Services;
 using UntappdViewer.Views;
 
 namespace UntappdViewer.ViewModels
@@ -15,7 +16,7 @@ namespace UntappdViewer.ViewModels
 
         private IModuleManager moduleManager;
 
-        private ICommunicationService communicationService;
+        private InteractionRequestService interactionRequestService;
 
         private ISettingService settingService;
 
@@ -33,12 +34,12 @@ namespace UntappdViewer.ViewModels
 
         public UntappdViewModel(UntappdService untappdService, IModuleManager moduleManager,
                                                                 IRegionManager regionManager,
-                                                                ICommunicationService communicationService,
+                                                                InteractionRequestService interactionRequestService,
                                                                 ISettingService settingService) : base(regionManager)
         {
             this.untappdService = untappdService;
             this.moduleManager = moduleManager;
-            this.communicationService = communicationService;
+            this.interactionRequestService = interactionRequestService;
             this.settingService = settingService;
         }
 
@@ -50,7 +51,7 @@ namespace UntappdViewer.ViewModels
             moduleManager.LoadModule(typeof(TreeModue).Name);
             ActivateView(RegionNames.TreeRegion, typeof(Tree));
 
-            communicationService.ShowMessageOnStatusBar(CommunicationHelper.GetLoadingMessage(untappdService.FIlePath));
+            interactionRequestService.ShowMessageOnStatusBar(CommunicationHelper.GetLoadingMessage(untappdService.FIlePath));
         }
 
         protected override void DeActivate()

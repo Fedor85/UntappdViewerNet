@@ -1,11 +1,12 @@
 ﻿using System;
 using UntappdViewer.Interfaces.Services;
+using UntappdViewer.Services;
 
 namespace UntappdViewer.ViewModels
 {
     public class StatusBarViewModel : ActiveAwareBaseModel
     {
-        private ICommunicationService communicationService;
+        private InteractionRequestService interactionRequestService;
 
         private string message;
 
@@ -19,23 +20,23 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public StatusBarViewModel(ICommunicationService communicationService)
+        public StatusBarViewModel(InteractionRequestService interactionRequestService)
         {
-            this.communicationService = communicationService;
+            this.interactionRequestService = interactionRequestService;
         }
 
         protected override void Activate()
         {
             base.Activate();
-            communicationService.ShowMessageOnStatusBarEnvent += ShowMessage;
-            communicationService.ClearMessageOnStatusBarEnvent += ClearMessage;
+            interactionRequestService.ShowMessageOnStatusBarEnvent += ShowMessage;
+            interactionRequestService.ClearMessageOnStatusBarEnvent += ClearMessage;
         }
 
         protected override void DeActivate()
         {
             base.DeActivate();
-            communicationService.ShowMessageOnStatusBarEnvent -= ShowMessage;
-            communicationService.ClearMessageOnStatusBarEnvent -= ClearMessage;
+            interactionRequestService.ShowMessageOnStatusBarEnvent -= ShowMessage;
+            interactionRequestService.ClearMessageOnStatusBarEnvent -= ClearMessage;
         }
 
 

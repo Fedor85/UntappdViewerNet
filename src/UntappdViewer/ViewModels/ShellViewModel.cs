@@ -22,7 +22,7 @@ namespace UntappdViewer.ViewModels
     {
         private UntappdService untappdService;
 
-        private ICommunicationService communicationService;
+        private InteractionRequestService interactionRequestService;
 
         private IRegionManager regionManager;
 
@@ -49,13 +49,12 @@ namespace UntappdViewer.ViewModels
         }
 
         public ShellViewModel(UntappdService untappdService, InteractionRequestService interactionRequestService,
-                                                                ICommunicationService communicationService,
                                                                 IRegionManager regionManager,
                                                                 ISettingService settingService,
                                                                 IModuleManager moduleManager)
         {
             this.untappdService = untappdService;
-            this.communicationService = communicationService;
+            this.interactionRequestService = interactionRequestService;
             this.regionManager = regionManager;
             this.settingService = settingService;
             this.moduleManager = moduleManager;
@@ -83,14 +82,15 @@ namespace UntappdViewer.ViewModels
                 }
                 catch (ArgumentException ex)
                 {
-                    communicationService.ShowError(Properties.Resources.Error, ex.Message);
+                    //TODO: нужно вызывать сообщение об ошибке
+                    interactionRequestService.ShowMessage(Properties.Resources.Error, ex.Message);
                     moduleManager.LoadModule(typeof(WelcomeModule).Name);
                 }
             }
             else
             {
                 if (fileStatus != FileStatus.IsEmptyPath)
-                    communicationService.ShowMessage(Properties.Resources.Warning, CommunicationHelper.GetFileStatusMessage(fileStatus, filePath));
+                    interactionRequestService.ShowMessage(Properties.Resources.Warning, CommunicationHelper.GetFileStatusMessage(fileStatus, filePath));
 
                 moduleManager.LoadModule(typeof(WelcomeModule).Name);
             }
@@ -108,7 +108,7 @@ namespace UntappdViewer.ViewModels
 
         private void Closing(CancelEventArgs e)
         {
-            if (communicationService.Ask(Properties.Resources.Warning, Properties.Resources.AskCloseApp) == MessageBoxResult.OK)
+            if (interactionRequestService.Ask(Properties.Resources.Warning, Properties.Resources.AskCloseApp))
                 DeActivate();
             else
                 e.Cancel = true;
