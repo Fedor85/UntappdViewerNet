@@ -4,15 +4,16 @@ using System.Windows;
 using System.Windows.Input;
 using Prism.Commands;
 using Prism.Events;
+using Prism.Interactivity.InteractionRequest;
 using Prism.Modularity;
 using Prism.Mvvm;
 using Prism.Regions;
 using UntappdViewer.Domain.Services;
-using UntappdViewer.Events;
 using UntappdViewer.Helpers;
 using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
+using UntappdViewer.Services;
 using Untappd = UntappdViewer.Models.Untappd;
 
 namespace UntappdViewer.ViewModels
@@ -29,6 +30,10 @@ namespace UntappdViewer.ViewModels
 
         private IModuleManager moduleManager;
 
+        public InteractionRequest<IConfirmation> ConfirmationRequest { get; private set; }
+
+        public InteractionRequest<INotification> NotificationRequest { get; private set; }
+
         private string title;
 
         public ICommand ClosingCommand { get; }
@@ -43,7 +48,8 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public ShellViewModel(UntappdService untappdService, ICommunicationService communicationService,
+        public ShellViewModel(UntappdService untappdService, InteractionRequestService interactionRequestService,
+                                                                ICommunicationService communicationService,
                                                                 IRegionManager regionManager,
                                                                 ISettingService settingService,
                                                                 IModuleManager moduleManager)
@@ -53,6 +59,9 @@ namespace UntappdViewer.ViewModels
             this.regionManager = regionManager;
             this.settingService = settingService;
             this.moduleManager = moduleManager;
+
+            ConfirmationRequest = interactionRequestService.ConfirmationRequest;
+            NotificationRequest = interactionRequestService.NotificationRequest;
 
             ClosingCommand = new DelegateCommand<CancelEventArgs>(Closing);
             untappdService.InitializeUntappdEvent += UpdateTitle;

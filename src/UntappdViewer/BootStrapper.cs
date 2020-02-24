@@ -7,6 +7,7 @@ using UntappdViewer.Domain.Services;
 using UntappdViewer.Infrastructure.Services;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
+using UntappdViewer.Services;
 using UntappdViewer.Views;
 
 namespace UntappdViewer
@@ -67,6 +68,7 @@ namespace UntappdViewer
 
             Container.RegisterInstance(settingService);
             Container.RegisterInstance(new UntappdService(settingService));
+            Container.RegisterInstance(new InteractionRequestService());
         }
     }
 }
