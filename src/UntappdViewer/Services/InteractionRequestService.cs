@@ -15,7 +15,6 @@ namespace UntappdViewer.Services
     public class InteractionRequestService
     {
         public InteractionRequest<IConfirmation> ConfirmationRequest { get; }
-
       
         public InteractionRequest<INotification> NotificationRequest { get; }
 

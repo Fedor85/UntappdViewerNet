@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 using Prism.Interactivity.InteractionRequest;
 
@@ -20,7 +21,14 @@ namespace UntappdViewer.Services.PopupWindowAction
             IIconNotification iconNotification = notification as IIconNotification;
                 defaultWindow.Icon = iconNotification.Icon;
 
+            defaultWindow.PreviewKeyDown += PreviewKeyDown;
             return defaultWindow;
+        }
+
+        private void PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                ((Window)sender).Close();
         }
     }
 }
