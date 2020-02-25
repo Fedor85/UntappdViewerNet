@@ -114,8 +114,7 @@ namespace UntappdViewer.ViewModels
             }
             catch (ArgumentException ex)
             {
-                //TODO: нужно вызывать сообщение об ошибке
-                interactionRequestService.ShowMessage(Properties.Resources.Error, ex.Message);
+                interactionRequestService.ShowError(Properties.Resources.Error, ex.Message);
                 return;
             }
 

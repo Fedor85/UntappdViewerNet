@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 using System.Windows;
+using System.Windows.Interop;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using Prism.Interactivity.InteractionRequest;
+using UntappdViewer.Services.PopupWindowAction;
 
 namespace UntappdViewer.Services
 {
@@ -11,41 +16,33 @@ namespace UntappdViewer.Services
     {
         public InteractionRequest<IConfirmation> ConfirmationRequest { get; }
 
-       
-
+      
         public InteractionRequest<INotification> NotificationRequest { get; }
 
         public event Action<string> ShowMessageOnStatusBarEnvent;
 
         public event Action ClearMessageOnStatusBarEnvent;
 
-        private Confirmation confirmation;
-
-        private Notification notification;
-
         public InteractionRequestService()
         {
             ConfirmationRequest = new InteractionRequest<IConfirmation>();
-            confirmation = new Confirmation();
             NotificationRequest = new InteractionRequest<INotification>();
-            notification = new Notification();
         }
 
         public void ShowMessage(string caption, string message)
         {
-            notification.Title = caption;
-            notification.Content = message;
-            NotificationRequest.Raise(notification);
-            ResetNotification(notification);
+            NotificationRequest.Raise(GetIconNotification(caption, message, SystemIcons.Warning));
+        }
+
+        public void ShowError(string caption, string message)
+        {
+            NotificationRequest.Raise(GetIconNotification(caption, message, SystemIcons.Error));
         }
 
         public bool Ask(string caption, string message)
         {
             bool result = false;
-            confirmation.Title = caption;
-            confirmation.Content = message;
-            ConfirmationRequest.Raise(confirmation, c=> result = c.Confirmed);
-            ResetNotification(confirmation);
+            ConfirmationRequest.Raise(GetIconConfirmation(caption, message, null), c => result = c.Confirmed);
             return result;
         }
 
@@ -88,6 +85,36 @@ namespace UntappdViewer.Services
                 filter.AppendFormat("(*.{0})|*.{0}|", extension);
 
             return filter.Remove(filter.Length - 1, 1).ToString();
+        }
+
+        private IconNotification GetIconNotification(string caption, string message, Icon icon)
+        {
+            IconNotification notification = new IconNotification();
+            notification.Title = caption;
+            notification.Content = message;
+            if (icon != null)
+                notification.Icon = ConvertIconToImageSource(icon);
+
+            return notification;
+        }
+
+        private IconConfirmation GetIconConfirmation(string caption, string message, Icon icon)
+        {
+            IconConfirmation confirmation = new IconConfirmation();
+            confirmation.Title = caption;
+            confirmation.Content = message;
+            if (icon != null)
+                confirmation.Icon = ConvertIconToImageSource(icon);
+
+            return confirmation;
+        }
+
+        private ImageSource ConvertIconToImageSource(Icon icon)
+        {
+            return Imaging.CreateBitmapSourceFromHIcon(
+                icon.Handle,
+                Int32Rect.Empty,
+                BitmapSizeOptions.FromEmptyOptions());
         }
     }
 }
