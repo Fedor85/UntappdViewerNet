@@ -67,20 +67,34 @@ namespace UntappdViewer.ViewModels
 
         private void SaveProject()
         {
-            string lastOpenFilePath = FileHelper.GetFirstFileItemPath(settingService.GetRecentFilePaths());
-            string fileSavePath = interactionRequestService.SaveFile(String.IsNullOrEmpty(lastOpenFilePath) ? String.Empty : Path.GetDirectoryName(lastOpenFilePath), untappdService.GetUntappdProjectFileName(), Extensions.GetSaveExtensions());
-            if (String.IsNullOrEmpty(fileSavePath))
+            if (!FileHelper.GetExtensionWihtoutPoint(untappdService.FIlePath).Equals(Extensions.UNTP))
+            {
+                SaveAsProject();
+                return;
+            }
+
+            if (!untappdService.IsDirtyUntappd())
                 return;
 
-            FileHelper.SaveFile(fileSavePath, untappdService.Untappd);
-            FileHelper.CreateDirectory(Path.Combine(Path.GetDirectoryName(fileSavePath), untappdService.GetUntappdProjectPhotoFilesDirectory()));
-            untappdService.FIlePath = fileSavePath;
-            interactionRequestService.ShowMessageOnStatusBar(fileSavePath);
-            settingService.SetRecentFilePaths(FileHelper.AddFilePath(settingService.GetRecentFilePaths(), fileSavePath, settingService.GetMaxRecentFilePaths()));
+            if (!interactionRequestService.Ask(Properties.Resources.Warning, Properties.Resources.AskSaveСhangesUntappdProject))
+                return;
+
+            FileHelper.SaveFile(untappdService.FIlePath, untappdService.Untappd);
+            untappdService.ResetСhanges();
         }
 
         private void SaveAsProject()
         {
+            string fileSavePath = interactionRequestService.SaveFile(String.IsNullOrEmpty(untappdService.FIlePath) ? String.Empty : Path.GetDirectoryName(untappdService.FIlePath), untappdService.GetUntappdProjectFileName(), Extensions.GetSaveExtensions());
+            if (String.IsNullOrEmpty(fileSavePath))
+                return;
+
+            FileHelper.SaveFile(fileSavePath, untappdService.Untappd);
+            untappdService.ResetСhanges();
+            FileHelper.CreateDirectory(Path.Combine(Path.GetDirectoryName(fileSavePath), untappdService.GetUntappdProjectPhotoFilesDirectory(Path.GetFileNameWithoutExtension(fileSavePath))));
+            untappdService.FIlePath = fileSavePath;
+            interactionRequestService.ShowMessageOnStatusBar(fileSavePath);
+            settingService.SetRecentFilePaths(FileHelper.AddFilePath(settingService.GetRecentFilePaths(), fileSavePath, settingService.GetMaxRecentFilePaths()));
         }
     }
 }

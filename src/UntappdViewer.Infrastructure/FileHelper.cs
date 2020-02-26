@@ -43,7 +43,7 @@ namespace UntappdViewer.Infrastructure
 
         public static void SaveFile(string filePath, object saveObject)
         {
-            using (Stream stream = File.Open(filePath, FileMode.Create))
+            using (Stream stream = File.Open(filePath, FileMode.OpenOrCreate))
             {
                 BinaryFormatter binaryFormatter = new BinaryFormatter();
                 binaryFormatter.Serialize(stream, saveObject);

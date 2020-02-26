@@ -79,6 +79,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Want to save your changes untappd project?.
+        /// </summary>
+        public static string AskSaveСhangesUntappdProject {
+            get {
+                return ResourceManager.GetString("AskSaveСhangesUntappdProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checkins.
         /// </summary>
         public static string Checkins {

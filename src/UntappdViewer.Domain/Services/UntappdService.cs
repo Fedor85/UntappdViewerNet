@@ -14,6 +14,8 @@ namespace UntappdViewer.Domain.Services
     {
         private ISettingService settingService;
 
+        private bool isСhanges;
+
         public Untappd Untappd { get; private set; }
 
         public Action<Untappd> InitializeUntappdEvent { get; set; }
@@ -73,6 +75,16 @@ namespace UntappdViewer.Domain.Services
             CleanUntappdEvent?.Invoke();
         }
 
+        public bool IsDirtyUntappd()
+        {
+            return isСhanges;
+        }
+
+        public void ResetСhanges()
+        {
+            isСhanges = false;
+        }
+
         public string GetUntappdUserName()
         {
             return Untappd.UserName;
@@ -83,6 +95,7 @@ namespace UntappdViewer.Domain.Services
             if (Untappd.UserName.Equals(untappdUserName))
                 return;
 
+            isСhanges = true;
             Untappd.UserName = GetUntappdUserName(untappdUserName);
             UpdateUntappdUserNameEvent?.Invoke(Untappd.UserName);
         }
@@ -92,9 +105,9 @@ namespace UntappdViewer.Domain.Services
             return $"{Untappd.CreatedDate:yyyy_MMM_dd}_{Untappd.UserName}";
         }
 
-        public string GetUntappdProjectPhotoFilesDirectory()
+        public string GetUntappdProjectPhotoFilesDirectory(string fileName)
         {
-            return $"{GetUntappdProjectFileName()}_Photos";
+            return $"{fileName}_Photos";
         }
 
         public List<Checkin> GeCheckins(bool isUniqueCheckins = false)
