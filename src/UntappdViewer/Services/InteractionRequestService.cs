@@ -87,7 +87,9 @@ namespace UntappdViewer.Services
         private T GetINotification<T>(INotification notification ,string caption, string message)
         {
             notification.Title = caption;
-            notification.Content = message;
+            Views.MessageBox messageBox = new Views.MessageBox();
+            messageBox.Message.Text = message;
+            notification.Content = messageBox;
             return (T) notification;
         }
 
