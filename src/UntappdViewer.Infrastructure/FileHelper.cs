@@ -2,20 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Xml.Serialization;
 
 namespace UntappdViewer.Infrastructure
 {
     public static class FileHelper
     {
-        public static string GetExtensionWihtoutPoint(string filePath)
-        {
-            string extension = Path.GetExtension(filePath);
-            if (String.IsNullOrEmpty(extension))
-                return extension;
-
-            return extension.Replace(".", String.Empty).Trim().ToLower();
-        }
-
         public static FileStatus Check(string filePath, List<string> supportExtensions)
         {
             if (String.IsNullOrEmpty(filePath))
@@ -38,6 +31,15 @@ namespace UntappdViewer.Infrastructure
                     return FileStatus.IsLocked;
             }
             return FileStatus.Available;
+        }
+
+        public static void SaveFile(string filePath, object saveObject)
+        {
+            using (Stream stream = File.Open(filePath, FileMode.Create))
+            {
+                BinaryFormatter binaryFormatter = new BinaryFormatter();
+                binaryFormatter.Serialize(stream, saveObject);
+            }
         }
 
         public static string AddFilePath(string allFilePaths, string filePath, int maxItems)
@@ -110,6 +112,15 @@ namespace UntappdViewer.Infrastructure
             int counter = 1;
             foreach (FileItem fileItem in fileItems)
                 fileItem.Index = counter++;
+        }
+
+        private static string GetExtensionWihtoutPoint(string filePath)
+        {
+            string extension = Path.GetExtension(filePath);
+            if (String.IsNullOrEmpty(extension))
+                return extension;
+
+            return extension.Replace(".", String.Empty).Trim().ToLower();
         }
     }
 }

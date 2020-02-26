@@ -13,7 +13,7 @@ namespace UntappdViewer.Domain.Services
     {
         private ISettingService settingService;
 
-        private Untappd untappd;
+        public Untappd Untappd { get; private set; }
 
         public Action<Untappd> InitializeUntappdEvent { get; set; }
 
@@ -26,49 +26,56 @@ namespace UntappdViewer.Domain.Services
         public UntappdService(ISettingService settingService)
         {
             this.settingService = settingService;
-            untappd = new Untappd(String.Empty);
+            Untappd = new Untappd(String.Empty);
         }
 
         public void Initialize(string userName, string filePath)
         {
             FIlePath = filePath;
-            untappd = new Untappd(GetUntappdUserName(userName));
+            Untappd = new Untappd(GetUntappdUserName(userName));
             using (FileStream fileStream = File.OpenRead(filePath))
-                untappd.AddCheckins(CheckinCSVMapper.GetCheckins(fileStream));
+                Untappd.AddCheckins(CheckinCSVMapper.GetCheckins(fileStream));
 
-            untappd.SortDataDescCheckins();
-            UpdateUntappdUserNameEvent?.Invoke(untappd.UserName);
+            Untappd.SortDataDescCheckins();
+
+            InitializeUntappdEvent?.Invoke(Untappd);
+            UpdateUntappdUserNameEvent?.Invoke(Untappd.UserName);
         }
 
         public void CleanUpUntappd()
         {
             FIlePath = String.Empty;
-            untappd = new Untappd(String.Empty);
+            Untappd = new Untappd(String.Empty);
             CleanUntappdEvent?.Invoke();
         }
 
         public string GetUntappdUserName()
         {
-            return untappd.UserName;
+            return Untappd.UserName;
         }
 
         public void UpdateUntappdUserName(string untappdUserName)
         {
-            if (untappd.UserName.Equals(untappdUserName))
+            if (Untappd.UserName.Equals(untappdUserName))
                 return;
 
-            untappd.UserName = GetUntappdUserName(untappdUserName);
-            UpdateUntappdUserNameEvent?.Invoke(untappd.UserName);
+            Untappd.UserName = GetUntappdUserName(untappdUserName);
+            UpdateUntappdUserNameEvent?.Invoke(Untappd.UserName);
+        }
+
+        public string GetUntappdProjectFileName()
+        {
+            return $"{Untappd.CreatedDate:yyyy_MMM_dd}_{Untappd.UserName}";
         }
 
         public List<Checkin> GeCheckins(bool isUniqueCheckins = false)
         {
-            return isUniqueCheckins ? untappd.GetUniqueCheckins() : untappd.Checkins;
+            return isUniqueCheckins ? Untappd.GetUniqueCheckins() : Untappd.Checkins;
         }
 
         public Checkin GetCheckin(long checkinId)
         {
-            return untappd.Checkins.FirstOrDefault(item => item.Id.Equals(checkinId));
+            return Untappd.Checkins.FirstOrDefault(item => item.Id.Equals(checkinId));
         }
 
         public string GetTreeViewCheckinDisplayName(Checkin checkin, int number)

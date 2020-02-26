@@ -1,9 +1,12 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.IO;
+using System.Windows.Input;
 using Prism.Commands;
-using Prism.Interactivity.InteractionRequest;
 using Prism.Modularity;
 using Prism.Regions;
 using UntappdViewer.Domain.Services;
+using UntappdViewer.Infrastructure;
+using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
 using UntappdViewer.Services;
 using UntappdViewer.Services.PopupWindowAction;
@@ -17,6 +20,8 @@ namespace UntappdViewer.ViewModels
 
         private InteractionRequestService interactionRequestService;
 
+        private ISettingService settingService;
+
         private IModuleManager moduleManager;
 
         public ICommand GoToWelcomeCommand { get; }
@@ -28,12 +33,15 @@ namespace UntappdViewer.ViewModels
         public ICommand SaveAsProjectCommand { get; }
 
         public MenuBarViewModel(UntappdService untappdService, InteractionRequestService interactionRequestService,
+                                                                ISettingService settingService,
                                                                 IModuleManager moduleManager,
                                                                 IRegionManager regionManager): base(regionManager)
         {
+            this.interactionRequestService = interactionRequestService;
+            this.settingService = settingService;
             this.untappdService = untappdService;
             this.moduleManager = moduleManager;
-            this.interactionRequestService = interactionRequestService;
+
             GoToWelcomeCommand = new DelegateCommand(GoToWelcome);
             RenameProjectCommand = new DelegateCommand(RenameProject);
             SaveProjectCommand = new DelegateCommand(SaveProject);
@@ -53,10 +61,18 @@ namespace UntappdViewer.ViewModels
                 return;
 
             untappdService.UpdateUntappdUserName(confirmationResult.Value);
+
         }
 
         private void SaveProject()
         {
+            string lastOpenFilePath = FileHelper.GetFirstFileItemPath(settingService.GetRecentFilePaths());
+            string fileSavePath = interactionRequestService.SaveFile(String.IsNullOrEmpty(lastOpenFilePath) ? String.Empty : Path.GetDirectoryName(lastOpenFilePath), untappdService.GetUntappdProjectFileName(), Extensions.GetSaveExtensions());
+            if (String.IsNullOrEmpty(fileSavePath))
+                return;
+
+            FileHelper.SaveFile(fileSavePath, untappdService.Untappd);
+            settingService.SetRecentFilePaths(FileHelper.AddFilePath(settingService.GetRecentFilePaths(), fileSavePath, settingService.GetMaxRecentFilePaths()));
         }
 
         private void SaveAsProject()

@@ -18,5 +18,10 @@ namespace UntappdViewer
         {
             return new List<string> { CSV, UNTP };
         }
+
+        public static List<string> GetSaveExtensions()
+        {
+            return new List<string> { UNTP };
+        }
     }
 }

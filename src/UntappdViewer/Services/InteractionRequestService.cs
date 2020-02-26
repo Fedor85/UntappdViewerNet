@@ -79,6 +79,22 @@ namespace UntappdViewer.Services
             return openFileDialog.FileName;
         }
 
+        public string SaveFile(string initialDirectory, string fileName, List<string> extensions)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            if (!String.IsNullOrEmpty(initialDirectory))
+                saveFileDialog.InitialDirectory = initialDirectory;
+
+            saveFileDialog.FileName = fileName;
+            saveFileDialog.FilterIndex = 1;
+            saveFileDialog.Filter = GetFilter(extensions);
+            bool? result = saveFileDialog.ShowDialog(Application.Current.MainWindow);
+            if (result.HasValue && result.Value)
+                return saveFileDialog.FileName;
+
+            return String.Empty;
+        }
+
         public void ClearMessageOnStatusBar()
         {
             if (ClearMessageOnStatusBarEnvent != null)

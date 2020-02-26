@@ -19,7 +19,7 @@ namespace UntappdViewer.Models
         /// <summary>
         /// Дата создания проекта
         /// </summary>
-        private DateTime CreatedDate { get;}
+        public DateTime CreatedDate { get;}
 
         public Untappd(string userName)
         {
