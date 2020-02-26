@@ -289,6 +289,14 @@
   <ItemGroup>
     <Resource Include="Resources\untappd_bottles.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\rename.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\save_as.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\save.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

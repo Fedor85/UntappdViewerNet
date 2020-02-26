@@ -11,9 +11,21 @@
     <Menu VerticalAlignment="Top" Background="Transparent">
         <MenuItem Header="{x:Static properties:Resources.StartPageMenuItem}" Command="{Binding GoToWelcomeCommand}"/>
         <MenuItem Header="{x:Static properties:Resources.ProjectMenuItem}">
-            <MenuItem Header="{x:Static properties:Resources.RenameProject}" Command="{Binding RenameProjectCommand}"/>
-            <MenuItem Header="{x:Static properties:Resources.Save}" Command="{Binding SaveProjectCommand}"/>
-            <MenuItem Header="{x:Static properties:Resources.SaveAs}" Command="{Binding SaveAsProjectCommand}"/>
+            <MenuItem Header="{x:Static properties:Resources.RenameProject}" Command="{Binding RenameProjectCommand}">
+                <MenuItem.Icon>
+                    <Image Source="../Resources/rename.ico"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="{x:Static properties:Resources.Save}" Command="{Binding SaveProjectCommand}">
+                <MenuItem.Icon>
+                    <Image Source="../Resources/save.ico"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="{x:Static properties:Resources.SaveAs}" Command="{Binding SaveAsProjectCommand}">
+                <MenuItem.Icon>
+                    <Image Source="../Resources/save_as.ico"/>
+                </MenuItem.Icon>
+            </MenuItem>
         </MenuItem>
         <MenuItem Header="{x:Static properties:Resources.HelpMenuItem}"/>
     </Menu>
