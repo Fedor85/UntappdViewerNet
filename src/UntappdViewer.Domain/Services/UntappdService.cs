@@ -22,7 +22,7 @@ namespace UntappdViewer.Domain.Services
 
         public Action CleanUntappdEvent { get; set; }
 
-        public string FIlePath { get; private set; }
+        public string FIlePath { get;  set; }
 
         public UntappdService(ISettingService settingService)
         {
