@@ -14,9 +14,9 @@ namespace UntappdViewer.ViewModels
 
         private IEventAggregator eventAggregator;
 
-        public ICommand OpenRecentFileCommand { get; }
-
         private List<FileItem> fileItems;
+
+        public ICommand OpenRecentFileCommand { get; }
 
         public List<FileItem> FileItems
         {
@@ -36,12 +36,6 @@ namespace UntappdViewer.ViewModels
             OpenRecentFileCommand = new DelegateCommand<FileItem>(OpenRecentFile);
         }
 
-        private void OpenRecentFile(FileItem entity)
-        {
-            FileHelper.AddFile(FileItems, entity.FilePath, settingService.GetMaxRecentFilePaths());
-            eventAggregator.GetEvent<OpenFileEvent>().Publish(entity.FilePath);
-        }
-
         protected override void Activate()
         {
             base.Activate();
@@ -52,6 +46,12 @@ namespace UntappdViewer.ViewModels
         {
             base.DeActivate();
             FileItems.Clear();
+        }
+
+        private void OpenRecentFile(FileItem entity)
+        {
+            FileHelper.AddFile(FileItems, entity.FilePath, settingService.GetMaxRecentFilePaths());
+            eventAggregator.GetEvent<OpenFileEvent>().Publish(entity.FilePath);
         }
     }
 }

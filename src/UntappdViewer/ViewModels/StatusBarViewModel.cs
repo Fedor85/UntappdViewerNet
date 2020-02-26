@@ -1,5 +1,4 @@
 ﻿using System;
-using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Services;
 
 namespace UntappdViewer.ViewModels

@@ -7,9 +7,9 @@ namespace UntappdViewer
     {
         private Visibility visibility;
 
-        public long Id { get; private set; }
+        public long Id { get; }
 
-        public string Name { get; set; }
+        public string Name { get; }
 
         public Visibility Visibility
         {

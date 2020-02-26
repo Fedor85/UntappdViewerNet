@@ -13,7 +13,6 @@ using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
 using UntappdViewer.Services;
-using Untappd = UntappdViewer.Models.Untappd;
 
 namespace UntappdViewer.ViewModels
 {
@@ -29,13 +28,13 @@ namespace UntappdViewer.ViewModels
 
         private IModuleManager moduleManager;
 
-        public InteractionRequest<IConfirmation> ConfirmationRequest { get; private set; }
-
-        public InteractionRequest<INotification> NotificationRequest { get; private set; }
-
         private string title;
 
         private bool loadedWindow;
+
+        public InteractionRequest<IConfirmation> ConfirmationRequest { get; }
+
+        public InteractionRequest<INotification> NotificationRequest { get; }
 
         public ICommand ClosingCommand { get; }
 
