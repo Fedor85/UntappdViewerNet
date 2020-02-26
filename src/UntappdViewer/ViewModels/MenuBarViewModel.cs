@@ -41,7 +41,7 @@ namespace UntappdViewer.ViewModels
 
         private void RenameProject()
         {
-            interactionRequestService.ShowMessage("Notification", "Data Received");
+            interactionRequestService.AskReplaceText("Rename project", "NoName");
         }
     }
 }

@@ -19,6 +19,7 @@ namespace UntappdViewer.Services.PopupWindowAction
         {
             Window defaultWindow = base.GetWindow(notification);
             IIconNotification iconNotification = notification as IIconNotification;
+            if (iconNotification != null)
                 defaultWindow.Icon = iconNotification.Icon;
 
             defaultWindow.ResizeMode = ResizeMode.NoResize;

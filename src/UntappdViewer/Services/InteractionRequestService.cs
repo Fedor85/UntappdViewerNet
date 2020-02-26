@@ -9,6 +9,7 @@ using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using Prism.Interactivity.InteractionRequest;
 using UntappdViewer.Services.PopupWindowAction;
+using UntappdViewer.Views;
 
 namespace UntappdViewer.Services
 {
@@ -45,8 +46,20 @@ namespace UntappdViewer.Services
         public bool Ask(string caption, string message)
         {
             bool result = false;
-            ConfirmationRequest.Raise(GetINotification<IconConfirmation>(new IconConfirmation(), caption, message), c => result = c.Confirmed);
+            ConfirmationRequest.Raise(GetINotification<Confirmation>(new Confirmation(), caption, message), c => result = c.Confirmed);
             return result;
+        }
+
+        public ConfirmationResult<string> AskReplaceText(string caption, string text)
+        {
+            bool result = false;
+            TextBox textBox = new TextBox();
+            textBox.TextContent.Text = text;
+            Confirmation confirmation = new Confirmation();
+            confirmation.Title = caption;
+            confirmation.Content = textBox;
+            ConfirmationRequest.Raise(confirmation, c => result = c.Confirmed);
+            return new ConfirmationResult<string>(textBox.TextContent.Text, result);
         }
 
         public void ShowMessageOnStatusBar(string message)

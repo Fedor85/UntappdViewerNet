@@ -122,6 +122,7 @@
     <Compile Include="Modules\UntappdModule.cs" />
     <Compile Include="Modules\WelcomeModule.cs" />
     <Compile Include="Services\InteractionRequestService.cs" />
+    <Compile Include="Services\PopupWindowAction\ConfirmationResult.cs" />
     <Compile Include="Services\PopupWindowAction\IconConfirmation.cs" />
     <Compile Include="Services\PopupWindowAction\IconNotification.cs" />
     <Compile Include="Services\PopupWindowAction\IconPopupWindowAction.cs" />
@@ -158,6 +159,9 @@
     </Compile>
     <Compile Include="Views\StatusBar.xaml.cs">
       <DependentUpon>StatusBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InteractionRequest\TextBox.xaml.cs">
+      <DependentUpon>TextBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Tree.xaml.cs">
       <DependentUpon>Tree.xaml</DependentUpon>
@@ -211,6 +215,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\StatusBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InteractionRequest\TextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
