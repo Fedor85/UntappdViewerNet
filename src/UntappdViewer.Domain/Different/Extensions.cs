@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
 
-namespace UntappdViewer
+namespace UntappdViewer.Domain
 {
     public static class Extensions
     {
         /// <summary>
         /// Import untappd data
         /// </summary>
-        private static string CSV = "csv";
+        public const string CSV = "csv";
 
         /// <summary>
         /// Проект данных по Untappd
         /// </summary>
-        private static string UNTP = "untp";
+        public const string UNTP = "untp";
 
         public static List<string> GetSupportExtensions()
         {

@@ -6,6 +6,7 @@ using Prism.Interactivity.InteractionRequest;
 using Prism.Modularity;
 using Prism.Mvvm;
 using Prism.Regions;
+using UntappdViewer.Domain;
 using UntappdViewer.Domain.Services;
 using UntappdViewer.Helpers;
 using UntappdViewer.Infrastructure;
@@ -88,7 +89,7 @@ namespace UntappdViewer.ViewModels
             {
                 try
                 {
-                    untappdService.Initialize(String.Empty, filePath);
+                    untappdService.Initialize(filePath);
                     moduleManager.LoadModule(typeof(MainModule).Name);
                 }
                 catch (ArgumentException ex)

@@ -32,12 +32,30 @@ namespace UntappdViewer.Infrastructure
             return FileStatus.Available;
         }
 
+        public static string GetExtensionWihtoutPoint(string filePath)
+        {
+            string extension = Path.GetExtension(filePath);
+            if (String.IsNullOrEmpty(extension))
+                return extension;
+
+            return extension.Replace(".", String.Empty).Trim().ToLower();
+        }
+
         public static void SaveFile(string filePath, object saveObject)
         {
             using (Stream stream = File.Open(filePath, FileMode.Create))
             {
                 BinaryFormatter binaryFormatter = new BinaryFormatter();
                 binaryFormatter.Serialize(stream, saveObject);
+            }
+        }
+
+        public static T OpenFile<T>(string filePath)
+        {
+            using (Stream stream = File.Open(filePath, FileMode.Open))
+            {
+                BinaryFormatter binaryFormatter = new BinaryFormatter();
+                return (T)binaryFormatter.Deserialize(stream);
             }
         }
 
@@ -111,15 +129,6 @@ namespace UntappdViewer.Infrastructure
             int counter = 1;
             foreach (FileItem fileItem in fileItems)
                 fileItem.Index = counter++;
-        }
-
-        private static string GetExtensionWihtoutPoint(string filePath)
-        {
-            string extension = Path.GetExtension(filePath);
-            if (String.IsNullOrEmpty(extension))
-                return extension;
-
-            return extension.Replace(".", String.Empty).Trim().ToLower();
         }
     }
 }

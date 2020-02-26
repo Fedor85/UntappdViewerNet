@@ -6,6 +6,7 @@ using Prism.Commands;
 using Prism.Events;
 using Prism.Modularity;
 using Prism.Regions;
+using UntappdViewer.Domain;
 using UntappdViewer.Domain.Services;
 using UntappdViewer.Events;
 using UntappdViewer.Helpers;
@@ -110,7 +111,7 @@ namespace UntappdViewer.ViewModels
 
             try
             {
-                untappdService.Initialize(UntappdUserName, filePath);
+                untappdService.Initialize(filePath, UntappdUserName);
             }
             catch (ArgumentException ex)
             {

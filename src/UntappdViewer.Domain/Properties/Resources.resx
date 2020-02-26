@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ArgumentExceptionInitializeUntappd" xml:space="preserve">
+    <value>Unsupported format file: {0}</value>
+    <comment>en-en</comment>
+  </data>
   <data name="ArgumentExceptionOnCheckinParser" xml:space="preserve">
     <value>The number of parameters and values does not match: {1} / {2}.{0}ParameterNumbers:{3}{0}ParameterValues:{4}</value>
     <comment>en-en</comment>

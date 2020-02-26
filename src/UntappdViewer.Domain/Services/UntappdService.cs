@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UntappdViewer.Domain.Mappers;
+using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
 using UntappdViewer.Utils;
@@ -29,7 +30,27 @@ namespace UntappdViewer.Domain.Services
             Untappd = new Untappd(String.Empty);
         }
 
-        public void Initialize(string userName, string filePath)
+        public void Initialize(string filePath, string userName = null)
+        {
+            switch (FileHelper.GetExtensionWihtoutPoint(filePath))
+            {
+                case Extensions.CSV:
+                    InitializeToCSV(filePath, userName);
+                    break;
+
+                case Extensions.UNTP:
+                    InitializeToUNTP(filePath);
+                    break;
+                    default:
+
+                throw new ArgumentException(String.Format(Properties.Resources.ArgumentExceptionInitializeUntappd, filePath));
+            }
+
+            InitializeUntappdEvent?.Invoke(Untappd);
+            UpdateUntappdUserNameEvent?.Invoke(Untappd.UserName);
+        }
+
+        private void InitializeToCSV(string filePath, string userName)
         {
             FIlePath = filePath;
             Untappd = new Untappd(GetUntappdUserName(userName));
@@ -37,9 +58,12 @@ namespace UntappdViewer.Domain.Services
                 Untappd.AddCheckins(CheckinCSVMapper.GetCheckins(fileStream));
 
             Untappd.SortDataDescCheckins();
+        }
 
-            InitializeUntappdEvent?.Invoke(Untappd);
-            UpdateUntappdUserNameEvent?.Invoke(Untappd.UserName);
+        private void InitializeToUNTP(string filePath)
+        {
+            FIlePath = filePath;
+            Untappd = FileHelper.OpenFile<Untappd>(filePath);
         }
 
         public void CleanUpUntappd()

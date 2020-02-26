@@ -4,6 +4,7 @@ using System.Windows.Input;
 using Prism.Commands;
 using Prism.Modularity;
 using Prism.Regions;
+using UntappdViewer.Domain;
 using UntappdViewer.Domain.Services;
 using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;

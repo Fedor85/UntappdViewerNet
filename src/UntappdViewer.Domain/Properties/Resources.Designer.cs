@@ -61,6 +61,15 @@ namespace UntappdViewer.Domain.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unsupported format file: {0}.
+        /// </summary>
+        internal static string ArgumentExceptionInitializeUntappd {
+            get {
+                return ResourceManager.GetString("ArgumentExceptionInitializeUntappd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The number of parameters and values does not match: {1} / {2}.{0}ParameterNumbers:{3}{0}ParameterValues:{4}.
         /// </summary>
         internal static string ArgumentExceptionOnCheckinParser {

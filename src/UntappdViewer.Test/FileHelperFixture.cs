@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using NUnit.Framework;
+using UntappdViewer.Domain;
 using UntappdViewer.Infrastructure;
 using UntappdViewer.Test.Properties;
 
