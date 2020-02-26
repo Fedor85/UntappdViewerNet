@@ -23,6 +23,10 @@ namespace UntappdViewer.ViewModels
 
         public ICommand RenameProjectCommand { get; }
 
+        public ICommand SaveProjectCommand { get; }
+
+        public ICommand SaveAsProjectCommand { get; }
+
         public MenuBarViewModel(UntappdService untappdService, InteractionRequestService interactionRequestService,
                                                                 IModuleManager moduleManager,
                                                                 IRegionManager regionManager): base(regionManager)
@@ -32,6 +36,8 @@ namespace UntappdViewer.ViewModels
             this.interactionRequestService = interactionRequestService;
             GoToWelcomeCommand = new DelegateCommand(GoToWelcome);
             RenameProjectCommand = new DelegateCommand(RenameProject);
+            SaveProjectCommand = new DelegateCommand(SaveProject);
+            SaveAsProjectCommand = new DelegateCommand(SaveAsProject);
         }
 
         private void GoToWelcome()
@@ -47,6 +53,14 @@ namespace UntappdViewer.ViewModels
                 return;
 
             untappdService.UpdateUntappdUserName(confirmationResult.Value);
+        }
+
+        private void SaveProject()
+        {
+        }
+
+        private void SaveAsProject()
+        {
         }
     }
 }

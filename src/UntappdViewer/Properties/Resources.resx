@@ -204,4 +204,12 @@
     <value>Rename project</value>
     <comment>en-en</comment>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="SaveAs" xml:space="preserve">
+    <value>Save As...</value>
+    <comment>en-en</comment>
+  </data>
 </root>

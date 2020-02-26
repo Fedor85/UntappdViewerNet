@@ -12,6 +12,8 @@
         <MenuItem Header="{x:Static properties:Resources.StartPageMenuItem}" Command="{Binding GoToWelcomeCommand}"/>
         <MenuItem Header="{x:Static properties:Resources.ProjectMenuItem}">
             <MenuItem Header="{x:Static properties:Resources.RenameProject}" Command="{Binding RenameProjectCommand}"/>
+            <MenuItem Header="{x:Static properties:Resources.Save}" Command="{Binding SaveProjectCommand}"/>
+            <MenuItem Header="{x:Static properties:Resources.SaveAs}" Command="{Binding SaveAsProjectCommand}"/>
         </MenuItem>
         <MenuItem Header="{x:Static properties:Resources.HelpMenuItem}"/>
     </Menu>
