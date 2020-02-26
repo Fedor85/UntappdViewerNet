@@ -30,7 +30,18 @@ namespace UntappdViewer.Services.PopupWindowAction
         private void PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
-                ((Window)sender).Close();
+            {
+                ((Window)sender).Close();               
+            }
+            else if (e.Key == Key.Enter)
+            {
+                Window window = (Window) sender;
+                IConfirmation confirmation = window.DataContext as IConfirmation;
+                if (confirmation != null)
+                    confirmation.Confirmed = true;
+
+                window.Close();
+            }
         }
     }
 }
