@@ -21,6 +21,7 @@ namespace UntappdViewer.Services.PopupWindowAction
             IIconNotification iconNotification = notification as IIconNotification;
                 defaultWindow.Icon = iconNotification.Icon;
 
+            defaultWindow.ResizeMode = ResizeMode.NoResize;
             defaultWindow.PreviewKeyDown += PreviewKeyDown;
             return defaultWindow;
         }
