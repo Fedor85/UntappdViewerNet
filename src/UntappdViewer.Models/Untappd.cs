@@ -14,7 +14,7 @@ namespace UntappdViewer.Models
         /// <summary>
         /// Имя пользователя
         /// </summary>
-        public string UserName { get; }
+        public string UserName { get; set; }
 
         /// <summary>
         /// Дата создания проекта

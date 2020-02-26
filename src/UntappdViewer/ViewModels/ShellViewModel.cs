@@ -75,7 +75,7 @@ namespace UntappdViewer.ViewModels
             NotificationRequest = interactionRequestService.NotificationRequest;
 
             ClosingCommand = new DelegateCommand<CancelEventArgs>(Closing);
-            untappdService.InitializeUntappdEvent += UpdateTitle;
+            untappdService.UpdateUntappdUserNameEvent += UpdateTitle;
             untappdService.CleanUntappdEvent += UpdateTitle;
         }
 
@@ -106,9 +106,9 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        private void UpdateTitle(Untappd untappd)
+        private void UpdateTitle(string untappdUserName)
         {
-            Title = CommunicationHelper.GetTitle(untappd.UserName);
+            Title = CommunicationHelper.GetTitle(untappdUserName);
         }
 
         private void UpdateTitle()

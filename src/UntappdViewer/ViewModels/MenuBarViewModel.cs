@@ -6,6 +6,7 @@ using Prism.Regions;
 using UntappdViewer.Domain.Services;
 using UntappdViewer.Modules;
 using UntappdViewer.Services;
+using UntappdViewer.Services.PopupWindowAction;
 using UntappdViewer.Views;
 
 namespace UntappdViewer.ViewModels
@@ -41,7 +42,11 @@ namespace UntappdViewer.ViewModels
 
         private void RenameProject()
         {
-            interactionRequestService.AskReplaceText("Rename project", "NoName");
+            ConfirmationResult<string> confirmationResult = interactionRequestService.AskReplaceText(Properties.Resources.RenameProject, untappdService.GetUntappdUserName());
+            if (!confirmationResult.Result)
+                return;
+
+            untappdService.UpdateUntappdUserName(confirmationResult.Value);
         }
     }
 }

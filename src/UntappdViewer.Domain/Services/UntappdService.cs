@@ -17,6 +17,8 @@ namespace UntappdViewer.Domain.Services
 
         public Action<Untappd> InitializeUntappdEvent { get; set; }
 
+        public Action<string> UpdateUntappdUserNameEvent { get; set; }
+
         public Action CleanUntappdEvent { get; set; }
 
         public string FIlePath { get; private set; }
@@ -30,12 +32,12 @@ namespace UntappdViewer.Domain.Services
         public void Initialize(string userName, string filePath)
         {
             FIlePath = filePath;
-            untappd = new Untappd(String.IsNullOrEmpty(userName) ? settingService.GetDefaultUserName() : userName);
+            untappd = new Untappd(GetUntappdUserName(userName));
             using (FileStream fileStream = File.OpenRead(filePath))
                 untappd.AddCheckins(CheckinCSVMapper.GetCheckins(fileStream));
 
             untappd.SortDataDescCheckins();
-            InitializeUntappdEvent?.Invoke(untappd);
+            UpdateUntappdUserNameEvent?.Invoke(untappd.UserName);
         }
 
         public void CleanUpUntappd()
@@ -43,6 +45,20 @@ namespace UntappdViewer.Domain.Services
             FIlePath = String.Empty;
             untappd = new Untappd(String.Empty);
             CleanUntappdEvent?.Invoke();
+        }
+
+        public string GetUntappdUserName()
+        {
+            return untappd.UserName;
+        }
+
+        public void UpdateUntappdUserName(string untappdUserName)
+        {
+            if (untappd.UserName.Equals(untappdUserName))
+                return;
+
+            untappd.UserName = GetUntappdUserName(untappdUserName);
+            UpdateUntappdUserNameEvent?.Invoke(untappd.UserName);
         }
 
         public List<Checkin> GeCheckins(bool isUniqueCheckins = false)
@@ -60,6 +76,11 @@ namespace UntappdViewer.Domain.Services
             string date = checkin.CreatedDate.ToString("yyyy-MMM-dd");
             string fullName = $"#{number} {date} {StringHelper.GetShortName(checkin.Beer.Name)}";
             return StringHelper.GeBreakForLongName(fullName, settingService.GetTreeItemNameMaxLength(), date.Length * 2);
+        }
+
+        private string GetUntappdUserName(string userName)
+        {
+            return String.IsNullOrEmpty(userName) ? settingService.GetDefaultUserName() : userName;
         }
     }
 }
