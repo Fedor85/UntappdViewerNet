@@ -30,18 +30,22 @@ namespace UntappdViewer.Services
 
         public void ShowMessage(string caption, string message)
         {
-            NotificationRequest.Raise(GetIconNotification(caption, message, SystemIcons.Warning));
+            IconNotification notification = GetINotification<IconNotification>(new IconNotification(), caption, message);
+            AddIcon(notification, SystemIcons.Warning);
+            NotificationRequest.Raise(notification);
         }
 
         public void ShowError(string caption, string message)
         {
-            NotificationRequest.Raise(GetIconNotification(caption, message, SystemIcons.Error));
+            IconNotification notification = GetINotification<IconNotification>(new IconNotification(), caption, message);
+            AddIcon(notification, SystemIcons.Error);
+            NotificationRequest.Raise(notification);
         }
 
         public bool Ask(string caption, string message)
         {
             bool result = false;
-            ConfirmationRequest.Raise(GetIconConfirmation(caption, message, null), c => result = c.Confirmed);
+            ConfirmationRequest.Raise(GetINotification<IconConfirmation>(new IconConfirmation(), caption, message), c => result = c.Confirmed);
             return result;
         }
 
@@ -68,12 +72,6 @@ namespace UntappdViewer.Services
                 ClearMessageOnStatusBarEnvent.Invoke();
         }
 
-        private void ResetNotification(INotification notification)
-        {
-            notification.Title = String.Empty;
-            notification.Content = null;
-        }
-
         private string GetFilter(List<string> extensions)
         {
             if (extensions.Count == 0)
@@ -86,26 +84,17 @@ namespace UntappdViewer.Services
             return filter.Remove(filter.Length - 1, 1).ToString();
         }
 
-        private IconNotification GetIconNotification(string caption, string message, Icon icon)
+        private T GetINotification<T>(INotification notification ,string caption, string message)
         {
-            IconNotification notification = new IconNotification();
             notification.Title = caption;
             notification.Content = message;
-            if (icon != null)
-                notification.Icon = ConvertIconToImageSource(icon);
-
-            return notification;
+            return (T) notification;
         }
 
-        private IconConfirmation GetIconConfirmation(string caption, string message, Icon icon)
+        private void AddIcon(IIconNotification iconNotification, Icon icon)
         {
-            IconConfirmation confirmation = new IconConfirmation();
-            confirmation.Title = caption;
-            confirmation.Content = message;
             if (icon != null)
-                confirmation.Icon = ConvertIconToImageSource(icon);
-
-            return confirmation;
+                iconNotification.Icon = ConvertIconToImageSource(icon);
         }
 
         private ImageSource ConvertIconToImageSource(Icon icon)
