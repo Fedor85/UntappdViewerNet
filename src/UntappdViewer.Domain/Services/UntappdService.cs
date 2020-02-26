@@ -92,6 +92,11 @@ namespace UntappdViewer.Domain.Services
             return $"{Untappd.CreatedDate:yyyy_MMM_dd}_{Untappd.UserName}";
         }
 
+        public string GetUntappdProjectPhotoFilesDirectory()
+        {
+            return $"{GetUntappdProjectFileName()}_Photos";
+        }
+
         public List<Checkin> GeCheckins(bool isUniqueCheckins = false)
         {
             return isUniqueCheckins ? Untappd.GetUniqueCheckins() : Untappd.Checkins;
