@@ -21,10 +21,10 @@
             <command:EventToCommand Command="{Binding ClosingCommand}"  PassEventArgsToCommand="True" />
         </i:EventTrigger>
         <prism:InteractionRequestTrigger SourceObject="{Binding ConfirmationRequest, Mode=OneWay}">
-            <popupWindowAction:IconPopupWindowAction IsModal="True" CenterOverAssociatedObject="True"/>
+            <popupWindowAction:IconPopupWindowAction IsModal="True" WindowStartupLocation="CenterOwner"/>
         </prism:InteractionRequestTrigger>
         <prism:InteractionRequestTrigger SourceObject="{Binding NotificationRequest, Mode=OneWay}">
-            <popupWindowAction:IconPopupWindowAction IsModal="True" CenterOverAssociatedObject="True"/>
+            <popupWindowAction:IconPopupWindowAction IsModal="True" WindowStartupLocation="CenterOwner"/>
         </prism:InteractionRequestTrigger>
     </i:Interaction.Triggers>
     <Grid Background="{StaticResource MainBackground}">
