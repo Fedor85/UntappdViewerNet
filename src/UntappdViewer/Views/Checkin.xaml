@@ -8,13 +8,19 @@
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="450" d:DesignWidth="450">
-    <StackPanel>
-        <GroupBox Header="{Binding CheckinHeader}">
-            <GroupBox Header="{x:Static properties:Resources.Beer}">
-                <TextBlock TextWrapping="Wrap" Text="{Binding BeerName}" FontWeight="Bold"/>
-            </GroupBox>
+    <UserControl.Background>
+        <SolidColorBrush Opacity="0.3" Color="#ffffff"/>
+    </UserControl.Background>
+    <DockPanel>
+        <GroupBox Header="{Binding CheckinHeader}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <StackPanel>
+                <GroupBox Header="{x:Static properties:Resources.Beer}">
+                    <StackPanel>
+                        <TextBlock TextWrapping="Wrap" Text="{Binding BeerName}" FontWeight="Bold"/>
+                        <TextBlock TextWrapping="Wrap" Text="{Binding BeerType}"/>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
         </GroupBox>
-
-    </StackPanel>
-
+    </DockPanel>
 </UserControl>
