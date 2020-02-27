@@ -8,14 +8,14 @@ namespace UntappdViewer.ViewModels
     {
         private IEventAggregator eventAggregator;
 
-        private string checkinName;
+        private string beerName;
 
-        public string CheckinName
+        public string BeerName
         {
-            get { return checkinName; }
+            get { return beerName; }
             set
             {
-                checkinName = value;
+                beerName = value;
                 OnPropertyChanged();
             }
         }
@@ -40,7 +40,7 @@ namespace UntappdViewer.ViewModels
         private void ChekinUpdate(Checkin checkin)
         {
             if (checkin != null)
-                CheckinName = checkin.ToString();
+                BeerName = checkin.Beer.Name;
         }
     }
 }

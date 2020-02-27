@@ -229,4 +229,8 @@
     <value>Not supported File: {0}</value>
     <comment>en-en</comment>
   </data>
+  <data name="Beer" xml:space="preserve">
+    <value>Beer</value>
+    <comment>en-en</comment>
+  </data>
 </root>
