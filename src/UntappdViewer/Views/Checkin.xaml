@@ -18,6 +18,21 @@
                     <StackPanel>
                         <TextBlock TextWrapping="Wrap" Text="{Binding BeerName}" FontWeight="Bold"/>
                         <TextBlock TextWrapping="Wrap" Text="{Binding BeerType}"/>
+                        <DockPanel>
+                            <TextBlock TextWrapping="Wrap">
+                                <TextBlock.Inlines>
+                                    <Run FontWeight="Bold" Text="ABV: "/>
+                                    <Run Text="{Binding BeerABV}"/>
+                                </TextBlock.Inlines>
+                            </TextBlock>
+                            <TextBlock Text="  |  " FontWeight="Bold"/>
+                            <TextBlock TextWrapping="Wrap">
+                                <TextBlock.Inlines>
+                                    <Run FontWeight="Bold" Text="IBU: "/>
+                                    <Run Text="{Binding BeerIBU}"/>
+                                </TextBlock.Inlines>
+                            </TextBlock>
+                        </DockPanel>
                     </StackPanel>
                 </GroupBox>
             </StackPanel>

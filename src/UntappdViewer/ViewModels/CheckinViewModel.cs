@@ -15,6 +15,10 @@ namespace UntappdViewer.ViewModels
 
         private string beerType;
 
+        private string beerABV;
+
+        private string beerIBU;
+
         public string CheckinHeader
         {
             get { return checkinHeader; }
@@ -41,6 +45,26 @@ namespace UntappdViewer.ViewModels
             set
             {
                 beerType = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string BeerABV
+        {
+            get { return beerABV; }
+            set
+            {
+                beerABV = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string BeerIBU
+        {
+            get { return beerIBU; }
+            set
+            {
+                beerIBU = value;
                 OnPropertyChanged();
             }
         }
@@ -74,6 +98,8 @@ namespace UntappdViewer.ViewModels
             CheckinHeader = GetCheckinHeader(checkin.CreatedDate);
             BeerName = checkin.Beer.Name;
             BeerType = checkin.Beer.Type;
+            BeerABV = checkin.Beer.ABV.ToString();
+            BeerIBU = checkin.Beer.IBU.ToString();
         }
 
         private void Clear()
@@ -81,6 +107,8 @@ namespace UntappdViewer.ViewModels
             CheckinHeader = GetCheckinHeader(null);
             BeerName = String.Empty;
             BeerType = String.Empty;
+            BeerABV = String.Empty;
+            BeerIBU = String.Empty;
         }
 
         private string GetCheckinHeader(DateTime? checkinCreatedDate)
