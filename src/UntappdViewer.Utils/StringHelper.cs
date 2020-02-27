@@ -54,8 +54,7 @@ namespace UntappdViewer.Utils
                         if (isInsertEmpty)
                             name = name.Remove(index, 1);
 
-                        name =name.Insert(index, String.Format("{0}{1}", Convert.ToChar(ControlChar.NewLine), isInsertEmpty ? String.Empty : 
-                                                                                                                new string(Convert.ToChar(ControlChar.Space), insertSpaceCount - 1)));
+                        name =name.Insert(index, $"{Convert.ToChar(ControlChar.NewLine)}{(isInsertEmpty ? String.Empty : new string(Convert.ToChar(ControlChar.Space), insertSpaceCount - 1))}");
                         break;;
                     }
                     index--;
