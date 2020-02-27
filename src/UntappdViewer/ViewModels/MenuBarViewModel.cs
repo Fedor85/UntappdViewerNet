@@ -2,10 +2,12 @@
 using System.IO;
 using System.Windows.Input;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Modularity;
 using Prism.Regions;
 using UntappdViewer.Domain;
 using UntappdViewer.Domain.Services;
+using UntappdViewer.Events;
 using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
@@ -25,6 +27,8 @@ namespace UntappdViewer.ViewModels
 
         private IModuleManager moduleManager;
 
+        private IEventAggregator eventAggregator;
+
         public ICommand GoToWelcomeCommand { get; }
 
         public ICommand RenameProjectCommand { get; }
@@ -36,17 +40,30 @@ namespace UntappdViewer.ViewModels
         public MenuBarViewModel(UntappdService untappdService, InteractionRequestService interactionRequestService,
                                                                 ISettingService settingService,
                                                                 IModuleManager moduleManager,
-                                                                IRegionManager regionManager): base(regionManager)
+                                                                IRegionManager regionManager,
+                                                                IEventAggregator eventAggregator) : base(regionManager)
         {
             this.interactionRequestService = interactionRequestService;
             this.settingService = settingService;
             this.untappdService = untappdService;
             this.moduleManager = moduleManager;
+            this.eventAggregator = eventAggregator;
 
             GoToWelcomeCommand = new DelegateCommand(GoToWelcome);
             RenameProjectCommand = new DelegateCommand(RenameProject);
             SaveProjectCommand = new DelegateCommand(SaveProject);
             SaveAsProjectCommand = new DelegateCommand(SaveAsProject);
+        }
+        protected override void Activate()
+        {
+            base.Activate();
+            eventAggregator.GetEvent<SaveUntappdToFileEvent>().Subscribe(SaveСhangesProject);
+        }
+
+        protected override void DeActivate()
+        {
+            base.DeActivate();
+            eventAggregator.GetEvent<SaveUntappdToFileEvent>().Unsubscribe(SaveСhangesProject);
         }
 
         private void GoToWelcome()
@@ -63,6 +80,29 @@ namespace UntappdViewer.ViewModels
 
             untappdService.UpdateUntappdUserName(confirmationResult.Value);
 
+        }
+
+        private void SaveСhangesProject()
+        {
+            if (!untappdService.IsDirtyUntappd())
+                return;
+
+            if (!interactionRequestService.Ask(Properties.Resources.Warning, Properties.Resources.AskSaveСhangesUntappdProject))
+                return;
+
+            switch (FileHelper.GetExtensionWihtoutPoint(untappdService.FIlePath))
+            {
+                case Extensions.CSV:
+                    SaveAsProject();
+                    break;
+
+                case Extensions.UNTP:
+                    FileHelper.SaveFile(untappdService.FIlePath, untappdService.Untappd);
+                    break;
+                default:
+                    throw new ArgumentException(String.Format(Properties.Resources.ArgumentExceptioSaveUntappdProject, untappdService.FIlePath));
+            }
+            untappdService.ResetСhanges();
         }
 
         private void SaveProject()
@@ -92,7 +132,7 @@ namespace UntappdViewer.ViewModels
             FileHelper.SaveFile(fileSavePath, untappdService.Untappd);
             untappdService.ResetСhanges();
             FileHelper.CreateDirectory(Path.Combine(Path.GetDirectoryName(fileSavePath), untappdService.GetUntappdProjectPhotoFilesDirectory(Path.GetFileNameWithoutExtension(fileSavePath))));
-            untappdService.FIlePath = fileSavePath;
+            untappdService.Initialize(untappdService.FIlePath);
             interactionRequestService.ShowMessageOnStatusBar(fileSavePath);
             settingService.SetRecentFilePaths(FileHelper.AddFilePath(settingService.GetRecentFilePaths(), fileSavePath, settingService.GetMaxRecentFilePaths()));
         }

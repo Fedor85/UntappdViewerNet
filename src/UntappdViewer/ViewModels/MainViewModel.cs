@@ -1,5 +1,7 @@
-﻿using Prism.Modularity;
+﻿using Prism.Events;
+using Prism.Modularity;
 using Prism.Regions;
+using UntappdViewer.Events;
 using UntappdViewer.Modules;
 using UntappdViewer.Views;
 
@@ -9,9 +11,13 @@ namespace UntappdViewer.ViewModels
     {
         private IModuleManager moduleManager;
 
-        public MainViewModel(IModuleManager moduleManager, IRegionManager regionManager): base(regionManager)
+        private IEventAggregator eventAggregator;
+
+        public MainViewModel(IModuleManager moduleManager, IRegionManager regionManager,
+                                                           IEventAggregator eventAggregator) : base(regionManager)
         {
             this.moduleManager = moduleManager;
+            this.eventAggregator = eventAggregator;
         }
 
         protected override void Activate()
@@ -28,6 +34,7 @@ namespace UntappdViewer.ViewModels
         protected override void DeActivate()
         {
             base.DeActivate();
+            eventAggregator.GetEvent<SaveUntappdToFileEvent>().Publish();
             DeActivateAllViews(RegionNames.MainRegion);
             DeActivateAllViews(RegionNames.StatusBarRegion);
         }

@@ -47,14 +47,13 @@ namespace UntappdViewer.Domain.Services
 
                 throw new ArgumentException(String.Format(Properties.Resources.ArgumentExceptionInitializeUntappd, filePath));
             }
-
+            FIlePath = filePath;
             InitializeUntappdEvent?.Invoke(Untappd);
             UpdateUntappdUserNameEvent?.Invoke(Untappd.UserName);
         }
 
         private void InitializeToCSV(string filePath, string userName)
-        {
-            FIlePath = filePath;
+        {     
             Untappd = new Untappd(GetUntappdUserName(userName));
             using (FileStream fileStream = File.OpenRead(filePath))
                 Untappd.AddCheckins(CheckinCSVMapper.GetCheckins(fileStream));
@@ -64,7 +63,6 @@ namespace UntappdViewer.Domain.Services
 
         private void InitializeToUNTP(string filePath)
         {
-            FIlePath = filePath;
             Untappd = FileHelper.OpenFile<Untappd>(filePath);
         }
 

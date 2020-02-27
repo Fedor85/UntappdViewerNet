@@ -225,4 +225,8 @@
     <value>Want to save your changes untappd project?</value>
     <comment>en-en</comment>
   </data>
+  <data name="ArgumentExceptioSaveUntappdProject" xml:space="preserve">
+    <value>Not supported File: {0}</value>
+    <comment>en-en</comment>
+  </data>
 </root>

@@ -70,6 +70,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not supported File: {0}.
+        /// </summary>
+        public static string ArgumentExceptioSaveUntappdProject {
+            get {
+                return ResourceManager.GetString("ArgumentExceptioSaveUntappdProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Close application?.
         /// </summary>
         public static string AskCloseApp {
