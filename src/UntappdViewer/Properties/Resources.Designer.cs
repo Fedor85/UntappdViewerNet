@@ -106,6 +106,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checkin.
+        /// </summary>
+        public static string Checkin {
+            get {
+                return ResourceManager.GetString("Checkin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checkins.
         /// </summary>
         public static string Checkins {

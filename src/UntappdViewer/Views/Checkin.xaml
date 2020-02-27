@@ -9,9 +9,12 @@
              prism:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="450" d:DesignWidth="450">
     <StackPanel>
-        <GroupBox Header="{x:Static properties:Resources.Beer}">
-            <TextBlock TextWrapping="Wrap" Text="{Binding BeerName}" FontWeight="Bold"/>
+        <GroupBox Header="{Binding CheckinHeader}">
+            <GroupBox Header="{x:Static properties:Resources.Beer}">
+                <TextBlock TextWrapping="Wrap" Text="{Binding BeerName}" FontWeight="Bold"/>
+            </GroupBox>
         </GroupBox>
+
     </StackPanel>
 
 </UserControl>

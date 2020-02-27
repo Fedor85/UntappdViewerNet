@@ -1,4 +1,5 @@
-﻿using Prism.Events;
+﻿using System;
+using Prism.Events;
 using UntappdViewer.Events;
 using UntappdViewer.Models;
 
@@ -8,7 +9,20 @@ namespace UntappdViewer.ViewModels
     {
         private IEventAggregator eventAggregator;
 
+        private string checkinHeader;
+
         private string beerName;
+
+        public string CheckinHeader
+        {
+            get { return checkinHeader; }
+            set
+            {
+                checkinHeader = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         public string BeerName
         {
@@ -34,13 +48,30 @@ namespace UntappdViewer.ViewModels
         protected override void DeActivate()
         {
             base.DeActivate();
+            Clear();
             eventAggregator.GetEvent<ChekinUpdateEvent>().Unsubscribe(ChekinUpdate);
         }
 
         private void ChekinUpdate(Checkin checkin)
         {
-            if (checkin != null)
-                BeerName = checkin.Beer.Name;
+            if (checkin == null)
+            {
+                Clear();
+                return;
+            }
+            CheckinHeader = GetCheckinHeader(checkin.CreatedDate);
+            BeerName = checkin.Beer.Name;
+        }
+
+        private void Clear()
+        {
+            CheckinHeader = GetCheckinHeader(null);
+            BeerName = String.Empty;
+        }
+
+        private string GetCheckinHeader(DateTime? checkinCreatedDate)
+        {
+            return $"{Properties.Resources.Checkin}: {checkinCreatedDate}";
         }
     }
 }

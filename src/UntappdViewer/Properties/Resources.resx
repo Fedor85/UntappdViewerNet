@@ -233,4 +233,8 @@
     <value>Beer</value>
     <comment>en-en</comment>
   </data>
+  <data name="Checkin" xml:space="preserve">
+    <value>Checkin</value>
+    <comment>en-en</comment>
+  </data>
 </root>
