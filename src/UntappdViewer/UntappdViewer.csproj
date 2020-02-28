@@ -54,6 +54,7 @@
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="PresentationFramework.Luna" />
     <Reference Include="Prism, Version=7.2.0.1422, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Core.7.2.0.1422\lib\net45\Prism.dll</HintPath>
     </Reference>
@@ -142,6 +143,13 @@
     <Compile Include="Views\Checkin.xaml.cs">
       <DependentUpon>Checkin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Controls\StarRating\ProgressBarSolidBrushConverter.cs" />
+    <Compile Include="Views\Controls\StarRating\StarProgressBar.xaml.cs">
+      <DependentUpon>StarProgressBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\StarRating\StarRatingControl.xaml.cs">
+      <DependentUpon>StarRatingControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Loading.xaml.cs">
       <DependentUpon>Loading.xaml</DependentUpon>
     </Compile>
@@ -173,6 +181,14 @@
       <DependentUpon>Welcome.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\Checkin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\StarRating\StarProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\StarRating\StarRatingControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
