@@ -7,9 +7,13 @@ namespace UntappdViewer.ViewModels
 {
     public class CheckinViewModel : ActiveAwareBaseModel
     {
+        private const string defaultUrl = "http://schemas.microsoft.com/winfx/2006/xaml";
+
         private IEventAggregator eventAggregator;
 
         private string checkinHeader;
+
+        private string checkinUrl;
 
         private string beerName;
 
@@ -28,6 +32,17 @@ namespace UntappdViewer.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        public string CheckinUrl
+        {
+            get { return checkinUrl; }
+            set
+            {
+                checkinUrl = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         public string BeerName
         {
@@ -69,9 +84,9 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-
         public CheckinViewModel(IEventAggregator eventAggregator)
         {
+            CheckinUrl = defaultUrl;
             this.eventAggregator = eventAggregator;
         }
 
@@ -96,6 +111,7 @@ namespace UntappdViewer.ViewModels
                 return;
             }
             CheckinHeader = GetCheckinHeader(checkin.CreatedDate);
+            CheckinUrl = checkin.Url;
             BeerName = checkin.Beer.Name;
             BeerType = checkin.Beer.Type;
             BeerABV = checkin.Beer.ABV.ToString();
@@ -105,6 +121,7 @@ namespace UntappdViewer.ViewModels
         private void Clear()
         {
             CheckinHeader = GetCheckinHeader(null);
+            CheckinUrl = defaultUrl;
             BeerName = String.Empty;
             BeerType = String.Empty;
             BeerABV = String.Empty;

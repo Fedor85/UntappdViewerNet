@@ -14,6 +14,11 @@
     <DockPanel>
         <GroupBox Header="{Binding CheckinHeader}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <StackPanel>
+                <TextBlock >
+                    <Hyperlink NavigateUri="{Binding CheckinUrl}" RequestNavigate="HyperlinkOnRequestNavigate">
+                        <TextBlock Text="{x:Static properties:Resources.UntappdPage}"/>
+                    </Hyperlink>
+                </TextBlock>
                 <GroupBox Header="{x:Static properties:Resources.Beer}">
                     <StackPanel>
                         <TextBlock TextWrapping="Wrap" Text="{Binding BeerName}" FontWeight="Bold"/>

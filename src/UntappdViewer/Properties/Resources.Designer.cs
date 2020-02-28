@@ -327,6 +327,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Untappd page..
+        /// </summary>
+        public static string UntappdPage {
+            get {
+                return ResourceManager.GetString("UntappdPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Untappd user name:.
         /// </summary>
         public static string UntappdUserNameCaption {

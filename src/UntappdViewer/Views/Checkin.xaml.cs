@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using System.Windows.Navigation;
 
 namespace UntappdViewer.Views
 {
@@ -10,6 +11,11 @@ namespace UntappdViewer.Views
         public Checkin()
         {
             InitializeComponent();
+        }
+
+        private void HyperlinkOnRequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            System.Diagnostics.Process.Start(e.Uri.ToString());
         }
     }
 }
