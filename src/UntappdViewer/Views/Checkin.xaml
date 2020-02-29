@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:properties="clr-namespace:UntappdViewer.Properties"
+             xmlns:starRating="clr-namespace:UntappdViewer.Views.Controls.StarRating"
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="450" d:DesignWidth="450">
@@ -38,6 +39,11 @@
                                 </TextBlock.Inlines>
                             </TextBlock>
                         </DockPanel>
+                        <starRating:StarRatingControl StarCount="5" StarSize="20" HorizontalAlignment="Left"
+                                                      ViewStarsColor="#ffffff" ViewStarsOpacity="0"
+                                                      BackgroundStarColor="#ffffff" BackgroundStarOpacity="1"
+                                                      BorderStarColor="#000000" BorderStarThickness="5"
+                                                      ForegroundStarColor="#ffc100" Rating="2.61"/>
                     </StackPanel>
                 </GroupBox>
             </StackPanel>

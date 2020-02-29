@@ -23,6 +23,8 @@ namespace UntappdViewer.ViewModels
 
         private string beerIBU;
 
+        private double beerRating;
+
         public string CheckinHeader
         {
             get { return checkinHeader; }
@@ -84,6 +86,16 @@ namespace UntappdViewer.ViewModels
             }
         }
 
+        public double BeerRating
+        {
+            get { return beerRating; }
+            set
+            {
+                beerRating = value;
+                OnPropertyChanged();
+            }
+        }
+
         public CheckinViewModel(IEventAggregator eventAggregator)
         {
             CheckinUrl = defaultUrl;
@@ -116,6 +128,7 @@ namespace UntappdViewer.ViewModels
             BeerType = checkin.Beer.Type;
             BeerABV = checkin.Beer.ABV.ToString();
             BeerIBU = checkin.Beer.IBU.ToString();
+            BeerRating = checkin.Beer.GlobalRatingScore;
         }
 
         private void Clear()
@@ -126,6 +139,7 @@ namespace UntappdViewer.ViewModels
             BeerType = String.Empty;
             BeerABV = String.Empty;
             BeerIBU = String.Empty;
+            BeerRating = 0;
         }
 
         private string GetCheckinHeader(DateTime? checkinCreatedDate)

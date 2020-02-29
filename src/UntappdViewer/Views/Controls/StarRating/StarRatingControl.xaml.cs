@@ -114,9 +114,9 @@ namespace UntappdViewer.Views.Controls.StarRating
             }
         }
 
-        public double Reating
+        public double Rating
         {
-            set { UpdateReating(value); }
+            set { UpdateRating(value); }
         }
 
         public StarRatingControl()
@@ -125,7 +125,7 @@ namespace UntappdViewer.Views.Controls.StarRating
             BackgroundPanel.Background = new SolidColorBrush(Colors.Transparent);
         }
 
-        public void UpdateReating(double rating)
+        private void UpdateRating(double rating)
         {
             int truncateRating = Convert.ToInt32(Math.Truncate(rating));
             List<StarProgressBar> stars = GetStars();

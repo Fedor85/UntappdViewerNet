@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Background="#000000" Opacity="0.3">
     <Grid>
-        <Label Content="{x:Static properties:Resources.Loading}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Foreground="AliceBlue"/>
+        <Label Content="{x:Static properties:Resources.Loading}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Foreground="#ffffff"/>
         <!--<Rectangle>
             <Rectangle.Fill>
                 <SolidColorBrush Color="#fd9532" Opacity="0.5"/>
