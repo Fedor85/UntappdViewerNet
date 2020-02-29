@@ -6,11 +6,12 @@
              xmlns:prism="http://prismlibrary.com/"
              xmlns:properties="clr-namespace:UntappdViewer.Properties"
              xmlns:starRating="clr-namespace:UntappdViewer.Views.Controls.StarRating"
-             xmlns:behaviors="clr-namespace:UntappdViewer.Behaviors"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="450" d:DesignWidth="450">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanConverter" />
+    </UserControl.Resources>
     <UserControl.Background>
         <SolidColorBrush Opacity="0.3" Color="#ffffff"/>
     </UserControl.Background>
@@ -71,7 +72,8 @@
                         <TextBlock TextWrapping="Wrap" Text="{Binding BreweryName}" FontWeight="Bold"/>
                         <DockPanel>
                             <TextBlock TextWrapping="Wrap" Text="{Binding BreweryVenueCountry}" VerticalAlignment="Center"/>
-                            <TextBlock Text="  |  " FontWeight="Bold"  VerticalAlignment="Center"/>
+                            <TextBlock Text="  |  " FontWeight="Bold"  VerticalAlignment="Center"
+                                       Visibility="{Binding Path =VisibilityBreweryVenueStateSeporator, Converter={StaticResource BooleanConverter}}"/>
                             <TextBlock TextWrapping="Wrap" Text="{Binding BreweryVenueState}" VerticalAlignment="Center"/>
                             <TextBlock Text="  |  " FontWeight="Bold"  VerticalAlignment="Center"/>
                             <TextBlock TextWrapping="Wrap" Text="{Binding BreweryVenueCity}" VerticalAlignment="Center"/>

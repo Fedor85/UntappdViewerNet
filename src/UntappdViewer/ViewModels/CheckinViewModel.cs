@@ -33,6 +33,8 @@ namespace UntappdViewer.ViewModels
 
         private string breweryVenueCountry;
 
+        private bool visibilityBreweryVenueStateSeporator;
+
         private string breweryVenueState;
 
         private string breweryVenueCity;
@@ -153,13 +155,24 @@ namespace UntappdViewer.ViewModels
             }
         }
 
+        public bool VisibilityBreweryVenueStateSeporator
+        {
+            get { return visibilityBreweryVenueStateSeporator; }
+            set
+            {
+                visibilityBreweryVenueStateSeporator = value;
+                OnPropertyChanged();
+            }
+        }
+
         public string BreweryVenueState
         {
             get { return breweryVenueState; }
             set
             {
-                breweryVenueState = value;
+                breweryVenueState = value;      
                 OnPropertyChanged();
+                VisibilityBreweryVenueStateSeporator = !String.IsNullOrEmpty(value);
             }
         }
 
