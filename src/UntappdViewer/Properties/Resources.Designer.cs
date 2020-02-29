@@ -106,6 +106,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Brewery.
+        /// </summary>
+        public static string Brewery {
+            get {
+                return ResourceManager.GetString("Brewery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checkin.
         /// </summary>
         public static string Checkin {
@@ -327,7 +336,7 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Untappd page..
+        ///   Looks up a localized string similar to Untappd page.
         /// </summary>
         public static string UntappdPage {
             get {

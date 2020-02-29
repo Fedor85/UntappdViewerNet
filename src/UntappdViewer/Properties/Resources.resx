@@ -238,7 +238,11 @@
     <comment>en-en</comment>
   </data>
   <data name="UntappdPage" xml:space="preserve">
-    <value>Untappd page.</value>
+    <value>Untappd page</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="Brewery" xml:space="preserve">
+    <value>Brewery</value>
     <comment>en-en</comment>
   </data>
 </root>
