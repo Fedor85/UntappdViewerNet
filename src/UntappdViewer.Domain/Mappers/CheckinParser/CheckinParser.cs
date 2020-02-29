@@ -41,9 +41,10 @@ namespace UntappdViewer.Domain.Mappers.CheckinParser
             return GetValue<double>(ParameterNames.BeerABV);
         }
 
-        public double GetBeerIBU()
+        public double? GetBeerIBU()
         {
-            return GetValue<double>(ParameterNames.BeerIBU);
+            double ibu = GetValue<double>(ParameterNames.BeerIBU);
+            return MathHelper.Doublecompare(ibu, 0) ? (double?) null : ibu;
         }
 
         public string GetComment()
@@ -73,17 +74,17 @@ namespace UntappdViewer.Domain.Mappers.CheckinParser
 
         public double? GetVenueLat()
         {
-            return GetDoubleValue(ParameterNames.VenueLat);
+            return GetDoubleNullableValue(ParameterNames.VenueLat);
         }
 
         public double? GetVenueLng()
         {
-            return GetDoubleValue(ParameterNames.VenueLng);
+            return GetDoubleNullableValue(ParameterNames.VenueLng);
         }
 
         public double? GetRatingScore()
         {
-            return GetDoubleValue(ParameterNames.RatingScore);
+            return GetDoubleNullableValue(ParameterNames.RatingScore);
         }
 
         public DateTime GetCreatedData()
@@ -192,7 +193,7 @@ namespace UntappdViewer.Domain.Mappers.CheckinParser
             return ParserAndConvertHelper.GetConvertValue <T>(GetValue(name));
         }
 
-        private double? GetDoubleValue(string name)
+        private double? GetDoubleNullableValue(string name)
         {
             string value = GetValue(name);
             return ParserAndConvertHelper.GetDoubleValue(value);

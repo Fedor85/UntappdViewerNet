@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ControlChar.cs" />
+    <Compile Include="MathHelper.cs" />
     <Compile Include="ParserAndConvertHelper.cs" />
     <Compile Include="StringHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

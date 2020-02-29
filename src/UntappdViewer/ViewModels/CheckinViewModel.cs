@@ -145,7 +145,7 @@ namespace UntappdViewer.ViewModels
             BeerName = checkin.Beer.Name;
             BeerType = checkin.Beer.Type;
             BeerABV = checkin.Beer.ABV.ToString();
-            BeerIBU = checkin.Beer.IBU.ToString();
+            BeerIBU = GetBeerIBU(checkin.Beer.IBU);
             BeerRating = checkin.Beer.GlobalRatingScore;
         }
 
@@ -165,6 +165,11 @@ namespace UntappdViewer.ViewModels
         private string GetCheckinHeader(DateTime? checkinCreatedDate)
         {
             return $"{Properties.Resources.Checkin}: {checkinCreatedDate}";
+        }
+
+        private string GetBeerIBU(double? beerIBU)
+        {
+            return beerIBU.HasValue ? beerIBU.Value.ToString() : "No IBU";
         }
     }
 }
