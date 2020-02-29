@@ -15,6 +15,8 @@ namespace UntappdViewer.ViewModels
 
         private string checkinUrl;
 
+        private string beerUrl;
+
         private string beerName;
 
         private string beerType;
@@ -45,6 +47,17 @@ namespace UntappdViewer.ViewModels
             }
         }
 
+        #region Beer
+
+        public string BeerUrl
+        {
+            get { return beerUrl; }
+            set
+            {
+                beerUrl = value;
+                OnPropertyChanged();
+            }
+        }
 
         public string BeerName
         {
@@ -96,9 +109,12 @@ namespace UntappdViewer.ViewModels
             }
         }
 
+        #endregion
+
         public CheckinViewModel(IEventAggregator eventAggregator)
         {
             CheckinUrl = defaultUrl;
+            BeerUrl = defaultUrl;
             this.eventAggregator = eventAggregator;
         }
 
@@ -124,6 +140,8 @@ namespace UntappdViewer.ViewModels
             }
             CheckinHeader = GetCheckinHeader(checkin.CreatedDate);
             CheckinUrl = checkin.Url;
+
+            BeerUrl = checkin.Beer.Url;
             BeerName = checkin.Beer.Name;
             BeerType = checkin.Beer.Type;
             BeerABV = checkin.Beer.ABV.ToString();
@@ -135,6 +153,8 @@ namespace UntappdViewer.ViewModels
         {
             CheckinHeader = GetCheckinHeader(null);
             CheckinUrl = defaultUrl;
+
+            BeerUrl = defaultUrl;
             BeerName = String.Empty;
             BeerType = String.Empty;
             BeerABV = String.Empty;
