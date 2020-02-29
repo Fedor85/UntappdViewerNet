@@ -31,7 +31,7 @@
         </ControlTemplate>
     </UserControl.Resources>
     <Grid>
-        <Path Name="BackgroundStar" Fill="#ffffff" Stretch="Fill"  Opacity="0.5" Style="{StaticResource StarPathStyle}"/>
+        <Path Name="BackgroundStar" Fill="#ffffff" Stretch="Fill"  Opacity="1" Style="{StaticResource StarPathStyle}"/>
         <ProgressBar x:Name="ForegroundStar" Template = "{StaticResource StarTemplate }" Foreground="#ffc100" Minimum="0" Maximum="1"/>
         <Path Name="BorderStar" Fill="Transparent" Stretch="Fill" Stroke="#fd9532" StrokeThickness="5" Style="{StaticResource StarPathStyle}"/>
     </Grid>

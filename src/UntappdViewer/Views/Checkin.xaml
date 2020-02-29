@@ -40,7 +40,7 @@
                             </TextBlock>
                         </DockPanel>
                         <starRating:StarRatingControl StarCount="5" StarSize="20" HorizontalAlignment="Left"
-                                                      ViewStarsColor="#ffffff" ViewStarsOpacity="0"
+                                                      ViewStarsColor="#ffffff" ViewStarsOpacity="0.3"
                                                       BackgroundStarColor="#ffffff" BackgroundStarOpacity="1"
                                                       BorderStarColor="#000000" BorderStarThickness="5"
                                                       ForegroundStarColor="#ffc100" Rating="2.61"/>
