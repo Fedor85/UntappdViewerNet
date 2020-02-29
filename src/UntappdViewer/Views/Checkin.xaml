@@ -69,6 +69,13 @@
                             </Hyperlink>
                         </TextBlock>
                         <TextBlock TextWrapping="Wrap" Text="{Binding BreweryName}" FontWeight="Bold"/>
+                        <DockPanel>
+                            <TextBlock TextWrapping="Wrap" Text="{Binding BreweryVenueCountry}" VerticalAlignment="Center"/>
+                            <TextBlock Text="  |  " FontWeight="Bold"  VerticalAlignment="Center"/>
+                            <TextBlock TextWrapping="Wrap" Text="{Binding BreweryVenueState}" VerticalAlignment="Center"/>
+                            <TextBlock Text="  |  " FontWeight="Bold"  VerticalAlignment="Center"/>
+                            <TextBlock TextWrapping="Wrap" Text="{Binding BreweryVenueCity}" VerticalAlignment="Center"/>
+                        </DockPanel>
                     </StackPanel>
                 </GroupBox>
             </StackPanel>

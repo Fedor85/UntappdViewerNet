@@ -31,6 +31,12 @@ namespace UntappdViewer.ViewModels
 
         private string breweryName;
 
+        private string breweryVenueCountry;
+
+        private string breweryVenueState;
+
+        private string breweryVenueCity;
+
         public string CheckinHeader
         {
             get { return checkinHeader; }
@@ -137,6 +143,36 @@ namespace UntappdViewer.ViewModels
             }
         }
 
+        public string BreweryVenueCountry
+        {
+            get { return breweryVenueCountry; }
+            set
+            {
+                breweryVenueCountry = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string BreweryVenueState
+        {
+            get { return breweryVenueState; }
+            set
+            {
+                breweryVenueState = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string BreweryVenueCity
+        {
+            get { return breweryVenueCity; }
+            set
+            {
+                breweryVenueCity = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         public CheckinViewModel(IEventAggregator eventAggregator)
@@ -179,6 +215,9 @@ namespace UntappdViewer.ViewModels
 
             BreweryUrl = checkin.Beer.Brewery.Url;
             BreweryName = checkin.Beer.Brewery.Name;
+            BreweryVenueCountry = checkin.Beer.Brewery.Venue.Country;
+            BreweryVenueState = checkin.Beer.Brewery.Venue.State;
+            BreweryVenueCity = checkin.Beer.Brewery.Venue.City;
         }
 
         private void Clear()
@@ -195,6 +234,9 @@ namespace UntappdViewer.ViewModels
 
             BreweryUrl = defaultUrl;
             BreweryName = String.Empty;
+            BreweryVenueCountry = String.Empty;
+            BreweryVenueState= String.Empty;
+            BreweryVenueCity = String.Empty;
         }
 
         private string GetCheckinHeader(DateTime? checkinCreatedDate)
