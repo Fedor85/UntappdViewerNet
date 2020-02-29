@@ -62,7 +62,14 @@
                     </StackPanel>
                 </GroupBox>
                 <GroupBox Header="{x:Static properties:Resources.Brewery}">
-                    
+                    <StackPanel>
+                        <TextBlock >
+                            <Hyperlink NavigateUri="{Binding BreweryUrl}" RequestNavigate="HyperlinkOnRequestNavigate">
+                                <TextBlock Text="{x:Static properties:Resources.UntappdPage}"/>
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" Text="{Binding BreweryName}" FontWeight="Bold"/>
+                    </StackPanel>
                 </GroupBox>
             </StackPanel>
         </GroupBox>
