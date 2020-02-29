@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -10,6 +11,16 @@ namespace UntappdViewer.Views.Controls.StarRating
     /// </summary>
     public partial class StarRatingControl : UserControl
     {
+        public static readonly DependencyProperty DependencyProperty = DependencyProperty.Register("Rating", typeof(double), typeof(StarRatingControl), new FrameworkPropertyMetadata(null, UpdateRating));
+
+        private static object UpdateRating(DependencyObject dependencyObject, object rating)
+        {
+            if (rating != null)
+                ((StarRatingControl)dependencyObject).Rating = Convert.ToDouble(rating);
+
+            return rating;
+        }
+
         public Color ViewStarsColor
         {
             set
