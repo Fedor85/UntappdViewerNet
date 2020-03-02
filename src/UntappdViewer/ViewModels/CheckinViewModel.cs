@@ -19,6 +19,14 @@ namespace UntappdViewer.ViewModels
 
         private double checkinRating;
 
+        private string checkinVenueCountry;
+
+        private bool visibilityСheckinVenueStateSeporator;
+
+        private string checkinVenueState;
+
+        private string checkinVenueCity;
+
         private string beerUrl;
 
         private string beerName;
@@ -79,6 +87,47 @@ namespace UntappdViewer.ViewModels
             set
             {
                 checkinRating = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string CheckinVenueCountry
+        {
+            get { return checkinVenueCountry; }
+            set
+            {
+                checkinVenueCountry = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool VisibilityCheckinVenueStateSeporator
+        {
+            get { return visibilityСheckinVenueStateSeporator; }
+            set
+            {
+                visibilityСheckinVenueStateSeporator = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string CheckinVenueState
+        {
+            get { return checkinVenueState; }
+            set
+            {
+                checkinVenueState = value;
+                OnPropertyChanged();
+                VisibilityCheckinVenueStateSeporator = !String.IsNullOrEmpty(value);
+            }
+        }
+
+        public string CheckinVenueCity
+        {
+            get { return checkinVenueCity; }
+            set
+            {
+                checkinVenueCity = value;
                 OnPropertyChanged();
             }
         }
@@ -251,6 +300,9 @@ namespace UntappdViewer.ViewModels
             {
                 VsibilityCheckinRating = false;
             }
+            CheckinVenueCountry = checkin.Venue.Country;
+            CheckinVenueState = checkin.Venue.State;
+            CheckinVenueCity = checkin.Venue.City;
 
             BeerUrl = checkin.Beer.Url;
             BeerName = checkin.Beer.Name;
@@ -272,6 +324,9 @@ namespace UntappdViewer.ViewModels
             CheckinUrl = defaultUrl;
             CheckinRating = 0;
             VsibilityCheckinRating = false;
+            CheckinVenueCountry = String.Empty;
+            CheckinVenueState = String.Empty;
+            CheckinVenueCity = String.Empty;
 
             BeerUrl = defaultUrl;
             BeerName = String.Empty;

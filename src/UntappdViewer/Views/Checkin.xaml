@@ -94,6 +94,14 @@
                         </TextBlock.Inlines>
                     </TextBlock>
                 </DockPanel>
+                <DockPanel Visibility="{Binding Path =VisibilityCheckinVenue, Converter={StaticResource BooleanConverter}}">
+                    <TextBlock TextWrapping="Wrap" Text="{Binding CheckinVenueCountry}" VerticalAlignment="Center"/>
+                    <TextBlock Text="  |  " FontWeight="Bold"  VerticalAlignment="Center"
+                               Visibility="{Binding Path =VisibilityCheckinVenueStateSeporator, Converter={StaticResource BooleanConverter}}"/>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding CheckinVenueState}" VerticalAlignment="Center"/>
+                    <TextBlock Text="  |  " FontWeight="Bold"  VerticalAlignment="Center"/>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding CheckinVenueCity}" VerticalAlignment="Center"/>
+                </DockPanel>
             </StackPanel>
         </GroupBox>
     </DockPanel>
