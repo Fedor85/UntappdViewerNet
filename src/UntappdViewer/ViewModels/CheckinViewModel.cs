@@ -63,6 +63,8 @@ namespace UntappdViewer.ViewModels
 
         private string breweryVenueCity;
 
+        private bool visibilityCheckinVenueLocation;
+
         public string CheckinHeader
         {
             get { return checkinHeader; }
@@ -165,7 +167,6 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-
         public string CheckinVenueCity
         {
             get { return checkinVenueCity; }
@@ -174,6 +175,16 @@ namespace UntappdViewer.ViewModels
                 checkinVenueCity = value;
                 OnPropertyChanged();
                 VisibilityСheckinVenueCitySeporator = !String.IsNullOrEmpty(value);
+            }
+        }
+
+        public bool VisibilityCheckinVenueLocation
+        {
+            get { return visibilityCheckinVenueLocation; }
+            set
+            {
+                visibilityCheckinVenueLocation = value;
+                OnPropertyChanged();
             }
         }
 
@@ -381,6 +392,7 @@ namespace UntappdViewer.ViewModels
             CheckinVenueCountry = checkin.Venue.Country;
             CheckinVenueState = checkin.Venue.State;
             CheckinVenueCity = checkin.Venue.City;
+            VisibilityCheckinVenueLocation = checkin.Venue.Latitude.HasValue && checkin.Venue.Longitude.HasValue;
 
             BeerUrl = checkin.Beer.Url;
             BeerName = checkin.Beer.Name;
@@ -406,6 +418,7 @@ namespace UntappdViewer.ViewModels
             CheckinVenueCountry = String.Empty;
             CheckinVenueState = String.Empty;
             CheckinVenueCity = String.Empty;
+            VisibilityCheckinVenueLocation = false;
 
             BeerUrl = defaultUrl;
             BeerName = String.Empty;
