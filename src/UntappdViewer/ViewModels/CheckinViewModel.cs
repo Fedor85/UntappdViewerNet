@@ -15,6 +15,8 @@ namespace UntappdViewer.ViewModels
 
         private string checkinUrl;
 
+        private double checkinRating;
+
         private string beerUrl;
 
         private string beerName;
@@ -55,6 +57,16 @@ namespace UntappdViewer.ViewModels
             set
             {
                 checkinUrl = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public double CheckinRating
+        {
+            get { return checkinRating; }
+            set
+            {
+                checkinRating = value;
                 OnPropertyChanged();
             }
         }
@@ -218,6 +230,8 @@ namespace UntappdViewer.ViewModels
             }
             CheckinHeader = GetCheckinHeader(checkin.CreatedDate);
             CheckinUrl = checkin.Url;
+            if (checkin.RatingScore.HasValue)
+                CheckinRating = checkin.RatingScore.Value;
 
             BeerUrl = checkin.Beer.Url;
             BeerName = checkin.Beer.Name;
@@ -237,6 +251,7 @@ namespace UntappdViewer.ViewModels
         {
             CheckinHeader = GetCheckinHeader(null);
             CheckinUrl = defaultUrl;
+            CheckinRating = 0;
 
             BeerUrl = defaultUrl;
             BeerName = String.Empty;
