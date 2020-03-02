@@ -98,7 +98,8 @@
                         </TextBlock.Inlines>
                     </TextBlock>
                 </DockPanel>
-                <DockPanel Visibility="{Binding Path =VisibilityCheckinVenue, Converter={StaticResource BooleanConverter}}">
+                <DockPanel>
+                    <Image Source="..\Resources\icons8-location-24.png" Width="20" Height="20" HorizontalAlignment="Left"/>
                     <TextBlock TextWrapping="Wrap" Text="{Binding CheckinVenueName}" VerticalAlignment="Center"/>
                     <TextBlock Text="  |  " FontWeight="Bold"  VerticalAlignment="Center"
                                Visibility="{Binding Path =VisibilityCheckinVenueCountrySeporator, Converter={StaticResource BooleanConverter}}"/>

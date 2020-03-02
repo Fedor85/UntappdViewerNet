@@ -314,5 +314,8 @@
   <ItemGroup>
     <Resource Include="Resources\save.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-location-24.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
