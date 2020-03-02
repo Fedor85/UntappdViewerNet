@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Windows.Input;
+using Prism.Commands;
 using Prism.Events;
 using UntappdViewer.Events;
 using UntappdViewer.Models;
@@ -349,12 +351,21 @@ namespace UntappdViewer.ViewModels
 
         #endregion
 
+        public ICommand CheckinVenueLocationCommand { get; }
+
+
         public CheckinViewModel(IEventAggregator eventAggregator)
         {
             CheckinUrl = defaultUrl;
             BeerUrl = defaultUrl;
             breweryUrl = defaultUrl;
             this.eventAggregator = eventAggregator;
+            CheckinVenueLocationCommand  = new DelegateCommand(CheckinVenueLocation);
+        }
+
+        private void CheckinVenueLocation()
+        {
+
         }
 
         protected override void Activate()
