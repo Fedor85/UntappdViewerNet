@@ -19,11 +19,17 @@ namespace UntappdViewer.ViewModels
 
         private double checkinRating;
 
+        private string checkinVenueName;
+
+        private bool visibilityCheckinVenueCountrySeporator;
+
         private string checkinVenueCountry;
 
         private bool visibilityСheckinVenueStateSeporator;
 
         private string checkinVenueState;
+
+        private bool visibilityСheckinVenueCitySeporator;
 
         private string checkinVenueCity;
 
@@ -43,11 +49,17 @@ namespace UntappdViewer.ViewModels
 
         private string breweryName;
 
+        private string breweryVenueName;
+
+        private bool visibilityBreweryVenueCountrySeporator;
+
         private string breweryVenueCountry;
 
         private bool visibilityBreweryVenueStateSeporator;
 
         private string breweryVenueState;
+
+        private bool visibilityBreweryVenueCitySeporator;
 
         private string breweryVenueCity;
 
@@ -91,6 +103,27 @@ namespace UntappdViewer.ViewModels
             }
         }
 
+        public string CheckinVenueName
+        {
+            get { return checkinVenueName; }
+            set
+            {
+                checkinVenueName = value;
+                OnPropertyChanged();
+                VisibilityCheckinVenueCountrySeporator = !String.IsNullOrEmpty(value);
+            }
+        }
+
+        public bool VisibilityCheckinVenueCountrySeporator
+        {
+            get { return visibilityCheckinVenueCountrySeporator; }
+            set
+            {
+                visibilityCheckinVenueCountrySeporator = value;
+                OnPropertyChanged();
+            }
+        }
+
         public string CheckinVenueCountry
         {
             get { return checkinVenueCountry; }
@@ -122,6 +155,17 @@ namespace UntappdViewer.ViewModels
             }
         }
 
+        public bool VisibilityСheckinVenueCitySeporator
+        {
+            get { return visibilityСheckinVenueCitySeporator; }
+            set
+            {
+                visibilityСheckinVenueCitySeporator = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         public string CheckinVenueCity
         {
             get { return checkinVenueCity; }
@@ -129,6 +173,7 @@ namespace UntappdViewer.ViewModels
             {
                 checkinVenueCity = value;
                 OnPropertyChanged();
+                VisibilityСheckinVenueCitySeporator = !String.IsNullOrEmpty(value);
             }
         }
 
@@ -218,6 +263,27 @@ namespace UntappdViewer.ViewModels
             }
         }
 
+        public string BreweryVenueName
+        {
+            get { return breweryVenueName; }
+            set
+            {
+                breweryVenueName = value;
+                OnPropertyChanged();
+                VisibilityBreweryVenueCountrySeporator = !String.IsNullOrEmpty(value);
+            }
+        }
+
+        public bool VisibilityBreweryVenueCountrySeporator
+        {
+            get { return visibilityBreweryVenueCountrySeporator; }
+            set
+            {
+                visibilityBreweryVenueCountrySeporator = value;
+                OnPropertyChanged();
+            }
+        }
+
         public string BreweryVenueCountry
         {
             get { return breweryVenueCountry; }
@@ -249,6 +315,16 @@ namespace UntappdViewer.ViewModels
             }
         }
 
+        public bool VisibilityBreweryVenueCitySeporator
+        {
+            get { return visibilityBreweryVenueCitySeporator; }
+            set
+            {
+                visibilityBreweryVenueCitySeporator = value;
+                OnPropertyChanged();
+            }
+        }
+
         public string BreweryVenueCity
         {
             get { return breweryVenueCity; }
@@ -256,6 +332,7 @@ namespace UntappdViewer.ViewModels
             {
                 breweryVenueCity = value;
                 OnPropertyChanged();
+                VisibilityBreweryVenueCitySeporator = !String.IsNullOrEmpty(value);
             }
         }
 
@@ -300,6 +377,7 @@ namespace UntappdViewer.ViewModels
             {
                 VsibilityCheckinRating = false;
             }
+            CheckinVenueName = checkin.Venue.Name;
             CheckinVenueCountry = checkin.Venue.Country;
             CheckinVenueState = checkin.Venue.State;
             CheckinVenueCity = checkin.Venue.City;
@@ -313,6 +391,7 @@ namespace UntappdViewer.ViewModels
 
             BreweryUrl = checkin.Beer.Brewery.Url;
             BreweryName = checkin.Beer.Brewery.Name;
+            BreweryVenueName = checkin.Beer.Brewery.Venue.Name;
             BreweryVenueCountry = checkin.Beer.Brewery.Venue.Country;
             BreweryVenueState = checkin.Beer.Brewery.Venue.State;
             BreweryVenueCity = checkin.Beer.Brewery.Venue.City;

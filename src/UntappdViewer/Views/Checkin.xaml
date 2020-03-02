@@ -71,16 +71,20 @@
                         </TextBlock>
                         <TextBlock TextWrapping="Wrap" Text="{Binding BreweryName}" FontWeight="Bold"/>
                         <DockPanel>
+                            <TextBlock TextWrapping="Wrap" Text="{Binding BreweryVenueName}" VerticalAlignment="Center"/>
+                            <TextBlock Text="  |  " FontWeight="Bold"  VerticalAlignment="Center"
+                                       Visibility="{Binding Path =VisibilityBreweryVenueCountrySeporator, Converter={StaticResource BooleanConverter}}"/>
                             <TextBlock TextWrapping="Wrap" Text="{Binding BreweryVenueCountry}" VerticalAlignment="Center"/>
                             <TextBlock Text="  |  " FontWeight="Bold"  VerticalAlignment="Center"
                                        Visibility="{Binding Path =VisibilityBreweryVenueStateSeporator, Converter={StaticResource BooleanConverter}}"/>
                             <TextBlock TextWrapping="Wrap" Text="{Binding BreweryVenueState}" VerticalAlignment="Center"/>
-                            <TextBlock Text="  |  " FontWeight="Bold"  VerticalAlignment="Center"/>
+                            <TextBlock Text="  |  " FontWeight="Bold"  VerticalAlignment="Center"
+                                       Visibility="{Binding Path =VisibilityBreweryVenueCitySeporator, Converter={StaticResource BooleanConverter}}"/>
                             <TextBlock TextWrapping="Wrap" Text="{Binding BreweryVenueCity}" VerticalAlignment="Center"/>
                         </DockPanel>
                     </StackPanel>
                 </GroupBox>
-                <DockPanel  Visibility="{Binding Path = VisibilityCheckinRating, Converter={StaticResource BooleanConverter}}">
+                <DockPanel>
                     <starRating:StarRatingControl StarCount="5" StarSize="20" HorizontalAlignment="Left"
                                                   ViewStarsColor="#ffffff" ViewStarsOpacity="0.3"
                                                   BackgroundStarColor="#ffffff" BackgroundStarOpacity="1"
@@ -95,11 +99,15 @@
                     </TextBlock>
                 </DockPanel>
                 <DockPanel Visibility="{Binding Path =VisibilityCheckinVenue, Converter={StaticResource BooleanConverter}}">
+                    <TextBlock TextWrapping="Wrap" Text="{Binding CheckinVenueName}" VerticalAlignment="Center"/>
+                    <TextBlock Text="  |  " FontWeight="Bold"  VerticalAlignment="Center"
+                               Visibility="{Binding Path =VisibilityCheckinVenueCountrySeporator, Converter={StaticResource BooleanConverter}}"/>
                     <TextBlock TextWrapping="Wrap" Text="{Binding CheckinVenueCountry}" VerticalAlignment="Center"/>
                     <TextBlock Text="  |  " FontWeight="Bold"  VerticalAlignment="Center"
                                Visibility="{Binding Path =VisibilityCheckinVenueStateSeporator, Converter={StaticResource BooleanConverter}}"/>
                     <TextBlock TextWrapping="Wrap" Text="{Binding CheckinVenueState}" VerticalAlignment="Center"/>
-                    <TextBlock Text="  |  " FontWeight="Bold"  VerticalAlignment="Center"/>
+                    <TextBlock Text="  |  " FontWeight="Bold"  VerticalAlignment="Center"
+                               Visibility="{Binding Path =VisibilityСheckinVenueCitySeporator, Converter={StaticResource BooleanConverter}}"/>
                     <TextBlock TextWrapping="Wrap" Text="{Binding CheckinVenueCity}" VerticalAlignment="Center"/>
                 </DockPanel>
             </StackPanel>
