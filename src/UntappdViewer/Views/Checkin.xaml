@@ -117,6 +117,9 @@
                                Visibility="{Binding Path =VisibilityСheckinVenueCitySeporator, Converter={StaticResource BooleanConverter}}"/>
                     <TextBlock TextWrapping="Wrap" Text="{Binding CheckinVenueCity}" VerticalAlignment="Center"/>
                 </DockPanel>
+                <GroupBox Header="{x:Static properties:Resources.Photo}">
+                    
+                </GroupBox>
             </StackPanel>
         </GroupBox>
     </DockPanel>
