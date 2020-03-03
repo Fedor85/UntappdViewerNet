@@ -197,6 +197,16 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap no_image_icon {
+            get {
+                object obj = ResourceManager.GetObject("no_image_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File format not supported.
         /// </summary>
         public static string NoSupportedFile {

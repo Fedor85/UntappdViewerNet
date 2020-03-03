@@ -11,6 +11,8 @@ namespace UntappdViewer.ViewModels
     {
         private const string defaultUrl = "http://schemas.microsoft.com/winfx/2006/xaml";
 
+        private const string defaultCheckinPhotoPath = @"..\Resources\no-image-icon.png";
+
         private IEventAggregator eventAggregator;
 
         private string checkinHeader;
@@ -34,6 +36,8 @@ namespace UntappdViewer.ViewModels
         private bool visibilityСheckinVenueCitySeporator;
 
         private string checkinVenueCity;
+
+        private string checkinPhotoPath;
 
         private string beerUrl;
 
@@ -186,6 +190,16 @@ namespace UntappdViewer.ViewModels
             set
             {
                 visibilityCheckinVenueLocation = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string CheckinPhotoPath
+        {
+            get { return checkinPhotoPath; }
+            set
+            {
+                checkinPhotoPath = value;
                 OnPropertyChanged();
             }
         }
@@ -357,6 +371,8 @@ namespace UntappdViewer.ViewModels
         public CheckinViewModel(IEventAggregator eventAggregator)
         {
             CheckinUrl = defaultUrl;
+            CheckinPhotoPath = defaultCheckinPhotoPath;
+
             BeerUrl = defaultUrl;
             breweryUrl = defaultUrl;
             this.eventAggregator = eventAggregator;
@@ -405,6 +421,7 @@ namespace UntappdViewer.ViewModels
             CheckinVenueState = checkin.Venue.State;
             CheckinVenueCity = checkin.Venue.City;
             VisibilityCheckinVenueLocation = checkin.Venue.Latitude.HasValue && checkin.Venue.Longitude.HasValue;
+            //CheckinPhoto = @"D:\c30b5bc3e73764fc1831f714398d0bbf_raw.jpg";
 
             BeerUrl = checkin.Beer.Url;
             BeerName = checkin.Beer.Name;
@@ -431,6 +448,7 @@ namespace UntappdViewer.ViewModels
             CheckinVenueState = String.Empty;
             CheckinVenueCity = String.Empty;
             VisibilityCheckinVenueLocation = false;
+            CheckinPhotoPath = defaultCheckinPhotoPath;
 
             BeerUrl = defaultUrl;
             BeerName = String.Empty;
