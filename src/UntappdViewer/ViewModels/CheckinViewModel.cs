@@ -397,6 +397,7 @@ namespace UntappdViewer.ViewModels
             }
             else
             {
+                CheckinRating = 0;
                 VsibilityCheckinRating = false;
             }
             CheckinVenueName = checkin.Venue.Name;
