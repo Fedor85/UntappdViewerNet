@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Prism.Commands;
 using Prism.Events;
@@ -432,7 +433,7 @@ namespace UntappdViewer.ViewModels
             CheckinVenueState = checkin.Venue.State;
             CheckinVenueCity = checkin.Venue.City;
             VisibilityCheckinVenueLocation = checkin.Venue.Latitude.HasValue && checkin.Venue.Longitude.HasValue;
-            CheckinPhotoPath = GetCheckinPhotoPath(checkin);
+            UpadateCheckinPhoto(checkin);
 
             BeerUrl = checkin.Beer.Url;
             BeerName = checkin.Beer.Name;
@@ -483,6 +484,11 @@ namespace UntappdViewer.ViewModels
         private string GetBeerIBU(double? beerIBU)
         {
             return beerIBU.HasValue ? beerIBU.Value.ToString() : "No IBU";
+        }
+
+        private async void UpadateCheckinPhoto(Checkin checkin)
+        {
+            CheckinPhotoPath = await Task.Run(() => GetCheckinPhotoPath(checkin));
         }
 
         private string GetCheckinPhotoPath(Checkin checkin)
