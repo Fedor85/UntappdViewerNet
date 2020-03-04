@@ -103,9 +103,9 @@ namespace UntappdViewer.Domain.Services
             return $"{Untappd.CreatedDate:yyyy_MMM_dd}_{Untappd.UserName}";
         }
 
-        public string GetUntappdProjectPhotoFilesDirectory(string fileName)
+        public string GetUntappdProjectPhotoFilesDirectory()
         {
-            return $"{fileName}_Photos";
+            return $"{Path.GetFileNameWithoutExtension(FIlePath)}_Photos";
         }
 
         public List<Checkin> GeCheckins(bool isUniqueCheckins = false)

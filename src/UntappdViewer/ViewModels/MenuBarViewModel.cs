@@ -130,9 +130,9 @@ namespace UntappdViewer.ViewModels
                 return;
 
             FileHelper.SaveFile(fileSavePath, untappdService.Untappd);
-            untappdService.ResetСhanges();
-            FileHelper.CreateDirectory(Path.Combine(Path.GetDirectoryName(fileSavePath), untappdService.GetUntappdProjectPhotoFilesDirectory(Path.GetFileNameWithoutExtension(fileSavePath))));
             untappdService.Initialize(fileSavePath);
+            untappdService.ResetСhanges();
+            FileHelper.CreateDirectory(Path.Combine(Path.GetDirectoryName(untappdService.FIlePath), untappdService.GetUntappdProjectPhotoFilesDirectory()));          
             interactionRequestService.ShowMessageOnStatusBar(untappdService.FIlePath);
             settingService.SetRecentFilePaths(FileHelper.AddFilePath(settingService.GetRecentFilePaths(), fileSavePath, settingService.GetMaxRecentFilePaths()));
         }
