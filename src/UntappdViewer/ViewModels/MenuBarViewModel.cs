@@ -79,7 +79,6 @@ namespace UntappdViewer.ViewModels
                 return;
 
             untappdService.UpdateUntappdUserName(confirmationResult.Value);
-
         }
 
         private void SaveСhangesProject()

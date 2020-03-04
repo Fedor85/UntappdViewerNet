@@ -54,6 +54,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Services\SettingService.cs" />
+    <Compile Include="Services\WebDownloader.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UntappdViewer.Interfaces\UntappdViewer.Interfaces.csproj">

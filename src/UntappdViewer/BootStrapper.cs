@@ -68,6 +68,7 @@ namespace UntappdViewer
 
             Container.RegisterInstance(settingService);
             Container.RegisterInstance(new UntappdService(settingService));
+            Container.RegisterType<IWebDownloader, WebDownloader>();
         }
     }
 }

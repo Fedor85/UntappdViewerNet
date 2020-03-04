@@ -1,8 +1,11 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Input;
 using Prism.Commands;
 using Prism.Events;
+using UntappdViewer.Domain.Services;
 using UntappdViewer.Events;
+using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
 
 namespace UntappdViewer.ViewModels
@@ -13,7 +16,11 @@ namespace UntappdViewer.ViewModels
 
         private const string defaultCheckinPhotoPath = @"..\Resources\no-image-icon.png";
 
+        private UntappdService untappdService;
+
         private IEventAggregator eventAggregator;
+
+        private IWebDownloader webDownloader;
 
         private string checkinHeader;
 
@@ -368,14 +375,18 @@ namespace UntappdViewer.ViewModels
         public ICommand CheckinVenueLocationCommand { get; }
 
 
-        public CheckinViewModel(IEventAggregator eventAggregator)
+        public CheckinViewModel(UntappdService untappdService, IWebDownloader webDownloader,
+                                                               IEventAggregator eventAggregator)
         {
             CheckinUrl = defaultUrl;
             CheckinPhotoPath = defaultCheckinPhotoPath;
 
             BeerUrl = defaultUrl;
             breweryUrl = defaultUrl;
+
+            this.untappdService = untappdService;
             this.eventAggregator = eventAggregator;
+            this.webDownloader = webDownloader;
             CheckinVenueLocationCommand  = new DelegateCommand(CheckinVenueLocation);
         }
 
@@ -421,7 +432,7 @@ namespace UntappdViewer.ViewModels
             CheckinVenueState = checkin.Venue.State;
             CheckinVenueCity = checkin.Venue.City;
             VisibilityCheckinVenueLocation = checkin.Venue.Latitude.HasValue && checkin.Venue.Longitude.HasValue;
-            //CheckinPhoto = @"D:\c30b5bc3e73764fc1831f714398d0bbf_raw.jpg";
+            CheckinPhotoPath = GetCheckinPhotoPath(checkin);
 
             BeerUrl = checkin.Beer.Url;
             BeerName = checkin.Beer.Name;
@@ -472,6 +483,18 @@ namespace UntappdViewer.ViewModels
         private string GetBeerIBU(double? beerIBU)
         {
             return beerIBU.HasValue ? beerIBU.Value.ToString() : "No IBU";
+        }
+
+        private string GetCheckinPhotoPath(Checkin checkin)
+        {
+            if (String.IsNullOrEmpty(checkin.UrlPhoto))
+                return defaultCheckinPhotoPath;
+
+            string photoPath = Path.Combine(Path.GetDirectoryName(untappdService.FIlePath), untappdService.GetUntappdProjectPhotoFilesDirectory(), Path.GetFileName(checkin.UrlPhoto));
+            if (!File.Exists(photoPath))
+                webDownloader.DownloadFile(checkin.UrlPhoto, photoPath);
+
+            return photoPath;
         }
     }
 }
