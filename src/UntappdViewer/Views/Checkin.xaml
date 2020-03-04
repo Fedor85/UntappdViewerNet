@@ -103,13 +103,13 @@
                     </TextBlock>
                 </DockPanel>
                 <DockPanel>
-                        <Image Source="..\Resources\icons8-location-24.png" Width="20" Height="20" HorizontalAlignment="Left"
+                        <!--<Image Source="..\Resources\icons8-location-24.png" Width="20" Height="20" HorizontalAlignment="Left"
                                Cursor="Hand" MouseDown="UIElement_OnMouseDown"
                                Visibility="{Binding Path =VisibilityCheckinVenueLocation, Converter={StaticResource BooleanConverter}}">
                             <Image.InputBindings>
                                 <MouseBinding Gesture="LeftClick" Command="{Binding CheckinVenueLocationCommand, Mode=OneTime}" />
                             </Image.InputBindings>
-                        </Image>
+                        </Image>-->
                         <TextBlock TextWrapping="Wrap" Text="{Binding CheckinVenueName}" VerticalAlignment="Center"/>
                         <TextBlock Text="  |  " FontWeight="Bold"  VerticalAlignment="Center"
                                    Visibility="{Binding Path =VisibilityCheckinVenueCountrySeporator, Converter={StaticResource BooleanConverter}}"/>
