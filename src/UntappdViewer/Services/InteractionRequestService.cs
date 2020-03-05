@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Microsoft.Win32;
 using Prism.Interactivity.InteractionRequest;
 using UntappdViewer.Services.PopupWindowAction;
-using UntappdViewer.Views;
+using Application = System.Windows.Application;
+using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
+using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
+using TextBox = UntappdViewer.Views.TextBox;
 
 namespace UntappdViewer.Services
 {
@@ -78,6 +81,19 @@ namespace UntappdViewer.Services
             openFileDialog.ShowDialog(Application.Current.MainWindow);
             return openFileDialog.FileName;
         }
+
+        public string FolderBrowser(string initialDirectory)
+        {
+            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+            if (!String.IsNullOrEmpty(initialDirectory))
+                folderBrowserDialog.SelectedPath = initialDirectory;
+
+            if (folderBrowserDialog.ShowDialog() != DialogResult.OK)
+                return String.Empty;
+
+            return folderBrowserDialog.SelectedPath;
+        }
+
 
         public string SaveFile(string initialDirectory, string fileName, List<string> extensions)
         {

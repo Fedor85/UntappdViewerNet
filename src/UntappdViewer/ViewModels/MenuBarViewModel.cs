@@ -120,6 +120,10 @@ namespace UntappdViewer.ViewModels
 
         private void UploadProjectPhoto()
         {
+            string directoryPath = interactionRequestService.FolderBrowser(Path.GetDirectoryName(untappdService.FIlePath));
+            if (String.IsNullOrEmpty(directoryPath))
+                return;
+
             CallBackConteiner<List<long>> callBackConteiner = new CallBackConteiner<List<long>>();
             eventAggregator.GetEvent<RequestCheckinsEvent>().Publish(callBackConteiner);
         }
