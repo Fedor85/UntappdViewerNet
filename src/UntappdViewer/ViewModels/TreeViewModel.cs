@@ -98,8 +98,10 @@ namespace UntappdViewer.ViewModels
             this.eventAggregator = eventAggregator;
             this.settingService = settingService;
 
-            UniqueCheckedCommand = new DelegateCommand<bool?>(UniqueChecked);
+            loadingModuleName = typeof(LoadingModule).Name;
+            loadingRegionName = RegionNames.LoadingRegion;
 
+            UniqueCheckedCommand = new DelegateCommand<bool?>(UniqueChecked);
             TreeItems = new ObservableCollection<TreeItemViewModel>();
         }
 
@@ -144,7 +146,6 @@ namespace UntappdViewer.ViewModels
             TreeItems = await Task.Run(() => GeTreeViewItems(isUniqueCheckins));
             AppFilter(Search);
             UpdateTreeViewCaption();
-            LoadingChangeActivity(false);
 
             if (TreeItems.Count > 0)
                 UpdateSelectedTreeItem(selectedTreeItemId);

@@ -1,19 +1,11 @@
-﻿using Prism.Ioc;
-using Prism.Regions;
-using UntappdViewer.Views;
+﻿using Prism.Regions;
 
 namespace UntappdViewer.Modules
 {
-    public class LoadingModule : BaseModue
+    public class LoadingModule : BaseLoadingModule
     {
-        public LoadingModule(IRegionManager regionManager) : base(regionManager)
+        public LoadingModule(IRegionManager regionManager) : base(regionManager, RegionNames.LoadingRegion)
         {
-        }
-
-        public override void OnInitialized(IContainerProvider containerProvider)
-        {
-            base.OnInitialized(containerProvider);
-            regionManager.RegisterViewWithRegion(RegionNames.LoadingRegion, () => containerProvider.Resolve<Loading>());
         }
     }
 }

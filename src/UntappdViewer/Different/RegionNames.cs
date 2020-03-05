@@ -17,5 +17,7 @@
         public const string RecentFilesRegion = "RecentFilesRegion";
 
         public const string LoadingRegion = "LoadingRegion";
+
+        public const string PhotoLoadingRegion = "PhotoLoadingRegion";
     }
 }

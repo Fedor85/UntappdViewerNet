@@ -112,11 +112,13 @@
     <Compile Include="Different\Helpers\CommunicationHelper.cs" />
     <Compile Include="Different\Helpers\EnumsHelper.cs" />
     <Compile Include="Different\TreeItemViewModel.cs" />
-    <Compile Include="Modules\BaseModue.cs" />
+    <Compile Include="Modules\Base\BaseLoadingModule.cs" />
+    <Compile Include="Modules\Base\BaseModue.cs" />
     <Compile Include="Modules\CheckinModule.cs" />
     <Compile Include="Modules\LoadingModule.cs" />
     <Compile Include="Modules\MainModule.cs" />
     <Compile Include="Modules\MenuBarModule.cs" />
+    <Compile Include="Modules\PhotoLoadingModule.cs" />
     <Compile Include="Modules\RecentFilesModule.cs" />
     <Compile Include="Modules\StatusBarModule.cs" />
     <Compile Include="Modules\TreeModue.cs" />

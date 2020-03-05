@@ -4,14 +4,17 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Prism.Commands;
 using Prism.Events;
+using Prism.Modularity;
+using Prism.Regions;
 using UntappdViewer.Domain.Services;
 using UntappdViewer.Events;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
+using UntappdViewer.Modules;
 
 namespace UntappdViewer.ViewModels
 {
-    public class CheckinViewModel : ActiveAwareBaseModel
+    public class CheckinViewModel : LoadingBaseModel
     {
         private const string defaultUrl = "http://schemas.microsoft.com/winfx/2006/xaml";
 
@@ -377,17 +380,23 @@ namespace UntappdViewer.ViewModels
 
 
         public CheckinViewModel(UntappdService untappdService, IWebDownloader webDownloader,
-                                                               IEventAggregator eventAggregator)
+                                                               IEventAggregator eventAggregator,
+                                                               IModuleManager moduleManager,
+                                                               IRegionManager regionManager) : base(moduleManager, regionManager)
         {
+            this.untappdService = untappdService;
+            this.eventAggregator = eventAggregator;
+            this.webDownloader = webDownloader;
+
+            loadingModuleName = typeof(PhotoLoadingModule).Name;
+            loadingRegionName = RegionNames.PhotoLoadingRegion;
+
             CheckinUrl = defaultUrl;
             CheckinPhotoPath = defaultCheckinPhotoPath;
 
             BeerUrl = defaultUrl;
             breweryUrl = defaultUrl;
 
-            this.untappdService = untappdService;
-            this.eventAggregator = eventAggregator;
-            this.webDownloader = webDownloader;
             CheckinVenueLocationCommand  = new DelegateCommand(CheckinVenueLocation);
         }
 
@@ -486,9 +495,17 @@ namespace UntappdViewer.ViewModels
             return beerIBU.HasValue ? beerIBU.Value.ToString() : "No IBU";
         }
 
-        private async void UpadateCheckinPhoto(Checkin checkin)
+        private void UpadateCheckinPhoto(Checkin checkin)
+        {
+            CheckinPhotoPath = defaultCheckinPhotoPath;
+            LoadingChangeActivity(true);
+            UpadateCheckinPhotoAsunc(checkin);
+        }
+
+        private async void UpadateCheckinPhotoAsunc(Checkin checkin)
         {
             CheckinPhotoPath = await Task.Run(() => GetCheckinPhotoPath(checkin));
+            LoadingChangeActivity(false);
         }
 
         private string GetCheckinPhotoPath(Checkin checkin)
