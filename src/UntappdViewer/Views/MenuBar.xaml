@@ -26,6 +26,11 @@
                     <Image Source="../Resources/save_as.ico"/>
                 </MenuItem.Icon>
             </MenuItem>
+            <MenuItem Header="{x:Static properties:Resources.UploadPhoto}" Command="{Binding UploadProjectPhotoCommand}">
+                <MenuItem.Icon>
+                    <Image Source="../Resources/upload_photo.ico"/>
+                </MenuItem.Icon>
+            </MenuItem>
         </MenuItem>
         <MenuItem Header="{x:Static properties:Resources.HelpMenuItem}"/>
     </Menu>

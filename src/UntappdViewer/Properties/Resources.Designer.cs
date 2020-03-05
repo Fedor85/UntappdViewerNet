@@ -383,6 +383,25 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        public static System.Drawing.Icon upload_photo {
+            get {
+                object obj = ResourceManager.GetObject("upload_photo", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload Photo.
+        /// </summary>
+        public static string UploadPhoto {
+            get {
+                return ResourceManager.GetString("UploadPhoto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Warning..
         /// </summary>
         public static string Warning {

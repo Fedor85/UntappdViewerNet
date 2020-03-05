@@ -37,6 +37,8 @@ namespace UntappdViewer.ViewModels
 
         public ICommand SaveAsProjectCommand { get; }
 
+        public ICommand UploadProjectPhotoCommand { get; }
+
         public MenuBarViewModel(UntappdService untappdService, InteractionRequestService interactionRequestService,
                                                                 ISettingService settingService,
                                                                 IModuleManager moduleManager,
@@ -53,7 +55,9 @@ namespace UntappdViewer.ViewModels
             RenameProjectCommand = new DelegateCommand(RenameProject);
             SaveProjectCommand = new DelegateCommand(SaveProject);
             SaveAsProjectCommand = new DelegateCommand(SaveAsProject);
+            UploadProjectPhotoCommand = new DelegateCommand(UploadProjectPhoto);
         }
+
         protected override void Activate()
         {
             base.Activate();
@@ -134,6 +138,11 @@ namespace UntappdViewer.ViewModels
             FileHelper.CreateDirectory(Path.Combine(Path.GetDirectoryName(untappdService.FIlePath), untappdService.GetUntappdProjectPhotoFilesDirectory()));          
             interactionRequestService.ShowMessageOnStatusBar(untappdService.FIlePath);
             settingService.SetRecentFilePaths(FileHelper.AddFilePath(settingService.GetRecentFilePaths(), fileSavePath, settingService.GetMaxRecentFilePaths()));
+        }
+
+        private void UploadProjectPhoto()
+        {
+
         }
     }
 }
