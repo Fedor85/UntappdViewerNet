@@ -10,6 +10,7 @@ using Prism.Regions;
 using UntappdViewer.Domain;
 using UntappdViewer.Domain.Services;
 using UntappdViewer.Events;
+using UntappdViewer.Helpers;
 using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
@@ -137,16 +138,21 @@ namespace UntappdViewer.ViewModels
 
         private async void UploadProjectPhotosASync(List<long> checkinIds, string uploadDirectory)
         {
-            foreach (long checkinId in checkinIds)
-                await Task.Run(() => UploadCheckinPhoto(checkinId, uploadDirectory));
+            for (int i = 0; i < checkinIds.Count; i++)
+            {
+                Checkin checkin = untappdService.GetCheckin(checkinIds[i]);
+                if (checkin == null || String.IsNullOrEmpty(checkin.UrlPhoto))
+                    continue;
+
+                string message = $"{Properties.Resources.Loading} {i + 1}/{checkinIds.Count}: {checkin.UrlPhoto}";
+                interactionRequestService.ShowMessageOnStatusBar(message);
+                await Task.Run(() => UploadCheckinPhoto(checkin, uploadDirectory));
+            }
+            interactionRequestService.ShowMessageOnStatusBar(CommunicationHelper.GetLoadingMessage(untappdService.FIlePath));
         }
 
-        private void UploadCheckinPhoto(long checkinId, string uploadDirectory)
+        private void UploadCheckinPhoto(Checkin checkin, string uploadDirectory)
         {
-            Checkin checkin = untappdService.GetCheckin(checkinId);
-            if (checkin == null || String.IsNullOrEmpty(checkin.UrlPhoto))
-                return;
-
             string photoPath = untappdService.GetFullCheckinPhotoFilePath(checkin);
             if (!File.Exists(photoPath))
                 webDownloader.DownloadFile(checkin.UrlPhoto, photoPath);
