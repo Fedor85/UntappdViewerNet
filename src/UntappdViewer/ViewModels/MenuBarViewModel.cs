@@ -30,6 +30,8 @@ namespace UntappdViewer.ViewModels
 
         private IEventAggregator eventAggregator;
 
+        private IWebDownloader webDownloader;
+
         public ICommand GoToWelcomeCommand { get; }
 
         public ICommand RenameProjectCommand { get; }
@@ -44,19 +46,21 @@ namespace UntappdViewer.ViewModels
                                                                 ISettingService settingService,
                                                                 IModuleManager moduleManager,
                                                                 IRegionManager regionManager,
-                                                                IEventAggregator eventAggregator) : base(regionManager)
+                                                                IEventAggregator eventAggregator,
+                                                                IWebDownloader webDownloader) : base(regionManager)
         {
             this.interactionRequestService = interactionRequestService;
             this.settingService = settingService;
             this.untappdService = untappdService;
             this.moduleManager = moduleManager;
             this.eventAggregator = eventAggregator;
+            this.webDownloader = webDownloader;
 
             GoToWelcomeCommand = new DelegateCommand(GoToWelcome);
             RenameProjectCommand = new DelegateCommand(RenameProject);
             SaveProjectCommand = new DelegateCommand(SaveProject);
             SaveAsProjectCommand = new DelegateCommand(SaveAsProject);
-            UploadProjectPhotoCommand = new DelegateCommand(UploadProjectPhoto);
+            UploadProjectPhotoCommand = new DelegateCommand(UploadProjectPhotos);
         }
 
         protected override void Activate()
@@ -116,9 +120,10 @@ namespace UntappdViewer.ViewModels
             FileHelper.CreateDirectory(untappdService.GetFullUntappdProjectPhotoFilesDirectory());
             interactionRequestService.ShowMessageOnStatusBar(untappdService.FIlePath);
             settingService.SetRecentFilePaths(FileHelper.AddFilePath(settingService.GetRecentFilePaths(), fileSavePath, settingService.GetMaxRecentFilePaths()));
+
         }
 
-        private void UploadProjectPhoto()
+        private void UploadProjectPhotos()
         {
             string directoryPath = interactionRequestService.FolderBrowser(Path.GetDirectoryName(untappdService.FIlePath));
             if (String.IsNullOrEmpty(directoryPath))
@@ -126,6 +131,22 @@ namespace UntappdViewer.ViewModels
 
             CallBackConteiner<List<long>> callBackConteiner = new CallBackConteiner<List<long>>();
             eventAggregator.GetEvent<RequestCheckinsEvent>().Publish(callBackConteiner);
+            foreach (long checkinId in callBackConteiner.Content)
+                UploadCheckinPhoto(checkinId, directoryPath);
+        }
+
+        private void UploadCheckinPhoto(long checkinId, string uploadDirectory)
+        {
+            Checkin checkin = untappdService.GetCheckin(checkinId);
+            if (checkin == null || String.IsNullOrEmpty(checkin.UrlPhoto))
+                return;
+
+            string photoPath = untappdService.GetFullCheckinPhotoFilePath(checkin);
+            if (!File.Exists(photoPath))
+                webDownloader.DownloadFile(checkin.UrlPhoto, photoPath);
+
+            File.Copy(photoPath, Path.Combine(uploadDirectory, untappdService.GetUploadSavePhotoFileName(checkin)), true);
+
         }
 
         private void SaveСhangesProject()

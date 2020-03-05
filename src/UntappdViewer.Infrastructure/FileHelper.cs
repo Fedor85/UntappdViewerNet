@@ -16,7 +16,7 @@ namespace UntappdViewer.Infrastructure
             if (!File.Exists(filePath))
                 return FileStatus.NotExists;
 
-            if (!supportExtensions.Contains(FileHelper.GetExtensionWihtoutPoint(filePath)))
+            if (!supportExtensions.Contains(GetExtensionWihtoutPoint(filePath)))
                 return FileStatus.NoSupported;
 
             try

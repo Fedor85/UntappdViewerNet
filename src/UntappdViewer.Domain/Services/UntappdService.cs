@@ -108,6 +108,7 @@ namespace UntappdViewer.Domain.Services
             return Path.Combine(Path.GetDirectoryName(FIlePath), GetUntappdProjectPhotoFilesDirectory());
         }
 
+
         public string GetFullCheckinPhotoFilePath(Checkin checkin)
         {
             return Path.Combine(GetFullUntappdProjectPhotoFilesDirectory(), Path.GetFileName(checkin.UrlPhoto));
@@ -130,10 +131,16 @@ namespace UntappdViewer.Domain.Services
             return StringHelper.GeBreakForLongName(fullName, settingService.GetTreeItemNameMaxLength(), prefix.Length * 2 - 2);
         }
 
+        public string GetUploadSavePhotoFileName(Checkin checkin)
+        {
+            return $"{checkin.CreatedDate.ToString("yyyy_MM_dd")}_{checkin.Id}.{FileHelper.GetExtensionWihtoutPoint(checkin.UrlPhoto)}";
+        }
+
         private string GetUntappdUserName(string userName)
         {
             return String.IsNullOrEmpty(userName) ? settingService.GetDefaultUserName() : userName;
         }
+
         private string GetUntappdProjectPhotoFilesDirectory()
         {
             return $"{Path.GetFileNameWithoutExtension(FIlePath)}_Photos";
