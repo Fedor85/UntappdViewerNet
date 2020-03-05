@@ -85,29 +85,6 @@ namespace UntappdViewer.ViewModels
             untappdService.UpdateUntappdUserName(confirmationResult.Value);
         }
 
-        private void SaveСhangesProject()
-        {
-            if (!untappdService.IsDirtyUntappd())
-                return;
-
-            if (!interactionRequestService.Ask(Properties.Resources.Warning, Properties.Resources.AskSaveСhangesUntappdProject))
-                return;
-
-            switch (FileHelper.GetExtensionWihtoutPoint(untappdService.FIlePath))
-            {
-                case Extensions.CSV:
-                    SaveAsProject();
-                    break;
-
-                case Extensions.UNTP:
-                    FileHelper.SaveFile(untappdService.FIlePath, untappdService.Untappd);
-                    break;
-                default:
-                    throw new ArgumentException(String.Format(Properties.Resources.ArgumentExceptioSaveUntappdProject, untappdService.FIlePath));
-            }
-            untappdService.ResetСhanges();
-        }
-
         private void SaveProject()
         {
             if (!FileHelper.GetExtensionWihtoutPoint(untappdService.FIlePath).Equals(Extensions.UNTP))
@@ -135,7 +112,7 @@ namespace UntappdViewer.ViewModels
             FileHelper.SaveFile(fileSavePath, untappdService.Untappd);
             untappdService.Initialize(fileSavePath);
             untappdService.ResetСhanges();
-            FileHelper.CreateDirectory(Path.Combine(Path.GetDirectoryName(untappdService.FIlePath), untappdService.GetUntappdProjectPhotoFilesDirectory()));          
+            FileHelper.CreateDirectory(Path.Combine(Path.GetDirectoryName(untappdService.FIlePath), untappdService.GetUntappdProjectPhotoFilesDirectory()));
             interactionRequestService.ShowMessageOnStatusBar(untappdService.FIlePath);
             settingService.SetRecentFilePaths(FileHelper.AddFilePath(settingService.GetRecentFilePaths(), fileSavePath, settingService.GetMaxRecentFilePaths()));
         }
@@ -143,6 +120,29 @@ namespace UntappdViewer.ViewModels
         private void UploadProjectPhoto()
         {
 
+        }
+
+        private void SaveСhangesProject()
+        {
+            if (!untappdService.IsDirtyUntappd())
+                return;
+
+            if (!interactionRequestService.Ask(Properties.Resources.Warning, Properties.Resources.AskSaveСhangesUntappdProject))
+                return;
+
+            switch (FileHelper.GetExtensionWihtoutPoint(untappdService.FIlePath))
+            {
+                case Extensions.CSV:
+                    SaveAsProject();
+                    break;
+
+                case Extensions.UNTP:
+                    FileHelper.SaveFile(untappdService.FIlePath, untappdService.Untappd);
+                    break;
+                default:
+                    throw new ArgumentException(String.Format(Properties.Resources.ArgumentExceptioSaveUntappdProject, untappdService.FIlePath));
+            }
+            untappdService.ResetСhanges();
         }
     }
 }
