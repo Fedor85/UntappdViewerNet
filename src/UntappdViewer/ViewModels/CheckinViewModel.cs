@@ -527,7 +527,7 @@ namespace UntappdViewer.ViewModels
             if (String.IsNullOrEmpty(checkin.UrlPhoto))
                 return defaultCheckinPhotoPath;
 
-            string photoPath = Path.Combine(Path.GetDirectoryName(untappdService.FIlePath), untappdService.GetUntappdProjectPhotoFilesDirectory(), Path.GetFileName(checkin.UrlPhoto));
+            string photoPath = untappdService.GetFullCheckinPhotoFilePath(checkin);
             if (!File.Exists(photoPath))
                 webDownloader.DownloadFile(checkin.UrlPhoto, photoPath);
 

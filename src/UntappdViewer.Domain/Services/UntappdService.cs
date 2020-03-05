@@ -103,9 +103,14 @@ namespace UntappdViewer.Domain.Services
             return $"{Untappd.CreatedDate:yyyy_MMM_dd}_{Untappd.UserName}";
         }
 
-        public string GetUntappdProjectPhotoFilesDirectory()
+        public string GetFullUntappdProjectPhotoFilesDirectory()
         {
-            return $"{Path.GetFileNameWithoutExtension(FIlePath)}_Photos";
+            return Path.Combine(Path.GetDirectoryName(FIlePath), GetUntappdProjectPhotoFilesDirectory());
+        }
+
+        public string GetFullCheckinPhotoFilePath(Checkin checkin)
+        {
+            return Path.Combine(GetFullUntappdProjectPhotoFilesDirectory(), Path.GetFileName(checkin.UrlPhoto));
         }
 
         public List<Checkin> GeCheckins(bool isUniqueCheckins = false)
@@ -128,6 +133,10 @@ namespace UntappdViewer.Domain.Services
         private string GetUntappdUserName(string userName)
         {
             return String.IsNullOrEmpty(userName) ? settingService.GetDefaultUserName() : userName;
+        }
+        private string GetUntappdProjectPhotoFilesDirectory()
+        {
+            return $"{Path.GetFileNameWithoutExtension(FIlePath)}_Photos";
         }
     }
 }
