@@ -125,11 +125,11 @@ namespace UntappdViewer.ViewModels
             Search =String.Empty;
         }
 
-        private void ReturnVisibleChekins(CallBackConteiner<List<Checkin>> callBackConteiner)
+        private void ReturnVisibleChekins(CallBackConteiner<List<long>> callBackConteiner)
         {
-            callBackConteiner.Content = new List<Checkin>();
+            callBackConteiner.Content = new List<long>();
             foreach (TreeItemViewModel treeItemViewModel in TreeItems.Where(item => !item.IsHidden()))
-                callBackConteiner.Content.Add(untappdService.GetCheckin(treeItemViewModel.Id));
+                callBackConteiner.Content.Add(treeItemViewModel.Id);
         }
 
         private void UpdateContent()

@@ -120,7 +120,7 @@ namespace UntappdViewer.ViewModels
 
         private void UploadProjectPhoto()
         {
-            CallBackConteiner<List<Checkin>> callBackConteiner = new CallBackConteiner<List<Checkin>>();
+            CallBackConteiner<List<long>> callBackConteiner = new CallBackConteiner<List<long>>();
             eventAggregator.GetEvent<RequestCheckinsEvent>().Publish(callBackConteiner);
         }
 
