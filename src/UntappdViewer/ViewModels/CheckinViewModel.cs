@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Prism.Commands;
@@ -11,6 +12,7 @@ using UntappdViewer.Events;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
 using UntappdViewer.Modules;
+using UntappdViewer.Services;
 
 namespace UntappdViewer.ViewModels
 {
@@ -21,6 +23,8 @@ namespace UntappdViewer.ViewModels
         private const string defaultCheckinPhotoPath = @"..\Resources\no-image-icon.png";
 
         private UntappdService untappdService;
+
+        private InteractionRequestService interactionRequestService;
 
         private IEventAggregator eventAggregator;
 
@@ -379,11 +383,13 @@ namespace UntappdViewer.ViewModels
         public ICommand CheckinVenueLocationCommand { get; }
 
 
-        public CheckinViewModel(UntappdService untappdService, IWebDownloader webDownloader,
+        public CheckinViewModel(UntappdService untappdService, InteractionRequestService interactionRequestService,
+                                                               IWebDownloader webDownloader,
                                                                IEventAggregator eventAggregator,
                                                                IModuleManager moduleManager,
                                                                IRegionManager regionManager) : base(moduleManager, regionManager)
         {
+            this.interactionRequestService = interactionRequestService;
             this.untappdService = untappdService;
             this.eventAggregator = eventAggregator;
             this.webDownloader = webDownloader;
@@ -504,7 +510,15 @@ namespace UntappdViewer.ViewModels
 
         private async void UpadateCheckinPhotoAsunc(Checkin checkin)
         {
-            CheckinPhotoPath = await Task.Run(() => GetCheckinPhotoPath(checkin));
+            try
+            {
+                CheckinPhotoPath = await Task.Run(() => GetCheckinPhotoPath(checkin));
+            }
+            catch (Exception ex)
+            {
+                interactionRequestService.ShowError(Properties.Resources.Error, ex.Message);
+                CheckinPhotoPath = defaultCheckinPhotoPath;
+            }
             LoadingChangeActivity(false);
         }
 
