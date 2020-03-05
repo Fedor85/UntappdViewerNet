@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Prism.Commands;
 using Prism.Events;
@@ -131,8 +132,13 @@ namespace UntappdViewer.ViewModels
 
             CallBackConteiner<List<long>> callBackConteiner = new CallBackConteiner<List<long>>();
             eventAggregator.GetEvent<RequestCheckinsEvent>().Publish(callBackConteiner);
-            foreach (long checkinId in callBackConteiner.Content)
-                UploadCheckinPhoto(checkinId, directoryPath);
+            UploadProjectPhotosASync(callBackConteiner.Content, directoryPath);
+        }
+
+        private async void UploadProjectPhotosASync(List<long> checkinIds, string uploadDirectory)
+        {
+            foreach (long checkinId in checkinIds)
+                await Task.Run(() => UploadCheckinPhoto(checkinId, uploadDirectory));
         }
 
         private void UploadCheckinPhoto(long checkinId, string uploadDirectory)
@@ -146,7 +152,6 @@ namespace UntappdViewer.ViewModels
                 webDownloader.DownloadFile(checkin.UrlPhoto, photoPath);
 
             File.Copy(photoPath, Path.Combine(uploadDirectory, untappdService.GetUploadSavePhotoFileName(checkin)), true);
-
         }
 
         private void SaveСhangesProject()
