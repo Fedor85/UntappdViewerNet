@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Input;
 using Prism.Commands;
@@ -10,10 +11,10 @@ using UntappdViewer.Domain.Services;
 using UntappdViewer.Events;
 using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
+using UntappdViewer.Models;
 using UntappdViewer.Modules;
 using UntappdViewer.Services;
 using UntappdViewer.Services.PopupWindowAction;
-using UntappdViewer.Views;
 
 namespace UntappdViewer.ViewModels
 {
@@ -73,7 +74,7 @@ namespace UntappdViewer.ViewModels
         private void GoToWelcome()
         {
             moduleManager.LoadModule(typeof(WelcomeModule).Name);
-            ActivateView(RegionNames.RootRegion, typeof(Welcome));
+            ActivateView(RegionNames.RootRegion, typeof(Views.Welcome));
         }
 
         private void RenameProject()
@@ -119,7 +120,8 @@ namespace UntappdViewer.ViewModels
 
         private void UploadProjectPhoto()
         {
-
+            CallBackConteiner<List<Checkin>> callBackConteiner = new CallBackConteiner<List<Checkin>>();
+            eventAggregator.GetEvent<RequestCheckinsEvent>().Publish(callBackConteiner);
         }
 
         private void SaveСhangesProject()

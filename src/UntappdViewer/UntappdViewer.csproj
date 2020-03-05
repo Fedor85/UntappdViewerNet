@@ -106,8 +106,10 @@
     </ApplicationDefinition>
     <Compile Include="Different\Behaviors\LoadedWindowBehavior.cs" />
     <Compile Include="Different\Behaviors\SelectedTreeViewItemBehavior.cs" />
+    <Compile Include="Different\CallBackConteiner.cs" />
     <Compile Include="Different\Events\ChekinUpdateEvent.cs" />
     <Compile Include="Different\Events\OpenFileEvent.cs" />
+    <Compile Include="Different\Events\RequestCheckinsEvent.cs" />
     <Compile Include="Different\Events\SaveUntappdToFileEvent.cs" />
     <Compile Include="Different\Helpers\CommunicationHelper.cs" />
     <Compile Include="Different\Helpers\EnumsHelper.cs" />

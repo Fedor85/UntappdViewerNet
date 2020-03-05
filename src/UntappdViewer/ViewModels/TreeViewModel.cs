@@ -11,8 +11,8 @@ using Prism.Regions;
 using UntappdViewer.Domain.Services;
 using UntappdViewer.Events;
 using UntappdViewer.Interfaces.Services;
+using UntappdViewer.Models;
 using UntappdViewer.Modules;
-using UntappdViewer.Views;
 
 namespace UntappdViewer.ViewModels
 {
@@ -108,23 +108,34 @@ namespace UntappdViewer.ViewModels
         protected override void Activate()
         {
             base.Activate();
+            eventAggregator.GetEvent<RequestCheckinsEvent>().Subscribe(ReturnVisibleChekins);
             IsCheckedUniqueCheckBox = settingService.GetIsCheckedUniqueCheckBox();
             UpdateTree(IsCheckedUniqueCheckBox, settingService.GetSelectedTreeItemId());
         }
 
+
+
         protected override void DeActivate()
         {
             base.DeActivate();
+            eventAggregator.GetEvent<RequestCheckinsEvent>().Unsubscribe(ReturnVisibleChekins);
             SaveSettings();
             DeActivateAllViews(RegionNames.ContentRegion);
             TreeItems.Clear();
             Search =String.Empty;
         }
 
+        private void ReturnVisibleChekins(CallBackConteiner<List<Checkin>> callBackConteiner)
+        {
+            callBackConteiner.Content = new List<Checkin>();
+            foreach (TreeItemViewModel treeItemViewModel in TreeItems.Where(item => !item.IsHidden()))
+                callBackConteiner.Content.Add(untappdService.GetCheckin(treeItemViewModel.Id));
+        }
+
         private void UpdateContent()
         {
             moduleManager.LoadModule(typeof(CheckinModule).Name);
-            ActivateView(RegionNames.ContentRegion, typeof(Checkin));
+            ActivateView(RegionNames.ContentRegion, typeof(Views.Checkin));
 
             eventAggregator.GetEvent<ChekinUpdateEvent>().Publish(SelectedTreeItem != null ? untappdService.GetCheckin(SelectedTreeItem.Id) : null);
         }
@@ -156,10 +167,10 @@ namespace UntappdViewer.ViewModels
         private ObservableCollection<TreeItemViewModel> GeTreeViewItems(bool isUniqueCheckins)
         {
             ObservableCollection<TreeItemViewModel> treeViewItems = new ObservableCollection<TreeItemViewModel>();
-            List<Models.Checkin> checkins = untappdService.GeCheckins(isUniqueCheckins);
+            List<Checkin> checkins = untappdService.GeCheckins(isUniqueCheckins);
             for (int i = 0; i < checkins.Count; i++)
             {
-                Models.Checkin checkin = checkins[i];
+                Checkin checkin = checkins[i];
                 treeViewItems.Add(new TreeItemViewModel(checkin.Id, untappdService.GetTreeViewCheckinDisplayName(checkin, i + 1)));
             }
             return treeViewItems;
