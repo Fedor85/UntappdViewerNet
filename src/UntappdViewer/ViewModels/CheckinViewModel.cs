@@ -455,7 +455,7 @@ namespace UntappdViewer.ViewModels
             CheckinVenueState = checkin.Venue.State;
             CheckinVenueCity = checkin.Venue.City;
             VisibilityCheckinVenueLocation = checkin.Venue.Latitude.HasValue && checkin.Venue.Longitude.HasValue;
-            //CheckinServingType = @"..\Resources\bottle@3x.png";
+            CheckinServingType = ConverterHelper.GetServingTypeImagePath(checkin.ServingType);
             UpadateCheckinPhoto(checkin);
 
             BeerUrl = checkin.Beer.Url;
