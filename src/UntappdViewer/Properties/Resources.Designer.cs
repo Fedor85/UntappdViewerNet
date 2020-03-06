@@ -106,11 +106,41 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap bottle_3x {
+            get {
+                object obj = ResourceManager.GetObject("bottle_3x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Brewery.
         /// </summary>
         public static string Brewery {
             get {
                 return ResourceManager.GetString("Brewery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap can_3x {
+            get {
+                object obj = ResourceManager.GetObject("can_3x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap cask_3x {
+            get {
+                object obj = ResourceManager.GetObject("cask_3x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -133,11 +163,41 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap crowler {
+            get {
+                object obj = ResourceManager.GetObject("crowler", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap draft_3x {
+            get {
+                object obj = ResourceManager.GetObject("draft_3x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error..
         /// </summary>
         public static string Error {
             get {
                 return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap growler {
+            get {
+                object obj = ResourceManager.GetObject("growler", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -342,6 +402,16 @@ namespace UntappdViewer.Properties {
         public static string StartPageMenuItem {
             get {
                 return ResourceManager.GetString("StartPageMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap taster_3x {
+            get {
+                object obj = ResourceManager.GetObject("taster_3x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

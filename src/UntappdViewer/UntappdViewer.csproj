@@ -328,5 +328,26 @@
   <ItemGroup>
     <Resource Include="Resources\upload_photo.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\bottle%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\can%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\cask%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\crowler.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\draft%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\growler.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\taster%403x.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
