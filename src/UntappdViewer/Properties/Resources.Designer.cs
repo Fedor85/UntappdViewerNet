@@ -183,6 +183,16 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap empty_1x1 {
+            get {
+                object obj = ResourceManager.GetObject("empty_1x1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error..
         /// </summary>
         public static string Error {

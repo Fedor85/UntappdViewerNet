@@ -22,6 +22,8 @@ namespace UntappdViewer.ViewModels
 
         private const string defaultCheckinPhotoPath = @"..\Resources\no-image-icon.png";
 
+        private const string emptyImage = @"..\Resources\mpty_1x1.png";
+
         private UntappdService untappdService;
 
         private InteractionRequestService interactionRequestService;
@@ -51,6 +53,8 @@ namespace UntappdViewer.ViewModels
         private bool visibilityСheckinVenueCitySeporator;
 
         private string checkinVenueCity;
+
+        private string checkinServingType;
 
         private string checkinPhotoPath;
 
@@ -205,6 +209,16 @@ namespace UntappdViewer.ViewModels
             set
             {
                 visibilityCheckinVenueLocation = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string CheckinServingType
+        {
+            get { return checkinServingType; }
+            set
+            {
+                checkinServingType = value;
                 OnPropertyChanged();
             }
         }
@@ -398,7 +412,6 @@ namespace UntappdViewer.ViewModels
             loadingRegionName = RegionNames.PhotoLoadingRegion;
 
             CheckinUrl = defaultUrl;
-            CheckinPhotoPath = defaultCheckinPhotoPath;
 
             BeerUrl = defaultUrl;
             breweryUrl = defaultUrl;
@@ -448,6 +461,7 @@ namespace UntappdViewer.ViewModels
             CheckinVenueState = checkin.Venue.State;
             CheckinVenueCity = checkin.Venue.City;
             VisibilityCheckinVenueLocation = checkin.Venue.Latitude.HasValue && checkin.Venue.Longitude.HasValue;
+            //CheckinServingType = @"..\Resources\bottle@3x.png";
             UpadateCheckinPhoto(checkin);
 
             BeerUrl = checkin.Beer.Url;
@@ -475,7 +489,8 @@ namespace UntappdViewer.ViewModels
             CheckinVenueState = String.Empty;
             CheckinVenueCity = String.Empty;
             VisibilityCheckinVenueLocation = false;
-            CheckinPhotoPath = defaultCheckinPhotoPath;
+            CheckinServingType = emptyImage;
+            CheckinPhotoPath = emptyImage;
 
             BeerUrl = defaultUrl;
             BeerName = String.Empty;
