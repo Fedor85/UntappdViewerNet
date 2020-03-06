@@ -331,25 +331,25 @@
     <Resource Include="Resources\upload_photo.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\bottle%403x.png" />
+    <Resource Include="Resources\ServingType\bottle%403x.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\can%403x.png" />
+    <Resource Include="Resources\ServingType\can%403x.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\cask%403x.png" />
+    <Resource Include="Resources\ServingType\cask%403x.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\crowler.png" />
+    <Resource Include="Resources\ServingType\crowler.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\draft%403x.png" />
+    <Resource Include="Resources\ServingType\draft%403x.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\growler.png" />
+    <Resource Include="Resources\ServingType\growler.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\taster%403x.png" />
+    <None Include="Resources\ServingType\taster%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\empty_1x1.png" />

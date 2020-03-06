@@ -7,19 +7,19 @@
             switch (servingTypeName.ToLower())
             {
                 case "draft":
-                    return @"..\Resources\draft@3x.png";
+                    return @"..\Resources\ServingType\draft@3x.png";
                 case "bottle":
-                    return @"..\Resources\bottle@3x.png";
+                    return @"..\Resources\ServingType\bottle@3x.png";
                 case "can":
-                    return @"..\Resources\can@3x.png";
+                    return @"..\Resources\ServingType\can@3x.png";
                 case "taster":
-                    return @"..\Resources\taster@3x.png";
+                    return @"..\Resources\ServingType\taster@3x.png";
                 case "cask":
-                    return @"..\Resources\cask@3x.png";
+                    return @"..\Resources\ServingType\cask@3x.png";
                 case "crowler":
-                    return @"..\Resources\crowler.png";
+                    return @"..\Resources\ServingType\crowler.png";
                 case "growler":
-                    return @"..\Resources\growler.png";
+                    return @"..\Resources\ServingType\growler.png";
                 default:
                     return DefautlValues.EmptyImage;
             }
