@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Prism.Commands;
@@ -18,11 +17,7 @@ namespace UntappdViewer.ViewModels
 {
     public class CheckinViewModel : LoadingBaseModel
     {
-        private const string defaultUrl = "http://schemas.microsoft.com/winfx/2006/xaml";
 
-        private const string defaultCheckinPhotoPath = @"..\Resources\no-image-icon.png";
-
-        private const string emptyImage = @"..\Resources\mpty_1x1.png";
 
         private UntappdService untappdService;
 
@@ -411,10 +406,9 @@ namespace UntappdViewer.ViewModels
             loadingModuleName = typeof(PhotoLoadingModule).Name;
             loadingRegionName = RegionNames.PhotoLoadingRegion;
 
-            CheckinUrl = defaultUrl;
-
-            BeerUrl = defaultUrl;
-            breweryUrl = defaultUrl;
+            CheckinUrl = DefautlValues.DefaultUrl;
+            BeerUrl = DefautlValues.DefaultUrl;
+            BreweryUrl = DefautlValues.DefaultUrl;
 
             CheckinVenueLocationCommand  = new DelegateCommand(CheckinVenueLocation);
         }
@@ -482,24 +476,24 @@ namespace UntappdViewer.ViewModels
         private void Clear()
         {
             CheckinHeader = GetCheckinHeader(null);
-            CheckinUrl = defaultUrl;
+            CheckinUrl = DefautlValues.DefaultUrl;
             CheckinRating = 0;
             VsibilityCheckinRating = false;
             CheckinVenueCountry = String.Empty;
             CheckinVenueState = String.Empty;
             CheckinVenueCity = String.Empty;
             VisibilityCheckinVenueLocation = false;
-            CheckinServingType = emptyImage;
-            CheckinPhotoPath = emptyImage;
+            CheckinServingType = DefautlValues.EmptyImage;
+            CheckinPhotoPath = DefautlValues.EmptyImage;
 
-            BeerUrl = defaultUrl;
+            BeerUrl = DefautlValues.DefaultUrl;
             BeerName = String.Empty;
             BeerType = String.Empty;
             BeerABV = String.Empty;
             BeerIBU = String.Empty;
             BeerRating = 0;
 
-            BreweryUrl = defaultUrl;
+            BreweryUrl = DefautlValues.DefaultUrl;
             BreweryName = String.Empty;
             BreweryVenueCountry = String.Empty;
             BreweryVenueState= String.Empty;
@@ -518,7 +512,7 @@ namespace UntappdViewer.ViewModels
 
         private void UpadateCheckinPhoto(Checkin checkin)
         {
-            CheckinPhotoPath = defaultCheckinPhotoPath;
+            CheckinPhotoPath = DefautlValues.DefaultCheckinPhotoPath;
             LoadingChangeActivity(true);
             UpadateCheckinPhotoAsunc(checkin);
         }
@@ -532,7 +526,7 @@ namespace UntappdViewer.ViewModels
             catch (Exception ex)
             {
                 interactionRequestService.ShowError(Properties.Resources.Error, ex.Message);
-                CheckinPhotoPath = defaultCheckinPhotoPath;
+                CheckinPhotoPath = DefautlValues.DefaultCheckinPhotoPath;
             }
             LoadingChangeActivity(false);
         }
@@ -540,7 +534,7 @@ namespace UntappdViewer.ViewModels
         private string GetCheckinPhotoPath(Checkin checkin)
         {
             if (String.IsNullOrEmpty(checkin.UrlPhoto))
-                return defaultCheckinPhotoPath;
+                return DefautlValues.DefaultCheckinPhotoPath;
 
             string photoPath = untappdService.GetFullCheckinPhotoFilePath(checkin);
             if (!File.Exists(photoPath))
