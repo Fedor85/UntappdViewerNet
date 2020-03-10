@@ -51,7 +51,7 @@ namespace UntappdViewer.ViewModels
             moduleManager.LoadModule(typeof(TreeModue).Name);
             ActivateView(RegionNames.TreeRegion, typeof(Tree));
 
-            interactionRequestService.ShowMessageOnStatusBar(CommunicationHelper.GetLoadingMessage(untappdService.FIlePath));
+            interactionRequestService.ShowMessageOnStatusBar(CommunicationHelper.GetLoadingMessage(untappdService.FilePath));
         }
 
         protected override void DeActivate()

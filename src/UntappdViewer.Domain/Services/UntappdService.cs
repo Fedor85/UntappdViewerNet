@@ -24,7 +24,7 @@ namespace UntappdViewer.Domain.Services
 
         public Action CleanUntappdEvent { get; set; }
 
-        public string FIlePath { get;  set; }
+        public string FilePath { get; private set; }
 
         public UntappdService(ISettingService settingService)
         {
@@ -47,7 +47,7 @@ namespace UntappdViewer.Domain.Services
 
                 throw new ArgumentException(String.Format(Properties.Resources.ArgumentExceptionInitializeUntappd, filePath));
             }
-            FIlePath = filePath;
+            FilePath = filePath;
             InitializeUntappdEvent?.Invoke(Untappd);
             UpdateUntappdUserNameEvent?.Invoke(Untappd.UserName);
         }
@@ -68,9 +68,21 @@ namespace UntappdViewer.Domain.Services
 
         public void CleanUpUntappd()
         {
-            FIlePath = String.Empty;
+            FilePath = String.Empty;
             Untappd = new Untappd(String.Empty);
             CleanUntappdEvent?.Invoke();
+        }
+
+        public string GetProjectExtensions()
+        {
+            switch (FileHelper.GetExtensionWihtoutPoint(FilePath))
+            {
+                case Extensions.CSV: return Extensions.CSV;
+
+                case Extensions.UNTP: return Extensions.UNTP;
+                default:
+                    throw new ArgumentException(String.Format(Properties.Resources.ArgumentExceptionInitializeUntappd, FilePath));
+            }
         }
 
         public bool IsDirtyUntappd()
@@ -105,7 +117,7 @@ namespace UntappdViewer.Domain.Services
 
         public string GetFullUntappdProjectPhotoFilesDirectory()
         {
-            return Path.Combine(Path.GetDirectoryName(FIlePath), GetUntappdProjectPhotoFilesDirectory());
+            return Path.Combine(Path.GetDirectoryName(FilePath), GetUntappdProjectPhotoFilesDirectory());
         }
 
 
@@ -143,7 +155,7 @@ namespace UntappdViewer.Domain.Services
 
         private string GetUntappdProjectPhotoFilesDirectory()
         {
-            return $"{Path.GetFileNameWithoutExtension(FIlePath)}_Photos";
+            return $"{Path.GetFileNameWithoutExtension(FilePath)}_Photos";
         }
     }
 }

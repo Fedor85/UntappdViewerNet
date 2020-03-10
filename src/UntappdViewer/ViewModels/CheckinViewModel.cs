@@ -6,6 +6,7 @@ using Prism.Commands;
 using Prism.Events;
 using Prism.Modularity;
 using Prism.Regions;
+using UntappdViewer.Domain;
 using UntappdViewer.Domain.Services;
 using UntappdViewer.Events;
 using UntappdViewer.Interfaces.Services;
@@ -17,7 +18,6 @@ namespace UntappdViewer.ViewModels
 {
     public class CheckinViewModel : LoadingBaseModel
     {
-
 
         private UntappdService untappdService;
 
@@ -533,6 +533,9 @@ namespace UntappdViewer.ViewModels
 
         private string GetCheckinPhotoPath(Checkin checkin)
         {
+            if (untappdService.GetProjectExtensions() == Extensions.CSV)
+                return DefautlValues.EmptyImage;
+
             if (String.IsNullOrEmpty(checkin.UrlPhoto))
                 return DefautlValues.DefaultCheckinPhotoPath;
 

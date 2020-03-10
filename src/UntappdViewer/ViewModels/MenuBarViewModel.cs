@@ -94,7 +94,7 @@ namespace UntappdViewer.ViewModels
 
         private void SaveProject()
         {
-            if (!FileHelper.GetExtensionWihtoutPoint(untappdService.FIlePath).Equals(Extensions.UNTP))
+            if (!FileHelper.GetExtensionWihtoutPoint(untappdService.FilePath).Equals(Extensions.UNTP))
             {
                 SaveAsProject();
                 return;
@@ -106,13 +106,13 @@ namespace UntappdViewer.ViewModels
             if (!interactionRequestService.Ask(Properties.Resources.Warning, Properties.Resources.AskSaveСhangesUntappdProject))
                 return;
 
-            FileHelper.SaveFile(untappdService.FIlePath, untappdService.Untappd);
+            FileHelper.SaveFile(untappdService.FilePath, untappdService.Untappd);
             untappdService.ResetСhanges();
         }
 
         private void SaveAsProject()
         {
-            string fileSavePath = interactionRequestService.SaveFile(String.IsNullOrEmpty(untappdService.FIlePath) ? String.Empty : Path.GetDirectoryName(untappdService.FIlePath), untappdService.GetUntappdProjectFileName(), Extensions.GetSaveExtensions());
+            string fileSavePath = interactionRequestService.SaveFile(String.IsNullOrEmpty(untappdService.FilePath) ? String.Empty : Path.GetDirectoryName(untappdService.FilePath), untappdService.GetUntappdProjectFileName(), Extensions.GetSaveExtensions());
             if (String.IsNullOrEmpty(fileSavePath))
                 return;
 
@@ -120,14 +120,14 @@ namespace UntappdViewer.ViewModels
             untappdService.Initialize(fileSavePath);
             untappdService.ResetСhanges();
             FileHelper.CreateDirectory(untappdService.GetFullUntappdProjectPhotoFilesDirectory());
-            interactionRequestService.ShowMessageOnStatusBar(untappdService.FIlePath);
+            interactionRequestService.ShowMessageOnStatusBar(untappdService.FilePath);
             settingService.SetRecentFilePaths(FileHelper.AddFilePath(settingService.GetRecentFilePaths(), fileSavePath, settingService.GetMaxRecentFilePaths()));
 
         }
 
         private void UploadProjectPhotos()
         {
-            string directoryPath = interactionRequestService.FolderBrowser(Path.GetDirectoryName(untappdService.FIlePath));
+            string directoryPath = interactionRequestService.FolderBrowser(Path.GetDirectoryName(untappdService.FilePath));
             if (String.IsNullOrEmpty(directoryPath))
                 return;
 
@@ -148,7 +148,7 @@ namespace UntappdViewer.ViewModels
                 interactionRequestService.ShowMessageOnStatusBar(message);
                 await Task.Run(() => UploadCheckinPhoto(checkin, uploadDirectory));
             }
-            interactionRequestService.ShowMessageOnStatusBar(CommunicationHelper.GetLoadingMessage(untappdService.FIlePath));
+            interactionRequestService.ShowMessageOnStatusBar(CommunicationHelper.GetLoadingMessage(untappdService.FilePath));
         }
 
         private void UploadCheckinPhoto(Checkin checkin, string uploadDirectory)
@@ -168,17 +168,17 @@ namespace UntappdViewer.ViewModels
             if (!interactionRequestService.Ask(Properties.Resources.Warning, Properties.Resources.AskSaveСhangesUntappdProject))
                 return;
 
-            switch (FileHelper.GetExtensionWihtoutPoint(untappdService.FIlePath))
+            switch (FileHelper.GetExtensionWihtoutPoint(untappdService.FilePath))
             {
                 case Extensions.CSV:
                     SaveAsProject();
                     break;
 
                 case Extensions.UNTP:
-                    FileHelper.SaveFile(untappdService.FIlePath, untappdService.Untappd);
+                    FileHelper.SaveFile(untappdService.FilePath, untappdService.Untappd);
                     break;
                 default:
-                    throw new ArgumentException(String.Format(Properties.Resources.ArgumentExceptioSaveUntappdProject, untappdService.FIlePath));
+                    throw new ArgumentException(String.Format(Properties.Resources.ArgumentExceptioSaveUntappdProject, untappdService.FilePath));
             }
             untappdService.ResetСhanges();
         }
