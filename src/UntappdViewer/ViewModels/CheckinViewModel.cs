@@ -9,6 +9,7 @@ using Prism.Regions;
 using UntappdViewer.Domain;
 using UntappdViewer.Domain.Services;
 using UntappdViewer.Events;
+using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
 using UntappdViewer.Modules;
@@ -541,7 +542,13 @@ namespace UntappdViewer.ViewModels
 
             string photoPath = untappdService.GetFullCheckinPhotoFilePath(checkin);
             if (!File.Exists(photoPath))
+            {
+                string directoryName = Path.GetDirectoryName(photoPath);
+                if (!Directory.Exists(directoryName))
+                    FileHelper.CreateDirectory(directoryName);
+
                 webDownloader.DownloadFile(checkin.UrlPhoto, photoPath);
+            }
 
             return photoPath;
         }
