@@ -63,6 +63,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <EmbeddedResource Include="78a7bb4694ba2d4c33ba2dc76d0fc60d.csv" />
   </ItemGroup>
