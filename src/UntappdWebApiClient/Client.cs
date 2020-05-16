@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 
 namespace UntappdWebApiClient
 {
@@ -20,9 +21,19 @@ namespace UntappdWebApiClient
 
         public bool Check(out string message)
         {
+            return CheckSuccessResponse( "checkin/recent", out message);
+        }
+
+        public bool CheckUser(string userName, out string message)
+        {
+            return CheckSuccessResponse(String.Format("user/info/{0}", userName), out message);
+        }
+
+        private bool CheckSuccessResponse(string methodName, out string message)
+        {
             using (HttpClient httpClient = new HttpClient())
             {
-                HttpResponseMessage httpResponse = httpClient.GetAsync(urlPathBuilder.GetUrl("checkin/recent")).Result;
+                HttpResponseMessage httpResponse = httpClient.GetAsync(urlPathBuilder.GetUrl(methodName)).Result;
                 message = httpResponse.ReasonPhrase;
                 return httpResponse.IsSuccessStatusCode;
             }

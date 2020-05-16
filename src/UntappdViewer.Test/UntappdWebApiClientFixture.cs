@@ -6,6 +6,7 @@ namespace UntappdViewer.Test
     [TestFixture]
     public class UntappdWebApiClientFixture
     {
+        //access_token
         private const string AccessToken = "access_token";
 
         [Test]
@@ -14,6 +15,7 @@ namespace UntappdViewer.Test
             Client untappdClient = new Client(AccessToken);
             string message;
             Assert.True(untappdClient.Check(out message));
+            Assert.True(untappdClient.CheckUser("feador", out message));
         }
     }
 }
