@@ -56,6 +56,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="TestHelper.cs" />
+    <Compile Include="UntappdWebApiClientFixture.cs" />
     <Compile Include="Utils\TestStringHelper.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +90,10 @@
     <ProjectReference Include="..\UntappdViewer\UntappdViewer.csproj">
       <Project>{0BFB86F3-F42B-4617-A2E4-DA2549F2EC75}</Project>
       <Name>UntappdViewer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UntappdWebApiClient\UntappdWebApiClient.csproj">
+      <Project>{b0d9f698-52db-4794-8600-18153aba3d36}</Project>
+      <Name>UntappdWebApiClient</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
