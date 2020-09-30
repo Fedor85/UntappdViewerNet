@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
 
 namespace UntappdWebApiClient
@@ -9,12 +10,17 @@ namespace UntappdWebApiClient
 
         private UrlPathBuilder urlPathBuilder;
 
-        public Client(string clinetId, string clientSecret)
+        private Client()
+        {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+        }
+
+        public Client(string clinetId, string clientSecret):this()
         {
             urlPathBuilder = new UrlPathBuilder(baseUrl, clinetId, clientSecret);
         }
 
-        public Client(string accessToken)
+        public Client(string accessToken) : this()
         {
             urlPathBuilder = new UrlPathBuilder(baseUrl, accessToken);
         }
