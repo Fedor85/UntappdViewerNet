@@ -457,7 +457,7 @@ namespace UntappdViewer.ViewModels
             CheckinVenueCity = checkin.Venue.City;
             VisibilityCheckinVenueLocation = checkin.Venue.Latitude.HasValue && checkin.Venue.Longitude.HasValue;
             CheckinServingType = ConverterHelper.GetServingTypeImagePath(checkin.ServingType);
-            UpadateCheckinPhoto(checkin);
+            UpdateCheckinPhoto(checkin);
 
             BeerUrl = checkin.Beer.Url;
             BeerName = checkin.Beer.Name;
@@ -511,14 +511,14 @@ namespace UntappdViewer.ViewModels
             return beerIBU.HasValue ? beerIBU.Value.ToString() : "No IBU";
         }
 
-        private void UpadateCheckinPhoto(Checkin checkin)
+        private void UpdateCheckinPhoto(Checkin checkin)
         {
             CheckinPhotoPath = DefautlValues.DefaultCheckinPhotoPath;
             LoadingChangeActivity(true);
-            UpadateCheckinPhotoAsunc(checkin);
+            UpdateCheckinPhotoAsunc(checkin);
         }
 
-        private async void UpadateCheckinPhotoAsunc(Checkin checkin)
+        private async void UpdateCheckinPhotoAsunc(Checkin checkin)
         {
             try
             {
