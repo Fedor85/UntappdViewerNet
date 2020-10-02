@@ -349,7 +349,7 @@
     <Resource Include="Resources\ServingType\growler.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ServingType\taster%403x.png" />
+    <Resource Include="Resources\ServingType\taster%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\empty_1x1.png" />
