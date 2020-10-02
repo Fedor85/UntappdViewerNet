@@ -133,10 +133,10 @@ namespace UntappdViewer.ViewModels
 
             CallBackConteiner<List<long>> callBackConteiner = new CallBackConteiner<List<long>>();
             eventAggregator.GetEvent<RequestCheckinsEvent>().Publish(callBackConteiner);
-            UploadProjectPhotosASync(callBackConteiner.Content, directoryPath);
+            UploadProjectPhotosAsync(callBackConteiner.Content, directoryPath);
         }
 
-        private async void UploadProjectPhotosASync(List<long> checkinIds, string uploadDirectory)
+        private async void UploadProjectPhotosAsync(List<long> checkinIds, string uploadDirectory)
         {
             for (int i = 0; i < checkinIds.Count; i++)
             {
