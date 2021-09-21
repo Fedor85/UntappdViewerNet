@@ -23,7 +23,7 @@ namespace UntappdViewer.ViewModels
     {
         private UntappdService untappdService;
 
-        private InteractionRequestService interactionRequestService;
+        private IInteractionRequestService interactionRequestService;
 
         private ISettingService settingService;
 
@@ -43,7 +43,7 @@ namespace UntappdViewer.ViewModels
 
         public ICommand UploadProjectPhotoCommand { get; }
 
-        public MenuBarViewModel(UntappdService untappdService, InteractionRequestService interactionRequestService,
+        public MenuBarViewModel(UntappdService untappdService,  IInteractionRequestService interactionRequestService,
                                                                 ISettingService settingService,
                                                                 IModuleManager moduleManager,
                                                                 IRegionManager regionManager,

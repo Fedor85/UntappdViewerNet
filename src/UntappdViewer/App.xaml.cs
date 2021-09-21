@@ -2,7 +2,9 @@
 using System.Windows;
 using Prism.Ioc;
 using Prism.Modularity;
+using Prism.Services.Dialogs;
 using Prism.Unity;
+using Unity;
 using UntappdViewer.Domain.Services;
 using UntappdViewer.Infrastructure.Services;
 using UntappdViewer.Interfaces.Services;
@@ -24,17 +26,19 @@ namespace UntappdViewer
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.Register<InteractionRequestService>();
-            containerRegistry.RegisterDialog<NotificationDialog>();
-            containerRegistry.RegisterDialog<AskDialog>();
-            containerRegistry.RegisterDialog<TextBoxDialog>();
-
             ISettingService settingService = new SettingService();
             //if (Debugger.IsAttached)
             //    settingService.Reset();
 
             containerRegistry.RegisterInstance(settingService);
             containerRegistry.RegisterInstance(new UntappdService(settingService));
+
+            IDialogService dialogService = containerRegistry.GetContainer().Resolve<IDialogService>();
+            containerRegistry.RegisterInstance<IInteractionRequestService>(new InteractionRequestService(dialogService));
+            containerRegistry.RegisterDialog<NotificationDialog>();
+            containerRegistry.RegisterDialog<AskDialog>();
+            containerRegistry.RegisterDialog<TextBoxDialog>();
+
             containerRegistry.Register<IWebDownloader, WebDownloader>();
         }
 

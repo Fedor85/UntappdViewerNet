@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Prism.Services.Dialogs;
+using UntappdViewer.Interfaces.Services;
 using Application = System.Windows.Application;
 using DialogResult = System.Windows.Forms.DialogResult;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
@@ -11,7 +12,7 @@ using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 
 namespace UntappdViewer.Services
 {
-    public class InteractionRequestService
+    public class InteractionRequestService: IInteractionRequestService
     {
         private IDialogService dialogService;
 

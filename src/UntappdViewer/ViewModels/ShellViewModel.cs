@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Windows.Input;
 using Prism.Commands;
-//using Prism.Interactivity.InteractionRequest;
 using Prism.Modularity;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -20,7 +19,7 @@ namespace UntappdViewer.ViewModels
     {
         private UntappdService untappdService;
 
-        private InteractionRequestService interactionRequestService;
+        private IInteractionRequestService interactionRequestService;
 
         private IRegionManager regionManager;
 
@@ -56,19 +55,16 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public ShellViewModel(UntappdService untappdService, InteractionRequestService interactionRequestService,
-                                                                IRegionManager regionManager,
-                                                                ISettingService settingService,
-                                                                IModuleManager moduleManager)
+        public ShellViewModel(UntappdService untappdService, IInteractionRequestService interactionRequestService,
+                                                             IRegionManager regionManager,
+                                                             ISettingService settingService,
+                                                             IModuleManager moduleManager)
         {
             this.untappdService = untappdService;
             this.interactionRequestService = interactionRequestService;
             this.regionManager = regionManager;
             this.settingService = settingService;
             this.moduleManager = moduleManager;
-
-            //ConfirmationRequest = interactionRequestService.ConfirmationRequest;
-            //NotificationRequest = interactionRequestService.NotificationRequest;
 
             ClosingCommand = new DelegateCommand<CancelEventArgs>(Closing);
             untappdService.UpdateUntappdUserNameEvent += UpdateTitle;

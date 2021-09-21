@@ -23,7 +23,7 @@ namespace UntappdViewer.ViewModels
 
         private UntappdService untappdService;
 
-        private InteractionRequestService interactionRequestService;
+        private IInteractionRequestService interactionRequestService;
 
         private IEventAggregator eventAggregator;
 
@@ -394,7 +394,7 @@ namespace UntappdViewer.ViewModels
         public ICommand CheckinVenueLocationCommand { get; }
 
 
-        public CheckinViewModel(UntappdService untappdService, InteractionRequestService interactionRequestService,
+        public CheckinViewModel(UntappdService untappdService, IInteractionRequestService interactionRequestService,
                                                                IWebDownloader webDownloader,
                                                                IEventAggregator eventAggregator,
                                                                IModuleManager moduleManager,

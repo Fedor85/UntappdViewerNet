@@ -1,12 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
-using UntappdViewer.Services;
+using UntappdViewer.Interfaces.Services;
 
 namespace UntappdViewer.ViewModels
 {
     public class StatusBarViewModel : ActiveAwareBaseModel
     {
-        private InteractionRequestService interactionRequestService;
+        private IInteractionRequestService interactionRequestService;
 
         private string message;
 
@@ -20,7 +20,7 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public StatusBarViewModel(InteractionRequestService interactionRequestService)
+        public StatusBarViewModel(IInteractionRequestService interactionRequestService)
         {
             this.interactionRequestService = interactionRequestService;
         }

@@ -14,7 +14,6 @@ using UntappdViewer.Helpers;
 using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
-using UntappdViewer.Services;
 using UntappdViewer.Views;
 
 namespace UntappdViewer.ViewModels
@@ -23,7 +22,7 @@ namespace UntappdViewer.ViewModels
     {
         private UntappdService untappdService;
 
-        private InteractionRequestService interactionRequestService;
+        private IInteractionRequestService interactionRequestService;
 
         private ISettingService settingService;
 
@@ -47,11 +46,11 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public WelcomeViewModel(UntappdService untappdService, InteractionRequestService interactionRequestService,
-                                                                ISettingService settingService,
-                                                                IModuleManager moduleManager,
-                                                                IRegionManager regionManager,
-                                                                IEventAggregator eventAggregator) : base(regionManager)
+        public WelcomeViewModel(UntappdService untappdService, IInteractionRequestService interactionRequestService,
+                                                               ISettingService settingService,
+                                                               IModuleManager moduleManager,
+                                                               IRegionManager regionManager,
+                                                               IEventAggregator eventAggregator) : base(regionManager)
         {
             this.untappdService = untappdService;
             this.interactionRequestService = interactionRequestService;
