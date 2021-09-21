@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="UntappdViewer.Views.AskDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mvvm="http://prismlibrary.com/"
+             xmlns:properties="clr-namespace:UntappdViewer.Properties"
+             mc:Ignorable="d" 
+             mvvm:ViewModelLocator.AutoWireViewModel="True"
+             Height="120" Width="300" Background="{StaticResource MainColor}">
+    <mvvm:Dialog.WindowStyle>
+        <Style TargetType="Window">
+            <Setter Property="SizeToContent" Value="WidthAndHeight"/>
+            <Setter Property="ResizeMode" Value="NoResize"/>
+            <Setter Property="Icon" Value="{Binding IconSource}"/>
+        </Style>
+    </mvvm:Dialog.WindowStyle>
+    <Grid x:Name="LayoutRoot" Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <TextBlock  Grid.Row="0"  Text="{Binding Message}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextWrapping="Wrap" Background="White"/>
+        <Button  Grid.Row="1" Content="{x:Static properties:Resources.Ok}" Command="{Binding OkDialogCommand}" 
+                 Width="60" Height="20" HorizontalAlignment="Right" VerticalAlignment="Center" IsDefault="True"  Margin="0,0,65,0"/>
+        <Button  Grid.Row="1" Content="{x:Static properties:Resources.Cancel}" Command="{Binding CancelDialogCommand}" 
+                 Width="60" Height="20" HorizontalAlignment="Right" VerticalAlignment="Center" IsDefault="True"/>
+    </Grid>
+</UserControl>

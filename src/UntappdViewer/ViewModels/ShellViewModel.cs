@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Windows.Input;
 using Prism.Commands;
-using Prism.Interactivity.InteractionRequest;
+//using Prism.Interactivity.InteractionRequest;
 using Prism.Modularity;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -32,10 +32,6 @@ namespace UntappdViewer.ViewModels
 
         private bool loadedWindow;
 
-        public InteractionRequest<IConfirmation> ConfirmationRequest { get; }
-
-        public InteractionRequest<INotification> NotificationRequest { get; }
-
         public ICommand ClosingCommand { get; }
 
         public string Title
@@ -44,7 +40,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 title = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("Title"));
             }
         }
 
@@ -54,7 +50,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 loadedWindow = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("LoadedWindow"));
                 if(value)
                     Activate();
             }
@@ -71,8 +67,8 @@ namespace UntappdViewer.ViewModels
             this.settingService = settingService;
             this.moduleManager = moduleManager;
 
-            ConfirmationRequest = interactionRequestService.ConfirmationRequest;
-            NotificationRequest = interactionRequestService.NotificationRequest;
+            //ConfirmationRequest = interactionRequestService.ConfirmationRequest;
+            //NotificationRequest = interactionRequestService.NotificationRequest;
 
             ClosingCommand = new DelegateCommand<CancelEventArgs>(Closing);
             untappdService.UpdateUntappdUserNameEvent += UpdateTitle;

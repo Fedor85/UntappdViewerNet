@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -42,7 +43,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 treeViewCaption = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("TreeViewCaption"));
             }
         }
 
@@ -54,7 +55,7 @@ namespace UntappdViewer.ViewModels
                 search = value;
                 AppFilter(value);
                 UpdateTreeViewCaption();
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("Search"));
             }
         }
 
@@ -64,7 +65,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 isCheckedUniqueCheckBox = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("IsCheckedUniqueCheckBox"));
             }
         }
 
@@ -74,7 +75,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 treeItems = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("TreeItems"));
             }
         }
 
@@ -84,7 +85,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 selectedTreeItem = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("SelectedTreeItem"));
                 UpdateContent();
             }
         }

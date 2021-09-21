@@ -8,15 +8,16 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:command="http://www.galasoft.ch/mvvmlight"
              xmlns:local="clr-namespace:UntappdViewer"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="600" d:DesignWidth="800"  Background="{StaticResource MainColor}"
              AllowDrop="True">
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Drop">
-            <command:EventToCommand Command="{Binding DropFileCommand}" PassEventArgsToCommand="True" />
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Drop">
+            <prism:InvokeCommandAction Command="{Binding DropFileCommand}"/>
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
     <Grid Background="{StaticResource MainBackground}">
         <Grid.RowDefinitions>
             <RowDefinition/>

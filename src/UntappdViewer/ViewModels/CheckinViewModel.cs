@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -92,7 +93,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 checkinHeader = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("CheckinHeader"));
             }
         }
 
@@ -102,7 +103,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 checkinUrl = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("CheckinUrl"));
             }
         }
 
@@ -112,7 +113,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 vsibilityCheckinRating = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("VsibilityCheckinRating"));
             }
         }
 
@@ -122,7 +123,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 checkinRating = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("CheckinRating"));
             }
         }
 
@@ -132,7 +133,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 checkinVenueName = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("CheckinVenueName"));
                 VisibilityCheckinVenueCountrySeporator = !String.IsNullOrEmpty(value);
             }
         }
@@ -143,7 +144,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 visibilityCheckinVenueCountrySeporator = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("VisibilityCheckinVenueCountrySeporator"));
             }
         }
 
@@ -153,7 +154,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 checkinVenueCountry = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("CheckinVenueCountry"));
             }
         }
 
@@ -163,7 +164,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 visibilityСheckinVenueStateSeporator = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("VisibilityCheckinVenueStateSeporator"));
             }
         }
 
@@ -173,7 +174,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 checkinVenueState = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("CheckinVenueState"));
                 VisibilityCheckinVenueStateSeporator = !String.IsNullOrEmpty(value);
             }
         }
@@ -184,7 +185,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 visibilityСheckinVenueCitySeporator = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("VisibilityСheckinVenueCitySeporator"));
             }
         }
 
@@ -194,7 +195,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 checkinVenueCity = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("CheckinVenueCity"));
                 VisibilityСheckinVenueCitySeporator = !String.IsNullOrEmpty(value);
             }
         }
@@ -205,7 +206,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 visibilityCheckinVenueLocation = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("VisibilityCheckinVenueLocation"));
             }
         }
 
@@ -215,7 +216,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 checkinServingType = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("CheckinServingType"));
             }
         }
 
@@ -225,7 +226,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 checkinPhotoPath = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("CheckinPhotoPath"));
             }
         }
 
@@ -237,7 +238,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 beerUrl = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("BeerUrl"));
             }
         }
 
@@ -247,7 +248,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 beerName = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("BeerName"));
             }
         }
 
@@ -257,7 +258,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 beerType = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("BeerType"));
             }
         }
 
@@ -267,7 +268,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 beerABV = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("BeerABV"));
             }
         }
 
@@ -277,7 +278,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 beerIBU = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("BeerIBU"));
             }
         }
 
@@ -287,7 +288,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 beerRating = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("BeerRating"));
             }
         }
 
@@ -301,7 +302,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 breweryUrl = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("BreweryUrl"));
             }
         }
 
@@ -311,7 +312,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 breweryName = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("BreweryName"));
             }
         }
 
@@ -321,7 +322,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 breweryVenueName = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("BreweryVenueName"));
                 VisibilityBreweryVenueCountrySeporator = !String.IsNullOrEmpty(value);
             }
         }
@@ -332,7 +333,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 visibilityBreweryVenueCountrySeporator = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("VisibilityBreweryVenueCountrySeporator"));
             }
         }
 
@@ -342,7 +343,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 breweryVenueCountry = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("BreweryVenueCountry"));
             }
         }
 
@@ -352,7 +353,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 visibilityBreweryVenueStateSeporator = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("VisibilityBreweryVenueStateSeporator"));
             }
         }
 
@@ -362,7 +363,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 breweryVenueState = value;      
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("BreweryVenueState"));
                 VisibilityBreweryVenueStateSeporator = !String.IsNullOrEmpty(value);
             }
         }
@@ -373,7 +374,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 visibilityBreweryVenueCitySeporator = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("VisibilityBreweryVenueCitySeporator"));
             }
         }
 
@@ -383,7 +384,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 breweryVenueCity = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("BreweryVenueCity"));
                 VisibilityBreweryVenueCitySeporator = !String.IsNullOrEmpty(value);
             }
         }

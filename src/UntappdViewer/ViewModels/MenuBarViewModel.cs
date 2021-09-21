@@ -16,7 +16,6 @@ using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
 using UntappdViewer.Modules;
 using UntappdViewer.Services;
-using UntappdViewer.Services.PopupWindowAction;
 
 namespace UntappdViewer.ViewModels
 {
@@ -85,11 +84,10 @@ namespace UntappdViewer.ViewModels
 
         private void RenameProject()
         {
-            ConfirmationResult<string> confirmationResult = interactionRequestService.AskReplaceText(Properties.Resources.RenameProject, untappdService.GetUntappdUserName());
-            if (!confirmationResult.Result)
-                return;
-
-            untappdService.UpdateUntappdUserName(confirmationResult.Value);
+            string oldName = untappdService.GetUntappdUserName();
+            string newName = interactionRequestService.AskReplaceText(Properties.Resources.RenameProject, oldName);
+            if (!oldName.Equals(newName))
+                untappdService.UpdateUntappdUserName(newName);
         }
 
         private void SaveProject()

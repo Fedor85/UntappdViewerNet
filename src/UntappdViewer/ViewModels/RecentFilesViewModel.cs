@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Input;
 using Prism.Commands;
 using Prism.Events;
@@ -24,7 +25,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 fileItems = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("FileItems"));
             }
         }
 

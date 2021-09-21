@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using UntappdViewer.Services;
 
 namespace UntappdViewer.ViewModels
@@ -15,7 +16,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 message = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("Message"));
             }
         }
 

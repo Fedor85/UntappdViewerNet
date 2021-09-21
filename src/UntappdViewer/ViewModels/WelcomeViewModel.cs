@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
@@ -42,7 +43,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 untappdUserName = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("UntappdUserName"));
             }
         }
 

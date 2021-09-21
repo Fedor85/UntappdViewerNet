@@ -9,24 +9,18 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:command="http://www.galasoft.ch/mvvmlight"
         xmlns:behaviors="clr-namespace:UntappdViewer.Behaviors"
-        xmlns:popupWindowAction="clr-namespace:UntappdViewer.Services.PopupWindowAction"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="{Binding Title}" Height="600" Width="800" MinHeight="600" MinWidth="800" Background="{StaticResource MainColor}" WindowStartupLocation ="CenterScreen">
-    <i:Interaction.Behaviors>
+    <b:Interaction.Behaviors>
         <behaviors:LoadedWindowBehavior LoadedWindow ="{Binding LoadedWindow, Mode=TwoWay}"/>
-    </i:Interaction.Behaviors>
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Closing">
-            <command:EventToCommand Command="{Binding ClosingCommand}"  PassEventArgsToCommand="True" />
-        </i:EventTrigger>
-        <prism:InteractionRequestTrigger SourceObject="{Binding ConfirmationRequest, Mode=OneWay}">
-            <popupWindowAction:IconPopupWindowAction IsModal="True" WindowStartupLocation="CenterOwner"/>
-        </prism:InteractionRequestTrigger>
-        <prism:InteractionRequestTrigger SourceObject="{Binding NotificationRequest, Mode=OneWay}">
-            <popupWindowAction:IconPopupWindowAction IsModal="True" WindowStartupLocation="CenterOwner"/>
-        </prism:InteractionRequestTrigger>
-    </i:Interaction.Triggers>
+    </b:Interaction.Behaviors>
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Closing">
+            <prism:InvokeCommandAction Command="{Binding ClosingCommand}"/>
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
     <Grid Background="{StaticResource MainBackground}">
         <ItemsControl HorizontalAlignment="Center" VerticalAlignment="Center" >
             <Image Height="80" Width="300" Source="..\Resources\pbu_320_white.png"/>

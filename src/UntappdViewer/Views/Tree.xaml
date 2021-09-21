@@ -9,6 +9,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:behaviors="clr-namespace:UntappdViewer.Behaviors"
              xmlns:untappdViewer="clr-namespace:UntappdViewer"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              prism:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="600" d:DesignWidth="250">
@@ -33,9 +34,9 @@
                         <Setter Property="Visibility" Value="{Binding Visibility, Mode=TwoWay}" />
                     </Style>
                 </TreeView.ItemContainerStyle>
-                <i:Interaction.Behaviors>
+                <b:Interaction.Behaviors>
                     <behaviors:SelectedTreeViewItemBehavior SelectedItem="{Binding SelectedTreeItem, Mode=TwoWay}" />
-                </i:Interaction.Behaviors>
+                </b:Interaction.Behaviors>
             </TreeView>
         </ScrollViewer>
     </Grid>

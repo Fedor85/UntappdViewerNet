@@ -2,67 +2,64 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
-using System.Windows;
 using System.Windows.Forms;
-using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using Prism.Interactivity.InteractionRequest;
-using UntappdViewer.Services.PopupWindowAction;
+using Prism.Services.Dialogs;
 using Application = System.Windows.Application;
+using DialogResult = System.Windows.Forms.DialogResult;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
-using TextBox = UntappdViewer.Views.TextBox;
 
 namespace UntappdViewer.Services
 {
     public class InteractionRequestService
     {
-        public InteractionRequest<IConfirmation> ConfirmationRequest { get; }
-      
-        public InteractionRequest<INotification> NotificationRequest { get; }
+        private IDialogService dialogService;
 
         public event Action<string> ShowMessageOnStatusBarEnvent;
 
         public event Action ClearMessageOnStatusBarEnvent;
 
-        public InteractionRequestService()
+        public InteractionRequestService(IDialogService dialogService)
         {
-            ConfirmationRequest = new InteractionRequest<IConfirmation>();
-            NotificationRequest = new InteractionRequest<INotification>();
+            this.dialogService = dialogService;
         }
 
         public void ShowMessage(string caption, string message)
         {
-            IconNotification notification = GetINotification<IconNotification>(new IconNotification(), caption, message);
-            AddIcon(notification, SystemIcons.Warning);
-            NotificationRequest.Raise(notification);
+            ShowNotificationDialog(caption, message, SystemIcons.Warning);
         }
 
         public void ShowError(string caption, string message)
         {
-            IconNotification notification = GetINotification<IconNotification>(new IconNotification(), caption, message);
-            AddIcon(notification, SystemIcons.Error);
-            NotificationRequest.Raise(notification);
+            ShowNotificationDialog(caption, message, SystemIcons.Error);
         }
 
         public bool Ask(string caption, string message)
         {
+            DialogParameters dialogParameters = new DialogParameters();
+            dialogParameters.Add("caption", caption);
+            dialogParameters.Add("message", message);
             bool result = false;
-            ConfirmationRequest.Raise(GetINotification<Confirmation>(new Confirmation(), caption, message), c => result = c.Confirmed);
+            dialogService.ShowDialog("AskDialog", dialogParameters,dialogResult =>
+            {
+                if (dialogResult.Result == ButtonResult.OK)
+                    result = true;
+            });
             return result;
         }
 
-        public ConfirmationResult<string> AskReplaceText(string caption, string text)
+        public string AskReplaceText(string caption, string text)
         {
-            bool result = false;
-            TextBox textBox = new TextBox();
-            textBox.TextContent.Text = text;
-            Confirmation confirmation = new Confirmation();
-            confirmation.Title = caption;
-            confirmation.Content = textBox;
-            ConfirmationRequest.Raise(confirmation, c => result = c.Confirmed);
-            return new ConfirmationResult<string>(textBox.TextContent.Text, result);
+            DialogParameters dialogParameters = new DialogParameters();
+            dialogParameters.Add("caption", caption);
+            dialogParameters.Add("text", text);
+            string result = text;
+            dialogService.ShowDialog("TextBoxDialog", dialogParameters, dialogResult =>
+            {
+                if (dialogResult.Result == ButtonResult.OK)
+                    result = dialogResult.Parameters.GetValue<string>("name");
+            });
+            return result;
         }
 
         public void ShowMessageOnStatusBar(string message)
@@ -129,27 +126,13 @@ namespace UntappdViewer.Services
             return filter.Remove(filter.Length - 1, 1).ToString();
         }
 
-        private T GetINotification<T>(INotification notification ,string caption, string message)
+        private void ShowNotificationDialog(string caption, string message, Icon icon)
         {
-            notification.Title = caption;
-            Views.MessageBox messageBox = new Views.MessageBox();
-            messageBox.Message.Text = message;
-            notification.Content = messageBox;
-            return (T) notification;
-        }
-
-        private void AddIcon(IIconNotification iconNotification, Icon icon)
-        {
-            if (icon != null)
-                iconNotification.Icon = ConvertIconToImageSource(icon);
-        }
-
-        private ImageSource ConvertIconToImageSource(Icon icon)
-        {
-            return Imaging.CreateBitmapSourceFromHIcon(
-                icon.Handle,
-                Int32Rect.Empty,
-                BitmapSizeOptions.FromEmptyOptions());
+            DialogParameters dialogParameters = new DialogParameters();
+            dialogParameters.Add("caption", caption);
+            dialogParameters.Add("message", message);
+            dialogParameters.Add("icon", icon);
+            dialogService.ShowDialog("NotificationDialog", dialogParameters, null);
         }
     }
 }

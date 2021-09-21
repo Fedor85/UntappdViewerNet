@@ -3,11 +3,11 @@
 namespace UntappdViewer.Views
 {
     /// <summary>
-    /// Interaction logic for MessageBox.xaml
+    /// Interaction logic for NotificationDialog.xaml
     /// </summary>
-    public partial class MessageBox : UserControl
+    public partial class NotificationDialog : UserControl
     {
-        public MessageBox()
+        public NotificationDialog()
         {
             InitializeComponent();
         }

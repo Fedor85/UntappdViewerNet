@@ -3,11 +3,11 @@
 namespace UntappdViewer.Views
 {
     /// <summary>
-    /// Interaction logic for TextBox.xaml
+    /// Interaction logic for AskDialog.xaml
     /// </summary>
-    public partial class TextBox : UserControl
+    public partial class AskDialog : UserControl
     {
-        public TextBox()
+        public AskDialog()
         {
             InitializeComponent();
         }

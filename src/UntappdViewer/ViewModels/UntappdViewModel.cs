@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using Prism.Modularity;
 using Prism.Regions;
 using UntappdViewer.Domain.Services;
@@ -28,7 +29,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 treeRegionWidth = value;
-                OnPropertyChanged();
+                OnPropertyChanged(new PropertyChangedEventArgs("TreeRegionWidth"));
             }
         }
 
