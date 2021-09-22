@@ -26,7 +26,20 @@
         </Grid.RowDefinitions>
         <ItemsControl Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Image Height="80" Width="300" Source="..\Resources\pbu_320_white.png"/>
-            <Label Content="{x:Static properties:Resources.Signature}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Foreground="#ffffff"/>
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="{x:Static properties:Resources.Signature1}" FontSize="15" Foreground="#ffffff"/>
+                <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Hyperlink NavigateUri="{Binding EmailUrl}" RequestNavigate="HyperlinkOnRequestNavigate">
+                        <TextBlock Text="{x:Static properties:Resources.Email}" FontSize="15" Foreground="#ffffff"/>
+                    </Hyperlink>
+                </TextBlock>
+                <Label Grid.Column="2" Content="{x:Static properties:Resources.Signature2}" FontSize="15" Foreground="#ffffff"/>
+            </Grid>
         </ItemsControl>
         <Grid Grid.Row="3">
             <Grid.RowDefinitions>

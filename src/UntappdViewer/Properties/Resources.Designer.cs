@@ -192,6 +192,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to fvasilets@gmail.com.
+        /// </summary>
+        public static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap empty_1x1 {
@@ -416,11 +425,20 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to created by fvasilets@gmail.com (с) 2021.
+        ///   Looks up a localized string similar to created by.
         /// </summary>
-        public static string Signature {
+        public static string Signature1 {
             get {
-                return ResourceManager.GetString("Signature", resourceCulture);
+                return ResourceManager.GetString("Signature1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (с) 2021.
+        /// </summary>
+        public static string Signature2 {
+            get {
+                return ResourceManager.GetString("Signature2", resourceCulture);
             }
         }
         

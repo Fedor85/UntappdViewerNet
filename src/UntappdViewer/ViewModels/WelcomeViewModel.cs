@@ -34,6 +34,11 @@ namespace UntappdViewer.ViewModels
 
         public ICommand DropFileCommand { get; }
 
+        public string EmailUrl
+        {
+            get { return "mailto:" + Properties.Resources.Email; }
+        }
+
         public WelcomeViewModel(UntappdService untappdService, IInteractionRequestService interactionRequestService,
                                                                ISettingService settingService,
                                                                IModuleManager moduleManager,

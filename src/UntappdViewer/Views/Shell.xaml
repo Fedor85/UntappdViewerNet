@@ -24,7 +24,16 @@
     <Grid Background="{StaticResource MainBackground}">
         <ItemsControl HorizontalAlignment="Center" VerticalAlignment="Center" >
             <Image Height="80" Width="300" Source="..\Resources\pbu_320_white.png"/>
-            <Label Content="{x:Static properties:Resources.Signature}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Foreground="#ffffff"/>
+            <Grid  HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="{x:Static properties:Resources.Signature1}" HorizontalAlignment="Right" FontSize="15" Foreground="#ffffff"/>
+                <Label Grid.Column="1" Content="{x:Static properties:Resources.Email}" FontSize="15" Foreground="#ffffff"/>
+                <Label Grid.Column="2" Content="{x:Static properties:Resources.Signature2}" HorizontalAlignment="Left" FontSize="15" Foreground="#ffffff"/>
+            </Grid>
         </ItemsControl>
         <ContentControl prism:RegionManager.RegionName="{x:Static local:RegionNames.RootRegion}"/>
         <ContentControl prism:RegionManager.RegionName="{x:Static local:RegionNames.LoadingRegion}"/>

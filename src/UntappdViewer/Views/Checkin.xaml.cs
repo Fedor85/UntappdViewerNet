@@ -18,10 +18,5 @@ namespace UntappdViewer.Views
         {
             System.Diagnostics.Process.Start(e.Uri.ToString());
         }
-
-        private void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
     }
 }

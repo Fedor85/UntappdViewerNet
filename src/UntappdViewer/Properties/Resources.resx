@@ -133,8 +133,8 @@
     <value>Warning.</value>
     <comment>en-en</comment>
   </data>
-  <data name="Signature" xml:space="preserve">
-    <value>created by fvasilets@gmail.com (с) 2021</value>
+  <data name="Signature1" xml:space="preserve">
+    <value>created by</value>
     <comment>en-en</comment>
   </data>
   <data name="untappd_bottles" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -293,5 +293,11 @@
   <data name="Ok" xml:space="preserve">
     <value>OK</value>
     <comment>en-en</comment>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>fvasilets@gmail.com</value>
+  </data>
+  <data name="Signature2" xml:space="preserve">
+    <value>(с) 2021</value>
   </data>
 </root>
