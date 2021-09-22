@@ -309,5 +309,10 @@
   </data>
   <data name="MyProfileUrl" xml:space="preserve">
     <value>https://untappd.com/user/Feador</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="CreateProject" xml:space="preserve">
+    <value>Create project</value>
+    <comment>en-en</comment>
   </data>
 </root>

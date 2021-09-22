@@ -32,6 +32,13 @@ namespace UntappdViewer.Domain.Services
             Untappd = new Untappd(String.Empty);
         }
 
+        public void Create(string userName)
+        {
+            Untappd = new Untappd(GetUntappdUserName(userName));
+            InitializeUntappdEvent?.Invoke(Untappd);
+            UpdateUntappdUserNameEvent?.Invoke(Untappd.UserName);
+        }
+
         public void Initialize(string filePath, string userName = null)
         {
             switch (FileHelper.GetExtensionWihtoutPoint(filePath))

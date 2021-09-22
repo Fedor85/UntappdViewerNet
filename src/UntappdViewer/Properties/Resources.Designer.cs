@@ -172,6 +172,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create project.
+        /// </summary>
+        public static string CreateProject {
+            get {
+                return ResourceManager.GetString("CreateProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap crowler {

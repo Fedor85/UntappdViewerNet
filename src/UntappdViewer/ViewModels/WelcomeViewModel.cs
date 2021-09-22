@@ -34,6 +34,8 @@ namespace UntappdViewer.ViewModels
 
         public ICommand DropFileCommand { get; }
 
+        public ICommand CreateProjectCommand { get; }
+
         public string EmailUrl
         {
             get { return "mailto:" + Properties.Resources.Email; }
@@ -59,6 +61,7 @@ namespace UntappdViewer.ViewModels
 
             OpenFileCommand = new DelegateCommand(OpenFile);
             DropFileCommand = new DelegateCommand<DragEventArgs>(DropFile);
+            CreateProjectCommand = new DelegateCommand(CreateProject);
         }
 
         protected override void Activate()
@@ -96,6 +99,14 @@ namespace UntappdViewer.ViewModels
                 return;
 
             RunUntappd(filesPaths[0]);
+        }
+
+        private void CreateProject()
+        {
+            string untappdUserName = interactionRequestService.AskReplaceText(Properties.Resources.UntappdUserNameCaption, String.Empty);
+            untappdService.Create(untappdUserName);
+            moduleManager.LoadModule(typeof(MainModule).Name);
+            ActivateView(RegionNames.RootRegion, typeof(Main));
         }
 
         private void RunUntappd(string filePath)
