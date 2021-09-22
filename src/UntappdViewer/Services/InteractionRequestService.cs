@@ -58,7 +58,7 @@ namespace UntappdViewer.Services
             dialogService.ShowDialog("TextBoxDialog", dialogParameters, dialogResult =>
             {
                 if (dialogResult.Result == ButtonResult.OK)
-                    result = dialogResult.Parameters.GetValue<string>("name");
+                    result = dialogResult.Parameters.GetValue<string>("name").Trim();
             });
             return result;
         }

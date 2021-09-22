@@ -30,21 +30,9 @@ namespace UntappdViewer.ViewModels
 
         private IEventAggregator eventAggregator;
 
-        private string untappdUserName;
-
         public ICommand OpenFileCommand { get; }
 
         public ICommand DropFileCommand { get; }
-
-        public string UntappdUserName
-        {
-            get { return untappdUserName; }
-            set
-            {
-                untappdUserName = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("UntappdUserName"));
-            }
-        }
 
         public WelcomeViewModel(UntappdService untappdService, IInteractionRequestService interactionRequestService,
                                                                ISettingService settingService,
@@ -111,7 +99,11 @@ namespace UntappdViewer.ViewModels
 
             try
             {
-                untappdService.Initialize(filePath, UntappdUserName);
+                string untappdUserName = String.Empty;
+                if (FileHelper.GetExtensionWihtoutPoint(filePath).Equals(Extensions.CSV))
+                    untappdUserName = interactionRequestService.AskReplaceText(Properties.Resources.UntappdUserNameCaption, String.Empty);
+
+                untappdService.Initialize(filePath, untappdUserName);
             }
             catch (ArgumentException ex)
             {

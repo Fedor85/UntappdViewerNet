@@ -472,7 +472,7 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Untappd user name:.
+        ///   Looks up a localized string similar to Enter untappd user name..
         /// </summary>
         public static string UntappdUserNameCaption {
             get {
