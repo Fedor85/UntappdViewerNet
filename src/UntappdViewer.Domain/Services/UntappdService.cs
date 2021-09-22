@@ -39,13 +39,11 @@ namespace UntappdViewer.Domain.Services
                 case Extensions.CSV:
                     InitializeToCSV(filePath, userName);
                     break;
-
                 case Extensions.UNTP:
                     InitializeToUNTP(filePath);
                     break;
-                    default:
-
-                throw new ArgumentException(String.Format(Properties.Resources.ArgumentExceptionInitializeUntappd, filePath));
+                default:
+                    throw new ArgumentException(String.Format(Properties.Resources.ArgumentExceptionInitializeUntappd, filePath));
             }
             FilePath = filePath;
             InitializeUntappdEvent?.Invoke(Untappd);
