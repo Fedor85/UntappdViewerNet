@@ -481,6 +481,7 @@ namespace UntappdViewer.ViewModels
             CheckinUrl = DefautlValues.DefaultUrl;
             CheckinRating = 0;
             VsibilityCheckinRating = false;
+            CheckinVenueName = String.Empty;
             CheckinVenueCountry = String.Empty;
             CheckinVenueState = String.Empty;
             CheckinVenueCity = String.Empty;
