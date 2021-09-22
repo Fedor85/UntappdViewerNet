@@ -184,6 +184,16 @@ namespace UntappdViewer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap default_avatar {
+            get {
+                object obj = ResourceManager.GetObject("default_avatar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap draft_3x {
             get {
                 object obj = ResourceManager.GetObject("draft_3x", resourceCulture);
@@ -281,6 +291,24 @@ namespace UntappdViewer.Properties {
         public static string LoadingFrom {
             get {
                 return ResourceManager.GetString("LoadingFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My Profile.
+        /// </summary>
+        public static string MyProfile {
+            get {
+                return ResourceManager.GetString("MyProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://untappd.com/user/Feador.
+        /// </summary>
+        public static string MyProfileUrl {
+            get {
+                return ResourceManager.GetString("MyProfileUrl", resourceCulture);
             }
         }
         

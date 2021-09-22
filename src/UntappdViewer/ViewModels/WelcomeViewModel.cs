@@ -39,6 +39,11 @@ namespace UntappdViewer.ViewModels
             get { return "mailto:" + Properties.Resources.Email; }
         }
 
+        public string MyProfileUrl
+        {
+            get { return Properties.Resources.MyProfileUrl; }
+        }
+
         public WelcomeViewModel(UntappdService untappdService, IInteractionRequestService interactionRequestService,
                                                                ISettingService settingService,
                                                                IModuleManager moduleManager,
