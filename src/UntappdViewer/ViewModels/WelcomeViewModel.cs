@@ -107,6 +107,7 @@ namespace UntappdViewer.ViewModels
             untappdService.Create(untappdUserName);
             moduleManager.LoadModule(typeof(MainModule).Name);
             ActivateView(RegionNames.RootRegion, typeof(Main));
+            interactionRequestService.ClearMessageOnStatusBar();
         }
 
         private void RunUntappd(string filePath)

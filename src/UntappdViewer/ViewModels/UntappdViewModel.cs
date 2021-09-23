@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using Prism.Modularity;
 using Prism.Regions;
@@ -51,7 +52,8 @@ namespace UntappdViewer.ViewModels
             moduleManager.LoadModule(typeof(TreeModue).Name);
             ActivateView(RegionNames.TreeRegion, typeof(Tree));
 
-            interactionRequestService.ShowMessageOnStatusBar(CommunicationHelper.GetLoadingMessage(untappdService.FilePath));
+            if(!String.IsNullOrEmpty(untappdService.FilePath))
+                interactionRequestService.ShowMessageOnStatusBar(CommunicationHelper.GetLoadingMessage(untappdService.FilePath));
         }
 
         protected override void DeActivate()
