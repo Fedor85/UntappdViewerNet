@@ -24,29 +24,25 @@ namespace UntappdWebApiClient
 
         public bool Check(out string message)
         {
-            return CheckSuccessResponse( "checkin/recent/?", out message);
+            HttpResponseMessage httpResponse = GetHttpResponse("checkin/recent/?");
+            message = httpResponse.ReasonPhrase;
+            return httpResponse.IsSuccessStatusCode;
         }
 
         public List<Checkin> GetCheckins()
         {
-            using (HttpClient httpClient = new HttpClient())
-            {
-                string url = urlPathBuilder.GetUrl("user/checkins/?limit=50");
-                HttpResponseMessage httpResponse = httpClient.GetAsync(url).Result;
-                string responseBody = httpResponse.Content.ReadAsStringAsync().Result;
-                Temperatures temperatures = Newtonsoft.Json.JsonConvert.DeserializeObject<Temperatures>(responseBody);
-                return CheckinMapper.GetCheckins(temperatures.Response.Checkins);
-            }
+            HttpResponseMessage httpResponse = GetHttpResponse("user/checkins/?limit=50");
+            string responseBody = httpResponse.Content.ReadAsStringAsync().Result;
+            Temperatures temperatures = Newtonsoft.Json.JsonConvert.DeserializeObject<Temperatures>(responseBody);
+            return CheckinMapper.GetCheckins(temperatures.Response.Checkins);
         }
 
-        private bool CheckSuccessResponse(string methodName, out string message)
+        private HttpResponseMessage GetHttpResponse(string methodName)
         {
             using (HttpClient httpClient = new HttpClient())
             {
                 string url = urlPathBuilder.GetUrl(methodName);
-                HttpResponseMessage httpResponse = httpClient.GetAsync(url).Result;
-                message = httpResponse.ReasonPhrase;
-                return httpResponse.IsSuccessStatusCode;
+                return httpClient.GetAsync(url).Result;
             }
         }
     }
