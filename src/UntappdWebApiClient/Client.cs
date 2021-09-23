@@ -1,6 +1,8 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using QuickType.WebModels;
+using UntappdViewer.Models;
 
 namespace UntappdWebApiClient
 {
@@ -25,7 +27,7 @@ namespace UntappdWebApiClient
             return CheckSuccessResponse( "checkin/recent/?", out message);
         }
 
-        public void FillCheckins()
+        public List<Checkin> GetCheckins()
         {
             using (HttpClient httpClient = new HttpClient())
             {
@@ -33,6 +35,7 @@ namespace UntappdWebApiClient
                 HttpResponseMessage httpResponse = httpClient.GetAsync(url).Result;
                 string responseBody = httpResponse.Content.ReadAsStringAsync().Result;
                 Temperatures temperatures = Newtonsoft.Json.JsonConvert.DeserializeObject<Temperatures>(responseBody);
+                return CheckinMapper.GetCheckins(temperatures.Response.Checkins);
             }
         }
 

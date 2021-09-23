@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System.Collections.Generic;
+using NUnit.Framework;
+using UntappdViewer.Models;
 using UntappdWebApiClient;
 
 namespace UntappdViewer.Test
@@ -17,7 +19,7 @@ namespace UntappdViewer.Test
             string message;
             Assert.True(untappdClient.Check(out message));
 
-            untappdClient.FillCheckins();
+            List<Checkin> checkins = untappdClient.GetCheckins();
         }
     }
 }
