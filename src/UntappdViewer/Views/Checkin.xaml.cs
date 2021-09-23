@@ -1,5 +1,4 @@
 ﻿using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Navigation;
 
 namespace UntappdViewer.Views
@@ -16,7 +15,8 @@ namespace UntappdViewer.Views
 
         private void HyperlinkOnRequestNavigate(object sender, RequestNavigateEventArgs e)
         {
-            System.Diagnostics.Process.Start(e.Uri.ToString());
+            if (!e.Uri.AbsoluteUri.Equals(DefautlValues.DefaultUrl))
+                System.Diagnostics.Process.Start(e.Uri.AbsoluteUri);
         }
     }
 }
