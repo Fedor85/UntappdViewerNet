@@ -37,6 +37,7 @@ namespace UntappdViewer.Domain.Services
             Untappd = new Untappd(GetUntappdUserName(userName));
             InitializeUntappdEvent?.Invoke(Untappd);
             UpdateUntappdUserNameEvent?.Invoke(Untappd.UserName);
+            ResetСhanges();
         }
 
         public void Initialize(string filePath, string userName = null)
@@ -55,6 +56,7 @@ namespace UntappdViewer.Domain.Services
             FilePath = filePath;
             InitializeUntappdEvent?.Invoke(Untappd);
             UpdateUntappdUserNameEvent?.Invoke(Untappd.UserName);
+            ResetСhanges();
         }
 
         private void InitializeToCSV(string filePath, string userName)
