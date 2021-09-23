@@ -13,9 +13,11 @@ namespace UntappdViewer.Test
         public void Test()
         {
             Client untappdClient = new Client(AccessToken);
+
             string message;
             Assert.True(untappdClient.Check(out message));
-            Assert.True(untappdClient.CheckUser("feador", out message));
+
+            untappdClient.FillCheckins();
         }
     }
 }

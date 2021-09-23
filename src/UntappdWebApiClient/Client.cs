@@ -1,6 +1,6 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
+using QuickType.WebModels;
 
 namespace UntappdWebApiClient
 {
@@ -15,11 +15,6 @@ namespace UntappdWebApiClient
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
         }
 
-        public Client(string clinetId, string clientSecret):this()
-        {
-            urlPathBuilder = new UrlPathBuilder(baseUrl, clinetId, clientSecret);
-        }
-
         public Client(string accessToken) : this()
         {
             urlPathBuilder = new UrlPathBuilder(baseUrl, accessToken);
@@ -27,19 +22,26 @@ namespace UntappdWebApiClient
 
         public bool Check(out string message)
         {
-            return CheckSuccessResponse( "checkin/recent", out message);
+            return CheckSuccessResponse( "checkin/recent/?", out message);
         }
 
-        public bool CheckUser(string userName, out string message)
+        public void FillCheckins()
         {
-            return CheckSuccessResponse(String.Format("user/info/{0}", userName), out message);
+            using (HttpClient httpClient = new HttpClient())
+            {
+                string url = urlPathBuilder.GetUrl("user/checkins/?limit=50");
+                HttpResponseMessage httpResponse = httpClient.GetAsync(url).Result;
+                string responseBody = httpResponse.Content.ReadAsStringAsync().Result;
+                Temperatures temperatures = Newtonsoft.Json.JsonConvert.DeserializeObject<Temperatures>(responseBody);
+            }
         }
 
         private bool CheckSuccessResponse(string methodName, out string message)
         {
             using (HttpClient httpClient = new HttpClient())
             {
-                HttpResponseMessage httpResponse = httpClient.GetAsync(urlPathBuilder.GetUrl(methodName)).Result;
+                string url = urlPathBuilder.GetUrl(methodName);
+                HttpResponseMessage httpResponse = httpClient.GetAsync(url).Result;
                 message = httpResponse.ReasonPhrase;
                 return httpResponse.IsSuccessStatusCode;
             }
