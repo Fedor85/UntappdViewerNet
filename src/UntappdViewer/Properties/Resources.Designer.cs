@@ -201,6 +201,24 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Developer Profile.
+        /// </summary>
+        public static string DeveloperProfile {
+            get {
+                return ResourceManager.GetString("DeveloperProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://untappd.com/user/Feador.
+        /// </summary>
+        public static string DeveloperProfileUrl {
+            get {
+                return ResourceManager.GetString("DeveloperProfileUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap draft_3x {
@@ -300,24 +318,6 @@ namespace UntappdViewer.Properties {
         public static string LoadingFrom {
             get {
                 return ResourceManager.GetString("LoadingFrom", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to My Profile.
-        /// </summary>
-        public static string MyProfile {
-            get {
-                return ResourceManager.GetString("MyProfile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to https://untappd.com/user/Feador.
-        /// </summary>
-        public static string MyProfileUrl {
-            get {
-                return ResourceManager.GetString("MyProfileUrl", resourceCulture);
             }
         }
         

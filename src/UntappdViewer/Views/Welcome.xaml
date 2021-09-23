@@ -28,7 +28,7 @@
             <Image Height="50" Width="50" Source="..\Resources\default_avatar.png"/>
             <TextBlock >
                 <Hyperlink NavigateUri="{Binding MyProfileUrl}" RequestNavigate="HyperlinkOnRequestNavigate">
-                    <TextBlock Text="{x:Static properties:Resources.MyProfile}" Foreground="#ffffff"/>
+                    <TextBlock Text="{x:Static properties:Resources.DeveloperProfile}" Foreground="#ffffff"/>
                 </Hyperlink>
             </TextBlock>
         </StackPanel>

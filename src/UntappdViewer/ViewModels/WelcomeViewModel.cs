@@ -43,7 +43,7 @@ namespace UntappdViewer.ViewModels
 
         public string MyProfileUrl
         {
-            get { return Properties.Resources.MyProfileUrl; }
+            get { return Properties.Resources.DeveloperProfileUrl; }
         }
 
         public WelcomeViewModel(UntappdService untappdService, IInteractionRequestService interactionRequestService,
