@@ -34,7 +34,9 @@ namespace UntappdWebApiClient
             checkin.TotalComments = Convert.ToInt32(checkinsItem.Comments.TotalCount);
             checkin.TotalToasts = Convert.ToInt32(checkinsItem.Toasts.TotalCount);
 
-            FillVenue(checkin.Venue, checkinsItem.Venue);
+            if (checkinsItem.Venue.Length > 0)
+                FillVenue(checkin.Venue, checkinsItem.Venue[0]);
+
             FillBeer(checkin.Beer, checkinsItem.Beer);
             FillBrewery(checkin.Beer.Brewery, checkinsItem.Brewery);
 

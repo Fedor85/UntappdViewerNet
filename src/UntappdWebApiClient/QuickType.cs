@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 /// <summary>
 /// Сгенерировавано с помощью https://app.quicktype.io/
@@ -118,7 +119,8 @@ namespace QuickType.WebModels
         public Brewery Brewery { get; set; }
 
         [JsonProperty("venue")]
-        public Venue Venue { get; set; }
+        [JsonConverter(typeof(ObjectToArrayConverter<Venue>))]
+        public Venue[] Venue { get; set; }
 
         [JsonProperty("comments")]
         public Comments Comments { get; set; }
@@ -623,6 +625,26 @@ namespace QuickType.WebModels
 
         [JsonProperty("max_id")]
         public long MaxId { get; set; }
+    }
+
+    public class ObjectToArrayConverter<T> : CustomCreationConverter<T[]>
+    {
+        public override T[] Create(Type objectType)
+        {
+            return new T[0];
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            if (reader.TokenType == JsonToken.StartArray)
+            {
+                return serializer.Deserialize(reader, objectType);
+            }
+            else
+            {
+                return new T[] { serializer.Deserialize<T>(reader) };
+            }
+        }
     }
 
 }
