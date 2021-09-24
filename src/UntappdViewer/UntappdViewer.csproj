@@ -119,6 +119,7 @@
     <Compile Include="Modules\StatusBarModule.cs" />
     <Compile Include="Modules\TreeModue.cs" />
     <Compile Include="Modules\UntappdModule.cs" />
+    <Compile Include="Modules\WebDownloadProjectModule.cs" />
     <Compile Include="Modules\WelcomeModule.cs" />
     <Compile Include="Services\InteractionRequestService.cs" />
     <Compile Include="ViewModels\Base\BaseDialogModel.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="ViewModels\StatusBarViewModel.cs" />
     <Compile Include="ViewModels\TreeViewModel.cs" />
     <Compile Include="ViewModels\UntappdViewModel.cs" />
+    <Compile Include="ViewModels\WebDownloadProjectViewModel.cs" />
     <Compile Include="ViewModels\WelcomeViewModel.cs" />
     <Compile Include="Views\Checkin.xaml.cs">
       <DependentUpon>Checkin.xaml</DependentUpon>
@@ -176,6 +178,9 @@
     </Compile>
     <Compile Include="Views\Untappd.xaml.cs">
       <DependentUpon>Untappd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WebDownloadProject.xaml.cs">
+      <DependentUpon>WebDownloadProject.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Welcome.xaml.cs">
       <DependentUpon>Welcome.xaml</DependentUpon>
@@ -246,6 +251,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Untappd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WebDownloadProject.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

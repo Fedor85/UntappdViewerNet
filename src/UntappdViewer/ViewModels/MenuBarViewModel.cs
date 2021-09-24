@@ -185,7 +185,8 @@ namespace UntappdViewer.ViewModels
 
         private void WebDownloadProject()
         {
-
+            moduleManager.LoadModule(typeof(WebDownloadProjectModule).Name);
+            ActivateView(RegionNames.RootRegion, typeof(Views.WebDownloadProject));
         }
     }
 }
