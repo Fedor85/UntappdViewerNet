@@ -39,12 +39,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CheckinMapperFixture.cs" />
@@ -86,10 +80,6 @@
     <ProjectReference Include="..\UntappdViewer.Utils\UntappdViewer.Utils.csproj">
       <Project>{5fa116c9-7571-494c-a74d-7e121857ffe9}</Project>
       <Name>UntappdViewer.Utils</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\UntappdViewer\UntappdViewer.csproj">
-      <Project>{0BFB86F3-F42B-4617-A2E4-DA2549F2EC75}</Project>
-      <Name>UntappdViewer</Name>
     </ProjectReference>
     <ProjectReference Include="..\UntappdWebApiClient\UntappdWebApiClient.csproj">
       <Project>{b0d9f698-52db-4794-8600-18153aba3d36}</Project>
