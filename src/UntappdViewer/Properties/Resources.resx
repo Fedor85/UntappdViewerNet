@@ -315,4 +315,11 @@
     <value>Create project</value>
     <comment>en-en</comment>
   </data>
+  <data name="WebDownloadProject" xml:space="preserve">
+    <value>Web Download Project</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="web" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\web.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

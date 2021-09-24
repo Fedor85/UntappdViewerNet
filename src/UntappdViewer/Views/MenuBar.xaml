@@ -7,7 +7,7 @@
              xmlns:properties="clr-namespace:UntappdViewer.Properties"
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True"
-             d:DesignHeight="30" d:DesignWidth="800" >
+             d:DesignHeight="30" d:DesignWidth="800">
     <Menu VerticalAlignment="Top" Background="Transparent">
         <MenuItem Header="{x:Static properties:Resources.StartPageMenuItem}" Command="{Binding GoToWelcomeCommand}"/>
         <MenuItem Header="{x:Static properties:Resources.ProjectMenuItem}">
@@ -29,6 +29,11 @@
             <MenuItem Header="{x:Static properties:Resources.UploadPhoto}" Command="{Binding UploadProjectPhotoCommand}">
                 <MenuItem.Icon>
                     <Image Source="../Resources/upload_photo.ico"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="{x:Static properties:Resources.WebDownloadProject}" Command="{Binding WebDownloadProjectCommand}">
+                <MenuItem.Icon>
+                    <Image Source="../Resources/web.ico"/>
                 </MenuItem.Icon>
             </MenuItem>
         </MenuItem>

@@ -15,7 +15,6 @@ using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
 using UntappdViewer.Modules;
-using UntappdViewer.Services;
 
 namespace UntappdViewer.ViewModels
 {
@@ -43,6 +42,8 @@ namespace UntappdViewer.ViewModels
 
         public ICommand UploadProjectPhotoCommand { get; }
 
+        public ICommand WebDownloadProjectCommand { get; }
+
         public MenuBarViewModel(UntappdService untappdService,  IInteractionRequestService interactionRequestService,
                                                                 ISettingService settingService,
                                                                 IModuleManager moduleManager,
@@ -62,6 +63,7 @@ namespace UntappdViewer.ViewModels
             SaveProjectCommand = new DelegateCommand(SaveProject);
             SaveAsProjectCommand = new DelegateCommand(SaveAsProject);
             UploadProjectPhotoCommand = new DelegateCommand(UploadProjectPhotos);
+            WebDownloadProjectCommand = new DelegateCommand(WebDownloadProject);
         }
 
         protected override void Activate()
@@ -179,6 +181,11 @@ namespace UntappdViewer.ViewModels
                     throw new ArgumentException(String.Format(Properties.Resources.ArgumentExceptioSaveUntappdProject, untappdService.FilePath));
             }
             untappdService.ResetСhanges();
+        }
+
+        private void WebDownloadProject()
+        {
+
         }
     }
 }

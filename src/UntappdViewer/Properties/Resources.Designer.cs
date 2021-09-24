@@ -562,5 +562,24 @@ namespace UntappdViewer.Properties {
                 return ResourceManager.GetString("Warning", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        public static System.Drawing.Icon web {
+            get {
+                object obj = ResourceManager.GetObject("web", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Web Download Project.
+        /// </summary>
+        public static string WebDownloadProject {
+            get {
+                return ResourceManager.GetString("WebDownloadProject", resourceCulture);
+            }
+        }
     }
 }
