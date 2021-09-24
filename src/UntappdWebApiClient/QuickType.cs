@@ -606,7 +606,7 @@ namespace QuickType.WebModels
         public Uri NextUrl { get; set; }
 
         [JsonProperty("max_id")]
-        public long MaxId { get; set; }
+        public long? MaxId { get; set; }
     }
 
     public class ObjectToArrayConverter<T> : CustomCreationConverter<T[]>
