@@ -80,12 +80,16 @@ namespace UntappdViewer.Domain.Services
             CleanUntappdEvent?.Invoke();
         }
 
-        public string GetProjectExtensions()
+        public bool IsUNTPProject()
+        {
+            return !String.IsNullOrEmpty(FilePath) && GetProjectExtensions() == Extensions.UNTP;
+        }
+
+        private string GetProjectExtensions()
         {
             switch (FileHelper.GetExtensionWihtoutPoint(FilePath))
             {
                 case Extensions.CSV: return Extensions.CSV;
-
                 case Extensions.UNTP: return Extensions.UNTP;
                 default:
                     throw new ArgumentException(String.Format(Properties.Resources.ArgumentExceptionInitializeUntappd, FilePath));

@@ -536,23 +536,25 @@ namespace UntappdViewer.ViewModels
 
         private string GetCheckinPhotoPath(Checkin checkin)
         {
-            if (untappdService.GetProjectExtensions() == Extensions.CSV)
-                return DefautlValues.EmptyImage;
-
-            if (String.IsNullOrEmpty(checkin.UrlPhoto))
-                return DefautlValues.DefaultCheckinPhotoPath;
-
-            string photoPath = untappdService.GetFullCheckinPhotoFilePath(checkin);
-            if (!File.Exists(photoPath))
+            if (untappdService.IsUNTPProject())
             {
-                string directoryName = Path.GetDirectoryName(photoPath);
-                if (!Directory.Exists(directoryName))
-                    FileHelper.CreateDirectory(directoryName);
+                if (String.IsNullOrEmpty(checkin.UrlPhoto))
+                    return DefautlValues.DefaultCheckinPhotoPath;
 
-                webDownloader.DownloadFile(checkin.UrlPhoto, photoPath);
+                string photoPath = untappdService.GetFullCheckinPhotoFilePath(checkin);
+                if (!File.Exists(photoPath))
+                {
+                    string directoryName = Path.GetDirectoryName(photoPath);
+                    if (!Directory.Exists(directoryName))
+                        FileHelper.CreateDirectory(directoryName);
+
+                    webDownloader.DownloadFile(checkin.UrlPhoto, photoPath);
+                }
+
+                return photoPath;
             }
 
-            return photoPath;
+            return DefautlValues.EmptyImage;
         }
     }
 }

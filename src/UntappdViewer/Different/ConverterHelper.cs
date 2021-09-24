@@ -4,6 +4,9 @@
     {
         public static string GetServingTypeImagePath(string servingTypeName)
         {
+            if (servingTypeName == null)
+                return DefautlValues.EmptyImage;
+
             switch (servingTypeName.ToLower())
             {
                 case "draft":

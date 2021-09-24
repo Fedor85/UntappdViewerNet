@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using QuickType.WebModels;
@@ -13,13 +12,9 @@ namespace UntappdWebApiClient
 
         private UrlPathBuilder urlPathBuilder;
 
-        private Client()
+        public Client(string accessToken)
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-        }
-
-        public Client(string accessToken) : this()
-        {
             urlPathBuilder = new UrlPathBuilder(baseUrl, accessToken);
         }
 
