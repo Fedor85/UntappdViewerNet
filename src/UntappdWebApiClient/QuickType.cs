@@ -382,21 +382,6 @@ namespace QuickType.WebModels
 
         [JsonProperty("account_type", NullValueHandling = NullValueHandling.Ignore)]
         public string AccountType { get; set; }
-
-        [JsonProperty("venue_details", NullValueHandling = NullValueHandling.Ignore)]
-        public object[] VenueDetails { get; set; }
-
-        [JsonProperty("brewery_details", NullValueHandling = NullValueHandling.Ignore)]
-        public object[] BreweryDetails { get; set; }
-
-        [JsonProperty("url", NullValueHandling = NullValueHandling.Ignore)]
-        public string Url { get; set; }
-
-        [JsonProperty("is_private", NullValueHandling = NullValueHandling.Ignore)]
-        public long? IsPrivate { get; set; }
-
-        [JsonProperty("contact", NullValueHandling = NullValueHandling.Ignore)]
-        public object[] Contact { get; set; }
     }
 
     public partial class Media
@@ -502,9 +487,6 @@ namespace QuickType.WebModels
 
         [JsonProperty("account_type")]
         public string AccountType { get; set; }
-
-        [JsonProperty("venue_details")]
-        public object[] VenueDetails { get; set; }
     }
 
     public partial class BreweryDetailsClass
