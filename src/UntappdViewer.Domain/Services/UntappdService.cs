@@ -10,7 +10,7 @@ using UntappdViewer.Utils;
 
 namespace UntappdViewer.Domain.Services
 {
-    public class UntappdService
+    public class UntappdService : IUntappdService
     {
         private ISettingService settingService;
 

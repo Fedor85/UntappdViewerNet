@@ -6,18 +6,16 @@ using Prism.Modularity;
 using Prism.Mvvm;
 using Prism.Regions;
 using UntappdViewer.Domain;
-using UntappdViewer.Domain.Services;
 using UntappdViewer.Helpers;
 using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
-using UntappdViewer.Services;
 
 namespace UntappdViewer.ViewModels
 {
     public class ShellViewModel : BindableBase
     {
-        private UntappdService untappdService;
+        private IUntappdService untappdService;
 
         private IInteractionRequestService interactionRequestService;
 
@@ -55,10 +53,10 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public ShellViewModel(UntappdService untappdService, IInteractionRequestService interactionRequestService,
-                                                             IRegionManager regionManager,
-                                                             ISettingService settingService,
-                                                             IModuleManager moduleManager)
+        public ShellViewModel(IUntappdService untappdService, IInteractionRequestService interactionRequestService,
+                                                              IRegionManager regionManager,
+                                                              ISettingService settingService,
+                                                              IModuleManager moduleManager)
         {
             this.untappdService = untappdService;
             this.interactionRequestService = interactionRequestService;

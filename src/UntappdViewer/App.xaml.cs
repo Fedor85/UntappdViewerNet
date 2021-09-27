@@ -11,6 +11,7 @@ using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
 using UntappdViewer.Services;
 using UntappdViewer.Views;
+using UntappdWebApiClient;
 
 namespace UntappdViewer
 {
@@ -31,7 +32,7 @@ namespace UntappdViewer
             //    settingService.Reset();
 
             containerRegistry.RegisterInstance(settingService);
-            containerRegistry.RegisterInstance(new UntappdService(settingService));
+            containerRegistry.RegisterInstance<IUntappdService>(new UntappdService(settingService));
 
             IDialogService dialogService = containerRegistry.GetContainer().Resolve<IDialogService>();
             containerRegistry.RegisterInstance<IInteractionRequestService>(new InteractionRequestService(dialogService));
@@ -40,6 +41,7 @@ namespace UntappdViewer
             containerRegistry.RegisterDialog<TextBoxDialog>();
 
             containerRegistry.Register<IWebDownloader, WebDownloader>();
+            containerRegistry.Register<IWebApiClient, Client>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

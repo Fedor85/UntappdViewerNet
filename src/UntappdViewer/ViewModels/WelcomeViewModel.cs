@@ -7,7 +7,6 @@ using Prism.Events;
 using Prism.Modularity;
 using Prism.Regions;
 using UntappdViewer.Domain;
-using UntappdViewer.Domain.Services;
 using UntappdViewer.Events;
 using UntappdViewer.Helpers;
 using UntappdViewer.Infrastructure;
@@ -19,7 +18,7 @@ namespace UntappdViewer.ViewModels
 {
     public class WelcomeViewModel: RegionManagerBaseModel
     {
-        private UntappdService untappdService;
+        private IUntappdService untappdService;
 
         private IInteractionRequestService interactionRequestService;
 
@@ -45,11 +44,11 @@ namespace UntappdViewer.ViewModels
             get { return Properties.Resources.DeveloperProfileUrl; }
         }
 
-        public WelcomeViewModel(UntappdService untappdService, IInteractionRequestService interactionRequestService,
-                                                               ISettingService settingService,
-                                                               IModuleManager moduleManager,
-                                                               IRegionManager regionManager,
-                                                               IEventAggregator eventAggregator) : base(regionManager)
+        public WelcomeViewModel(IUntappdService untappdService, IInteractionRequestService interactionRequestService,
+                                                                ISettingService settingService,
+                                                                IModuleManager moduleManager,
+                                                                IRegionManager regionManager,
+                                                                IEventAggregator eventAggregator) : base(regionManager)
         {
             this.untappdService = untappdService;
             this.interactionRequestService = interactionRequestService;

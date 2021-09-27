@@ -320,6 +320,10 @@
       <Project>{5fa116c9-7571-494c-a74d-7e121857ffe9}</Project>
       <Name>UntappdViewer.Utils</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UntappdWebApiClient\UntappdWebApiClient.csproj">
+      <Project>{b0d9f698-52db-4794-8600-18153aba3d36}</Project>
+      <Name>UntappdWebApiClient</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\untappd_bottles.png" />

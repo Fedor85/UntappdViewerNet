@@ -9,7 +9,6 @@ using Prism.Commands;
 using Prism.Events;
 using Prism.Modularity;
 using Prism.Regions;
-using UntappdViewer.Domain.Services;
 using UntappdViewer.Events;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
@@ -19,7 +18,7 @@ namespace UntappdViewer.ViewModels
 {
     public class TreeViewModel : LoadingBaseModel
     {
-        private UntappdService untappdService;
+        private IUntappdService untappdService;
 
         private IEventAggregator eventAggregator;
 
@@ -90,10 +89,10 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public TreeViewModel(UntappdService untappdService, IModuleManager moduleManager,
-                                                            IRegionManager regionManager,
-                                                            IEventAggregator eventAggregator,
-                                                            ISettingService settingService) : base(moduleManager, regionManager)
+        public TreeViewModel(IUntappdService untappdService, IModuleManager moduleManager,
+                                                             IRegionManager regionManager,
+                                                             IEventAggregator eventAggregator,
+                                                             ISettingService settingService) : base(moduleManager, regionManager)
         {
             this.untappdService = untappdService;
             this.eventAggregator = eventAggregator;

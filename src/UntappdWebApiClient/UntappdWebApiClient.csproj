@@ -56,6 +56,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\UntappdViewer.Interfaces\UntappdViewer.Interfaces.csproj">
+      <Project>{bb613be0-ae21-4a41-836a-c904d16444f6}</Project>
+      <Name>UntappdViewer.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UntappdViewer.Models\UntappdViewer.Models.csproj">
       <Project>{b1584484-7648-4349-b8f8-47352dd85ff1}</Project>
       <Name>UntappdViewer.Models</Name>

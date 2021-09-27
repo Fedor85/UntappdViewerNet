@@ -14,7 +14,8 @@ namespace UntappdViewer.Test
         [Test]
         public void Test()
         {
-            Client untappdClient = new Client(AccessToken);
+            Client untappdClient = new Client();
+            untappdClient.Initialize(AccessToken);
 
             string message;
             Assert.True(untappdClient.Check(out message));

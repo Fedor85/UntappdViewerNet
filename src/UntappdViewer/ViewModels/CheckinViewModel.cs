@@ -7,21 +7,17 @@ using Prism.Commands;
 using Prism.Events;
 using Prism.Modularity;
 using Prism.Regions;
-using UntappdViewer.Domain;
-using UntappdViewer.Domain.Services;
 using UntappdViewer.Events;
 using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
 using UntappdViewer.Modules;
-using UntappdViewer.Services;
 
 namespace UntappdViewer.ViewModels
 {
     public class CheckinViewModel : LoadingBaseModel
     {
-
-        private UntappdService untappdService;
+        private IUntappdService untappdService;
 
         private IInteractionRequestService interactionRequestService;
 
@@ -394,11 +390,11 @@ namespace UntappdViewer.ViewModels
         public ICommand CheckinVenueLocationCommand { get; }
 
 
-        public CheckinViewModel(UntappdService untappdService, IInteractionRequestService interactionRequestService,
-                                                               IWebDownloader webDownloader,
-                                                               IEventAggregator eventAggregator,
-                                                               IModuleManager moduleManager,
-                                                               IRegionManager regionManager) : base(moduleManager, regionManager)
+        public CheckinViewModel(IUntappdService untappdService, IInteractionRequestService interactionRequestService,
+                                                                IWebDownloader webDownloader,
+                                                                IEventAggregator eventAggregator,
+                                                                IModuleManager moduleManager,
+                                                                IRegionManager regionManager) : base(moduleManager, regionManager)
         {
             this.interactionRequestService = interactionRequestService;
             this.untappdService = untappdService;

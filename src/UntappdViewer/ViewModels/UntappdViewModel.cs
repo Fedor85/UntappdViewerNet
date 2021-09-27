@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Windows;
 using Prism.Modularity;
 using Prism.Regions;
-using UntappdViewer.Domain.Services;
 using UntappdViewer.Helpers;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
@@ -13,7 +12,7 @@ namespace UntappdViewer.ViewModels
 {
     public class UntappdViewModel: RegionManagerBaseModel
     {
-        private UntappdService untappdService;
+        private IUntappdService untappdService;
 
         private IModuleManager moduleManager;
 
@@ -33,10 +32,10 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public UntappdViewModel(UntappdService untappdService, IModuleManager moduleManager,
-                                                               IRegionManager regionManager,
-                                                               IInteractionRequestService interactionRequestService,
-                                                               ISettingService settingService) : base(regionManager)
+        public UntappdViewModel(IUntappdService untappdService, IModuleManager moduleManager,
+                                                                IRegionManager regionManager,
+                                                                IInteractionRequestService interactionRequestService,
+                                                                ISettingService settingService) : base(regionManager)
         {
             this.untappdService = untappdService;
             this.moduleManager = moduleManager;

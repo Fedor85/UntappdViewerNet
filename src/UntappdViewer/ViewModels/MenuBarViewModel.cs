@@ -8,7 +8,6 @@ using Prism.Events;
 using Prism.Modularity;
 using Prism.Regions;
 using UntappdViewer.Domain;
-using UntappdViewer.Domain.Services;
 using UntappdViewer.Events;
 using UntappdViewer.Helpers;
 using UntappdViewer.Infrastructure;
@@ -20,7 +19,7 @@ namespace UntappdViewer.ViewModels
 {
     public class MenuBarViewModel: RegionManagerBaseModel
     {
-        private UntappdService untappdService;
+        private IUntappdService untappdService;
 
         private IInteractionRequestService interactionRequestService;
 
@@ -44,12 +43,12 @@ namespace UntappdViewer.ViewModels
 
         public ICommand WebDownloadProjectCommand { get; }
 
-        public MenuBarViewModel(UntappdService untappdService,  IInteractionRequestService interactionRequestService,
-                                                                ISettingService settingService,
-                                                                IModuleManager moduleManager,
-                                                                IRegionManager regionManager,
-                                                                IEventAggregator eventAggregator,
-                                                                IWebDownloader webDownloader) : base(regionManager)
+        public MenuBarViewModel(IUntappdService untappdService,  IInteractionRequestService interactionRequestService,
+                                                                 ISettingService settingService,
+                                                                 IModuleManager moduleManager,
+                                                                 IRegionManager regionManager,
+                                                                 IEventAggregator eventAggregator,
+                                                                 IWebDownloader webDownloader) : base(regionManager)
         {
             this.interactionRequestService = interactionRequestService;
             this.settingService = settingService;

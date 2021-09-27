@@ -2,19 +2,24 @@
 using System.Net;
 using System.Net.Http;
 using QuickType.WebModels;
+using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
 
 namespace UntappdWebApiClient
 {
-    public class Client
+    public class Client : IWebApiClient
     {
         private const string baseUrl = @"https://api.untappd.com/v4/";
 
         private UrlPathBuilder urlPathBuilder;
 
-        public Client(string accessToken)
+        public Client()
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+        }
+
+        public void Initialize(string accessToken)
+        {
             urlPathBuilder = new UrlPathBuilder(baseUrl, accessToken);
         }
 
