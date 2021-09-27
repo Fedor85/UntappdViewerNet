@@ -24,8 +24,7 @@ namespace UntappdViewer.ViewModels
         private void CheckAccessToken(string token)
         {
             webApiClient.Initialize(token);
-            string message;
-            bool check = webApiClient.Check(out message);
+            bool check = webApiClient.Check();
         }
     }
 }

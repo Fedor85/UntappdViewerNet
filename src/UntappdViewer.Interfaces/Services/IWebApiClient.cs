@@ -7,7 +7,7 @@ namespace UntappdViewer.Interfaces.Services
     {
         void Initialize(string accessToken);
 
-        bool Check(out string message);
+        bool Check();
 
         List<Checkin> GetCheckins();
     }

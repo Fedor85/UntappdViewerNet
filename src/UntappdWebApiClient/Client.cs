@@ -23,10 +23,9 @@ namespace UntappdWebApiClient
             urlPathBuilder = new UrlPathBuilder(baseUrl, accessToken);
         }
 
-        public bool Check(out string message)
+        public bool Check()
         {
             HttpResponseMessage httpResponse = GetHttpResponse("checkin/recent/?");
-            message = httpResponse.ReasonPhrase;
             return httpResponse.IsSuccessStatusCode;
         }
 

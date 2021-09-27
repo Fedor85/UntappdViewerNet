@@ -17,9 +17,7 @@ namespace UntappdViewer.Test
             Client untappdClient = new Client();
             untappdClient.Initialize(AccessToken);
 
-            string message;
-            Assert.True(untappdClient.Check(out message));
-
+            Assert.True(untappdClient.Check());
             List<Checkin> checkins = untappdClient.GetCheckins();
         }
     }
