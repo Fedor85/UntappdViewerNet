@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace UntappdViewer.Views
 {
@@ -10,6 +11,12 @@ namespace UntappdViewer.Views
         public WebDownloadProject()
         {
             InitializeComponent();
+            TokenTextBox.TextPasswordBox.PasswordChanged += TextPasswordBoxPasswordChanged;
+        }
+
+        private void TextPasswordBoxPasswordChanged(object sender, RoutedEventArgs e)
+        {
+            AccessTokenButton.IsEnabled = TokenTextBox.TextPasswordBox.Password.Length > 0;
         }
     }
 }
