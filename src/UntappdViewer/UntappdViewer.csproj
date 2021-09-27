@@ -142,6 +142,9 @@
     <Compile Include="Views\Checkin.xaml.cs">
       <DependentUpon>Checkin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Controls\PasswordBox.xaml.cs">
+      <DependentUpon>PasswordBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Controls\StarRating\ProgressBarSolidBrushConverter.cs" />
     <Compile Include="Views\Controls\StarRating\StarProgressBar.xaml.cs">
       <DependentUpon>StarProgressBar.xaml</DependentUpon>
@@ -186,6 +189,10 @@
       <DependentUpon>Welcome.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\Checkin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\PasswordBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -364,6 +371,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\web.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Hide.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Show.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
