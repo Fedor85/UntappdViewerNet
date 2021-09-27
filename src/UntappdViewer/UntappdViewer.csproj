@@ -378,5 +378,8 @@
   <ItemGroup>
     <Resource Include="Resources\Show.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ut_connection_default.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
