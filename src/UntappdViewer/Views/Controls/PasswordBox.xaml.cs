@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -10,12 +11,17 @@ namespace UntappdViewer.Views.Controls
     /// <summary>
     /// Interaction logic for PasswordBox.xaml
     /// </summary>
-    public partial class PasswordBox : UserControl
+    public partial class PasswordBox : UserControl, INotifyPropertyChanged
     {
+        private string password;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public PasswordBox()
         {
             InitializeComponent();
         }
+
         public double ImgSize
         {
             set
@@ -25,8 +31,20 @@ namespace UntappdViewer.Views.Controls
             }
         }
 
+        public string Password
+        {
+            get { return password; }
+            set
+            {
+                password = value;
+                OnPropertyChanged("Password");
+            }
+        }
+    
+
         private void TextPasswordBoxPasswordChanged(object sender, RoutedEventArgs e)
         {
+            Password = TextPasswordBox.Password;
             ImgShowHide.Visibility = TextPasswordBox.Password.Length > 0 ? Visibility.Visible : Visibility.Hidden;
         }
 
@@ -59,6 +77,12 @@ namespace UntappdViewer.Views.Controls
             TextVisiblePasswordBox.Visibility = Visibility.Hidden;
             TextPasswordBox.Visibility = Visibility.Visible;
             TextPasswordBox.Focus();
+        }
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

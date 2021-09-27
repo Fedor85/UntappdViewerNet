@@ -18,11 +18,14 @@ namespace UntappdViewer.ViewModels
             this.untappdService = untappdService;
             this.webApiClient = webApiClient;
 
-            CheckAccessTokenCommand = new DelegateCommand(CheckAccessToken);
+            CheckAccessTokenCommand = new DelegateCommand<string>(CheckAccessToken);
         }
 
-        private void CheckAccessToken()
+        private void CheckAccessToken(string token)
         {
+            webApiClient.Initialize(token);
+            string message;
+            bool check = webApiClient.Check(out message);
         }
     }
 }

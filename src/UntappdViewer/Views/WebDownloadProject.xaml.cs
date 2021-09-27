@@ -14,9 +14,19 @@ namespace UntappdViewer.Views
             TokenTextBox.TextPasswordBox.PasswordChanged += TextPasswordBoxPasswordChanged;
         }
 
+
+
         private void TextPasswordBoxPasswordChanged(object sender, RoutedEventArgs e)
         {
-            AccessTokenButton.IsEnabled = TokenTextBox.TextPasswordBox.Password.Length > 0;
+            if (TokenTextBox.TextPasswordBox.Password.Length > 0)
+            {
+                AccessTokenButton.IsEnabled = true;
+            }
+            else
+            {
+                AccessTokenButton.IsEnabled = false;
+                CheckStatusImg.Visibility = Visibility.Hidden;
+            }
         }
     }
 }
