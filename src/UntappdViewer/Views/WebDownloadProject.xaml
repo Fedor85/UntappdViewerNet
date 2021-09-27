@@ -33,8 +33,13 @@
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Content="{x:Static properties:Resources.EnterAccessToken}" FontSize="15" Foreground="#ffffff" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                 <controls:PasswordBox Grid.Column="1" x:Name="TokenTextBox" Height="20" Width="320" />
-                <Button Grid.Column="2" Name="AccessTokenButton" Content="{x:Static properties:Resources.Check}" Command="{Binding CheckAccessTokenCommand}"
-                        IsEnabled="False"  Height="20" Width="90" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+                <Button Grid.Column="2" Name="AccessTokenButton"  Command="{Binding CheckAccessTokenCommand}"
+                        IsEnabled="False"  Height="20" Width="70" HorizontalAlignment="Left" Margin="5,0,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Name="CheckStatusImg" Height="15" Width="15" Visibility="Hidden" Source="..\Resources\red-x.png" Margin="0,0,2,0"/>
+                        <TextBlock Text="{x:Static properties:Resources.Check}"/>
+                    </StackPanel>
+                </Button>
             </Grid>
         </Grid>
     </Grid>

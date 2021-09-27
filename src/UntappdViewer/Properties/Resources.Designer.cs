@@ -277,6 +277,16 @@ namespace UntappdViewer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap green_checkmark {
+            get {
+                object obj = ResourceManager.GetObject("green_checkmark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap growler {
             get {
                 object obj = ResourceManager.GetObject("growler", resourceCulture);
@@ -429,6 +439,16 @@ namespace UntappdViewer.Properties {
         public static string ProjectMenuItem {
             get {
                 return ResourceManager.GetString("ProjectMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap red_x {
+            get {
+                object obj = ResourceManager.GetObject("red_x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

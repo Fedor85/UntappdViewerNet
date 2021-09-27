@@ -385,5 +385,11 @@
   <ItemGroup>
     <Resource Include="Resources\ut_connection_default.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\green-checkmark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\red-x.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
