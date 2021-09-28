@@ -65,6 +65,7 @@ namespace UntappdViewer.ViewModels
         protected override void Activate()
         {
             base.Activate();
+            untappdService.CleanUpUntappd();
             eventAggregator.GetEvent<OpenFileEvent>().Subscribe(RunUntappd);
             moduleManager.LoadModule(typeof(RecentFilesModule).Name);
             ActivateView(RegionNames.RecentFilesRegion, typeof(RecentFiles));

@@ -1,8 +1,11 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
 using Prism.Commands;
+using Prism.Modularity;
 using Prism.Regions;
 using UntappdViewer.Interfaces.Services;
+using UntappdViewer.Modules;
+using UntappdViewer.Views;
 
 namespace UntappdViewer.ViewModels
 {
@@ -13,6 +16,8 @@ namespace UntappdViewer.ViewModels
         private IUntappdService untappdService;
 
         private IWebApiClient webApiClient;
+
+        private IModuleManager moduleManager;
 
         public ICommand CheckAccessTokenCommand { get; }
 
@@ -31,10 +36,13 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public WebDownloadProjectViewModel(IRegionManager regionManager, IUntappdService untappdService, IWebApiClient webApiClient) : base(regionManager)
+        public WebDownloadProjectViewModel(IRegionManager regionManager, IUntappdService untappdService,
+                                                                         IWebApiClient webApiClient,
+                                                                         IModuleManager moduleManager) : base(regionManager)
         {
             this.untappdService = untappdService;
             this.webApiClient = webApiClient;
+            this.moduleManager = moduleManager;
 
             CheckAccessTokenCommand = new DelegateCommand<string>(CheckAccessToken);
             OkButtonCommand = new DelegateCommand(Exit);
@@ -50,6 +58,8 @@ namespace UntappdViewer.ViewModels
 
         private void Exit()
         {
+            moduleManager.LoadModule(typeof(MainModule).Name);
+            ActivateView(RegionNames.RootRegion, typeof(Main));
         }
     }
 }

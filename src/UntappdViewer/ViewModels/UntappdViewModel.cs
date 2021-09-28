@@ -60,7 +60,6 @@ namespace UntappdViewer.ViewModels
             base.DeActivate();
             DeActivateAllViews(RegionNames.TreeRegion);
             settingService.SetTreeRegionWidth(TreeRegionWidth.Value);
-            untappdService.CleanUpUntappd();
         }
     }
 }

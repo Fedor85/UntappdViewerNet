@@ -113,8 +113,6 @@ namespace UntappdViewer.ViewModels
             UpdateTree(IsCheckedUniqueCheckBox, settingService.GetSelectedTreeItemId());
         }
 
-
-
         protected override void DeActivate()
         {
             base.DeActivate();
