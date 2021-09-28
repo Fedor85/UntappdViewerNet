@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Prism.Modularity;
 using Prism.Regions;
+using UntappdViewer.Modules;
 using UntappdViewer.Views;
 
 namespace UntappdViewer.ViewModels
@@ -16,6 +17,8 @@ namespace UntappdViewer.ViewModels
         protected LoadingBaseModel(IModuleManager moduleManager, IRegionManager regionManager) : base(regionManager)
         {
             this.moduleManager = moduleManager;
+            loadingModuleName = typeof(LoadingModule).Name;
+            loadingRegionName = RegionNames.LoadingRegion;
         }
 
         protected void LoadingChangeActivity(bool isActivate)

@@ -98,9 +98,6 @@ namespace UntappdViewer.ViewModels
             this.eventAggregator = eventAggregator;
             this.settingService = settingService;
 
-            loadingModuleName = typeof(LoadingModule).Name;
-            loadingRegionName = RegionNames.LoadingRegion;
-
             UniqueCheckedCommand = new DelegateCommand<bool?>(UniqueChecked);
             TreeItems = new ObservableCollection<TreeItemViewModel>();
         }

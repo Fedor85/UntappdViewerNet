@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Prism.Commands;
 using Prism.Modularity;
@@ -9,7 +10,7 @@ using UntappdViewer.Views;
 
 namespace UntappdViewer.ViewModels
 {
-    public class WebDownloadProjectViewModel : RegionManagerBaseModel
+    public class WebDownloadProjectViewModel : LoadingBaseModel
     {
         private bool? accessToken;
 
@@ -38,22 +39,27 @@ namespace UntappdViewer.ViewModels
 
         public WebDownloadProjectViewModel(IRegionManager regionManager, IUntappdService untappdService,
                                                                          IWebApiClient webApiClient,
-                                                                         IModuleManager moduleManager) : base(regionManager)
+                                                                         IModuleManager moduleManager) : base(moduleManager, regionManager)
         {
             this.untappdService = untappdService;
             this.webApiClient = webApiClient;
             this.moduleManager = moduleManager;
-
             CheckAccessTokenCommand = new DelegateCommand<string>(CheckAccessToken);
             OkButtonCommand = new DelegateCommand(Exit);
         }
 
         private void CheckAccessToken(string token)
         {
-            //необходимо занулять чтобы срабатывало событие если токен иметт одинковое значение подряд
+            LoadingChangeActivity(true);
+            CheckAccessTokenAsync(token);
+        }
+
+        private async void CheckAccessTokenAsync(string token)
+        {
             AccessToken = null;
             webApiClient.Initialize(token);
-            AccessToken = webApiClient.Check();
+            AccessToken = await Task.Run(() => webApiClient.Check());
+            LoadingChangeActivity(false);
         }
 
         private void Exit()
