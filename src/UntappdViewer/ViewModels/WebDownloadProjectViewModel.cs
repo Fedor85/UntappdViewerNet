@@ -16,6 +16,8 @@ namespace UntappdViewer.ViewModels
 
         public ICommand CheckAccessTokenCommand { get; }
 
+        public ICommand OkButtonCommand { get; }
+
         public bool? AccessToken
         {
             get
@@ -35,14 +37,19 @@ namespace UntappdViewer.ViewModels
             this.webApiClient = webApiClient;
 
             CheckAccessTokenCommand = new DelegateCommand<string>(CheckAccessToken);
+            OkButtonCommand = new DelegateCommand(Exit);
         }
 
         private void CheckAccessToken(string token)
         {
+            //необходимо занулять чтобы срабатывало событие если токен иметт одинковое значение подряд
             AccessToken = null;
-            //AccessToken = true;
             webApiClient.Initialize(token);
             AccessToken = webApiClient.Check();
+        }
+
+        private void Exit()
+        {
         }
     }
 }
