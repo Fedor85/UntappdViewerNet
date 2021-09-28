@@ -14,7 +14,10 @@ namespace UntappdViewer.Views
             TokenTextBox.TextPasswordBox.PasswordChanged += TextPasswordBoxPasswordChanged;
         }
 
-
+        public void SetAccessToken(bool? isAccessToken)
+        {
+            
+        }
 
         private void TextPasswordBoxPasswordChanged(object sender, RoutedEventArgs e)
         {

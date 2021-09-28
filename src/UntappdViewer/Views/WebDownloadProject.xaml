@@ -7,9 +7,14 @@
              xmlns:mvvm="http://prismlibrary.com/"
              xmlns:controls="clr-namespace:UntappdViewer.Views.Controls"
              xmlns:properties="clr-namespace:UntappdViewer.Properties"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:behaviors="clr-namespace:UntappdViewer.Behaviors"
              mc:Ignorable="d"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="600" d:DesignWidth="800">
+    <b:Interaction.Behaviors>
+        <behaviors:AccessTokenBehavior AccessToken="{Binding AccessToken, Mode=TwoWay}" />
+    </b:Interaction.Behaviors>
     <UserControl.Background>
         <SolidColorBrush Opacity="0.2" Color="#ffffff"/>
     </UserControl.Background>
