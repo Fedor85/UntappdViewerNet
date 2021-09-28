@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
+using UntappdViewer.Helpers;
 
 namespace UntappdViewer.Views
 {
@@ -22,14 +23,7 @@ namespace UntappdViewer.Views
             AccessTokenButton.IsEnabled = false;
             if (isAccessToken.HasValue)
             {
-                if (isAccessToken.Value)
-                {
-                    CheckStatusImg.Source = Imaging.CreateBitmapSourceFromHBitmap(Properties.Resources.green_checkmark.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
-                }
-                else
-                {
-                    CheckStatusImg.Source = Imaging.CreateBitmapSourceFromHBitmap(Properties.Resources.red_x.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
-                }
+                CheckStatusImg.Source = ImageConverter.GetBitmapSource(isAccessToken.Value ? Properties.Resources.green_checkmark : Properties.Resources.red_x);
                 CheckStatusImg.Visibility = Visibility.Visible;
             }
             else

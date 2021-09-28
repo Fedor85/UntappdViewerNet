@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
+using UntappdViewer.Helpers;
 
 namespace UntappdViewer.Views.Controls
 {
@@ -65,7 +66,7 @@ namespace UntappdViewer.Views.Controls
 
         private void ShowPassword()
         {
-            ImgShowHide.Source = Imaging.CreateBitmapSourceFromHBitmap(Properties.Resources.Hide.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+            ImgShowHide.Source = ImageConverter.GetBitmapSource(Properties.Resources.Hide);
             TextVisiblePasswordBox.Visibility = Visibility.Visible;
             TextPasswordBox.Visibility = Visibility.Hidden;
             TextVisiblePasswordBox.Text = TextPasswordBox.Password;
@@ -73,7 +74,7 @@ namespace UntappdViewer.Views.Controls
 
         private void HidePassword()
         {
-            ImgShowHide.Source = Imaging.CreateBitmapSourceFromHBitmap(Properties.Resources.Show.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+            ImgShowHide.Source = ImageConverter.GetBitmapSource(Properties.Resources.Show);
             TextVisiblePasswordBox.Visibility = Visibility.Hidden;
             TextPasswordBox.Visibility = Visibility.Visible;
             TextPasswordBox.Focus();
