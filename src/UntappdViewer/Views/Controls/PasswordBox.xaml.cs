@@ -41,7 +41,12 @@ namespace UntappdViewer.Views.Controls
                 OnPropertyChanged("Password");
             }
         }
-    
+
+        public void Clear()
+        {
+            TextPasswordBox.Clear();
+            TextVisiblePasswordBox.Clear();
+        }
 
         private void TextPasswordBoxPasswordChanged(object sender, RoutedEventArgs e)
         {

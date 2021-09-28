@@ -1,8 +1,5 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Interop;
-using System.Windows.Media.Imaging;
 using UntappdViewer.Helpers;
 
 namespace UntappdViewer.Views
@@ -16,6 +13,12 @@ namespace UntappdViewer.Views
         {
             InitializeComponent();
             TokenTextBox.TextPasswordBox.PasswordChanged += TextPasswordBoxPasswordChanged;
+            Unloaded += WebDownloadProjectUnloaded;
+        }
+
+        private void WebDownloadProjectUnloaded(object sender, RoutedEventArgs e)
+        {
+            TokenTextBox.Clear();
         }
 
         public void SetAccessToken(bool? isAccessToken)

@@ -47,6 +47,11 @@ namespace UntappdViewer.ViewModels
             CheckAccessTokenCommand = new DelegateCommand<string>(CheckAccessToken);
             OkButtonCommand = new DelegateCommand(Exit);
         }
+        protected override void DeActivate()
+        {
+            base.DeActivate();
+            AccessToken = null;
+        }
 
         private void CheckAccessToken(string token)
         {
