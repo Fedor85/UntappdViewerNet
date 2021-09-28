@@ -19,6 +19,7 @@ namespace UntappdViewer.Views
 
         public void SetAccessToken(bool? isAccessToken)
         {
+            AccessTokenButton.IsEnabled = false;
             if (isAccessToken.HasValue)
             {
                 if (isAccessToken.Value)
