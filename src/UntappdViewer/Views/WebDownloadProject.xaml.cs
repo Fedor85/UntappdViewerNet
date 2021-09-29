@@ -14,6 +14,12 @@ namespace UntappdViewer.Views
             InitializeComponent();
             TokenTextBox.TextPasswordBox.PasswordChanged += TextPasswordBoxPasswordChanged;
             Unloaded += WebDownloadProjectUnloaded;
+            TableCheckins.Items.CurrentChanged += TableCheckinsItemsCurrentChanged;
+        }
+
+        private void TableCheckinsItemsCurrentChanged(object sender, System.EventArgs e)
+        {
+            TableCaption.Content = $"{Properties.Resources.Checkins} ({TableCheckins.Items.Count}):";
         }
 
         private void WebDownloadProjectUnloaded(object sender, RoutedEventArgs e)
