@@ -41,8 +41,7 @@ namespace UntappdViewer.ViewModels
             get { return treeViewCaption; }
             set
             {
-                treeViewCaption = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("TreeViewCaption"));
+                SetProperty(ref treeViewCaption, value);
             }
         }
 
@@ -51,10 +50,9 @@ namespace UntappdViewer.ViewModels
             get { return search; }
             set
             {
-                search = value;
+                SetProperty(ref search, value);
                 AppFilter(value);
                 UpdateTreeViewCaption();
-                OnPropertyChanged(new PropertyChangedEventArgs("Search"));
             }
         }
 
@@ -63,8 +61,7 @@ namespace UntappdViewer.ViewModels
             get { return isCheckedUniqueCheckBox; }
             set
             {
-                isCheckedUniqueCheckBox = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("IsCheckedUniqueCheckBox"));
+                SetProperty(ref isCheckedUniqueCheckBox, value);
             }
         }
 
@@ -73,8 +70,7 @@ namespace UntappdViewer.ViewModels
             get { return treeItems; }
             set
             {
-                treeItems = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("TreeItems"));
+                SetProperty(ref treeItems, value);
             }
         }
 
@@ -83,8 +79,7 @@ namespace UntappdViewer.ViewModels
             get { return selectedTreeItem; }
             set
             {
-                selectedTreeItem = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("SelectedTreeItem"));
+                SetProperty(ref selectedTreeItem, value);
                 UpdateContent();
             }
         }

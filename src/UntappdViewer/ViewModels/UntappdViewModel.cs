@@ -27,8 +27,7 @@ namespace UntappdViewer.ViewModels
             get { return treeRegionWidth; }
             set
             {
-                treeRegionWidth = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("TreeRegionWidth"));
+                SetProperty(ref treeRegionWidth, value);
             }
         }
 

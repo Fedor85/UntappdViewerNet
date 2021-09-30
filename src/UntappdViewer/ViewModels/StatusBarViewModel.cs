@@ -15,8 +15,7 @@ namespace UntappdViewer.ViewModels
             get { return message; }
             set
             {
-                message = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Message"));
+                SetProperty(ref message, value);
             }
         }
 

@@ -24,8 +24,7 @@ namespace UntappdViewer.ViewModels
             get { return fileItems; }
             set
             {
-                fileItems = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("FileItems"));
+                SetProperty(ref fileItems, value);
             }
         }
 

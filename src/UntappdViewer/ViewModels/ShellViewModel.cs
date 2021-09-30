@@ -36,8 +36,7 @@ namespace UntappdViewer.ViewModels
             get { return title; }
             set
             {
-                title = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Title"));
+                SetProperty(ref title, value);
             }
         }
 
@@ -46,9 +45,8 @@ namespace UntappdViewer.ViewModels
             get { return loadedWindow; }
             set
             {
-                loadedWindow = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("LoadedWindow"));
-                if(value)
+                SetProperty(ref loadedWindow, value);
+                if (value)
                     Activate();
             }
         }

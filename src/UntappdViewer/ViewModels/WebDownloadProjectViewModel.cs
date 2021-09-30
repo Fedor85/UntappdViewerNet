@@ -46,8 +46,7 @@ namespace UntappdViewer.ViewModels
             }
             set
             {
-                accessToken = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("AccessToken"));
+                SetProperty(ref accessToken, value);
             }
         }
 
@@ -59,8 +58,7 @@ namespace UntappdViewer.ViewModels
             }
             set
             {
-                checkins = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Checkins"));
+                SetProperty(ref checkins, value);
             }
         }
 
@@ -86,6 +84,7 @@ namespace UntappdViewer.ViewModels
             base.Activate();
             Checkins = new List<Checkin>(untappdService.GetCheckins());
             webApiClient.ChangeUploadedCountEvent += WebApiClientChangeUploadedCountEvent;
+            interactionRequestService.ClearMessageOnStatusBar();
         }
 
         protected override void DeActivate()

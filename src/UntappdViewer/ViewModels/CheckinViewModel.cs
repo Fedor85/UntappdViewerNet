@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -88,8 +87,7 @@ namespace UntappdViewer.ViewModels
             get { return checkinHeader; }
             set
             {
-                checkinHeader = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("CheckinHeader"));
+                SetProperty(ref checkinHeader, value);
             }
         }
 
@@ -98,8 +96,7 @@ namespace UntappdViewer.ViewModels
             get { return checkinUrl; }
             set
             {
-                checkinUrl = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("CheckinUrl"));
+                SetProperty(ref checkinUrl, value);
             }
         }
 
@@ -108,8 +105,7 @@ namespace UntappdViewer.ViewModels
             get { return vsibilityCheckinRating; }
             set
             {
-                vsibilityCheckinRating = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("VsibilityCheckinRating"));
+                SetProperty(ref vsibilityCheckinRating, value);
             }
         }
 
@@ -118,8 +114,7 @@ namespace UntappdViewer.ViewModels
             get { return checkinRating; }
             set
             {
-                checkinRating = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("CheckinRating"));
+                SetProperty(ref checkinRating, value);
             }
         }
 
@@ -128,8 +123,7 @@ namespace UntappdViewer.ViewModels
             get { return checkinVenueName; }
             set
             {
-                checkinVenueName = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("CheckinVenueName"));
+                SetProperty(ref checkinVenueName, value);
                 VisibilityCheckinVenueCountrySeporator = !String.IsNullOrEmpty(value);
             }
         }
@@ -139,8 +133,7 @@ namespace UntappdViewer.ViewModels
             get { return visibilityCheckinVenueCountrySeporator; }
             set
             {
-                visibilityCheckinVenueCountrySeporator = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("VisibilityCheckinVenueCountrySeporator"));
+                SetProperty(ref visibilityCheckinVenueCountrySeporator, value);
             }
         }
 
@@ -149,8 +142,7 @@ namespace UntappdViewer.ViewModels
             get { return checkinVenueCountry; }
             set
             {
-                checkinVenueCountry = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("CheckinVenueCountry"));
+                SetProperty(ref checkinVenueCountry, value);
             }
         }
 
@@ -159,8 +151,7 @@ namespace UntappdViewer.ViewModels
             get { return visibilityСheckinVenueStateSeporator; }
             set
             {
-                visibilityСheckinVenueStateSeporator = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("VisibilityCheckinVenueStateSeporator"));
+                SetProperty(ref visibilityСheckinVenueStateSeporator, value);
             }
         }
 
@@ -169,8 +160,7 @@ namespace UntappdViewer.ViewModels
             get { return checkinVenueState; }
             set
             {
-                checkinVenueState = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("CheckinVenueState"));
+                SetProperty(ref checkinVenueState, value);
                 VisibilityCheckinVenueStateSeporator = !String.IsNullOrEmpty(value);
             }
         }
@@ -180,8 +170,7 @@ namespace UntappdViewer.ViewModels
             get { return visibilityСheckinVenueCitySeporator; }
             set
             {
-                visibilityСheckinVenueCitySeporator = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("VisibilityСheckinVenueCitySeporator"));
+                SetProperty(ref visibilityСheckinVenueCitySeporator, value);
             }
         }
 
@@ -190,8 +179,7 @@ namespace UntappdViewer.ViewModels
             get { return checkinVenueCity; }
             set
             {
-                checkinVenueCity = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("CheckinVenueCity"));
+                SetProperty(ref checkinVenueCity, value);
                 VisibilityСheckinVenueCitySeporator = !String.IsNullOrEmpty(value);
             }
         }
@@ -201,8 +189,7 @@ namespace UntappdViewer.ViewModels
             get { return visibilityCheckinVenueLocation; }
             set
             {
-                visibilityCheckinVenueLocation = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("VisibilityCheckinVenueLocation"));
+                SetProperty(ref visibilityCheckinVenueLocation, value);
             }
         }
 
@@ -211,8 +198,7 @@ namespace UntappdViewer.ViewModels
             get { return checkinServingType; }
             set
             {
-                checkinServingType = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("CheckinServingType"));
+                SetProperty(ref checkinServingType, value);
             }
         }
 
@@ -221,8 +207,7 @@ namespace UntappdViewer.ViewModels
             get { return checkinPhotoPath; }
             set
             {
-                checkinPhotoPath = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("CheckinPhotoPath"));
+                SetProperty(ref checkinPhotoPath, value);
             }
         }
 
@@ -233,8 +218,7 @@ namespace UntappdViewer.ViewModels
             get { return beerUrl; }
             set
             {
-                beerUrl = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("BeerUrl"));
+                SetProperty(ref beerUrl, value);
             }
         }
 
@@ -243,8 +227,7 @@ namespace UntappdViewer.ViewModels
             get { return beerName; }
             set
             {
-                beerName = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("BeerName"));
+                SetProperty(ref beerName, value);
             }
         }
 
@@ -253,8 +236,7 @@ namespace UntappdViewer.ViewModels
             get { return beerType; }
             set
             {
-                beerType = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("BeerType"));
+                SetProperty(ref beerType, value);
             }
         }
 
@@ -263,8 +245,7 @@ namespace UntappdViewer.ViewModels
             get { return beerABV; }
             set
             {
-                beerABV = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("BeerABV"));
+                SetProperty(ref beerABV, value);
             }
         }
 
@@ -273,8 +254,7 @@ namespace UntappdViewer.ViewModels
             get { return beerIBU; }
             set
             {
-                beerIBU = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("BeerIBU"));
+                SetProperty(ref beerIBU, value);
             }
         }
 
@@ -283,8 +263,7 @@ namespace UntappdViewer.ViewModels
             get { return beerRating; }
             set
             {
-                beerRating = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("BeerRating"));
+                SetProperty(ref beerRating, value);
             }
         }
 
@@ -297,8 +276,7 @@ namespace UntappdViewer.ViewModels
             get { return breweryUrl; }
             set
             {
-                breweryUrl = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("BreweryUrl"));
+                SetProperty(ref breweryUrl, value);
             }
         }
 
@@ -307,8 +285,7 @@ namespace UntappdViewer.ViewModels
             get { return breweryName; }
             set
             {
-                breweryName = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("BreweryName"));
+                SetProperty(ref breweryName, value);
             }
         }
 
@@ -317,8 +294,7 @@ namespace UntappdViewer.ViewModels
             get { return breweryVenueName; }
             set
             {
-                breweryVenueName = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("BreweryVenueName"));
+                SetProperty(ref breweryVenueName, value);
                 VisibilityBreweryVenueCountrySeporator = !String.IsNullOrEmpty(value);
             }
         }
@@ -328,8 +304,7 @@ namespace UntappdViewer.ViewModels
             get { return visibilityBreweryVenueCountrySeporator; }
             set
             {
-                visibilityBreweryVenueCountrySeporator = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("VisibilityBreweryVenueCountrySeporator"));
+                SetProperty(ref visibilityBreweryVenueCountrySeporator, value);
             }
         }
 
@@ -338,8 +313,7 @@ namespace UntappdViewer.ViewModels
             get { return breweryVenueCountry; }
             set
             {
-                breweryVenueCountry = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("BreweryVenueCountry"));
+                SetProperty(ref breweryVenueCountry, value);
             }
         }
 
@@ -348,8 +322,7 @@ namespace UntappdViewer.ViewModels
             get { return visibilityBreweryVenueStateSeporator; }
             set
             {
-                visibilityBreweryVenueStateSeporator = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("VisibilityBreweryVenueStateSeporator"));
+                SetProperty(ref visibilityBreweryVenueStateSeporator, value);
             }
         }
 
@@ -358,8 +331,7 @@ namespace UntappdViewer.ViewModels
             get { return breweryVenueState; }
             set
             {
-                breweryVenueState = value;      
-                OnPropertyChanged(new PropertyChangedEventArgs("BreweryVenueState"));
+                SetProperty(ref breweryVenueState, value);
                 VisibilityBreweryVenueStateSeporator = !String.IsNullOrEmpty(value);
             }
         }
@@ -369,8 +341,7 @@ namespace UntappdViewer.ViewModels
             get { return visibilityBreweryVenueCitySeporator; }
             set
             {
-                visibilityBreweryVenueCitySeporator = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("VisibilityBreweryVenueCitySeporator"));
+                SetProperty(ref visibilityBreweryVenueCitySeporator, value);
             }
         }
 
@@ -379,8 +350,7 @@ namespace UntappdViewer.ViewModels
             get { return breweryVenueCity; }
             set
             {
-                breweryVenueCity = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("BreweryVenueCity"));
+                SetProperty(ref breweryVenueCity, value);
                 VisibilityBreweryVenueCitySeporator = !String.IsNullOrEmpty(value);
             }
         }
