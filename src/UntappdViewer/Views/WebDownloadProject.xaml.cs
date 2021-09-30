@@ -9,9 +9,12 @@ namespace UntappdViewer.Views
     /// </summary>
     public partial class WebDownloadProject : UserControl
     {
+        private bool? isAccessToken;
+
         public WebDownloadProject()
         {
             InitializeComponent();
+            isAccessToken = false;
             TokenTextBox.TextPasswordBox.PasswordChanged += TextPasswordBoxPasswordChanged;
             Unloaded += WebDownloadProjectUnloaded;
             TableCheckins.Items.CurrentChanged += TableCheckinsItemsCurrentChanged;
@@ -20,20 +23,28 @@ namespace UntappdViewer.Views
         private void TableCheckinsItemsCurrentChanged(object sender, System.EventArgs e)
         {
             TableCaption.Content = $"{Properties.Resources.Checkins} ({TableCheckins.Items.Count}):";
+            if (isAccessToken.HasValue && isAccessToken.Value)
+                SetEnabledDownloadButtons();
         }
 
         private void WebDownloadProjectUnloaded(object sender, RoutedEventArgs e)
         {
             TokenTextBox.Clear();
+            FulllDownloadButton.IsEnabled = false;
+            FirstDownloadButton.IsEnabled = false;
+            ToEndDownloadButton.IsEnabled = false;
         }
 
         public void SetAccessToken(bool? isAccessToken)
         {
+            this.isAccessToken = isAccessToken;
             AccessTokenButton.IsEnabled = false;
             if (isAccessToken.HasValue)
             {
                 CheckStatusImg.Source = ImageConverter.GetBitmapSource(isAccessToken.Value ? Properties.Resources.green_checkmark : Properties.Resources.red_x);
                 CheckStatusImg.Visibility = Visibility.Visible;
+                if (isAccessToken.Value)
+                    SetEnabledDownloadButtons();
             }
             else
             {
@@ -53,6 +64,16 @@ namespace UntappdViewer.Views
             {
                 AccessTokenButton.IsEnabled = false;
                 CheckStatusImg.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void SetEnabledDownloadButtons()
+        {
+            FulllDownloadButton.IsEnabled = true;
+            if (TableCheckins.Items.Count > 0)
+            {
+                FirstDownloadButton.IsEnabled = true;
+                ToEndDownloadButton.IsEnabled = true;
             }
         }
     }

@@ -28,6 +28,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
+                <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
             <Image Grid.Row="0" Height="50" Width="50" Source="..\Resources\ut_connection_default.png" VerticalAlignment="Bottom"/>
             <Grid Grid.Row="1">
@@ -46,6 +47,13 @@
                     </StackPanel>
                 </Button>
             </Grid>
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Name="FulllDownloadButton" Content="{x:Static properties:Resources.Full}" IsEnabled="False" Command="{Binding FulllDownloadButtonCommand}" Width="60" Height="20" IsDefault="True"/>
+                <Separator Width="10" Visibility="Hidden"/>
+                <Button Name="FirstDownloadButton" Content="{x:Static properties:Resources.First}" IsEnabled="False" Command="{Binding FirstDownloadButtonCommand}" Width="60" Height="20" IsDefault="True"/>
+                <Separator Width="10" Visibility="Hidden"/>
+                <Button Name="ToEndDownloadButton" Content="{x:Static properties:Resources.ToEnd}" IsEnabled="False" Command="{Binding ToEndDownloadButtonCommand}" Width="60" Height="20" IsDefault="True"/>
+            </StackPanel>
         </Grid>
         <Grid Grid.Row="1" >
             <Grid.RowDefinitions>

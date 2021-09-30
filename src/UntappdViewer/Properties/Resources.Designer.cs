@@ -275,6 +275,24 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to First.
+        /// </summary>
+        public static string First {
+            get {
+                return ResourceManager.GetString("First", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Full.
+        /// </summary>
+        public static string Full {
+            get {
+                return ResourceManager.GetString("Full", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap green_checkmark {
@@ -553,6 +571,15 @@ namespace UntappdViewer.Properties {
             get {
                 object obj = ResourceManager.GetObject("taster_3x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To End.
+        /// </summary>
+        public static string ToEnd {
+            get {
+                return ResourceManager.GetString("ToEnd", resourceCulture);
             }
         }
         

@@ -26,6 +26,12 @@ namespace UntappdViewer.ViewModels
 
         public ICommand CheckAccessTokenCommand { get; }
 
+        public ICommand FulllDownloadButtonCommand { get; }
+
+        public ICommand FirstDownloadButtonCommand { get; }
+
+        public ICommand ToEndDownloadButtonCommand { get; }
+
         public ICommand OkButtonCommand { get; }
 
         public bool? AccessToken
@@ -62,6 +68,9 @@ namespace UntappdViewer.ViewModels
             this.webApiClient = webApiClient;
             this.moduleManager = moduleManager;
             CheckAccessTokenCommand = new DelegateCommand<string>(CheckAccessToken);
+            FulllDownloadButtonCommand = new DelegateCommand(FulllDownload);
+            FirstDownloadButtonCommand = new DelegateCommand(FirstDownload);
+            ToEndDownloadButtonCommand = new DelegateCommand(ToEndDownload);
             OkButtonCommand = new DelegateCommand(Exit);
         }
 
@@ -90,6 +99,21 @@ namespace UntappdViewer.ViewModels
             webApiClient.Initialize(token);
             AccessToken = await Task.Run(() => webApiClient.Check());
             LoadingChangeActivity(false);
+        }
+
+        private void FulllDownload()
+        {
+        
+        }
+
+        private void FirstDownload()
+        {
+        
+        }
+
+        private void ToEndDownload()
+        {
+        
         }
 
         private void Exit()
