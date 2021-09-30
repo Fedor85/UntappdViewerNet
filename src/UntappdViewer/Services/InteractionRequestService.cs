@@ -16,7 +16,7 @@ namespace UntappdViewer.Services
     {
         private IDialogService dialogService;
 
-        public event Action<string> ShowMessageOnStatusBarEnvent;
+        public event Action<string> ShowMessageOnStatusBarEvent;
 
         public event Action ClearMessageOnStatusBarEnvent;
 
@@ -65,8 +65,8 @@ namespace UntappdViewer.Services
 
         public void ShowMessageOnStatusBar(string message)
         {
-            if (ShowMessageOnStatusBarEnvent != null)
-                ShowMessageOnStatusBarEnvent.Invoke(message);
+            if (ShowMessageOnStatusBarEvent != null)
+                ShowMessageOnStatusBarEvent.Invoke(message);
         }
 
         public string OpenFile(string initialDirectory, List<string> extensions)

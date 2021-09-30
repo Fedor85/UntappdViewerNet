@@ -13,7 +13,7 @@ namespace UntappdViewer.Modules
         public override void OnInitialized(IContainerProvider containerProvider)
         {
             base.OnInitialized(containerProvider);
-            regionManager.RegisterViewWithRegion(RegionNames.RootRegion, () => containerProvider.Resolve<WebDownloadProject>());
+            regionManager.RegisterViewWithRegion(RegionNames.MainRegion, () => containerProvider.Resolve<WebDownloadProject>());
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using QuickType.WebModels;
@@ -13,6 +14,8 @@ namespace UntappdWebApiClient
 
         private UrlPathBuilder urlPathBuilder;
 
+        public event Action<int> ChangeUploadedCountEvent;
+
         public Client()
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
@@ -26,6 +29,9 @@ namespace UntappdWebApiClient
         public bool Check()
         {
             HttpResponseMessage httpResponse = GetHttpResponse("checkin/recent/?");
+            if ((long)httpResponse.StatusCode == 429)
+                throw new ArgumentException(httpResponse.ReasonPhrase);
+
             return httpResponse.IsSuccessStatusCode;
         }
 
@@ -52,6 +58,9 @@ namespace UntappdWebApiClient
             while (true)
             {
                 HttpResponseMessage httpResponse = GetHttpResponse($"user/checkins/?max_id={currentId}&limit=50");
+                if ((long)httpResponse.StatusCode == 429)
+                    throw new ArgumentException(httpResponse.ReasonPhrase);
+
                 string responseBody = httpResponse.Content.ReadAsStringAsync().Result;
                 Temperatures temperatures = Newtonsoft.Json.JsonConvert.DeserializeObject<Temperatures>(responseBody);
                 if (temperatures.Response.Pagination.MaxId.HasValue)
@@ -73,6 +82,8 @@ namespace UntappdWebApiClient
                         checkins.AddRange(currentCheckins);
                     }
                     currentId = temperatures.Response.Pagination.MaxId.Value;
+                    if (ChangeUploadedCountEvent != null)
+                        ChangeUploadedCountEvent.Invoke(checkins.Count);
                 }
                 else
                 {

@@ -5,7 +5,7 @@ namespace UntappdViewer.Interfaces.Services
 {
     public interface IInteractionRequestService
     {
-        event Action<string> ShowMessageOnStatusBarEnvent;
+        event Action<string> ShowMessageOnStatusBarEvent;
 
         event Action ClearMessageOnStatusBarEnvent;
 

@@ -28,14 +28,14 @@ namespace UntappdViewer.ViewModels
         protected override void Activate()
         {
             base.Activate();
-            interactionRequestService.ShowMessageOnStatusBarEnvent += ShowMessage;
+            interactionRequestService.ShowMessageOnStatusBarEvent += ShowMessage;
             interactionRequestService.ClearMessageOnStatusBarEnvent += ClearMessage;
         }
 
         protected override void DeActivate()
         {
             base.DeActivate();
-            interactionRequestService.ShowMessageOnStatusBarEnvent -= ShowMessage;
+            interactionRequestService.ShowMessageOnStatusBarEvent -= ShowMessage;
             interactionRequestService.ClearMessageOnStatusBarEnvent -= ClearMessage;
         }
 

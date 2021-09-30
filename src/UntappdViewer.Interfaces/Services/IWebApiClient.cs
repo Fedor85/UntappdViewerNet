@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UntappdViewer.Models;
 
 namespace UntappdViewer.Interfaces.Services
 {
     public interface IWebApiClient
     {
+        event Action<int> ChangeUploadedCountEvent;
+
         void Initialize(string accessToken);
 
         bool Check();
