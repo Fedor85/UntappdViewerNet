@@ -90,7 +90,7 @@
                     </StackPanel>
                 </GroupBox>
                 <DockPanel>
-                    <DockPanel  Visibility="{Binding Path =VsibilityCheckinRating, Converter={StaticResource BooleanConverter}}">
+                    <DockPanel  Visibility="{Binding Path =VisibilityCheckinRating, Converter={StaticResource BooleanConverter}}">
                         <starRating:StarRatingControl StarCount="5" StarSize="20" HorizontalAlignment="Left"
                                                       ViewStarsColor="#ffffff" ViewStarsOpacity="0.3"
                                                       BackgroundStarColor="#ffffff" BackgroundStarOpacity="1"

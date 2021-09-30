@@ -28,7 +28,7 @@ namespace UntappdViewer.ViewModels
 
         private string checkinUrl;
 
-        private bool vsibilityCheckinRating;
+        private bool visibilityCheckinRating;
 
         private double checkinRating;
 
@@ -100,12 +100,12 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public bool VsibilityCheckinRating
+        public bool VisibilityCheckinRating
         {
-            get { return vsibilityCheckinRating; }
+            get { return visibilityCheckinRating; }
             set
             {
-                SetProperty(ref vsibilityCheckinRating, value);
+                SetProperty(ref visibilityCheckinRating, value);
             }
         }
 
@@ -410,13 +410,13 @@ namespace UntappdViewer.ViewModels
             CheckinUrl = checkin.Url;
             if (checkin.RatingScore.HasValue)
             {
-                VsibilityCheckinRating = true;
+                VisibilityCheckinRating = true;
                 CheckinRating = checkin.RatingScore.Value;
             }
             else
             {
                 CheckinRating = 0;
-                VsibilityCheckinRating = false;
+                VisibilityCheckinRating = false;
             }
             CheckinVenueName = checkin.Venue.Name;
             CheckinVenueCountry = checkin.Venue.Country;
@@ -446,7 +446,7 @@ namespace UntappdViewer.ViewModels
             CheckinHeader = GetCheckinHeader(null);
             CheckinUrl = DefautlValues.DefaultUrl;
             CheckinRating = 0;
-            VsibilityCheckinRating = false;
+            VisibilityCheckinRating = false;
             CheckinVenueName = String.Empty;
             CheckinVenueCountry = String.Empty;
             CheckinVenueState = String.Empty;
