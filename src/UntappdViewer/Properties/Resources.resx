@@ -357,4 +357,8 @@
     <value>Full</value>
     <comment>en-en</comment>
   </data>
+  <data name="AskDeletedCheckins" xml:space="preserve">
+    <value>Checkins will be deleted. Continue?</value>
+    <comment>en-en</comment>
+  </data>
 </root>

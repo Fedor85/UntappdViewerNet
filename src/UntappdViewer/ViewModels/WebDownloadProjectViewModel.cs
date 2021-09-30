@@ -24,6 +24,8 @@ namespace UntappdViewer.ViewModels
 
         private IModuleManager moduleManager;
 
+        private IInteractionRequestService interactionRequestService;
+
         public ICommand CheckAccessTokenCommand { get; }
 
         public ICommand FulllDownloadButtonCommand { get; }
@@ -62,11 +64,14 @@ namespace UntappdViewer.ViewModels
 
         public WebDownloadProjectViewModel(IRegionManager regionManager, IUntappdService untappdService,
                                                                          IWebApiClient webApiClient,
-                                                                         IModuleManager moduleManager) : base(moduleManager, regionManager)
+                                                                         IModuleManager moduleManager,
+                                                                         IInteractionRequestService interactionRequestService) : base(moduleManager, regionManager)
         {
             this.untappdService = untappdService;
             this.webApiClient = webApiClient;
             this.moduleManager = moduleManager;
+            this.interactionRequestService = interactionRequestService;
+
             CheckAccessTokenCommand = new DelegateCommand<string>(CheckAccessToken);
             FulllDownloadButtonCommand = new DelegateCommand(FulllDownload);
             FirstDownloadButtonCommand = new DelegateCommand(FirstDownload);
@@ -103,17 +108,38 @@ namespace UntappdViewer.ViewModels
 
         private void FulllDownload()
         {
-        
+            if (untappdService.Untappd.Checkins.Count  > 0 && !interactionRequestService.Ask(Properties.Resources.Warning, Properties.Resources.AskDeletedCheckins))
+                return;
+
+            LoadingChangeActivity(true);
+            FulllDownloadAsync();
+        }
+
+        private async void FulllDownloadAsync()
+        {
+            LoadingChangeActivity(false);
         }
 
         private void FirstDownload()
         {
-        
+            LoadingChangeActivity(true);
+            FirstDownloadAsync();
+        }
+
+        private async void FirstDownloadAsync()
+        {
+            LoadingChangeActivity(false);
         }
 
         private void ToEndDownload()
         {
-        
+            LoadingChangeActivity(true);
+            ToEndDownloadAsync();
+        }
+
+        private async void ToEndDownloadAsync()
+        {
+            LoadingChangeActivity(false);
         }
 
         private void Exit()

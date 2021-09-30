@@ -88,6 +88,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checkins will be deleted. Continue?.
+        /// </summary>
+        public static string AskDeletedCheckins {
+            get {
+                return ResourceManager.GetString("AskDeletedCheckins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Want to save your changes untappd project?.
         /// </summary>
         public static string AskSaveСhangesUntappdProject {
