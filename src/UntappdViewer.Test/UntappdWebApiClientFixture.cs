@@ -18,7 +18,7 @@ namespace UntappdViewer.Test
             untappdClient.Initialize(AccessToken);
 
             Assert.True(untappdClient.Check());
-            List<Checkin> checkins = untappdClient.GetCheckins();
+            List<Checkin> checkins = untappdClient.GetFullCheckins();
         }
     }
 }

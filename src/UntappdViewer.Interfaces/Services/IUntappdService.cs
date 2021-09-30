@@ -30,6 +30,8 @@ namespace UntappdViewer.Interfaces.Services
 
         string GetUntappdUserName();
 
+        void AddCheckins(List<Checkin> checkins);
+
         void UpdateUntappdUserName(string untappdUserName);
 
         string GetUntappdProjectFileName();
@@ -38,7 +40,7 @@ namespace UntappdViewer.Interfaces.Services
 
         string GetFullCheckinPhotoFilePath(Checkin checkin);
 
-        List<Checkin> GeCheckins(bool isUniqueCheckins = false);
+        List<Checkin> GetCheckins(bool isUniqueCheckins = false);
 
         Checkin GetCheckin(long checkinId);
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Prism.Commands;
@@ -82,7 +83,7 @@ namespace UntappdViewer.ViewModels
         protected override void Activate()
         {
             base.Activate();
-            Checkins = new List<Checkin>(untappdService.GeCheckins());
+            Checkins = new List<Checkin>(untappdService.GetCheckins());
         }
 
         protected override void DeActivate()
@@ -117,6 +118,10 @@ namespace UntappdViewer.ViewModels
 
         private async void FulllDownloadAsync()
         {
+            untappdService.Untappd.Checkins.Clear();
+            List<Checkin> checkins = await Task.Run(() => webApiClient.GetFullCheckins());
+            untappdService.AddCheckins(checkins);
+            Checkins = new List<Checkin>(untappdService.GetCheckins());
             LoadingChangeActivity(false);
         }
 
@@ -128,6 +133,9 @@ namespace UntappdViewer.ViewModels
 
         private async void FirstDownloadAsync()
         {
+            List<Checkin> checkins = await Task.Run(() => webApiClient.GetFirstCheckins(untappdService.Untappd.Checkins.Max(item => item.Id)));
+            untappdService.AddCheckins(checkins);
+            Checkins = new List<Checkin>(untappdService.GetCheckins());
             LoadingChangeActivity(false);
         }
 
@@ -139,6 +147,9 @@ namespace UntappdViewer.ViewModels
 
         private async void ToEndDownloadAsync()
         {
+            List<Checkin> checkins = await Task.Run(() => webApiClient.GetToEndCheckins(untappdService.Untappd.Checkins.Min(item => item.Id)));
+            untappdService.AddCheckins(checkins);
+            Checkins = new List<Checkin>(untappdService.GetCheckins());
             LoadingChangeActivity(false);
         }
 

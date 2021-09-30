@@ -29,10 +29,26 @@ namespace UntappdWebApiClient
             return httpResponse.IsSuccessStatusCode;
         }
 
-        public List<Checkin> GetCheckins()
+        public List<Checkin> GetFullCheckins()
+        {
+            return GetCheckins(0);
+        }
+
+        public List<Checkin> GetFirstCheckins(long endId)
+        {
+            return GetCheckins(0, endId);
+        }
+
+
+        public List<Checkin> GetToEndCheckins(long startId)
+        {
+            return GetCheckins(startId);
+        }
+
+        private List<Checkin> GetCheckins(long maxId, long? minId = null)
         {
             List<Checkin> checkins = new List<Checkin>();
-            long currentId = 0;
+            long currentId = maxId;
             while (true)
             {
                 HttpResponseMessage httpResponse = GetHttpResponse($"user/checkins/?max_id={currentId}&limit=50");
@@ -40,7 +56,22 @@ namespace UntappdWebApiClient
                 Temperatures temperatures = Newtonsoft.Json.JsonConvert.DeserializeObject<Temperatures>(responseBody);
                 if (temperatures.Response.Pagination.MaxId.HasValue)
                 {
-                    checkins.AddRange(CheckinMapper.GetCheckins(temperatures.Response.Checkins));
+                    List<Checkin> currentCheckins = CheckinMapper.GetCheckins(temperatures.Response.Checkins);
+
+                    if (minId.HasValue)
+                    {
+                        foreach (Checkin currentCheckin in currentCheckins)
+                        {
+                            if (currentCheckin.Id == minId.Value)
+                                return checkins;
+
+                            checkins.Add(currentCheckin);
+                        }
+                    }
+                    else
+                    {
+                        checkins.AddRange(currentCheckins);
+                    }
                     currentId = temperatures.Response.Pagination.MaxId.Value;
                 }
                 else

@@ -111,6 +111,13 @@ namespace UntappdViewer.Domain.Services
             return Untappd.UserName;
         }
 
+        public void AddCheckins(List<Checkin> checkins)
+        {
+            Untappd.AddCheckins(checkins);
+            Untappd.SortDataDescCheckins();
+            isСhanges = true;
+        }
+
         public void UpdateUntappdUserName(string untappdUserName)
         {
             if (Untappd.UserName.Equals(untappdUserName))
@@ -137,7 +144,7 @@ namespace UntappdViewer.Domain.Services
             return Path.Combine(GetFullUntappdProjectPhotoFilesDirectory(), Path.GetFileName(checkin.UrlPhoto));
         }
 
-        public List<Checkin> GeCheckins(bool isUniqueCheckins = false)
+        public List<Checkin> GetCheckins(bool isUniqueCheckins = false)
         {
             return isUniqueCheckins ? Untappd.GetUniqueCheckins() : Untappd.Checkins;
         }
