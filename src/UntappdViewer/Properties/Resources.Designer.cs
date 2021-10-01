@@ -677,6 +677,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save project to UNTP.
+        /// </summary>
+        public static string WarningMessageSaveProjectToUNTP {
+            get {
+                return ResourceManager.GetString("WarningMessageSaveProjectToUNTP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         public static System.Drawing.Icon web {

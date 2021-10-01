@@ -184,6 +184,12 @@ namespace UntappdViewer.ViewModels
 
         private void WebDownloadProject()
         {
+            if (!FileHelper.GetExtensionWihtoutPoint(untappdService.FilePath).Equals(Extensions.UNTP))
+            {
+                interactionRequestService.ShowMessage(Properties.Resources.Warning, Properties.Resources.WarningMessageSaveProjectToUNTP);
+                return;
+            }
+
             moduleManager.LoadModule(typeof(WebDownloadProjectModule).Name);
             ActivateView(RegionNames.MainRegion, typeof(Views.WebDownloadProject));
         }

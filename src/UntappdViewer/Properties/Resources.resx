@@ -365,4 +365,8 @@
     <value>Uploaded</value>
     <comment>en-en</comment>
   </data>
+  <data name="WarningMessageSaveProjectToUNTP" xml:space="preserve">
+    <value>Save project to UNTP</value>
+    <comment>en-en</comment>
+  </data>
 </root>
