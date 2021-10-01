@@ -198,7 +198,7 @@ namespace UntappdViewer.ViewModels
 
         private void WebApiClientChangeUploadedCountEvent(int count)
         {
-            interactionRequestService.ShowMessageOnStatusBar($"{Properties.Resources.Uploaded}:{checkins.Count}");
+            interactionRequestService.ShowMessageOnStatusBar($"{Properties.Resources.Uploaded}:{count}");
         }
 
         private void Exit()

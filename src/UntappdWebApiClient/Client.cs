@@ -75,15 +75,16 @@ namespace UntappdWebApiClient
                                 return checkins;
 
                             checkins.Add(currentCheckin);
+                            UploadedCountInvoke(checkins);
                         }
                     }
                     else
                     {
                         checkins.AddRange(currentCheckins);
+                        UploadedCountInvoke(checkins);
                     }
                     currentId = temperatures.Response.Pagination.MaxId.Value;
-                    if (ChangeUploadedCountEvent != null)
-                        ChangeUploadedCountEvent.Invoke(checkins.Count);
+             
                 }
                 else
                 {
@@ -100,6 +101,12 @@ namespace UntappdWebApiClient
                 string url = urlPathBuilder.GetUrl(methodName);
                 return httpClient.GetAsync(url).Result;
             }
+        }
+
+        private void UploadedCountInvoke(List<Checkin> checkins)
+        {
+            if (ChangeUploadedCountEvent != null)
+                ChangeUploadedCountEvent.Invoke(checkins.Count);
         }
     }
 }
