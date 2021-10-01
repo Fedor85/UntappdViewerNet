@@ -102,7 +102,10 @@ namespace UntappdViewer.ViewModels
 
         private void CreateProject()
         {
-            string untappdUserName = interactionRequestService.AskReplaceText(Properties.Resources.UntappdUserNameCaption, String.Empty);
+            string untappdUserName = String.Empty;
+            if (!interactionRequestService.AskReplaceText(Properties.Resources.UntappdUserNameCaption, ref untappdUserName))
+                return;
+
             untappdService.Create(untappdUserName);
             moduleManager.LoadModule(typeof(MainModule).Name);
             ActivateView(RegionNames.RootRegion, typeof(Main));
@@ -117,12 +120,14 @@ namespace UntappdViewer.ViewModels
                 interactionRequestService.ShowMessage(Properties.Resources.Warning, CommunicationHelper.GetFileStatusMessage(fileStatus, filePath));
                 return;
             }
-
             try
             {
                 string untappdUserName = String.Empty;
                 if (FileHelper.GetExtensionWihtoutPoint(filePath).Equals(Extensions.CSV))
-                    untappdUserName = interactionRequestService.AskReplaceText(Properties.Resources.UntappdUserNameCaption, String.Empty);
+                {
+                    if (!interactionRequestService.AskReplaceText(Properties.Resources.UntappdUserNameCaption, ref untappdUserName))
+                        return;
+                }
 
                 untappdService.Initialize(filePath, untappdUserName);
             }

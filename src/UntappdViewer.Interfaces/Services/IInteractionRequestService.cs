@@ -15,7 +15,7 @@ namespace UntappdViewer.Interfaces.Services
 
         bool Ask(string caption, string message);
 
-        string AskReplaceText(string caption, string text);
+        bool AskReplaceText(string caption, ref string text);
 
         void ShowMessageOnStatusBar(string message);
 

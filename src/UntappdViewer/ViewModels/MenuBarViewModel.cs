@@ -85,10 +85,10 @@ namespace UntappdViewer.ViewModels
 
         private void RenameProject()
         {
-            string oldName = untappdService.GetUntappdUserName();
-            string newName = interactionRequestService.AskReplaceText(Properties.Resources.RenameProject, oldName);
-            if (!oldName.Equals(newName))
-                untappdService.UpdateUntappdUserName(newName);
+            string name = untappdService.GetUntappdUserName();
+            string oldName = name;
+            if (interactionRequestService.AskReplaceText(Properties.Resources.RenameProject,ref name) && !oldName.Equals(name))
+                untappdService.UpdateUntappdUserName(name);
         }
 
         private void SaveProject()

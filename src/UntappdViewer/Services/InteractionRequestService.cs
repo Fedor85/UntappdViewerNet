@@ -40,27 +40,34 @@ namespace UntappdViewer.Services
             DialogParameters dialogParameters = new DialogParameters();
             dialogParameters.Add("caption", caption);
             dialogParameters.Add("message", message);
-            bool result = false;
-            dialogService.ShowDialog("AskDialog", dialogParameters,dialogResult =>
+            bool dialogResult = false;
+            dialogService.ShowDialog("AskDialog", dialogParameters, dialog =>
             {
-                if (dialogResult.Result == ButtonResult.OK)
-                    result = true;
+                if (dialog.Result == ButtonResult.OK)
+                    dialogResult = true;
             });
-            return result;
+            return dialogResult;
         }
 
-        public string AskReplaceText(string caption, string text)
+        public bool AskReplaceText(string caption, ref string text)
         {
             DialogParameters dialogParameters = new DialogParameters();
             dialogParameters.Add("caption", caption);
             dialogParameters.Add("text", text);
-            string result = text;
-            dialogService.ShowDialog("TextBoxDialog", dialogParameters, dialogResult =>
+            string dialogText = text;
+            bool dialogResult = false;
+
+            dialogService.ShowDialog("TextBoxDialog", dialogParameters, dialog=>
             {
-                if (dialogResult.Result == ButtonResult.OK)
-                    result = dialogResult.Parameters.GetValue<string>("name").Trim();
+                if (dialog.Result == ButtonResult.OK)
+                {
+                    dialogText = dialog.Parameters.GetValue<string>("name").Trim();
+                    dialogResult = true;
+                }
             });
-            return result;
+
+            text = dialogText;
+            return dialogResult;
         }
 
         public void ShowMessageOnStatusBar(string message)
