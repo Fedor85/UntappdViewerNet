@@ -97,6 +97,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Different\Behaviors\AccessTokenBehavior.cs" />
+    <Compile Include="Different\Behaviors\CloseByEscapeBehavior.cs" />
     <Compile Include="Different\Behaviors\LoadedWindowBehavior.cs" />
     <Compile Include="Different\Behaviors\SelectedTreeViewItemBehavior.cs" />
     <Compile Include="Different\CallBackConteiner.cs" />
