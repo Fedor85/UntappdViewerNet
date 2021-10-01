@@ -113,6 +113,9 @@ namespace UntappdViewer.Domain.Services
 
         public void AddCheckins(List<Checkin> checkins)
         {
+            if(checkins.Count == 0)
+                return;
+
             Untappd.AddCheckins(checkins);
             Untappd.SortDataDescCheckins();
             isСhanges = true;
