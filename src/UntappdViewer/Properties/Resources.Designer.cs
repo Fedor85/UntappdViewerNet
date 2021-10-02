@@ -703,5 +703,32 @@ namespace UntappdViewer.Properties {
                 return ResourceManager.GetString("WebDownloadProject", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to left mouse button: moving.
+        /// </summary>
+        public static string ZoomBorderLeftMouseButtonUse {
+            get {
+                return ResourceManager.GetString("ZoomBorderLeftMouseButtonUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to right mouse button: reset.
+        /// </summary>
+        public static string ZoomBorderRightMouseButtonUse {
+            get {
+                return ResourceManager.GetString("ZoomBorderRightMouseButtonUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to scroll whell: zoom.
+        /// </summary>
+        public static string ZoomBorderScrollUse {
+            get {
+                return ResourceManager.GetString("ZoomBorderScrollUse", resourceCulture);
+            }
+        }
     }
 }

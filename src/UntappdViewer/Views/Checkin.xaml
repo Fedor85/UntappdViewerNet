@@ -130,6 +130,11 @@
             </StackPanel>
             <GroupBox Grid.Row="1" Header="{x:Static properties:Resources.Photo}">
                 <Grid>
+                    <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Opacity="0.4">
+                        <Label Content="{x:Static properties:Resources.ZoomBorderScrollUse}" FontSize="10"/>
+                        <Label Content="{x:Static properties:Resources.ZoomBorderLeftMouseButtonUse}" FontSize="10"/>
+                        <Label Content="{x:Static properties:Resources.ZoomBorderRightMouseButtonUse}" FontSize="10"/>
+                    </StackPanel>
                     <controls:ZoomBorder ClipToBounds="True">
                         <Image Source="{Binding CheckinPhotoPath, TargetNullValue={x:Null}}"/>
                     </controls:ZoomBorder>

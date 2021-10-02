@@ -369,4 +369,16 @@
     <value>Save project to UNTP</value>
     <comment>en-en</comment>
   </data>
+  <data name="ZoomBorderLeftMouseButtonUse" xml:space="preserve">
+    <value>left mouse button: moving</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="ZoomBorderRightMouseButtonUse" xml:space="preserve">
+    <value>right mouse button: reset</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="ZoomBorderScrollUse" xml:space="preserve">
+    <value>scroll whell: zoom</value>
+    <comment>en-en</comment>
+  </data>
 </root>
