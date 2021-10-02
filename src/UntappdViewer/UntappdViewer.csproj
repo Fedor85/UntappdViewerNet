@@ -155,6 +155,7 @@
     <Compile Include="Views\Controls\StarRating\StarRatingControl.xaml.cs">
       <DependentUpon>StarRatingControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Controls\ZoomBorder.cs" />
     <Compile Include="Views\InteractionRequest\AskDialog.xaml.cs">
       <DependentUpon>AskDialog.xaml</DependentUpon>
     </Compile>

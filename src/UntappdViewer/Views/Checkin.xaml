@@ -7,6 +7,7 @@
              xmlns:properties="clr-namespace:UntappdViewer.Properties"
              xmlns:starRating="clr-namespace:UntappdViewer.Views.Controls.StarRating"
              xmlns:local="clr-namespace:UntappdViewer"
+             xmlns:controls="clr-namespace:UntappdViewer.Views.Controls"
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="450" d:DesignWidth="450">
@@ -129,7 +130,9 @@
             </StackPanel>
             <GroupBox Grid.Row="1" Header="{x:Static properties:Resources.Photo}">
                 <Grid>
-                    <Image Source="{Binding CheckinPhotoPath, TargetNullValue={x:Null}}" Stretch="Uniform"/>
+                    <controls:ZoomBorder ClipToBounds="True">
+                        <Image Source="{Binding CheckinPhotoPath, TargetNullValue={x:Null}}"/>
+                    </controls:ZoomBorder>
                     <ContentControl prism:RegionManager.RegionName="{x:Static local:RegionNames.PhotoLoadingRegion}"/>
                 </Grid>
             </GroupBox>
