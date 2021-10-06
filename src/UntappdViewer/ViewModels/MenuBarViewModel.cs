@@ -123,7 +123,6 @@ namespace UntappdViewer.ViewModels
             FileHelper.CreateDirectory(untappdService.GetFullUntappdProjectPhotoFilesDirectory());
             interactionRequestService.ShowMessageOnStatusBar(untappdService.FilePath);
             settingService.SetRecentFilePaths(FileHelper.AddFilePath(settingService.GetRecentFilePaths(), fileSavePath, settingService.GetMaxRecentFilePaths()));
-
         }
 
         private void UploadProjectPhotos()
