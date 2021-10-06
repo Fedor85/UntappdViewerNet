@@ -1,4 +1,6 @@
 ﻿//using System.Diagnostics;
+
+using System.Linq;
 using System.Windows;
 using Prism.Ioc;
 using Prism.Modularity;
@@ -20,13 +22,22 @@ namespace UntappdViewer
     /// </summary>
     public partial class App : PrismApplication
     {
+        private IArgumentsProvider argumentsProvider = new ArgumentsProvider();
+
         protected override Window CreateShell()
         {
             return Container.Resolve<Shell>();
         }
 
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            argumentsProvider.Arguments.AddRange(e.Args.ToList());
+            base.OnStartup(e);
+        }
+
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterInstance(argumentsProvider);
             ISettingService settingService = new SettingService();
             //if (Debugger.IsAttached)
             //    settingService.Reset();

@@ -47,6 +47,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Services\ArgumentsProvider.cs" />
     <Compile Include="Services\SettingService.cs" />
     <Compile Include="Services\WebDownloader.cs" />
   </ItemGroup>

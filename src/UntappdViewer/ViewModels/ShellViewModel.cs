@@ -25,6 +25,8 @@ namespace UntappdViewer.ViewModels
 
         private IModuleManager moduleManager;
 
+        private IArgumentsProvider argumentsProvider;
+
         private string title;
 
         private bool loadedWindow;
@@ -54,13 +56,15 @@ namespace UntappdViewer.ViewModels
         public ShellViewModel(IUntappdService untappdService, IInteractionRequestService interactionRequestService,
                                                               IRegionManager regionManager,
                                                               ISettingService settingService,
-                                                              IModuleManager moduleManager)
+                                                              IModuleManager moduleManager,
+                                                              IArgumentsProvider argumentsProvider)
         {
             this.untappdService = untappdService;
             this.interactionRequestService = interactionRequestService;
             this.regionManager = regionManager;
             this.settingService = settingService;
             this.moduleManager = moduleManager;
+            this.argumentsProvider = argumentsProvider;
 
             ClosingCommand = new DelegateCommand<CancelEventArgs>(Closing);
             untappdService.UpdateUntappdUserNameEvent += UpdateTitle;
@@ -70,13 +74,27 @@ namespace UntappdViewer.ViewModels
         private void Activate()
         {
             Title = CommunicationHelper.GetTitle();
-            string filePath = FileHelper.GetFirstFileItemPath(settingService.GetRecentFilePaths());
+            bool isUsedArgument = false;
+            string filePath;
+            if (argumentsProvider.Arguments.Count > 0)
+            {
+                filePath = argumentsProvider.Arguments[0];
+                isUsedArgument = true;
+            }
+            else
+            {
+                filePath = FileHelper.GetFirstFileItemPath(settingService.GetRecentFilePaths());
+            }
+
             FileStatus fileStatus = FileHelper.Check(filePath, Extensions.GetSupportExtensions());
             if (EnumsHelper.IsValidFileStatus(fileStatus))
             {
                 try
                 {
                     untappdService.Initialize(filePath);
+                    if (isUsedArgument)
+                        settingService.SetRecentFilePaths(FileHelper.AddFilePath(settingService.GetRecentFilePaths(), filePath, settingService.GetMaxRecentFilePaths()));
+
                     moduleManager.LoadModule(typeof(MainModule).Name);
                 }
                 catch (ArgumentException ex)
