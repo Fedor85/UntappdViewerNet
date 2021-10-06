@@ -168,7 +168,7 @@ namespace UntappdViewer.ViewModels
         {
             Image image = Image.FromFile(soursePath);
             PropertyItem propertyItem = image.PropertyItems[0];
-            FileHelper.SetProperty(propertyItem, FileHelper.ExifImageDateTimeOriginal, checkin.CreatedDate.ToString("MM/dd/yyyy"));
+            FileHelper.SetProperty(propertyItem, FileHelper.ExifImageDateTimeOriginal, checkin.CreatedDate.ToString("yyyy/MM/dd"));
             image.SetPropertyItem(propertyItem);
             image.Save(targetPath);
         }
