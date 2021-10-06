@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -8,6 +9,8 @@ namespace UntappdViewer.Infrastructure
 {
     public static class FileHelper
     {
+        public const int ExifImageDateTimeOriginal = 36867;
+
         public static FileStatus Check(string filePath, List<string> supportExtensions)
         {
             if (String.IsNullOrEmpty(filePath))
@@ -127,6 +130,22 @@ namespace UntappdViewer.Infrastructure
 
             fileItems.Sort();
             return fileItems[0].FilePath;
+        }
+
+        public static void SetProperty(PropertyItem propertyItem, int id, string stringValue)
+        {
+            int lenght = stringValue.Length + 1;
+
+            byte[] byteValue = new Byte[lenght];
+            for (int i = 0; i < lenght - 1; i++)
+                byteValue[i] = (byte)stringValue[i];
+
+            byteValue[lenght - 1] = 0x00;
+
+            propertyItem.Id = id;
+            propertyItem.Type = 2;
+            propertyItem.Value = byteValue;
+            propertyItem.Len = lenght;
         }
 
         private static void UpdateFileItemIndex(List<FileItem> fileItems)

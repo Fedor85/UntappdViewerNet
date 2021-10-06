@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -156,7 +158,20 @@ namespace UntappdViewer.ViewModels
             if (!File.Exists(photoPath))
                 webDownloader.DownloadFile(checkin.UrlPhoto, photoPath);
 
-            File.Copy(photoPath, Path.Combine(uploadDirectory, untappdService.GetUploadSavePhotoFileName(checkin)), true);
+            string targetPath = Path.Combine(uploadDirectory, untappdService.GetUploadSavePhotoFileName(checkin));
+            if (File.Exists(targetPath))
+                return;
+
+            SavePhoto(photoPath, targetPath, checkin);
+        }
+
+        private void SavePhoto(string soursePath, string targetPath, Checkin checkin)
+        {
+            Image image = Image.FromFile(soursePath);
+            PropertyItem propertyItem = image.PropertyItems[0];
+            FileHelper.SetProperty(propertyItem, FileHelper.ExifImageDateTimeOriginal, checkin.CreatedDate.ToString("MM/dd/yyyy"));
+            image.SetPropertyItem(propertyItem);
+            image.Save(targetPath);
         }
 
         private void SaveСhangesProject()
