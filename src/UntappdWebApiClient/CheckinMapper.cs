@@ -26,7 +26,7 @@ namespace UntappdWebApiClient
         {
             Checkin checkin = new Checkin();
             checkin.Id = checkinsItem.CheckinId;
-            checkin.Url = "https://untappd.com/c/" + checkinsItem.CheckinId;
+            checkin.Url = $"{UriConstants.BaseUri}c/{checkinsItem.CheckinId}";
             checkin.CreatedDate = DateTime.Parse(checkinsItem.CreatedAt);
             checkin.Comment = checkinsItem.CheckinComment;
             checkin.RatingScore = checkinsItem.RatingScore;
@@ -67,14 +67,14 @@ namespace UntappdWebApiClient
             beer.Name = beerWeb.BeerName;
             beer.Type = beerWeb.BeerStyle;
             beer.ABV = beerWeb.BeerAbv;
-            beer.Url = "https://untappd.com/beer/" + beerWeb.Bid;
+            beer.Url = $"{UriConstants.BaseUri}beer/{beerWeb.Bid}";
         }
 
         private static void FillBrewery(Brewery brewery, BreweryWeb breweryWeb)
         {
             brewery.Id = breweryWeb.BreweryId;
             brewery.Name = breweryWeb.BreweryName;
-            brewery.Url = "https://untappd.com/brewery/" + breweryWeb.BreweryId;
+            brewery.Url = $"{UriConstants.BaseUri}brewery/{breweryWeb.BreweryId}";
             brewery.Venue.Country = breweryWeb.CountryName;
             brewery.Venue.City = breweryWeb.Location.BreweryCity;
             brewery.Venue.State = breweryWeb.Location.BreweryState;

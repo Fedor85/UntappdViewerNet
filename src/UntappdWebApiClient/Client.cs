@@ -10,8 +10,6 @@ namespace UntappdWebApiClient
 {
     public class Client : IWebApiClient
     {
-        private const string baseUrl = @"https://api.untappd.com/v4/";
-
         private UrlPathBuilder urlPathBuilder;
 
         public event Action<int> ChangeUploadedCountEvent;
@@ -23,7 +21,7 @@ namespace UntappdWebApiClient
 
         public void Initialize(string accessToken)
         {
-            urlPathBuilder = new UrlPathBuilder(baseUrl, accessToken);
+            urlPathBuilder = new UrlPathBuilder(UriConstants.BaseAPIUrl, accessToken);
         }
 
         public bool Check()

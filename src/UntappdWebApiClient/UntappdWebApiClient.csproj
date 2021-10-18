@@ -49,6 +49,7 @@
     <Compile Include="Client.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuickType.cs" />
+    <Compile Include="UriConstants.cs" />
     <Compile Include="UrlPathBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
