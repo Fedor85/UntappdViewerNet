@@ -33,7 +33,6 @@ namespace UntappdViewer.Behaviors
             }
         }
 
-
         protected override void OnAttached()
         {
             base.OnAttached();
