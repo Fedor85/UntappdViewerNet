@@ -43,7 +43,6 @@ namespace UntappdWebApiClient
             FillCheckins(checkins, 0, endId);
         }
 
-
         public void FillToEndCheckins(List<Checkin> checkins, long startId)
         {
             FillCheckins(checkins, startId);
@@ -81,7 +80,6 @@ namespace UntappdWebApiClient
                         UploadedCountInvoke(checkins);
                     }
                     currentId = temperatures.Response.Pagination.MaxId.Value;
-             
                 }
                 else
                 {

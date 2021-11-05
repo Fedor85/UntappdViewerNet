@@ -125,66 +125,46 @@ namespace UntappdViewer.ViewModels
                 return;
 
             LoadingChangeActivity(true);
-            FulllDownloadAsync();
+
+            Checkins.Clear();
+            untappdService.Untappd.Checkins.Clear();
+
+            FillCheckins(FulllDownload);
         }
 
-        private async void FulllDownloadAsync()
+        private void FulllDownload(List<Checkin> checkins)
         {
-            untappdService.Untappd.Checkins.Clear();
-            List<Checkin> checkins = new List<Checkin>();
-            try
-            {
-                await Task.Run(() => webApiClient.FillFullCheckins(checkins));
-            }
-            catch (Exception ex)
-            {
-                interactionRequestService.ShowError(Properties.Resources.Error, ex.Message);
-            }
-            finally
-            {
-                untappdService.AddCheckins(checkins);
-                Checkins = new List<Checkin>(untappdService.GetCheckins());
-                LoadingChangeActivity(false);
-            }
+            webApiClient.FillFullCheckins(checkins);
         }
 
         private void FirstDownload()
         {
             LoadingChangeActivity(true);
-            FirstDownloadAsync();
+            FillCheckins(FirstDownload);
         }
 
-        private async void FirstDownloadAsync()
+        private void FirstDownload(List<Checkin> checkins)
         {
-            List<Checkin> checkins = new List<Checkin>();
-            try
-            {
-                await Task.Run(() => webApiClient.FillFirstCheckins(checkins, untappdService.Untappd.Checkins.Max(item => item.Id)));
-            }
-            catch (Exception ex)
-            {
-                interactionRequestService.ShowError(Properties.Resources.Error, ex.Message);
-            }
-            finally
-            {
-                untappdService.AddCheckins(checkins);
-                Checkins = new List<Checkin>(untappdService.GetCheckins());
-                LoadingChangeActivity(false);
-            }
+            webApiClient.FillFirstCheckins(checkins, untappdService.Untappd.Checkins.Max(item => item.Id));
         }
 
         private void ToEndDownload()
         {
             LoadingChangeActivity(true);
-            ToEndDownloadAsync();
+            FillCheckins(ToEndDownload);
         }
 
-        private async void ToEndDownloadAsync()
+        private void ToEndDownload(List<Checkin> checkins)
+        {
+            webApiClient.FillToEndCheckins(checkins, untappdService.Untappd.Checkins.Min(item => item.Id));
+        }
+
+        private async void FillCheckins(Action<List<Checkin>> fillCheckinsDelegate)
         {
             List<Checkin> checkins = new List<Checkin>();
             try
             {
-                await Task.Run(() => webApiClient.FillToEndCheckins(checkins, untappdService.Untappd.Checkins.Min(item => item.Id)));
+                await Task.Run(() => fillCheckinsDelegate(checkins));
             }
             catch (Exception ex)
             {
@@ -192,8 +172,11 @@ namespace UntappdViewer.ViewModels
             }
             finally
             {
-                untappdService.AddCheckins(checkins);
-                Checkins = new List<Checkin>(untappdService.GetCheckins());
+                if (checkins.Count > 0)
+                {
+                    untappdService.AddCheckins(checkins);
+                    Checkins = new List<Checkin>(untappdService.GetCheckins());
+                }
                 LoadingChangeActivity(false);
             }
         }
