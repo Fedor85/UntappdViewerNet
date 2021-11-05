@@ -33,25 +33,24 @@ namespace UntappdWebApiClient
             return httpResponse.IsSuccessStatusCode;
         }
 
-        public List<Checkin> GetFullCheckins()
+        public void FillFullCheckins(List<Checkin> checkins)
         {
-            return GetCheckins(0);
+            FillCheckins(checkins, 0);
         }
 
-        public List<Checkin> GetFirstCheckins(long endId)
+        public void FillFirstCheckins(List<Checkin> checkins, long endId)
         {
-            return GetCheckins(0, endId);
+            FillCheckins(checkins, endId);
         }
 
 
-        public List<Checkin> GetToEndCheckins(long startId)
+        public void FillToEndCheckins(List<Checkin> checkins, long startId)
         {
-            return GetCheckins(startId);
+            FillCheckins(checkins, startId);
         }
 
-        private List<Checkin> GetCheckins(long maxId, long? minId = null)
+        private void FillCheckins(List<Checkin> checkins, long maxId, long? minId = null)
         {
-            List<Checkin> checkins = new List<Checkin>();
             long currentId = maxId;
             while (true)
             {
@@ -70,7 +69,7 @@ namespace UntappdWebApiClient
                         foreach (Checkin currentCheckin in currentCheckins)
                         {
                             if (currentCheckin.Id == minId.Value)
-                                return checkins;
+                                return;
 
                             checkins.Add(currentCheckin);
                             UploadedCountInvoke(checkins);
@@ -89,7 +88,6 @@ namespace UntappdWebApiClient
                     break;
                 }
             }
-            return checkins;
         }
 
         private HttpResponseMessage GetHttpResponse(string methodName)

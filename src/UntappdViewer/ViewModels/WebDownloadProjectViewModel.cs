@@ -131,10 +131,10 @@ namespace UntappdViewer.ViewModels
         private async void FulllDownloadAsync()
         {
             untappdService.Untappd.Checkins.Clear();
+            List<Checkin> checkins = new List<Checkin>();
             try
             {
-                List<Checkin> checkins = await Task.Run(() => webApiClient.GetFullCheckins());
-                untappdService.AddCheckins(checkins);
+                await Task.Run(() => webApiClient.FillFullCheckins(checkins));
             }
             catch (Exception ex)
             {
@@ -142,6 +142,7 @@ namespace UntappdViewer.ViewModels
             }
             finally
             {
+                untappdService.AddCheckins(checkins);
                 Checkins = new List<Checkin>(untappdService.GetCheckins());
                 LoadingChangeActivity(false);
             }
@@ -155,10 +156,10 @@ namespace UntappdViewer.ViewModels
 
         private async void FirstDownloadAsync()
         {
+            List<Checkin> checkins = new List<Checkin>();
             try
             {
-                List<Checkin> checkins = await Task.Run(() => webApiClient.GetFirstCheckins(untappdService.Untappd.Checkins.Max(item => item.Id)));
-                untappdService.AddCheckins(checkins);
+                await Task.Run(() => webApiClient.FillFirstCheckins(checkins, untappdService.Untappd.Checkins.Max(item => item.Id)));
             }
             catch (Exception ex)
             {
@@ -166,6 +167,7 @@ namespace UntappdViewer.ViewModels
             }
             finally
             {
+                untappdService.AddCheckins(checkins);
                 Checkins = new List<Checkin>(untappdService.GetCheckins());
                 LoadingChangeActivity(false);
             }
@@ -179,10 +181,10 @@ namespace UntappdViewer.ViewModels
 
         private async void ToEndDownloadAsync()
         {
+            List<Checkin> checkins = new List<Checkin>();
             try
             {
-                List<Checkin> checkins = await Task.Run(() => webApiClient.GetToEndCheckins(untappdService.Untappd.Checkins.Min(item => item.Id)));
-                untappdService.AddCheckins(checkins);
+                await Task.Run(() => webApiClient.FillToEndCheckins(checkins, untappdService.Untappd.Checkins.Min(item => item.Id)));
             }
             catch (Exception ex)
             {
@@ -190,6 +192,7 @@ namespace UntappdViewer.ViewModels
             }
             finally
             {
+                untappdService.AddCheckins(checkins);
                 Checkins = new List<Checkin>(untappdService.GetCheckins());
                 LoadingChangeActivity(false);
             }

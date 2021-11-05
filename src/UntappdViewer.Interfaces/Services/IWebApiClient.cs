@@ -12,10 +12,10 @@ namespace UntappdViewer.Interfaces.Services
 
         bool Check();
 
-        List<Checkin> GetFullCheckins();
+        void FillFullCheckins(List<Checkin> checkins);
 
-        List<Checkin> GetFirstCheckins(long endId);
+        void FillFirstCheckins(List<Checkin> checkins, long endId);
 
-        List<Checkin> GetToEndCheckins(long startId);
+        void FillToEndCheckins(List<Checkin> checkins, long startId);
     }
 }
