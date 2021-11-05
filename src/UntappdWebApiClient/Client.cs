@@ -40,7 +40,7 @@ namespace UntappdWebApiClient
 
         public void FillFirstCheckins(List<Checkin> checkins, long endId)
         {
-            FillCheckins(checkins, endId);
+            FillCheckins(checkins, 0, endId);
         }
 
 
