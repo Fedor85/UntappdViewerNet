@@ -9,3 +9,4 @@ Rmdir /S /Q %targetdir%
 Rmdir /S /Q %releasedir%
 "%msbuildpath%"\MSBuild.exe "%slndir%" /property:Configuration=Release > %logfile%
 Xcopy /E /I "%releasedir%" %targetdir%
+pause
