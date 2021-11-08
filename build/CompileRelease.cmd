@@ -5,5 +5,5 @@ SET targetdir=UntappdViewer
 
 Rmdir /S /Q %targetdir%
 Rmdir /S /Q %releasedir%
-"%msbuildpath%"\MSBuild.exe "%slndir%" /property:Configuration=Release
+"%msbuildpath%"\MSBuild.exe "%slndir%" /property:Configuration=Release > MSBuild.Log.txt
 Xcopy /E /I "%releasedir%" %targetdir%
