@@ -1,6 +1,8 @@
 SET msbuildpath=C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin
-SET sourcedir=..\src\UntappdViewer.sln
+SET slndir=..\src\UntappdViewer.sln
 SET releasedir=..\src\UntappdViewer\bin\Release
+SET targetdir=UntappdViewer
 
-"%msbuildpath%"\MSBuild.exe "%sourcedir%" /property:Configuration=Release
-Xcopy /E /I "%releasedir%" UntappdViewer
+Rmdir /S /Q %targetdir%
+"%msbuildpath%"\MSBuild.exe "%slndir%" /property:Configuration=Release
+Xcopy /E /I "%releasedir%" %targetdir%
