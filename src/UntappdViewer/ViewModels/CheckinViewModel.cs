@@ -11,6 +11,7 @@ using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
 using UntappdViewer.Modules;
+using UntappdViewer.Utils;
 
 namespace UntappdViewer.ViewModels
 {
@@ -494,7 +495,7 @@ namespace UntappdViewer.ViewModels
             }
             catch (Exception ex)
             {
-                interactionRequestService.ShowError(Properties.Resources.Error, ex.Message);
+                interactionRequestService.ShowError(Properties.Resources.Error, StringHelper.GetFullExceptionMessage(ex));
                 CheckinPhotoPath = DefautlValues.DefaultCheckinPhotoPath;
             }
             LoadingChangeActivity(false);

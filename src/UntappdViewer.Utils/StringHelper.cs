@@ -71,6 +71,20 @@ namespace UntappdViewer.Utils
             return valueLine.Split(',').Select(item => item.Trim()).ToList();
         }
 
+        public static string GetFullExceptionMessage(Exception ex)
+        {
+            string message = String.Empty;
+            if (ex == null)
+                return message;
+
+            message = ex.Message;
+            string innerMessage = GetFullExceptionMessage(ex.InnerException);
+            if (!String.IsNullOrEmpty(innerMessage))
+                message += $"\n{innerMessage}";
+
+            return message;
+        }
+
         private static string GetNormalizeDecimalSeparator(string str, string requiredSeparator)
         {
             return GetNormalizeDecimalSeparator(str, requiredSeparator, ",.");

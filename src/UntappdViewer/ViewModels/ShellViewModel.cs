@@ -10,6 +10,7 @@ using UntappdViewer.Helpers;
 using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
+using UntappdViewer.Utils;
 
 namespace UntappdViewer.ViewModels
 {
@@ -99,7 +100,7 @@ namespace UntappdViewer.ViewModels
                 }
                 catch (ArgumentException ex)
                 {
-                    interactionRequestService.ShowError(Properties.Resources.Error, ex.Message);
+                    interactionRequestService.ShowError(Properties.Resources.Error, StringHelper.GetFullExceptionMessage(ex));
                     moduleManager.LoadModule(typeof(WelcomeModule).Name);
                 }
             }

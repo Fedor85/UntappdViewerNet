@@ -8,6 +8,7 @@ using Prism.Modularity;
 using Prism.Regions;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
+using UntappdViewer.Utils;
 using UntappdViewer.Views;
 using Checkin = UntappdViewer.Models.Checkin;
 
@@ -111,7 +112,7 @@ namespace UntappdViewer.ViewModels
             }
             catch (Exception ex)
             {
-                interactionRequestService.ShowError(Properties.Resources.Error, ex.Message);
+                interactionRequestService.ShowError(Properties.Resources.Error, StringHelper.GetFullExceptionMessage(ex));
             }
             finally
             {
@@ -168,7 +169,7 @@ namespace UntappdViewer.ViewModels
             }
             catch (Exception ex)
             {
-                interactionRequestService.ShowError(Properties.Resources.Error, ex.Message);
+                interactionRequestService.ShowError(Properties.Resources.Error, StringHelper.GetFullExceptionMessage(ex));
             }
             finally
             {
