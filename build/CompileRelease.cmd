@@ -4,5 +4,6 @@ SET releasedir=..\src\UntappdViewer\bin\Release
 SET targetdir=UntappdViewer
 
 Rmdir /S /Q %targetdir%
+Rmdir /S /Q %releasedir%
 "%msbuildpath%"\MSBuild.exe "%slndir%" /property:Configuration=Release
 Xcopy /E /I "%releasedir%" %targetdir%
