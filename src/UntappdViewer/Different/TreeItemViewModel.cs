@@ -30,7 +30,7 @@ namespace UntappdViewer
 
         public void Hide()
         {
-            Visibility = Visibility.Collapsed;
+            Visibility = Visibility.Hidden;
         }
 
         public void Visible()
@@ -40,7 +40,7 @@ namespace UntappdViewer
 
         public bool IsHidden()
         {
-            return Visibility == Visibility.Collapsed || Visibility == Visibility.Hidden; ;
+            return Visibility == Visibility.Collapsed || Visibility == Visibility.Hidden;
         }
 
         public override string ToString()
