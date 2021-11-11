@@ -4,11 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:prism="http://prismlibrary.com/"
-             xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:properties="clr-namespace:UntappdViewer.Properties"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:behaviors="clr-namespace:UntappdViewer.Behaviors"
-             xmlns:untappdViewer="clr-namespace:UntappdViewer"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              prism:ViewModelLocator.AutoWireViewModel="True"
@@ -23,21 +20,16 @@
             <CheckBox IsChecked="{Binding IsCheckedUniqueCheckBox}" Content="{x:Static properties:Resources.UniqueCheckBoxContent}" Command="{Binding UniqueCheckedCommand}" CommandParameter="{Binding Path=IsChecked, RelativeSource={RelativeSource Self}}"/>
             <Label Content="{Binding TreeViewCaption}" FontWeight="Bold"/>
         </StackPanel>
-        <ScrollViewer Grid.Row="1" CanContentScroll="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-            <ScrollViewer.Resources>
-                <system:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">10</system:Double>
-                <system:Double x:Key="{x:Static SystemParameters.HorizontalScrollBarHeightKey}">10</system:Double>
-            </ScrollViewer.Resources>
-            <TreeView ItemsSource ="{Binding TreeItems}"  Background="Transparent" BorderBrush="Transparent" PreviewMouseWheel="OnPreviewMouseWheel">
-                <TreeView.ItemContainerStyle>
-                    <Style TargetType="{x:Type TreeViewItem}">
-                        <Setter Property="Visibility" Value="{Binding Visibility, Mode=TwoWay}" />
-                    </Style>
-                </TreeView.ItemContainerStyle>
-                <b:Interaction.Behaviors>
-                    <behaviors:SelectedTreeViewItemBehavior SelectedItem="{Binding SelectedTreeItem, Mode=TwoWay}" />
-                </b:Interaction.Behaviors>
-            </TreeView>
-        </ScrollViewer>
+        <TreeView Grid.Row="1" ItemsSource ="{Binding TreeItems}"  Background="Transparent" BorderBrush="Transparent" PreviewMouseWheel="OnPreviewMouseWheel"
+                      Style="{StaticResource TreeViewStyle}">
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="{x:Type TreeViewItem}">
+                    <Setter Property="Visibility" Value="{Binding Visibility, Mode=TwoWay}" />
+                </Style>
+            </TreeView.ItemContainerStyle>
+            <b:Interaction.Behaviors>
+                <behaviors:SelectedTreeViewItemBehavior SelectedItem="{Binding SelectedTreeItem, Mode=TwoWay}" />
+            </b:Interaction.Behaviors>
+        </TreeView>
     </Grid>
 </UserControl>

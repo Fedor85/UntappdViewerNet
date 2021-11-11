@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace UntappdViewer.Views
 {
@@ -22,8 +23,8 @@ namespace UntappdViewer.Views
                 MouseWheelEventArgs eventArg = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta);
                 eventArg.RoutedEvent = UIElement.MouseWheelEvent;
                 eventArg.Source = sender;
-                UIElement parent = ((Control)sender).Parent as UIElement;
-                parent.RaiseEvent(eventArg);
+                ScrollViewer scrollViewer = VisualTreeHelper.GetChild((Control)sender, 0) as ScrollViewer;
+                scrollViewer.RaiseEvent(eventArg);
             }
         }
     }
