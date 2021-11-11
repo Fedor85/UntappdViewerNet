@@ -101,7 +101,7 @@
     <Compile Include="Different\Behaviors\LoadedWindowBehavior.cs" />
     <Compile Include="Different\Behaviors\SelectedTreeViewItemBehavior.cs" />
     <Compile Include="Different\CallBackConteiner.cs" />
-    <Compile Include="Different\ConverterHelper.cs" />
+    <Compile Include="Different\Helpers\ConverterHelper.cs" />
     <Compile Include="Different\DefautlValues.cs" />
     <Compile Include="Different\Events\ChekinUpdateEvent.cs" />
     <Compile Include="Different\Events\OpenFileEvent.cs" />

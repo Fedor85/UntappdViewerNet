@@ -1,4 +1,4 @@
-﻿namespace UntappdViewer
+﻿namespace UntappdViewer.Helpers
 {
     public static class ConverterHelper
     {
