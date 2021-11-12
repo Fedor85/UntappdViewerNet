@@ -141,7 +141,6 @@ namespace UntappdViewer.Domain.Services
             return Path.Combine(Path.GetDirectoryName(FilePath), GetUntappdProjectPhotoFilesDirectory());
         }
 
-
         public string GetFullCheckinPhotoFilePath(Checkin checkin)
         {
             return Path.Combine(GetFullUntappdProjectPhotoFilesDirectory(), Path.GetFileName(checkin.UrlPhoto));

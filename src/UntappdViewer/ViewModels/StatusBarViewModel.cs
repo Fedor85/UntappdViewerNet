@@ -37,7 +37,6 @@ namespace UntappdViewer.ViewModels
             interactionRequestService.ClearMessageOnStatusBarEnvent -= ClearMessage;
         }
 
-
         private void ShowMessage(string message)
         {
             Message = message;
