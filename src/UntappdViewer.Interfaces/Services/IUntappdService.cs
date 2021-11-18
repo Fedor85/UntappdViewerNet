@@ -36,11 +36,11 @@ namespace UntappdViewer.Interfaces.Services
 
         string GetUntappdProjectFileName();
 
-        string GetFullUntappdProjectPhotoFilesDirectory();
+        string GetFileDataDirectory();
 
-        string GetFullCheckinPhotoFilePath(Checkin checkin);
+        string GetCheckinPhotoFilePath(Checkin checkin);
 
-        string GetFullBeerLabelFilePath(Beer beer);
+        string GetBeerLabelFilePath(Beer beer);
 
         List<Checkin> GetCheckins(bool isUniqueCheckins = false);
 

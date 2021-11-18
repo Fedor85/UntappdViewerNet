@@ -136,19 +136,19 @@ namespace UntappdViewer.Domain.Services
             return $"{Untappd.CreatedDate:yyyy_MMM_dd}_{Untappd.UserName}";
         }
 
-        public string GetFullUntappdProjectPhotoFilesDirectory()
+        public string GetFileDataDirectory()
         {
-            return Path.Combine(Path.GetDirectoryName(FilePath), GetUntappdProjectPhotoFilesDirectory());
+            return Path.Combine(Path.GetDirectoryName(FilePath), $"{Path.GetFileNameWithoutExtension(FilePath)}_Data");
         }
 
-        public string GetFullCheckinPhotoFilePath(Checkin checkin)
+        public string GetCheckinPhotoFilePath(Checkin checkin)
         {
-            return Path.Combine(GetFullUntappdProjectPhotoFilesDirectory(), Path.GetFileName(checkin.UrlPhoto));
+            return Path.Combine(GetFileDataDirectory(), "CheckinPhotos", Path.GetFileName(checkin.UrlPhoto));
         }
 
-        public string GetFullBeerLabelFilePath(Beer beer)
+        public string GetBeerLabelFilePath(Beer beer)
         {
-            return Path.Combine(GetDataPath(), Path.GetFileName(beer.LabelUrl));
+            return Path.Combine(GetFileDataDirectory(), "BeerLabels", Path.GetFileName(beer.LabelUrl));
         }
 
         public List<Checkin> GetCheckins(bool isUniqueCheckins = false)
@@ -176,16 +176,6 @@ namespace UntappdViewer.Domain.Services
         private string GetUntappdUserName(string userName)
         {
             return String.IsNullOrEmpty(userName) ? settingService.GetDefaultUserName() : userName;
-        }
-
-        private string GetDataPath()
-        {
-            return Path.Combine(GetFullUntappdProjectPhotoFilesDirectory(), "Data");
-        }
-
-        private string GetUntappdProjectPhotoFilesDirectory()
-        {
-            return $"{Path.GetFileNameWithoutExtension(FilePath)}_Photos";
         }
     }
 }

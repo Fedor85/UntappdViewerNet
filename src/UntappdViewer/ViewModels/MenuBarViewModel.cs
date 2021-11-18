@@ -120,7 +120,7 @@ namespace UntappdViewer.ViewModels
             FileHelper.SaveFile(fileSavePath, untappdService.Untappd);
             untappdService.Initialize(fileSavePath);
             untappdService.ResetСhanges();
-            FileHelper.CreateDirectory(untappdService.GetFullUntappdProjectPhotoFilesDirectory());
+            FileHelper.CreateDirectory(untappdService.GetFileDataDirectory());
             interactionRequestService.ShowMessageOnStatusBar(untappdService.FilePath);
             settingService.SetRecentFilePaths(FileHelper.AddFilePath(settingService.GetRecentFilePaths(), fileSavePath, settingService.GetMaxRecentFilePaths()));
         }
@@ -153,7 +153,7 @@ namespace UntappdViewer.ViewModels
 
         private void UploadCheckinPhoto(Checkin checkin, string uploadDirectory)
         {
-            string photoPath = untappdService.GetFullCheckinPhotoFilePath(checkin);
+            string photoPath = untappdService.GetCheckinPhotoFilePath(checkin);
             if (!File.Exists(photoPath))
                 webDownloader.DownloadFile(checkin.UrlPhoto, photoPath);
 

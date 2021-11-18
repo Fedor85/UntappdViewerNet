@@ -512,7 +512,7 @@ namespace UntappdViewer.ViewModels
             if(!untappdService.IsUNTPProject() || String.IsNullOrEmpty(beer.LabelUrl))
                 return;
 
-            string labelPath = untappdService.GetFullBeerLabelFilePath(beer);
+            string labelPath = untappdService.GetBeerLabelFilePath(beer);
             if (!File.Exists(labelPath))
             {
                 string directoryName = Path.GetDirectoryName(labelPath);
@@ -554,7 +554,7 @@ namespace UntappdViewer.ViewModels
             if (String.IsNullOrEmpty(checkin.UrlPhoto))
                 return DefautlValues.DefaultCheckinPhotoPath;
 
-            string photoPath = untappdService.GetFullCheckinPhotoFilePath(checkin);
+            string photoPath = untappdService.GetCheckinPhotoFilePath(checkin);
             if (!File.Exists(photoPath))
             {
                 string directoryName = Path.GetDirectoryName(photoPath);
