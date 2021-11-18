@@ -64,6 +64,10 @@ namespace UntappdViewer.ViewModels
 
         private double beerRating;
 
+        private string beerLabelPath;
+
+        private bool visibilityBeerLabel;
+
         private string breweryUrl;
 
         private string breweryName;
@@ -269,6 +273,25 @@ namespace UntappdViewer.ViewModels
             }
         }
 
+        public string BeerLabelPath
+        {
+            get { return beerLabelPath; }
+            set
+            {
+                SetProperty(ref beerLabelPath, value);
+                VisibilityBeerLabel = IsVisibilityBeerLabel(value);
+            }
+        }
+
+        public bool VisibilityBeerLabel
+        {
+            get { return visibilityBeerLabel; }
+            set
+            {
+                SetProperty(ref visibilityBeerLabel, value);
+            }
+        }
+
         #endregion
 
         #region Brewery
@@ -434,6 +457,7 @@ namespace UntappdViewer.ViewModels
             BeerABV = checkin.Beer.ABV.ToString();
             BeerIBU = GetBeerIBU(checkin.Beer.IBU);
             BeerRating = checkin.Beer.GlobalRatingScore;
+            UpdateBeerLabel(checkin.Beer);
 
             BreweryUrl = checkin.Beer.Brewery.Url;
             BreweryName = checkin.Beer.Brewery.Name;
@@ -463,6 +487,7 @@ namespace UntappdViewer.ViewModels
             BeerABV = String.Empty;
             BeerIBU = String.Empty;
             BeerRating = 0;
+            BeerLabelPath = DefautlValues.EmptyImage;
 
             BreweryUrl = DefautlValues.DefaultUrl;
             BreweryName = String.Empty;
@@ -479,6 +504,25 @@ namespace UntappdViewer.ViewModels
         private string GetBeerIBU(double? beerIBU)
         {
             return beerIBU.HasValue ? beerIBU.Value.ToString() : "No IBU";
+        }
+
+        private void UpdateBeerLabel(Beer beer)
+        {
+            BeerLabelPath = DefautlValues.EmptyImage;
+            if(!untappdService.IsUNTPProject() || String.IsNullOrEmpty(beer.LabelUrl))
+                return;
+
+            string labelPath = untappdService.GetFullBeerLabelFilePath(beer);
+            if (!File.Exists(labelPath))
+            {
+                string directoryName = Path.GetDirectoryName(labelPath);
+                if (!Directory.Exists(directoryName))
+                    FileHelper.CreateDirectory(directoryName);
+
+                webDownloader.DownloadFile(beer.LabelUrl, labelPath);
+            }
+
+            BeerLabelPath = labelPath;
         }
 
         private void UpdateCheckinPhoto(Checkin checkin)
@@ -504,25 +548,30 @@ namespace UntappdViewer.ViewModels
 
         private string GetCheckinPhotoPath(Checkin checkin)
         {
-            if (untappdService.IsUNTPProject())
+            if (!untappdService.IsUNTPProject())
+                return DefautlValues.EmptyImage;
+
+            if (String.IsNullOrEmpty(checkin.UrlPhoto))
+                return DefautlValues.DefaultCheckinPhotoPath;
+
+            string photoPath = untappdService.GetFullCheckinPhotoFilePath(checkin);
+            if (!File.Exists(photoPath))
             {
-                if (String.IsNullOrEmpty(checkin.UrlPhoto))
-                    return DefautlValues.DefaultCheckinPhotoPath;
+                string directoryName = Path.GetDirectoryName(photoPath);
+                if (!Directory.Exists(directoryName))
+                    FileHelper.CreateDirectory(directoryName);
 
-                string photoPath = untappdService.GetFullCheckinPhotoFilePath(checkin);
-                if (!File.Exists(photoPath))
-                {
-                    string directoryName = Path.GetDirectoryName(photoPath);
-                    if (!Directory.Exists(directoryName))
-                        FileHelper.CreateDirectory(directoryName);
-
-                    webDownloader.DownloadFile(checkin.UrlPhoto, photoPath);
-                }
-
-                return photoPath;
+                webDownloader.DownloadFile(checkin.UrlPhoto, photoPath);
             }
 
-            return DefautlValues.EmptyImage;
+            return photoPath;
+        }
+
+        private bool IsVisibilityBeerLabel(string lableUrl)
+        {
+            return !String.IsNullOrEmpty(lableUrl) && 
+                    !lableUrl.Equals(DefautlValues.EmptyImage) && 
+                    !Path.GetFileNameWithoutExtension(lableUrl).Equals(DefautlValues.DefaultBeerLabelName);
         }
     }
 }

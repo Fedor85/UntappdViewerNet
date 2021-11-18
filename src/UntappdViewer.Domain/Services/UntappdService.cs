@@ -146,6 +146,11 @@ namespace UntappdViewer.Domain.Services
             return Path.Combine(GetFullUntappdProjectPhotoFilesDirectory(), Path.GetFileName(checkin.UrlPhoto));
         }
 
+        public string GetFullBeerLabelFilePath(Beer beer)
+        {
+            return Path.Combine(GetDataPath(), Path.GetFileName(beer.LabelUrl));
+        }
+
         public List<Checkin> GetCheckins(bool isUniqueCheckins = false)
         {
             return isUniqueCheckins ? Untappd.GetUniqueCheckins() : Untappd.Checkins;
@@ -171,6 +176,11 @@ namespace UntappdViewer.Domain.Services
         private string GetUntappdUserName(string userName)
         {
             return String.IsNullOrEmpty(userName) ? settingService.GetDefaultUserName() : userName;
+        }
+
+        private string GetDataPath()
+        {
+            return Path.Combine(GetFullUntappdProjectPhotoFilesDirectory(), "Data");
         }
 
         private string GetUntappdProjectPhotoFilesDirectory()

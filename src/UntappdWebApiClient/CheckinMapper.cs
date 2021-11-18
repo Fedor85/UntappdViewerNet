@@ -68,6 +68,7 @@ namespace UntappdWebApiClient
             beer.Type = beerWeb.BeerStyle;
             beer.ABV = beerWeb.BeerAbv;
             beer.Url = $"{UriConstants.BaseUri}beer/{beerWeb.Bid}";
+            beer.LabelUrl = beerWeb.BeerLabel.ToString();
         }
 
         private static void FillBrewery(Brewery brewery, BreweryWeb breweryWeb)

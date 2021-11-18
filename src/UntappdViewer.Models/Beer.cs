@@ -46,6 +46,11 @@ namespace UntappdViewer.Models
         public string Url { get; set; }
 
         /// <summary>
+        /// url лого
+        /// </summary>
+        public string LabelUrl { get; set; }
+
+        /// <summary>
         /// пивоварня
         /// </summary>
         public Brewery Brewery { get; set; }
