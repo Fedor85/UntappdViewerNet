@@ -73,26 +73,30 @@
                     </DockPanel>
                 </GroupBox>
                 <GroupBox Header="{x:Static properties:Resources.Brewery}">
-                    <StackPanel>
-                        <TextBlock >
+                    <DockPanel>
+                        <Image Width="50" Source="{Binding BreweryLabelPath, TargetNullValue={x:Null}}" Margin="0, 0, 10, 0"
+                               Visibility="{Binding Path =VisibilityBreweryLabel, Converter={StaticResource BooleanConverter}}"/>
+                        <StackPanel>
+                            <TextBlock >
                                 <Hyperlink NavigateUri="{Binding BreweryUrl}" RequestNavigate="HyperlinkOnRequestNavigate">
                                     <TextBlock Text="{x:Static properties:Resources.UntappdPage}"/>
                                 </Hyperlink>
                             </TextBlock>
-                        <TextBlock TextWrapping="Wrap" Text="{Binding BreweryName}" FontWeight="Bold"/>
-                        <DockPanel>
-                            <TextBlock TextWrapping="Wrap" Text="{Binding BreweryVenueName}" VerticalAlignment="Center"/>
-                            <TextBlock Text="  |  " FontWeight="Bold"  VerticalAlignment="Center"
+                            <TextBlock TextWrapping="Wrap" Text="{Binding BreweryName}" FontWeight="Bold"/>
+                            <DockPanel>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding BreweryVenueName}" VerticalAlignment="Center"/>
+                                <TextBlock Text="  |  " FontWeight="Bold"  VerticalAlignment="Center"
                                            Visibility="{Binding Path =VisibilityBreweryVenueCountrySeporator, Converter={StaticResource BooleanConverter}}"/>
-                            <TextBlock TextWrapping="Wrap" Text="{Binding BreweryVenueCountry}" VerticalAlignment="Center"/>
-                            <TextBlock Text="  |  " FontWeight="Bold"  VerticalAlignment="Center"
+                                <TextBlock TextWrapping="Wrap" Text="{Binding BreweryVenueCountry}" VerticalAlignment="Center"/>
+                                <TextBlock Text="  |  " FontWeight="Bold"  VerticalAlignment="Center"
                                            Visibility="{Binding Path =VisibilityBreweryVenueStateSeporator, Converter={StaticResource BooleanConverter}}"/>
-                            <TextBlock TextWrapping="Wrap" Text="{Binding BreweryVenueState}" VerticalAlignment="Center"/>
-                            <TextBlock Text="  |  " FontWeight="Bold"  VerticalAlignment="Center"
+                                <TextBlock TextWrapping="Wrap" Text="{Binding BreweryVenueState}" VerticalAlignment="Center"/>
+                                <TextBlock Text="  |  " FontWeight="Bold"  VerticalAlignment="Center"
                                            Visibility="{Binding Path =VisibilityBreweryVenueCitySeporator, Converter={StaticResource BooleanConverter}}"/>
-                            <TextBlock TextWrapping="Wrap" Text="{Binding BreweryVenueCity}" VerticalAlignment="Center"/>
-                        </DockPanel>
-                    </StackPanel>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding BreweryVenueCity}" VerticalAlignment="Center"/>
+                            </DockPanel>
+                        </StackPanel>
+                    </DockPanel>
                 </GroupBox>
                 <DockPanel>
                     <DockPanel  Visibility="{Binding Path =VisibilityCheckinRating, Converter={StaticResource BooleanConverter}}">

@@ -151,6 +151,11 @@ namespace UntappdViewer.Domain.Services
             return Path.Combine(GetFileDataDirectory(), "BeerLabels", Path.GetFileName(beer.LabelUrl));
         }
 
+        public string GetBreweryLabelFilePath(Brewery brewery)
+        {
+            return Path.Combine(GetFileDataDirectory(), "BreweryLabels", Path.GetFileName(brewery.LabelUrl));
+        }
+
         public List<Checkin> GetCheckins(bool isUniqueCheckins = false)
         {
             return isUniqueCheckins ? Untappd.GetUniqueCheckins() : Untappd.Checkins;

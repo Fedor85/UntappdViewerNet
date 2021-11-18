@@ -42,6 +42,8 @@ namespace UntappdViewer.Interfaces.Services
 
         string GetBeerLabelFilePath(Beer beer);
 
+        string GetBreweryLabelFilePath(Brewery brewery);
+
         List<Checkin> GetCheckins(bool isUniqueCheckins = false);
 
         Checkin GetCheckin(long checkinId);

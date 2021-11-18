@@ -25,6 +25,11 @@ namespace UntappdViewer.Models
         /// </summary>
         public Venue Venue { get; set; }
 
+        /// <summary>
+        /// url лого
+        /// </summary>
+        public string LabelUrl { get; set; }
+
         public Brewery()
         {
             Venue = new Venue();

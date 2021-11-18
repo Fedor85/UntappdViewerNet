@@ -81,6 +81,7 @@ namespace UntappdWebApiClient
             brewery.Venue.State = breweryWeb.Location.BreweryState;
             brewery.Venue.Latitude = breweryWeb.Location.Lat;
             brewery.Venue.Longitude = breweryWeb.Location.Lng;
+            brewery.LabelUrl = breweryWeb.BreweryLabel.ToString();
         }
     }
 }

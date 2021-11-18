@@ -88,6 +88,10 @@ namespace UntappdViewer.ViewModels
 
         private bool visibilityCheckinVenueLocation;
 
+        private string breweryLabelPath;
+
+        private bool visibilityBreweryLabel;
+
         public string CheckinHeader
         {
             get { return checkinHeader; }
@@ -380,6 +384,25 @@ namespace UntappdViewer.ViewModels
             }
         }
 
+        public string BreweryLabelPath
+        {
+            get { return breweryLabelPath; }
+            set
+            {
+                SetProperty(ref breweryLabelPath, value);
+                VisibilityBreweryLabel = IsVisibilityBreweryLabel(value);
+            }
+        }
+
+        public bool VisibilityBreweryLabel
+        {
+            get { return visibilityBreweryLabel; }
+            set
+            {
+                SetProperty(ref visibilityBreweryLabel, value);
+            }
+        }
+
         #endregion
 
         public ICommand CheckinVenueLocationCommand { get; }
@@ -465,6 +488,7 @@ namespace UntappdViewer.ViewModels
             BreweryVenueCountry = checkin.Beer.Brewery.Venue.Country;
             BreweryVenueState = checkin.Beer.Brewery.Venue.State;
             BreweryVenueCity = checkin.Beer.Brewery.Venue.City;
+            UpdateBreweryLabel(checkin.Beer.Brewery);
         }
 
         private void Clear()
@@ -494,6 +518,7 @@ namespace UntappdViewer.ViewModels
             BreweryVenueCountry = String.Empty;
             BreweryVenueState= String.Empty;
             BreweryVenueCity = String.Empty;
+            BreweryLabelPath = DefautlValues.EmptyImage;
         }
 
         private string GetCheckinHeader(DateTime? checkinCreatedDate)
@@ -523,6 +548,25 @@ namespace UntappdViewer.ViewModels
             }
 
             BeerLabelPath = labelPath;
+        }
+
+        private void UpdateBreweryLabel(Brewery brewery)
+        {
+            BreweryLabelPath = DefautlValues.EmptyImage;
+            if (!untappdService.IsUNTPProject() || String.IsNullOrEmpty(brewery.LabelUrl))
+                return;
+
+            string labelPath = untappdService.GetBreweryLabelFilePath(brewery);
+            if (!File.Exists(labelPath))
+            {
+                string directoryName = Path.GetDirectoryName(labelPath);
+                if (!Directory.Exists(directoryName))
+                    FileHelper.CreateDirectory(directoryName);
+
+                webDownloader.DownloadFile(brewery.LabelUrl, labelPath);
+            }
+
+            BreweryLabelPath = labelPath;
         }
 
         private void UpdateCheckinPhoto(Checkin checkin)
@@ -572,6 +616,12 @@ namespace UntappdViewer.ViewModels
             return !String.IsNullOrEmpty(lableUrl) && 
                     !lableUrl.Equals(DefautlValues.EmptyImage) && 
                     !Path.GetFileNameWithoutExtension(lableUrl).Equals(DefautlValues.DefaultBeerLabelName);
+        }
+
+        private bool IsVisibilityBreweryLabel(string lableUrl)
+        {
+            return !String.IsNullOrEmpty(lableUrl) &&
+                   !lableUrl.Equals(DefautlValues.EmptyImage);
         }
     }
 }
