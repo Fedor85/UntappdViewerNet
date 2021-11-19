@@ -621,7 +621,8 @@ namespace UntappdViewer.ViewModels
         private bool IsVisibilityBreweryLabel(string lableUrl)
         {
             return !String.IsNullOrEmpty(lableUrl) &&
-                   !lableUrl.Equals(DefautlValues.EmptyImage);
+                   !lableUrl.Equals(DefautlValues.EmptyImage) &&
+                   !Path.GetFileNameWithoutExtension(lableUrl).Equals(DefautlValues.DefaultBreweryLabelName);
         }
     }
 }

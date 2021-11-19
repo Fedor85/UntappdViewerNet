@@ -9,5 +9,7 @@
         public const string EmptyImage = @"..\Resources\empty_1x1.png";
 
         public const string DefaultBeerLabelName = "badge-beer-default";
+
+        public const string DefaultBreweryLabelName = "badge-brewery-default";
     }
 }
