@@ -283,7 +283,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 SetProperty(ref beerLabelPath, value);
-                VisibilityBeerLabel = IsVisibilityBeerLabel(value);
+                VisibilityBeerLabel = IsVisibilityLabel(value, DefautlValues.DefaultBeerLabelName);
             }
         }
 
@@ -390,7 +390,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 SetProperty(ref breweryLabelPath, value);
-                VisibilityBreweryLabel = IsVisibilityBreweryLabel(value);
+                VisibilityBreweryLabel = IsVisibilityLabel(value, DefautlValues.DefaultBreweryLabelName);
             }
         }
 
@@ -611,18 +611,11 @@ namespace UntappdViewer.ViewModels
             return photoPath;
         }
 
-        private bool IsVisibilityBeerLabel(string lableUrl)
-        {
-            return !String.IsNullOrEmpty(lableUrl) && 
-                    !lableUrl.Equals(DefautlValues.EmptyImage) && 
-                    !Path.GetFileNameWithoutExtension(lableUrl).Equals(DefautlValues.DefaultBeerLabelName);
-        }
-
-        private bool IsVisibilityBreweryLabel(string lableUrl)
+        private bool IsVisibilityLabel(string lableUrl, string defaultLabelName)
         {
             return !String.IsNullOrEmpty(lableUrl) &&
                    !lableUrl.Equals(DefautlValues.EmptyImage) &&
-                   !Path.GetFileNameWithoutExtension(lableUrl).Equals(DefautlValues.DefaultBreweryLabelName);
+                   !Path.GetFileNameWithoutExtension(lableUrl).Equals(defaultLabelName);
         }
     }
 }
