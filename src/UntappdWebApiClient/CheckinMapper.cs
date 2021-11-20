@@ -39,6 +39,7 @@ namespace UntappdWebApiClient
 
             FillBeer(checkin.Beer, checkinsItem.Beer);
             FillBrewery(checkin.Beer.Brewery, checkinsItem.Brewery);
+            FillBadges(checkin.Badges, checkinsItem.Badges);
 
             return checkin;
         }
@@ -82,6 +83,19 @@ namespace UntappdWebApiClient
             brewery.Venue.Latitude = breweryWeb.Location.Lat;
             brewery.Venue.Longitude = breweryWeb.Location.Lng;
             brewery.LabelUrl = breweryWeb.BreweryLabel.ToString();
+        }
+
+        private static void FillBadges(List<Badge> checkinBadges, Badges webCheckinsBadges)
+        {
+            foreach (BadgesItem badgesItem in webCheckinsBadges.Items)
+            {
+                Badge badge = new Badge();
+                badge.Id = badgesItem.BadgeId;
+                badge.Name = badgesItem.BadgeName;
+                badge.Description = badgesItem.BadgeDescription;
+                badge.ImageUrl = badgesItem.BadgeImage.Lg.ToString();
+                checkinBadges.Add(badge);
+            }
         }
     }
 }

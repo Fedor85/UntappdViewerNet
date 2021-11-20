@@ -76,11 +76,17 @@ namespace UntappdViewer.Models
         /// </summary>
         public int TotalComments { get; set; }
 
+        /// <summary>
+        /// значки за пиво
+        /// </summary>
+        public List<Badge> Badges { get; set; }
+
         public Checkin()
         {
             Venue = new Venue();
             VenuePurchase = new Venue();
             Beer = new Beer();
+            Badges = new List<Badge>();
         }
 
         public override string ToString()
