@@ -67,7 +67,7 @@ namespace UntappdViewer.Views.Controls
             index = 0;
             LabelGrid.Visibility = Visibility.Hidden;
             NavigationGrid.Visibility = Visibility.Hidden;
-
+            Image.Source = null;
             if (items.Count == 0)
                 return;
 
