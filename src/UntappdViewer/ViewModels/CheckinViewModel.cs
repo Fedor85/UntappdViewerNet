@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Modularity;
 using Prism.Regions;
+using UntappdViewer.Different;
 using UntappdViewer.Events;
 using UntappdViewer.Helpers;
 using UntappdViewer.Infrastructure;
@@ -91,6 +95,8 @@ namespace UntappdViewer.ViewModels
         private string breweryLabelPath;
 
         private bool visibilityBreweryLabel;
+
+        private IList badges;
 
         public string CheckinHeader
         {
@@ -218,6 +224,15 @@ namespace UntappdViewer.ViewModels
             set
             {
                 SetProperty(ref checkinPhotoPath, value);
+            }
+        }
+
+        public IList Badges
+        {
+            get { return badges; }
+            set
+            {
+                SetProperty(ref badges, value);
             }
         }
 
@@ -425,6 +440,7 @@ namespace UntappdViewer.ViewModels
             CheckinUrl = DefautlValues.DefaultUrl;
             BeerUrl = DefautlValues.DefaultUrl;
             BreweryUrl = DefautlValues.DefaultUrl;
+            Badges = new List<ImageItemViewModel>();
 
             CheckinVenueLocationCommand  = new DelegateCommand(CheckinVenueLocation);
         }
@@ -473,6 +489,7 @@ namespace UntappdViewer.ViewModels
             VisibilityCheckinVenueLocation = checkin.Venue.Latitude.HasValue && checkin.Venue.Longitude.HasValue;
             CheckinServingType = ConverterHelper.GetServingTypeImagePath(checkin.ServingType);
             UpdateCheckinPhoto(checkin);
+            UpdateBadges(checkin.Badges);
 
             BeerUrl = checkin.Beer.Url;
             BeerName = checkin.Beer.Name;
@@ -504,6 +521,7 @@ namespace UntappdViewer.ViewModels
             VisibilityCheckinVenueLocation = false;
             CheckinServingType = DefautlValues.EmptyImage;
             CheckinPhotoPath = DefautlValues.EmptyImage;
+            Badges = new List<ImageItemViewModel>();
 
             BeerUrl = DefautlValues.DefaultUrl;
             BeerName = String.Empty;
@@ -609,6 +627,35 @@ namespace UntappdViewer.ViewModels
             }
 
             return photoPath;
+        }
+
+        private void UpdateBadges(List<Badge> checkinBadges)
+        {
+            Badges = new List<ImageItemViewModel>();
+            if (!untappdService.IsUNTPProject() || checkinBadges == null || checkinBadges.Count == 0)
+                return;
+
+            List<ImageItemViewModel> currentBadges = new List<ImageItemViewModel>();
+            foreach (Badge badge in checkinBadges.Where(item => !String.IsNullOrEmpty(item.ImageUrl)))
+            {
+                string badgeImagePath = GetBadgeImagePath(badge);
+                currentBadges.Add(new ImageItemViewModel(badgeImagePath, $"{badge.Name}\n{badge.Description}"));
+            }
+            Badges = currentBadges;
+        }
+
+        private string GetBadgeImagePath(Badge badge)
+        {
+            string badgeImagePath = untappdService.GetBadgeImageFilePath(badge);
+            if (!File.Exists(badgeImagePath))
+            {
+                string directoryName = Path.GetDirectoryName(badgeImagePath);
+                if (!Directory.Exists(directoryName))
+                    FileHelper.CreateDirectory(directoryName);
+
+                webDownloader.DownloadFile(badge.ImageUrl, badgeImagePath);
+            }
+            return badgeImagePath;
         }
 
         private bool IsVisibilityLabel(string lableUrl, string defaultLabelName)

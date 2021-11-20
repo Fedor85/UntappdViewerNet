@@ -44,6 +44,8 @@ namespace UntappdViewer.Interfaces.Services
 
         string GetBreweryLabelFilePath(Brewery brewery);
 
+        string GetBadgeImageFilePath(Badge badge);
+
         List<Checkin> GetCheckins(bool isUniqueCheckins = false);
 
         Checkin GetCheckin(long checkinId);

@@ -110,6 +110,7 @@
     <Compile Include="Different\Helpers\CommunicationHelper.cs" />
     <Compile Include="Different\Helpers\EnumsHelper.cs" />
     <Compile Include="Different\Helpers\ImageConverter.cs" />
+    <Compile Include="Different\ImageItemViewModel.cs" />
     <Compile Include="Different\TreeItemViewModel.cs" />
     <Compile Include="Modules\Base\BaseLoadingModule.cs" />
     <Compile Include="Modules\Base\BaseModue.cs" />
