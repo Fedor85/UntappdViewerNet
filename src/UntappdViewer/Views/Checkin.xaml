@@ -143,6 +143,7 @@
                         </DockPanel>
                     </StackPanel>
                     <GroupBox Grid.Column="1" Header="{x:Static properties:Resources.Badges}" Width="100" Visibility="Visible">
+                        <controls:SliderImagesControl ArrowsSize="10"/>
                     </GroupBox>
                 </Grid>
             </StackPanel>

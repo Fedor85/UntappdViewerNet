@@ -148,6 +148,9 @@
     <Compile Include="Views\Controls\PasswordBox.xaml.cs">
       <DependentUpon>PasswordBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Controls\SliderImagesControl.xaml.cs">
+      <DependentUpon>SliderImagesControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Controls\StarRating\ProgressBarSolidBrushConverter.cs" />
     <Compile Include="Views\Controls\StarRating\StarProgressBar.xaml.cs">
       <DependentUpon>StarProgressBar.xaml</DependentUpon>
@@ -197,6 +200,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Controls\PasswordBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\SliderImagesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
