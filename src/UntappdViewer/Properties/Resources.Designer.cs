@@ -106,6 +106,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Badges.
+        /// </summary>
+        public static string Badges {
+            get {
+                return ResourceManager.GetString("Badges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Beer.
         /// </summary>
         public static string Beer {

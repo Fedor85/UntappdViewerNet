@@ -381,4 +381,8 @@
     <value>scroll whell: zoom</value>
     <comment>en-en</comment>
   </data>
+  <data name="Badges" xml:space="preserve">
+    <value>Badges</value>
+    <comment>en-en</comment>
+  </data>
 </root>
