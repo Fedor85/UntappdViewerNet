@@ -30,7 +30,7 @@ namespace UntappdViewer
 
         public void Hide()
         {
-            Visibility = Visibility.Hidden;
+            Visibility = Visibility.Collapsed;
         }
 
         public void Visible()
