@@ -5,6 +5,7 @@ using System.IO;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using UntappdViewer.Utils;
 
 namespace UntappdViewer.Views.Controls
 {
@@ -101,7 +102,7 @@ namespace UntappdViewer.Views.Controls
             if (imageDescriptionPropertyInfo != null)
             {
                 string imageDescription = imageDescriptionPropertyInfo.GetValue(item, null).ToString();
-                Image.ToolTip = imageDescription;
+                Image.ToolTip = StringHelper.GetSplitByLength(imageDescription, 50);
                 ToolTipService.SetIsEnabled(Image, !String.IsNullOrEmpty(imageDescription));
             }
 

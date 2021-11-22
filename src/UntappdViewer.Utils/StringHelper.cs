@@ -55,12 +55,36 @@ namespace UntappdViewer.Utils
                             name = name.Remove(index, 1);
 
                         name =name.Insert(index, $"{Convert.ToChar(ControlChar.NewLine)}{(isInsertEmpty ? String.Empty : new string(Convert.ToChar(ControlChar.Space), insertSpaceCount - 1))}");
-                        break;;
+                        break;
                     }
                     index--;
                 }
             }
             return name;
+        }
+
+        public static string GetSplitByLength(string text, int length)
+        {
+            if (String.IsNullOrEmpty(text))
+                return String.Empty;
+
+            List<string> lines = new List<string>();
+            foreach (string newLine in text.Split(Convert.ToChar(ControlChar.NewLine)).ToList())
+            {
+                if (newLine.Length > length)
+                    lines.AddRange(GetSplitWordsByLength(newLine, length));
+                else
+                    lines.Add(newLine);
+            }
+
+            if (lines.Count == 1)
+                return lines[0];
+
+            StringBuilder result = new StringBuilder();
+            foreach (string line in lines)
+                result.AppendLine(line);
+
+            return result.ToString();
         }
 
         public static List<string> GetValues(string valueLine)
@@ -100,6 +124,29 @@ namespace UntappdViewer.Utils
                     sb.Append(ch);
 
             return sb.ToString();
+        }
+
+
+        private static List<string> GetSplitWordsByLength(string text, int length)
+        {
+            List<string> lines = text.Split(Convert.ToChar(ControlChar.Space))
+                                        .Aggregate(new[] { String.Empty }.ToList(), (result, nextItem) =>
+                                        {
+                                            int lastIndex = result.Count - 1;
+                                            string last = result[lastIndex];
+                                            string mergeItem = $"{last} {nextItem}".Trim();
+                                            if (mergeItem.Length > length)
+                                            {
+                                                result.Add(nextItem);
+                                            }
+                                            else
+                                            {
+                                                result[lastIndex] = mergeItem;
+                                            }
+                                            return result;
+                                        });
+
+            return lines;
         }
     }
 }
