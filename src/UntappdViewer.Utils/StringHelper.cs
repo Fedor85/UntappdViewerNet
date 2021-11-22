@@ -77,13 +77,17 @@ namespace UntappdViewer.Utils
                     lines.Add(newLine);
             }
 
-            if (lines.Count == 1)
+            int linesCount = lines.Count;
+            if (linesCount == 1)
                 return lines[0];
 
             StringBuilder result = new StringBuilder();
-            foreach (string line in lines)
-                result.AppendLine(line);
-
+            for (int i = 0; i < linesCount; i++)
+            {
+                result.Append(lines[i]);
+                if (i != linesCount - 1)
+                    result.AppendLine();
+            }
             return result.ToString();
         }
 
@@ -125,7 +129,6 @@ namespace UntappdViewer.Utils
 
             return sb.ToString();
         }
-
 
         private static List<string> GetSplitWordsByLength(string text, int length)
         {
