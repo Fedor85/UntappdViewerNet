@@ -40,15 +40,15 @@ namespace UntappdViewer.ViewModels
 
         private string checkinVenueName;
 
-        private bool visibilityCheckinVenueCountrySeporator;
+        private string checkinVenueCountrySeparator;
 
         private string checkinVenueCountry;
 
-        private bool visibilityСheckinVenueStateSeporator;
+        private string checkinVenueStateySeparator;
 
         private string checkinVenueState;
 
-        private bool visibilityСheckinVenueCitySeporator;
+        private string checkinVenueCitySeparator;
 
         private string checkinVenueCity;
 
@@ -78,15 +78,15 @@ namespace UntappdViewer.ViewModels
 
         private string breweryVenueName;
 
-        private bool visibilityBreweryVenueCountrySeporator;
+        private string breweryVenueCountrySeparator;
 
         private string breweryVenueCountry;
 
-        private bool visibilityBreweryVenueStateSeporator;
+        private string breweryVenueStateSeparator;
 
         private string breweryVenueState;
 
-        private bool visibilityBreweryVenueCitySeporator;
+        private string breweryVenueCitySeparator;
 
         private string breweryVenueCity;
 
@@ -140,16 +140,15 @@ namespace UntappdViewer.ViewModels
             set
             {
                 SetProperty(ref checkinVenueName, value);
-                VisibilityCheckinVenueCountrySeporator = !String.IsNullOrEmpty(value);
             }
         }
 
-        public bool VisibilityCheckinVenueCountrySeporator
+        public string CheckinVenueCountrySeparator
         {
-            get { return visibilityCheckinVenueCountrySeporator; }
+            get { return checkinVenueCountrySeparator; }
             set
             {
-                SetProperty(ref visibilityCheckinVenueCountrySeporator, value);
+                SetProperty(ref checkinVenueCountrySeparator, value);
             }
         }
 
@@ -159,15 +158,16 @@ namespace UntappdViewer.ViewModels
             set
             {
                 SetProperty(ref checkinVenueCountry, value);
+                CheckinVenueCountrySeparator = !String.IsNullOrEmpty(CheckinVenueName) && !String.IsNullOrEmpty(value) ? DefautlValues.Separator : String.Empty;
             }
         }
 
-        public bool VisibilityCheckinVenueStateSeporator
+        public string CheckinVenueStateySeparator
         {
-            get { return visibilityСheckinVenueStateSeporator; }
+            get { return checkinVenueStateySeparator; }
             set
             {
-                SetProperty(ref visibilityСheckinVenueStateSeporator, value);
+                SetProperty(ref checkinVenueStateySeparator, value);
             }
         }
 
@@ -177,16 +177,17 @@ namespace UntappdViewer.ViewModels
             set
             {
                 SetProperty(ref checkinVenueState, value);
-                VisibilityCheckinVenueStateSeporator = !String.IsNullOrEmpty(value);
+                CheckinVenueStateySeparator = (!String.IsNullOrEmpty(CheckinVenueName) || !String.IsNullOrEmpty(CheckinVenueCountry))
+                                                        && !String.IsNullOrEmpty(value) ? DefautlValues.Separator : String.Empty;
             }
         }
 
-        public bool VisibilityСheckinVenueCitySeporator
+        public string CheckinVenueCitySeparator
         {
-            get { return visibilityСheckinVenueCitySeporator; }
+            get { return checkinVenueCitySeparator; }
             set
             {
-                SetProperty(ref visibilityСheckinVenueCitySeporator, value);
+                SetProperty(ref checkinVenueCitySeparator, value);
             }
         }
 
@@ -196,7 +197,8 @@ namespace UntappdViewer.ViewModels
             set
             {
                 SetProperty(ref checkinVenueCity, value);
-                VisibilityСheckinVenueCitySeporator = !String.IsNullOrEmpty(value);
+                CheckinVenueCitySeparator = (!String.IsNullOrEmpty(CheckinVenueName) || !String.IsNullOrEmpty(CheckinVenueCountry) || !String.IsNullOrEmpty(CheckinVenueState))
+                                                                                                    && !String.IsNullOrEmpty(value) ? DefautlValues.Separator : String.Empty;
             }
         }
 
@@ -339,16 +341,15 @@ namespace UntappdViewer.ViewModels
             set
             {
                 SetProperty(ref breweryVenueName, value);
-                VisibilityBreweryVenueCountrySeporator = !String.IsNullOrEmpty(value);
             }
         }
 
-        public bool VisibilityBreweryVenueCountrySeporator
+        public string BreweryVenueCountrySeparator
         {
-            get { return visibilityBreweryVenueCountrySeporator; }
+            get { return breweryVenueCountrySeparator; }
             set
             {
-                SetProperty(ref visibilityBreweryVenueCountrySeporator, value);
+                SetProperty(ref breweryVenueCountrySeparator, value);
             }
         }
 
@@ -358,15 +359,17 @@ namespace UntappdViewer.ViewModels
             set
             {
                 SetProperty(ref breweryVenueCountry, value);
+                BreweryVenueCountrySeparator = !String.IsNullOrEmpty(BreweryVenueName) && !String.IsNullOrEmpty(value) 
+                                                                        ? DefautlValues.Separator : String.Empty;
             }
         }
 
-        public bool VisibilityBreweryVenueStateSeporator
+        public string BreweryVenueStateSeparator
         {
-            get { return visibilityBreweryVenueStateSeporator; }
+            get { return breweryVenueStateSeparator; }
             set
             {
-                SetProperty(ref visibilityBreweryVenueStateSeporator, value);
+                SetProperty(ref breweryVenueStateSeparator, value);
             }
         }
 
@@ -376,16 +379,17 @@ namespace UntappdViewer.ViewModels
             set
             {
                 SetProperty(ref breweryVenueState, value);
-                VisibilityBreweryVenueStateSeporator = !String.IsNullOrEmpty(value);
+                BreweryVenueStateSeparator = (!String.IsNullOrEmpty(BreweryVenueName) || !String.IsNullOrEmpty(BreweryVenueCountry)) 
+                                                        && !String.IsNullOrEmpty(value) ? DefautlValues.Separator : String.Empty;
             }
         }
 
-        public bool VisibilityBreweryVenueCitySeporator
+        public string BreweryVenueCitySeparator
         {
-            get { return visibilityBreweryVenueCitySeporator; }
+            get { return breweryVenueCitySeparator; }
             set
             {
-                SetProperty(ref visibilityBreweryVenueCitySeporator, value);
+                SetProperty(ref breweryVenueCitySeparator, value);
             }
         }
 
@@ -395,7 +399,8 @@ namespace UntappdViewer.ViewModels
             set
             {
                 SetProperty(ref breweryVenueCity, value);
-                VisibilityBreweryVenueCitySeporator = !String.IsNullOrEmpty(value);
+                BreweryVenueCitySeparator = (!String.IsNullOrEmpty(BreweryVenueName) || !String.IsNullOrEmpty(BreweryVenueCountry) || !String.IsNullOrEmpty(BreweryVenueState))
+                                            && !String.IsNullOrEmpty(value) ? DefautlValues.Separator : String.Empty;
             }
         }
 

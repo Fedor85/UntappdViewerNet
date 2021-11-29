@@ -11,5 +11,7 @@
         public const string DefaultBeerLabelName = "badge-beer-default";
 
         public const string DefaultBreweryLabelName = "badge-brewery-default";
+
+        public const string Separator = " | ";
     }
 }

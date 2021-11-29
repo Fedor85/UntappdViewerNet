@@ -48,14 +48,14 @@
                                         <Run Text="{Binding BeerABV}"/>
                                     </TextBlock.Inlines>
                                 </TextBlock>
-                                <TextBlock Text="  |  " FontWeight="Bold"  VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding Source={x:Static local:DefautlValues.Separator}}" FontWeight="Bold"  VerticalAlignment="Center"/>
                                 <TextBlock TextWrapping="Wrap"  VerticalAlignment="Center">
                                     <TextBlock.Inlines>
                                         <Run FontWeight="Bold" Text="IBU: "/>
                                         <Run Text="{Binding BeerIBU}"/>
                                     </TextBlock.Inlines>
                                 </TextBlock>
-                                <TextBlock Text="  |  " FontWeight="Bold"  VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding Source={x:Static local:DefautlValues.Separator}}" FontWeight="Bold"  VerticalAlignment="Center"/>
                                 <starRating:StarRatingControl StarCount="5" StarSize="20" HorizontalAlignment="Left"
                                                               ViewStarsColor="#ffffff" ViewStarsOpacity="0.3"
                                                               BackgroundStarColor="#ffffff" BackgroundStarOpacity="1"
@@ -89,18 +89,16 @@
                                 </Hyperlink>
                             </TextBlock>
                                     <TextBlock TextWrapping="Wrap" Text="{Binding BreweryName}" FontWeight="Bold"/>
-                                    <DockPanel>
-                                        <TextBlock TextWrapping="Wrap" Text="{Binding BreweryVenueName}" VerticalAlignment="Center"/>
-                                        <TextBlock Text="  |  " FontWeight="Bold"  VerticalAlignment="Center"
-                                           Visibility="{Binding Path =VisibilityBreweryVenueCountrySeporator, Converter={StaticResource BooleanConverter}}"/>
-                                        <TextBlock TextWrapping="Wrap" Text="{Binding BreweryVenueCountry}" VerticalAlignment="Center"/>
-                                        <TextBlock Text="  |  " FontWeight="Bold"  VerticalAlignment="Center"
-                                           Visibility="{Binding Path =VisibilityBreweryVenueStateSeporator, Converter={StaticResource BooleanConverter}}"/>
-                                        <TextBlock TextWrapping="Wrap" Text="{Binding BreweryVenueState}" VerticalAlignment="Center"/>
-                                        <TextBlock Text="  |  " FontWeight="Bold"  VerticalAlignment="Center"
-                                           Visibility="{Binding Path =VisibilityBreweryVenueCitySeporator, Converter={StaticResource BooleanConverter}}"/>
-                                        <TextBlock TextWrapping="Wrap" Text="{Binding BreweryVenueCity}" VerticalAlignment="Center"/>
-                                    </DockPanel>
+                                    <TextBlock TextWrapping="Wrap" VerticalAlignment="Center">
+                                        <Run Text="{Binding BreweryVenueName}"/>
+                                        <Run Text="{Binding BreweryVenueCountrySeparator}" FontWeight="Bold" />
+                                        <Run Text="{Binding BreweryVenueCountry}"/>
+                                        <Run Text="{Binding BreweryVenueStateSeparator}" FontWeight="Bold"/>
+                                        <Run Text="{Binding BreweryVenueState}"/>
+                                        <Run Text="{Binding BreweryVenueCitySeparator}" FontWeight="Bold" />
+                                        <Run Text="{Binding BreweryVenueCity}"/>
+                                    </TextBlock>
+    
                                 </StackPanel>
                             </DockPanel>
                         </GroupBox>
@@ -130,16 +128,15 @@
                                 <MouseBinding Gesture="LeftClick" Command="{Binding CheckinVenueLocationCommand, Mode=OneTime}" />
                             </Image.InputBindings>
                         </Image>-->
-                            <TextBlock TextWrapping="Wrap" Text="{Binding CheckinVenueName}" VerticalAlignment="Center"/>
-                            <TextBlock Text="  |  " FontWeight="Bold"  VerticalAlignment="Center"
-                                   Visibility="{Binding Path =VisibilityCheckinVenueCountrySeporator, Converter={StaticResource BooleanConverter}}"/>
-                            <TextBlock TextWrapping="Wrap" Text="{Binding CheckinVenueCountry}" VerticalAlignment="Center"/>
-                            <TextBlock Text="  |  " FontWeight="Bold"  VerticalAlignment="Center"
-                                   Visibility="{Binding Path =VisibilityCheckinVenueStateSeporator, Converter={StaticResource BooleanConverter}}"/>
-                            <TextBlock TextWrapping="Wrap" Text="{Binding CheckinVenueState}" VerticalAlignment="Center"/>
-                            <TextBlock Text="  |  " FontWeight="Bold"  VerticalAlignment="Center"
-                                   Visibility="{Binding Path =VisibilityСheckinVenueCitySeporator, Converter={StaticResource BooleanConverter}}"/>
-                            <TextBlock TextWrapping="Wrap" Text="{Binding CheckinVenueCity}" VerticalAlignment="Center"/>
+                            <TextBlock TextWrapping="Wrap" VerticalAlignment="Center">
+                                <Run Text="{Binding CheckinVenueName}"/>
+                                <Run Text="{Binding CheckinVenueCountrySeparator}" FontWeight="Bold" />
+                                <Run Text="{Binding CheckinVenueCountry}"/>
+                                <Run Text="{Binding CheckinVenueStateySeparator}" FontWeight="Bold"/>
+                                <Run Text="{Binding CheckinVenueState}"/>
+                                <Run Text="{Binding CheckinVenueCitySeparator}" FontWeight="Bold" />
+                                <Run Text="{Binding CheckinVenueCity}"/>
+                            </TextBlock>
                         </DockPanel>
                     </StackPanel>
                     <GroupBox Grid.Column="1" Header="{x:Static properties:Resources.Badges}" Width="100" Visibility="Visible">
