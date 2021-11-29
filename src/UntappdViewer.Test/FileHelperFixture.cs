@@ -4,6 +4,7 @@ using System.IO;
 using NUnit.Framework;
 using UntappdViewer.Domain;
 using UntappdViewer.Infrastructure;
+using UntappdViewer.Models;
 using UntappdViewer.Test.Properties;
 
 namespace UntappdViewer.Test
@@ -80,6 +81,15 @@ namespace UntappdViewer.Test
             Assert.AreEqual("vsjitdebuggerui.dll", fileItems[2].FileName);
 
             Assert.AreEqual(file, FileHelper.GetFirstFileItemPath(FileHelper.GetMergedFilePaths(fileItems)));
+        }
+
+        [Test, Ignore("для удаления чекинов")]
+        public void CheckinsRemove()
+        {
+            string filePath = @"";
+            Untappd untappd = FileHelper.OpenFile<Untappd>(filePath);
+            untappd.Checkins.RemoveRange(0, 25);
+            FileHelper.SaveFile(filePath, untappd);
         }
     }
 }
