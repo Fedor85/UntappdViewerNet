@@ -6,13 +6,11 @@
         xmlns:local="clr-namespace:UntappdViewer"
         xmlns:properties="clr-namespace:UntappdViewer.Properties"
         xmlns:prism="http://prismlibrary.com/"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        xmlns:command="http://www.galasoft.ch/mvvmlight"
         xmlns:behaviors="clr-namespace:UntappdViewer.Behaviors"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         prism:ViewModelLocator.AutoWireViewModel="True"
-        Title="{Binding Title}" Height="600" Width="800" MinHeight="600" MinWidth="800" Background="{StaticResource MainColor}" WindowStartupLocation ="CenterScreen">
+        Title="{Binding Title}" Height="850" Width="800" MinHeight="600" MinWidth="800" Background="{StaticResource MainColor}" WindowStartupLocation ="CenterScreen">
     <b:Interaction.Behaviors>
         <behaviors:LoadedWindowBehavior LoadedWindow ="{Binding LoadedWindow, Mode=TwoWay}"/>
     </b:Interaction.Behaviors>
