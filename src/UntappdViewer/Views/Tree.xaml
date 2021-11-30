@@ -24,7 +24,7 @@
                       Style="{StaticResource TreeViewStyle}">
             <TreeView.ItemContainerStyle>
                 <Style TargetType="{x:Type TreeViewItem}">
-                    <Setter Property="Visibility" Value="{Binding Visibility, Mode=TwoWay}" />
+                    <Setter Property="Visibility" Value="{Binding Visibility, Converter={StaticResource BTVConverter}}" />
                 </Style>
             </TreeView.ItemContainerStyle>
             <b:Interaction.Behaviors>

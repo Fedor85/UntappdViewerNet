@@ -117,7 +117,7 @@ namespace UntappdViewer.ViewModels
         private void ReturnVisibleChekins(CallBackConteiner<List<long>> callBackConteiner)
         {
             callBackConteiner.Content = new List<long>();
-            foreach (TreeItemViewModel treeItemViewModel in TreeItems.Where(item => !item.IsHidden()))
+            foreach (TreeItemViewModel treeItemViewModel in TreeItems.Where(item => item.Visibility))
                 callBackConteiner.Content.Add(treeItemViewModel.Id);
         }
 
@@ -167,17 +167,17 @@ namespace UntappdViewer.ViewModels
 
         private void UpdateTreeViewCaption()
         {
-            TreeViewCaption = $"{Properties.Resources.Checkins} ({TreeItems.Count(item => !item.IsHidden())}):";
+            TreeViewCaption = $"{Properties.Resources.Checkins} ({TreeItems.Count(item => item.Visibility)}):";
         }
 
         private void UpdateSelectedTreeItem(long? selectedTreeItemId)
         {
             TreeItemViewModel findSelectedTreeItem = null;
             if (selectedTreeItemId.HasValue)
-                findSelectedTreeItem = TreeItems.FirstOrDefault(item => item.Id.Equals(selectedTreeItemId.Value) && !item.IsHidden());
+                findSelectedTreeItem = TreeItems.FirstOrDefault(item => item.Id.Equals(selectedTreeItemId.Value) && item.Visibility);
 
             if (findSelectedTreeItem == null)
-                findSelectedTreeItem = TreeItems.FirstOrDefault(item => !item.IsHidden());
+                findSelectedTreeItem = TreeItems.FirstOrDefault(item => item.Visibility);
 
             SelectedTreeItem = findSelectedTreeItem;
         }

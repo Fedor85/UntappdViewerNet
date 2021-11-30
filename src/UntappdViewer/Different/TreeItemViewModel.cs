@@ -1,17 +1,16 @@
-﻿using System.Windows;
-using Prism.Mvvm;
+﻿using Prism.Mvvm;
 
 namespace UntappdViewer
 {
     public class TreeItemViewModel : BindableBase
     {
-        private Visibility visibility;
+        private bool visibility;
 
         public long Id { get; }
 
         public string Name { get; }
 
-        public Visibility Visibility
+        public bool Visibility
         {
             get { return visibility; }
             set
@@ -25,22 +24,17 @@ namespace UntappdViewer
         {
             Id = id;
             Name = name;
-            Visibility = Visibility.Visible;
+            Visibility = true;
         }
 
         public void Hide()
         {
-            Visibility = Visibility.Collapsed;
+            Visibility = false;
         }
 
         public void Visible()
         {
-            Visibility = Visibility.Visible;
-        }
-
-        public bool IsHidden()
-        {
-            return Visibility == Visibility.Collapsed || Visibility == Visibility.Hidden;
+            Visibility = true;
         }
 
         public override string ToString()

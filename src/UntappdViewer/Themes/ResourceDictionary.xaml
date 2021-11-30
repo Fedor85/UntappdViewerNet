@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:system="clr-namespace:System;assembly=mscorlib">
-    
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:helpers="clr-namespace:UntappdViewer.Different.Helpers">
     <LinearGradientBrush x:Key="MainColor" SpreadMethod="Reflect" EndPoint="0,1">
         <GradientStop Color="#ffc100" Offset="0" />
         <GradientStop Color="#fd9532" Offset="1" />
@@ -29,4 +29,5 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <helpers:BoolToVisibilityConverter x:Key="BTVConverter"/>
 </ResourceDictionary>
