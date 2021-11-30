@@ -98,6 +98,8 @@ namespace UntappdViewer.ViewModels
 
         private IList badges;
 
+        private bool visibilityBadges;
+
         public string CheckinHeader
         {
             get { return checkinHeader; }
@@ -235,6 +237,16 @@ namespace UntappdViewer.ViewModels
             set
             {
                 SetProperty(ref badges, value);
+                VisibilityBadges = value != null && value.Count != 0;
+            }
+        }
+
+        public bool VisibilityBadges
+        {
+            get { return visibilityBadges; }
+            set
+            {
+                SetProperty(ref visibilityBadges, value);
             }
         }
 

@@ -139,7 +139,8 @@
                             </TextBlock>
                         </DockPanel>
                     </StackPanel>
-                    <GroupBox Grid.Column="1" Header="{x:Static properties:Resources.Badges}" Width="100" Visibility="Visible">
+                    <GroupBox Grid.Column="1" Header="{x:Static properties:Resources.Badges}" Width="100"
+                              Visibility="{Binding VisibilityBadges, Converter={StaticResource BTVConverter}}">
                         <controls:SliderImagesControl ItemsSource="{Binding Badges}" ArrowsSize="10"/>
                     </GroupBox>
                 </Grid>
