@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -12,13 +13,6 @@ namespace UntappdViewer.Views.Controls
     public partial class PasswordBox : UserControl, INotifyPropertyChanged
     {
         private string password;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public PasswordBox()
-        {
-            InitializeComponent();
-        }
 
         public double ImgSize
         {
@@ -39,16 +33,51 @@ namespace UntappdViewer.Views.Controls
             }
         }
 
+        public string HintText
+        { 
+            set
+            {
+                if (!String.IsNullOrEmpty(value))
+                {
+                    HintTextBox.Visibility = Visibility.Visible;
+                    HintTextBox.Text = value;
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public PasswordBox()
+        {
+            InitializeComponent();
+            IsVisibleChanged += PasswordBoxIsVisibleChanged;
+            HintTextBox.GotKeyboardFocus += HintTextBoxGotKeyboardFocus;
+        }
+
+
         public void Clear()
         {
             TextPasswordBox.Clear();
             TextVisiblePasswordBox.Clear();
         }
 
+        private void PasswordBoxIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.NewValue is bool && (bool)e.NewValue)
+                HintTextBox.Visibility = String.IsNullOrEmpty(TextPasswordBox.Password) && !String.IsNullOrEmpty(HintTextBox.Text) ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void HintTextBoxGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            HintTextBox.Visibility = Visibility.Collapsed;
+            TextPasswordBox.Focus();
+        }
+
         private void TextPasswordBoxPasswordChanged(object sender, RoutedEventArgs e)
         {
             Password = TextPasswordBox.Password;
-            ImgShowHide.Visibility = TextPasswordBox.Password.Length > 0 ? Visibility.Visible : Visibility.Hidden;
+            ImgShowHide.Visibility = !String.IsNullOrEmpty(TextPasswordBox.Password) ? Visibility.Visible : Visibility.Hidden;
+            HintTextBox.Visibility = String.IsNullOrEmpty(TextPasswordBox.Password) && !String.IsNullOrEmpty(HintTextBox.Text) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void ImgShowHideMouseLeave(object sender, MouseEventArgs e)

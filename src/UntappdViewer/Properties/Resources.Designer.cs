@@ -275,7 +275,7 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter access token:.
+        ///   Looks up a localized string similar to Enter access token.
         /// </summary>
         public static string EnterAccessToken {
             get {

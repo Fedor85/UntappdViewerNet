@@ -329,7 +329,7 @@
     <value>..\Resources\Show.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="EnterAccessToken" xml:space="preserve">
-    <value>Enter access token:</value>
+    <value>Enter access token</value>
     <comment>en-en</comment>
   </data>
   <data name="ut_connection_default" type="System.Resources.ResXFileRef, System.Windows.Forms">

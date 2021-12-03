@@ -39,9 +39,9 @@
                         <ScrollViewer x:Name="PART_ContentHost"
                                       VerticalAlignment="Stretch" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                       Background="{TemplateBinding Background}"/>
-                        <TextBox Margin="1,0,0,0" x:Name="HintLabel" Text="{TemplateBinding Tag}" Visibility="Collapsed" IsReadOnly="True"
+                        <TextBox Margin="5,0,0,0" x:Name="HintLabel" Text="{TemplateBinding Tag}" Visibility="Collapsed" IsReadOnly="True"
                                  VerticalAlignment="Stretch" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                 Foreground="#FF7D8683" Background="{TemplateBinding Background}"/>
+                                 Foreground="#FF7D8683" Background="{TemplateBinding Background}" BorderThickness="0"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <MultiTrigger>
