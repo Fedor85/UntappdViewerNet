@@ -385,4 +385,8 @@
     <value>Badges</value>
     <comment>en-en</comment>
   </data>
+  <data name="Filter" xml:space="preserve">
+    <value>filter</value>
+    <comment>en-en</comment>
+  </data>
 </root>
