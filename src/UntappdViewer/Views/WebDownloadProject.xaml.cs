@@ -49,6 +49,9 @@ namespace UntappdViewer.Views
             else
             {
                 CheckStatusImg.Visibility = Visibility.Hidden;
+                FulllDownloadButton.IsEnabled = false;
+                FirstDownloadButton.IsEnabled = false;
+                ToEndDownloadButton.IsEnabled = false;
             }
         }
 
