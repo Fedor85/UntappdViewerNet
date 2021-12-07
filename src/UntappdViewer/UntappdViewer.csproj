@@ -408,5 +408,8 @@
   <ItemGroup>
     <Resource Include="Resources\download_media.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\excel_report.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

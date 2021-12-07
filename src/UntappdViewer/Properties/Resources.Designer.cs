@@ -199,6 +199,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checkins Report.
+        /// </summary>
+        public static string CheckinsReport {
+            get {
+                return ResourceManager.GetString("CheckinsReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create project.
         /// </summary>
         public static string CreateProject {
@@ -308,6 +317,16 @@ namespace UntappdViewer.Properties {
         public static string Error {
             get {
                 return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        public static System.Drawing.Icon excel_report {
+            get {
+                object obj = ResourceManager.GetObject("excel_report", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         

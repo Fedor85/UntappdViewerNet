@@ -43,6 +43,12 @@
                     <Image Source="../Resources/upload_photo.ico"/>
                 </MenuItem.Icon>
             </MenuItem>
+            <Separator/>
+            <MenuItem Header="{x:Static properties:Resources.CheckinsReport}" Command="{Binding CheckinsProjectReportCommand}">
+                <MenuItem.Icon>
+                    <Image Source="../Resources/excel_report.ico"/>
+                </MenuItem.Icon>
+            </MenuItem>
         </MenuItem>
         <MenuItem Header="{x:Static properties:Resources.HelpMenuItem}"/>
     </Menu>

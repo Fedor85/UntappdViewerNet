@@ -47,6 +47,8 @@ namespace UntappdViewer.ViewModels
 
         public ICommand WebDownloadProjectCommand { get; }
 
+        public ICommand CheckinsProjectReportCommand { get; }
+
         public MenuBarViewModel(IUntappdService untappdService,  IInteractionRequestService interactionRequestService,
                                                                  ISettingService settingService,
                                                                  IModuleManager moduleManager,
@@ -68,6 +70,7 @@ namespace UntappdViewer.ViewModels
             DownloadProjectMediaCommand = new DelegateCommand(DownloadProjectMedia);
             UploadProjectPhotoCommand = new DelegateCommand(UploadProjectPhotos);
             WebDownloadProjectCommand = new DelegateCommand(WebDownloadProject);
+            CheckinsProjectReportCommand = new DelegateCommand(CheckinsProjectReport);
         }
 
         protected override void Activate()
@@ -253,6 +256,11 @@ namespace UntappdViewer.ViewModels
 
             moduleManager.LoadModule(typeof(WebDownloadProjectModule).Name);
             ActivateView(RegionNames.MainRegion, typeof(Views.WebDownloadProject));
+        }
+
+        private void CheckinsProjectReport()
+        {
+
         }
     }
 }

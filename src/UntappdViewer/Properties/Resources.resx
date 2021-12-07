@@ -396,4 +396,11 @@
   <data name="download_media" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\download_media.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="CheckinsReport" xml:space="preserve">
+    <value>Checkins Report</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="excel_report" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\excel_report.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
