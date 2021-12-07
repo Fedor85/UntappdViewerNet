@@ -11,6 +11,7 @@ using UntappdViewer.Domain.Services;
 using UntappdViewer.Infrastructure.Services;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
+using UntappdViewer.Reporting;
 using UntappdViewer.Services;
 using UntappdViewer.Views;
 using UntappdWebApiClient;
@@ -53,6 +54,8 @@ namespace UntappdViewer
 
             containerRegistry.Register<IWebDownloader, WebDownloader>();
             containerRegistry.Register<IWebApiClient, Client>();
+
+            containerRegistry.Register<IReportingService, ReportingService>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

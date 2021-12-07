@@ -33,6 +33,8 @@ namespace UntappdViewer.ViewModels
 
         private IWebDownloader webDownloader;
 
+        private IReportingService reportingService;
+
         public ICommand GoToWelcomeCommand { get; }
 
         public ICommand RenameProjectCommand { get; }
@@ -54,7 +56,8 @@ namespace UntappdViewer.ViewModels
                                                                  IModuleManager moduleManager,
                                                                  IRegionManager regionManager,
                                                                  IEventAggregator eventAggregator,
-                                                                 IWebDownloader webDownloader) : base(regionManager)
+                                                                 IWebDownloader webDownloader,
+                                                                 IReportingService reportingService) : base(regionManager)
         {
             this.interactionRequestService = interactionRequestService;
             this.settingService = settingService;
@@ -62,6 +65,7 @@ namespace UntappdViewer.ViewModels
             this.moduleManager = moduleManager;
             this.eventAggregator = eventAggregator;
             this.webDownloader = webDownloader;
+            this.reportingService = reportingService;
 
             GoToWelcomeCommand = new DelegateCommand(GoToWelcome);
             RenameProjectCommand = new DelegateCommand(RenameProject);
