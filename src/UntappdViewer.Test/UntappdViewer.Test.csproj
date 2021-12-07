@@ -49,6 +49,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ReportingFixture.cs" />
     <Compile Include="TestHelper.cs" />
     <Compile Include="UntappdWebApiClientFixture.cs" />
     <Compile Include="Utils\TestStringHelper.cs" />
@@ -57,6 +58,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="app.config">
       <SubType>Designer</SubType>
@@ -76,6 +78,10 @@
     <ProjectReference Include="..\UntappdViewer.Models\UntappdViewer.Models.csproj">
       <Project>{B1584484-7648-4349-B8F8-47352DD85FF1}</Project>
       <Name>UntappdViewer.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UntappdViewer.Reporting\UntappdViewer.Reporting.csproj">
+      <Project>{f1bbfaf1-b399-436b-a644-a2cb462c0589}</Project>
+      <Name>UntappdViewer.Reporting</Name>
     </ProjectReference>
     <ProjectReference Include="..\UntappdViewer.Utils\UntappdViewer.Utils.csproj">
       <Project>{5fa116c9-7571-494c-a74d-7e121857ffe9}</Project>

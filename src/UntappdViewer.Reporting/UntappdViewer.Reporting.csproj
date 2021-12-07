@@ -45,9 +45,32 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportingService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <EmbeddedResource Include="Resources\AllCheckinsTemplate.xlsx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UntappdViewer.Interfaces\UntappdViewer.Interfaces.csproj">
+      <Project>{bb613be0-ae21-4a41-836a-c904d16444f6}</Project>
+      <Name>UntappdViewer.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UntappdViewer.Models\UntappdViewer.Models.csproj">
+      <Project>{B1584484-7648-4349-B8F8-47352DD85FF1}</Project>
+      <Name>UntappdViewer.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
