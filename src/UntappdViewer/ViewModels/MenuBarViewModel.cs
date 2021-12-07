@@ -265,10 +265,11 @@ namespace UntappdViewer.ViewModels
 
         private void CheckinsProjectReport()
         {
-            string reportPath = Path.Combine(untappdService.GetFileDataDirectory(), $"{untappdService.Untappd.UserName}.xlsx");
             try
             {
-                reportingService.CreateAllCheckinsReport(untappdService.GetCheckins(), reportPath);
+                string reportPath = reportingService.CreateAllCheckinsReport(untappdService.GetCheckins(), 
+                                                                             untappdService.GetFileDataDirectory(),
+                                                                             untappdService.Untappd.UserName);
                 System.Diagnostics.Process.Start(reportPath);
             }
             catch (Exception ex)

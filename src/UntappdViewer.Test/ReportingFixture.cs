@@ -20,7 +20,7 @@ namespace UntappdViewer.Test
             using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(Resources.ResourcesTestFileName))
             {
                 List<Checkin> checkins = CheckinCSVMapper.GetCheckins(stream);
-                reportingService.CreateAllCheckinsReport(checkins, @"");
+                reportingService.CreateAllCheckinsReport(checkins, @"", "result");
             }
         }
     }

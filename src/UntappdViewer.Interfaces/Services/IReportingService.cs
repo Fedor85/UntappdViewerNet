@@ -5,6 +5,7 @@ namespace UntappdViewer.Interfaces.Services
 {
     public interface IReportingService
     {
-        void CreateAllCheckinsReport(List<Checkin> checkins, string outputPath);
+        /// <returns></returns>
+        string CreateAllCheckinsReport(List<Checkin> checkins, string directory, string fileName);
     }
 }

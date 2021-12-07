@@ -10,12 +10,13 @@ namespace UntappdViewer.Reporting
 {
     public class ReportingService: IReportingService
     {
-        public void CreateAllCheckinsReport(List<Checkin> checkins, string outputPath)
+        public string CreateAllCheckinsReport(List<Checkin> checkins, string directory, string fileName)
         {
             IList<Checkin> checkinsSort = checkins.OrderBy(item => item.Beer.Brewery.Name).ThenBy(item => item.Beer.Name).ToList();
             Workbook workbook = new Workbook();
             Assembly assembly = Assembly.GetExecutingAssembly();
             string templateFileName = $@"{assembly.GetName().Name}.Resources.AllCheckinsTemplate.xlsx";
+            string outputPath = Path.Combine(directory, $"{fileName}.{Path.GetExtension(templateFileName)}");
             using (Stream stream = assembly.GetManifestResourceStream(templateFileName))
                 workbook.LoadFromStream(stream);
 
@@ -39,6 +40,7 @@ namespace UntappdViewer.Reporting
             sheet.AutoFitColumn(3);
             sheet.AutoFitColumn(4);
             workbook.SaveToFile(outputPath);
+            return outputPath;
         }
     }
 }
