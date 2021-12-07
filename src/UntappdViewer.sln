@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UntappdViewer.Domain", "Unt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UntappdWebApiClient", "UntappdWebApiClient\UntappdWebApiClient.csproj", "{B0D9F698-52DB-4794-8600-18153ABA3D36}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UntappdViewer.Reporting", "UntappdViewer.Reporting\UntappdViewer.Reporting.csproj", "{F1BBFAF1-B399-436B-A644-A2CB462C0589}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +58,10 @@ Global
 		{B0D9F698-52DB-4794-8600-18153ABA3D36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0D9F698-52DB-4794-8600-18153ABA3D36}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0D9F698-52DB-4794-8600-18153ABA3D36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1BBFAF1-B399-436B-A644-A2CB462C0589}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1BBFAF1-B399-436B-A644-A2CB462C0589}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1BBFAF1-B399-436B-A644-A2CB462C0589}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1BBFAF1-B399-436B-A644-A2CB462C0589}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
