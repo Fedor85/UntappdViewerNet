@@ -16,6 +16,7 @@ using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
 using UntappdViewer.Modules;
+using UntappdViewer.Utils;
 
 namespace UntappdViewer.ViewModels
 {
@@ -264,7 +265,16 @@ namespace UntappdViewer.ViewModels
 
         private void CheckinsProjectReport()
         {
-
+            string reportPath = Path.Combine(untappdService.GetFileDataDirectory(), $"{untappdService.Untappd.UserName}.xlsx");
+            reportingService.CreateAllCheckinsReport(untappdService.GetCheckins(), reportPath);
+            try
+            {
+                System.Diagnostics.Process.Start(reportPath);
+            }
+            catch (Exception ex)
+            {
+                interactionRequestService.ShowError(Properties.Resources.Error, StringHelper.GetFullExceptionMessage(ex));
+            }
         }
     }
 }
