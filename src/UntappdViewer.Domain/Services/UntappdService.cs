@@ -143,22 +143,22 @@ namespace UntappdViewer.Domain.Services
 
         public string GetCheckinPhotoFilePath(Checkin checkin)
         {
-            return Path.Combine(GetFileDataDirectory(), "CheckinPhotos", Path.GetFileName(checkin.UrlPhoto));
+            return Path.Combine(GetFileDataDirectory(), "CheckinPhotos", Path.GetFileName(StringHelper.GetNormalizedJPGPath(checkin.UrlPhoto)));
         }
 
         public string GetBeerLabelFilePath(Beer beer)
         {
-            return Path.Combine(GetFileDataDirectory(), "BeerLabels", Path.GetFileName(beer.LabelUrl));
+            return Path.Combine(GetFileDataDirectory(), "BeerLabels", Path.GetFileName(StringHelper.GetNormalizedJPGPath(beer.LabelUrl)));
         }
 
         public string GetBreweryLabelFilePath(Brewery brewery)
         {
-            return Path.Combine(GetFileDataDirectory(), "BreweryLabels", Path.GetFileName(brewery.LabelUrl));
+            return Path.Combine(GetFileDataDirectory(), "BreweryLabels", Path.GetFileName(StringHelper.GetNormalizedJPGPath(brewery.LabelUrl)));
         }
 
         public string GetBadgeImageFilePath(Badge badge)
         {
-            return Path.Combine(GetFileDataDirectory(), "BadgeImages", Path.GetFileName(badge.ImageUrl));
+            return Path.Combine(GetFileDataDirectory(), "BadgeImages", Path.GetFileName(StringHelper.GetNormalizedJPGPath(badge.ImageUrl)));
         }
 
         public List<Checkin> GetCheckins(bool isUniqueCheckins = false)

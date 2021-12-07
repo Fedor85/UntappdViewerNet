@@ -24,6 +24,13 @@ namespace UntappdViewer.Utils
             return GetNormalizeDecimalSeparator(str, System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator);
         }
 
+        public static string GetNormalizedJPGPath(string path)
+        {
+            Regex regex = new Regex(@".*jp(e?)g");
+            MatchCollection matches = regex.Matches(path);
+            return matches.Count > 0 ? matches[0].Value : path;
+        }
+
         public static string GetShortName(string name)
         {
             Regex parenthesesRegex = new Regex(@"\(.*?\)");
