@@ -151,7 +151,7 @@ namespace UntappdViewer.ViewModels
 
         private void DownloadFile(string webPath, string filePath)
         {
-            if (!String.IsNullOrEmpty(webPath) && !File.Exists(filePath)))
+            if (!String.IsNullOrEmpty(webPath) && !File.Exists(filePath))
             {
                 string directoryName = Path.GetDirectoryName(filePath);
                 if (!Directory.Exists(directoryName))
