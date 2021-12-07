@@ -130,7 +130,33 @@ namespace UntappdViewer.ViewModels
 
         private void DownloadProjectMedia()
         {
-         
+            if (!FileHelper.GetExtensionWihtoutPoint(untappdService.FilePath).Equals(Extensions.UNTP))
+            {
+                interactionRequestService.ShowMessage(Properties.Resources.Warning, Properties.Resources.WarningMessageSaveProjectToUNTP);
+                return;
+            }
+
+            foreach (Checkin checkin in untappdService.GetCheckins())
+            {
+                DownloadFile(checkin.UrlPhoto, untappdService.GetCheckinPhotoFilePath(checkin));
+                DownloadFile(checkin.Beer.LabelUrl, untappdService.GetBeerLabelFilePath(checkin.Beer));
+                DownloadFile(checkin.Beer.Brewery.Url, untappdService.GetBreweryLabelFilePath(checkin.Beer.Brewery));
+                foreach (Badge badge in checkin.Badges)
+                    DownloadFile(badge.ImageUrl, untappdService.GetBadgeImageFilePath(badge));
+            }
+        }
+
+        private void DownloadFile(string webPath, string filePath)
+        {
+            if (!File.Exists(filePath))
+            {
+                string directoryName = Path.GetDirectoryName(filePath);
+                if (!Directory.Exists(directoryName))
+                    FileHelper.CreateDirectory(directoryName);
+
+                webDownloader.DownloadFile(webPath, filePath);
+            }
+               
         }
 
         private void UploadProjectPhotos()
