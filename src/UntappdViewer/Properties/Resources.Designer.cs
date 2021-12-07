@@ -246,6 +246,25 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        public static System.Drawing.Icon download_media {
+            get {
+                object obj = ResourceManager.GetObject("download_media", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download Media.
+        /// </summary>
+        public static string DownloadMedia {
+            get {
+                return ResourceManager.GetString("DownloadMedia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap draft_3x {

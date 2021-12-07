@@ -405,5 +405,8 @@
   <ItemGroup>
     <Resource Include="Resources\red-x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\download_media.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
