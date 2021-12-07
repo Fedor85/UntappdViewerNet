@@ -26,14 +26,18 @@ namespace UntappdViewer.Reporting
                 int indexRow = i + 2;
 
                 sheet[indexRow, 1].Text = (i + 1).ToString();
-                sheet[indexRow, 2].Text = currentCheckin.Beer.Brewery.Name;
-                sheet[indexRow, 3].Text = currentCheckin.Beer.Name;
-                sheet[indexRow, 4].Text = currentCheckin.RatingScore.ToString();
-                sheet[indexRow, 5].Text = currentCheckin.CreatedDate.ToString();
+                if (currentCheckin.Beer.Brewery.Venue != null)
+                    sheet[indexRow, 2].Text = currentCheckin.Beer.Brewery.Venue.Country;
+
+                sheet[indexRow, 3].Text = currentCheckin.Beer.Brewery.Name;
+                sheet[indexRow, 4].Text = currentCheckin.Beer.Name;
+
+                sheet[indexRow, 5].Text = currentCheckin.RatingScore.ToString();
+                sheet[indexRow, 6].Text = currentCheckin.CreatedDate.ToString();
 
             }
-            sheet.AutoFitColumn(2);
             sheet.AutoFitColumn(3);
+            sheet.AutoFitColumn(4);
             workbook.SaveToFile(outputPath);
         }
     }
