@@ -135,18 +135,29 @@ namespace UntappdViewer.ViewModels
                 interactionRequestService.ShowMessage(Properties.Resources.Warning, Properties.Resources.WarningMessageSaveProjectToUNTP);
                 return;
             }
+            DownloadFiles();
+        }
 
-            foreach (Checkin checkin in untappdService.GetCheckins())
+        private async void DownloadFiles()
+        {
+            List<Checkin> checkins = untappdService.GetCheckins();
+            int count = checkins.Count;
+            int counter = 1;
+            foreach (Checkin checkin in checkins)
             {
-                interactionRequestService.ShowMessageOnStatusBar(checkin.Beer.Name);
-                DownloadFile(checkin.UrlPhoto, untappdService.GetCheckinPhotoFilePath(checkin));
-                DownloadFile(checkin.Beer.LabelUrl, untappdService.GetBeerLabelFilePath(checkin.Beer));
-                DownloadFile(checkin.Beer.Brewery.LabelUrl, untappdService.GetBreweryLabelFilePath(checkin.Beer.Brewery));
-                foreach (Badge badge in checkin.Badges)
-                    DownloadFile(badge.ImageUrl, untappdService.GetBadgeImageFilePath(badge));
+                interactionRequestService.ShowMessageOnStatusBar(CommunicationHelper.GetLoadingMessage($"{counter++}/{count} -> {checkin.Beer.Name}"));
+                await Task.Run(() => DownloadFiles(checkin));
             }
+            interactionRequestService.ShowMessageOnStatusBar(CommunicationHelper.GetLoadingMessage(untappdService.FilePath));
+        }
 
-            interactionRequestService.ShowMessageOnStatusBar(untappdService.FilePath);
+        private void DownloadFiles(Checkin checkin)
+        {
+            DownloadFile(checkin.UrlPhoto, untappdService.GetCheckinPhotoFilePath(checkin));
+            DownloadFile(checkin.Beer.LabelUrl, untappdService.GetBeerLabelFilePath(checkin.Beer));
+            DownloadFile(checkin.Beer.Brewery.LabelUrl, untappdService.GetBreweryLabelFilePath(checkin.Beer.Brewery));
+            foreach (Badge badge in checkin.Badges)
+                DownloadFile(badge.ImageUrl, untappdService.GetBadgeImageFilePath(badge));
         }
 
         private void DownloadFile(string webPath, string filePath)
@@ -159,7 +170,6 @@ namespace UntappdViewer.ViewModels
 
                 webDownloader.DownloadFile(webPath, filePath);
             }
-               
         }
 
         private void UploadProjectPhotos()
