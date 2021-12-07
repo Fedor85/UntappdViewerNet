@@ -138,17 +138,20 @@ namespace UntappdViewer.ViewModels
 
             foreach (Checkin checkin in untappdService.GetCheckins())
             {
+                interactionRequestService.ShowMessageOnStatusBar(checkin.Beer.Name);
                 DownloadFile(checkin.UrlPhoto, untappdService.GetCheckinPhotoFilePath(checkin));
                 DownloadFile(checkin.Beer.LabelUrl, untappdService.GetBeerLabelFilePath(checkin.Beer));
-                DownloadFile(checkin.Beer.Brewery.Url, untappdService.GetBreweryLabelFilePath(checkin.Beer.Brewery));
+                DownloadFile(checkin.Beer.Brewery.LabelUrl, untappdService.GetBreweryLabelFilePath(checkin.Beer.Brewery));
                 foreach (Badge badge in checkin.Badges)
                     DownloadFile(badge.ImageUrl, untappdService.GetBadgeImageFilePath(badge));
             }
+
+            interactionRequestService.ShowMessageOnStatusBar(untappdService.FilePath);
         }
 
         private void DownloadFile(string webPath, string filePath)
         {
-            if (!File.Exists(filePath))
+            if (!String.IsNullOrEmpty(webPath) && !File.Exists(filePath)))
             {
                 string directoryName = Path.GetDirectoryName(filePath);
                 if (!Directory.Exists(directoryName))
