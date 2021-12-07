@@ -23,7 +23,7 @@ namespace UntappdViewer.Reporting
             for (int i = 0; i < checkinsSort.Count; i++)
             {
                 Checkin currentCheckin = checkinsSort[i];
-                int indexRow = i + 3;
+                int indexRow = i + 2;
 
                 sheet[indexRow, 1].Text = (i + 1).ToString();
                 sheet[indexRow, 2].Text = currentCheckin.Beer.Brewery.Name;
