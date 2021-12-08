@@ -17,6 +17,8 @@ using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
 using UntappdViewer.Modules;
 using UntappdViewer.Utils;
+using UntappdViewer.Views;
+using Checkin = UntappdViewer.Models.Checkin;
 
 namespace UntappdViewer.ViewModels
 {
@@ -52,6 +54,8 @@ namespace UntappdViewer.ViewModels
 
         public ICommand CheckinsProjectReportCommand { get; }
 
+        public ICommand HelpCommand { get; }
+
         public MenuBarViewModel(IUntappdService untappdService,  IInteractionRequestService interactionRequestService,
                                                                  ISettingService settingService,
                                                                  IModuleManager moduleManager,
@@ -76,6 +80,7 @@ namespace UntappdViewer.ViewModels
             UploadProjectPhotoCommand = new DelegateCommand(UploadProjectPhotos);
             WebDownloadProjectCommand = new DelegateCommand(WebDownloadProject);
             CheckinsProjectReportCommand = new DelegateCommand(CheckinsProjectReport);
+            HelpCommand = new DelegateCommand(Help);
         }
 
         protected override void Activate()
@@ -276,6 +281,12 @@ namespace UntappdViewer.ViewModels
             {
                 interactionRequestService.ShowError(Properties.Resources.Error, StringHelper.GetFullExceptionMessage(ex));
             }
+        }
+
+        private void Help()
+        {
+            About about = new About();
+            about.ShowDialog();
         }
     }
 }

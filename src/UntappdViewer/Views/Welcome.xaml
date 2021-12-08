@@ -32,7 +32,6 @@
                 </Hyperlink>
             </TextBlock>
         </StackPanel>
-
         <ItemsControl Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Image Height="80" Width="300" Source="..\Resources\pbu_320_white.png"/>
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center">

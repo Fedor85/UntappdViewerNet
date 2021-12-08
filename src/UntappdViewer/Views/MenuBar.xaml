@@ -50,6 +50,6 @@
                 </MenuItem.Icon>
             </MenuItem>
         </MenuItem>
-        <MenuItem Header="{x:Static properties:Resources.HelpMenuItem}"/>
+        <MenuItem Header="{x:Static properties:Resources.HelpMenuItem}" Command="{Binding HelpCommand}"/>
     </Menu>
 </UserControl>

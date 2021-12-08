@@ -128,6 +128,7 @@
     <Compile Include="Modules\WebDownloadProjectModule.cs" />
     <Compile Include="Modules\WelcomeModule.cs" />
     <Compile Include="Services\InteractionRequestService.cs" />
+    <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\Base\BaseDialogModel.cs" />
     <Compile Include="ViewModels\Base\LoadingBaseModel.cs" />
     <Compile Include="ViewModels\Base\RegionManagerBaseModel.cs" />
@@ -145,6 +146,9 @@
     <Compile Include="ViewModels\UntappdViewModel.cs" />
     <Compile Include="ViewModels\WebDownloadProjectViewModel.cs" />
     <Compile Include="ViewModels\WelcomeViewModel.cs" />
+    <Compile Include="Views\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Checkin.xaml.cs">
       <DependentUpon>Checkin.xaml</DependentUpon>
     </Compile>
@@ -198,6 +202,10 @@
     <Compile Include="Views\Welcome.xaml.cs">
       <DependentUpon>Welcome.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Checkin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
