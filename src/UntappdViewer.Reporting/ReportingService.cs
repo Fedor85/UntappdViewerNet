@@ -16,7 +16,7 @@ namespace UntappdViewer.Reporting
             Workbook workbook = new Workbook();
             Assembly assembly = Assembly.GetExecutingAssembly();
             string templateFileName = $@"{assembly.GetName().Name}.Resources.AllCheckinsTemplate.xlsx";
-            string outputPath = Path.Combine(directory, $"{fileName}.{Path.GetExtension(templateFileName)}");
+            string outputPath = Path.Combine(directory, $"{fileName}{Path.GetExtension(templateFileName)}");
             using (Stream stream = assembly.GetManifestResourceStream(templateFileName))
                 workbook.LoadFromStream(stream);
 
