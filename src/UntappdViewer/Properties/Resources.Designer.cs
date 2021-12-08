@@ -434,7 +434,7 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Loading from:.
+        ///   Looks up a localized string similar to Loading from.
         /// </summary>
         public static string LoadingFrom {
             get {

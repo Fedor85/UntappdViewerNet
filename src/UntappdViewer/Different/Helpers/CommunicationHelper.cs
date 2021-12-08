@@ -30,9 +30,9 @@ namespace UntappdViewer.Helpers
             return $"{statusMessage}:\n{filePath}";
         }
 
-        public static string GetLoadingMessage(string filePath)
+        public static string GetLoadingMessage(string text)
         {
-            return $"{Properties.Resources.LoadingFrom} {filePath}";
+            return $"{Properties.Resources.LoadingFrom}: {text}";
         }
 
         public static string GetTitle()
