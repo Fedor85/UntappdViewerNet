@@ -46,6 +46,8 @@ namespace UntappdViewer.Interfaces.Services
 
         string GetBadgeImageFilePath(Badge badge);
 
+        string GetReportsDirectory();
+
         List<Checkin> GetCheckins(bool isUniqueCheckins = false);
 
         Checkin GetCheckin(long checkinId);

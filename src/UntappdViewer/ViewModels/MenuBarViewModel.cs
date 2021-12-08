@@ -268,7 +268,7 @@ namespace UntappdViewer.ViewModels
             try
             {
                 string reportPath = reportingService.CreateAllCheckinsReport(untappdService.GetCheckins(), 
-                                                                             untappdService.GetFileDataDirectory(),
+                                                                             untappdService.GetReportsDirectory(),
                                                                              untappdService.Untappd.UserName);
                 System.Diagnostics.Process.Start(reportPath);
             }

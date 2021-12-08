@@ -161,6 +161,11 @@ namespace UntappdViewer.Domain.Services
             return Path.Combine(GetFileDataDirectory(), "BadgeImages", Path.GetFileName(StringHelper.GetNormalizedJPGPath(badge.ImageUrl)));
         }
 
+        public string GetReportsDirectory()
+        {
+            return Path.Combine(GetFileDataDirectory(), "Reports");
+        }
+
         public List<Checkin> GetCheckins(bool isUniqueCheckins = false)
         {
             return isUniqueCheckins ? Untappd.GetUniqueCheckins() : Untappd.Checkins;
