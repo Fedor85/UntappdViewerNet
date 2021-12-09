@@ -120,6 +120,11 @@ namespace UntappdViewer.Utils
             return message;
         }
 
+        public static string GetEmailUrl(string email)
+        {
+            return $"mailto:{email}";
+        }
+
         private static string GetNormalizeDecimalSeparator(string str, string requiredSeparator)
         {
             return GetNormalizeDecimalSeparator(str, requiredSeparator, ",.");

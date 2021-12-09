@@ -4,9 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mvvm="http://prismlibrary.com/"
+        xmlns:properties="clr-namespace:UntappdViewer.Properties"
         mc:Ignorable="d"
         mvvm:ViewModelLocator.AutoWireViewModel="True"
         Title="About" Height="250" Width="500"  Background="{StaticResource MainColor}"
         WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
-    <Label Content="{Binding Version}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Foreground="#ffffff"/>
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Label Content="{Binding Version}" FontSize="15" Foreground="#ffffff" HorizontalAlignment="Center"/>
+        <TextBlock HorizontalAlignment="Center">
+            <Hyperlink NavigateUri="{Binding EmailUrl}" RequestNavigate="HyperlinkOnRequestNavigate">
+                <TextBlock Text="{x:Static properties:Resources.Email}" FontSize="15" Foreground="#ffffff"/>
+            </Hyperlink>
+        </TextBlock>
+
+    </StackPanel>
 </Window>

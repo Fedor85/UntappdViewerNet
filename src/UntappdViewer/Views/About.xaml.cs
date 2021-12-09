@@ -2,6 +2,7 @@
 using System.Media;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using System.Windows.Resources;
 
 namespace UntappdViewer.Views
@@ -41,6 +42,11 @@ namespace UntappdViewer.Views
         private void WindowClosed(object sender, EventArgs e)
         {
             player.Stop();
+        }
+
+        private void HyperlinkOnRequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            System.Diagnostics.Process.Start(e.Uri.ToString());
         }
     }
 }

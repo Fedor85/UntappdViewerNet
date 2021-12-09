@@ -37,7 +37,7 @@ namespace UntappdViewer.ViewModels
 
         public string EmailUrl
         {
-            get { return "mailto:" + Properties.Resources.Email; }
+            get { return StringHelper.GetEmailUrl(Properties.Resources.Email); }
         }
 
         public string MyProfileUrl
