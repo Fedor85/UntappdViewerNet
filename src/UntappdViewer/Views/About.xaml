@@ -10,6 +10,7 @@
         Title="About" Height="250" Width="500"  Background="{StaticResource MainColor}"
         WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Image Height="40" Width="200" Source="..\Resources\pbu_320_white.png"/>
         <Label Content="{Binding Version}" FontSize="15" Foreground="#ffffff" HorizontalAlignment="Center"/>
         <TextBlock HorizontalAlignment="Center">
             <Hyperlink NavigateUri="{Binding EmailUrl}" RequestNavigate="HyperlinkOnRequestNavigate">
