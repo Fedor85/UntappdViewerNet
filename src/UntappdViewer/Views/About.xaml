@@ -13,18 +13,23 @@
         WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
     <Grid Background="{StaticResource MainBackground}">
         <controls:LoopAutoScrollImageListBox Height="150" Speed="100" MinItemsCount="4" Opacity="0.6" ItemsSource="{Binding ImagePaths}"/>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock HorizontalAlignment="Center">
-                <Hyperlink NavigateUri="{Binding Source={x:Static local:DefautlValues.UntappdtUrl}}" TextDecorations="" RequestNavigate="HyperlinkOnRequestNavigate">
-                    <Image Height="40" Width="200" Source="..\Resources\pbu_320_white.png"/>
-                </Hyperlink>
-            </TextBlock>
-            <Label Content="{Binding Version}" FontSize="15" Foreground="#ffffff" HorizontalAlignment="Center"/>
-            <TextBlock HorizontalAlignment="Center">
-                <Hyperlink NavigateUri="{Binding EmailUrl}" TextDecorations="" RequestNavigate="HyperlinkOnRequestNavigate">
-                    <TextBlock Text="{x:Static properties:Resources.Email}" FontSize="15" Foreground="#ffffff"/>
-                </Hyperlink>
-            </TextBlock>
-        </StackPanel>
+        <ItemsControl HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid>
+                <ItemsControl Background="#000000" Opacity="0.2"/>
+                <StackPanel>
+                    <TextBlock HorizontalAlignment="Center">
+                        <Hyperlink NavigateUri="{Binding Source={x:Static local:DefautlValues.UntappdtUrl}}" TextDecorations="" RequestNavigate="HyperlinkOnRequestNavigate">
+                            <Image Height="40" Width="200" Source="..\Resources\pbu_320_white.png"/>
+                        </Hyperlink>
+                    </TextBlock>
+                    <Label Content="{Binding Version}" FontSize="15" Foreground="#ffffff" HorizontalAlignment="Center"/>
+                    <TextBlock HorizontalAlignment="Center">
+                        <Hyperlink NavigateUri="{Binding EmailUrl}" TextDecorations="" RequestNavigate="HyperlinkOnRequestNavigate">
+                            <TextBlock Text="{x:Static properties:Resources.Email}" FontSize="15" Foreground="#ffffff"/>
+                        </Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+        </ItemsControl>
     </Grid>
 </Window>
