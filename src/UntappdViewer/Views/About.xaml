@@ -11,7 +11,7 @@
         mvvm:ViewModelLocator.AutoWireViewModel="True"
         Title="About" Height="250" Width="500"  Background="{StaticResource MainColor}"
         WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
-    <Grid>
+    <Grid Background="{StaticResource MainBackground}">
         <controls:LoopAutoScrollImageListBox Height="150" Speed="100" MinItemsCount="4" Opacity="0.6" ItemsSource="{Binding ImagePaths}"/>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock HorizontalAlignment="Center">
