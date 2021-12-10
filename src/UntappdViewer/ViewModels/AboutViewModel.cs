@@ -41,7 +41,8 @@ namespace UntappdViewer.ViewModels
         public AboutViewModel(IUntappdService untappdService)
         {
             this.untappdService = untappdService;
-            ImagePaths = GetImagePaths();
+            if (untappdService.IsUNTPProject())
+                ImagePaths = GetImagePaths();
         }
 
         private ObservableCollection<string> GetImagePaths()
