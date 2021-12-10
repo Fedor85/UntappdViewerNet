@@ -36,7 +36,7 @@ namespace UntappdViewer.Views
 
         private void WindowLoaded(object sender, RoutedEventArgs e)
         {
-            player.Play();
+            player.PlayLooping();
         }
 
         private void WindowClosed(object sender, EventArgs e)
