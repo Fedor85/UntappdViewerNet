@@ -6,7 +6,6 @@ namespace UntappdViewer.Utils
 {
     public static class Extension
     {
-
         public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> list)
         {
             Random random = new Random();

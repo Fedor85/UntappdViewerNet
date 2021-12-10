@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using Prism.Mvvm;
+using UntappdViewer.Helpers;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Utils;
 
@@ -43,6 +41,7 @@ namespace UntappdViewer.ViewModels
         public AboutViewModel(IUntappdService untappdService)
         {
             this.untappdService = untappdService;
+            Version = CommunicationHelper.GetTitle();
             if (untappdService.IsUNTPProject())
                 ImagePaths = GetImagePaths();
         }
