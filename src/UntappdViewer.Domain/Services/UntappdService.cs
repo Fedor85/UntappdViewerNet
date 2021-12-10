@@ -158,7 +158,12 @@ namespace UntappdViewer.Domain.Services
 
         public string GetBadgeImageFilePath(Badge badge)
         {
-            return Path.Combine(GetFileDataDirectory(), "BadgeImages", Path.GetFileName(StringHelper.GetNormalizedJPGPath(badge.ImageUrl)));
+            return Path.Combine(GetBadgeImageDirectory(), Path.GetFileName(StringHelper.GetNormalizedJPGPath(badge.ImageUrl)));
+        }
+
+        public string GetBadgeImageDirectory()
+        {
+            return Path.Combine(GetFileDataDirectory(), "BadgeImages");
         }
 
         public string GetReportsDirectory()

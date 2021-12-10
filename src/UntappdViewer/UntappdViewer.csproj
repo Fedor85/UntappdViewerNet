@@ -112,6 +112,7 @@
     <Compile Include="Different\Helpers\CommunicationHelper.cs" />
     <Compile Include="Different\Helpers\EnumsHelper.cs" />
     <Compile Include="Different\Helpers\ImageConverter.cs" />
+    <Compile Include="Different\Helpers\UIHelper.cs" />
     <Compile Include="Different\ImageItemViewModel.cs" />
     <Compile Include="Different\TreeItemViewModel.cs" />
     <Compile Include="Modules\Base\BaseLoadingModule.cs" />
@@ -151,6 +152,9 @@
     </Compile>
     <Compile Include="Views\Checkin.xaml.cs">
       <DependentUpon>Checkin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\LoopAutoScrollImageListBox.xaml.cs">
+      <DependentUpon>LoopAutoScrollImageListBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\PasswordBox.xaml.cs">
       <DependentUpon>PasswordBox.xaml</DependentUpon>
@@ -207,6 +211,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Checkin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\LoopAutoScrollImageListBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

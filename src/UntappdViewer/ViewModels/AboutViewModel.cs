@@ -1,16 +1,32 @@
-﻿using Prism.Mvvm;
-using UntappdViewer.Helpers;
+﻿using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
+using Prism.Mvvm;
+using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Utils;
 
 namespace UntappdViewer.ViewModels
 {
     public class AboutViewModel : BindableBase
     {
+        private IUntappdService untappdService;
+
+        private ObservableCollection<string> imagePaths;
+
         string version;
 
         public string EmailUrl
         {
             get { return StringHelper.GetEmailUrl(Properties.Resources.Email); }
+        }
+
+        public ObservableCollection<string> ImagePaths
+        {
+            get { return imagePaths; }
+            set
+            {
+                SetProperty(ref imagePaths, value);
+            }
         }
 
         public string Version
@@ -22,9 +38,16 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public AboutViewModel()
+        public AboutViewModel(IUntappdService untappdService)
         {
-            Version = CommunicationHelper.GetTitle();
+            this.untappdService = untappdService;
+            ImagePaths = GetImagePaths();
+        }
+
+        private ObservableCollection<string> GetImagePaths()
+        {
+            string directory = untappdService.GetBadgeImageDirectory();
+            return new ObservableCollection<string>(Directory.GetFiles(directory));
         }
     }
 }

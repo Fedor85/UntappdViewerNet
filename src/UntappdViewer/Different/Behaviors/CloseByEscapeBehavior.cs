@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Xaml.Behaviors;
+using UntappdViewer.Different.Helpers;
 
 namespace UntappdViewer.Behaviors
 {
@@ -37,7 +38,7 @@ namespace UntappdViewer.Behaviors
 
         private void AssociatedObjectLoaded(object sender, RoutedEventArgs e)
         {
-            Window = Window.GetWindow(AssociatedObject);
+            Window = UIHelper.GetWindow(AssociatedObject);
             if (Window != null)
                 Window.PreviewKeyDown += WindowPreviewKeyDown;
         }
