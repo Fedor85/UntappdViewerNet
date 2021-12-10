@@ -99,11 +99,18 @@ namespace UntappdViewer.Views.Controls
         private void WindowClosing(object sender, CancelEventArgs e)
         {
             timer.Stop();
+            items.Clear();
         }
 
         private void TimerElapsed(object sender, ElapsedEventArgs e)
         {
-            Dispatcher.Invoke(() => items.Move(0, items.Count - 1));
+            Dispatcher.Invoke(MoveItems);
+        }
+
+        private void MoveItems()
+        {
+            if (items.Count > 2)
+                items.Move(0, items.Count - 1);
         }
     }
 }

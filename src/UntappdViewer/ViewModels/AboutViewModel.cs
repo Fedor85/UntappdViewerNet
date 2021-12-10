@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using Prism.Mvvm;
@@ -48,7 +50,7 @@ namespace UntappdViewer.ViewModels
         private ObservableCollection<string> GetImagePaths()
         {
             string directory = untappdService.GetBadgeImageDirectory();
-            return new ObservableCollection<string>(Directory.GetFiles(directory));
+            return new ObservableCollection<string>(Directory.GetFiles(directory).Shuffle());
         }
     }
 }
