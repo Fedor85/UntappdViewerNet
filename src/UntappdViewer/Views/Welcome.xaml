@@ -5,8 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:properties="clr-namespace:UntappdViewer.Properties"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:command="http://www.galasoft.ch/mvvmlight"
              xmlns:local="clr-namespace:UntappdViewer"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d"
@@ -27,13 +25,17 @@
         <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Image Height="50" Width="50" Source="..\Resources\default_avatar.png"/>
             <TextBlock >
-                <Hyperlink NavigateUri="{Binding MyProfileUrl}" RequestNavigate="HyperlinkOnRequestNavigate">
+                <Hyperlink NavigateUri="{Binding Source={x:Static local:DefautlValues.DeveloperProfileUrl}}" TextDecorations="" RequestNavigate="HyperlinkOnRequestNavigate">
                     <TextBlock Text="{x:Static properties:Resources.DeveloperProfile}" Foreground="#ffffff"/>
                 </Hyperlink>
             </TextBlock>
         </StackPanel>
         <ItemsControl Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Image Height="80" Width="300" Source="..\Resources\pbu_320_white.png"/>
+            <TextBlock HorizontalAlignment="Center">
+                <Hyperlink NavigateUri="{Binding Source={x:Static local:DefautlValues.UntappdtUrl}}" TextDecorations="" RequestNavigate="HyperlinkOnRequestNavigate">
+                    <Image Height="80" Width="300" Source="..\Resources\pbu_320_white.png"/>
+                </Hyperlink>
+            </TextBlock>
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -42,7 +44,7 @@
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Content="{x:Static properties:Resources.Signature1}" FontSize="15" Foreground="#ffffff"/>
                 <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Hyperlink NavigateUri="{Binding EmailUrl}" RequestNavigate="HyperlinkOnRequestNavigate">
+                    <Hyperlink NavigateUri="{Binding EmailUrl}" TextDecorations="" RequestNavigate="HyperlinkOnRequestNavigate">
                         <TextBlock Text="{x:Static properties:Resources.Email}" FontSize="15" Foreground="#ffffff"/>
                     </Hyperlink>
                 </TextBlock>

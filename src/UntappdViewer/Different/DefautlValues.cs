@@ -4,6 +4,10 @@
     {
         public const string DefaultUrl = "http://schemas.microsoft.com/winfx/2006/xaml";
 
+        public const string UntappdtUrl = "https://untappd.com/";
+
+        public const string DeveloperProfileUrl = UntappdtUrl + @"user/Feador";
+
         public const string DefaultCheckinPhotoPath = @"..\Resources\no-image-icon.png";
 
         public const string EmptyImage = @"..\Resources\empty_1x1.png";

@@ -40,11 +40,6 @@ namespace UntappdViewer.ViewModels
             get { return StringHelper.GetEmailUrl(Properties.Resources.Email); }
         }
 
-        public string MyProfileUrl
-        {
-            get { return Properties.Resources.DeveloperProfileUrl; }
-        }
-
         public WelcomeViewModel(IUntappdService untappdService, IInteractionRequestService interactionRequestService,
                                                                 ISettingService settingService,
                                                                 IModuleManager moduleManager,

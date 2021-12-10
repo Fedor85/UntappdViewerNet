@@ -6,6 +6,7 @@
         xmlns:mvvm="http://prismlibrary.com/"
         xmlns:properties="clr-namespace:UntappdViewer.Properties"
         xmlns:controls="clr-namespace:UntappdViewer.Views.Controls"
+        xmlns:local="clr-namespace:UntappdViewer"
         mc:Ignorable="d"
         mvvm:ViewModelLocator.AutoWireViewModel="True"
         Title="About" Height="250" Width="500"  Background="{StaticResource MainColor}"
@@ -13,10 +14,14 @@
     <Grid>
         <controls:LoopAutoScrollImageListBox Height="150" Speed="100" MinItemsCount="4" Opacity="0.6" ItemsSource="{Binding ImagePaths}"/>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Image Height="40" Width="200" Source="..\Resources\pbu_320_white.png"/>
+            <TextBlock HorizontalAlignment="Center">
+                <Hyperlink NavigateUri="{Binding Source={x:Static local:DefautlValues.UntappdtUrl}}" TextDecorations="" RequestNavigate="HyperlinkOnRequestNavigate">
+                    <Image Height="40" Width="200" Source="..\Resources\pbu_320_white.png"/>
+                </Hyperlink>
+            </TextBlock>
             <Label Content="{Binding Version}" FontSize="15" Foreground="#ffffff" HorizontalAlignment="Center"/>
             <TextBlock HorizontalAlignment="Center">
-                <Hyperlink NavigateUri="{Binding EmailUrl}" RequestNavigate="HyperlinkOnRequestNavigate">
+                <Hyperlink NavigateUri="{Binding EmailUrl}" TextDecorations="" RequestNavigate="HyperlinkOnRequestNavigate">
                     <TextBlock Text="{x:Static properties:Resources.Email}" FontSize="15" Foreground="#ffffff"/>
                 </Hyperlink>
             </TextBlock>
