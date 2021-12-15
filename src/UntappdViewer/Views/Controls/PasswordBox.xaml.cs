@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -10,9 +9,23 @@ namespace UntappdViewer.Views.Controls
     /// <summary>
     /// Interaction logic for PasswordBox.xaml
     /// </summary>
-    public partial class PasswordBox : UserControl, INotifyPropertyChanged
+    public partial class PasswordBox : UserControl
     {
+        public static readonly DependencyProperty DependencyProperty = DependencyProperty.Register("Password", typeof(string), typeof(PasswordBox), new FrameworkPropertyMetadata(null, SetPassword));
+
+        private static object SetPassword(DependencyObject dependencyObject, object text)
+        {
+            if (text != null)
+                ((PasswordBox)dependencyObject).Password = (string)text;
+
+            return text;
+        }
+
+        private bool passwordMode;
+
         private string password;
+
+        public event Action<string> PasswordChanged;
 
         public double ImgSize
         {
@@ -23,13 +36,28 @@ namespace UntappdViewer.Views.Controls
             }
         }
 
+        public bool PasswordMode
+        {
+            get { return passwordMode; }
+            set
+            {
+                passwordMode = value;
+                TextPasswordBox.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
+                if (value)
+                    ImgShowHide.Visibility = !String.IsNullOrEmpty(Password) ? Visibility.Visible : Visibility.Hidden;
+                else
+                    ImgShowHide.Visibility = Visibility.Collapsed;          
+            }
+        }
+
         public string Password
         {
             get { return password; }
             set
             {
                 password = value;
-                OnPropertyChanged("Password");
+                if (PasswordChanged != null)
+                    PasswordChanged.Invoke(value);
             }
         }
 
@@ -45,15 +73,16 @@ namespace UntappdViewer.Views.Controls
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public PasswordBox()
         {
             InitializeComponent();
+            PasswordMode = true;
+
             IsVisibleChanged += PasswordBoxIsVisibleChanged;
             HintTextBox.GotKeyboardFocus += HintTextBoxGotKeyboardFocus;
+            TextPasswordBox.GotKeyboardFocus += TextPasswordBoxKeyboardFocus;
+            TextVisiblePasswordBox.GotKeyboardFocus += TextVisiblePasswordBoxGotKeyboardFocus;
         }
-
 
         public void Clear()
         {
@@ -70,14 +99,34 @@ namespace UntappdViewer.Views.Controls
         private void HintTextBoxGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             HintTextBox.Visibility = Visibility.Collapsed;
-            TextPasswordBox.Focus();
+            if (TextPasswordBox.Visibility == Visibility.Visible)
+                TextPasswordBox.Focus();
+            else
+                TextVisiblePasswordBox.Focus();
+        }
+
+        private void TextPasswordBoxKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            HintTextBox.Visibility = Visibility.Hidden;
         }
 
         private void TextPasswordBoxPasswordChanged(object sender, RoutedEventArgs e)
         {
-            Password = TextPasswordBox.Password;
-            ImgShowHide.Visibility = !String.IsNullOrEmpty(TextPasswordBox.Password) ? Visibility.Visible : Visibility.Hidden;
-            HintTextBox.Visibility = String.IsNullOrEmpty(TextPasswordBox.Password) && !String.IsNullOrEmpty(HintTextBox.Text) ? Visibility.Visible : Visibility.Collapsed;
+            TextVisiblePasswordBox.Text = TextPasswordBox.Password;
+        }
+
+        private void VisibleTextChanged(object sender, TextChangedEventArgs e)
+        {
+            Password = TextVisiblePasswordBox.Text;
+            if (PasswordMode)
+                ImgShowHide.Visibility = !String.IsNullOrEmpty(Password) ? Visibility.Visible : Visibility.Hidden;
+
+            HintTextBox.Visibility = String.IsNullOrEmpty(Password) && !String.IsNullOrEmpty(HintTextBox.Text) ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void TextVisiblePasswordBoxGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            HintTextBox.Visibility = Visibility.Hidden;
         }
 
         private void ImgShowHideMouseLeave(object sender, MouseEventArgs e)
@@ -100,7 +149,6 @@ namespace UntappdViewer.Views.Controls
             ImgShowHide.Source = ImageConverter.GetBitmapSource(Properties.Resources.Hide);
             TextVisiblePasswordBox.Visibility = Visibility.Visible;
             TextPasswordBox.Visibility = Visibility.Hidden;
-            TextVisiblePasswordBox.Text = TextPasswordBox.Password;
         }
 
         private void HidePassword()
@@ -109,12 +157,6 @@ namespace UntappdViewer.Views.Controls
             TextVisiblePasswordBox.Visibility = Visibility.Hidden;
             TextPasswordBox.Visibility = Visibility.Visible;
             TextPasswordBox.Focus();
-        }
-
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
