@@ -12,6 +12,13 @@ namespace UntappdViewer.Views.Controls
     /// </summary>
     public partial class PasswordBox : UserControl, INotifyPropertyChanged
     {
+        public static readonly DependencyProperty DependencyProperty = DependencyProperty.Register("PasswordBinding", typeof(string), typeof(PasswordBox), new FrameworkPropertyMetadata(null, SetPassword));
+
+        private static object SetPassword(DependencyObject dependencyObject, object items)
+        {
+            ((PasswordBox)dependencyObject).PasswordBinding = (string)items;
+            return items;
+        }
 
         private bool passwordMode;
 
@@ -41,6 +48,14 @@ namespace UntappdViewer.Views.Controls
                     ImgShowHide.Visibility = !String.IsNullOrEmpty(Password) ? Visibility.Visible : Visibility.Hidden;
                 else
                     ImgShowHide.Visibility = Visibility.Collapsed;          
+            }
+        }
+
+        public string PasswordBinding
+        {
+            set
+            {
+                TextPasswordBox.Password = value;
             }
         }
 

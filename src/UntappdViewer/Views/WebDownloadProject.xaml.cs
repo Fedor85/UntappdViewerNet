@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using UntappdViewer.Helpers;
 
@@ -16,8 +17,15 @@ namespace UntappdViewer.Views
             InitializeComponent();
             isAccessToken = false;
             TokenTextBox.PasswordChanged += PasswordChanged;
+            Loaded += WebDownloadProjectLoaded;
             Unloaded += WebDownloadProjectUnloaded;
             TableCheckins.Items.CurrentChanged += TableCheckinsItemsCurrentChanged;
+        }
+
+        private void WebDownloadProjectLoaded(object sender, RoutedEventArgs e)
+        {
+            if (!String.IsNullOrEmpty(TokenTextBox.Password))
+                AccessTokenButton.IsEnabled = true;
         }
 
         private void TableCheckinsItemsCurrentChanged(object sender, System.EventArgs e)
