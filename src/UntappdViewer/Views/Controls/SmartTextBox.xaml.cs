@@ -150,6 +150,7 @@ namespace UntappdViewer.Views.Controls
                 ImgShowHide.Visibility = !String.IsNullOrEmpty(Text) ? Visibility.Visible : Visibility.Hidden;
 
             HintTextBox.Visibility = String.IsNullOrEmpty(Text) && !String.IsNullOrEmpty(HintTextBox.Text) ? Visibility.Visible : Visibility.Collapsed;
+            ClearButton.Visibility = !String.IsNullOrEmpty(Text) ? Visibility.Visible : Visibility.Hidden;
         }
 
         private void ImgShowHideMouseLeave(object sender, MouseEventArgs e)

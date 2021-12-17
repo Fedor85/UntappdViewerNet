@@ -14,7 +14,7 @@
         <TextBox Grid.Column="0" Name="TextVisiblePasswordBox" TextChanged="VisibleTextChanged"/>
         <PasswordBox Grid.Column="0" Name="TextPasswordBox" PasswordChanged="TextPasswordBoxPasswordChanged"/>
         <TextBox Grid.Column="0" Name="HintTextBox" Margin="5,1,1,1" Foreground="#FF7D8683" BorderThickness="0" IsReadOnly="True" Visibility="Hidden"/>
-        <Button   Width ="15" Margin="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Stretch" Opacity="0.3" Click="СlearClick">
+        <Button Grid.Column="0" Name="ClearButton"  Width ="15" Margin="2,2,2,2" HorizontalAlignment="Right" VerticalAlignment="Stretch"  Visibility="Hidden" Opacity="0.3" Click="СlearClick">
             <Image  Source="..\..\Resources\close_icon.ico"/>
         </Button>
         <Image Grid.Column="1" Name="ImgShowHide"  Visibility="Hidden" HorizontalAlignment="Right" Stretch="Fill" VerticalAlignment="Center" Width="20"
