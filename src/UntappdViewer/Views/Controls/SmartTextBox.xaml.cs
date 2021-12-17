@@ -8,25 +8,25 @@ using UntappdViewer.Helpers;
 namespace UntappdViewer.Views.Controls
 {
     /// <summary>
-    /// Interaction logic for PasswordBox.xaml
+    /// Interaction logic for SmartTextBox.xaml
     /// </summary>
-    public partial class PasswordBox : UserControl, INotifyPropertyChanged
+    public partial class SmartTextBox : UserControl, INotifyPropertyChanged
     {
-        public static readonly DependencyProperty DependencyProperty = DependencyProperty.Register("PasswordBinding", typeof(string), typeof(PasswordBox), new FrameworkPropertyMetadata(null, SetPassword));
+        public static readonly DependencyProperty DependencyProperty = DependencyProperty.Register("TextBinding", typeof(string), typeof(SmartTextBox), new FrameworkPropertyMetadata(null, SetText));
 
-        private static object SetPassword(DependencyObject dependencyObject, object items)
+        private static object SetText(DependencyObject dependencyObject, object items)
         {
-            ((PasswordBox)dependencyObject).Password = (string)items;
+            ((SmartTextBox)dependencyObject).Text = (string)items;
             return items;
         }
 
         private bool passwordMode;
 
-        private string password;
+        private string text;
 
         private string passwordBinding;
 
-        public event Action<string> PasswordChanged;
+        public event Action<string> TextChanged;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -47,32 +47,32 @@ namespace UntappdViewer.Views.Controls
                 passwordMode = value;
                 TextPasswordBox.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
                 if (value)
-                    ImgShowHide.Visibility = !String.IsNullOrEmpty(Password) ? Visibility.Visible : Visibility.Hidden;
+                    ImgShowHide.Visibility = !String.IsNullOrEmpty(Text) ? Visibility.Visible : Visibility.Hidden;
                 else
                     ImgShowHide.Visibility = Visibility.Collapsed;          
             }
         }
 
-        public string PasswordBinding
+        public string TextBinding
         {
             get { return (string)GetValue(DependencyProperty); }
             set
             {
                 SetValue(DependencyProperty, value);
-                OnPropertyChanged("PasswordBinding");
+                OnPropertyChanged("TextBinding");
             }
         }
 
-        public string Password
+        public string Text
         {
-            get { return password; }
+            get { return text; }
             set
             {
-                password = value;
+                text = value;
                 if (!TextPasswordBox.Password.Equals(value ?? String.Empty))
                     TextPasswordBox.Password = value;
 
-                OnPropertyChanged("Password");
+                OnPropertyChanged("Text");
             }
         }
 
@@ -88,10 +88,10 @@ namespace UntappdViewer.Views.Controls
             }
         }
 
-        public PasswordBox()
+        public SmartTextBox()
         {
             InitializeComponent();
-            PasswordMode = true;
+            PasswordMode = false;
             IsVisibleChanged += PasswordBoxIsVisibleChanged;
             HintTextBox.GotKeyboardFocus += HintTextBoxGotKeyboardFocus;
             TextPasswordBox.GotKeyboardFocus += TextPasswordBoxKeyboardFocus;
@@ -131,12 +131,12 @@ namespace UntappdViewer.Views.Controls
 
         private void VisibleTextChanged(object sender, TextChangedEventArgs e)
         {
-            Password = TextVisiblePasswordBox.Text;
-            PasswordBinding = Password;
+            Text = TextVisiblePasswordBox.Text;
+            TextBinding = Text;
             if (PasswordMode)
-                ImgShowHide.Visibility = !String.IsNullOrEmpty(Password) ? Visibility.Visible : Visibility.Hidden;
+                ImgShowHide.Visibility = !String.IsNullOrEmpty(Text) ? Visibility.Visible : Visibility.Hidden;
 
-            HintTextBox.Visibility = String.IsNullOrEmpty(Password) && !String.IsNullOrEmpty(HintTextBox.Text) ? Visibility.Visible : Visibility.Collapsed;
+            HintTextBox.Visibility = String.IsNullOrEmpty(Text) && !String.IsNullOrEmpty(HintTextBox.Text) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void TextVisiblePasswordBoxGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
@@ -179,8 +179,8 @@ namespace UntappdViewer.Views.Controls
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 
-            if (propertyName.Equals("Password") && PasswordChanged != null)
-                PasswordChanged.Invoke(Password);
+            if (propertyName.Equals("Text") && TextChanged != null)
+                TextChanged.Invoke(Text);
         }
     }
 }

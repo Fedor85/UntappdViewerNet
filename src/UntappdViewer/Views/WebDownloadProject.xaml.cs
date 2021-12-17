@@ -16,7 +16,7 @@ namespace UntappdViewer.Views
         {
             InitializeComponent();
             isAccessToken = false;
-            TokenTextBox.PasswordChanged += PasswordChanged;
+            TokenTextBox.TextChanged += TextChanged;
             Loaded += WebDownloadProjectLoaded;
             Unloaded += WebDownloadProjectUnloaded;
             TableCheckins.Items.CurrentChanged += TableCheckinsItemsCurrentChanged;
@@ -24,7 +24,7 @@ namespace UntappdViewer.Views
 
         private void WebDownloadProjectLoaded(object sender, RoutedEventArgs e)
         {
-            if (!String.IsNullOrEmpty(TokenTextBox.Password))
+            if (!String.IsNullOrEmpty(TokenTextBox.Text))
                 AccessTokenButton.IsEnabled = true;
         }
 
@@ -63,7 +63,7 @@ namespace UntappdViewer.Views
             }
         }
 
-        private void PasswordChanged(string text)
+        private void TextChanged(string text)
         {
             CheckStatusImg.Visibility = Visibility.Hidden;
 

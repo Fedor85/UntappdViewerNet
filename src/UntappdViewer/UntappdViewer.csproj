@@ -156,8 +156,8 @@
     <Compile Include="Views\Controls\LoopAutoScrollImageListBox.xaml.cs">
       <DependentUpon>LoopAutoScrollImageListBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\PasswordBox.xaml.cs">
-      <DependentUpon>PasswordBox.xaml</DependentUpon>
+    <Compile Include="Views\Controls\SmartTextBox.xaml.cs">
+      <DependentUpon>SmartTextBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\SliderImagesControl.xaml.cs">
       <DependentUpon>SliderImagesControl.xaml</DependentUpon>
@@ -218,7 +218,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Controls\PasswordBox.xaml">
+    <Page Include="Views\Controls\SmartTextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
