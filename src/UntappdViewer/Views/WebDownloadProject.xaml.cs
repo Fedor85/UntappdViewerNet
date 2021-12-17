@@ -41,6 +41,7 @@ namespace UntappdViewer.Views
             FulllDownloadButton.IsEnabled = false;
             FirstDownloadButton.IsEnabled = false;
             ToEndDownloadButton.IsEnabled = false;
+            BeerUpdateButton.IsEnabled = false;
         }
 
         public void SetAccessToken(bool? isAccessToken)
@@ -60,6 +61,7 @@ namespace UntappdViewer.Views
                 FulllDownloadButton.IsEnabled = false;
                 FirstDownloadButton.IsEnabled = false;
                 ToEndDownloadButton.IsEnabled = false;
+                BeerUpdateButton.IsEnabled = false;
             }
         }
 
@@ -85,6 +87,7 @@ namespace UntappdViewer.Views
             {
                 FirstDownloadButton.IsEnabled = true;
                 ToEndDownloadButton.IsEnabled = true;
+                BeerUpdateButton.IsEnabled = true;
             }
         }
     }

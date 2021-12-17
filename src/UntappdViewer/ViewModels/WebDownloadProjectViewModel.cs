@@ -35,6 +35,8 @@ namespace UntappdViewer.ViewModels
         public ICommand FirstDownloadButtonCommand { get; }
 
         public ICommand ToEndDownloadButtonCommand { get; }
+        
+        public ICommand BeerUpdateButtonCommand { get; }
 
         public ICommand OkButtonCommand { get; }
 
@@ -76,6 +78,7 @@ namespace UntappdViewer.ViewModels
             FulllDownloadButtonCommand = new DelegateCommand(FulllDownload);
             FirstDownloadButtonCommand = new DelegateCommand(FirstDownload);
             ToEndDownloadButtonCommand = new DelegateCommand(ToEndDownload);
+            BeerUpdateButtonCommand = new DelegateCommand(BeerUpdate);
             OkButtonCommand = new DelegateCommand(Exit);
         }
 
@@ -158,6 +161,11 @@ namespace UntappdViewer.ViewModels
         private void ToEndDownload(List<Checkin> checkins)
         {
             webApiClient.FillToEndCheckins(checkins, untappdService.Untappd.Checkins.Min(item => item.Id));
+        }
+
+        private void BeerUpdate()
+        {
+
         }
 
         private async void FillCheckins(Action<List<Checkin>> fillCheckinsDelegate)

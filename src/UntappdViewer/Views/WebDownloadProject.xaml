@@ -49,6 +49,9 @@
                 <Separator Width="10" Visibility="Hidden"/>
                 <Button Name="ToEndDownloadButton" Content="{x:Static properties:Resources.ToEnd}" IsEnabled="False"
                         Command="{Binding ToEndDownloadButtonCommand}" Width="60" Height="20" IsDefault="True"/>
+                <Separator Width="20" Visibility="Hidden"/>
+                <Button Name="BeerUpdateButton" Content="{x:Static properties:Resources.BeerUpdate}" IsEnabled="False"
+                        Command="{Binding BeerUpdateButtonCommand}" Width="100" Height="20" IsDefault="True"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1" >
