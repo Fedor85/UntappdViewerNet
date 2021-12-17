@@ -182,5 +182,10 @@ namespace UntappdViewer.Views.Controls
             if (propertyName.Equals("Text") && TextChanged != null)
                 TextChanged.Invoke(Text);
         }
+
+        private void СlearClick(object sender, RoutedEventArgs e)
+        {
+            Clear();
+        }
     }
 }
