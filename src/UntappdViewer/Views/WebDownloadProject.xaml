@@ -41,11 +41,14 @@
                 </Button>
             </DockPanel>
             <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Name="FulllDownloadButton" Content="{x:Static properties:Resources.Full}" IsEnabled="False" Command="{Binding FulllDownloadButtonCommand}" Width="60" Height="20" IsDefault="True"/>
+                <Button Name="FulllDownloadButton" Content="{x:Static properties:Resources.Full}" IsEnabled="False"
+                        Command="{Binding FulllDownloadButtonCommand}" Width="60" Height="20" IsDefault="True"/>
                 <Separator Width="10" Visibility="Hidden"/>
-                <Button Name="FirstDownloadButton" Content="{x:Static properties:Resources.First}" IsEnabled="False" Command="{Binding FirstDownloadButtonCommand}" Width="60" Height="20" IsDefault="True"/>
+                <Button Name="FirstDownloadButton" Content="{x:Static properties:Resources.First}" IsEnabled="False"
+                        Command="{Binding FirstDownloadButtonCommand}" Width="60" Height="20" IsDefault="True"/>
                 <Separator Width="10" Visibility="Hidden"/>
-                <Button Name="ToEndDownloadButton" Content="{x:Static properties:Resources.ToEnd}" IsEnabled="False" Command="{Binding ToEndDownloadButtonCommand}" Width="60" Height="20" IsDefault="True"/>
+                <Button Name="ToEndDownloadButton" Content="{x:Static properties:Resources.ToEnd}" IsEnabled="False"
+                        Command="{Binding ToEndDownloadButtonCommand}" Width="60" Height="20" IsDefault="True"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1" >

@@ -25,14 +25,16 @@
         <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Image Height="50" Width="50" Source="..\Resources\default_avatar.png"/>
             <TextBlock >
-                <Hyperlink NavigateUri="{Binding Source={x:Static local:DefautlValues.DeveloperProfileUrl}}" TextDecorations="" RequestNavigate="HyperlinkOnRequestNavigate">
+                <Hyperlink NavigateUri="{Binding Source={x:Static local:DefautlValues.DeveloperProfileUrl}}"
+                           TextDecorations="" RequestNavigate="HyperlinkOnRequestNavigate">
                     <TextBlock Text="{x:Static properties:Resources.DeveloperProfile}" Foreground="#ffffff"/>
                 </Hyperlink>
             </TextBlock>
         </StackPanel>
         <ItemsControl Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock HorizontalAlignment="Center">
-                <Hyperlink NavigateUri="{Binding Source={x:Static local:DefautlValues.UntappdtUrl}}" TextDecorations="" RequestNavigate="HyperlinkOnRequestNavigate">
+                <Hyperlink NavigateUri="{Binding Source={x:Static local:DefautlValues.UntappdtUrl}}"
+                           TextDecorations="" RequestNavigate="HyperlinkOnRequestNavigate">
                     <Image Height="80" Width="300" Source="..\Resources\pbu_320_white.png"/>
                 </Hyperlink>
             </TextBlock>
@@ -58,7 +60,8 @@
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom">
                 <ContentControl prism:RegionManager.RegionName="{x:Static local:RegionNames.RecentFilesRegion}"/>
-                <Label Content="{x:Static properties:Resources.OpenFileCaption}" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="15" Foreground="#ffffff"/>
+                <Label Content="{x:Static properties:Resources.OpenFileCaption}" HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                       FontSize="15" Foreground="#ffffff"/>
             </StackPanel>
             <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top">
                 <Button Name="OpenFileButton" Height="20" Width="90" Content="{x:Static properties:Resources.OpenFile}" Command="{Binding OpenFileCommand}"

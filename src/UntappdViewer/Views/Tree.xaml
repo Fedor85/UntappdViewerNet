@@ -19,7 +19,8 @@
         <StackPanel  Grid.Row="0">
             <controls:SmartTextBox HintText="{x:Static properties:Resources.Filter}" PasswordMode="False"
                                    TextBinding="{Binding Search, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <CheckBox IsChecked="{Binding IsCheckedUniqueCheckBox}" Content="{x:Static properties:Resources.UniqueCheckBoxContent}" Command="{Binding UniqueCheckedCommand}" CommandParameter="{Binding Path=IsChecked, RelativeSource={RelativeSource Self}}"/>
+            <CheckBox IsChecked="{Binding IsCheckedUniqueCheckBox}" Content="{x:Static properties:Resources.UniqueCheckBoxContent}"
+                      Command="{Binding UniqueCheckedCommand}" CommandParameter="{Binding Path=IsChecked, RelativeSource={RelativeSource Self}}"/>
             <Label Content="{Binding TreeViewCaption}" FontWeight="Bold"/>
         </StackPanel>
         <TreeView Grid.Row="1" ItemsSource ="{Binding TreeItems}"  Background="Transparent" BorderBrush="Transparent" PreviewMouseWheel="OnPreviewMouseWheel"
