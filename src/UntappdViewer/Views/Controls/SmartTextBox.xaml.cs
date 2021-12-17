@@ -24,7 +24,7 @@ namespace UntappdViewer.Views.Controls
 
         private string text;
 
-        private string passwordBinding;
+        private string hintText;
 
         public event Action<string> TextChanged;
 
@@ -78,13 +78,16 @@ namespace UntappdViewer.Views.Controls
 
         public string HintText
         { 
+            get { return hintText; }
             set
             {
+                hintText = value;
                 if (!String.IsNullOrEmpty(value))
                 {
                     HintTextBox.Visibility = Visibility.Visible;
                     HintTextBox.Text = value;
                 }
+                OnPropertyChanged("HintText");
             }
         }
 
@@ -93,9 +96,33 @@ namespace UntappdViewer.Views.Controls
             InitializeComponent();
             PasswordMode = false;
             IsVisibleChanged += PasswordBoxIsVisibleChanged;
-            HintTextBox.GotKeyboardFocus += HintTextBoxGotKeyboardFocus;
-            TextPasswordBox.GotKeyboardFocus += TextPasswordBoxKeyboardFocus;
-            TextVisiblePasswordBox.GotKeyboardFocus += TextVisiblePasswordBoxGotKeyboardFocus;
+
+            HintTextBox.GotFocus += HintTextBoxGotFocus;
+            TextPasswordBox.GotFocus += TextBoxGotFocus;
+            TextVisiblePasswordBox.GotFocus += TextBoxGotFocus;
+
+            TextPasswordBox.LostFocus += TextBoxLostFocus;
+            TextVisiblePasswordBox.LostFocus += TextBoxLostFocus;
+        }
+
+        private void HintTextBoxGotFocus(object sender, RoutedEventArgs e)
+        {
+            HintTextBox.Visibility = Visibility.Collapsed;
+            if (TextPasswordBox.Visibility == Visibility.Visible)
+                TextPasswordBox.Focus();
+            else
+                TextVisiblePasswordBox.Focus();
+        }
+
+        private void TextBoxGotFocus(object sender, RoutedEventArgs e)
+        {
+            HintTextBox.Visibility = Visibility.Hidden;
+        }
+
+        private void TextBoxLostFocus(object sender, RoutedEventArgs e)
+        {
+            if(!String.IsNullOrEmpty(hintText) && String.IsNullOrEmpty(Text))
+                HintTextBox.Visibility = Visibility.Visible;
         }
 
         public void Clear()
@@ -108,20 +135,6 @@ namespace UntappdViewer.Views.Controls
         {
             if (e.NewValue is bool && (bool)e.NewValue)
                 HintTextBox.Visibility = String.IsNullOrEmpty(TextPasswordBox.Password) && !String.IsNullOrEmpty(HintTextBox.Text) ? Visibility.Visible : Visibility.Collapsed;
-        }
-
-        private void HintTextBoxGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
-        {
-            HintTextBox.Visibility = Visibility.Collapsed;
-            if (TextPasswordBox.Visibility == Visibility.Visible)
-                TextPasswordBox.Focus();
-            else
-                TextVisiblePasswordBox.Focus();
-        }
-
-        private void TextPasswordBoxKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
-        {
-            HintTextBox.Visibility = Visibility.Hidden;
         }
 
         private void TextPasswordBoxPasswordChanged(object sender, RoutedEventArgs e)
@@ -137,11 +150,6 @@ namespace UntappdViewer.Views.Controls
                 ImgShowHide.Visibility = !String.IsNullOrEmpty(Text) ? Visibility.Visible : Visibility.Hidden;
 
             HintTextBox.Visibility = String.IsNullOrEmpty(Text) && !String.IsNullOrEmpty(HintTextBox.Text) ? Visibility.Visible : Visibility.Collapsed;
-        }
-
-        private void TextVisiblePasswordBoxGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
-        {
-            HintTextBox.Visibility = Visibility.Hidden;
         }
 
         private void ImgShowHideMouseLeave(object sender, MouseEventArgs e)
