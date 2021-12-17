@@ -186,7 +186,7 @@ namespace UntappdViewer.ViewModels
         {
             if (String.IsNullOrEmpty(filter) || String.IsNullOrEmpty(filter.Trim()))
             {
-                foreach (TreeItemViewModel model in TreeItems)
+                foreach (TreeItemViewModel model in TreeItems.Where(item => !item.Visibility))
                     model.Visible();
             }
             else
