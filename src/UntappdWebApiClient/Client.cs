@@ -5,6 +5,7 @@ using System.Net.Http;
 using QuickType.WebModels;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
+using Beer = UntappdViewer.Models.Beer;
 
 namespace UntappdWebApiClient
 {
@@ -46,6 +47,11 @@ namespace UntappdWebApiClient
         public void FillToEndCheckins(List<Checkin> checkins, long startId)
         {
             FillCheckins(checkins, startId);
+        }
+
+        public void BeerUpdate(List<Beer> beers)
+        {
+
         }
 
         private void FillCheckins(List<Checkin> checkins, long maxId, long? minId = null)

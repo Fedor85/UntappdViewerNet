@@ -165,7 +165,10 @@ namespace UntappdViewer.ViewModels
 
         private void BeerUpdate()
         {
+            if (untappdService.Untappd.Checkins.Count == 0)
+                return;
 
+            webApiClient.BeerUpdate(untappdService.Untappd.Checkins.Select(item => item.Beer).Where(item => !item.IBU.HasValue).ToList());
         }
 
         private async void FillCheckins(Action<List<Checkin>> fillCheckinsDelegate)
