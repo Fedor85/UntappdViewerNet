@@ -29,31 +29,5 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="HintTextBoxStyle" TargetType="{x:Type TextBox}">
-        <Setter Property="Background" Value="#FFFFFF"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TextBox}">
-                    <Grid>
-                        <ScrollViewer x:Name="PART_ContentHost"
-                                      VerticalAlignment="Stretch" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                      Background="{TemplateBinding Background}"/>
-                        <TextBox Margin="5,0,0,0" x:Name="HintLabel" Text="{TemplateBinding Tag}" Visibility="Collapsed" IsReadOnly="True"
-                                 VerticalAlignment="Stretch" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                 Foreground="#FF7D8683" Background="{TemplateBinding Background}" BorderThickness="0"/>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="Text" Value=""/>
-                            </MultiTrigger.Conditions>
-                            <Setter Property="Visibility" TargetName="HintLabel" Value="Visible"/>
-                        </MultiTrigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
     <helpers:BoolToVisibilityConverter x:Key="BTVConverter"/>
 </ResourceDictionary>

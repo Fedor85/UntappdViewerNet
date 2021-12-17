@@ -7,6 +7,7 @@
              xmlns:properties="clr-namespace:UntappdViewer.Properties"
              xmlns:behaviors="clr-namespace:UntappdViewer.Behaviors"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:controls="clr-namespace:UntappdViewer.Views.Controls"
              mc:Ignorable="d" 
              prism:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="600" d:DesignWidth="250">
@@ -16,9 +17,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel  Grid.Row="0">
-            <TextBox Height="20" Text="{Binding Search, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     Style="{StaticResource HintTextBoxStyle}" Tag="{x:Static properties:Resources.Filter}"
-                     HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+            <controls:SmartTextBox HintText="{x:Static properties:Resources.Filter}" PasswordMode="False"
+                                   TextBinding="{Binding Search, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <CheckBox IsChecked="{Binding IsCheckedUniqueCheckBox}" Content="{x:Static properties:Resources.UniqueCheckBoxContent}" Command="{Binding UniqueCheckedCommand}" CommandParameter="{Binding Path=IsChecked, RelativeSource={RelativeSource Self}}"/>
             <Label Content="{Binding TreeViewCaption}" FontWeight="Bold"/>
         </StackPanel>
