@@ -16,13 +16,15 @@ namespace UntappdViewer.Views.Controls
 
         private static object SetPassword(DependencyObject dependencyObject, object items)
         {
-            ((PasswordBox)dependencyObject).PasswordBinding = (string)items;
+            ((PasswordBox)dependencyObject).Password = (string)items;
             return items;
         }
 
         private bool passwordMode;
 
         private string password;
+
+        private string passwordBinding;
 
         public event Action<string> PasswordChanged;
 
@@ -53,9 +55,11 @@ namespace UntappdViewer.Views.Controls
 
         public string PasswordBinding
         {
+            get { return (string)GetValue(DependencyProperty); }
             set
             {
-                TextPasswordBox.Password = value;
+                SetValue(DependencyProperty, value);
+                OnPropertyChanged("PasswordBinding");
             }
         }
 
@@ -65,6 +69,9 @@ namespace UntappdViewer.Views.Controls
             set
             {
                 password = value;
+                if (!TextPasswordBox.Password.Equals(value ?? String.Empty))
+                    TextPasswordBox.Password = value;
+
                 OnPropertyChanged("Password");
             }
         }
@@ -85,7 +92,6 @@ namespace UntappdViewer.Views.Controls
         {
             InitializeComponent();
             PasswordMode = true;
-
             IsVisibleChanged += PasswordBoxIsVisibleChanged;
             HintTextBox.GotKeyboardFocus += HintTextBoxGotKeyboardFocus;
             TextPasswordBox.GotKeyboardFocus += TextPasswordBoxKeyboardFocus;
@@ -126,6 +132,7 @@ namespace UntappdViewer.Views.Controls
         private void VisibleTextChanged(object sender, TextChangedEventArgs e)
         {
             Password = TextVisiblePasswordBox.Text;
+            PasswordBinding = Password;
             if (PasswordMode)
                 ImgShowHide.Visibility = !String.IsNullOrEmpty(Password) ? Visibility.Visible : Visibility.Hidden;
 
