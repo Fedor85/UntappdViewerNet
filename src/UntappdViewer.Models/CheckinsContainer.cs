@@ -5,7 +5,7 @@ namespace UntappdViewer.Models
 {
     public class CheckinsContainer
     {
-        public List<Checkin> Checkin;
+        public List<Checkin> Checkins;
 
         public List<Beer> Beers;
 
@@ -15,7 +15,7 @@ namespace UntappdViewer.Models
 
         public CheckinsContainer()
         {
-            Checkin = new List<Checkin>();
+            Checkins = new List<Checkin>();
             Beers = new List<Beer>();
             Brewerys = new List<Brewery>();
             Venues = new List<Venue>();
@@ -31,11 +31,6 @@ namespace UntappdViewer.Models
             return Brewerys.FirstOrDefault(item => item.Id == breweryId);
         }
 
-        public Venue GetVenue(long venueId)
-        {
-            return Venues.FirstOrDefault(item => item.Id == venueId);
-        }
-
         public Venue GetVenue(Venue venue)
         {
             return Venues.FirstOrDefault(item => item.Equals(venue));
@@ -43,7 +38,7 @@ namespace UntappdViewer.Models
 
         public void AddCheckin(Checkin checkin)
         {
-            Checkin.Add(checkin);
+            Checkins.Add(checkin);
         }
 
         public void AddBeer(Beer beer)

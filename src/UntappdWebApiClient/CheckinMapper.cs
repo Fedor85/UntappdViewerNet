@@ -54,6 +54,7 @@ namespace UntappdWebApiClient
 
         private static void FillVenue(Venue venue, VenueWeb venueWeb)
         {
+            venue.Id = venueWeb.VenueId;
             venue.Name = venueWeb.VenueName;
             venue.Country = venueWeb.Location.VenueCountry;
             venue.State = venueWeb.Location.VenueState;
