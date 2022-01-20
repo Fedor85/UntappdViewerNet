@@ -6,6 +6,11 @@ namespace UntappdViewer.Models
     public class Venue
     {
         /// <summary>
+        /// id локации
+        /// </summary>
+        public long Id { get; set; }
+
+        /// <summary>
         /// имя локации
         /// </summary>
         public string Name { get; set; }
@@ -34,6 +39,25 @@ namespace UntappdViewer.Models
         /// долгота
         /// </summary>
         public double? Longitude { get; set; }
+
+        public Venue()
+        {
+            Name = String.Empty;
+            Country = String.Empty;
+            State = String.Empty;
+            City = String.Empty;
+        }
+
+        public bool Equals(Venue venue)
+        {
+            return Id == venue.Id &&
+                   Name == venue.Name &&
+                   Country == venue.Country &&
+                   State == venue.State &&
+                   City == venue.City &&
+                   Latitude == venue.Latitude &&
+                   Longitude == venue.Longitude;
+        }
 
         public override string ToString()
         {

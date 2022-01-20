@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Reflection;
 using NUnit.Framework;
 using UntappdViewer.Domain.Mappers;
@@ -16,8 +15,8 @@ namespace UntappdViewer.Test
         {
             using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(Resources.ResourcesTestFileName))
             {
-                List<Checkin> checkins = CheckinCSVMapper.GetCheckins(stream);
-                Assert.IsTrue(checkins.Count > 0);
+                CheckinsContainer checkins = CheckinCSVMapper.GetCheckinsContainer(stream);
+                Assert.IsTrue(checkins.Checkin.Count > 0);
             }
         }
     }

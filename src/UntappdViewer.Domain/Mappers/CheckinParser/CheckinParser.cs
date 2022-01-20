@@ -124,7 +124,7 @@ namespace UntappdViewer.Domain.Mappers.CheckinParser
             return StringHelper.GetValues(GetValue(ParameterNames.FlavorProfiles));
         }
 
-        public string GetPurchaseVenues()
+        public string GetPurchaseVenue()
         {
             return GetValue(ParameterNames.PurchaseVenue);
         }
