@@ -37,29 +37,14 @@ namespace UntappdWebApiClient
             return httpResponse.IsSuccessStatusCode;
         }
 
-        public void FillFullCheckins(List<Checkin> checkins)
-        {
-            FillCheckins(checkins, 0);
-        }
-
         public void FillFullCheckins(CheckinsContainer checkinsContainer)
         {
             FillCheckins(checkinsContainer, 0);
         }
 
-        public void FillFirstCheckins(List<Checkin> checkins, long endId)
-        {
-            FillCheckins(checkins, 0, endId);
-        }
-
         public void FillFirstCheckins(CheckinsContainer checkinsContainer, long endId)
         {
             FillCheckins(checkinsContainer, 0);
-        }
-
-        public void FillToEndCheckins(List<Checkin> checkins, long startId)
-        {
-            FillCheckins(checkins, startId);
         }
 
         public void FillToEndCheckins(CheckinsContainer checkinsContainer, long endId)
@@ -167,46 +152,6 @@ namespace UntappdWebApiClient
                 checkin.Venue = existVenue;
             else
                 checkinsContainer.AddVenue(checkin.Venue);
-        }
-
-        private void FillCheckins(List<Checkin> checkins, long maxId, long? minId = null)
-        {
-            long currentId = maxId;
-            while (true)
-            {
-                HttpResponseMessage httpResponse = GetHttpResponse($"user/checkins/?max_id={currentId}&limit=50");
-                if ((long)httpResponse.StatusCode == 429)
-                    throw new ArgumentException(httpResponse.ReasonPhrase);
-
-                string responseBody = httpResponse.Content.ReadAsStringAsync().Result;
-                Temperatures temperatures = Newtonsoft.Json.JsonConvert.DeserializeObject<Temperatures>(responseBody);
-                if (temperatures.Response.Pagination.MaxId.HasValue)
-                {
-                    List<Checkin> currentCheckins = CheckinMapper.GetCheckins(temperatures.Response.Checkins);
-
-                    if (minId.HasValue)
-                    {
-                        foreach (Checkin currentCheckin in currentCheckins)
-                        {
-                            if (currentCheckin.Id == minId.Value)
-                                return;
-
-                            checkins.Add(currentCheckin);
-                            UploadedCountInvoke(checkins);
-                        }
-                    }
-                    else
-                    {
-                        checkins.AddRange(currentCheckins);
-                        UploadedCountInvoke(checkins);
-                    }
-                    currentId = temperatures.Response.Pagination.MaxId.Value;
-                }
-                else
-                {
-                    break;
-                }
-            }
         }
 
         private HttpResponseMessage GetHttpResponse(string methodName)

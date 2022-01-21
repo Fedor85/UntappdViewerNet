@@ -15,7 +15,8 @@ namespace UntappdViewer.Test
         {
             using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(Resources.ResourcesTestFileName))
             {
-                CheckinsContainer checkinsContainer = CheckinCSVMapper.GetCheckinsContainer(stream);
+                CheckinsContainer checkinsContainer = new CheckinsContainer();
+                CheckinCSVMapper.InitializeCheckinsContainer(checkinsContainer, stream);
                 Assert.IsTrue(checkinsContainer.Checkins.Count > 0);
             }
         }

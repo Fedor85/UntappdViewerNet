@@ -6,36 +6,54 @@ namespace UntappdViewer.Models
     [Serializable]
     public class Untappd
     {
-        /// <summary>
+
+        public CheckinsContainer CheckinsContainer { get; private set; }
+
+        ///// <summary>
         /// Чекины
         /// </summary>
-        public List<Checkin> Checkins { get; }
+        public List<Checkin> Checkins { get { return CheckinsContainer.Checkins; } }
 
         /// <summary>
         /// Имя пользователя
         /// </summary>
-        public string UserName { get; set; }
+        public string UserName { get; private set; }
 
         /// <summary>
         /// Дата создания проекта
         /// </summary>
         public DateTime CreatedDate { get;}
 
+        private bool isСhanges { get; set; }
+
         public Untappd(string userName)
         {
-            Checkins = new List<Checkin>();
+            CheckinsContainer = new CheckinsContainer();
             UserName = userName;
             CreatedDate = DateTime.Now;
+            isСhanges = false;
         }
 
-        public void AddCheckins(List<Checkin> checkins)
+        public void SetUserName(string userName)
         {
-            Checkins.AddRange(checkins);
+            UserName = userName;
+            isСhanges = true;
         }
 
         public void SortDataDescCheckins()
         {
             Checkins.Sort(SortCheckinsDataDesc);
+        }
+
+        public bool IsСhanges()
+        {
+            return isСhanges || CheckinsContainer.IsСhanges;
+        }
+
+        public void ResetСhanges()
+        {
+            isСhanges = false;
+            CheckinsContainer.IsСhanges = false;
         }
 
         public List<Checkin> GetUniqueCheckins()

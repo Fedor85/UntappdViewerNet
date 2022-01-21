@@ -30,8 +30,6 @@ namespace UntappdViewer.Interfaces.Services
 
         string GetUntappdUserName();
 
-        void AddCheckins(List<Checkin> checkins);
-
         void UpdateUntappdUserName(string untappdUserName);
 
         string GetUntappdProjectFileName();

@@ -7,10 +7,11 @@ using Prism.Commands;
 using Prism.Modularity;
 using Prism.Regions;
 using UntappdViewer.Interfaces.Services;
+using UntappdViewer.Models;
 using UntappdViewer.Modules;
 using UntappdViewer.Utils;
-using UntappdViewer.Views;
 using Checkin = UntappdViewer.Models.Checkin;
+using Untappd = UntappdViewer.Views.Untappd;
 
 namespace UntappdViewer.ViewModels
 {
@@ -136,9 +137,9 @@ namespace UntappdViewer.ViewModels
             FillCheckins(FulllDownload);
         }
 
-        private void FulllDownload(List<Checkin> checkins)
+        private void FulllDownload(CheckinsContainer checkinsContainer)
         {
-            webApiClient.FillFullCheckins(checkins);
+            webApiClient.FillFullCheckins(checkinsContainer);
         }
 
         private void FirstDownload()
@@ -147,9 +148,9 @@ namespace UntappdViewer.ViewModels
             FillCheckins(FirstDownload);
         }
 
-        private void FirstDownload(List<Checkin> checkins)
+        private void FirstDownload(CheckinsContainer checkinsContainer)
         {
-            webApiClient.FillFirstCheckins(checkins, untappdService.Untappd.Checkins.Max(item => item.Id));
+            webApiClient.FillFirstCheckins(checkinsContainer, untappdService.Untappd.Checkins.Max(item => item.Id));
         }
 
         private void ToEndDownload()
@@ -158,9 +159,9 @@ namespace UntappdViewer.ViewModels
             FillCheckins(ToEndDownload);
         }
 
-        private void ToEndDownload(List<Checkin> checkins)
+        private void ToEndDownload(CheckinsContainer checkinsContainer)
         {
-            webApiClient.FillToEndCheckins(checkins, untappdService.Untappd.Checkins.Min(item => item.Id));
+            webApiClient.FillToEndCheckins(checkinsContainer, untappdService.Untappd.Checkins.Min(item => item.Id));
         }
 
         private void BeerUpdate()
@@ -171,12 +172,11 @@ namespace UntappdViewer.ViewModels
             webApiClient.BeerUpdate(untappdService.Untappd.Checkins.Select(item => item.Beer).Where(item => !item.IBU.HasValue).ToList());
         }
 
-        private async void FillCheckins(Action<List<Checkin>> fillCheckinsDelegate)
+        private async void FillCheckins(Action<CheckinsContainer> fillCheckinsDelegate)
         {
-            List<Checkin> checkins = new List<Checkin>();
             try
             {
-                await Task.Run(() => fillCheckinsDelegate(checkins));
+                await Task.Run(() => fillCheckinsDelegate(untappdService.Untappd.CheckinsContainer));
             }
             catch (Exception ex)
             {
@@ -184,11 +184,7 @@ namespace UntappdViewer.ViewModels
             }
             finally
             {
-                if (checkins.Count > 0)
-                {
-                    untappdService.AddCheckins(checkins);
-                    Checkins = new List<Checkin>(untappdService.GetCheckins());
-                }
+                Checkins = new List<Checkin>(untappdService.GetCheckins());
                 LoadingChangeActivity(false);
             }
         }

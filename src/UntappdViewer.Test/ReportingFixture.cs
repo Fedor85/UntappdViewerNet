@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Reflection;
 using NUnit.Framework;
 using UntappdViewer.Domain.Mappers;
@@ -19,8 +17,9 @@ namespace UntappdViewer.Test
             ReportingService reportingService = new ReportingService();
             using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(Resources.ResourcesTestFileName))
             {
-                List<Checkin> checkins = CheckinCSVMapper.GetCheckins(stream);
-                reportingService.CreateAllCheckinsReport(checkins, @"", "result");
+                CheckinsContainer checkinsContainer = new CheckinsContainer();
+                CheckinCSVMapper.InitializeCheckinsContainer(checkinsContainer, stream);
+                reportingService.CreateAllCheckinsReport(checkinsContainer.Checkins, @"", "result");
             }
         }
     }

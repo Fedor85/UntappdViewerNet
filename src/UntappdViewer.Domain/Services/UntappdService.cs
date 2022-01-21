@@ -14,8 +14,6 @@ namespace UntappdViewer.Domain.Services
     {
         private ISettingService settingService;
 
-        private bool isСhanges;
-
         public Untappd Untappd { get; private set; }
 
         public Action<Untappd> InitializeUntappdEvent { get; set; }
@@ -63,7 +61,7 @@ namespace UntappdViewer.Domain.Services
         {     
             Untappd = new Untappd(GetUntappdUserName(userName));
             using (FileStream fileStream = File.OpenRead(filePath))
-                Untappd.AddCheckins(CheckinCSVMapper.GetCheckins(fileStream));
+                CheckinCSVMapper.InitializeCheckinsContainer(Untappd.CheckinsContainer, fileStream);
 
             Untappd.SortDataDescCheckins();
         }
@@ -98,12 +96,12 @@ namespace UntappdViewer.Domain.Services
 
         public bool IsDirtyUntappd()
         {
-            return isСhanges;
+            return Untappd.IsСhanges();
         }
 
         public void ResetСhanges()
         {
-            isСhanges = false;
+            Untappd.ResetСhanges();
         }
 
         public string GetUntappdUserName()
@@ -111,23 +109,12 @@ namespace UntappdViewer.Domain.Services
             return Untappd.UserName;
         }
 
-        public void AddCheckins(List<Checkin> checkins)
-        {
-            if(checkins.Count == 0)
-                return;
-
-            Untappd.AddCheckins(checkins);
-            Untappd.SortDataDescCheckins();
-            isСhanges = true;
-        }
-
         public void UpdateUntappdUserName(string untappdUserName)
         {
             if (Untappd.UserName.Equals(untappdUserName))
                 return;
 
-            isСhanges = true;
-            Untappd.UserName = GetUntappdUserName(untappdUserName);
+            Untappd.SetUserName(GetUntappdUserName(untappdUserName));
             UpdateUntappdUserNameEvent?.Invoke(Untappd.UserName);
         }
 

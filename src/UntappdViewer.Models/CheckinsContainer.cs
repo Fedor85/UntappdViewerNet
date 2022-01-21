@@ -1,17 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace UntappdViewer.Models
 {
+    [Serializable]
     public class CheckinsContainer
     {
+        public bool IsСhanges { get; set; }
+
         public List<Checkin> Checkins;
 
-        public List<Beer> Beers;
+        private List<Beer> Beers;
 
-        public List<Brewery> Brewerys;
+        private List<Brewery> Brewerys;
 
-        public List<Venue> Venues;
+        private List<Venue> Venues;
 
         public CheckinsContainer()
         {
@@ -19,6 +23,7 @@ namespace UntappdViewer.Models
             Beers = new List<Beer>();
             Brewerys = new List<Brewery>();
             Venues = new List<Venue>();
+            IsСhanges = false;
         }
 
         public Beer GetBeer(long beerId)
@@ -39,20 +44,24 @@ namespace UntappdViewer.Models
         public void AddCheckin(Checkin checkin)
         {
             Checkins.Add(checkin);
+            IsСhanges = true;
         }
 
         public void AddBeer(Beer beer)
         {
             Beers.Add(beer);
+            IsСhanges = true;
         }
         public void AddBrewery(Brewery brewery)
         {
             Brewerys.Add(brewery);
+            IsСhanges = true;
         }
 
         public void AddVenue(Venue venue)
         {
             Venues.Add(venue);
+            IsСhanges = true;
         }
     }
 }
