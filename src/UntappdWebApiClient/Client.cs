@@ -42,14 +42,14 @@ namespace UntappdWebApiClient
             FillCheckins(checkinsContainer, 0);
         }
 
-        public void FillFirstCheckins(CheckinsContainer checkinsContainer, long endId)
+        public void FillFirstCheckins(CheckinsContainer checkinsContainer)
         {
-            FillCheckins(checkinsContainer, 0, endId);
+            FillCheckins(checkinsContainer, 0, checkinsContainer.Checkins.Max(item => item.Id));
         }
 
-        public void FillToEndCheckins(CheckinsContainer checkinsContainer, long startId)
+        public void FillToEndCheckins(CheckinsContainer checkinsContainer)
         {
-            FillCheckins(checkinsContainer, startId);
+            FillCheckins(checkinsContainer, checkinsContainer.Checkins.Min(item => item.Id));
         }
 
         public void BeerUpdate(List<Beer> beers)

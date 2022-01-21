@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Prism.Commands;
@@ -150,7 +149,7 @@ namespace UntappdViewer.ViewModels
 
         private void FirstDownload(CheckinsContainer checkinsContainer)
         {
-            webApiClient.FillFirstCheckins(checkinsContainer, untappdService.GetCheckins().Max(item => item.Id));
+            webApiClient.FillFirstCheckins(checkinsContainer);
         }
 
         private void ToEndDownload()
@@ -161,7 +160,7 @@ namespace UntappdViewer.ViewModels
 
         private void ToEndDownload(CheckinsContainer checkinsContainer)
         {
-            webApiClient.FillToEndCheckins(checkinsContainer, untappdService.GetCheckins().Min(item => item.Id));
+            webApiClient.FillToEndCheckins(checkinsContainer);
         }
 
         private void BeerUpdate()

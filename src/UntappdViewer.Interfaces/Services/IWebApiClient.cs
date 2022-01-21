@@ -14,9 +14,9 @@ namespace UntappdViewer.Interfaces.Services
 
         void FillFullCheckins(CheckinsContainer checkinsContainer);
 
-        void FillFirstCheckins(CheckinsContainer checkinsContainer, long endId);
+        void FillFirstCheckins(CheckinsContainer checkinsContainer);
 
-        void FillToEndCheckins(CheckinsContainer checkinsContainer, long startId);
+        void FillToEndCheckins(CheckinsContainer checkinsContainer);
 
         void BeerUpdate(List<Beer> beers);
     }
