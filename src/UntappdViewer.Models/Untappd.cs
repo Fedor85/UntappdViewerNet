@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-
 namespace UntappdViewer.Models
 {
     [Serializable]
     public class Untappd
     {
         public CheckinsContainer CheckinsContainer { get; private set; }
-
-
 
         /// <summary>
         /// Имя пользователя
@@ -46,7 +42,6 @@ namespace UntappdViewer.Models
             isСhanges = false;
             CheckinsContainer.IsСhanges = false;
         }
-
 
         public override string ToString()
         {
