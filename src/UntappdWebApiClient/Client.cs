@@ -44,12 +44,12 @@ namespace UntappdWebApiClient
 
         public void FillFirstCheckins(CheckinsContainer checkinsContainer, long endId)
         {
-            FillCheckins(checkinsContainer, 0);
+            FillCheckins(checkinsContainer, 0, endId);
         }
 
-        public void FillToEndCheckins(CheckinsContainer checkinsContainer, long endId)
+        public void FillToEndCheckins(CheckinsContainer checkinsContainer, long startId)
         {
-            FillCheckins(checkinsContainer, 0);
+            FillCheckins(checkinsContainer, startId);
         }
 
         public void BeerUpdate(List<Beer> beers)
