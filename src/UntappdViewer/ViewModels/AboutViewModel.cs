@@ -49,7 +49,11 @@ namespace UntappdViewer.ViewModels
         private ObservableCollection<string> GetImagePaths()
         {
             string directory = untappdService.GetBadgeImageDirectory();
-            return new ObservableCollection<string>(Directory.GetFiles(directory).Shuffle());
+            ObservableCollection<string> imagePaths = new ObservableCollection<string>();
+            if (Directory.Exists(directory))
+                imagePaths.AddRange(Directory.GetFiles(directory).Shuffle());
+
+            return imagePaths;
         }
     }
 }
