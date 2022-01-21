@@ -133,34 +133,19 @@ namespace UntappdViewer.ViewModels
             Checkins.Clear();
             untappdService.GetCheckins().Clear();
 
-            FillCheckins(FulllDownload);
-        }
-
-        private void FulllDownload(CheckinsContainer checkinsContainer)
-        {
-            webApiClient.FillFullCheckins(checkinsContainer);
+            FillCheckins(webApiClient.FillFullCheckins);
         }
 
         private void FirstDownload()
         {
             LoadingChangeActivity(true);
-            FillCheckins(FirstDownload);
-        }
-
-        private void FirstDownload(CheckinsContainer checkinsContainer)
-        {
-            webApiClient.FillFirstCheckins(checkinsContainer);
+            FillCheckins(webApiClient.FillFirstCheckins);
         }
 
         private void ToEndDownload()
         {
             LoadingChangeActivity(true);
-            FillCheckins(ToEndDownload);
-        }
-
-        private void ToEndDownload(CheckinsContainer checkinsContainer)
-        {
-            webApiClient.FillToEndCheckins(checkinsContainer);
+            FillCheckins(webApiClient.FillToEndCheckins);
         }
 
         private void BeerUpdate()
