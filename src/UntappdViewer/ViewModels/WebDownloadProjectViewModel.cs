@@ -184,6 +184,7 @@ namespace UntappdViewer.ViewModels
             }
             finally
             {
+                untappdService.SortDataDescCheckins();
                 Checkins = new List<Checkin>(untappdService.GetCheckins());
                 LoadingChangeActivity(false);
             }

@@ -63,12 +63,17 @@ namespace UntappdViewer.Domain.Services
             using (FileStream fileStream = File.OpenRead(filePath))
                 CheckinCSVMapper.InitializeCheckinsContainer(Untappd.CheckinsContainer, fileStream);
 
-            Untappd.SortDataDescCheckins();
+            SortDataDescCheckins();
         }
 
         private void InitializeToUNTP(string filePath)
         {
             Untappd = FileHelper.OpenFile<Untappd>(filePath);
+        }
+
+        public void SortDataDescCheckins()
+        {
+            Untappd.Checkins.Sort(SortCheckinsDataDesc);
         }
 
         public void CleanUpUntappd()
@@ -160,7 +165,7 @@ namespace UntappdViewer.Domain.Services
 
         public List<Checkin> GetCheckins(bool isUniqueCheckins = false)
         {
-            return isUniqueCheckins ? Untappd.GetUniqueCheckins() : Untappd.Checkins;
+            return isUniqueCheckins ? GetUniqueCheckins() : Untappd.Checkins;
         }
 
         public Checkin GetCheckin(long checkinId)
@@ -183,6 +188,55 @@ namespace UntappdViewer.Domain.Services
         private string GetUntappdUserName(string userName)
         {
             return String.IsNullOrEmpty(userName) ? settingService.GetDefaultUserName() : userName;
+        }
+
+        private List<Checkin> GetUniqueCheckins()
+        {
+            List<Checkin> checkins = new List<Checkin>();
+            Dictionary<long, List<Checkin>> beers = new Dictionary<long, List<Checkin>>();
+            foreach (Checkin checkin in Untappd.Checkins)
+            {
+                if (beers.ContainsKey(checkin.Beer.Id))
+                    beers[checkin.Beer.Id].Add(checkin);
+                else
+                    beers.Add(checkin.Beer.Id, new List<Checkin> { checkin });
+            }
+
+            foreach (KeyValuePair<long, List<Checkin>> keyValuePair in beers)
+            {
+                if (keyValuePair.Value.Count == 1)
+                {
+                    checkins.Add(keyValuePair.Value[0]);
+                    continue;
+                }
+                Checkin addedCheckin = null;
+                keyValuePair.Value.Sort(SortCheckinsDataDesc);
+                foreach (Checkin curretCheckin in keyValuePair.Value)
+                {
+                    if (!String.IsNullOrEmpty(curretCheckin.UrlPhoto))
+                        addedCheckin = curretCheckin;
+                    break;
+                }
+
+                if (addedCheckin == null)
+                    addedCheckin = keyValuePair.Value[0];
+
+                checkins.Add(addedCheckin);
+            }
+            beers.Clear();
+            checkins.Sort(SortCheckinsDataDesc);
+            return checkins;
+        }
+
+        private int SortCheckinsDataDesc(Checkin x, Checkin y)
+        {
+            if (x.CreatedDate < y.CreatedDate)
+                return 1;
+
+            if (x.CreatedDate > y.CreatedDate)
+                return -1;
+
+            return 1;
         }
     }
 }

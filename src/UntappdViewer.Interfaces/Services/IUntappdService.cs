@@ -20,6 +20,8 @@ namespace UntappdViewer.Interfaces.Services
 
         void Initialize(string filePath, string userName = null);
 
+        void SortDataDescCheckins();
+
         void CleanUpUntappd();
 
         bool IsUNTPProject();
