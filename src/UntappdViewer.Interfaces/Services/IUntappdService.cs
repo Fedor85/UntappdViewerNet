@@ -54,6 +54,8 @@ namespace UntappdViewer.Interfaces.Services
 
         Checkin GetCheckin(long checkinId);
 
+        List<Beer> GetBeers();
+
         string GetTreeViewCheckinDisplayName(Checkin checkin, int number);
 
         string GetUploadSavePhotoFileName(Checkin checkin);

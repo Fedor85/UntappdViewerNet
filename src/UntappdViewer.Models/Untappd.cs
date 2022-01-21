@@ -8,10 +8,7 @@ namespace UntappdViewer.Models
     {
         public CheckinsContainer CheckinsContainer { get; private set; }
 
-        ///// <summary>
-        /// Чекины
-        /// </summary>
-        public List<Checkin> Checkins { get { return CheckinsContainer.Checkins; } }
+
 
         /// <summary>
         /// Имя пользователя
@@ -53,7 +50,7 @@ namespace UntappdViewer.Models
 
         public override string ToString()
         {
-            return $"UserName:{UserName}/CreatedDate:{CreatedDate}/CheckinsCount:{Checkins.Count}";
+            return $"UserName:{UserName}/CreatedDate:{CreatedDate}/CheckinsCount:{CheckinsContainer.Checkins.Count}";
         }
     }
 }

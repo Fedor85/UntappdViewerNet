@@ -73,7 +73,7 @@ namespace UntappdViewer.Domain.Services
 
         public void SortDataDescCheckins()
         {
-            Untappd.Checkins.Sort(SortCheckinsDataDesc);
+            GetCheckins().Sort(SortCheckinsDataDesc);
         }
 
         public void CleanUpUntappd()
@@ -165,12 +165,17 @@ namespace UntappdViewer.Domain.Services
 
         public List<Checkin> GetCheckins(bool isUniqueCheckins = false)
         {
-            return isUniqueCheckins ? GetUniqueCheckins() : Untappd.Checkins;
+            return isUniqueCheckins ? GetUniqueCheckins() : Untappd.CheckinsContainer.Checkins;
         }
 
         public Checkin GetCheckin(long checkinId)
         {
-            return Untappd.Checkins.FirstOrDefault(item => item.Id.Equals(checkinId));
+            return GetCheckins().FirstOrDefault(item => item.Id.Equals(checkinId));
+        }
+
+        public List<Beer> GetBeers()
+        {
+            return Untappd.CheckinsContainer.Beers;
         }
 
         public string GetTreeViewCheckinDisplayName(Checkin checkin, int number)
@@ -194,7 +199,7 @@ namespace UntappdViewer.Domain.Services
         {
             List<Checkin> checkins = new List<Checkin>();
             Dictionary<long, List<Checkin>> beers = new Dictionary<long, List<Checkin>>();
-            foreach (Checkin checkin in Untappd.Checkins)
+            foreach (Checkin checkin in GetCheckins())
             {
                 if (beers.ContainsKey(checkin.Beer.Id))
                     beers[checkin.Beer.Id].Add(checkin);

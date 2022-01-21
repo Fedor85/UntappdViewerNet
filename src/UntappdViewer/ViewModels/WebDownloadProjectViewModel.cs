@@ -126,13 +126,13 @@ namespace UntappdViewer.ViewModels
 
         private void FulllDownload()
         {
-            if (untappdService.Untappd.Checkins.Count  > 0 && !interactionRequestService.Ask(Properties.Resources.Warning, Properties.Resources.AskDeletedCheckins))
+            if (untappdService.GetCheckins().Count  > 0 && !interactionRequestService.Ask(Properties.Resources.Warning, Properties.Resources.AskDeletedCheckins))
                 return;
 
             LoadingChangeActivity(true);
 
             Checkins.Clear();
-            untappdService.Untappd.Checkins.Clear();
+            untappdService.GetCheckins().Clear();
 
             FillCheckins(FulllDownload);
         }
@@ -150,7 +150,7 @@ namespace UntappdViewer.ViewModels
 
         private void FirstDownload(CheckinsContainer checkinsContainer)
         {
-            webApiClient.FillFirstCheckins(checkinsContainer, untappdService.Untappd.Checkins.Max(item => item.Id));
+            webApiClient.FillFirstCheckins(checkinsContainer, untappdService.GetCheckins().Max(item => item.Id));
         }
 
         private void ToEndDownload()
@@ -161,15 +161,15 @@ namespace UntappdViewer.ViewModels
 
         private void ToEndDownload(CheckinsContainer checkinsContainer)
         {
-            webApiClient.FillToEndCheckins(checkinsContainer, untappdService.Untappd.Checkins.Min(item => item.Id));
+            webApiClient.FillToEndCheckins(checkinsContainer, untappdService.GetCheckins().Min(item => item.Id));
         }
 
         private void BeerUpdate()
         {
-            if (untappdService.Untappd.Checkins.Count == 0)
+            if (untappdService.GetBeers().Count == 0)
                 return;
 
-            webApiClient.BeerUpdate(untappdService.Untappd.Checkins.Select(item => item.Beer).Where(item => !item.IBU.HasValue).ToList());
+            webApiClient.BeerUpdate(untappdService.GetBeers());
         }
 
         private async void FillCheckins(Action<CheckinsContainer> fillCheckinsDelegate)

@@ -88,7 +88,7 @@ namespace UntappdViewer.Test
         {
             string filePath = @"";
             Untappd untappd = FileHelper.OpenFile<Untappd>(filePath);
-            untappd.Checkins.RemoveRange(0, 25);
+            untappd.CheckinsContainer.Checkins.RemoveRange(0, 25);
             FileHelper.SaveFile(filePath, untappd);
         }
     }
