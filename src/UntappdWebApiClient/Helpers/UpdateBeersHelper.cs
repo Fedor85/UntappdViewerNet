@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using QuickType.Beers.WebModels;
 using Beer = UntappdViewer.Models.Beer;
@@ -17,9 +18,14 @@ namespace UntappdWebApiClient
                 if (beer == null)
                     continue;
 
-                beer.GlobalRatingScore = webBeer.RatingScore;
-                beer.IBU = webBeer.BeerIbu;
-                beer.Description = webBeer.BeerDescription;
+                if (webBeer.RatingScore > 0)
+                    beer.GlobalRatingScore = webBeer.RatingScore;
+
+                if(webBeer.BeerIbu > 0)
+                    beer.IBU = webBeer.BeerIbu;
+
+                if(!String.IsNullOrEmpty(webBeer.BeerDescription))
+                    beer.Description = webBeer.BeerDescription;
             }
         }
     }
