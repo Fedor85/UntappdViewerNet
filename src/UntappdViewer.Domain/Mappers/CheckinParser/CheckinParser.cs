@@ -41,10 +41,10 @@ namespace UntappdViewer.Domain.Mappers.CheckinParser
             return GetValue<double>(ParameterNames.BeerABV);
         }
 
-        public double? GetBeerIBU()
+        public long? GetBeerIBU()
         {
-            double ibu = GetValue<double>(ParameterNames.BeerIBU);
-            return MathHelper.Doublecompare(ibu, 0) ? (double?) null : ibu;
+            long ibu = GetValue<long>(ParameterNames.BeerIBU);
+            return ibu == 0 ? (long?) null : ibu;
         }
 
         public string GetComment()

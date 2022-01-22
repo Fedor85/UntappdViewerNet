@@ -6,7 +6,7 @@ using Newtonsoft.Json.Converters;
 /// Сгенерировавано с помощью https://app.quicktype.io/
 /// требуется доработка
 /// </summary>
-namespace QuickType.WebModels
+namespace QuickType.Checkins.WebModels
 {
     public partial class CheckinsQuickType
     {

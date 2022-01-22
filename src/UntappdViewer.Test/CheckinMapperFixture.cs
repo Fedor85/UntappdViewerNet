@@ -1,9 +1,5 @@
-﻿using System.IO;
-using System.Reflection;
-using NUnit.Framework;
-using UntappdViewer.Domain.Mappers;
+﻿using NUnit.Framework;
 using UntappdViewer.Models;
-using UntappdViewer.Test.Properties;
 
 namespace UntappdViewer.Test
 {
@@ -13,12 +9,8 @@ namespace UntappdViewer.Test
         [Test]
         public void CheckinTextMapperTest()
         {
-            using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(Resources.ResourcesTestFileName))
-            {
-                CheckinsContainer checkinsContainer = new CheckinsContainer();
-                CheckinCSVMapper.InitializeCheckinsContainer(checkinsContainer, stream);
-                Assert.IsTrue(checkinsContainer.Checkins.Count > 0);
-            }
+            CheckinsContainer checkinsContainer = TestHelper.GetCheckinsContainer();
+            Assert.IsTrue(checkinsContainer.Checkins.Count > 0);
         }
     }
 }

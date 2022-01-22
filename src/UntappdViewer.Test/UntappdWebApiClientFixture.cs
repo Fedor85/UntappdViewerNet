@@ -12,7 +12,7 @@ namespace UntappdViewer.Test
         private const string AccessToken = "access_token";
 
         [Test]
-        public void Test()
+        public void TestCheckins()
         {
             Client untappdClient = new Client();
             untappdClient.Initialize(AccessToken);
@@ -20,6 +20,17 @@ namespace UntappdViewer.Test
             Assert.True(untappdClient.Check());
             CheckinsContainer checkinsContainer = new CheckinsContainer();
             untappdClient.FillFullCheckins(checkinsContainer);
+        }
+
+        [Test]
+        public void TestBeers()
+        {
+            Client untappdClient = new Client();
+            untappdClient.Initialize(AccessToken);
+
+            Assert.True(untappdClient.Check());
+            CheckinsContainer checkinsContainer = TestHelper.GetCheckinsContainer();
+            untappdClient.BeerUpdate(checkinsContainer.Beers);
         }
     }
 }

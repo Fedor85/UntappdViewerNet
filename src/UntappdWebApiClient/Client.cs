@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using QuickType.WebModels;
+using Newtonsoft.Json;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
+using QuickType.Checkins.WebModels;
+using QuickType.Beers.WebModels;
 using Beer = UntappdViewer.Models.Beer;
 using Brewery = UntappdViewer.Models.Brewery;
 using Venue = UntappdViewer.Models.Venue;
@@ -15,6 +17,8 @@ namespace UntappdWebApiClient
     public class Client : IWebApiClient
     {
         private UrlPathBuilder urlPathBuilder;
+
+        private JsonSerializerSettings jsonSerializerSettings;
 
         public event Action<int> ChangeUploadedCountEvent;
 
@@ -26,6 +30,10 @@ namespace UntappdWebApiClient
         public void Initialize(string accessToken)
         {
             urlPathBuilder = new UrlPathBuilder(UriConstants.BaseAPIUrl, accessToken);
+
+            jsonSerializerSettings = new JsonSerializerSettings();
+            jsonSerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+            jsonSerializerSettings.MissingMemberHandling = MissingMemberHandling.Ignore;
         }
 
         public bool Check()
@@ -54,7 +62,26 @@ namespace UntappdWebApiClient
 
         public void BeerUpdate(List<Beer> beers)
         {
+            if(beers.Count == 0)
+                return;
 
+            long offset = 0;
+            bool isRun = true;
+            while (isRun)
+            {
+                HttpResponseMessage httpResponse = GetHttpResponse($"user/beers/?offset={offset}&limit=50");
+                if ((long)httpResponse.StatusCode == 429)
+                    throw new ArgumentException(httpResponse.ReasonPhrase);
+
+                string responseBody = httpResponse.Content.ReadAsStringAsync().Result;
+                BeersQuickType beersQuickType = JsonConvert.DeserializeObject<BeersQuickType>(responseBody, jsonSerializerSettings);
+
+                UpdateBeersHelper.UpdateBeers(beers, beersQuickType);
+                if (beersQuickType.Response.Pagination.Offset.HasValue)
+                    offset = beersQuickType.Response.Pagination.Offset.Value;
+                else
+                    isRun = false;
+            }
         }
 
         private void FillCheckins(CheckinsContainer checkinsContainer, long maxId, long? minId = null)
@@ -68,7 +95,7 @@ namespace UntappdWebApiClient
                     throw new ArgumentException(httpResponse.ReasonPhrase);
 
                 string responseBody = httpResponse.Content.ReadAsStringAsync().Result;
-                CheckinsQuickType checkinsQuickType = Newtonsoft.Json.JsonConvert.DeserializeObject<CheckinsQuickType>(responseBody);
+                CheckinsQuickType checkinsQuickType = JsonConvert.DeserializeObject<CheckinsQuickType>(responseBody);
                 if (checkinsQuickType.Response.Pagination.MaxId.HasValue)
                 {
                     List<Checkin> currentCheckins = CheckinMapper.GetCheckins(checkinsQuickType.Response.Checkins);

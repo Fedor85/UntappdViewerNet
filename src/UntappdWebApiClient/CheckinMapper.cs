@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using QuickType.WebModels;
+using QuickType.Checkins.WebModels;
 using UntappdViewer.Models;
 using Beer = UntappdViewer.Models.Beer;
 using Venue = UntappdViewer.Models.Venue;
-using VenueWeb = QuickType.WebModels.Venue;
-using BeerWeb = QuickType.WebModels.Beer;
+using VenueWeb = QuickType.Checkins.WebModels.Venue;
+using BeerWeb = QuickType.Checkins.WebModels.Beer;
 using Brewery = UntappdViewer.Models.Brewery;
-using BreweryWeb = QuickType.WebModels.Brewery;
+using BreweryWeb = QuickType.Checkins.WebModels.Brewery;
 
 namespace UntappdWebApiClient
 {

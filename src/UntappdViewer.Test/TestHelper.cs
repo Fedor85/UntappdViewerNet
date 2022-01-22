@@ -1,5 +1,8 @@
 ﻿using System.IO;
 using System.Reflection;
+using UntappdViewer.Domain.Mappers;
+using UntappdViewer.Models;
+using UntappdViewer.Test.Properties;
 
 namespace UntappdViewer.Test
 {
@@ -20,6 +23,16 @@ namespace UntappdViewer.Test
                     stream.CopyTo(fileStream);
             }
             return tempFilePath;
+        }
+
+        public static CheckinsContainer GetCheckinsContainer()
+        {
+            using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(Resources.ResourcesTestFileName))
+            {
+                CheckinsContainer checkinsContainer = new CheckinsContainer();
+                CheckinCSVMapper.InitializeCheckinsContainer(checkinsContainer, stream);
+                return checkinsContainer;
+            }
         }
 
         private static string GetTempFilePath(string tempPathDirectory, string extension)

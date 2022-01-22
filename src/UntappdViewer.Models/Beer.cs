@@ -43,7 +43,7 @@ namespace UntappdViewer.Models
         /// <summary>
         /// международная единица горечи
         /// </summary>
-        public double? IBU { get; set; }
+        public long? IBU { get; set; }
 
         /// <summary>
         /// url пива
