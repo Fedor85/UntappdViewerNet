@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Prism.Commands;
@@ -153,7 +154,7 @@ namespace UntappdViewer.ViewModels
             if (untappdService.GetBeers().Count == 0)
                 return;
 
-            webApiClient.BeerUpdate(untappdService.GetBeers());
+            webApiClient.BeerUpdate(untappdService.GetBeers().Where(item => !item.IBU.HasValue).ToList());
         }
 
         private async void FillCheckins(Action<CheckinsContainer> fillCheckinsDelegate)

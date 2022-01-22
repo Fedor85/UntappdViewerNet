@@ -21,6 +21,11 @@ namespace UntappdViewer.Models
         public string Type { get; set; }
 
         /// <summary>
+        /// описание пива
+        /// </summary>
+        public string Description { get; set; }
+
+        /// <summary>
         /// реитинг пива
         /// </summary>
         public double GlobalRatingScore { get; set; }
