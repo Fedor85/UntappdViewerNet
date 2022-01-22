@@ -48,7 +48,7 @@
     <Compile Include="CheckinMapper.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QuickType.cs" />
+    <Compile Include="CheckinsQuickType.cs" />
     <Compile Include="UriConstants.cs" />
     <Compile Include="UrlPathBuilder.cs" />
   </ItemGroup>
