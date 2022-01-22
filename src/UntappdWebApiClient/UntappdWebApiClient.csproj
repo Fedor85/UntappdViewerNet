@@ -45,14 +45,14 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CheckinMapper.cs" />
+    <Compile Include="Helpers\CheckinMapper.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuickType\BeersQuickType.cs" />
     <Compile Include="QuickType\CheckinsQuickType.cs" />
-    <Compile Include="UpdateBeersHelper.cs" />
+    <Compile Include="Helpers\UpdateBeersHelper.cs" />
     <Compile Include="UriConstants.cs" />
-    <Compile Include="UrlPathBuilder.cs" />
+    <Compile Include="Helpers\UrlPathBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
