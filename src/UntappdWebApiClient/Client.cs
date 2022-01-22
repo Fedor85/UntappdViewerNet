@@ -68,10 +68,10 @@ namespace UntappdWebApiClient
                     throw new ArgumentException(httpResponse.ReasonPhrase);
 
                 string responseBody = httpResponse.Content.ReadAsStringAsync().Result;
-                Temperatures temperatures = Newtonsoft.Json.JsonConvert.DeserializeObject<Temperatures>(responseBody);
-                if (temperatures.Response.Pagination.MaxId.HasValue)
+                CheckinsQuickType checkinsQuickType = Newtonsoft.Json.JsonConvert.DeserializeObject<CheckinsQuickType>(responseBody);
+                if (checkinsQuickType.Response.Pagination.MaxId.HasValue)
                 {
-                    List<Checkin> currentCheckins = CheckinMapper.GetCheckins(temperatures.Response.Checkins);
+                    List<Checkin> currentCheckins = CheckinMapper.GetCheckins(checkinsQuickType.Response.Checkins);
 
                     if (minId.HasValue && currentCheckins.Any(item => item.Id == minId.Value))
                     {
@@ -93,7 +93,7 @@ namespace UntappdWebApiClient
 
                         UploadedCountInvoke(checkinsContainer.Checkins);
                     }
-                    currentId = temperatures.Response.Pagination.MaxId.Value;
+                    currentId = checkinsQuickType.Response.Pagination.MaxId.Value;
                 }
                 else
                 {

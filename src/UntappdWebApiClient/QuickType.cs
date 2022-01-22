@@ -8,7 +8,7 @@ using Newtonsoft.Json.Converters;
 /// </summary>
 namespace QuickType.WebModels
 {
-    public partial class Temperatures
+    public partial class CheckinsQuickType
     {
         [JsonProperty("meta")]
         public Meta Meta { get; set; }
