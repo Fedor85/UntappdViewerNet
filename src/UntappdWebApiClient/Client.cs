@@ -87,6 +87,7 @@ namespace UntappdWebApiClient
         private void FillCheckins(CheckinsContainer checkinsContainer, long maxId, long? minId = null)
         {
             long currentId = maxId;
+            int counter = 0;
             bool isRun = true;
             while (isRun)
             {
@@ -110,15 +111,19 @@ namespace UntappdWebApiClient
                                 break;
                             }
                             AddCheckin(currentCheckin, checkinsContainer);
+                            counter++;
                         }
-                        UploadedCountInvoke(checkinsContainer.Checkins);
+                        UploadedCountInvoke(counter);
                     }
                     else
                     {
                         foreach (Checkin currentCheckin in currentCheckins)
+                        {
                             AddCheckin(currentCheckin, checkinsContainer);
+                            counter++;
+                        }
 
-                        UploadedCountInvoke(checkinsContainer.Checkins);
+                        UploadedCountInvoke(counter);
                     }
                     currentId = checkinsQuickType.Response.Pagination.MaxId.Value;
                 }
@@ -190,10 +195,10 @@ namespace UntappdWebApiClient
             }
         }
 
-        private void UploadedCountInvoke(List<Checkin> checkins)
+        private void UploadedCountInvoke(int count)
         {
             if (ChangeUploadedCountEvent != null)
-                ChangeUploadedCountEvent.Invoke(checkins.Count);
+                ChangeUploadedCountEvent.Invoke(count);
         }
     }
 }
