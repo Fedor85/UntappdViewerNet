@@ -151,10 +151,11 @@ namespace UntappdViewer.ViewModels
 
         private void BeerUpdate()
         {
-            if (untappdService.GetBeers().Count == 0)
+            List<Beer> beers = untappdService.GetBeers().Where(IsUpdateBeer).ToList();
+            if (beers.Count == 0)
                 return;
 
-            webApiClient.BeerUpdate(untappdService.GetBeers().Where(IsUpdateBeer).ToList(), IsUpdateBeer);
+            webApiClient.BeerUpdate(beers, IsUpdateBeer);
         }
 
         private bool IsUpdateBeer(Beer beer)
