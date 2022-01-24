@@ -49,9 +49,16 @@ namespace UntappdViewer.Models
 
         public void AddBeer(Beer beer)
         {
+            beer.Changed += BeerChanged;
             Beers.Add(beer);
             IsСhanges = true;
         }
+
+        private void BeerChanged()
+        {
+            IsСhanges = true;
+        }
+
         public void AddBrewery(Brewery brewery)
         {
             brewerys.Add(brewery);

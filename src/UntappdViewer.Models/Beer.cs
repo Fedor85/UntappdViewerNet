@@ -5,6 +5,12 @@ namespace UntappdViewer.Models
     [Serializable]
     public class Beer
     {
+        private string description;
+
+        private double globalRatingScore;
+
+        private long? ibu;
+
         /// <summary>
         /// id пива
         /// </summary>
@@ -23,12 +29,28 @@ namespace UntappdViewer.Models
         /// <summary>
         /// описание пива
         /// </summary>
-        public string Description { get; set; }
+        public string Description
+        {
+            get { return description; }
+            set
+            {
+                description = value;
+                OnPropertyChanged();
+            }
+        }
 
         /// <summary>
         /// реитинг пива
         /// </summary>
-        public double GlobalRatingScore { get; set; }
+        public double GlobalRatingScore
+        {
+            get { return globalRatingScore; }
+            set
+            {
+                globalRatingScore = value;
+                OnPropertyChanged();
+            }
+        }
 
         /// <summary>
         /// взвешенный рейтинг пива
@@ -43,7 +65,15 @@ namespace UntappdViewer.Models
         /// <summary>
         /// международная единица горечи
         /// </summary>
-        public long? IBU { get; set; }
+        public long? IBU
+        {
+            get { return ibu; }
+            set
+            {
+                ibu = value;
+                OnPropertyChanged();
+            }
+        }
 
         /// <summary>
         /// url пива
@@ -60,6 +90,8 @@ namespace UntappdViewer.Models
         /// </summary>
         public Brewery Brewery { get; set; }
 
+        public event Action Changed;
+
         public Beer()
         {
             Brewery = new Brewery();
@@ -68,6 +100,12 @@ namespace UntappdViewer.Models
         public override string ToString()
         {
             return $"Name:{Name}/Type:{Type}";
+        }
+
+        private void OnPropertyChanged()
+        {
+            if (Changed != null)
+                Changed.Invoke();
         }
     }
 }
