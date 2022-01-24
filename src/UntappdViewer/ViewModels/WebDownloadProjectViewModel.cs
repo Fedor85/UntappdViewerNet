@@ -79,7 +79,7 @@ namespace UntappdViewer.ViewModels
             FulllDownloadButtonCommand = new DelegateCommand(FulllDownload);
             FirstDownloadButtonCommand = new DelegateCommand(FirstDownload);
             ToEndDownloadButtonCommand = new DelegateCommand(ToEndDownload);
-            BeerUpdateButtonCommand = new DelegateCommand(BeerUpdate);
+            BeerUpdateButtonCommand = new DelegateCommand(BeersUpdate);
             OkButtonCommand = new DelegateCommand(Exit);
         }
 
@@ -149,18 +149,14 @@ namespace UntappdViewer.ViewModels
             FillCheckins(webApiClient.FillToEndCheckins);
         }
 
-        private void BeerUpdate()
+        private void BeersUpdate()
         {
             List<Beer> beers = untappdService.GetBeers().Where(IsUpdateBeer).ToList();
             if (beers.Count == 0)
                 return;
 
-            webApiClient.BeerUpdate(beers, IsUpdateBeer);
-        }
-
-        private bool IsUpdateBeer(Beer beer)
-        {
-            return beer.GlobalRatingScore == 0;
+            LoadingChangeActivity(true);
+            BeersUpdate(beers);
         }
 
         private async void FillCheckins(Action<CheckinsContainer> fillCheckinsDelegate)
@@ -179,6 +175,27 @@ namespace UntappdViewer.ViewModels
                 Checkins = new List<Checkin>(untappdService.GetCheckins());
                 LoadingChangeActivity(false);
             }
+        }
+
+        private async void BeersUpdate(List<Beer> beers)
+        {
+            try
+            {
+                await Task.Run(() => webApiClient.BeerUpdate(beers, IsUpdateBeer));
+            }
+            catch (Exception ex)
+            {
+                interactionRequestService.ShowError(Properties.Resources.Error, StringHelper.GetFullExceptionMessage(ex));
+            }
+            finally
+            {
+                LoadingChangeActivity(false);
+            }
+        }
+
+        private bool IsUpdateBeer(Beer beer)
+        {
+            return beer.GlobalRatingScore == 0;
         }
 
         private void WebApiClientChangeUploadedCountEvent(int count)
