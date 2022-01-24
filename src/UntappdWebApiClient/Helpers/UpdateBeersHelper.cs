@@ -9,8 +9,9 @@ namespace UntappdWebApiClient
 {
     public static class UpdateBeersHelper
     {
-        public static void UpdateBeers(List<Beer> beers, BeersQuickType beersQuickType)
+        public static int UpdateBeers(List<Beer> beers, BeersQuickType beersQuickType)
         {
+            int counter = 0;
             List<BeerWeb> webBeers = beersQuickType.Response.Beers.Items.Select(item => item.Beer).ToList();
             foreach (BeerWeb webBeer in webBeers)
             {
@@ -18,15 +19,28 @@ namespace UntappdWebApiClient
                 if (beer == null)
                     continue;
 
+                bool isUpdate = false;
+
                 if (webBeer.RatingScore > 0)
+                {
                     beer.GlobalRatingScore = webBeer.RatingScore;
-
-                if(webBeer.BeerIbu > 0)
+                    isUpdate = true;
+                }
+                if (webBeer.BeerIbu > 0)
+                {
                     beer.IBU = webBeer.BeerIbu;
-
-                if(!String.IsNullOrEmpty(webBeer.BeerDescription))
+                    isUpdate = true;
+                }
+                if (!String.IsNullOrEmpty(webBeer.BeerDescription))
+                {
                     beer.Description = webBeer.BeerDescription;
+                    isUpdate = true;
+                }
+
+                if (isUpdate)
+                    counter++;
             }
+            return counter;
         }
     }
 }

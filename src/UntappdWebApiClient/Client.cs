@@ -60,12 +60,13 @@ namespace UntappdWebApiClient
             FillCheckins(checkinsContainer, checkinsContainer.Checkins.Min(item => item.Id));
         }
 
-        public void BeerUpdate(List<Beer> beers)
+        public void BeerUpdate(List<Beer> beers, Func<Beer, bool> predicate)
         {
             if(beers.Count == 0)
                 return;
 
             long offset = 0;
+            int counter = 0;
             bool isRun = true;
             while (isRun)
             {
@@ -76,10 +77,19 @@ namespace UntappdWebApiClient
                 string responseBody = httpResponse.Content.ReadAsStringAsync().Result;
                 BeersQuickType beersQuickType = JsonConvert.DeserializeObject<BeersQuickType>(responseBody, jsonSerializerSettings);
 
-                UpdateBeersHelper.UpdateBeers(beers, beersQuickType);
+                int countUpdate = UpdateBeersHelper.UpdateBeers(beers, beersQuickType);
+                if (countUpdate > 0)
+                {
+                    counter += countUpdate;
+                    UploadedCountInvoke(counter);
+                }
+
                 if (beersQuickType.Response.Pagination.Offset.HasValue)
                     offset = beersQuickType.Response.Pagination.Offset.Value;
                 else
+                    isRun = false;
+
+                if (predicate != null && !beers.Any(predicate))
                     isRun = false;
             }
         }

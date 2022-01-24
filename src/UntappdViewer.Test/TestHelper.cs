@@ -35,6 +35,11 @@ namespace UntappdViewer.Test
             }
         }
 
+        public static bool IsUpdateBeer(Beer beer)
+        {
+            return beer.GlobalRatingScore == 0;
+        }
+
         private static string GetTempFilePath(string tempPathDirectory, string extension)
         {
             string randomFileName = Path.GetRandomFileName();

@@ -154,7 +154,12 @@ namespace UntappdViewer.ViewModels
             if (untappdService.GetBeers().Count == 0)
                 return;
 
-            webApiClient.BeerUpdate(untappdService.GetBeers().Where(item => !item.IBU.HasValue).ToList());
+            webApiClient.BeerUpdate(untappdService.GetBeers().Where(IsUpdateBeer).ToList(), IsUpdateBeer);
+        }
+
+        private bool IsUpdateBeer(Beer beer)
+        {
+            return beer.GlobalRatingScore == 0;
         }
 
         private async void FillCheckins(Action<CheckinsContainer> fillCheckinsDelegate)
@@ -177,7 +182,7 @@ namespace UntappdViewer.ViewModels
 
         private void WebApiClientChangeUploadedCountEvent(int count)
         {
-            interactionRequestService.ShowMessageOnStatusBar($"{Properties.Resources.Uploaded}:{count}");
+            interactionRequestService.ShowMessageOnStatusBar($"{Properties.Resources.Uploaded}: {count}");
         }
 
         private void Exit()

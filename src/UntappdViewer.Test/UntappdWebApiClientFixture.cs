@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 using NUnit.Framework;
 using UntappdViewer.Models;
 using UntappdWebApiClient;
@@ -30,7 +30,7 @@ namespace UntappdViewer.Test
 
             Assert.True(untappdClient.Check());
             CheckinsContainer checkinsContainer = TestHelper.GetCheckinsContainer();
-            untappdClient.BeerUpdate(checkinsContainer.Beers);
+            untappdClient.BeerUpdate(checkinsContainer.Beers.Where(TestHelper.IsUpdateBeer).ToList(), TestHelper.IsUpdateBeer);
         }
     }
 }
