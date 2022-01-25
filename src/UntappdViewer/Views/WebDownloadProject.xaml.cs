@@ -38,10 +38,10 @@ namespace UntappdViewer.Views
         private void WebDownloadProjectUnloaded(object sender, RoutedEventArgs e)
         {
             TokenTextBox.Clear();
-            FulllDownloadButton.IsEnabled = false;
-            FirstDownloadButton.IsEnabled = false;
-            ToEndDownloadButton.IsEnabled = false;
-            BeerUpdateButton.IsEnabled = false;
+            FulllDownloadCheckinsButton.IsEnabled = false;
+            FirstDownloadCheckinsButton.IsEnabled = false;
+            ToEndDownloadCheckinsButton.IsEnabled = false;
+            UpdateBeersButton.IsEnabled = false;
         }
 
         public void SetAccessToken(bool? isAccessToken)
@@ -58,10 +58,10 @@ namespace UntappdViewer.Views
             else
             {
                 CheckStatusImg.Visibility = Visibility.Hidden;
-                FulllDownloadButton.IsEnabled = false;
-                FirstDownloadButton.IsEnabled = false;
-                ToEndDownloadButton.IsEnabled = false;
-                BeerUpdateButton.IsEnabled = false;
+                FulllDownloadCheckinsButton.IsEnabled = false;
+                FirstDownloadCheckinsButton.IsEnabled = false;
+                ToEndDownloadCheckinsButton.IsEnabled = false;
+                UpdateBeersButton.IsEnabled = false;
             }
         }
 
@@ -82,12 +82,12 @@ namespace UntappdViewer.Views
 
         private void SetEnabledDownloadButtons()
         {
-            FulllDownloadButton.IsEnabled = true;
+            FulllDownloadCheckinsButton.IsEnabled = true;
             if (TableCheckins.Items.Count > 0)
             {
-                FirstDownloadButton.IsEnabled = true;
-                ToEndDownloadButton.IsEnabled = true;
-                BeerUpdateButton.IsEnabled = true;
+                FirstDownloadCheckinsButton.IsEnabled = true;
+                ToEndDownloadCheckinsButton.IsEnabled = true;
+                UpdateBeersButton.IsEnabled = true;
             }
         }
     }

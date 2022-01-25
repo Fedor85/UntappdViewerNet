@@ -76,10 +76,10 @@ namespace UntappdViewer.ViewModels
             this.interactionRequestService = interactionRequestService;
 
             CheckAccessTokenCommand = new DelegateCommand<string>(CheckAccessToken);
-            FulllDownloadButtonCommand = new DelegateCommand(FulllDownload);
-            FirstDownloadButtonCommand = new DelegateCommand(FirstDownload);
-            ToEndDownloadButtonCommand = new DelegateCommand(ToEndDownload);
-            BeerUpdateButtonCommand = new DelegateCommand(BeersUpdate);
+            FulllDownloadButtonCommand = new DelegateCommand(FulllDownloadCheckins);
+            FirstDownloadButtonCommand = new DelegateCommand(FirstDownloadCheckins);
+            ToEndDownloadButtonCommand = new DelegateCommand(ToEndDownloadCheckins);
+            BeerUpdateButtonCommand = new DelegateCommand(UpdateBeers);
             OkButtonCommand = new DelegateCommand(Exit);
         }
 
@@ -124,7 +124,7 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        private void FulllDownload()
+        private void FulllDownloadCheckins()
         {
             if (untappdService.GetCheckins().Count  > 0 && !interactionRequestService.Ask(Properties.Resources.Warning, Properties.Resources.AskDeletedCheckins))
                 return;
@@ -137,26 +137,26 @@ namespace UntappdViewer.ViewModels
             FillCheckins(webApiClient.FillFullCheckins);
         }
 
-        private void FirstDownload()
+        private void FirstDownloadCheckins()
         {
             LoadingChangeActivity(true);
             FillCheckins(webApiClient.FillFirstCheckins);
         }
 
-        private void ToEndDownload()
+        private void ToEndDownloadCheckins()
         {
             LoadingChangeActivity(true);
             FillCheckins(webApiClient.FillToEndCheckins);
         }
 
-        private void BeersUpdate()
+        private void UpdateBeers()
         {
             List<Beer> beers = untappdService.GetBeers().Where(IsUpdateBeer).ToList();
             if (beers.Count == 0)
                 return;
 
             LoadingChangeActivity(true);
-            BeersUpdate(beers);
+            UpdateBeers(beers);
         }
 
         private async void FillCheckins(Action<CheckinsContainer> fillCheckinsDelegate)
@@ -177,11 +177,11 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        private async void BeersUpdate(List<Beer> beers)
+        private async void UpdateBeers(List<Beer> beers)
         {
             try
             {
-                await Task.Run(() => webApiClient.BeerUpdate(beers, IsUpdateBeer));
+                await Task.Run(() => webApiClient.UpdateBeers(beers, IsUpdateBeer));
             }
             catch (Exception ex)
             {
