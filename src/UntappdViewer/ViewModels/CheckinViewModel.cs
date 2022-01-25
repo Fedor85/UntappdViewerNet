@@ -622,7 +622,10 @@ namespace UntappdViewer.ViewModels
                 interactionRequestService.ShowError(Properties.Resources.Error, StringHelper.GetFullExceptionMessage(ex));
                 CheckinPhotoPath = DefautlValues.DefaultCheckinPhotoPath;
             }
-            LoadingChangeActivity(false);
+            finally
+            {
+                LoadingChangeActivity(false);
+            }
         }
 
         private string GetCheckinPhotoPath(Checkin checkin)
