@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 using System.Linq;
-using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Prism.Services.Dialogs;
 using UntappdViewer.ViewModels.Base;
 
@@ -8,9 +8,9 @@ namespace UntappdViewer.ViewModels
 {
     public class NotificationDialogViewModel : BaseDialogModel
     {
-        private ImageSource iconSource;
+        private BitmapSource iconSource;
 
-        public ImageSource IconSource
+        public BitmapSource IconSource
         {
             get { return iconSource; }
             set { SetProperty(ref iconSource, value); }
@@ -20,7 +20,7 @@ namespace UntappdViewer.ViewModels
         {
            base.OnDialogOpened(parameters);
             if (parameters.Keys.Contains("icon"))
-                IconSource = Helpers.ImageConverter.GerImageSource(parameters.GetValue<Icon>("icon"));
+                IconSource = Helpers.ImageConverter.GerBitmapSource(parameters.GetValue<Icon>("icon"));
         }
     }
 }

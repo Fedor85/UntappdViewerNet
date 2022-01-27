@@ -92,10 +92,7 @@ namespace UntappdViewer.Views.Controls
             {
                 string imagePath = imagePathPropertyInfo.GetValue(item, null).ToString();
                 if (!String.IsNullOrEmpty(imagePath) && File.Exists(imagePath))
-                {
-                    using (Bitmap image = new Bitmap(imagePath))
-                        Image.Source = Helpers.ImageConverter.GetBitmapSource(image);
-                }
+                    Image.Source = Helpers.ImageConverter.GetBitmapSource(imagePath);
             }
 
             PropertyInfo imageDescriptionPropertyInfo = item.GetType().GetProperty("ImageDescription");
