@@ -693,12 +693,5 @@ namespace UntappdViewer.ViewModels
             }
             return badgeImagePath;
         }
-
-        private bool IsVisibilityLabel(string lableUrl, string defaultLabelName)
-        {
-            return !String.IsNullOrEmpty(lableUrl) &&
-                   !lableUrl.Equals(DefautlValues.EmptyImage) &&
-                   !Path.GetFileNameWithoutExtension(lableUrl).Equals(defaultLabelName);
-        }
     }
 }
