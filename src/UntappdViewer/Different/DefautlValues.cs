@@ -8,8 +8,6 @@
 
         public const string DeveloperProfileUrl = UntappdtUrl + @"user/Feador";
 
-        public const string DefaultCheckinPhotoPath = @"..\Resources\no-image-icon.png";
-
         public const string EmptyImage = @"..\Resources\empty_1x1.png";
 
         public const string DefaultBeerLabelName = "badge-beer-default";

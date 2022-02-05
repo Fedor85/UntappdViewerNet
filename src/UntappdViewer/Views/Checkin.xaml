@@ -153,7 +153,7 @@
                         <Label Content="{x:Static properties:Resources.ZoomBorderRightMouseButtonUse}" FontSize="10"/>
                     </StackPanel>
                     <controls:ZoomBorder ClipToBounds="True">
-                        <Image Source="{Binding CheckinPhotoPath, TargetNullValue={x:Null}}"/>
+                        <Image Source="{Binding CheckinPhoto, TargetNullValue={x:Null}}"/>
                     </controls:ZoomBorder>
                     <ContentControl prism:RegionManager.RegionName="{x:Static local:RegionNames.PhotoLoadingRegion}"/>
                 </Grid>

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Modularity;
@@ -54,7 +55,7 @@ namespace UntappdViewer.ViewModels
 
         private string checkinServingType;
 
-        private string checkinPhotoPath;
+        private BitmapSource checkinPhoto;
 
         private string beerUrl;
 
@@ -99,6 +100,8 @@ namespace UntappdViewer.ViewModels
         private IList badges;
 
         private bool visibilityBadges;
+
+        #region Checkin
 
         public string CheckinHeader
         {
@@ -222,14 +225,16 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public string CheckinPhotoPath
+        public BitmapSource CheckinPhoto
         {
-            get { return checkinPhotoPath; }
+            get { return checkinPhoto; }
             set
             {
-                SetProperty(ref checkinPhotoPath, value);
+                SetProperty(ref checkinPhoto, value);
             }
         }
+
+        #endregion
 
         public IList Badges
         {
@@ -537,7 +542,7 @@ namespace UntappdViewer.ViewModels
             CheckinVenueCity = String.Empty;
             VisibilityCheckinVenueLocation = false;
             CheckinServingType = DefautlValues.EmptyImage;
-            CheckinPhotoPath = DefautlValues.EmptyImage;
+            CheckinPhoto = null;
             Badges = new List<ImageItemViewModel>();
 
             BeerUrl = DefautlValues.DefaultUrl;
@@ -606,21 +611,35 @@ namespace UntappdViewer.ViewModels
 
         private void UpdateCheckinPhoto(Checkin checkin)
         {
-            CheckinPhotoPath = DefautlValues.DefaultCheckinPhotoPath;
+            CheckinPhoto = null;
+            if (!untappdService.IsUNTPProject())
+                return;
+
+            if (String.IsNullOrEmpty(checkin.UrlPhoto))
+            {
+                CheckinPhoto = ImageConverter.GetBitmapSource(Properties.Resources.no_image_icon);
+                return;
+            }
+
+            string photoPath = untappdService.GetCheckinPhotoFilePath(checkin);
+            if (File.Exists(photoPath))
+            {
+                CheckinPhoto = ImageConverter.GetBitmapSource(photoPath);
+                return;
+            }
             LoadingChangeActivity(true);
-            UpdateCheckinPhotoAsunc(checkin);
+            UpdateCheckinPhotoAsunc(checkin, photoPath);
         }
 
-        private async void UpdateCheckinPhotoAsunc(Checkin checkin)
+        private async void UpdateCheckinPhotoAsunc(Checkin checkin, string photoPath)
         {
             try
             {
-                CheckinPhotoPath = await Task.Run(() => GetCheckinPhotoPath(checkin));
+                CheckinPhoto = await Task.Run(() => GetCheckinPhoto(checkin, photoPath));
             }
             catch (Exception ex)
             {
                 interactionRequestService.ShowError(Properties.Resources.Error, StringHelper.GetFullExceptionMessage(ex));
-                CheckinPhotoPath = DefautlValues.DefaultCheckinPhotoPath;
             }
             finally
             {
@@ -628,25 +647,16 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        private string GetCheckinPhotoPath(Checkin checkin)
+        private BitmapSource GetCheckinPhoto(Checkin checkin, string photoPath)
         {
-            if (!untappdService.IsUNTPProject())
-                return DefautlValues.EmptyImage;
+            string directoryName = Path.GetDirectoryName(photoPath);
+            if (!Directory.Exists(directoryName))
+                FileHelper.CreateDirectory(directoryName);
 
-            if (String.IsNullOrEmpty(checkin.UrlPhoto))
-                return DefautlValues.DefaultCheckinPhotoPath;
-
-            string photoPath = untappdService.GetCheckinPhotoFilePath(checkin);
-            if (!File.Exists(photoPath))
-            {
-                string directoryName = Path.GetDirectoryName(photoPath);
-                if (!Directory.Exists(directoryName))
-                    FileHelper.CreateDirectory(directoryName);
-
-                webDownloader.DownloadFile(checkin.UrlPhoto, photoPath);
-            }
-
-            return photoPath;
+            webDownloader.DownloadFile(checkin.UrlPhoto, photoPath);
+            BitmapSource photo = ImageConverter.GetBitmapSource(photoPath);
+            photo.Freeze();
+            return photo;
         }
 
         private void UpdateBadges(List<Badge> checkinBadges)
