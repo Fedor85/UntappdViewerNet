@@ -69,7 +69,7 @@ namespace UntappdViewer.ViewModels
 
         private double beerRating;
 
-        private string beerLabelPath;
+        private BitmapSource beerLabel;
 
         private bool visibilityBeerLabel;
 
@@ -311,13 +311,13 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public string BeerLabelPath
+        public BitmapSource BeerLabel
         {
-            get { return beerLabelPath; }
+            get { return beerLabel; }
             set
             {
-                SetProperty(ref beerLabelPath, value);
-                VisibilityBeerLabel = IsVisibilityLabel(value, DefautlValues.DefaultBeerLabelName);
+                SetProperty(ref beerLabel, value);
+                VisibilityBeerLabel = value != null;
             }
         }
 
@@ -551,7 +551,7 @@ namespace UntappdViewer.ViewModels
             BeerABV = String.Empty;
             BeerIBU = String.Empty;
             BeerRating = 0;
-            BeerLabelPath = DefautlValues.EmptyImage;
+            BeerLabel = null;
 
             BreweryUrl = DefautlValues.DefaultUrl;
             BreweryName = String.Empty;
@@ -573,11 +573,14 @@ namespace UntappdViewer.ViewModels
 
         private void UpdateBeerLabel(Beer beer)
         {
-            BeerLabelPath = DefautlValues.EmptyImage;
+            BeerLabel = null;
             if(!untappdService.IsUNTPProject() || String.IsNullOrEmpty(beer.LabelUrl))
                 return;
 
             string labelPath = untappdService.GetBeerLabelFilePath(beer);
+            if (Path.GetFileNameWithoutExtension(labelPath).Equals(DefautlValues.DefaultBeerLabelName))
+                return;
+
             if (!File.Exists(labelPath))
             {
                 string directoryName = Path.GetDirectoryName(labelPath);
@@ -587,7 +590,7 @@ namespace UntappdViewer.ViewModels
                 webDownloader.DownloadFile(beer.LabelUrl, labelPath);
             }
 
-            BeerLabelPath = labelPath;
+            BeerLabel = ImageConverter.GetBitmapSource(labelPath);
         }
 
         private void UpdateBreweryLabel(Brewery brewery)

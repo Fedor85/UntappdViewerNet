@@ -31,7 +31,7 @@
                     </TextBlock>
                 <GroupBox Header="{x:Static properties:Resources.Beer}">
                     <DockPanel>
-                        <Image Width="60" Source="{Binding BeerLabelPath, TargetNullValue={x:Null}}" Margin="0, 0, 10, 0"
+                        <Image Width="60" Source="{Binding BeerLabel, TargetNullValue={x:Null}}" Margin="0, 0, 10, 0"
                                    Visibility="{Binding Path =VisibilityBeerLabel, Converter={StaticResource BooleanConverter}}"/>
                         <StackPanel>
                             <TextBlock >
