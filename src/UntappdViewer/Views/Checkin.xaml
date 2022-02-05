@@ -80,7 +80,7 @@
                     <StackPanel Grid.Column="0">
                         <GroupBox Header="{x:Static properties:Resources.Brewery}">
                             <DockPanel>
-                                <Image Width="50" Source="{Binding BreweryLabelPath, TargetNullValue={x:Null}}" Margin="0, 0, 10, 0"
+                                <Image Width="50" Source="{Binding BreweryLabel, TargetNullValue={x:Null}}" Margin="0, 0, 10, 0"
                                Visibility="{Binding Path =VisibilityBreweryLabel, Converter={StaticResource BooleanConverter}}"/>
                                 <StackPanel>
                                     <TextBlock >

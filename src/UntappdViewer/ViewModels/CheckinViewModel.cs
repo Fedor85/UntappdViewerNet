@@ -93,7 +93,7 @@ namespace UntappdViewer.ViewModels
 
         private bool visibilityCheckinVenueLocation;
 
-        private string breweryLabelPath;
+        private BitmapSource breweryLabel;
 
         private bool visibilityBreweryLabel;
 
@@ -421,13 +421,13 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public string BreweryLabelPath
+        public BitmapSource BreweryLabel
         {
-            get { return breweryLabelPath; }
+            get { return breweryLabel; }
             set
             {
-                SetProperty(ref breweryLabelPath, value);
-                VisibilityBreweryLabel = IsVisibilityLabel(value, DefautlValues.DefaultBreweryLabelName);
+                SetProperty(ref breweryLabel, value);
+                VisibilityBreweryLabel = value != null;
             }
         }
 
@@ -558,7 +558,7 @@ namespace UntappdViewer.ViewModels
             BreweryVenueCountry = String.Empty;
             BreweryVenueState= String.Empty;
             BreweryVenueCity = String.Empty;
-            BreweryLabelPath = DefautlValues.EmptyImage;
+            BreweryLabel = null;
         }
 
         private string GetCheckinHeader(DateTime? checkinCreatedDate)
@@ -595,11 +595,14 @@ namespace UntappdViewer.ViewModels
 
         private void UpdateBreweryLabel(Brewery brewery)
         {
-            BreweryLabelPath = DefautlValues.EmptyImage;
+            BreweryLabel = null;
             if (!untappdService.IsUNTPProject() || String.IsNullOrEmpty(brewery.LabelUrl))
                 return;
 
             string labelPath = untappdService.GetBreweryLabelFilePath(brewery);
+            if (Path.GetFileNameWithoutExtension(labelPath).Equals(DefautlValues.DefaultBreweryLabelName))
+                return;
+
             if (!File.Exists(labelPath))
             {
                 string directoryName = Path.GetDirectoryName(labelPath);
@@ -609,7 +612,7 @@ namespace UntappdViewer.ViewModels
                 webDownloader.DownloadFile(brewery.LabelUrl, labelPath);
             }
 
-            BreweryLabelPath = labelPath;
+            BreweryLabel = ImageConverter.GetBitmapSource(labelPath);
         }
 
         private void UpdateCheckinPhoto(Checkin checkin)
