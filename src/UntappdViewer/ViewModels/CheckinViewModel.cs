@@ -530,7 +530,7 @@ namespace UntappdViewer.ViewModels
             BeerABV = checkin.Beer.ABV.ToString();
             BeerIBU = GetBeerIBU(checkin.Beer.IBU);
             BeerRating = checkin.Beer.GlobalRatingScore;
-            BeerDescription = checkin.Beer.Description;
+            BeerDescription = GetBeerDescription(checkin.Beer.Description);
             UpdateBeerLabel(checkin.Beer);
 
             BreweryUrl = checkin.Beer.Brewery.Url;
@@ -582,6 +582,14 @@ namespace UntappdViewer.ViewModels
         private string GetBeerIBU(double? beerIBU)
         {
             return beerIBU.HasValue ? beerIBU.Value.ToString() : "No IBU";
+        }
+
+        private string GetBeerDescription(string description)
+        {
+            if (String.IsNullOrEmpty(description))
+                return String.Empty;
+
+            return StringHelper.GetSplitByLength(description, 50);
         }
 
         private void UpdateBeerLabel(Beer beer)
