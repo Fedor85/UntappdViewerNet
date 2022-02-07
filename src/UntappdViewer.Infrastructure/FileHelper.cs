@@ -9,6 +9,8 @@ namespace UntappdViewer.Infrastructure
 {
     public static class FileHelper
     {
+        private static readonly string TempDirectory = Path.Combine(Path.GetTempPath(), $"uv_{Guid.NewGuid()}");
+
         public const int ExifImageDateTimeOriginal = 36867;
 
         public static FileStatus Check(string filePath, List<string> supportExtensions)
@@ -146,6 +148,19 @@ namespace UntappdViewer.Infrastructure
             propertyItem.Type = 2;
             propertyItem.Value = byteValue;
             propertyItem.Len = lenght;
+        }
+
+        public static string GetTempFilePathByPath(string path)
+        {
+            CreateDirectory(TempDirectory);
+            string fileName = Path.GetFileName(path);
+            return Path.Combine(TempDirectory, fileName);
+        }
+
+        public static void DeleteTempDirectory()
+        {
+            if (Directory.Exists(TempDirectory))
+                Directory.Delete(TempDirectory, true);
         }
 
         private static void UpdateFileItemIndex(List<FileItem> fileItems)

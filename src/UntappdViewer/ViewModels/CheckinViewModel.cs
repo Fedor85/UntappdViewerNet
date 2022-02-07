@@ -618,8 +618,6 @@ namespace UntappdViewer.ViewModels
         private void UpdateCheckinPhoto(Checkin checkin)
         {
             CheckinPhoto = null;
-            if (!untappdService.IsUNTPProject())
-                return;
 
             if (String.IsNullOrEmpty(checkin.UrlPhoto))
             {
@@ -627,7 +625,10 @@ namespace UntappdViewer.ViewModels
                 return;
             }
 
-            string photoPath = untappdService.GetCheckinPhotoFilePath(checkin);
+            string photoPath = untappdService.IsUNTPProject()
+                                ? untappdService.GetCheckinPhotoFilePath(checkin)
+                                : FileHelper.GetTempFilePathByPath(checkin.UrlPhoto);
+
             if (File.Exists(photoPath))
             {
                 CheckinPhoto = ImageConverter.GetBitmapSource(photoPath);

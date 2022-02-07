@@ -126,7 +126,10 @@ namespace UntappdViewer.ViewModels
         private void Closing(CancelEventArgs e)
         {
             if (interactionRequestService.Ask(Properties.Resources.Warning, Properties.Resources.AskCloseApp))
+            {
                 DeActivate();
+                FileHelper.DeleteTempDirectory();
+            }
             else
                 e.Cancel = true;
         }
