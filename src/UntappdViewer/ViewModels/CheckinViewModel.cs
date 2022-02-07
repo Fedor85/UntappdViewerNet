@@ -71,6 +71,8 @@ namespace UntappdViewer.ViewModels
 
         private string beerDescription;
 
+        private bool visibilityBeerDescription;
+
         private BitmapSource beerLabel;
 
         private bool visibilityBeerLabel;
@@ -319,9 +321,18 @@ namespace UntappdViewer.ViewModels
             set
             {
                 SetProperty(ref beerDescription, value);
+                VisibilityBeerDescription = !String.IsNullOrEmpty(value);
             }
         }
-
+        
+        public bool VisibilityBeerDescription
+        {
+            get { return visibilityBeerDescription; }
+            set
+            {
+                SetProperty(ref visibilityBeerDescription, value);
+            }
+        }
         public BitmapSource BeerLabel
         {
             get { return beerLabel; }

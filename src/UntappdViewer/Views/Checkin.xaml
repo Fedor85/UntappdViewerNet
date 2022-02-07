@@ -68,8 +68,8 @@
                                         <Run Text=")"/>
                                     </TextBlock.Inlines>
                                 </TextBlock>
-                                <Image Source="..\Resources\description_icon.png" Width="20" Height="20" Margin="10,0,0,0"
-                                       HorizontalAlignment="Left" ToolTip="{Binding BeerDescription}"/>
+                                <Image Source="..\Resources\description_icon.png" Width="20" Height="20" Margin="10,0,0,0" HorizontalAlignment="Left"
+                                       ToolTip="{Binding BeerDescription}" Visibility="{Binding VisibilityBeerDescription, Converter={StaticResource BTVConverter}}"/>
                             </DockPanel>
                         </StackPanel>
                     </DockPanel>
