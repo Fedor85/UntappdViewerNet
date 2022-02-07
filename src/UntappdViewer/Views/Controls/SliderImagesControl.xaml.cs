@@ -32,6 +32,7 @@ namespace UntappdViewer.Views.Controls
         public SliderImagesControl()
         {
             InitializeComponent();
+            ToolTipService.SetShowDuration(Image, Int32.MaxValue);
             LabelGrid.Visibility = Visibility.Hidden;
             NavigationGrid.Visibility = Visibility.Hidden;
         }
