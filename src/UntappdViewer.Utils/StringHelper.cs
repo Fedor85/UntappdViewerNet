@@ -81,21 +81,26 @@ namespace UntappdViewer.Utils
                 if (newLine.Length > length)
                     lines.AddRange(GetSplitWordsByLength(newLine, length));
                 else
-                    lines.Add(newLine);
+                    lines.Add(newLine.Trim());
             }
+            return GetMergedLines(lines);
+        }
 
-            int linesCount = lines.Count;
-            if (linesCount == 1)
-                return lines[0];
+        public static string GetRemoveEmptyLines(string text)
+        {
+            if (String.IsNullOrEmpty(text))
+                return text;
 
-            StringBuilder result = new StringBuilder();
-            for (int i = 0; i < linesCount; i++)
+            List<string> lines = new List<string>();
+            foreach (string newLine in text.Split(Convert.ToChar(ControlChar.NewLine)))
             {
-                result.Append(lines[i]);
-                if (i != linesCount - 1)
-                    result.AppendLine();
+                string line = newLine.Trim();
+                if (String.IsNullOrEmpty(line))
+                    continue;
+
+                lines.Add(line);
             }
-            return result.ToString();
+            return GetMergedLines(lines);
         }
 
         public static List<string> GetValues(string valueLine)
@@ -162,6 +167,25 @@ namespace UntappdViewer.Utils
                                         });
 
             return lines;
+        }
+
+        private static string GetMergedLines(List<string> lines)
+        {
+            int linesCount = lines.Count;
+            if (linesCount == 0)
+                return String.Empty;
+
+            if (linesCount == 1)
+                return lines[0];
+
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < linesCount; i++)
+            {
+                result.Append(lines[i]);
+                if (i != linesCount - 1)
+                    result.AppendLine();
+            }
+            return result.ToString();
         }
     }
 }

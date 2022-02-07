@@ -563,7 +563,7 @@ namespace UntappdViewer.ViewModels
             BeerABV = String.Empty;
             BeerIBU = String.Empty;
             BeerRating = 0;
-            BeerDescription = String.Empty;
+            BeerDescription = null;
             BeerLabel = null;
 
             BreweryUrl = DefautlValues.DefaultUrl;
@@ -584,11 +584,17 @@ namespace UntappdViewer.ViewModels
             return beerIBU.HasValue ? beerIBU.Value.ToString() : "No IBU";
         }
 
-        private string GetBeerDescription(string description)
+        /// <summary>
+        /// Если ToolTip String.Empty то отображается пустой
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        private string GetBeerDescription(string text)
         {
-            if (String.IsNullOrEmpty(description))
-                return String.Empty;
+            if (String.IsNullOrEmpty(text))
+                return null;
 
+            string description = StringHelper.GetRemoveEmptyLines(text);
             return StringHelper.GetSplitByLength(description, 50);
         }
 
