@@ -69,6 +69,8 @@ namespace UntappdViewer.ViewModels
 
         private double beerRating;
 
+        private string beerDescription;
+
         private BitmapSource beerLabel;
 
         private bool visibilityBeerLabel;
@@ -311,6 +313,15 @@ namespace UntappdViewer.ViewModels
             }
         }
 
+        public string BeerDescription
+        {
+            get { return beerDescription; }
+            set
+            {
+                SetProperty(ref beerDescription, value);
+            }
+        }
+
         public BitmapSource BeerLabel
         {
             get { return beerLabel; }
@@ -519,6 +530,7 @@ namespace UntappdViewer.ViewModels
             BeerABV = checkin.Beer.ABV.ToString();
             BeerIBU = GetBeerIBU(checkin.Beer.IBU);
             BeerRating = checkin.Beer.GlobalRatingScore;
+            BeerDescription = checkin.Beer.Description;
             UpdateBeerLabel(checkin.Beer);
 
             BreweryUrl = checkin.Beer.Brewery.Url;
@@ -551,6 +563,7 @@ namespace UntappdViewer.ViewModels
             BeerABV = String.Empty;
             BeerIBU = String.Empty;
             BeerRating = 0;
+            BeerDescription = String.Empty;
             BeerLabel = null;
 
             BreweryUrl = DefautlValues.DefaultUrl;
