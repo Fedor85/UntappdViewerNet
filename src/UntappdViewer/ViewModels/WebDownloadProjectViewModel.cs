@@ -151,7 +151,7 @@ namespace UntappdViewer.ViewModels
 
         private void UpdateBeers()
         {
-            List<Beer> beers = untappdService.GetBeers().Where(IsUpdateBeer).ToList();
+            List<Beer> beers = untappdService.GetBeers();
             if (beers.Count == 0)
                 return;
 
@@ -181,7 +181,7 @@ namespace UntappdViewer.ViewModels
         {
             try
             {
-                await Task.Run(() => webApiClient.UpdateBeers(beers, IsUpdateBeer));
+                await Task.Run(() => webApiClient.UpdateBeers(beers, null));
             }
             catch (Exception ex)
             {
@@ -191,11 +191,6 @@ namespace UntappdViewer.ViewModels
             {
                 LoadingChangeActivity(false);
             }
-        }
-
-        private bool IsUpdateBeer(Beer beer)
-        {
-            return beer.GlobalRatingScore == 0;
         }
 
         private void WebApiClientChangeUploadedCountEvent(int count)
