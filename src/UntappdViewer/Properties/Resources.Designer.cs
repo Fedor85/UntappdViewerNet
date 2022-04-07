@@ -445,6 +445,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The application is already launched!.
+        /// </summary>
+        public static string InstanceExistsMessage {
+            get {
+                return ResourceManager.GetString("InstanceExistsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File path is empty.
         /// </summary>
         public static string IsEmptyFilePath {

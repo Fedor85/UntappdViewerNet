@@ -1,5 +1,7 @@
 ﻿//using System.Diagnostics;
 
+using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using Prism.Ioc;
@@ -32,6 +34,13 @@ namespace UntappdViewer
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            if (IsInstanceExists())
+            {
+                MessageBox.Show(UntappdViewer.Properties.Resources.InstanceExistsMessage, UntappdViewer.Properties.Resources.Warning);
+                Current.Shutdown();
+                return;
+            }
+
             argumentsProvider.Arguments.AddRange(e.Args.ToList());
             base.OnStartup(e);
         }
@@ -74,6 +83,13 @@ namespace UntappdViewer
             moduleCatalog.AddModule(typeof(CheckinModule), InitializationMode.OnDemand);
             moduleCatalog.AddModule(typeof(PhotoLoadingModule), InitializationMode.OnDemand);
             moduleCatalog.AddModule(typeof(WebDownloadProjectModule), InitializationMode.OnDemand);
+        }
+
+        private bool IsInstanceExists()
+        {
+            Process current = Process.GetCurrentProcess();
+            Process[] processes = Process.GetProcessesByName(current.ProcessName);
+            return processes.Length > 1;
         }
     }
 }
