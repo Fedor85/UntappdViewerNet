@@ -90,10 +90,8 @@ namespace UntappdViewer.ViewModels
                 return;
 
             string[] filesPaths = (string[])e.Data.GetData(DataFormats.FileDrop);
-            if (filesPaths.Length == 0)
-                return;
-
-            RunUntappd(filesPaths[0]);
+            if (filesPaths.Length > 0)
+                RunUntappd(filesPaths[0]);
         }
 
         private void CreateProject()

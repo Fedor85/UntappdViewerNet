@@ -93,12 +93,8 @@ namespace UntappdViewer.Services
             if (!String.IsNullOrEmpty(initialDirectory))
                 folderBrowserDialog.SelectedPath = initialDirectory;
 
-            if (folderBrowserDialog.ShowDialog() != DialogResult.OK)
-                return String.Empty;
-
-            return folderBrowserDialog.SelectedPath;
+            return folderBrowserDialog.ShowDialog() != DialogResult.OK ? String.Empty : folderBrowserDialog.SelectedPath;
         }
-
 
         public string SaveFile(string initialDirectory, string fileName, List<string> extensions)
         {
@@ -110,10 +106,7 @@ namespace UntappdViewer.Services
             saveFileDialog.FilterIndex = 1;
             saveFileDialog.Filter = GetFilter(extensions);
             bool? result = saveFileDialog.ShowDialog(Application.Current.MainWindow);
-            if (result.HasValue && result.Value)
-                return saveFileDialog.FileName;
-
-            return String.Empty;
+            return result.HasValue && result.Value ? saveFileDialog.FileName : String.Empty;
         }
 
         public void ClearMessageOnStatusBar()

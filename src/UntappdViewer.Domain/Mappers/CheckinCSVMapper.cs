@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Microsoft.VisualBasic.FileIO;
 using UntappdViewer.Domain.Mappers.CheckinParser;
 using UntappdViewer.Models;
@@ -101,28 +100,34 @@ namespace UntappdViewer.Domain.Mappers
         private static Venue GetBreweryVenue(CheckinsContainer checkinsContainer, CheckinParser.CheckinParser checkinParser)
         {
             Venue venue = new Venue();
+
             venue.Country = checkinParser.GetBreweryCountry();
             venue.State = checkinParser.GetBreweryState();
             venue.City = checkinParser.GetBreweryCity();
+
             return GetVenue(venue, checkinsContainer);
         }
 
         private static Venue GetPurchaseVenue(CheckinsContainer checkinsContainer, CheckinParser.CheckinParser checkinParser)
         {
             Venue venue = new Venue();
+
             venue.Name = checkinParser.GetPurchaseVenue();
+
             return GetVenue(venue, checkinsContainer);
         }
 
         private static Venue GetCheckinVenue(CheckinsContainer checkinsContainer, CheckinParser.CheckinParser checkinParser)
         {
             Venue venue = new Venue();
+
             venue.Name = checkinParser.GetVenueName();
             venue.Country = checkinParser.GetVenueCountry();
             venue.State = checkinParser.GetVenueState();
             venue.City = checkinParser.GetVenueCity();
             venue.Latitude = checkinParser.GetVenueLat();
             venue.Longitude = checkinParser.GetVenueLng();
+
             return GetVenue(venue, checkinsContainer);
         }
 

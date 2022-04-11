@@ -51,7 +51,6 @@ namespace UntappdViewer.ViewModels.Base
 
         public void OnDialogClosed()
         {
-
         }
 
         public virtual void OnDialogOpened(IDialogParameters parameters)

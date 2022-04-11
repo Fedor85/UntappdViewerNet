@@ -139,10 +139,12 @@ namespace UntappdViewer.Utils
         {
             StringBuilder sb = new StringBuilder();
             foreach (char ch in str)
+            {
                 if (possibleSeparators.IndexOf(ch) != -1)
                     sb.Append(requiredSeparator);
                 else
-                    sb.Append(ch);
+                    sb.Append(ch); 
+            }
 
             return sb.ToString();
         }
@@ -155,14 +157,12 @@ namespace UntappdViewer.Utils
                                             int lastIndex = result.Count - 1;
                                             string last = result[lastIndex];
                                             string mergeItem = $"{last} {nextItem}".Trim();
+
                                             if (mergeItem.Length > length)
-                                            {
                                                 result.Add(nextItem);
-                                            }
                                             else
-                                            {
                                                 result[lastIndex] = mergeItem;
-                                            }
+
                                             return result;
                                         });
 

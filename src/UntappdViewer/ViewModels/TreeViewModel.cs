@@ -125,7 +125,6 @@ namespace UntappdViewer.ViewModels
         {
             moduleManager.LoadModule(typeof(CheckinModule).Name);
             ActivateView(RegionNames.ContentRegion, typeof(Views.Checkin));
-
             eventAggregator.GetEvent<ChekinUpdateEvent>().Publish(SelectedTreeItem != null ? untappdService.GetCheckin(SelectedTreeItem.Id) : null);
         }
 

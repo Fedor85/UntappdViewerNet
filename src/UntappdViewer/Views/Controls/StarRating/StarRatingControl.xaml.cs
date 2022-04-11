@@ -36,20 +36,17 @@ namespace UntappdViewer.Views.Controls.StarRating
 
         public Color BackgroundStarColor
         {
-
             set
             {
                 foreach (StarProgressBar star in GetStars())
                     star.BackgroundStarColor = value;
             }
-
         }
 
         public double BackgroundStarOpacity
         {
             set
             {
-
                 foreach (StarProgressBar star in GetStars())
                     star.BackgroundStarOpacity = value;
             }
@@ -68,7 +65,6 @@ namespace UntappdViewer.Views.Controls.StarRating
         {
             set
             {
-
                 foreach (StarProgressBar star in GetStars())
                     star.ForegroundStarOpacity = value;
             }
@@ -121,7 +117,6 @@ namespace UntappdViewer.Views.Controls.StarRating
                     if (i != value - 1)
                         StarratingPanel.Children.Add(new Label { Content = " " });
                 }
-
             }
         }
 
@@ -151,7 +146,6 @@ namespace UntappdViewer.Views.Controls.StarRating
             double module = rating - truncateRating;
             if (truncateRating < stars.Count)
                 stars[truncateRating].Value = module;
-
         }
 
         private List<StarProgressBar> GetStars()
@@ -163,7 +157,6 @@ namespace UntappdViewer.Views.Controls.StarRating
                 if (star != null)
                     stars.Add(star);
             }
-
             return stars;
         }
     }

@@ -26,11 +26,13 @@ namespace UntappdWebApiClient
                     beer.GlobalRatingScore = webBeer.RatingScore;
                     isUpdate = true;
                 }
+
                 if (webBeer.BeerIbu > 0)
                 {
                     beer.IBU = webBeer.BeerIbu;
                     isUpdate = true;
                 }
+
                 if (!String.IsNullOrEmpty(webBeer.BeerDescription))
                 {
                     beer.Description = webBeer.BeerDescription;

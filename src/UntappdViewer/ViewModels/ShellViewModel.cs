@@ -131,7 +131,9 @@ namespace UntappdViewer.ViewModels
                 FileHelper.DeleteTempDirectory();
             }
             else
+            {
                 e.Cancel = true;
+            }
         }
 
         private void DeActivate()

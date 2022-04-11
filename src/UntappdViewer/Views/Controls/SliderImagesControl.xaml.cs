@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Windows;
@@ -22,7 +21,6 @@ namespace UntappdViewer.Views.Controls
                 ((SliderImagesControl)dependencyObject).ItemsSource = (IList)items;
 
             return items;
-
         }
 
         private IList items;

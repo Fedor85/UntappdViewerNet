@@ -23,7 +23,6 @@ namespace UntappdViewer.Models
         /// </summary>
         public DateTime CreatedDate { get;}
 
-
         public Untappd(string userName)
         {
             CheckinsContainer = new CheckinsContainer();
