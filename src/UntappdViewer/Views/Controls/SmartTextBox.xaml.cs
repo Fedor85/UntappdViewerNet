@@ -19,7 +19,13 @@ namespace UntappdViewer.Views.Controls
 
         private static object SetText(DependencyObject dependencyObject, object items)
         {
-            ((SmartTextBox)dependencyObject).Text = (string)items;
+            string text = items == null ? String.Empty : (string) items;
+            SmartTextBox smartTextBox = dependencyObject as SmartTextBox;
+
+            if (!smartTextBox.IsUpdateText(text))
+                return String.Empty;
+
+            smartTextBox.SetText(text, false);
             return items;
         }
 
@@ -80,9 +86,6 @@ namespace UntappdViewer.Views.Controls
             set
             {
                 text = value;
-                if (!TextPasswordBox.Password.Equals(value ?? String.Empty))
-                    TextPasswordBox.Password = value;
-
                 OnPropertyChanged("Text");
             }
         }
@@ -105,6 +108,7 @@ namespace UntappdViewer.Views.Controls
         public SmartTextBox()
         {
             InitializeComponent();
+            Text = String.Empty;
             PasswordMode = false;
             IsVisibleChanged += PasswordBoxIsVisibleChanged;
 
@@ -138,8 +142,7 @@ namespace UntappdViewer.Views.Controls
 
         public void Clear()
         {
-            TextPasswordBox.Clear();
-            TextVisiblePasswordBox.Clear();
+            SetText(String.Empty);
         }
 
         private void PasswordBoxIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -153,9 +156,8 @@ namespace UntappdViewer.Views.Controls
             if(TextPasswordBox.Password.Equals(Text))
                 return;
 
-            if (!String.IsNullOrEmpty(TextPasswordBox.Password) && !ChekMaskText(TextPasswordBox.Password))
+            if (!IsUpdateText(TextPasswordBox.Password))
             {
-
                 int currentIndex = GetPasswordBoxCurrentIndex();
                 int delta = TextPasswordBox.Password.Length - Text.Length;
 
@@ -168,7 +170,7 @@ namespace UntappdViewer.Views.Controls
                 return;
             }
 
-            TextVisiblePasswordBox.Text = TextPasswordBox.Password;
+            SetText(TextPasswordBox.Password);
         }
 
         private int GetPasswordBoxCurrentIndex()
@@ -205,7 +207,7 @@ namespace UntappdViewer.Views.Controls
             if (e.Changes.Count == 0)
                 return;
 
-            if (!String.IsNullOrEmpty(TextVisiblePasswordBox.Text) && !ChekMaskText(TextVisiblePasswordBox.Text))
+            if (!IsUpdateText(TextVisiblePasswordBox.Text))
             {
                 int currentIndex = e.Changes.ToList()[0].Offset;
                 TextVisiblePasswordBox.Text = Text;
@@ -213,14 +215,12 @@ namespace UntappdViewer.Views.Controls
                 return;
             }
 
-            Text = TextVisiblePasswordBox.Text;
-            TextBinding = Text;
+            SetText(TextVisiblePasswordBox.Text);
+        }
 
-            if (PasswordMode)
-                ImgShowHide.Visibility = !String.IsNullOrEmpty(Text) ? Visibility.Visible : Visibility.Hidden;
-
-            HintTextBox.Visibility = String.IsNullOrEmpty(Text) && !String.IsNullOrEmpty(HintTextBox.Text) ? Visibility.Visible : Visibility.Collapsed;
-            ClearButton.Visibility = !String.IsNullOrEmpty(Text) ? Visibility.Visible : Visibility.Hidden;
+        private bool IsUpdateText(string text)
+        {
+            return String.IsNullOrEmpty(text) || ChekMaskText(text);
         }
 
         private bool ChekMaskText(string text)
@@ -231,6 +231,27 @@ namespace UntappdViewer.Views.Controls
             Regex regex = new Regex(Mask);
             MatchCollection matches = regex.Matches(text);
             return matches.Count == 1 && matches[0].Value.Equals(text);
+        }
+
+        private void SetText(string text, bool updateTextBinding = true)
+        {
+            if (!Text.Equals(text))
+                Text = text;
+
+            if (!TextPasswordBox.Password.Equals(text))
+                TextPasswordBox.Password = text;
+
+            if (!TextVisiblePasswordBox.Text.Equals(text))
+                TextVisiblePasswordBox.Text = text;
+
+            if (updateTextBinding)
+                TextBinding = Text;
+
+            if (PasswordMode)
+                ImgShowHide.Visibility = !String.IsNullOrEmpty(Text) ? Visibility.Visible : Visibility.Hidden;
+
+            HintTextBox.Visibility = String.IsNullOrEmpty(Text) && !String.IsNullOrEmpty(HintTextBox.Text) ? Visibility.Visible : Visibility.Collapsed;
+            ClearButton.Visibility = !String.IsNullOrEmpty(Text) ? Visibility.Visible : Visibility.Hidden;
         }
 
         private void ImgShowHideMouseLeave(object sender, MouseEventArgs e)
