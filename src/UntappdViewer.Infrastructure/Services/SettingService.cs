@@ -68,5 +68,16 @@ namespace UntappdViewer.Infrastructure.Services
             Settings.Default.SelectedTreeItemId = itemId;
             Settings.Default.Save();
         }
+
+        public long GetOffsetUpdateBeer()
+        {
+            return Settings.Default.OffsetUpdateBeer;
+        }
+
+        public void SetOffsetUpdateBeer(long offSet)
+        {
+            Settings.Default.OffsetUpdateBeer = offSet;
+            Settings.Default.Save();
+        }
     }
 }

@@ -25,5 +25,9 @@
         long GetSelectedTreeItemId();
 
         void SetSelectedTreeItemId(long itemId);
+
+        long GetOffsetUpdateBeer();
+
+        void SetOffsetUpdateBeer(long offSet);
     }
 }

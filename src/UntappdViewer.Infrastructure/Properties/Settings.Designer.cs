@@ -97,5 +97,17 @@ namespace UntappdViewer.Infrastructure.Properties {
                 this["SelectedTreeItemId"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long OffsetUpdateBeer {
+            get {
+                return ((long)(this["OffsetUpdateBeer"]));
+            }
+            set {
+                this["OffsetUpdateBeer"] = value;
+            }
+        }
     }
 }
