@@ -51,7 +51,6 @@ namespace UntappdViewer.ViewModels
             {
                 SetProperty(ref search, value);
                 AppFilter(value);
-                UpdateTreeViewCaption();
             }
         }
 
@@ -183,6 +182,16 @@ namespace UntappdViewer.ViewModels
 
         private void AppFilter(string filter)
         {
+            AppFilterAsync(filter);
+        }
+
+        private async void AppFilterAsync(string filter)
+        {
+            await Task.Run(() => SetFilter(filter));
+        }
+
+        private void SetFilter(string filter)
+        {
             if (String.IsNullOrEmpty(filter) || String.IsNullOrEmpty(filter.Trim()))
             {
                 foreach (TreeItemViewModel model in TreeItems.Where(item => !item.Visibility))
@@ -199,6 +208,7 @@ namespace UntappdViewer.ViewModels
                         model.Visible();
                 }
             }
+            UpdateTreeViewCaption();
         }
 
         private void SaveSettings()
