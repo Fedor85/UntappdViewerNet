@@ -113,6 +113,7 @@ namespace UntappdViewer.ViewModels
             base.DeActivate();
             Checkins.Clear();
             AccessToken = null;
+            OffsetUpdateBeer = String.Empty;
             webApiClient.ChangeUploadedCountEvent -= WebApiClientChangeUploadedCountEvent;
             interactionRequestService.ClearMessageOnStatusBar();
         }
@@ -130,6 +131,12 @@ namespace UntappdViewer.ViewModels
             try
             {
                 AccessToken = await Task.Run(() => webApiClient.Check());
+                if (AccessToken.HasValue && AccessToken.Value)
+                {
+                    long settingOffsetUpdateBeer = settingService.GetOffsetUpdateBeer();
+                    if (settingOffsetUpdateBeer > 0)
+                        OffsetUpdateBeer = settingOffsetUpdateBeer.ToString();
+                }
             }
             catch (Exception ex)
             {
@@ -196,22 +203,27 @@ namespace UntappdViewer.ViewModels
 
         private async void UpdateBeers(List<Beer> beers)
         {
-            long offset = 0;
+            long offset = Int64.TryParse(OffsetUpdateBeer, out offset) ? offset : 0;
             try
             {
-                await Task.Run(() => webApiClient.UpdateBeers(beers, null, out offset));
+                await Task.Run(() => webApiClient.UpdateBeers(beers, null, ref offset));
+                SetOffsetUpdateBeer(0);
             }
             catch (Exception ex)
             {
-                settingService.SetOffsetUpdateBeer(offset);
+                SetOffsetUpdateBeer(offset);
                 interactionRequestService.ShowError(Properties.Resources.Error, StringHelper.GetFullExceptionMessage(ex));
-
             }
             finally
             {
-                settingService.SetOffsetUpdateBeer(0);
                 LoadingChangeActivity(false);
             }
+        }
+
+        private void SetOffsetUpdateBeer(long offset)
+        {
+            settingService.SetOffsetUpdateBeer(offset);
+            OffsetUpdateBeer = offset > 0 ? offset.ToString() : String.Empty;
         }
 
         private void WebApiClientChangeUploadedCountEvent(int count)

@@ -60,9 +60,8 @@ namespace UntappdWebApiClient
             FillCheckins(checkinsContainer, checkinsContainer.Checkins.Min(item => item.Id));
         }
 
-        public void UpdateBeers(List<Beer> beers, Func<Beer, bool> predicate, out long offset)
+        public void UpdateBeers(List<Beer> beers, Func<Beer, bool> predicate, ref long offset)
         {
-            offset = 0;
             if (beers.Count == 0)
                 return;
 
