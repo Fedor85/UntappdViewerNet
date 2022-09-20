@@ -18,6 +18,6 @@ namespace UntappdViewer.Interfaces.Services
 
         void FillToEndCheckins(CheckinsContainer checkinsContainer);
 
-        void UpdateBeers(List<Beer> beers, Func<Beer, bool> predicate);
+        void UpdateBeers(List<Beer> beers, Func<Beer, bool> predicate, out long offset);
     }
 }

@@ -30,7 +30,8 @@ namespace UntappdViewer.Test
 
             Assert.True(untappdClient.Check());
             CheckinsContainer checkinsContainer = TestHelper.GetCheckinsContainer();
-            untappdClient.UpdateBeers(checkinsContainer.Beers.Where(TestHelper.IsUpdateBeer).ToList(), TestHelper.IsUpdateBeer);
+            long offset;
+            untappdClient.UpdateBeers(checkinsContainer.Beers.Where(TestHelper.IsUpdateBeer).ToList(), TestHelper.IsUpdateBeer, out offset);
         }
     }
 }

@@ -18,6 +18,8 @@ namespace UntappdViewer.ViewModels
     {
         private bool? accessToken;
 
+        private string offsetUpdateBeer;
+
         private List<Checkin> checkins;
 
         private IUntappdService untappdService;
@@ -25,6 +27,8 @@ namespace UntappdViewer.ViewModels
         private IWebApiClient webApiClient;
 
         private IModuleManager moduleManager;
+
+        private ISettingService settingService;
 
         private IInteractionRequestService interactionRequestService;
 
@@ -52,6 +56,18 @@ namespace UntappdViewer.ViewModels
             }
         }
 
+        public string OffsetUpdateBeer
+        {
+            get
+            {
+                return offsetUpdateBeer;
+            }
+            set
+            {
+                SetProperty(ref offsetUpdateBeer, value);
+            }
+        }
+
         public List<Checkin> Checkins
         {
             get
@@ -67,11 +83,13 @@ namespace UntappdViewer.ViewModels
         public WebDownloadProjectViewModel(IRegionManager regionManager, IUntappdService untappdService,
                                                                          IWebApiClient webApiClient,
                                                                          IModuleManager moduleManager,
+                                                                         ISettingService settingService,
                                                                          IInteractionRequestService interactionRequestService) : base(moduleManager, regionManager)
         {
             this.untappdService = untappdService;
             this.webApiClient = webApiClient;
             this.moduleManager = moduleManager;
+            this.settingService = settingService;
             this.interactionRequestService = interactionRequestService;
 
             CheckAccessTokenCommand = new DelegateCommand<string>(CheckAccessToken);
@@ -178,16 +196,20 @@ namespace UntappdViewer.ViewModels
 
         private async void UpdateBeers(List<Beer> beers)
         {
+            long offset = 0;
             try
             {
-                await Task.Run(() => webApiClient.UpdateBeers(beers, null));
+                await Task.Run(() => webApiClient.UpdateBeers(beers, null, out offset));
             }
             catch (Exception ex)
             {
+                settingService.SetOffsetUpdateBeer(offset);
                 interactionRequestService.ShowError(Properties.Resources.Error, StringHelper.GetFullExceptionMessage(ex));
+
             }
             finally
             {
+                settingService.SetOffsetUpdateBeer(0);
                 LoadingChangeActivity(false);
             }
         }
