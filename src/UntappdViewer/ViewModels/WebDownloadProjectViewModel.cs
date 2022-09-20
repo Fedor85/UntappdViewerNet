@@ -203,7 +203,7 @@ namespace UntappdViewer.ViewModels
 
         private async void UpdateBeers(List<Beer> beers)
         {
-            long offset = Int64.TryParse(OffsetUpdateBeer, out offset) ? offset : 0;
+            long offset = GetOffsetUpdateBeer();
             try
             {
                 await Task.Run(() => webApiClient.UpdateBeers(beers, null, ref offset));
@@ -220,6 +220,11 @@ namespace UntappdViewer.ViewModels
             }
         }
 
+        private long GetOffsetUpdateBeer()
+        {
+            return Int64.TryParse(OffsetUpdateBeer, out var offset) ? offset : 0;
+        }
+
         private void SetOffsetUpdateBeer(long offset)
         {
             settingService.SetOffsetUpdateBeer(offset);
@@ -233,6 +238,10 @@ namespace UntappdViewer.ViewModels
 
         private void Exit()
         {
+            long offset = GetOffsetUpdateBeer();
+            if (offset != settingService.GetOffsetUpdateBeer())
+                settingService.SetOffsetUpdateBeer(offset);
+
             moduleManager.LoadModule(typeof(UntappdModule).Name);
             ActivateView(RegionNames.MainRegion, typeof(Untappd));
         }
