@@ -22,7 +22,7 @@ using Checkin = UntappdViewer.Models.Checkin;
 
 namespace UntappdViewer.ViewModels
 {
-    public class MenuBarViewModel: RegionManagerBaseModel
+    public class MenuBarViewModel: LoadingBaseModel
     {
         private IUntappdService untappdService;
 
@@ -62,7 +62,7 @@ namespace UntappdViewer.ViewModels
                                                                  IRegionManager regionManager,
                                                                  IEventAggregator eventAggregator,
                                                                  IWebDownloader webDownloader,
-                                                                 IReportingService reportingService) : base(regionManager)
+                                                                 IReportingService reportingService) : base(moduleManager, regionManager)
         {
             this.interactionRequestService = interactionRequestService;
             this.settingService = settingService;
@@ -270,16 +270,26 @@ namespace UntappdViewer.ViewModels
 
         private void CheckinsProjectReport()
         {
+            LoadingChangeActivity(true);
+            CheckinsProjectReportAsync();
+        }
+
+        private async void CheckinsProjectReportAsync()
+        {
             try
             {
-                string reportPath = reportingService.CreateAllCheckinsReport(untappdService.GetCheckins(), 
-                                                                             untappdService.GetReportsDirectory(),
-                                                                             untappdService.Untappd.UserName);
+                string reportPath = await reportingService.CreateAllCheckinsReportrAsync(untappdService.GetCheckins(),
+                                                                                         untappdService.GetReportsDirectory(),
+                                                                                         untappdService.Untappd.UserName);
                 System.Diagnostics.Process.Start(reportPath);
             }
             catch (Exception ex)
             {
                 interactionRequestService.ShowError(Properties.Resources.Error, StringHelper.GetFullExceptionMessage(ex));
+            }
+            finally
+            {
+                LoadingChangeActivity(false);
             }
         }
 

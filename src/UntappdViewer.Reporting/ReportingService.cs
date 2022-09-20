@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using Spire.Xls;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
@@ -10,6 +11,11 @@ namespace UntappdViewer.Reporting
 {
     public class ReportingService: IReportingService
     {
+        public async Task<string> CreateAllCheckinsReportrAsync(List<Checkin> checkins, string directory, string fileName)
+        {
+            return await Task.Run(() => CreateAllCheckinsReport(checkins, directory, fileName));
+        }
+
         public string CreateAllCheckinsReport(List<Checkin> checkins, string directory, string fileName)
         {
             IList<Checkin> checkinsSort = checkins.OrderBy(item => item.Beer.Brewery.Name).ThenBy(item => item.Beer.Name).ToList();
