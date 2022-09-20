@@ -22,11 +22,14 @@ namespace UntappdViewer.Views.Controls
             string text = items == null ? String.Empty : (string) items;
             SmartTextBox smartTextBox = dependencyObject as SmartTextBox;
 
+            if (smartTextBox.MaxLength > 0 && smartTextBox.MaxLength < text.Length)
+                text = text.Remove(smartTextBox.MaxLength);
+
             if (!smartTextBox.IsUpdateText(text))
                 return String.Empty;
 
             smartTextBox.SetText(text, false);
-            return items;
+            return text;
         }
 
         private bool passwordMode;
@@ -34,6 +37,8 @@ namespace UntappdViewer.Views.Controls
         private string text;
 
         private string mask;
+
+        private int maxLength;
 
         private string hintText;
 
@@ -47,6 +52,7 @@ namespace UntappdViewer.Views.Controls
             {
                 ImgShowHide.Height = value;
                 ImgShowHide.Width = value;
+                OnPropertyChanged("ImgSize");
             }
         }
 
@@ -60,14 +66,32 @@ namespace UntappdViewer.Views.Controls
                 if (value)
                     ImgShowHide.Visibility = !String.IsNullOrEmpty(Text) ? Visibility.Visible : Visibility.Hidden;
                 else
-                    ImgShowHide.Visibility = Visibility.Collapsed;          
+                    ImgShowHide.Visibility = Visibility.Collapsed;
+
+                OnPropertyChanged("PasswordMode");
             }
         }
 
         public string Mask
         {
             get { return mask; }
-            set { mask = value; }
+            set
+            {
+                mask = value;
+                OnPropertyChanged("Mask");
+            }
+        }
+
+        public int MaxLength
+        {
+            get { return maxLength; }
+            set
+            {
+                maxLength = value;
+                TextVisiblePasswordBox.MaxLength = value;
+                TextPasswordBox.MaxLength = value;
+                OnPropertyChanged("MaxLength");
+            }
         }
 
         public string TextBinding
@@ -117,7 +141,7 @@ namespace UntappdViewer.Views.Controls
             TextVisiblePasswordBox.GotFocus += TextBoxGotFocus;
 
             TextPasswordBox.LostFocus += TextBoxLostFocus;
-            TextVisiblePasswordBox.LostFocus += TextBoxLostFocus;          
+            TextVisiblePasswordBox.LostFocus += TextBoxLostFocus;
         }
 
         private void HintTextBoxGotFocus(object sender, RoutedEventArgs e)
