@@ -649,6 +649,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save As Zip.
+        /// </summary>
+        public static string SaveAsZip {
+            get {
+                return ResourceManager.GetString("SaveAsZip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap Show {
@@ -813,6 +822,16 @@ namespace UntappdViewer.Properties {
         public static string WebDownloadProject {
             get {
                 return ResourceManager.GetString("WebDownloadProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        public static System.Drawing.Icon zip_file_icon {
+            get {
+                object obj = ResourceManager.GetObject("zip_file_icon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         

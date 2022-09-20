@@ -424,4 +424,11 @@
     <value>offset</value>
     <comment>en-en</comment>
   </data>
+  <data name="zip_file_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\zip_file_icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SaveAsZip" xml:space="preserve">
+    <value>Save As Zip</value>
+    <comment>en-en</comment>
+  </data>
 </root>

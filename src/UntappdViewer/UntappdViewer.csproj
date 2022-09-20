@@ -424,5 +424,8 @@
   <ItemGroup>
     <Resource Include="Resources\description_icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\zip_file_icon.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

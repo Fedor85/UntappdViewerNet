@@ -46,6 +46,8 @@ namespace UntappdViewer.ViewModels
 
         public ICommand SaveAsProjectCommand { get; }
 
+        public ICommand SaveAsZipArchiveCommand { get; }
+
         public ICommand DownloadProjectMediaCommand { get; }
 
         public ICommand UploadProjectPhotoCommand { get; }
@@ -76,6 +78,7 @@ namespace UntappdViewer.ViewModels
             RenameProjectCommand = new DelegateCommand(RenameProject);
             SaveProjectCommand = new DelegateCommand(SaveProject);
             SaveAsProjectCommand = new DelegateCommand(SaveAsProject);
+            SaveAsZipArchiveCommand = new DelegateCommand(SaveAsZipArchive);
             DownloadProjectMediaCommand = new DelegateCommand(DownloadProjectMedia);
             UploadProjectPhotoCommand = new DelegateCommand(UploadProjectPhotos);
             WebDownloadProjectCommand = new DelegateCommand(WebDownloadProject);
@@ -139,6 +142,11 @@ namespace UntappdViewer.ViewModels
             FileHelper.CreateDirectory(untappdService.GetFileDataDirectory());
             interactionRequestService.ShowMessageOnStatusBar(untappdService.FilePath);
             settingService.SetRecentFilePaths(FileHelper.AddFilePath(settingService.GetRecentFilePaths(), fileSavePath, settingService.GetMaxRecentFilePaths()));
+        }
+
+        private void SaveAsZipArchive()
+        {
+
         }
 
         private void DownloadProjectMedia()
