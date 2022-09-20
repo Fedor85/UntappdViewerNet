@@ -518,6 +518,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to offset.
+        /// </summary>
+        public static string Offset {
+            get {
+                return ResourceManager.GetString("Offset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
         public static string Ok {

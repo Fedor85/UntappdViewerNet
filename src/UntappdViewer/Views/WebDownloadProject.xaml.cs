@@ -41,7 +41,7 @@ namespace UntappdViewer.Views
             FulllDownloadCheckinsButton.IsEnabled = false;
             FirstDownloadCheckinsButton.IsEnabled = false;
             ToEndDownloadCheckinsButton.IsEnabled = false;
-            UpdateBeersButton.IsEnabled = false;
+            UpdateBeersPanelEnabled(false);
         }
 
         public void SetAccessToken(bool? isAccessToken)
@@ -61,7 +61,7 @@ namespace UntappdViewer.Views
                 FulllDownloadCheckinsButton.IsEnabled = false;
                 FirstDownloadCheckinsButton.IsEnabled = false;
                 ToEndDownloadCheckinsButton.IsEnabled = false;
-                UpdateBeersButton.IsEnabled = false;
+                UpdateBeersPanelEnabled(false);
             }
         }
 
@@ -87,8 +87,14 @@ namespace UntappdViewer.Views
             {
                 FirstDownloadCheckinsButton.IsEnabled = true;
                 ToEndDownloadCheckinsButton.IsEnabled = true;
-                UpdateBeersButton.IsEnabled = true;
+                UpdateBeersPanelEnabled(true);
             }
+        }
+
+        private void UpdateBeersPanelEnabled(bool isEnabled)
+        {
+            UpdateBeersButton.IsEnabled = isEnabled;
+            OffsetUpdateBeersTextBox.IsEnabled = isEnabled;
         }
     }
 }
