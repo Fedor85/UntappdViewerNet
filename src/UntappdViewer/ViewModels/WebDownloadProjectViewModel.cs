@@ -238,9 +238,12 @@ namespace UntappdViewer.ViewModels
 
         private void Exit()
         {
-            long offset = GetOffsetUpdateBeer();
-            if (offset != settingService.GetOffsetUpdateBeer())
-                settingService.SetOffsetUpdateBeer(offset);
+            if (AccessToken.HasValue && AccessToken.Value)
+            {
+                long offset = GetOffsetUpdateBeer();
+                if (offset != settingService.GetOffsetUpdateBeer())
+                    settingService.SetOffsetUpdateBeer(offset);
+            }
 
             moduleManager.LoadModule(typeof(UntappdModule).Name);
             ActivateView(RegionNames.MainRegion, typeof(Untappd));
