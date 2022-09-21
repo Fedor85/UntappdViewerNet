@@ -114,7 +114,7 @@ namespace UntappdViewer.ViewModels
 
         private void SaveProject()
         {
-            if (!FileHelper.GetExtensionWihtoutPoint(untappdService.FilePath).Equals(Extensions.UNTP))
+            if (!untappdService.IsUNTPProject())
             {
                 SaveAsProject();
                 return;
@@ -146,12 +146,31 @@ namespace UntappdViewer.ViewModels
 
         private void SaveAsZipArchive()
         {
+            if (!untappdService.IsUNTPProject())
+            {
+                interactionRequestService.ShowMessage(Properties.Resources.Warning, Properties.Resources.WarningMessageSaveProjectToUNTP);
+                return;
+            }
 
+            try
+            {
+                string mainFilePath = untappdService.FilePath;
+                ZipFileHelper zipFileHelper = new ZipFileHelper();
+                zipFileHelper.AddFile(mainFilePath);
+                zipFileHelper.AddDirectory(untappdService.GetFileDataDirectory());
+                string resultPath = ZipFileHelper.GetResultPath(mainFilePath);
+                zipFileHelper.SaveAsZipAsync(resultPath);
+
+            }
+            catch (Exception ex)
+            {
+                interactionRequestService.ShowError(Properties.Resources.Error, StringHelper.GetFullExceptionMessage(ex));
+            }
         }
 
         private void DownloadProjectMedia()
         {
-            if (!FileHelper.GetExtensionWihtoutPoint(untappdService.FilePath).Equals(Extensions.UNTP))
+            if (!untappdService.IsUNTPProject())
             {
                 interactionRequestService.ShowMessage(Properties.Resources.Warning, Properties.Resources.WarningMessageSaveProjectToUNTP);
                 return;
@@ -266,7 +285,7 @@ namespace UntappdViewer.ViewModels
 
         private void WebDownloadProject()
         {
-            if (!FileHelper.GetExtensionWihtoutPoint(untappdService.FilePath).Equals(Extensions.UNTP))
+            if (!untappdService.IsUNTPProject())
             {
                 interactionRequestService.ShowMessage(Properties.Resources.Warning, Properties.Resources.WarningMessageSaveProjectToUNTP);
                 return;
