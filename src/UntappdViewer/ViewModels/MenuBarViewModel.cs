@@ -144,7 +144,7 @@ namespace UntappdViewer.ViewModels
             settingService.SetRecentFilePaths(FileHelper.AddFilePath(settingService.GetRecentFilePaths(), fileSavePath, settingService.GetMaxRecentFilePaths()));
         }
 
-        private void SaveAsZipArchive()
+        private async void SaveAsZipArchive()
         {
             if (!untappdService.IsUNTPProject())
             {
@@ -152,20 +152,30 @@ namespace UntappdViewer.ViewModels
                 return;
             }
 
+            SaveAsZipArchiveAsync();
+        }
+
+        private async void SaveAsZipArchiveAsync()
+        {
             try
             {
                 string mainFilePath = untappdService.FilePath;
                 ZipFileHelper zipFileHelper = new ZipFileHelper();
+                zipFileHelper.ZipProgress += ZipProgress;
                 zipFileHelper.AddFile(mainFilePath);
                 zipFileHelper.AddDirectory(untappdService.GetFileDataDirectory());
                 string resultPath = ZipFileHelper.GetResultPath(mainFilePath);
-                zipFileHelper.SaveAsZipAsync(resultPath);
-
+                await Task.Run(() => zipFileHelper.SaveAsZip(resultPath));
             }
             catch (Exception ex)
             {
                 interactionRequestService.ShowError(Properties.Resources.Error, StringHelper.GetFullExceptionMessage(ex));
             }
+        }
+
+        private void ZipProgress(string message)
+        {
+            interactionRequestService.ShowMessageOnStatusBar(message);
         }
 
         private void DownloadProjectMedia()

@@ -13,6 +13,8 @@ namespace UntappdViewer.Infrastructure
 
         private List<FileItem> directoryItems;
 
+        public event Action<string> ZipProgress;
+
         public ZipFileHelper()
         {
             fileItems = new List<FileItem>();
@@ -30,15 +32,11 @@ namespace UntappdViewer.Infrastructure
             directoryItems.Add(new FileItem(index, directoryPath));
         }
 
-        public async void SaveAsZipAsync(string resultPath)
-        {
-            await Task.Run(() => SaveAsZip(resultPath));
-        }
-
         public void SaveAsZip(string resultPath)
         {
             using (ZipFile zip = new ZipFile())
             {
+                zip.SaveProgress += ZipSaveProgress;
                 foreach (FileItem fileItem in fileItems)
                     zip.AddFile(fileItem.FilePath, String.Empty);
 
@@ -47,6 +45,18 @@ namespace UntappdViewer.Infrastructure
 
                 zip.Save(resultPath);
             }
+        }
+
+        private void ZipSaveProgress(object sender, SaveProgressEventArgs e)
+        {
+            if (e.CurrentEntry != null)
+                ZipProgressInvoke(e.CurrentEntry.ToString());
+        }
+
+        private void ZipProgressInvoke(string message)
+        {
+            if (ZipProgress != null)
+                ZipProgress.Invoke(message);
         }
 
         public static string GetResultPath(string filePath)
