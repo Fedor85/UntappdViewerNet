@@ -7,8 +7,6 @@ namespace UntappdViewer.Interfaces.Services
     {
         event Action<string> ShowMessageOnStatusBarEvent;
 
-        event Action ClearMessageOnStatusBarEnvent;
-
         void ShowMessage(string caption, string message);
 
         void ShowError(string caption, string message);
@@ -18,6 +16,8 @@ namespace UntappdViewer.Interfaces.Services
         bool AskReplaceText(string caption, ref string text);
 
         void ShowMessageOnStatusBar(string message);
+
+        string GetCurrentwMessageOnStatusBar();
 
         string OpenFile(string initialDirectory, List<string> extensions);
 

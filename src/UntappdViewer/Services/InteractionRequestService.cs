@@ -18,10 +18,11 @@ namespace UntappdViewer.Services
 
         public event Action<string> ShowMessageOnStatusBarEvent;
 
-        public event Action ClearMessageOnStatusBarEnvent;
+        private string messageOnStatusBar;
 
         public InteractionRequestService(IDialogService dialogService)
         {
+            messageOnStatusBar = String.Empty;
             this.dialogService = dialogService;
         }
 
@@ -74,6 +75,21 @@ namespace UntappdViewer.Services
         {
             if (ShowMessageOnStatusBarEvent != null)
                 ShowMessageOnStatusBarEvent.Invoke(message);
+
+            messageOnStatusBar = message;
+        }
+
+        public string GetCurrentwMessageOnStatusBar()
+        {
+            return messageOnStatusBar;
+        }
+
+        public void ClearMessageOnStatusBar()
+        {
+            if (ShowMessageOnStatusBarEvent != null)
+                ShowMessageOnStatusBarEvent.Invoke(String.Empty);
+
+            messageOnStatusBar = String.Empty;
         }
 
         public string OpenFile(string initialDirectory, List<string> extensions)
@@ -107,12 +123,6 @@ namespace UntappdViewer.Services
             saveFileDialog.Filter = GetFilter(extensions);
             bool? result = saveFileDialog.ShowDialog(Application.Current.MainWindow);
             return result.HasValue && result.Value ? saveFileDialog.FileName : String.Empty;
-        }
-
-        public void ClearMessageOnStatusBar()
-        {
-            if (ClearMessageOnStatusBarEnvent != null)
-                ClearMessageOnStatusBarEnvent.Invoke();
         }
 
         private string GetFilter(List<string> extensions)

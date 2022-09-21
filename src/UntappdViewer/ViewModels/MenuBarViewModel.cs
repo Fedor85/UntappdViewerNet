@@ -157,19 +157,25 @@ namespace UntappdViewer.ViewModels
 
         private async void SaveAsZipArchiveAsync()
         {
+            string previousMessageOnStatusBar = interactionRequestService.GetCurrentwMessageOnStatusBar();
+            string mainFilePath = untappdService.FilePath;
+            ZipFileHelper zipFileHelper = new ZipFileHelper();
+            zipFileHelper.ZipProgress += ZipProgress;
+            zipFileHelper.AddFile(mainFilePath);
+            zipFileHelper.AddDirectory(untappdService.GetFileDataDirectory());
+            string resultPath = ZipFileHelper.GetResultPath(mainFilePath);
+
             try
             {
-                string mainFilePath = untappdService.FilePath;
-                ZipFileHelper zipFileHelper = new ZipFileHelper();
-                zipFileHelper.ZipProgress += ZipProgress;
-                zipFileHelper.AddFile(mainFilePath);
-                zipFileHelper.AddDirectory(untappdService.GetFileDataDirectory());
-                string resultPath = ZipFileHelper.GetResultPath(mainFilePath);
                 await Task.Run(() => zipFileHelper.SaveAsZip(resultPath));
             }
             catch (Exception ex)
             {
                 interactionRequestService.ShowError(Properties.Resources.Error, StringHelper.GetFullExceptionMessage(ex));
+            }
+            finally
+            {
+                interactionRequestService.ShowMessageOnStatusBar(previousMessageOnStatusBar);
             }
         }
 
