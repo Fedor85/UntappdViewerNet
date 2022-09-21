@@ -49,8 +49,12 @@ namespace UntappdViewer.Infrastructure
 
         private void ZipSaveProgress(object sender, SaveProgressEventArgs e)
         {
-            if (e.CurrentEntry != null)
-                ZipProgressInvoke(e.CurrentEntry.ToString());
+            if (e.CurrentEntry == null || e.EntriesTotal == 0 || e.EntriesSaved == 0 || e.EventType != ZipProgressEventType.Saving_AfterWriteEntry)
+                return;
+
+            int percent = (int)Math.Truncate((double)e.EntriesSaved / e.EntriesTotal * 100);
+            string message = String.Format("[{0}% ({1}/{2})]:{3}", percent, e.EntriesSaved, e.EntriesTotal, e.CurrentEntry.FileName);
+            ZipProgressInvoke(message);
         }
 
         private void ZipProgressInvoke(string message)
