@@ -79,7 +79,7 @@ namespace UntappdViewer.Services
             messageOnStatusBar = message;
         }
 
-        public string GetCurrentwMessageOnStatusBar()
+        public string GetCurrentMessageOnStatusBar()
         {
             return messageOnStatusBar;
         }

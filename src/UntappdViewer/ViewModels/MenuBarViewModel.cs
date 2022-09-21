@@ -157,7 +157,7 @@ namespace UntappdViewer.ViewModels
 
         private async void SaveAsZipArchiveAsync()
         {
-            string previousMessageOnStatusBar = interactionRequestService.GetCurrentwMessageOnStatusBar();
+            string previousMessageOnStatusBar = interactionRequestService.GetCurrentMessageOnStatusBar();
             string mainFilePath = untappdService.FilePath;
             ZipFileHelper zipFileHelper = new ZipFileHelper();
             zipFileHelper.ZipProgress += ZipProgress;

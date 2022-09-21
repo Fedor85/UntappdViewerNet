@@ -17,7 +17,7 @@ namespace UntappdViewer.Interfaces.Services
 
         void ShowMessageOnStatusBar(string message);
 
-        string GetCurrentwMessageOnStatusBar();
+        string GetCurrentMessageOnStatusBar();
 
         string OpenFile(string initialDirectory, List<string> extensions);
 
