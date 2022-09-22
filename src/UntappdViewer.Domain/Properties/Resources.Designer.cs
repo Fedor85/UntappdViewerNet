@@ -77,5 +77,14 @@ namespace UntappdViewer.Domain.Properties {
                 return ResourceManager.GetString("ArgumentExceptionOnCheckinParser", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This version of the UNTP project is no longer supported. Recreate the project..
+        /// </summary>
+        internal static string ArgumentExceptioValidUNTPProjectVersion {
+            get {
+                return ResourceManager.GetString("ArgumentExceptioValidUNTPProjectVersion", resourceCulture);
+            }
+        }
     }
 }

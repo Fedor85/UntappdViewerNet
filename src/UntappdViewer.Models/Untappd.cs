@@ -4,12 +4,14 @@ namespace UntappdViewer.Models
     [Serializable]
     public class Untappd
     {
+        private const int ActualUNTPVersion = 3;
+
         private bool isСhanges { get; set; }
 
         /// <summary>
         /// Для отслеживания версии файла, чтобы моджно было раотать с разными версиями
         /// </summary>
-        private int version { get; set; }
+        private int version { get ; set; }
 
         public CheckinsContainer CheckinsContainer { get; private set; }
 
@@ -29,13 +31,18 @@ namespace UntappdViewer.Models
             UserName = userName;
             CreatedDate = DateTime.Now;
             isСhanges = false;
-            version = 3;
+            version = ActualUNTPVersion;
         }
 
         public void SetUserName(string userName)
         {
             UserName = userName;
             isСhanges = true;
+        }
+
+        public bool IsValidVersion()
+        {
+            return version == ActualUNTPVersion;
         }
 
         public bool IsСhanges()

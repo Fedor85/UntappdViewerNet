@@ -69,6 +69,8 @@ namespace UntappdViewer.Domain.Services
         private void InitializeToUNTP(string filePath)
         {
             Untappd = FileHelper.OpenFile<Untappd>(filePath);
+            if(!Untappd.IsValidVersion())
+                throw new ArgumentException(String.Format("{0}\n{1}", Properties.Resources.ArgumentExceptioValidUNTPProjectVersion, filePath));
         }
 
         public void SortDataDescCheckins()
