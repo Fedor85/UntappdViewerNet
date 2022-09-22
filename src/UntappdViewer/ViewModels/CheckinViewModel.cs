@@ -625,7 +625,8 @@ namespace UntappdViewer.ViewModels
                 if (!Directory.Exists(directoryName))
                     FileHelper.CreateDirectory(directoryName);
 
-                webDownloader.DownloadFile(beer.LabelUrl, labelPath);
+                if (!webDownloader.DownloadFile(beer.LabelUrl, labelPath))
+                    return;
             }
 
             BeerLabel = ImageConverter.GetBitmapSource(labelPath);
@@ -647,7 +648,8 @@ namespace UntappdViewer.ViewModels
                 if (!Directory.Exists(directoryName))
                     FileHelper.CreateDirectory(directoryName);
 
-                webDownloader.DownloadFile(brewery.LabelUrl, labelPath);
+                if (!webDownloader.DownloadFile(brewery.LabelUrl, labelPath))
+                    return;
             }
 
             BreweryLabel = ImageConverter.GetBitmapSource(labelPath);
@@ -680,7 +682,9 @@ namespace UntappdViewer.ViewModels
         {
             try
             {
-                CheckinPhoto = await Task.Run(() => GetCheckinPhoto(checkin, photoPath));
+                BitmapSource checkinPhoto = await Task.Run(() => GetCheckinPhoto(checkin, photoPath));
+                if (checkinPhoto != null)
+                    CheckinPhoto = checkinPhoto;
             }
             catch (Exception ex)
             {
@@ -698,7 +702,9 @@ namespace UntappdViewer.ViewModels
             if (!Directory.Exists(directoryName))
                 FileHelper.CreateDirectory(directoryName);
 
-            webDownloader.DownloadFile(checkin.UrlPhoto, photoPath);
+            if (!webDownloader.DownloadFile(checkin.UrlPhoto, photoPath))
+                return null;
+            
             BitmapSource photo = ImageConverter.GetBitmapSource(photoPath);
             photo.Freeze();
             return photo;
@@ -714,7 +720,8 @@ namespace UntappdViewer.ViewModels
             foreach (Badge badge in checkinBadges.Where(item => !String.IsNullOrEmpty(item.ImageUrl)))
             {
                 string badgeImagePath = GetBadgeImagePath(badge);
-                currentBadges.Add(new ImageItemViewModel(badgeImagePath, $"{badge.Name}\n{badge.Description}"));
+                if (!String.IsNullOrEmpty(badgeImagePath))
+                    currentBadges.Add(new ImageItemViewModel(badgeImagePath, $"{badge.Name}\n{badge.Description}"));
             }
             Badges = currentBadges;
         }
@@ -722,15 +729,14 @@ namespace UntappdViewer.ViewModels
         private string GetBadgeImagePath(Badge badge)
         {
             string badgeImagePath = untappdService.GetBadgeImageFilePath(badge);
-            if (!File.Exists(badgeImagePath))
-            {
-                string directoryName = Path.GetDirectoryName(badgeImagePath);
-                if (!Directory.Exists(directoryName))
-                    FileHelper.CreateDirectory(directoryName);
+            if (File.Exists(badgeImagePath))
+                return badgeImagePath;
 
-                webDownloader.DownloadFile(badge.ImageUrl, badgeImagePath);
-            }
-            return badgeImagePath;
+            string directoryName = Path.GetDirectoryName(badgeImagePath);
+            if (!Directory.Exists(directoryName))
+                FileHelper.CreateDirectory(directoryName);
+
+            return webDownloader.DownloadFile(badge.ImageUrl, badgeImagePath) ? badgeImagePath : String.Empty;
         }
     }
 }

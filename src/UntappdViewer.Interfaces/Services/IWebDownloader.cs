@@ -2,6 +2,6 @@
 {
     public interface IWebDownloader
     {
-        void DownloadFile(string urlFile, string filePath);
+        bool DownloadFile(string urlFile, string filePath);
     }
 }

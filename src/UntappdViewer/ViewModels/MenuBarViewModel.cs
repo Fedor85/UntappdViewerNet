@@ -258,7 +258,10 @@ namespace UntappdViewer.ViewModels
         {
             string photoPath = untappdService.GetCheckinPhotoFilePath(checkin);
             if (!File.Exists(photoPath))
-                webDownloader.DownloadFile(checkin.UrlPhoto, photoPath);
+            {
+                if (!webDownloader.DownloadFile(checkin.UrlPhoto, photoPath))
+                    return;
+            }
 
             string targetPath = Path.Combine(uploadDirectory, untappdService.GetUploadSavePhotoFileName(checkin));
             if (File.Exists(targetPath))
