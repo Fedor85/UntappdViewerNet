@@ -82,6 +82,7 @@ namespace UntappdViewer
             moduleCatalog.AddModule(typeof(CheckinModule), InitializationMode.OnDemand);
             moduleCatalog.AddModule(typeof(PhotoLoadingModule), InitializationMode.OnDemand);
             moduleCatalog.AddModule(typeof(WebDownloadProjectModule), InitializationMode.OnDemand);
+            moduleCatalog.AddModule(typeof(GalleryProjectModule), InitializationMode.OnDemand);
         }
 
         private bool IsInstanceExists()

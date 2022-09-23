@@ -314,12 +314,13 @@ namespace UntappdViewer.ViewModels
             }
 
             moduleManager.LoadModule(typeof(WebDownloadProjectModule).Name);
-            ActivateView(RegionNames.MainRegion, typeof(Views.WebDownloadProject));
+            ActivateView(RegionNames.MainRegion, typeof(WebDownloadProject));
         }
 
         private void GalleryProject()
         {
-
+            moduleManager.LoadModule(typeof(GalleryProjectModule).Name);
+            ActivateView(RegionNames.MainRegion, typeof(GalleryProject));
         }
 
         private void CheckinsProjectReport()

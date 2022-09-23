@@ -102,6 +102,7 @@
     <Compile Include="Modules\Base\BaseLoadingModule.cs" />
     <Compile Include="Modules\Base\BaseModue.cs" />
     <Compile Include="Modules\CheckinModule.cs" />
+    <Compile Include="Modules\GalleryProjectModule.cs" />
     <Compile Include="Modules\LoadingModule.cs" />
     <Compile Include="Modules\MainModule.cs" />
     <Compile Include="Modules\MenuBarModule.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="ViewModels\Base\RegionManagerBaseModel.cs" />
     <Compile Include="ViewModels\Base\ActiveAwareBaseModel.cs" />
     <Compile Include="ViewModels\CheckinViewModel.cs" />
+    <Compile Include="ViewModels\GalleryProjectViewModel.cs" />
     <Compile Include="ViewModels\InteractionRequest\AskDialogViewModel.cs" />
     <Compile Include="ViewModels\InteractionRequest\NotificationDialogViewModel.cs" />
     <Compile Include="ViewModels\InteractionRequest\TextBoxDialogViewModel.cs" />
@@ -154,6 +156,9 @@
       <DependentUpon>StarRatingControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\ZoomBorder.cs" />
+    <Compile Include="Views\GalleryProject.xaml.cs">
+      <DependentUpon>GalleryProject.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\InteractionRequest\AskDialog.xaml.cs">
       <DependentUpon>AskDialog.xaml</DependentUpon>
     </Compile>
@@ -215,6 +220,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Controls\StarRating\StarRatingControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GalleryProject.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
