@@ -104,7 +104,7 @@ namespace UntappdViewer.ViewModels
         {
             base.Activate();
             Checkins = new List<Checkin>(untappdService.GetCheckins());
-            webApiClient.ChangeUploadedCountEvent += WebApiClientChangeUploadedCountEvent;
+            webApiClient.UploadedProgress += interactionRequestService.ShowMessageOnStatusBar;
             interactionRequestService.ClearMessageOnStatusBar();
         }
 
@@ -114,7 +114,7 @@ namespace UntappdViewer.ViewModels
             Checkins.Clear();
             AccessToken = null;
             OffsetUpdateBeer = String.Empty;
-            webApiClient.ChangeUploadedCountEvent -= WebApiClientChangeUploadedCountEvent;
+            webApiClient.UploadedProgress -= interactionRequestService.ShowMessageOnStatusBar;
             interactionRequestService.ClearMessageOnStatusBar();
         }
 
@@ -229,11 +229,6 @@ namespace UntappdViewer.ViewModels
         {
             settingService.SetOffsetUpdateBeer(offset);
             OffsetUpdateBeer = offset > 0 ? offset.ToString() : String.Empty;
-        }
-
-        private void WebApiClientChangeUploadedCountEvent(int count)
-        {
-            interactionRequestService.ShowMessageOnStatusBar($"{Properties.Resources.Uploaded}: {count}");
         }
 
         private void Exit()

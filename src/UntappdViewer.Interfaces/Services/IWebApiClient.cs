@@ -6,7 +6,7 @@ namespace UntappdViewer.Interfaces.Services
 {
     public interface IWebApiClient
     {
-        event Action<int> ChangeUploadedCountEvent;
+        event Action<string> UploadedProgress;
 
         void Initialize(string accessToken);
 

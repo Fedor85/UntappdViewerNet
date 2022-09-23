@@ -20,7 +20,7 @@ namespace UntappdWebApiClient
 
         private JsonSerializerSettings jsonSerializerSettings;
 
-        public event Action<int> ChangeUploadedCountEvent;
+        public event Action<string> UploadedProgress;
 
         public Client()
         {
@@ -65,7 +65,8 @@ namespace UntappdWebApiClient
             if (beers.Count == 0)
                 return;
 
-            int counter = 0;
+            long countChek = 0;
+            long countUpdate = 0;
             bool isRun = true;
             while (isRun)
             {
@@ -76,11 +77,12 @@ namespace UntappdWebApiClient
                 string responseBody = httpResponse.Content.ReadAsStringAsync().Result;
                 BeersQuickType beersQuickType = JsonConvert.DeserializeObject<BeersQuickType>(responseBody, jsonSerializerSettings);
 
-                int countUpdate = UpdateBeersHelper.UpdateBeers(beers, beersQuickType);
-                if (countUpdate > 0)
+                countChek += beersQuickType.Response.Beers.Count;
+                int currentCountUpdate = UpdateBeersHelper.UpdateBeers(beers, beersQuickType);
+                if (currentCountUpdate > 0)
                 {
-                    counter += countUpdate;
-                    UploadedCountInvoke(counter);
+                    countUpdate  += currentCountUpdate;
+                    UploadedCountInvoke(GetUpdateBeersMessage(countChek, countUpdate));
                 }
 
                 if (beersQuickType.Response.Pagination.Offset.HasValue)
@@ -122,7 +124,7 @@ namespace UntappdWebApiClient
                             AddCheckin(currentCheckin, checkinsContainer);
                             counter++;
                         }
-                        UploadedCountInvoke(counter);
+                        UploadedCountInvoke(GetFillCheckinsMessage(counter));
                     }
                     else
                     {
@@ -131,8 +133,7 @@ namespace UntappdWebApiClient
                             AddCheckin(currentCheckin, checkinsContainer);
                             counter++;
                         }
-
-                        UploadedCountInvoke(counter);
+                        UploadedCountInvoke(GetFillCheckinsMessage(counter));
                     }
                     currentId = checkinsQuickType.Response.Pagination.MaxId.Value;
                 }
@@ -204,10 +205,21 @@ namespace UntappdWebApiClient
             }
         }
 
-        private void UploadedCountInvoke(int count)
+        private string GetFillCheckinsMessage(int count)
         {
-            if (ChangeUploadedCountEvent != null)
-                ChangeUploadedCountEvent.Invoke(count);
+            return $"{Properties.Resources.Uploaded}: {count}";
+        }
+
+        private string GetUpdateBeersMessage(long countChek, long countUpdate)
+        {
+            int percent = countChek > 0 ? (int) Math.Truncate((double) countUpdate / countChek * 100) : 0;
+            return $"{Properties.Resources.Chek}:{countChek} / {Properties.Resources.Update}:{countUpdate} [{percent}%]";
+        }
+
+        private void UploadedCountInvoke(string message)
+        {
+            if (UploadedProgress != null)
+                UploadedProgress.Invoke(message);
         }
     }
 }

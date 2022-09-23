@@ -357,10 +357,6 @@
     <value>Checkins will be deleted. Continue?</value>
     <comment>en-en</comment>
   </data>
-  <data name="Uploaded" xml:space="preserve">
-    <value>Uploaded</value>
-    <comment>en-en</comment>
-  </data>
   <data name="WarningMessageSaveProjectToUNTP" xml:space="preserve">
     <value>Save project to UNTP</value>
     <comment>en-en</comment>

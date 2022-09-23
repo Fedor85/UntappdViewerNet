@@ -761,15 +761,6 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Uploaded.
-        /// </summary>
-        public static string Uploaded {
-            get {
-                return ResourceManager.GetString("Uploaded", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Upload Photo.
         /// </summary>
         public static string UploadPhoto {
