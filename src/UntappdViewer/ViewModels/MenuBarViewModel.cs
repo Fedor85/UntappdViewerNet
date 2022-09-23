@@ -54,6 +54,8 @@ namespace UntappdViewer.ViewModels
 
         public ICommand WebDownloadProjectCommand { get; }
 
+        public ICommand GalleryProjectCommand { get; }
+
         public ICommand CheckinsProjectReportCommand { get; }
 
         public ICommand HelpCommand { get; }
@@ -82,6 +84,7 @@ namespace UntappdViewer.ViewModels
             DownloadProjectMediaCommand = new DelegateCommand(DownloadProjectMedia);
             UploadProjectPhotoCommand = new DelegateCommand(UploadProjectPhotos);
             WebDownloadProjectCommand = new DelegateCommand(WebDownloadProject);
+            GalleryProjectCommand = new DelegateCommand(GalleryProject);
             CheckinsProjectReportCommand = new DelegateCommand(CheckinsProjectReport);
             HelpCommand = new DelegateCommand(Help);
         }
@@ -312,6 +315,11 @@ namespace UntappdViewer.ViewModels
 
             moduleManager.LoadModule(typeof(WebDownloadProjectModule).Name);
             ActivateView(RegionNames.MainRegion, typeof(Views.WebDownloadProject));
+        }
+
+        private void GalleryProject()
+        {
+
         }
 
         private void CheckinsProjectReport()

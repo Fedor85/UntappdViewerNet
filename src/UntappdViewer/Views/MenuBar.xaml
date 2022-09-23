@@ -49,6 +49,12 @@
                 </MenuItem.Icon>
             </MenuItem>
             <Separator/>
+            <MenuItem Header="{x:Static properties:Resources.GalleryProject}" Command="{Binding GalleryProjectCommand}">
+                <MenuItem.Icon>
+                    <Image Source="../Resources/gallery.ico"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator/>
             <MenuItem Header="{x:Static properties:Resources.CheckinsReport}" Command="{Binding CheckinsProjectReportCommand}">
                 <MenuItem.Icon>
                     <Image Source="../Resources/excel_report.ico"/>
