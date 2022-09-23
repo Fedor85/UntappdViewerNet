@@ -70,7 +70,7 @@ namespace UntappdViewer.Domain.Services
         {
             Untappd = FileHelper.OpenFile<Untappd>(filePath);
             if(!Untappd.IsValidVersion())
-                throw new ArgumentException(String.Format("{0}\n{1}", Properties.Resources.ArgumentExceptioValidUNTPProjectVersion, filePath));
+                throw new ArgumentException($"{Properties.Resources.ArgumentExceptioValidUNTPProjectVersion}\n{filePath}");
         }
 
         public void SortDataDescCheckins()

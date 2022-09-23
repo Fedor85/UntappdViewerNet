@@ -11,7 +11,7 @@ namespace UntappdWebApiClient
         public UrlPathBuilder(string baseUrl, string accessToken)
         {
             this.baseUrl = new Uri(baseUrl);
-            authenticationUri = String.Format("&access_token={0}", accessToken);
+            authenticationUri = $"&access_token={accessToken}";
         }
 
         public string GetUrl(string methodName)

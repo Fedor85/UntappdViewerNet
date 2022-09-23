@@ -118,7 +118,7 @@ namespace UntappdViewer.Infrastructure
 
             string allPaths = String.Empty;
             foreach (FileItem fileItem in fileItems)
-                allPaths += String.Format("{0}*{1}|", fileItem.Index, fileItem.FilePath);
+                allPaths += $"{fileItem.Index}*{fileItem.FilePath}|";
 
             return allPaths.Remove(allPaths.Length - 1, 1);
         }

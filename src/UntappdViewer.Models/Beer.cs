@@ -104,8 +104,7 @@ namespace UntappdViewer.Models
 
         private void OnPropertyChanged()
         {
-            if (Changed != null)
-                Changed.Invoke();
+            Changed?.Invoke();
         }
     }
 }

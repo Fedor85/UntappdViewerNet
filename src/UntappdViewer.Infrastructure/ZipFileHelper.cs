@@ -53,19 +53,18 @@ namespace UntappdViewer.Infrastructure
                 return;
 
             int percent = (int)Math.Truncate((double)e.EntriesSaved / e.EntriesTotal * 100);
-            string message = String.Format("[{0}% ({1}/{2})]:{3}", percent, e.EntriesSaved, e.EntriesTotal, e.CurrentEntry.FileName);
+            string message = $"[{percent}% ({e.EntriesSaved}/{e.EntriesTotal})]:{e.CurrentEntry.FileName}";
             ZipProgressInvoke(message);
         }
 
         private void ZipProgressInvoke(string message)
         {
-            if (ZipProgress != null)
-                ZipProgress.Invoke(message);
+            ZipProgress?.Invoke(message);
         }
 
         public static string GetResultPath(string filePath)
         {
-            return Path.Combine(Path.GetDirectoryName(filePath), String.Format("{0}.zip", Path.GetFileNameWithoutExtension(filePath)));
+            return Path.Combine(Path.GetDirectoryName(filePath), $"{Path.GetFileNameWithoutExtension(filePath)}.zip");
         }
     }
 }

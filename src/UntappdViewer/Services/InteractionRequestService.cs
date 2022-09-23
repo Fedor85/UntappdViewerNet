@@ -73,9 +73,7 @@ namespace UntappdViewer.Services
 
         public void ShowMessageOnStatusBar(string message)
         {
-            if (ShowMessageOnStatusBarEvent != null)
-                ShowMessageOnStatusBarEvent.Invoke(message);
-
+            ShowMessageOnStatusBarEvent?.Invoke(message);
             messageOnStatusBar = message;
         }
 
@@ -86,10 +84,7 @@ namespace UntappdViewer.Services
 
         public void ClearMessageOnStatusBar()
         {
-            if (ShowMessageOnStatusBarEvent != null)
-                ShowMessageOnStatusBarEvent.Invoke(String.Empty);
-
-            messageOnStatusBar = String.Empty;
+            ShowMessageOnStatusBar(String.Empty);
         }
 
         public string OpenFile(string initialDirectory, List<string> extensions)

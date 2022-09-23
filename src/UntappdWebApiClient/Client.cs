@@ -218,8 +218,7 @@ namespace UntappdWebApiClient
 
         private void UploadedCountInvoke(string message)
         {
-            if (UploadedProgress != null)
-                UploadedProgress.Invoke(message);
+            UploadedProgress?.Invoke(message);
         }
     }
 }

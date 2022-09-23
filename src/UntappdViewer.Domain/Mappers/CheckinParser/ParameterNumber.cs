@@ -16,7 +16,7 @@ namespace UntappdViewer.Domain.Mappers.CheckinParser
 
         public override string ToString()
         {
-            return String.Format("{0}:{1}", Number, Name);
+            return $"{Number}:{Name}";
         }
     }
 }
