@@ -72,6 +72,9 @@
     <Reference Include="Unity.Container, Version=5.11.11.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.Container.5.11.11\lib\net48\Unity.Container.dll</HintPath>
     </Reference>
+    <Reference Include="VirtualizingWrapPanel, Version=1.5.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VirtualizingWrapPanel.1.5.7\lib\net452\VirtualizingWrapPanel.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -150,7 +153,6 @@
       <DependentUpon>RecyclerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\RecyclerView\VewModel\CheckinViewModel.cs" />
-    <Compile Include="Views\Controls\RecyclerView\VirtualizingWrapPanel.cs" />
     <Compile Include="Views\Controls\SmartTextBox.xaml.cs">
       <DependentUpon>SmartTextBox.xaml</DependentUpon>
     </Compile>

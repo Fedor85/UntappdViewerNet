@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vewModel="clr-namespace:UntappdViewer.Views.Controls.VewModel"
              xmlns:dataTemplate="clr-namespace:UntappdViewer.Views.Controls.DataTemplate"
-             xmlns:controls="clr-namespace:UntappdViewer.Views.Controls"
+             xmlns:controls="clr-namespace:WpfToolkit.Controls;assembly=VirtualizingWrapPanel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Background="Transparent"
              ScrollViewer.HorizontalScrollBarVisibility="Disabled">
