@@ -30,4 +30,5 @@
         </Setter>
     </Style>
     <helpers:BoolToVisibilityConverter x:Key="BTVConverter"/>
+    <helpers:PathImageReSizeWidthConverter  x:Key="ImageReSizeWidthConverter"/>
 </ResourceDictionary>

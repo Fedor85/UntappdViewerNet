@@ -96,6 +96,7 @@
     <Compile Include="Different\Helpers\CommunicationHelper.cs" />
     <Compile Include="Different\Helpers\EnumsHelper.cs" />
     <Compile Include="Different\Helpers\ImageConverter.cs" />
+    <Compile Include="Different\Helpers\PathToThumbnailConverter.cs" />
     <Compile Include="Different\Helpers\UIHelper.cs" />
     <Compile Include="Different\ImageItemViewModel.cs" />
     <Compile Include="Different\TreeItemViewModel.cs" />
@@ -142,6 +143,14 @@
     <Compile Include="Views\Controls\LoopAutoScrollImageListBox.xaml.cs">
       <DependentUpon>LoopAutoScrollImageListBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Controls\RecyclerView\DataTemplate\CheckinDataTemplate.xaml.cs">
+      <DependentUpon>CheckinDataTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\RecyclerView\RecyclerView.xaml.cs">
+      <DependentUpon>RecyclerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\RecyclerView\VewModel\CheckinViewModel.cs" />
+    <Compile Include="Views\Controls\RecyclerView\VirtualizingWrapPanel.cs" />
     <Compile Include="Views\Controls\SmartTextBox.xaml.cs">
       <DependentUpon>SmartTextBox.xaml</DependentUpon>
     </Compile>
@@ -204,6 +213,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Controls\LoopAutoScrollImageListBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\RecyclerView\DataTemplate\CheckinDataTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\RecyclerView\RecyclerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -439,5 +456,6 @@
   <ItemGroup>
     <Resource Include="Resources\gallery.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
