@@ -14,12 +14,14 @@ namespace UntappdViewer.Different.Helpers
             string path = value as string;
 
             if (String.IsNullOrEmpty(path))
-                return null;
+                return value;
+
+            if(!Path.IsPathRooted(path))
+                return value;
 
             FileInfo info = new FileInfo(path);
-
             if (!info.Exists || info.Length <= 0)
-                return null;
+                return value;
 
             BitmapImage image = new BitmapImage();
 

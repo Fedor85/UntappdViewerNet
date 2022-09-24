@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Reflection;
 using UntappdViewer.Models;
 using UntappdViewer.Views.Controls.VewModel;
@@ -37,7 +38,7 @@ namespace UntappdViewer.Helpers
         {
             CheckinViewModel checkinViewModel = new CheckinViewModel();
             checkinViewModel.BeerName = checkin.Beer.Name;
-            checkinViewModel.PhotoPath = photoPath;
+            checkinViewModel.PhotoPath = !String.IsNullOrEmpty(checkin.UrlPhoto)? photoPath : DefautlValues.NoImageIconResources;
             checkinViewModel.CheckinRating = checkin.RatingScore ?? 0;
             return checkinViewModel;
         }
