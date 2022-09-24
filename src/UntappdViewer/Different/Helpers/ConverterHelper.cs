@@ -1,4 +1,9 @@
-﻿namespace UntappdViewer.Helpers
+﻿using System;
+using System.Reflection;
+using UntappdViewer.Models;
+using UntappdViewer.Views.Controls.VewModel;
+
+namespace UntappdViewer.Helpers
 {
     public static class ConverterHelper
     {
@@ -26,6 +31,15 @@
                 default:
                     return DefautlValues.EmptyImage;
             }
+        }
+
+        public static CheckinViewModel GetCheckinViewModel(Checkin checkin, string photoPath)
+        {
+            CheckinViewModel checkinViewModel = new CheckinViewModel();
+            checkinViewModel.BeerName = checkin.Beer.Name;
+            checkinViewModel.PhotoPath = photoPath;
+            checkinViewModel.CheckinRating = checkin.RatingScore ?? 0;
+            return checkinViewModel;
         }
     }
 }

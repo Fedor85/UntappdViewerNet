@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Windows.Documents;
 using System.Windows.Input;
 using Prism.Commands;
 using Prism.Modularity;
 using Prism.Regions;
+using UntappdViewer.Helpers;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
 using UntappdViewer.Views;
@@ -60,12 +59,7 @@ namespace UntappdViewer.ViewModels
             foreach (Checkin checkin in untappdService.GetCheckins())
             {
                 string photoPath = untappdService.GetCheckinPhotoFilePath(checkin);
-                viewModels.Add(new Views.Controls.VewModel.CheckinViewModel()
-                {
-                        BeerName = checkin.Beer.Name,
-                        PhotoPath = photoPath,
-                        CheckinRating = checkin.RatingScore.Value
-                });
+                viewModels.Add(ConverterHelper.GetCheckinViewModel(checkin, photoPath));
             }
             return viewModels;
         }
