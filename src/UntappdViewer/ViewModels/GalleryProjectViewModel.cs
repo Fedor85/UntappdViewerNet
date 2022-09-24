@@ -56,16 +56,15 @@ namespace UntappdViewer.ViewModels
 
         private IEnumerable GetItems()
         {
-            int count = 500;
-            List<Checkin> checkins = untappdService.GetCheckins();
             List<Views.Controls.VewModel.CheckinViewModel > viewModels = new List<Views.Controls.VewModel.CheckinViewModel>();
-
-            for (int i = 0; i < checkins.Count; i++)
+            foreach (Checkin checkin in untappdService.GetCheckins())
             {
-                string photoPath = untappdService.GetCheckinPhotoFilePath(checkins[i]);
+                string photoPath = untappdService.GetCheckinPhotoFilePath(checkin);
                 viewModels.Add(new Views.Controls.VewModel.CheckinViewModel()
                 {
-                    PhotoPath = photoPath
+                        BeerName = checkin.Beer.Name,
+                        PhotoPath = photoPath,
+                        CheckinRating = checkin.RatingScore.Value
                 });
             }
             return viewModels;
