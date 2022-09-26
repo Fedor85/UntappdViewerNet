@@ -40,5 +40,14 @@ namespace UntappdViewer.Helpers
             checkinViewModel.RatingScore = checkin.RatingScore ?? 0;
             return checkinViewModel;
         }
+
+        public static RatingViewModel GetBeerViewModel(Beer beer, string labelPath)
+        {
+            RatingViewModel checkinViewModel = new RatingViewModel();
+            checkinViewModel.Caption = beer.Name;
+            checkinViewModel.ImagePath = labelPath;
+            checkinViewModel.RatingScore = beer.GlobalRatingScore;
+            return checkinViewModel;
+        }
     }
 }

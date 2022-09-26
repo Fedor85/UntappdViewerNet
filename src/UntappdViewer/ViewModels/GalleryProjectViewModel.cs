@@ -7,10 +7,11 @@ using Prism.Regions;
 using UntappdViewer.Different;
 using UntappdViewer.Helpers;
 using UntappdViewer.Interfaces.Services;
+using UntappdViewer.Models;
 using UntappdViewer.Modules;
-using UntappdViewer.Views;
 using UntappdViewer.Views.Controls.ViewModel;
 using Checkin = UntappdViewer.Models.Checkin;
+using Untappd = UntappdViewer.Views.Untappd;
 
 namespace UntappdViewer.ViewModels
 {
@@ -58,7 +59,7 @@ namespace UntappdViewer.ViewModels
         }
 
         public GalleryProjectViewModel(IRegionManager regionManager, IModuleManager moduleManager,
-                                                                    IUntappdService untappdService) : base(regionManager)
+                                                                     IUntappdService untappdService) : base(regionManager)
         {
             this.moduleManager = moduleManager;
             this.untappdService = untappdService;
@@ -98,6 +99,9 @@ namespace UntappdViewer.ViewModels
                 case (long)UntappdEntity.Checkin:
                     Items = GetCheckinItems();
                     break;
+                case (long)UntappdEntity.Beer:
+                    Items = GetBeerItems();
+                    break;
             }
         }
 
@@ -108,6 +112,17 @@ namespace UntappdViewer.ViewModels
             {
                 string photoPath = untappdService.GetCheckinPhotoFilePath(checkin);
                 viewModels.Add(ConverterHelper.GetCheckinViewModel(checkin, photoPath));
+            }
+            return viewModels;
+        }
+
+        private IEnumerable GetBeerItems()
+        {
+            List<RatingViewModel> viewModels = new List<RatingViewModel>();
+            foreach (Beer beer in untappdService.GetBeers())
+            {
+                string photoPath = untappdService.GetBeerLabelFilePath(beer);
+                viewModels.Add(ConverterHelper.GetBeerViewModel(beer, photoPath));
             }
             return viewModels;
         }
