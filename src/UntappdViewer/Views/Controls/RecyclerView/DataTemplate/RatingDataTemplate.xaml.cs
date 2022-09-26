@@ -5,9 +5,9 @@ namespace UntappdViewer.Views.Controls.DataTemplate
     /// <summary>
     /// Interaction logic for CheckinDataTemplate.xaml
     /// </summary>
-    public partial class CheckinDataTemplate : UserControl
+    public partial class RatingDataTemplate : UserControl
     {
-        public CheckinDataTemplate()
+        public RatingDataTemplate()
         {
             InitializeComponent();
         }

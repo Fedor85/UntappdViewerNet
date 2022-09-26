@@ -8,6 +8,7 @@ using UntappdViewer.Helpers;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
 using UntappdViewer.Views;
+using UntappdViewer.Views.Controls.VewModel;
 using Checkin = UntappdViewer.Models.Checkin;
 
 namespace UntappdViewer.ViewModels
@@ -55,7 +56,7 @@ namespace UntappdViewer.ViewModels
 
         private IEnumerable GetItems()
         {
-            List<Views.Controls.VewModel.CheckinViewModel > viewModels = new List<Views.Controls.VewModel.CheckinViewModel>();
+            List<RatingViewModel> viewModels = new List<RatingViewModel>();
             foreach (Checkin checkin in untappdService.GetCheckins())
             {
                 string photoPath = untappdService.GetCheckinPhotoFilePath(checkin);

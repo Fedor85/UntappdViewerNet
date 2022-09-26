@@ -146,13 +146,13 @@
     <Compile Include="Views\Controls\LoopAutoScrollImageListBox.xaml.cs">
       <DependentUpon>LoopAutoScrollImageListBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\RecyclerView\DataTemplate\CheckinDataTemplate.xaml.cs">
-      <DependentUpon>CheckinDataTemplate.xaml</DependentUpon>
+    <Compile Include="Views\Controls\RecyclerView\DataTemplate\RatingDataTemplate.xaml.cs">
+      <DependentUpon>RatingDataTemplate.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\RecyclerView\RecyclerView.xaml.cs">
       <DependentUpon>RecyclerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\RecyclerView\VewModel\CheckinViewModel.cs" />
+    <Compile Include="Views\Controls\RecyclerView\VewModel\RatingViewModel.cs" />
     <Compile Include="Views\Controls\SmartTextBox.xaml.cs">
       <DependentUpon>SmartTextBox.xaml</DependentUpon>
     </Compile>
@@ -218,7 +218,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Controls\RecyclerView\DataTemplate\CheckinDataTemplate.xaml">
+    <Page Include="Views\Controls\RecyclerView\DataTemplate\RatingDataTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

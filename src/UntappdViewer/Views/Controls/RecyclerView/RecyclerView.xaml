@@ -15,8 +15,8 @@
         </ItemsPanelTemplate>
     </ItemsControl.ItemsPanel>
     <ListBox.Resources>
-        <DataTemplate DataType="{x:Type vewModel:CheckinViewModel}">
-            <dataTemplate:CheckinDataTemplate />
+        <DataTemplate DataType="{x:Type vewModel:RatingViewModel}">
+            <dataTemplate:RatingDataTemplate />
         </DataTemplate>
     </ListBox.Resources>
 </ListBox>

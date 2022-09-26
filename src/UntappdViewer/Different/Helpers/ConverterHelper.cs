@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
+﻿using System.IO;
 using UntappdViewer.Models;
 using UntappdViewer.Views.Controls.VewModel;
 
@@ -34,12 +32,12 @@ namespace UntappdViewer.Helpers
             }
         }
 
-        public static CheckinViewModel GetCheckinViewModel(Checkin checkin, string photoPath)
+        public static RatingViewModel GetCheckinViewModel(Checkin checkin, string photoPath)
         {
-            CheckinViewModel checkinViewModel = new CheckinViewModel();
-            checkinViewModel.BeerName = checkin.Beer.Name;
-            checkinViewModel.PhotoPath = File.Exists(photoPath) ? photoPath : DefautlValues.NoImageIconResources;
-            checkinViewModel.CheckinRating = checkin.RatingScore ?? 0;
+            RatingViewModel checkinViewModel = new RatingViewModel();
+            checkinViewModel.Caption = checkin.Beer.Name;
+            checkinViewModel.ImagePath = File.Exists(photoPath) ? photoPath : DefautlValues.NoImageIconResources;
+            checkinViewModel.RatingScore = checkin.RatingScore ?? 0;
             return checkinViewModel;
         }
     }
