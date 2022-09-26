@@ -18,5 +18,8 @@
         <DataTemplate DataType="{x:Type vewModel:RatingViewModel}">
             <dataTemplate:RatingDataTemplate />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vewModel:ImageViewModel}">
+            <dataTemplate:ImageDataTemplate />
+        </DataTemplate>
     </ListBox.Resources>
 </ListBox>

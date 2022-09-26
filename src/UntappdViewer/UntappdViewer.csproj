@@ -102,6 +102,10 @@
     <Compile Include="Different\Helpers\PathImageReSizeWidthConverter.cs" />
     <Compile Include="Different\Helpers\UIHelper.cs" />
     <Compile Include="Different\UntappdEntity.cs" />
+    <Compile Include="Views\Controls\RecyclerView\DataTemplate\ImageDataTemplate.xaml.cs">
+      <DependentUpon>ImageDataTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\RecyclerView\ViewModel\ImageViewModel.cs" />
     <Compile Include="Views\Controls\ViewModel\Entity.cs" />
     <Compile Include="Views\Controls\ViewModel\ImageItemViewModel.cs" />
     <Compile Include="Views\Controls\ViewModel\TreeItemViewModel.cs" />
@@ -217,6 +221,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Controls\LoopAutoScrollImageListBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\RecyclerView\DataTemplate\ImageDataTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,11 +1,7 @@
 ﻿namespace UntappdViewer.Views.Controls.ViewModel
 {
-    public class RatingViewModel
+    public class RatingViewModel : ImageViewModel
     {
-        public string Caption { get; set; }
-
-        public string ImagePath { get; set; }
-
         public double RatingScore { get; set; }
     }
 }

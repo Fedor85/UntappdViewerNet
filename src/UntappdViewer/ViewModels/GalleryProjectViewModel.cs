@@ -135,7 +135,7 @@ namespace UntappdViewer.ViewModels
 
         private IEnumerable GetBreweryItems()
         {
-            List<RatingViewModel> viewModels = new List<RatingViewModel>();
+            List<ImageViewModel> viewModels = new List<ImageViewModel>();
             foreach (Brewery brewery in untappdService.GetBrewerys())
             {
                 string labelPath = untappdService.GetBreweryLabelFilePath(brewery);
@@ -146,7 +146,7 @@ namespace UntappdViewer.ViewModels
 
         private IEnumerable GetBadgeItems()
         {
-            List<RatingViewModel> viewModels = new List<RatingViewModel>();
+            List<ImageViewModel> viewModels = new List<ImageViewModel>();
             foreach (Badge badge in untappdService.GetBadges())
             {
                 string imagePath = untappdService.GetBadgeImageFilePath(badge);

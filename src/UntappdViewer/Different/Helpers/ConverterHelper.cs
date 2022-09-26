@@ -50,17 +50,17 @@ namespace UntappdViewer.Helpers
             return ratingViewModel;
         }
 
-        public static RatingViewModel GetBreweryViewModel(Brewery brewery, string labelPath)
+        public static ImageViewModel GetBreweryViewModel(Brewery brewery, string labelPath)
         {
-            RatingViewModel ratingViewModel = new RatingViewModel();
+            ImageViewModel ratingViewModel = new ImageViewModel();
             ratingViewModel.Caption = brewery.Name;
             ratingViewModel.ImagePath = labelPath;
             return ratingViewModel;
         }
 
-        public static RatingViewModel GetBadgeViewModel(Badge badge, string imagePath)
+        public static ImageViewModel GetBadgeViewModel(Badge badge, string imagePath)
         {
-            RatingViewModel ratingViewModel = new RatingViewModel();
+            ImageViewModel ratingViewModel = new ImageViewModel();
             ratingViewModel.Caption = badge.Name;
             ratingViewModel.ImagePath = imagePath;
             return ratingViewModel;
