@@ -47,7 +47,9 @@ namespace UntappdViewer.Helpers
         {
             RatingViewModel ratingViewModel = new RatingViewModel();
             ratingViewModel.Caption = beer.Name;
-            ratingViewModel.ImagePath = labelPath;
+            if (File.Exists(labelPath))
+                ratingViewModel.ImagePath = labelPath;
+
             ratingViewModel.RatingScore = beer.GlobalRatingScore;
             return ratingViewModel;
         }
@@ -56,7 +58,9 @@ namespace UntappdViewer.Helpers
         {
             ImageViewModel imageViewModel = new ImageViewModel();
             imageViewModel.Caption = brewery.Name;
-            imageViewModel.ImagePath = labelPath;
+            if (File.Exists(labelPath))
+                imageViewModel.ImagePath = labelPath;
+
             if (brewery.Venue != null && !String.IsNullOrEmpty(brewery.Venue.Country))
                 imageViewModel.Description = brewery.Venue.Country;
 
@@ -67,7 +71,9 @@ namespace UntappdViewer.Helpers
         {
             ImageViewModel imageViewModel = new ImageViewModel();
             imageViewModel.Caption = badge.Name;
-            imageViewModel.ImagePath = imagePath;
+            if (File.Exists(imagePath))
+                imageViewModel.ImagePath = imagePath;
+
             if (!String.IsNullOrEmpty(badge.Description))
                 imageViewModel.Description = StringHelper.GetSplitByLength(badge.Description, 40);
 
