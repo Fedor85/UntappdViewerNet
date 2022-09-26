@@ -14,10 +14,14 @@
             <RowDefinition/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-        <controls:RecyclerView Grid.Row="0" ItemsSource="{Binding Items}"/>
-        <ComboBox Grid.Row="1" Width="100" Height="20" Margin="5,0,0,0" HorizontalAlignment="Left"
-                  ItemsSource="{Binding DisplayTypeItems}" SelectedItem="{Binding SelectTypeDisplayItem, Mode=TwoWay}"/>
-        <Button  Grid.Row="1" Content="{x:Static properties:Resources.Ok}" Command="{Binding OkButtonCommand}" 
-                 Width="60" Height="20" HorizontalAlignment="Right" VerticalAlignment="Center" IsDefault="True" Margin="0,0,5,0"/>
+        <controls:RecyclerView Grid.Row="0" ItemsSource="{Binding Items}" ItemsSourceChanged="ItemsSourceChanged"/>
+        <DockPanel Grid.Row="1">
+            <ComboBox Width="100" Height="20" Margin="5,0,0,0" VerticalAlignment="Center"
+                      ItemsSource="{Binding DisplayTypeItems}" SelectedItem="{Binding SelectTypeDisplayItem, Mode=TwoWay}"/>
+            <Label Name="ItemsCount" Content="Count:" FontWeight="Bold" Margin="5,0,0,0" VerticalAlignment="Center"/>
+            <Button  Content="{x:Static properties:Resources.Ok}" Command="{Binding OkButtonCommand}" 
+                     Width="60" Height="20" HorizontalAlignment="Right" VerticalAlignment="Center" IsDefault="True" Margin="0,0,5,0"/>
+        </DockPanel>
+
     </Grid>
 </UserControl>

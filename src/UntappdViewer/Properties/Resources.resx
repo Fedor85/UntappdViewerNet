@@ -438,4 +438,8 @@
     <value>No Name</value>
     <comment>en-en</comment>
   </data>
+  <data name="Count" xml:space="preserve">
+    <value>Count</value>
+    <comment>en- en</comment>
+  </data>
 </root>

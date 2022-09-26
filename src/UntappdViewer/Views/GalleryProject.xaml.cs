@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System.Collections;
+using System.Linq;
+using System.Windows.Controls;
 
 namespace UntappdViewer.Views
 {
@@ -10,6 +12,12 @@ namespace UntappdViewer.Views
         public GalleryProject()
         {
             InitializeComponent();
+        }
+
+        private void ItemsSourceChanged(IEnumerable itemsSource)
+        {
+            int count = itemsSource?.Cast<object>().Count() ?? 0;
+            ItemsCount.Content = $"{Properties.Resources.Count}: {count}";
         }
     }
 }
