@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:starRating="clr-namespace:UntappdViewer.Views.Controls.StarRating"
              mc:Ignorable="d" 
-             Width="200" Height="250">
+             Width="170" Height="250">
     <Grid>
         <ItemsControl Background="#ffffff" Opacity="0.3"/>
         <Grid>
@@ -14,8 +14,8 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="25"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" TextTrimming="CharacterEllipsis" Text="{Binding Caption}" Margin="15,0,0,0" Height="20"/>
-            <Border Grid.Row="1" Width="170" Height="200" CornerRadius="5" ToolTip="{Binding Description}">
+            <TextBlock Grid.Row="0" TextTrimming="CharacterEllipsis" Text="{Binding Caption}" Margin="10,0,0,0" Height="20"/>
+            <Border Grid.Row="1" Width="150" Height="200" CornerRadius="5" ToolTip="{Binding Description}">
                 <Border.Effect>
                     <DropShadowEffect ShadowDepth="1"/>
                 </Border.Effect>
