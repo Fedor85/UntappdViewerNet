@@ -80,10 +80,9 @@ namespace UntappdWebApiClient
                 countChek += beersQuickType.Response.Beers.Count;
                 int currentCountUpdate = UpdateBeersHelper.UpdateBeers(beers, beersQuickType);
                 if (currentCountUpdate > 0)
-                {
-                    countUpdate  += currentCountUpdate;
-                    UploadedCountInvoke(GetUpdateBeersMessage(countChek, countUpdate));
-                }
+                    countUpdate += currentCountUpdate;
+
+                UploadedCountInvoke(GetUpdateBeersMessage(countChek, countUpdate));
 
                 if (beersQuickType.Response.Pagination.Offset.HasValue)
                     offset = beersQuickType.Response.Pagination.Offset.Value;
