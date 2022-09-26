@@ -5,23 +5,28 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:starRating="clr-namespace:UntappdViewer.Views.Controls.StarRating"
              mc:Ignorable="d" 
-             Width="210" Height="260">
+             Width="200" Height="250">
     <Grid>
         <ItemsControl Background="#ffffff" Opacity="0.3"/>
-        <StackPanel>
-            <TextBlock TextTrimming="CharacterEllipsis" Text="{Binding Caption}" Margin="15,0,0,0" Height="20"/>
-            <Border Width="180" Height="215" CornerRadius="5">
-            <Border.Effect>
-                <DropShadowEffect ShadowDepth="1"/>
-            </Border.Effect>
-            <Border.Background>
-                <ImageBrush ImageSource="{Binding ImagePath, Converter={StaticResource ImageReSizeWidthConverter}, ConverterParameter='200'}"/>
-            </Border.Background>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="25"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" TextTrimming="CharacterEllipsis" Text="{Binding Caption}" Margin="15,0,0,0" Height="20"/>
+            <Border Grid.Row="1" Width="170" Height="200" CornerRadius="5">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="1"/>
+                </Border.Effect>
+                <Border.Background>
+                    <ImageBrush ImageSource="{Binding ImagePath, Converter={StaticResource ImageReSizeWidthConverter}, ConverterParameter='200'}"/>
+                </Border.Background>
             </Border>
-            <starRating:StarRatingControl StarCount="5" StarSize="20" HorizontalAlignment="Center"
+            <starRating:StarRatingControl Grid.Row="2" StarCount="5" StarSize="20" HorizontalAlignment="Center"
                                           BackgroundStarColor="#ffffff" BackgroundStarOpacity="1"
                                           BorderStarColor="#000000" BorderStarThickness="5"
                                           ForegroundStarColor="#ffc100" Rating="{Binding RatingScore}" VerticalAlignment="Center"/>
-        </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>
