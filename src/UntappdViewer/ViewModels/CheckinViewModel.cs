@@ -10,7 +10,6 @@ using Prism.Commands;
 using Prism.Events;
 using Prism.Modularity;
 using Prism.Regions;
-using UntappdViewer.Different;
 using UntappdViewer.Events;
 using UntappdViewer.Helpers;
 using UntappdViewer.Infrastructure;
@@ -18,6 +17,7 @@ using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
 using UntappdViewer.Modules;
 using UntappdViewer.Utils;
+using UntappdViewer.Views.Controls.ViewModel;
 
 namespace UntappdViewer.ViewModels
 {

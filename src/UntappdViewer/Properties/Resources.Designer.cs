@@ -519,6 +519,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No Name.
+        /// </summary>
+        public static string NoName {
+            get {
+                return ResourceManager.GetString("NoName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File format not supported.
         /// </summary>
         public static string NoSupportedFile {

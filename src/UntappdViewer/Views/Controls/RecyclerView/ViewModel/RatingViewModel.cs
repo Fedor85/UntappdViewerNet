@@ -1,4 +1,4 @@
-﻿namespace UntappdViewer.Views.Controls.VewModel
+﻿namespace UntappdViewer.Views.Controls.ViewModel
 {
     public class RatingViewModel
     {

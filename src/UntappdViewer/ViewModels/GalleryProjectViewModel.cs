@@ -4,11 +4,12 @@ using System.Windows.Input;
 using Prism.Commands;
 using Prism.Modularity;
 using Prism.Regions;
+using UntappdViewer.Different;
 using UntappdViewer.Helpers;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
 using UntappdViewer.Views;
-using UntappdViewer.Views.Controls.VewModel;
+using UntappdViewer.Views.Controls.ViewModel;
 using Checkin = UntappdViewer.Models.Checkin;
 
 namespace UntappdViewer.ViewModels
@@ -21,6 +22,10 @@ namespace UntappdViewer.ViewModels
 
         private IEnumerable items;
 
+        private IEnumerable displayTypeItems;
+
+        private Entity selectTypeDisplayItem;
+
         public ICommand OkButtonCommand { get; }
 
         public IEnumerable Items
@@ -32,12 +37,31 @@ namespace UntappdViewer.ViewModels
             }
         }
 
+        public IEnumerable DisplayTypeItems
+        {
+            get { return displayTypeItems; }
+            set
+            {
+                SetProperty(ref displayTypeItems, value);
+            }
+        }
+
+        public Entity SelectTypeDisplayItem
+        {
+            get { return selectTypeDisplayItem; }
+            set
+            {
+                SetItems(value);
+                SetProperty(ref selectTypeDisplayItem, value);
+
+            }
+        }
+
         public GalleryProjectViewModel(IRegionManager regionManager, IModuleManager moduleManager,
                                                                     IUntappdService untappdService) : base(regionManager)
         {
             this.moduleManager = moduleManager;
             this.untappdService = untappdService;
-
 
             OkButtonCommand = new DelegateCommand(Exit);
         }
@@ -45,16 +69,39 @@ namespace UntappdViewer.ViewModels
         protected override void Activate()
         {
             base.Activate();
-            Items = GetItems();
+            SetDisplayTypeItems();
         }
 
         protected override void DeActivate()
         {
             base.DeActivate();
-            Items = null;
+            DisplayTypeItems = null;
         }
 
-        private IEnumerable GetItems()
+        private void SetDisplayTypeItems()
+        {
+            List<Entity> items = GetDisplayTypeItems();
+            DisplayTypeItems = items;
+            if (items.Count > 0)
+                SelectTypeDisplayItem = items[0];
+        }
+
+        private void SetItems(Entity untappdEntity)
+        {
+            Items = null;
+
+            if (untappdEntity == null)
+                return;
+
+            switch (untappdEntity.Id)
+            {
+                case (long)UntappdEntity.Checkin:
+                    Items = GetCheckinItems();
+                    break;
+            }
+        }
+
+        private IEnumerable GetCheckinItems()
         {
             List<RatingViewModel> viewModels = new List<RatingViewModel>();
             foreach (Checkin checkin in untappdService.GetCheckins())
@@ -63,6 +110,15 @@ namespace UntappdViewer.ViewModels
                 viewModels.Add(ConverterHelper.GetCheckinViewModel(checkin, photoPath));
             }
             return viewModels;
+        }
+
+        private List<Entity> GetDisplayTypeItems()
+        {
+            List<Entity> typeItems = new List<Entity>();
+            typeItems.Add(EnumsHelper.GetntappdEntity(UntappdEntity.Checkin));
+            typeItems.Add(EnumsHelper.GetntappdEntity(UntappdEntity.Beer));
+            typeItems.Add(EnumsHelper.GetntappdEntity(UntappdEntity.Brewery));
+            return typeItems;
         }
 
         private void Exit()

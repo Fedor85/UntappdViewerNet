@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 using Microsoft.Xaml.Behaviors;
+using UntappdViewer.Views.Controls.ViewModel;
 
 namespace UntappdViewer.Behaviors
 {

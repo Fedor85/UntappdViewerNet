@@ -1,6 +1,6 @@
 ﻿using Prism.Mvvm;
 
-namespace UntappdViewer
+namespace UntappdViewer.Views.Controls.ViewModel
 {
     public class TreeItemViewModel : BindableBase
     {

@@ -101,8 +101,10 @@
     <Compile Include="Different\Helpers\ImageConverter.cs" />
     <Compile Include="Different\Helpers\PathImageReSizeWidthConverter.cs" />
     <Compile Include="Different\Helpers\UIHelper.cs" />
-    <Compile Include="Different\ImageItemViewModel.cs" />
-    <Compile Include="Different\TreeItemViewModel.cs" />
+    <Compile Include="Different\UntappdEntity.cs" />
+    <Compile Include="Views\Controls\ViewModel\Entity.cs" />
+    <Compile Include="Views\Controls\ViewModel\ImageItemViewModel.cs" />
+    <Compile Include="Views\Controls\ViewModel\TreeItemViewModel.cs" />
     <Compile Include="Modules\Base\BaseLoadingModule.cs" />
     <Compile Include="Modules\Base\BaseModue.cs" />
     <Compile Include="Modules\CheckinModule.cs" />
@@ -152,7 +154,7 @@
     <Compile Include="Views\Controls\RecyclerView\RecyclerView.xaml.cs">
       <DependentUpon>RecyclerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\RecyclerView\VewModel\RatingViewModel.cs" />
+    <Compile Include="Views\Controls\RecyclerView\ViewModel\RatingViewModel.cs" />
     <Compile Include="Views\Controls\SmartTextBox.xaml.cs">
       <DependentUpon>SmartTextBox.xaml</DependentUpon>
     </Compile>

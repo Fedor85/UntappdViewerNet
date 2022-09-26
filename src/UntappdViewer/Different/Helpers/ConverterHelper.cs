@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using UntappdViewer.Models;
-using UntappdViewer.Views.Controls.VewModel;
+using UntappdViewer.Views.Controls.ViewModel;
 
 namespace UntappdViewer.Helpers
 {

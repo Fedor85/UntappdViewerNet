@@ -434,4 +434,8 @@
     <value>Gallery Project</value>
     <comment>en-en</comment>
   </data>
+  <data name="NoName" xml:space="preserve">
+    <value>No Name</value>
+    <comment>en-en</comment>
+  </data>
 </root>

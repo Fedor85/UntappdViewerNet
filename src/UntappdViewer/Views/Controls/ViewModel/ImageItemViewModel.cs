@@ -1,4 +1,4 @@
-﻿namespace UntappdViewer.Different
+﻿namespace UntappdViewer.Views.Controls.ViewModel
 {
     public class ImageItemViewModel
     {
