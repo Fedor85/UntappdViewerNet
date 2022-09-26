@@ -20,7 +20,8 @@
                     <DropShadowEffect ShadowDepth="1"/>
                 </Border.Effect>
                 <Border.Background>
-                    <ImageBrush ImageSource="{Binding ImagePath, Converter={StaticResource ImageReSizeWidthConverter}, ConverterParameter='200'}"/>
+                    <ImageBrush ImageSource="{Binding ImagePath, Converter={StaticResource ImageReSizeWidthConverter}, ConverterParameter='200'}"
+                                Stretch="Uniform"/>
                 </Border.Background>
             </Border>
             <starRating:StarRatingControl Grid.Row="2" StarCount="5" StarSize="20" HorizontalAlignment="Center"

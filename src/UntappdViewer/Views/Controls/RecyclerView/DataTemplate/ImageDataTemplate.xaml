@@ -18,7 +18,8 @@
                     <DropShadowEffect ShadowDepth="1"/>
                 </Border.Effect>
                 <Border.Background>
-                    <ImageBrush ImageSource="{Binding ImagePath, Converter={StaticResource ImageReSizeWidthConverter}, ConverterParameter='170'}"/>
+                    <ImageBrush ImageSource="{Binding ImagePath, Converter={StaticResource ImageReSizeWidthConverter}, ConverterParameter='170'}"
+                                Stretch="Uniform"/>
                 </Border.Background>
             </Border>
         </Grid>
