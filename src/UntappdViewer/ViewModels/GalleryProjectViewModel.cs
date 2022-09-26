@@ -102,6 +102,9 @@ namespace UntappdViewer.ViewModels
                 case (long)UntappdEntity.Beer:
                     Items = GetBeerItems();
                     break;
+                case (long)UntappdEntity.Brewery:
+                    Items = GetBreweryItems();
+                    break;
             }
         }
 
@@ -123,6 +126,17 @@ namespace UntappdViewer.ViewModels
             {
                 string photoPath = untappdService.GetBeerLabelFilePath(beer);
                 viewModels.Add(ConverterHelper.GetBeerViewModel(beer, photoPath));
+            }
+            return viewModels;
+        }
+
+        private IEnumerable GetBreweryItems()
+        {
+            List<RatingViewModel> viewModels = new List<RatingViewModel>();
+            foreach (Brewery brewery in untappdService.GetBrewerys())
+            {
+                string photoPath = untappdService.GetBreweryLabelFilePath(brewery);
+                viewModels.Add(ConverterHelper.GetBreweryViewModel(brewery, photoPath));
             }
             return viewModels;
         }

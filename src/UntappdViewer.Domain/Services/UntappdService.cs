@@ -180,6 +180,11 @@ namespace UntappdViewer.Domain.Services
             return Untappd.CheckinsContainer.Beers;
         }
 
+        public List<Brewery> GetBrewerys()
+        {
+            return Untappd.CheckinsContainer.Brewerys;
+        }
+
         public string GetTreeViewCheckinDisplayName(Checkin checkin, int number)
         {
             string prefix = $"#{number} {checkin.CreatedDate.ToString("yyyy-MMM-dd")} ";

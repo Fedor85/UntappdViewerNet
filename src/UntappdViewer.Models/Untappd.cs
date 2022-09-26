@@ -4,7 +4,7 @@ namespace UntappdViewer.Models
     [Serializable]
     public class Untappd
     {
-        private const int ActualUNTPVersion = 3;
+        private const int ActualUNTPVersion = 4;
 
         private bool isСhanges { get; set; }
 

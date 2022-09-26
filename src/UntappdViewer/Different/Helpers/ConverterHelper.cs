@@ -49,5 +49,13 @@ namespace UntappdViewer.Helpers
             checkinViewModel.RatingScore = beer.GlobalRatingScore;
             return checkinViewModel;
         }
+
+        public static RatingViewModel GetBreweryViewModel(Brewery brewery, string labelPath)
+        {
+            RatingViewModel checkinViewModel = new RatingViewModel();
+            checkinViewModel.Caption = brewery.Name;
+            checkinViewModel.ImagePath = labelPath;
+            return checkinViewModel;
+        }
     }
 }

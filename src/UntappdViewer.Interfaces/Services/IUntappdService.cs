@@ -56,6 +56,8 @@ namespace UntappdViewer.Interfaces.Services
 
         List<Beer> GetBeers();
 
+        List<Brewery> GetBrewerys();
+
         string GetTreeViewCheckinDisplayName(Checkin checkin, int number);
 
         string GetUploadSavePhotoFileName(Checkin checkin);

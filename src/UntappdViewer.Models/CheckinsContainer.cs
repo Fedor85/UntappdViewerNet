@@ -13,7 +13,7 @@ namespace UntappdViewer.Models
 
         public List<Beer> Beers { get; private set; }
 
-        private List<Brewery> brewerys;
+        public List<Brewery> Brewerys { get; private set; }
 
         private List<Venue> venues;
 
@@ -21,7 +21,7 @@ namespace UntappdViewer.Models
         {
             Checkins = new List<Checkin>();
             Beers = new List<Beer>();
-            brewerys = new List<Brewery>();
+            Brewerys = new List<Brewery>();
             venues = new List<Venue>();
             IsСhanges = false;
         }
@@ -33,7 +33,7 @@ namespace UntappdViewer.Models
 
         public Brewery GetBrewery(long breweryId)
         {
-            return brewerys.FirstOrDefault(item => item.Id == breweryId);
+            return Brewerys.FirstOrDefault(item => item.Id == breweryId);
         }
 
         public Venue GetVenue(Venue venue)
@@ -61,7 +61,7 @@ namespace UntappdViewer.Models
 
         public void AddBrewery(Brewery brewery)
         {
-            brewerys.Add(brewery);
+            Brewerys.Add(brewery);
             IsСhanges = true;
         }
 
