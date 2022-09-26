@@ -34,28 +34,36 @@ namespace UntappdViewer.Helpers
 
         public static RatingViewModel GetCheckinViewModel(Checkin checkin, string photoPath)
         {
-            RatingViewModel checkinViewModel = new RatingViewModel();
-            checkinViewModel.Caption = checkin.Beer.Name;
-            checkinViewModel.ImagePath = File.Exists(photoPath) ? photoPath : DefautlValues.NoImageIconResources;
-            checkinViewModel.RatingScore = checkin.RatingScore ?? 0;
-            return checkinViewModel;
+            RatingViewModel ratingViewModel = new RatingViewModel();
+            ratingViewModel.Caption = checkin.Beer.Name;
+            ratingViewModel.ImagePath = File.Exists(photoPath) ? photoPath : DefautlValues.NoImageIconResources;
+            ratingViewModel.RatingScore = checkin.RatingScore ?? 0;
+            return ratingViewModel;
         }
 
         public static RatingViewModel GetBeerViewModel(Beer beer, string labelPath)
         {
-            RatingViewModel checkinViewModel = new RatingViewModel();
-            checkinViewModel.Caption = beer.Name;
-            checkinViewModel.ImagePath = labelPath;
-            checkinViewModel.RatingScore = beer.GlobalRatingScore;
-            return checkinViewModel;
+            RatingViewModel ratingViewModel = new RatingViewModel();
+            ratingViewModel.Caption = beer.Name;
+            ratingViewModel.ImagePath = labelPath;
+            ratingViewModel.RatingScore = beer.GlobalRatingScore;
+            return ratingViewModel;
         }
 
         public static RatingViewModel GetBreweryViewModel(Brewery brewery, string labelPath)
         {
-            RatingViewModel checkinViewModel = new RatingViewModel();
-            checkinViewModel.Caption = brewery.Name;
-            checkinViewModel.ImagePath = labelPath;
-            return checkinViewModel;
+            RatingViewModel ratingViewModel = new RatingViewModel();
+            ratingViewModel.Caption = brewery.Name;
+            ratingViewModel.ImagePath = labelPath;
+            return ratingViewModel;
+        }
+
+        public static RatingViewModel GetBadgeViewModel(Badge badge, string imagePath)
+        {
+            RatingViewModel ratingViewModel = new RatingViewModel();
+            ratingViewModel.Caption = badge.Name;
+            ratingViewModel.ImagePath = imagePath;
+            return ratingViewModel;
         }
     }
 }

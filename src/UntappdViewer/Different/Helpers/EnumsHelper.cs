@@ -24,6 +24,7 @@ namespace UntappdViewer.Helpers
                 case UntappdEntity.Checkin: return Properties.Resources.Checkin;
                 case UntappdEntity.Beer: return Properties.Resources.Beer;
                 case UntappdEntity.Brewery: return Properties.Resources.Brewery;
+                case UntappdEntity.Badge: return Properties.Resources.Badges;
             }
             return Properties.Resources.NoName;
         }

@@ -58,6 +58,8 @@ namespace UntappdViewer.Interfaces.Services
 
         List<Brewery> GetBrewerys();
 
+        List<Badge> GetBadges();
+
         string GetTreeViewCheckinDisplayName(Checkin checkin, int number);
 
         string GetUploadSavePhotoFileName(Checkin checkin);

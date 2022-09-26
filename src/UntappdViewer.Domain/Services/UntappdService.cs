@@ -185,6 +185,20 @@ namespace UntappdViewer.Domain.Services
             return Untappd.CheckinsContainer.Brewerys;
         }
 
+        public List<Badge> GetBadges()
+        {
+            List<Badge> badges = new List<Badge>();
+            foreach (Checkin checkin in GetCheckins())
+            {
+                foreach (Badge badge in checkin.Badges)
+                {
+                    if (badges.All(item => item.Id != badge.Id))
+                        badges.Add(badge);
+                }
+            }
+            return badges;
+        }
+
         public string GetTreeViewCheckinDisplayName(Checkin checkin, int number)
         {
             string prefix = $"#{number} {checkin.CreatedDate.ToString("yyyy-MMM-dd")} ";

@@ -105,6 +105,9 @@ namespace UntappdViewer.ViewModels
                 case (long)UntappdEntity.Brewery:
                     Items = GetBreweryItems();
                     break;
+                case (long)UntappdEntity.Badge:
+                    Items = GetBadgeItems();
+                    break;
             }
         }
 
@@ -124,8 +127,8 @@ namespace UntappdViewer.ViewModels
             List<RatingViewModel> viewModels = new List<RatingViewModel>();
             foreach (Beer beer in untappdService.GetBeers())
             {
-                string photoPath = untappdService.GetBeerLabelFilePath(beer);
-                viewModels.Add(ConverterHelper.GetBeerViewModel(beer, photoPath));
+                string labelPath = untappdService.GetBeerLabelFilePath(beer);
+                viewModels.Add(ConverterHelper.GetBeerViewModel(beer, labelPath));
             }
             return viewModels;
         }
@@ -135,8 +138,19 @@ namespace UntappdViewer.ViewModels
             List<RatingViewModel> viewModels = new List<RatingViewModel>();
             foreach (Brewery brewery in untappdService.GetBrewerys())
             {
-                string photoPath = untappdService.GetBreweryLabelFilePath(brewery);
-                viewModels.Add(ConverterHelper.GetBreweryViewModel(brewery, photoPath));
+                string labelPath = untappdService.GetBreweryLabelFilePath(brewery);
+                viewModels.Add(ConverterHelper.GetBreweryViewModel(brewery, labelPath));
+            }
+            return viewModels;
+        }
+
+        private IEnumerable GetBadgeItems()
+        {
+            List<RatingViewModel> viewModels = new List<RatingViewModel>();
+            foreach (Badge badge in untappdService.GetBadges())
+            {
+                string imagePath = untappdService.GetBadgeImageFilePath(badge);
+                viewModels.Add(ConverterHelper.GetBadgeViewModel(badge, imagePath));
             }
             return viewModels;
         }
@@ -147,6 +161,7 @@ namespace UntappdViewer.ViewModels
             typeItems.Add(EnumsHelper.GetntappdEntity(UntappdEntity.Checkin));
             typeItems.Add(EnumsHelper.GetntappdEntity(UntappdEntity.Beer));
             typeItems.Add(EnumsHelper.GetntappdEntity(UntappdEntity.Brewery));
+            typeItems.Add(EnumsHelper.GetntappdEntity(UntappdEntity.Badge));
             return typeItems;
         }
 

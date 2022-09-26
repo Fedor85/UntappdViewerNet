@@ -7,5 +7,7 @@
         Beer = 2,
 
         Brewery = 3,
+
+        Badge = 4
     }
 }
