@@ -38,7 +38,7 @@ namespace UntappdViewer.Helpers
         {
             CheckinViewModel checkinViewModel = new CheckinViewModel();
             checkinViewModel.BeerName = checkin.Beer.Name;
-            checkinViewModel.PhotoPath = !String.IsNullOrEmpty(checkin.UrlPhoto)? photoPath : DefautlValues.NoImageIconResources;
+            checkinViewModel.PhotoPath = File.Exists(photoPath) ? photoPath : DefautlValues.NoImageIconResources;
             checkinViewModel.CheckinRating = checkin.RatingScore ?? 0;
             return checkinViewModel;
         }
