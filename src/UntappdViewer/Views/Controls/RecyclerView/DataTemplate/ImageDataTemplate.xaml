@@ -14,7 +14,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" TextTrimming="CharacterEllipsis" Text="{Binding Caption}" Margin="15,0,0,0" Height="20"/>
-            <Border Grid.Row="1" Width="120" Height="120" CornerRadius="5">
+            <Border Grid.Row="1" Width="120" Height="120" CornerRadius="5" ToolTip="{Binding Description}">
                 <Border.Effect>
                     <DropShadowEffect ShadowDepth="1"/>
                 </Border.Effect>

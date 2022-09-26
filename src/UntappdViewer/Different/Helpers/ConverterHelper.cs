@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using UntappdViewer.Models;
+using UntappdViewer.Utils;
 using UntappdViewer.Views.Controls.ViewModel;
 
 namespace UntappdViewer.Helpers
@@ -52,18 +54,24 @@ namespace UntappdViewer.Helpers
 
         public static ImageViewModel GetBreweryViewModel(Brewery brewery, string labelPath)
         {
-            ImageViewModel ratingViewModel = new ImageViewModel();
-            ratingViewModel.Caption = brewery.Name;
-            ratingViewModel.ImagePath = labelPath;
-            return ratingViewModel;
+            ImageViewModel imageViewModel = new ImageViewModel();
+            imageViewModel.Caption = brewery.Name;
+            imageViewModel.ImagePath = labelPath;
+            if (brewery.Venue != null && !String.IsNullOrEmpty(brewery.Venue.Country))
+                imageViewModel.Description = brewery.Venue.Country;
+
+            return imageViewModel;
         }
 
         public static ImageViewModel GetBadgeViewModel(Badge badge, string imagePath)
         {
-            ImageViewModel ratingViewModel = new ImageViewModel();
-            ratingViewModel.Caption = badge.Name;
-            ratingViewModel.ImagePath = imagePath;
-            return ratingViewModel;
+            ImageViewModel imageViewModel = new ImageViewModel();
+            imageViewModel.Caption = badge.Name;
+            imageViewModel.ImagePath = imagePath;
+            if (!String.IsNullOrEmpty(badge.Description))
+                imageViewModel.Description = StringHelper.GetSplitByLength(badge.Description, 40);
+
+            return imageViewModel;
         }
     }
 }
