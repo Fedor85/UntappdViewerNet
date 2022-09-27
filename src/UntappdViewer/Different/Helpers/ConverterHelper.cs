@@ -104,6 +104,15 @@ namespace UntappdViewer.Helpers
             return ratingsViewModels;
         }
 
+        public static Dictionary<double, int> ChartViewModelToDictionary(List<ChartViewModel<double, int>> models)
+        {
+            Dictionary<double, int> dictionary = new Dictionary<double, int>();
+            foreach (ChartViewModel<double, int> chartViewModel in models)
+                dictionary.Add(chartViewModel.Key, chartViewModel.Value);
+
+            return dictionary;
+        }
+
         #endregion
     }
 }

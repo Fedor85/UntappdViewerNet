@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
@@ -8,6 +9,7 @@ using Prism.Regions;
 using UntappdViewer.Helpers;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
+using UntappdViewer.Utils;
 using UntappdViewer.Views;
 using UntappdViewer.Views.Controls.ViewModel;
 
@@ -22,6 +24,8 @@ namespace UntappdViewer.ViewModels
         private IEnumerable ratingScore;
 
         private int maxYAxis;
+
+        private double averageRating;
 
         public ICommand OkButtonCommand { get; }
 
@@ -40,6 +44,15 @@ namespace UntappdViewer.ViewModels
             set
             {
                 SetProperty(ref maxYAxis, value);
+            }
+        }
+
+        public double AverageRating
+        {
+            get { return averageRating; }
+            set
+            {
+                SetProperty(ref averageRating, value);
             }
         }
 
@@ -70,8 +83,8 @@ namespace UntappdViewer.ViewModels
             int maxCount = chekinRatingScore.Select(item => item.Value).Max();
             MaxYAxis = maxCount + 100;
             RatingScore = chekinRatingScore;
+            AverageRating = Math.Round(MathHelper.GetAverageValue(ConverterHelper.ChartViewModelToDictionary(chekinRatingScore)), 2);
         }
-
 
         private void Exit()
         {

@@ -31,6 +31,10 @@
 
                     </chartingToolkit:SplineSeries>
                 </chartingToolkit:Chart>
+                <DockPanel>
+                    <Label Content="{x:Static properties:Resources.AverageRating}" FontWeight="Bold" Margin="5,0,0,0" VerticalAlignment="Bottom"/>
+                    <Label Content="{Binding AverageRating}" FontWeight="Bold" VerticalAlignment="Bottom"/>
+                </DockPanel>
             </Grid>
         </StackPanel>
         <Button Grid.Row="1" Content="{x:Static properties:Resources.Ok}" Command="{Binding OkButtonCommand}" 

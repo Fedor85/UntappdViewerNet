@@ -124,6 +124,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Average Rating:.
+        /// </summary>
+        public static string AverageRating {
+            get {
+                return ResourceManager.GetString("AverageRating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Badges.
         /// </summary>
         public static string Badges {

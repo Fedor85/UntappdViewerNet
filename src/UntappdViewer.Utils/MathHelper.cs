@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace UntappdViewer.Utils
 {
@@ -17,6 +18,19 @@ namespace UntappdViewer.Utils
             double delta = value / (double)step;
             double ceilingValue = Math.Ceiling(delta);
             return Convert.ToInt32(ceilingValue * step);
+        }
+
+        public static double GetAverageValue(Dictionary<double, int> dictionary)
+        {
+            int counter = 0;
+            double totalValue = 0;
+            foreach (KeyValuePair<double, int> keyValuePair in dictionary)
+            {
+                counter += keyValuePair.Value;
+                totalValue += keyValuePair.Key * keyValuePair.Value;
+            }
+
+            return counter == 0 ? totalValue : totalValue / counter;
         }
     }
 }
