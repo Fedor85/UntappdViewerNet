@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UntappdViewer.Models;
 using UntappdViewer.Utils;
 using UntappdViewer.Views.Controls.ViewModel;
@@ -33,6 +35,8 @@ namespace UntappdViewer.Helpers
                     return DefautlValues.EmptyImage;
             }
         }
+
+        #region GalleryProject
 
         public static RatingViewModel GetCheckinViewModel(Checkin checkin, string photoPath)
         {
@@ -79,5 +83,27 @@ namespace UntappdViewer.Helpers
 
             return imageViewModel;
         }
+
+        #endregion
+
+        #region StatisticsProject
+
+        public static List<ChartViewModel<double, int>> GetChekinRatingScore(List<Checkin> checkins)
+        {
+            List<ChartViewModel<double, int>> ratingsViewModels = new List<ChartViewModel<double, int>>();
+
+            IEnumerable<Checkin> chekinRating = checkins.Where(item => item.RatingScore.HasValue);
+            if (!chekinRating.Any())
+                return ratingsViewModels;
+
+            List<double> ratings = chekinRating.Select(item => item.RatingScore.Value).Distinct().ToList();
+            ratings.Sort();
+            foreach (double rating in ratings)
+                ratingsViewModels.Add(new ChartViewModel<double, int>(rating, chekinRating.Count(item => item.RatingScore.Value == rating)));
+
+            return ratingsViewModels;
+        }
+
+        #endregion
     }
 }

@@ -52,6 +52,7 @@
     <Compile Include="ReportingFixture.cs" />
     <Compile Include="TestHelper.cs" />
     <Compile Include="UntappdWebApiClientFixture.cs" />
+    <Compile Include="Utils\TestMathHelper.cs" />
     <Compile Include="Utils\TestStringHelper.cs" />
   </ItemGroup>
   <ItemGroup>

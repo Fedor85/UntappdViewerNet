@@ -245,6 +245,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Chekin rating score.
+        /// </summary>
+        public static string ChekinRatingScore {
+            get {
+                return ResourceManager.GetString("ChekinRatingScore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         public static System.Drawing.Icon close_icon {

@@ -38,6 +38,9 @@
     <ApplicationIcon>Themes\untappd_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DotNetProjects.DataVisualization.Toolkit, Version=6.1.94.0, Culture=neutral, PublicKeyToken=79778c5f2eed289b, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetProjects.WpfToolkit.DataVisualization.6.1.94\lib\net40\DotNetProjects.DataVisualization.Toolkit.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
@@ -108,6 +111,7 @@
       <DependentUpon>ImageDataTemplate.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\RecyclerView\ViewModel\ImageViewModel.cs" />
+    <Compile Include="Views\Controls\ViewModel\ChartViewModel.cs" />
     <Compile Include="Views\Controls\ViewModel\Entity.cs" />
     <Compile Include="Views\Controls\ViewModel\ImageItemViewModel.cs" />
     <Compile Include="Views\Controls\ViewModel\TreeItemViewModel.cs" />

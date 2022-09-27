@@ -18,6 +18,6 @@
 
         public const string Separator = " | ";
 
-
+        public const int ChartRatingScoreYInterval = 250;
     }
 }
