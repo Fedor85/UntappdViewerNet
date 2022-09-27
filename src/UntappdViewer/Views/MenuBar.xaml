@@ -54,6 +54,11 @@
                     <Image Source="../Resources/gallery.ico"/>
                 </MenuItem.Icon>
             </MenuItem>
+            <MenuItem Header="{x:Static properties:Resources.Statistics}" Command="{Binding StatisticsProjectCommand}">
+                <MenuItem.Icon>
+                    <Image Source="../Resources/chart_icon.ico"/>
+                </MenuItem.Icon>
+            </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static properties:Resources.CheckinsReport}" Command="{Binding CheckinsProjectReportCommand}">
                 <MenuItem.Icon>

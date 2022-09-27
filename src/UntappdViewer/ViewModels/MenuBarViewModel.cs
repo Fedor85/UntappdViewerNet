@@ -56,6 +56,8 @@ namespace UntappdViewer.ViewModels
 
         public ICommand GalleryProjectCommand { get; }
 
+        public ICommand StatisticsProjectCommand { get; }
+
         public ICommand CheckinsProjectReportCommand { get; }
 
         public ICommand HelpCommand { get; }
@@ -85,6 +87,7 @@ namespace UntappdViewer.ViewModels
             UploadProjectPhotoCommand = new DelegateCommand(UploadProjectPhotos);
             WebDownloadProjectCommand = new DelegateCommand(WebDownloadProject);
             GalleryProjectCommand = new DelegateCommand(GalleryProject);
+            StatisticsProjectCommand = new DelegateCommand(StatisticsProject);
             CheckinsProjectReportCommand = new DelegateCommand(CheckinsProjectReport);
             HelpCommand = new DelegateCommand(Help);
         }
@@ -221,14 +224,14 @@ namespace UntappdViewer.ViewModels
 
         private void DownloadFile(string webPath, string filePath)
         {
-            if (!String.IsNullOrEmpty(webPath) && !File.Exists(filePath))
-            {
-                string directoryName = Path.GetDirectoryName(filePath);
-                if (!Directory.Exists(directoryName))
-                    FileHelper.CreateDirectory(directoryName);
+            if (String.IsNullOrEmpty(webPath) || File.Exists(filePath))
+                return;
 
-                webDownloader.DownloadFile(webPath, filePath);
-            }
+            string directoryName = Path.GetDirectoryName(filePath);
+            if (!Directory.Exists(directoryName))
+                FileHelper.CreateDirectory(directoryName);
+
+            webDownloader.DownloadFile(webPath, filePath);
         }
 
         private void UploadProjectPhotos()
@@ -321,6 +324,11 @@ namespace UntappdViewer.ViewModels
         {
             moduleManager.LoadModule(typeof(GalleryProjectModule).Name);
             ActivateView(RegionNames.MainRegion, typeof(GalleryProject));
+        }
+
+        private void StatisticsProject()
+        {
+
         }
 
         private void CheckinsProjectReport()
