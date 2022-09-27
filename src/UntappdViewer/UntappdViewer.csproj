@@ -102,6 +102,8 @@
     <Compile Include="Different\Helpers\PathImageReSizeWidthConverter.cs" />
     <Compile Include="Different\Helpers\UIHelper.cs" />
     <Compile Include="Different\UntappdEntity.cs" />
+    <Compile Include="Modules\StatisticsProjectModule.cs" />
+    <Compile Include="ViewModels\StatisticsProjectViewModel.cs" />
     <Compile Include="Views\Controls\RecyclerView\DataTemplate\ImageDataTemplate.xaml.cs">
       <DependentUpon>ImageDataTemplate.xaml</DependentUpon>
     </Compile>
@@ -196,6 +198,9 @@
     </Compile>
     <Compile Include="Views\RecentFiles.xaml.cs">
       <DependentUpon>RecentFiles.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StatisticsProject.xaml.cs">
+      <DependentUpon>StatisticsProject.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StatusBar.xaml.cs">
       <DependentUpon>StatusBar.xaml</DependentUpon>
@@ -298,6 +303,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Themes\ResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StatisticsProject.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

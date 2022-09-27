@@ -328,7 +328,8 @@ namespace UntappdViewer.ViewModels
 
         private void StatisticsProject()
         {
-
+            moduleManager.LoadModule(typeof(StatisticsProjectModule).Name);
+            ActivateView(RegionNames.MainRegion, typeof(StatisticsProject));
         }
 
         private void CheckinsProjectReport()
