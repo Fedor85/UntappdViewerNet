@@ -453,8 +453,12 @@
     <value>Chekin rating score</value>
     <comment>en-en</comment>
   </data>
-  <data name="AverageRating" xml:space="preserve">
-    <value>Average Rating:</value>
+  <data name="AverageChekinRating" xml:space="preserve">
+    <value>Average Chekin Rating:</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="AverageBeerRating" xml:space="preserve">
+    <value>Average Beer Rating:</value>
     <comment>en-en</comment>
   </data>
 </root>

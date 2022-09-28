@@ -99,7 +99,22 @@ namespace UntappdViewer.Helpers
             List<double> ratings = chekinRating.Select(item => item.RatingScore.Value).Distinct().ToList();
             ratings.Sort();
             foreach (double rating in ratings)
-                ratingsViewModels.Add(new ChartViewModel<double, int>(rating, chekinRating.Count(item => item.RatingScore.Value == rating)));
+                ratingsViewModels.Add(new ChartViewModel<double, int>(rating, chekinRating.Count(item => MathHelper.DoubleCompare(item.RatingScore.Value, rating))));
+
+            return ratingsViewModels;
+        }
+
+        public static List<ChartViewModel<double, int>> GetBeerRatingScore(List<Beer> beers)
+        {
+            List<ChartViewModel<double, int>> ratingsViewModels = new List<ChartViewModel<double, int>>();
+            if (!beers.Any())
+                return ratingsViewModels;
+
+            Dictionary<long, double> dictionaryBeerRating = GetBeerByRoundRating(beers);
+            List<double> ratings = dictionaryBeerRating.Select(item => item.Value).Distinct().ToList();
+            ratings.Sort();
+            foreach (double rating in ratings)
+                ratingsViewModels.Add(new ChartViewModel<double, int>(rating, dictionaryBeerRating.Count(item => MathHelper.DoubleCompare(item.Value, rating))));
 
             return ratingsViewModels;
         }
@@ -109,6 +124,15 @@ namespace UntappdViewer.Helpers
             Dictionary<double, int> dictionary = new Dictionary<double, int>();
             foreach (ChartViewModel<double, int> chartViewModel in models)
                 dictionary.Add(chartViewModel.Key, chartViewModel.Value);
+
+            return dictionary;
+        }
+
+        private static Dictionary<long, double> GetBeerByRoundRating(List<Beer> beers)
+        {
+            Dictionary<long, double> dictionary = new Dictionary<long, double>();
+            foreach (Beer beer in beers)
+                dictionary.Add(beer.Id, MathHelper.GetRoundByStep(beer.GlobalRatingScore, 0.25));
 
             return dictionary;
         }

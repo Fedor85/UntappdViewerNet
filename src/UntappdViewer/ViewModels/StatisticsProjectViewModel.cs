@@ -21,20 +21,33 @@ namespace UntappdViewer.ViewModels
 
         private IUntappdService untappdService;
 
-        private IEnumerable ratingScore;
+        private IEnumerable chekinRatingScore;
+
+        private IEnumerable beerRatingScore;
 
         private int maxYAxis;
 
-        private double averageRating;
+        private double averageChekinRating;
+
+        private double averageBeerRating;
 
         public ICommand OkButtonCommand { get; }
 
-        public IEnumerable RatingScore
+        public IEnumerable ChekinRatingScore
         {
-            get { return ratingScore; }
+            get { return chekinRatingScore; }
             set
             {
-                SetProperty(ref ratingScore, value);
+                SetProperty(ref chekinRatingScore, value);
+            }
+        }
+
+        public IEnumerable BeerRatingScore
+        {
+            get { return beerRatingScore; }
+            set
+            {
+                SetProperty(ref beerRatingScore, value);
             }
         }
 
@@ -47,12 +60,21 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public double AverageRating
+        public double AverageChekinRating
         {
-            get { return averageRating; }
+            get { return averageChekinRating; }
             set
             {
-                SetProperty(ref averageRating, value);
+                SetProperty(ref averageChekinRating, value);
+            }
+        }
+
+        public double AverageBeerRating
+        {
+            get { return averageBeerRating; }
+            set
+            {
+                SetProperty(ref averageBeerRating, value);
             }
         }
 
@@ -74,16 +96,26 @@ namespace UntappdViewer.ViewModels
         protected override void DeActivate()
         {
             base.DeActivate();
-            RatingScore = null;
+            ChekinRatingScore = null;
+            AverageChekinRating = 0;
+            BeerRatingScore = null;
+            AverageBeerRating = 0;
         }
 
         private void SetRatingScore()
         {
             List<ChartViewModel<double, int>> chekinRatingScore = ConverterHelper.GetChekinRatingScore(untappdService.GetCheckins());
-            int maxCount = chekinRatingScore.Select(item => item.Value).Max();
-            MaxYAxis = maxCount + 100;
-            RatingScore = chekinRatingScore;
-            AverageRating = Math.Round(MathHelper.GetAverageValue(ConverterHelper.ChartViewModelToDictionary(chekinRatingScore)), 2);
+            List<ChartViewModel<double, int>> beerRatingScore = ConverterHelper.GetBeerRatingScore(untappdService.GetBeers());
+
+            int chekinMaxCount = chekinRatingScore.Select(item => item.Value).Max();
+            int beerMaxCount = beerRatingScore.Select(item => item.Value).Max();
+            MaxYAxis = Math.Max(chekinMaxCount, beerMaxCount) + 100;
+
+            ChekinRatingScore = chekinRatingScore;
+            AverageChekinRating = Math.Round(MathHelper.GetAverageValue(ConverterHelper.ChartViewModelToDictionary(chekinRatingScore)), 2);
+
+            BeerRatingScore = beerRatingScore;
+            AverageBeerRating = Math.Round(MathHelper.GetAverageValue(ConverterHelper.ChartViewModelToDictionary(beerRatingScore)), 2);
         }
 
         private void Exit()

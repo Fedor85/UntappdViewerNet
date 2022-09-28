@@ -26,14 +26,18 @@
                                                     Maximum="{Binding MaxYAxis}" ShowGridLines="True"/>
                         <chartingToolkit:LinearAxis Orientation="X" Interval="0.25" ShowGridLines="True"/>
                     </chartingToolkit:Chart.Axes>
-                    <chartingToolkit:SplineSeries  DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding RatingScore}" IsSelectionEnabled="True"
-                                                   DataPointStyle="{StaticResource LineDataPointStyle}">
+                    <chartingToolkit:SplineSeries  DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding BeerRatingScore}" IsSelectionEnabled="True"
+                                                   DataPointStyle="{StaticResource LineDataPointStyleV2}" Title="Beer"/>
+                    <chartingToolkit:SplineSeries  DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding ChekinRatingScore}" IsSelectionEnabled="True"
+                                                   DataPointStyle="{StaticResource LineDataPointStyleV1}"  Title="Chekin"/>
 
-                    </chartingToolkit:SplineSeries>
                 </chartingToolkit:Chart>
-                <DockPanel>
-                    <Label Content="{x:Static properties:Resources.AverageRating}" FontWeight="Bold" Margin="5,0,0,0" VerticalAlignment="Bottom"/>
-                    <Label Content="{Binding AverageRating}" FontWeight="Bold" VerticalAlignment="Bottom"/>
+                <DockPanel HorizontalAlignment="Center">
+                    <Label Content="{x:Static properties:Resources.AverageChekinRating}" FontWeight="Bold" Margin="5,0,0,0" VerticalAlignment="Bottom"/>
+                    <Label Content="{Binding AverageChekinRating}" FontWeight="Bold" VerticalAlignment="Bottom"/>
+                    <Label Content="{Binding Source={x:Static local:DefautlValues.Separator}}" FontWeight="Bold" VerticalAlignment="Bottom"/>
+                    <Label Content="{x:Static properties:Resources.AverageBeerRating}" FontWeight="Bold" Margin="5,0,0,0" VerticalAlignment="Bottom"/>
+                    <Label Content="{Binding AverageBeerRating}" FontWeight="Bold" VerticalAlignment="Bottom"/>
                 </DockPanel>
             </Grid>
         </StackPanel>

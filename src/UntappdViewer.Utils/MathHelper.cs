@@ -7,10 +7,10 @@ namespace UntappdViewer.Utils
     {
         public static bool DoubleCompare(double value1, double value2)
         {
-            return Math.Abs(value1) - Math.Abs(value2) < 0.0001;
+            return Math.Abs(Math.Abs(value1) - Math.Abs(value2)) < 0.0001;
         }
 
-        public static int RoundByStep(int value, int step)
+        public static int GetCeilingByStep(int value, int step)
         {
             if (step == 0)
                 return value;
@@ -18,6 +18,16 @@ namespace UntappdViewer.Utils
             double delta = value / (double)step;
             double ceilingValue = Math.Ceiling(delta);
             return Convert.ToInt32(ceilingValue * step);
+        }
+
+        public static double GetRoundByStep(double value, double step)
+        {
+            if (DoubleCompare(step, 0))
+                return value;
+
+            double delta = value / step;
+            double ceilingValue = Math.Round(delta);
+            return ceilingValue * step;
         }
 
         public static double GetAverageValue(Dictionary<double, int> dictionary)
