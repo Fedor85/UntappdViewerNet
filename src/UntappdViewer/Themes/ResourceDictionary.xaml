@@ -3,7 +3,9 @@
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
                     xmlns:helpers="clr-namespace:UntappdViewer.Different.Helpers"
                     xmlns:charting="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=DotNetProjects.DataVisualization.Toolkit"
-                    xmlns:visualizationToolkit="clr-namespace:System.Windows.Controls.DataVisualization;assembly=DotNetProjects.DataVisualization.Toolkit">
+                    xmlns:visualizationToolkit="clr-namespace:System.Windows.Controls.DataVisualization;assembly=DotNetProjects.DataVisualization.Toolkit"
+                    xmlns:properties="clr-namespace:UntappdViewer.Properties"
+                    xmlns:primitives="clr-namespace:System.Windows.Controls.DataVisualization.Charting.Primitives;assembly=DotNetProjects.DataVisualization.Toolkit">
     <LinearGradientBrush x:Key="MainColor" SpreadMethod="Reflect" EndPoint="0,1">
         <GradientStop Color="#ffc100" Offset="0" />
         <GradientStop Color="#fd9532" Offset="1" />
@@ -13,50 +15,6 @@
             <RotateTransform Angle="-45"/>
         </ImageBrush.Transform>
     </ImageBrush>
-    <Style x:Key="TreeViewStyle" TargetType="TreeView">
-        <Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="True"/>
-        <Setter Property="VirtualizingStackPanel.VirtualizationMode" Value="Recycling"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="TreeView">
-                    <ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                        <!--name using in  SelectedTreeViewItemBehavior -->
-                        <ItemsPresenter Name="ItemsPresenter" HorizontalAlignment="Stretch"/>
-                        <ScrollViewer.Resources>
-                            <system:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">10</system:Double>
-                            <system:Double x:Key="{x:Static SystemParameters.HorizontalScrollBarHeightKey}">10</system:Double>
-                        </ScrollViewer.Resources>
-                    </ScrollViewer>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    <Style x:Key="ChartStyle" TargetType="{x:Type charting:Chart}">
-        <Setter Property="BorderBrush" Value="Transparent"/>
-        <Setter Property="Opacity" Value="0.8"/>
-        <Setter Property="LegendStyle">
-            <Setter.Value>
-                <Style TargetType="{x:Type visualizationToolkit:Legend}">
-                    <Setter Property="Width" Value="0" />
-                </Style>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    <Style x:Key="LineDataPointStyleV1" TargetType="{x:Type charting:LineDataPoint}">
-        <Setter Property="Height" Value="12"/>
-        <Setter Property="Width" Value="12" />
-        <Setter Property="Background" Value="#ffc100"/>
-    </Style>
-    <Style x:Key="LineDataPointStyleV2" TargetType="{x:Type charting:LineDataPoint}">
-        <Setter Property="Height" Value="12"/>
-        <Setter Property="Width" Value="12" />
-        <Setter Property="Background" Value="#fd9532"/>
-    </Style>
-    <Style x:Key="ChartTitleStyle" TargetType="{x:Type visualizationToolkit:Title}">
-        <Setter Property="FontWeight" Value="Bold" />
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="FontSize" Value="15"/>
-    </Style>
     <helpers:BoolToVisibilityConverter x:Key="BTVConverter"/>
     <helpers:PathImageReSizeWidthConverter  x:Key="ImageReSizeWidthConverter"/>
 </ResourceDictionary>

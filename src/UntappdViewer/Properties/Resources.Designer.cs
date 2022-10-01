@@ -124,20 +124,11 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Average Beer Rating:.
+        ///   Looks up a localized string similar to average rating:.
         /// </summary>
-        public static string AverageBeerRating {
+        public static string AverageRating {
             get {
-                return ResourceManager.GetString("AverageBeerRating", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Average Chekin Rating:.
-        /// </summary>
-        public static string AverageChekinRating {
-            get {
-                return ResourceManager.GetString("AverageChekinRating", resourceCulture);
+                return ResourceManager.GetString("AverageRating", resourceCulture);
             }
         }
         

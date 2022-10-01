@@ -8,9 +8,90 @@
              xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=DotNetProjects.DataVisualization.Toolkit"
              xmlns:local="clr-namespace:UntappdViewer"
              xmlns:visualizationToolkit="clr-namespace:System.Windows.Controls.DataVisualization;assembly=DotNetProjects.DataVisualization.Toolkit"
+             xmlns:primitives="clr-namespace:System.Windows.Controls.DataVisualization.Charting.Primitives;assembly=DotNetProjects.DataVisualization.Toolkit"
              mc:Ignorable="d" 
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="ChartStyleHideLegend" TargetType="{x:Type chartingToolkit:Chart}">
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Opacity" Value="0.8"/>
+            <Setter Property="LegendStyle">
+                <Setter.Value>
+                    <Style TargetType="{x:Type visualizationToolkit:Legend}">
+                        <Setter Property="Width" Value="0" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="RatingScoreChartStyle" TargetType="{x:Type chartingToolkit:Chart}">
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Opacity" Value="0.8"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type chartingToolkit:Chart}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <visualizationToolkit:Title  Grid.Row="0" Content="{TemplateBinding Title}" Style="{TemplateBinding TitleStyle}"
+                                                         Height="30" VerticalContentAlignment="Center"/>
+                            <Grid Grid.Row="1">
+                                <primitives:EdgePanel x:Name="ChartArea" Style="{TemplateBinding ChartAreaStyle}" Opacity="0.9">
+                                    <Grid Style="{TemplateBinding PlotAreaStyle}" Panel.ZIndex="-1"/>
+                                    <Border BorderBrush="#FF919191" BorderThickness="0" Panel.ZIndex="10"/>
+                                </primitives:EdgePanel>
+                            </Grid>
+                            <visualizationToolkit:Legend x:Name="Legend" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <visualizationToolkit:Legend.Template>
+                                    <ControlTemplate>
+                                        <DockPanel>
+                                            <ItemsPresenter/>
+                                        </DockPanel>
+                                    </ControlTemplate>
+                                </visualizationToolkit:Legend.Template>
+                                <visualizationToolkit:Legend.ItemsPanel>
+                                    <ItemsPanelTemplate >
+                                        <DockPanel/>
+                                    </ItemsPanelTemplate>
+                                </visualizationToolkit:Legend.ItemsPanel>
+                            </visualizationToolkit:Legend>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="LegendItemStyle" TargetType="chartingToolkit:LegendItem">
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="chartingToolkit:LegendItem">
+                        <DockPanel Margin="10,0,0,0" >
+                            <Rectangle Fill="{Binding Background}" Stroke="{Binding BorderBrush}" StrokeThickness="1" Height="10" Margin="0,0,5,0" Width="10" VerticalAlignment="Center"/>
+                            <TextBlock Text="{TemplateBinding Content}" TextWrapping="Wrap" FontWeight="Bold" VerticalAlignment="Center"/>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="LineDataPointStyleV1" TargetType="{x:Type chartingToolkit:LineDataPoint}">
+            <Setter Property="Height" Value="12"/>
+            <Setter Property="Width" Value="12" />
+            <Setter Property="Background" Value="#ffc100"/>
+        </Style>
+        <Style x:Key="LineDataPointStyleV2" TargetType="{x:Type chartingToolkit:LineDataPoint}">
+            <Setter Property="Height" Value="12"/>
+            <Setter Property="Width" Value="12" />
+            <Setter Property="Background" Value="#fd9532"/>
+        </Style>
+        <Style x:Key="ChartTitleStyle" TargetType="{x:Type visualizationToolkit:Title}">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -19,26 +100,33 @@
         <StackPanel Grid.Row="0">
             <Grid>
                 <ItemsControl Background="#ffffff" Opacity="0.3"/>
-                <chartingToolkit:Chart Height="300" ClipToBounds="True" Title="{x:Static properties:Resources.ChekinRatingScore}"
-                                       Style="{StaticResource ChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}">
-                    <chartingToolkit:Chart.Axes>
-                        <chartingToolkit:LinearAxis Orientation="Y" Interval="{Binding Source={x:Static local:DefautlValues.ChartRatingScoreYInterval}}" 
-                                                    Maximum="{Binding MaxYAxis}" ShowGridLines="True"/>
-                        <chartingToolkit:LinearAxis Orientation="X" Interval="0.25" ShowGridLines="True"/>
-                    </chartingToolkit:Chart.Axes>
-                    <chartingToolkit:SplineSeries  DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding BeerRatingScore}" IsSelectionEnabled="True"
-                                                   DataPointStyle="{StaticResource LineDataPointStyleV2}" Title="Beer"/>
-                    <chartingToolkit:SplineSeries  DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding ChekinRatingScore}" IsSelectionEnabled="True"
-                                                   DataPointStyle="{StaticResource LineDataPointStyleV1}"  Title="Chekin"/>
+                <StackPanel  Margin="0,0,5,0">
+                    <chartingToolkit:Chart Height="300" ClipToBounds="True" Title="{x:Static properties:Resources.ChekinRatingScore}"
+                                            TitleStyle="{StaticResource ChartTitleStyle}" Style="{StaticResource RatingScoreChartStyle}">
 
-                </chartingToolkit:Chart>
-                <DockPanel HorizontalAlignment="Center">
-                    <Label Content="{x:Static properties:Resources.AverageChekinRating}" FontWeight="Bold" Margin="5,0,0,0" VerticalAlignment="Bottom"/>
-                    <Label Content="{Binding AverageChekinRating}" FontWeight="Bold" VerticalAlignment="Bottom"/>
-                    <Label Content="{Binding Source={x:Static local:DefautlValues.Separator}}" FontWeight="Bold" VerticalAlignment="Bottom"/>
-                    <Label Content="{x:Static properties:Resources.AverageBeerRating}" FontWeight="Bold" Margin="5,0,0,0" VerticalAlignment="Bottom"/>
-                    <Label Content="{Binding AverageBeerRating}" FontWeight="Bold" VerticalAlignment="Bottom"/>
-                </DockPanel>
+                        <chartingToolkit:Chart.Axes>
+                            <chartingToolkit:LinearAxis Orientation="Y" Interval="{Binding Source={x:Static local:DefautlValues.ChartRatingScoreYInterval}}" 
+                                                        Maximum="{Binding MaxYAxis}" ShowGridLines="True" />
+                            <chartingToolkit:LinearAxis Orientation="X" Interval="0.25" ShowGridLines="True"/>
+                        </chartingToolkit:Chart.Axes>
+                        <chartingToolkit:SplineSeries  DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding BeerRatingScore}" IsSelectionEnabled="True"
+                                                       DataPointStyle="{StaticResource LineDataPointStyleV2}" LegendItemStyle="{StaticResource LegendItemStyle}"
+                                                       Title="{x:Static properties:Resources.Beer}">
+                            <chartingToolkit:SplineSeries.LegendItems>
+                                <Label Content="{x:Static properties:Resources.AverageRating}" FontWeight="Bold"/>
+                                <Label Content="{Binding AverageBeerRating}" FontWeight="Bold"/>
+                            </chartingToolkit:SplineSeries.LegendItems>
+                        </chartingToolkit:SplineSeries>
+                        <chartingToolkit:SplineSeries  DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding ChekinRatingScore}" IsSelectionEnabled="True"
+                                                       DataPointStyle="{StaticResource LineDataPointStyleV1}" LegendItemStyle="{StaticResource LegendItemStyle}"
+                                                       Title="{x:Static properties:Resources.Checkin}">
+                            <chartingToolkit:SplineSeries.LegendItems>
+                                <Label Content="{x:Static properties:Resources.AverageRating}" FontWeight="Bold"/>
+                                <Label Content="{Binding AverageChekinRating}" FontWeight="Bold"/>
+                            </chartingToolkit:SplineSeries.LegendItems>
+                        </chartingToolkit:SplineSeries>
+                    </chartingToolkit:Chart>
+                </StackPanel>
             </Grid>
         </StackPanel>
         <Button Grid.Row="1" Content="{x:Static properties:Resources.Ok}" Command="{Binding OkButtonCommand}" 

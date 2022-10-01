@@ -8,9 +8,30 @@
              xmlns:behaviors="clr-namespace:UntappdViewer.Behaviors"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:controls="clr-namespace:UntappdViewer.Views.Controls"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              prism:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="600" d:DesignWidth="250">
+    <UserControl.Resources>
+        <Style x:Key="TreeViewStyle" TargetType="TreeView">
+            <Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="True"/>
+            <Setter Property="VirtualizingStackPanel.VirtualizationMode" Value="Recycling"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TreeView">
+                        <ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                            <!--name using in  SelectedTreeViewItemBehavior -->
+                            <ItemsPresenter Name="ItemsPresenter" HorizontalAlignment="Stretch"/>
+                            <ScrollViewer.Resources>
+                                <system:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">10</system:Double>
+                                <system:Double x:Key="{x:Static SystemParameters.HorizontalScrollBarHeightKey}">10</system:Double>
+                            </ScrollViewer.Resources>
+                        </ScrollViewer>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -24,7 +45,7 @@
             <Label Content="{Binding TreeViewCaption}" FontWeight="Bold"/>
         </StackPanel>
         <TreeView Grid.Row="1" ItemsSource ="{Binding TreeItems}"  Background="Transparent" BorderBrush="Transparent" PreviewMouseWheel="OnPreviewMouseWheel"
-                      Style="{StaticResource TreeViewStyle}">
+                  Style="{StaticResource TreeViewStyle}">
             <TreeView.ItemContainerStyle>
                 <Style TargetType="{x:Type TreeViewItem}">
                     <Setter Property="Visibility" Value="{Binding Visibility, Converter={StaticResource BTVConverter}}" />
