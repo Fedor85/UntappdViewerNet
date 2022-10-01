@@ -91,6 +91,14 @@
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="15"/>
         </Style>
+        <DataTemplate x:Key="AverageRatingContentTemplate">
+            <DockPanel>
+                <Label Content="[" FontWeight="Bold"/>
+                <Label Content="{x:Static properties:Resources.AverageRating}" FontWeight="Bold"/>
+                <Label Content="{Binding}" FontWeight="Bold"/>
+                <Label Content="]" FontWeight="Bold"/>
+            </DockPanel>
+        </DataTemplate>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -113,16 +121,14 @@
                                                        DataPointStyle="{StaticResource LineDataPointStyleV2}" LegendItemStyle="{StaticResource LegendItemStyle}"
                                                        Title="{x:Static properties:Resources.Beer}">
                             <chartingToolkit:SplineSeries.LegendItems>
-                                <Label Content="{x:Static properties:Resources.AverageRating}" FontWeight="Bold"/>
-                                <Label Content="{Binding AverageBeerRating}" FontWeight="Bold"/>
+                                <Label Content="{Binding AverageBeerRating}" ContentTemplate="{StaticResource AverageRatingContentTemplate}"/>
                             </chartingToolkit:SplineSeries.LegendItems>
                         </chartingToolkit:SplineSeries>
                         <chartingToolkit:SplineSeries  DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding ChekinRatingScore}" IsSelectionEnabled="True"
                                                        DataPointStyle="{StaticResource LineDataPointStyleV1}" LegendItemStyle="{StaticResource LegendItemStyle}"
                                                        Title="{x:Static properties:Resources.Checkin}">
                             <chartingToolkit:SplineSeries.LegendItems>
-                                <Label Content="{x:Static properties:Resources.AverageRating}" FontWeight="Bold"/>
-                                <Label Content="{Binding AverageChekinRating}" FontWeight="Bold"/>
+                                <Label Content="{Binding AverageChekinRating}" ContentTemplate="{StaticResource AverageRatingContentTemplate}"/>
                             </chartingToolkit:SplineSeries.LegendItems>
                         </chartingToolkit:SplineSeries>
                     </chartingToolkit:Chart>
