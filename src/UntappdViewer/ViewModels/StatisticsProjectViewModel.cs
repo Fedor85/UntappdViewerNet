@@ -6,12 +6,13 @@ using System.Windows.Input;
 using Prism.Commands;
 using Prism.Modularity;
 using Prism.Regions;
+using UntappdViewer.Domain;
+using UntappdViewer.Domain.Models;
 using UntappdViewer.Helpers;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
 using UntappdViewer.Utils;
 using UntappdViewer.Views;
-using UntappdViewer.Views.Controls.ViewModel;
 
 namespace UntappdViewer.ViewModels
 {
@@ -117,8 +118,8 @@ namespace UntappdViewer.ViewModels
 
         private void SetRatingScore()
         {
-            List<ChartViewModel<double, int>> chekinRatingScore = ConverterHelper.GetChekinRatingScore(untappdService.GetCheckins());
-            List<ChartViewModel<double, int>> beerRatingScore = ConverterHelper.GetBeerRatingScore(untappdService.GetBeers());
+            List<KeyValue<double, int>> chekinRatingScore = StatisticsCalculation.GetChekinRatingScore(untappdService.GetCheckins());
+            List<KeyValue<double, int>> beerRatingScore = StatisticsCalculation.GetBeerRatingScore(untappdService.GetBeers());
 
             int chekinMaxCount = chekinRatingScore.Select(item => item.Value).Max();
             int beerMaxCount = beerRatingScore.Select(item => item.Value).Max();
@@ -133,7 +134,7 @@ namespace UntappdViewer.ViewModels
 
         private void SetBeerType()
         {
-            BeerTypeCount = ConverterHelper.GetBeerTypeCount(untappdService.GetCheckins());
+            BeerTypeCount = StatisticsCalculation.GetBeerTypeCount(untappdService.GetCheckins());
         }
 
         private void Exit()

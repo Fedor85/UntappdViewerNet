@@ -18,8 +18,6 @@
 
         public const string Separator = " | ";
 
-        public static readonly string[] SeparatorsBeerTypeName = {"/", "-"};
-
         public const int ChartRatingScoreYInterval = 250;
     }
 }

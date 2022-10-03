@@ -1,6 +1,6 @@
-﻿namespace UntappdViewer.Views.Controls.ViewModel
+﻿namespace UntappdViewer.Domain.Models
 {
-    public class ChartViewModel<T1,T2>
+    public class KeyValue<T1,T2>
     {
         /// <summary>
         /// X
@@ -12,7 +12,7 @@
         /// </summary>
         public T2 Value { get; set; }
 
-        public ChartViewModel(T1 key, T2 value)
+        public KeyValue(T1 key, T2 value)
         {
             Key = key;
             Value = value;

@@ -111,7 +111,6 @@
       <DependentUpon>ImageDataTemplate.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\RecyclerView\ViewModel\ImageViewModel.cs" />
-    <Compile Include="Views\Controls\ViewModel\ChartViewModel.cs" />
     <Compile Include="Views\Controls\ViewModel\Entity.cs" />
     <Compile Include="Views\Controls\ViewModel\ImageItemViewModel.cs" />
     <Compile Include="Views\Controls\ViewModel\TreeItemViewModel.cs" />
