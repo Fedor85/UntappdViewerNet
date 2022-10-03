@@ -25,6 +25,8 @@ namespace UntappdViewer.ViewModels
 
         private IEnumerable beerRatingScore;
 
+        private IEnumerable beerTypeCount;
+
         private int maxYAxis;
 
         private double averageChekinRating;
@@ -48,6 +50,15 @@ namespace UntappdViewer.ViewModels
             set
             {
                 SetProperty(ref beerRatingScore, value);
+            }
+        }
+
+        public IEnumerable BeerTypeCount
+        {
+            get { return beerTypeCount; }
+            set
+            {
+                SetProperty(ref beerTypeCount, value);
             }
         }
 
@@ -91,6 +102,7 @@ namespace UntappdViewer.ViewModels
         {
             base.Activate();
             SetRatingScore();
+            SetBeerType();
         }
 
         protected override void DeActivate()
@@ -100,6 +112,7 @@ namespace UntappdViewer.ViewModels
             AverageChekinRating = 0;
             BeerRatingScore = null;
             AverageBeerRating = 0;
+            BeerTypeCount = null;
         }
 
         private void SetRatingScore()
@@ -116,6 +129,11 @@ namespace UntappdViewer.ViewModels
 
             BeerRatingScore = beerRatingScore;
             AverageBeerRating = Math.Round(MathHelper.GetAverageValue(ConverterHelper.ChartViewModelToDictionary(beerRatingScore)), 2);
+        }
+
+        private void SetBeerType()
+        {
+            BeerTypeCount = ConverterHelper.GetBeerTypeCount(untappdService.GetCheckins());
         }
 
         private void Exit()

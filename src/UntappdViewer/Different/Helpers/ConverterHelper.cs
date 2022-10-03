@@ -119,6 +119,36 @@ namespace UntappdViewer.Helpers
             return ratingsViewModels;
         }
 
+        public static List<ChartViewModel<string, int>> GetBeerTypeCount(List<Checkin> checkins)
+        {
+            List<ChartViewModel<string, int>> typeCountViewModels = new List<ChartViewModel<string, int>>();
+            if (!checkins.Any())
+                return typeCountViewModels;
+
+            List<string> types = checkins.Select(item => item.Beer.Type).Distinct().ToList();
+            types.Sort();
+            types.Reverse();
+            Dictionary<string, List<string>> groupTypes = StringHelper.GetGroupByList(types);
+            foreach (KeyValuePair<string, List<string>> keyValuePair in groupTypes)
+            {
+                int sum = 0;
+                foreach (string type in keyValuePair.Value)
+                    sum += checkins.Count(item => type.Equals(item.Beer.Type));
+
+                typeCountViewModels.Add(new ChartViewModel<string, int>(keyValuePair.Key, sum));
+            }
+
+            ChartViewModel<string, int> other = typeCountViewModels.FirstOrDefault(item => item.Key.Equals("Other"));
+            List<string> remove = new List<string>();
+            foreach (ChartViewModel<string, int> keyValuePair in typeCountViewModels.Where(item => item.Value < 15))
+            {
+                other.Value += keyValuePair.Value;
+                remove.Add(keyValuePair.Key);
+            }
+            typeCountViewModels.RemoveAll(item => remove.Contains(item.Key));
+            return typeCountViewModels;
+        }
+
         public static Dictionary<double, int> ChartViewModelToDictionary(List<ChartViewModel<double, int>> models)
         {
             Dictionary<double, int> dictionary = new Dictionary<double, int>();

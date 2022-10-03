@@ -111,6 +111,22 @@ namespace UntappdViewer.Utils
             return valueLine.Split(',').Select(item => item.Trim()).ToList();
         }
 
+        public static Dictionary<string, List<string>> GetGroupByList(List<string> values)
+        {
+            Dictionary<string, List<string>> group = new Dictionary<string, List<string>>();
+            int count = values.Count;
+            if (count == 0)
+                return group;
+
+            foreach (IGrouping<string, string> grouping in values.GroupBy(i => i.Split()[0]))
+            {
+                List<string> currentValues = grouping.ToList();
+                group.Add(GetKey(currentValues), currentValues);
+            }
+
+            return group;
+        }
+
         public static string GetFullExceptionMessage(Exception ex)
         {
             string message = String.Empty;
@@ -186,6 +202,25 @@ namespace UntappdViewer.Utils
                     result.AppendLine();
             }
             return result.ToString();
+        }
+
+        private static string GetKey(List<string> values)
+        {
+            int count = values.Count;
+            string firstValue= values[0];
+            string key = String.Empty;
+            foreach (string words in firstValue.Split())
+            {
+                if (words.Equals("-") || words.Equals("/"))
+                    break;
+
+                string currentKey = $"{key} {words}".Trim();
+                if (values.Count(item => item.StartsWith(currentKey)) != count)
+                    break;
+
+                key = currentKey;
+            }
+            return key;
         }
     }
 }
