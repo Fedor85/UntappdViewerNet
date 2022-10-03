@@ -26,28 +26,29 @@ namespace UntappdViewer.Domain
 
         public static List<KeyValue<double, int>> GetBeerRatingScore(List<Beer> beers)
         {
-            List<KeyValue<double, int>> ratingsViewModels = new List<KeyValue<double, int>>();
+            List<KeyValue<double, int>> keyValues = new List<KeyValue<double, int>>();
             if (!beers.Any())
-                return ratingsViewModels;
+                return keyValues;
 
             Dictionary<long, double> dictionaryBeerRating = GetBeerByRoundRating(beers);
             List<double> ratings = dictionaryBeerRating.Select(item => item.Value).Distinct().ToList();
             ratings.Sort();
             foreach (double rating in ratings)
-                ratingsViewModels.Add(new KeyValue<double, int>(rating, dictionaryBeerRating.Count(item => MathHelper.DoubleCompare(item.Value, rating))));
+                keyValues.Add(new KeyValue<double, int>(rating, dictionaryBeerRating.Count(item => MathHelper.DoubleCompare(item.Value, rating))));
 
-            return ratingsViewModels;
+            return keyValues;
         }
 
         public static List<KeyValue<string, int>> GetBeerTypeCount(List<Checkin> checkins)
         {
-            List<KeyValue<string, int>> typeCountViewModels = new List<KeyValue<string, int>>();
+            List<KeyValue<string, int>> keyValues = new List<KeyValue<string, int>>();
             if (!checkins.Any())
-                return typeCountViewModels;
+                return keyValues;
 
             List<string> types = checkins.Select(item => item.Beer.Type).Distinct().ToList();
             types.Sort();
             types.Reverse();
+
             Dictionary<string, List<string>> groupTypes = StringHelper.GetGroupByList(types, DefautlValues.SeparatorsBeerTypeName);
             foreach (KeyValuePair<string, List<string>> keyValuePair in groupTypes)
             {
@@ -55,18 +56,18 @@ namespace UntappdViewer.Domain
                 foreach (string type in keyValuePair.Value)
                     sum += checkins.Count(item => type.Equals(item.Beer.Type));
 
-                typeCountViewModels.Add(new KeyValue<string, int>(keyValuePair.Key, sum));
+                keyValues.Add(new KeyValue<string, int>(keyValuePair.Key, sum));
             }
 
-            KeyValue<string, int> other = typeCountViewModels.FirstOrDefault(item => item.Key.Equals("Other"));
+            KeyValue<string, int> other = keyValues.FirstOrDefault(item => item.Key.Equals(DefautlValues.OtherNameGroupBeerType));
             List<string> remove = new List<string>();
-            foreach (KeyValue<string, int> keyValuePair in typeCountViewModels.Where(item => item.Value < 15))
+            foreach (KeyValue<string, int> keyValuePair in keyValues.Where(item => item.Value < DefautlValues.BeerTypeCountByOther))
             {
                 other.Value += keyValuePair.Value;
                 remove.Add(keyValuePair.Key);
             }
-            typeCountViewModels.RemoveAll(item => remove.Contains(item.Key));
-            return typeCountViewModels;
+            keyValues.RemoveAll(item => remove.Contains(item.Key));
+            return keyValues;
         }
 
 
@@ -74,7 +75,7 @@ namespace UntappdViewer.Domain
         {
             Dictionary<long, double> dictionary = new Dictionary<long, double>();
             foreach (Beer beer in beers)
-                dictionary.Add(beer.Id, MathHelper.GetRoundByStep(beer.GlobalRatingScore, 0.25));
+                dictionary.Add(beer.Id, MathHelper.GetRoundByStep(beer.GlobalRatingScore, DefautlValues.StepRating));
 
             return dictionary;
         }
