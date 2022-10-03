@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using UntappdViewer.Utils;
 
@@ -47,6 +48,27 @@ namespace UntappdViewer.Test
             string name2 = "LIDSKAE Nulevachka";
             string resultName2 = StringHelper.GeBreakForLongName(name2, 30, 5);
             Assert.AreEqual(name2, resultName2);
+        }
+
+        [Test]
+        public void TestGetGroupByList()
+        {
+            List<string> beerTypes = TestHelper.GetBeerTypes();
+            Assert.AreEqual(beerTypes.Count, 205);
+            Dictionary<string, List<string>> group = StringHelper.GetGroupByList(TestHelper.GetBeerTypes(), "/", "-");
+            Assert.AreEqual(group.Count, 66);
+
+            KeyValuePair<string, List<string>> val1 = group.ElementAt(0);
+            Assert.AreEqual(val1.Key, "Altbier");
+            Assert.AreEqual(val1.Value.Count, 1);
+
+            KeyValuePair<string, List<string>> val2 = group.ElementAt(2);
+            Assert.AreEqual(val2.Key, "Barleywine");
+            Assert.AreEqual(val2.Value.Count, 3);
+
+            KeyValuePair<string, List<string>> val3 = group.ElementAt(10);
+            Assert.AreEqual(val3.Key, "Brown Ale");
+            Assert.AreEqual(val3.Value.Count, 5);
         }
     }
 }

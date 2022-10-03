@@ -128,7 +128,7 @@ namespace UntappdViewer.Helpers
             List<string> types = checkins.Select(item => item.Beer.Type).Distinct().ToList();
             types.Sort();
             types.Reverse();
-            Dictionary<string, List<string>> groupTypes = StringHelper.GetGroupByList(types);
+            Dictionary<string, List<string>> groupTypes = StringHelper.GetGroupByList(types, DefautlValues.SeparatorsBeerTypeName);
             foreach (KeyValuePair<string, List<string>> keyValuePair in groupTypes)
             {
                 int sum = 0;

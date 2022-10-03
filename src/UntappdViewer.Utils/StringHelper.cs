@@ -111,7 +111,7 @@ namespace UntappdViewer.Utils
             return valueLine.Split(',').Select(item => item.Trim()).ToList();
         }
 
-        public static Dictionary<string, List<string>> GetGroupByList(List<string> values)
+        public static Dictionary<string, List<string>> GetGroupByList(List<string> values, params string[] chars)
         {
             Dictionary<string, List<string>> group = new Dictionary<string, List<string>>();
             int count = values.Count;
@@ -121,7 +121,7 @@ namespace UntappdViewer.Utils
             foreach (IGrouping<string, string> grouping in values.GroupBy(i => i.Split()[0]))
             {
                 List<string> currentValues = grouping.ToList();
-                group.Add(GetKey(currentValues), currentValues);
+                group.Add(GetKey(currentValues, chars), currentValues);
             }
 
             return group;
@@ -204,14 +204,15 @@ namespace UntappdViewer.Utils
             return result.ToString();
         }
 
-        private static string GetKey(List<string> values)
+        private static string GetKey(List<string> values, params string[] chars)
         {
             int count = values.Count;
             string firstValue= values[0];
             string key = String.Empty;
+
             foreach (string words in firstValue.Split())
             {
-                if (words.Equals("-") || words.Equals("/"))
+                if (chars.Contains(words))
                     break;
 
                 string currentKey = $"{key} {words}".Trim();

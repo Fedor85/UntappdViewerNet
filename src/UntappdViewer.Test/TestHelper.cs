@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using UntappdViewer.Domain.Mappers;
 using UntappdViewer.Models;
@@ -38,6 +40,20 @@ namespace UntappdViewer.Test
         public static bool IsUpdateBeer(Beer beer)
         {
             return beer.GlobalRatingScore == 0;
+        }
+
+        public static List<string> GetBeerTypes()
+        {
+            List<string> beerTypes = new List<string>();
+            foreach (string beerType in Consts.BeerTypsText.Split('*'))
+            {
+                string currentBeerType = beerType.Trim();
+                if (String.IsNullOrEmpty(currentBeerType))
+                    continue;
+
+                beerTypes.Add(currentBeerType);
+            }
+            return beerTypes;
         }
 
         private static string GetTempFilePath(string tempPathDirectory, string extension)
