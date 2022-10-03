@@ -60,6 +60,11 @@ namespace UntappdViewer.Domain
             }
 
             KeyValue<string, int> other = keyValues.FirstOrDefault(item => item.Key.Equals(DefautlValues.OtherNameGroupBeerType));
+            if (other == null)
+                other = new KeyValue<string, int>(DefautlValues.OtherNameGroupBeerType, 0);
+            else
+                keyValues.Remove(other);
+
             List<string> remove = new List<string>();
             foreach (KeyValue<string, int> keyValuePair in keyValues.Where(item => item.Value < DefautlValues.BeerTypeCountByOther))
             {
@@ -67,9 +72,11 @@ namespace UntappdViewer.Domain
                 remove.Add(keyValuePair.Key);
             }
             keyValues.RemoveAll(item => remove.Contains(item.Key));
+            if (other.Value > 0)
+                keyValues.Insert(0, other);
+
             return keyValues;
         }
-
 
         private static Dictionary<long, double> GetBeerByRoundRating(List<Beer> beers)
         {
