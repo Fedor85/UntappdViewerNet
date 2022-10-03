@@ -87,11 +87,11 @@ namespace UntappdViewer.Helpers
 
         #endregion
 
-        public static Dictionary<double, int> ChartViewModelToDictionary(List<KeyValue<double, int>> models)
+        public static Dictionary<double, int> ChartKeyValueToDictionary(List<KeyValue<double, int>> keyValues)
         {
             Dictionary<double, int> dictionary = new Dictionary<double, int>();
-            foreach (KeyValue<double, int> chartViewModel in models)
-                dictionary.Add(chartViewModel.Key, chartViewModel.Value);
+            foreach (KeyValue<double, int> keyValue in keyValues)
+                dictionary.Add(keyValue.Key, keyValue.Value);
 
             return dictionary;
         }

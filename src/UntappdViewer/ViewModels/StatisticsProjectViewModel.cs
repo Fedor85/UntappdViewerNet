@@ -126,10 +126,10 @@ namespace UntappdViewer.ViewModels
             MaxYAxis = Math.Max(chekinMaxCount, beerMaxCount) + 100;
 
             ChekinRatingScore = chekinRatingScore;
-            AverageChekinRating = Math.Round(MathHelper.GetAverageValue(ConverterHelper.ChartViewModelToDictionary(chekinRatingScore)), 2);
+            AverageChekinRating = Math.Round(MathHelper.GetAverageValue(ConverterHelper.ChartKeyValueToDictionary(chekinRatingScore)), 2);
 
             BeerRatingScore = beerRatingScore;
-            AverageBeerRating = Math.Round(MathHelper.GetAverageValue(ConverterHelper.ChartViewModelToDictionary(beerRatingScore)), 2);
+            AverageBeerRating = Math.Round(MathHelper.GetAverageValue(ConverterHelper.ChartKeyValueToDictionary(beerRatingScore)), 2);
         }
 
         private void SetBeerType()
