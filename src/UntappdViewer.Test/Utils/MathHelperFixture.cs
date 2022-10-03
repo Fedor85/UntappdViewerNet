@@ -4,7 +4,7 @@ using UntappdViewer.Utils;
 namespace UntappdViewer.Test.Utils
 {
     [TestFixture]
-    public class TestMathHelper
+    public class MathHelperFixture
     {
         [Test]
         public void TestDoubleCompare()

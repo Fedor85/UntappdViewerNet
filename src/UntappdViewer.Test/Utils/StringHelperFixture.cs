@@ -6,7 +6,7 @@ using UntappdViewer.Utils;
 namespace UntappdViewer.Test
 {
     [TestFixture]
-    public class TestStringHelper
+    public class StringHelperFixture
     {
         [Test]
         public void TestGetShortName()

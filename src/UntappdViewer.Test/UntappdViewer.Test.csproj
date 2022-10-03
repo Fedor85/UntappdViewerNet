@@ -53,8 +53,9 @@
     <Compile Include="ReportingFixture.cs" />
     <Compile Include="TestHelper.cs" />
     <Compile Include="UntappdWebApiClientFixture.cs" />
-    <Compile Include="Utils\TestMathHelper.cs" />
-    <Compile Include="Utils\TestStringHelper.cs" />
+    <Compile Include="Utils\ExtensionFixture.cs" />
+    <Compile Include="Utils\MathHelperFixture.cs" />
+    <Compile Include="Utils\StringHelperFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

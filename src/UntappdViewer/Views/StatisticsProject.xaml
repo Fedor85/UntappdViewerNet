@@ -141,7 +141,7 @@
                                 <chartingToolkit:BarSeries  DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding BeerTypeCount}" IsSelectionEnabled="True"/>
                             </chartingToolkit:Chart>
                             <chartingToolkit:Chart Grid.Column="1" Style="{StaticResource ChartStyleHideLegend}">
-                                <chartingToolkit:BarSeries  DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding BeerTypeCount}" IsSelectionEnabled="True"/>
+                                <chartingToolkit:BarSeries  DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding BeerTypeRating}" IsSelectionEnabled="True"/>
                             </chartingToolkit:Chart>
                         </Grid>
                     </StackPanel>

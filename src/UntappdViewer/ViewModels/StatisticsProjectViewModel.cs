@@ -13,6 +13,7 @@ using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
 using UntappdViewer.Utils;
 using UntappdViewer.Views;
+using Checkin = UntappdViewer.Models.Checkin;
 
 namespace UntappdViewer.ViewModels
 {
@@ -27,6 +28,8 @@ namespace UntappdViewer.ViewModels
         private IEnumerable beerRatingScore;
 
         private IEnumerable beerTypeCount;
+
+        private IEnumerable beerTypeRating;
 
         private int maxYAxis;
 
@@ -60,6 +63,15 @@ namespace UntappdViewer.ViewModels
             set
             {
                 SetProperty(ref beerTypeCount, value);
+            }
+        }
+
+        public IEnumerable BeerTypeRating
+        {
+            get { return beerTypeRating; }
+            set
+            {
+                SetProperty(ref beerTypeRating, value);
             }
         }
 
@@ -134,7 +146,11 @@ namespace UntappdViewer.ViewModels
 
         private void SetBeerType()
         {
-            BeerTypeCount = StatisticsCalculation.GetBeerTypeCount(untappdService.GetCheckins());
+            List<Checkin> chekin = untappdService.GetCheckins();
+            List<KeyValue<string, List<long>>> beerTypeCheckinIds = StatisticsCalculation.GetBeerTypeCheckinIdGroupByCount(chekin);
+
+            BeerTypeCount = StatisticsCalculation.GetBeerTypeCount(chekin, beerTypeCheckinIds);
+            BeerTypeRating = StatisticsCalculation.GetBeerTypeRating(chekin, beerTypeCheckinIds);
         }
 
         private void Exit()

@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UntappdViewer.Domain.Models;
+using UntappdViewer.Infrastructure;
 using UntappdViewer.Models;
 using UntappdViewer.Utils;
 
@@ -39,44 +41,71 @@ namespace UntappdViewer.Domain
             return keyValues;
         }
 
-        public static List<KeyValue<string, int>> GetBeerTypeCount(List<Checkin> checkins)
+        public static List<KeyValue<string, int>> GetBeerTypeCount(List<Checkin> checkins, List<KeyValue<string, List<long>>> beerTypeCheckinIds)
         {
             List<KeyValue<string, int>> keyValues = new List<KeyValue<string, int>>();
-            if (!checkins.Any())
-                return keyValues;
 
-            List<string> types = checkins.Select(item => item.Beer.Type).Distinct().ToList();
-            types.Sort();
-            types.Reverse();
-
-            Dictionary<string, List<string>> groupTypes = StringHelper.GetGroupByList(types, DefautlValues.SeparatorsBeerTypeName);
-            foreach (KeyValuePair<string, List<string>> keyValuePair in groupTypes)
-            {
-                int sum = 0;
-                foreach (string type in keyValuePair.Value)
-                    sum += checkins.Count(item => type.Equals(item.Beer.Type));
-
-                keyValues.Add(new KeyValue<string, int>(keyValuePair.Key, sum));
-            }
-
-            KeyValue<string, int> other = keyValues.FirstOrDefault(item => item.Key.Equals(DefautlValues.OtherNameGroupBeerType));
-            if (other == null)
-                other = new KeyValue<string, int>(DefautlValues.OtherNameGroupBeerType, 0);
-            else
-                keyValues.Remove(other);
-
-            List<string> remove = new List<string>();
-            foreach (KeyValue<string, int> keyValuePair in keyValues.Where(item => item.Value < DefautlValues.BeerTypeCountByOther))
-            {
-                other.Value += keyValuePair.Value;
-                remove.Add(keyValuePair.Key);
-            }
-            keyValues.RemoveAll(item => remove.Contains(item.Key));
-            if (other.Value > 0)
-                keyValues.Insert(0, other);
+            foreach (KeyValue<string, List<long>> keyValue in beerTypeCheckinIds)
+                keyValues.Add(new KeyValue<string, int>(keyValue.Key, checkins.Count(item => keyValue.Value.Contains(item.Id))));
 
             return keyValues;
         }
+
+        public static List<KeyValue<string, double>> GetBeerTypeRating(List<Checkin> checkins, List<KeyValue<string, List<long>>> beerTypeCheckinIds)
+        {
+            List<KeyValue<string, double>> keyValues = new List<KeyValue<string, double>>();
+
+            foreach (KeyValue<string, List<long>> keyValue in beerTypeCheckinIds)
+            {
+                int count = checkins.Count(item => keyValue.Value.Contains(item.Id) && item.RatingScore.HasValue);
+                double sumRating = checkins.Where(item => keyValue.Value.Contains(item.Id) && item.RatingScore.HasValue).Sum(checkin => checkin.RatingScore.Value);
+                double rating = sumRating / (count > 0 ? count : 1);
+                keyValues.Add(new KeyValue<string, double>(keyValue.Key, Math.Round(rating, 2)));
+            }
+
+            return keyValues;
+        }
+
+        public static List<KeyValue<string, List<long>>> GetBeerTypeCheckinIdGroupByCount(List<Checkin> checkins)
+        {
+            List<KeyValue<string, List<long>>> dictionary = new List<KeyValue<string, List<long>>>();
+            if (!checkins.Any())
+                return dictionary;
+
+            List<string> types = checkins.Select(item => item.Beer.Type).Distinct().ToList();
+            types.Sort();
+
+            Dictionary<string, List<string>> groupTypes = StringHelper.GetGroupByList(types, DefautlValues.SeparatorsBeerTypeName);
+
+            foreach (KeyValuePair<string, List<string>> keyValuePair in groupTypes)
+            {
+                List<long> checkinIds = checkins.Where(item => keyValuePair.Value.Contains(item.Beer.Type)).Select(checkin => checkin.Id).ToList();
+                dictionary.Add(new KeyValue<string, List<long>>(keyValuePair.Key, checkinIds));               
+            }
+
+            KeyValue<string, List<long>> other = dictionary.FirstOrDefault(item => item.Key.Equals(DefautlValues.OtherNameGroupBeerType));
+            if (other == null)
+                other = new KeyValue<string, List<long>>(DefautlValues.OtherNameGroupBeerType, new List<long>());
+            else
+                dictionary.Remove(other);
+
+
+            List<string> removeKeys = new List<string>();
+            foreach (KeyValue<string, List<long>> keyValue in dictionary.Where(item => item.Value.Count < DefautlValues.BeerTypeCountByOther))
+            {
+                removeKeys.Add(keyValue.Key);
+                other.Value.AddRange(keyValue.Value);
+            }
+
+            dictionary.RemoveAll(item => removeKeys.Contains(item.Key));
+
+            if (other.Value.Count > 0)
+                dictionary.Add(other);
+
+            dictionary.Reverse();
+            return dictionary;
+        }
+
 
         private static Dictionary<long, double> GetBeerByRoundRating(List<Beer> beers)
         {
