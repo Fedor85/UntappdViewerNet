@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using UntappdViewer.Domain.Models;
 using UntappdViewer.Models;
 using UntappdViewer.Utils;
@@ -87,7 +86,7 @@ namespace UntappdViewer.Helpers
 
         #endregion
 
-        public static Dictionary<double, int> ChartKeyValueToDictionary(List<KeyValue<double, int>> keyValues)
+        public static Dictionary<double, int> KeyValuesToDictionary(List<KeyValue<double, int>> keyValues)
         {
             Dictionary<double, int> dictionary = new Dictionary<double, int>();
             foreach (KeyValue<double, int> keyValue in keyValues)
