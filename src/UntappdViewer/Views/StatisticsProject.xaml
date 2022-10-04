@@ -169,7 +169,7 @@
                 </Grid>
                 <Grid  Margin="0,20,0,0">
                     <ContentControl Template="{StaticResource BackgroundControl}"/>
-                    <Grid  Margin="5,0,5,0"  Height="500">
+                    <Grid  Margin="5,0,5,0" Height="{Binding HeightChartBeerType}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
@@ -194,7 +194,7 @@
                         </chartingToolkit:Chart>
                     </Grid>
                 </Grid>
-                <Grid  Margin="0,20,0,0">
+                <Grid  Margin="0,20,0,0" Height="{Binding HeightChartBeerCountry}">
                     <ContentControl Template="{StaticResource BackgroundControl}"/>
                     <Grid Margin="5,0,5,0"  Height="1000">
                         <Grid.ColumnDefinitions>
@@ -227,4 +227,3 @@
                 Width="60" Height="20" HorizontalAlignment="Right" VerticalAlignment="Center" IsDefault="True" Margin="0,0,5,0"/>
     </Grid>
 </UserControl>
-

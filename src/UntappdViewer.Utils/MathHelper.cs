@@ -15,6 +15,9 @@ namespace UntappdViewer.Utils
             if (step == 0)
                 return value;
 
+            if (value == 0)
+                return step;
+
             double delta = value / (double)step;
             double ceilingValue = Math.Ceiling(delta);
             return Convert.ToInt32(ceilingValue * step);

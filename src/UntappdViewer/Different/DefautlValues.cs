@@ -19,5 +19,7 @@
         public const string Separator = " | ";
 
         public const int ChartRatingScoreYInterval = 250;
+
+        public const int HeightBarSeriesChartYDelta = 18;
     }
 }
