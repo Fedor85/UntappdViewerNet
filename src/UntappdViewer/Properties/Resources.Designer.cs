@@ -769,6 +769,24 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Style/Count.
+        /// </summary>
+        public static string StyleCount {
+            get {
+                return ResourceManager.GetString("StyleCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Style/Rating.
+        /// </summary>
+        public static string StyleRating {
+            get {
+                return ResourceManager.GetString("StyleRating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap taster_3x {

@@ -457,4 +457,12 @@
     <value>average rating:</value>
     <comment>en-en</comment>
   </data>
+  <data name="StyleCount" xml:space="preserve">
+    <value>Style/Count</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="StyleRating" xml:space="preserve">
+    <value>Style/Rating</value>
+    <comment>en-en</comment>
+  </data>
 </root>

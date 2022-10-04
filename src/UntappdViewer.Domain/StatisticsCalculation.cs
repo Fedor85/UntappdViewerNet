@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UntappdViewer.Domain.Models;
-using UntappdViewer.Infrastructure;
 using UntappdViewer.Models;
 using UntappdViewer.Utils;
 
@@ -91,7 +90,7 @@ namespace UntappdViewer.Domain
 
 
             List<string> removeKeys = new List<string>();
-            foreach (KeyValue<string, List<long>> keyValue in dictionary.Where(item => item.Value.Count < DefautlValues.BeerTypeCountByOther))
+            foreach (KeyValue<string, List<long>> keyValue in dictionary.Where(item => item.Value.Count <= DefautlValues.BeerTypeCountByOther))
             {
                 removeKeys.Add(keyValue.Key);
                 other.Value.AddRange(keyValue.Value);

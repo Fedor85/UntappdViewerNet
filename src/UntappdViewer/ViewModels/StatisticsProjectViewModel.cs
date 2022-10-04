@@ -31,7 +31,11 @@ namespace UntappdViewer.ViewModels
 
         private IEnumerable beerTypeRating;
 
-        private int maxYAxis;
+        private int maxYAxisRatingScore;
+
+        private int maxXAxisBeerTypeCount;
+
+        private double maxXAxisBeerTypeRating;
 
         private double averageChekinRating;
 
@@ -75,12 +79,28 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public int MaxYAxis
+        public int MaxYAxisRatingScore
         {
-            get { return maxYAxis; }
+            get { return maxYAxisRatingScore; }
             set
             {
-                SetProperty(ref maxYAxis, value);
+                SetProperty(ref maxYAxisRatingScore, value);
+            }
+        }
+        public int MaxXAxisBeerTypeCount
+        {
+            get { return maxXAxisBeerTypeCount; }
+            set
+            {
+                SetProperty(ref maxXAxisBeerTypeCount, value);
+            }
+        }
+        public double MaxXAxisBeerTypeRating
+        {
+            get { return maxXAxisBeerTypeRating; }
+            set
+            {
+                SetProperty(ref maxXAxisBeerTypeRating, value);
             }
         }
 
@@ -135,7 +155,7 @@ namespace UntappdViewer.ViewModels
 
             int chekinMaxCount = chekinRatingScore.Select(item => item.Value).Max();
             int beerMaxCount = beerRatingScore.Select(item => item.Value).Max();
-            MaxYAxis = Math.Max(chekinMaxCount, beerMaxCount) + 100;
+            MaxYAxisRatingScore = Math.Max(chekinMaxCount, beerMaxCount) + 100;
 
             ChekinRatingScore = chekinRatingScore;
             AverageChekinRating = Math.Round(MathHelper.GetAverageValue(ConverterHelper.KeyValuesToDictionary(chekinRatingScore)), 2);
@@ -149,8 +169,13 @@ namespace UntappdViewer.ViewModels
             List<Checkin> chekin = untappdService.GetCheckins();
             List<KeyValue<string, List<long>>> beerTypeCheckinIds = StatisticsCalculation.GetBeerTypeCheckinIdGroupByCount(chekin);
 
-            BeerTypeCount = StatisticsCalculation.GetBeerTypeCount(chekin, beerTypeCheckinIds);
-            BeerTypeRating = StatisticsCalculation.GetBeerTypeRating(chekin, beerTypeCheckinIds);
+            List<KeyValue<string, int>> beerTypeCount = StatisticsCalculation.GetBeerTypeCount(chekin, beerTypeCheckinIds);
+            MaxXAxisBeerTypeCount = beerTypeCount.Max(item => item.Value) + 20;
+            BeerTypeCount = beerTypeCount;
+
+            List<KeyValue<string, double>> beerTypeRating = StatisticsCalculation.GetBeerTypeRating(chekin, beerTypeCheckinIds);
+            MaxXAxisBeerTypeRating = beerTypeRating.Max(item => item.Value) + 0.1;
+            BeerTypeRating = beerTypeRating;
         }
 
         private void Exit()
