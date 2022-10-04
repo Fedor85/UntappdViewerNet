@@ -282,6 +282,24 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Country/Count.
+        /// </summary>
+        public static string CountryCount {
+            get {
+                return ResourceManager.GetString("CountryCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Country/Rating.
+        /// </summary>
+        public static string CountryRating {
+            get {
+                return ResourceManager.GetString("CountryRating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create project.
         /// </summary>
         public static string CreateProject {

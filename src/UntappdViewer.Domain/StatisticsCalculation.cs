@@ -40,17 +40,17 @@ namespace UntappdViewer.Domain
             return keyValues;
         }
 
-        public static List<KeyValue<string, int>> GetBeerTypeCount(List<Checkin> checkins, List<KeyValue<string, List<long>>> beerTypeCheckinIds)
+        public static List<KeyValue<string, int>> GetListCount(List<KeyValue<string, List<long>>> beerTypeCheckinIds)
         {
             List<KeyValue<string, int>> keyValues = new List<KeyValue<string, int>>();
 
             foreach (KeyValue<string, List<long>> keyValue in beerTypeCheckinIds)
-                keyValues.Add(new KeyValue<string, int>(keyValue.Key, checkins.Count(item => keyValue.Value.Contains(item.Id))));
+                keyValues.Add(new KeyValue<string, int>(keyValue.Key, keyValue.Value.Count));
 
             return keyValues;
         }
 
-        public static List<KeyValue<string, double>> GetBeerTypeRating(List<Checkin> checkins, List<KeyValue<string, List<long>>> beerTypeCheckinIds)
+        public static List<KeyValue<string, double>> GetCheckinRatingByIds(List<Checkin> checkins, List<KeyValue<string, List<long>>> beerTypeCheckinIds)
         {
             List<KeyValue<string, double>> keyValues = new List<KeyValue<string, double>>();
 
@@ -74,7 +74,7 @@ namespace UntappdViewer.Domain
             List<string> types = checkins.Select(item => item.Beer.Type).Distinct().ToList();
             types.Sort();
 
-            Dictionary<string, List<string>> groupTypes = StringHelper.GetGroupByList(types, DefautlValues.SeparatorsBeerTypeName);
+            Dictionary<string, List<string>> groupTypes = StringHelper.GetGroupByList(types, DefautlValues.SeparatorsName);
 
             foreach (KeyValuePair<string, List<string>> keyValuePair in groupTypes)
             {
@@ -105,6 +105,25 @@ namespace UntappdViewer.Domain
             return dictionary;
         }
 
+        public static List<KeyValue<string, List<long>>> GetCountryCheckinIds(List<Checkin> checkins)
+        {
+            List<KeyValue<string, List<long>>> dictionary = new List<KeyValue<string, List<long>>>();
+            IEnumerable<Checkin> checkinCountry = checkins.Where(item => item.Beer.Brewery.Venue != null && !String.IsNullOrEmpty(item.Beer.Brewery.Venue.Country));
+            if (!checkinCountry.Any())
+                return dictionary;
+
+            List<string> countrys = checkinCountry.Select(item => item.Beer.Brewery.Venue.Country).Distinct().ToList();
+            countrys.Sort();
+            countrys.Reverse();
+
+            foreach (string country in countrys)
+            {
+                List<long> checkinIds = checkins.Where(item => item.Beer.Brewery.Venue.Country.Equals(country)).Select(checkin => checkin.Id).ToList();
+                dictionary.Add(new KeyValue<string, List<long>>(StringHelper.GetCutByFirstChars(country, DefautlValues.SeparatorsName), checkinIds));
+            }
+
+            return dictionary;
+        }
 
         private static Dictionary<long, double> GetBeerByRoundRating(List<Beer> beers)
         {

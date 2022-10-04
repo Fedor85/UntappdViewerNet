@@ -31,11 +31,19 @@ namespace UntappdViewer.ViewModels
 
         private IEnumerable beerTypeRating;
 
+        private IEnumerable beerCountryCount;
+
+        private IEnumerable beerCountryRating;
+
         private int maxYAxisRatingScore;
 
         private int maxXAxisBeerTypeCount;
 
         private double maxXAxisBeerTypeRating;
+
+        private int maxXAxisBeerCountryCount;
+
+        private double maxXAxisBeerCountryRating;
 
         private double averageChekinRating;
 
@@ -79,6 +87,24 @@ namespace UntappdViewer.ViewModels
             }
         }
 
+        public IEnumerable BeerCountryCount
+        {
+            get { return beerCountryCount; }
+            set
+            {
+                SetProperty(ref beerCountryCount, value);
+            }
+        }
+
+        public IEnumerable BeerCountryRating
+        {
+            get { return beerCountryRating; }
+            set
+            {
+                SetProperty(ref beerCountryRating, value);
+            }
+        }
+
         public int MaxYAxisRatingScore
         {
             get { return maxYAxisRatingScore; }
@@ -101,6 +127,23 @@ namespace UntappdViewer.ViewModels
             set
             {
                 SetProperty(ref maxXAxisBeerTypeRating, value);
+            }
+        }
+
+        public int MaxXAxisBeerCountryCount
+        {
+            get { return maxXAxisBeerCountryCount; }
+            set
+            {
+                SetProperty(ref maxXAxisBeerCountryCount, value);
+            }
+        }
+        public double MaxXAxisBeerCountryRating
+        {
+            get { return maxXAxisBeerCountryRating; }
+            set
+            {
+                SetProperty(ref maxXAxisBeerCountryRating, value);
             }
         }
 
@@ -136,6 +179,7 @@ namespace UntappdViewer.ViewModels
             base.Activate();
             SetRatingScore();
             SetBeerType();
+            SetBeerCountry();
         }
 
         protected override void DeActivate()
@@ -169,13 +213,27 @@ namespace UntappdViewer.ViewModels
             List<Checkin> chekin = untappdService.GetCheckins();
             List<KeyValue<string, List<long>>> beerTypeCheckinIds = StatisticsCalculation.GetBeerTypeCheckinIdGroupByCount(chekin);
 
-            List<KeyValue<string, int>> beerTypeCount = StatisticsCalculation.GetBeerTypeCount(chekin, beerTypeCheckinIds);
+            List<KeyValue<string, int>> beerTypeCount = StatisticsCalculation.GetListCount(beerTypeCheckinIds);
             MaxXAxisBeerTypeCount = beerTypeCount.Count > 0 ? beerTypeCount.Max(item => item.Value) + 20 : 0;
             BeerTypeCount = beerTypeCount;
 
-            List<KeyValue<string, double>> beerTypeRating = StatisticsCalculation.GetBeerTypeRating(chekin, beerTypeCheckinIds);
+            List<KeyValue<string, double>> beerTypeRating = StatisticsCalculation.GetCheckinRatingByIds(chekin, beerTypeCheckinIds);
             MaxXAxisBeerTypeRating = beerTypeRating.Count > 0 ? beerTypeRating.Max(item => item.Value) + 0.1 : 0;
             BeerTypeRating = beerTypeRating;
+        }
+
+        private void SetBeerCountry()
+        {
+            List<Checkin> chekin = untappdService.GetCheckins();
+            List<KeyValue<string, List<long>>> beerTypeCheckinIds = StatisticsCalculation.GetCountryCheckinIds(chekin);
+
+            List<KeyValue<string, int>> beerCountryCount = StatisticsCalculation.GetListCount(beerTypeCheckinIds);
+            MaxXAxisBeerCountryCount = beerCountryCount.Count > 0 ? beerCountryCount.Max(item => item.Value) + 20 : 0;
+            BeerCountryCount = beerCountryCount;
+
+            List<KeyValue<string, double>> beerCountryRating = StatisticsCalculation.GetCheckinRatingByIds(chekin, beerTypeCheckinIds);
+            MaxXAxisBeerCountryRating = beerCountryRating.Count > 0 ? beerCountryRating.Max(item => item.Value) + 0.1 : 0;
+            BeerCountryRating = beerCountryRating;
         }
 
         private void Exit()

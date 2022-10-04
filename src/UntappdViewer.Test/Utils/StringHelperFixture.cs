@@ -70,5 +70,15 @@ namespace UntappdViewer.Test
             Assert.AreEqual(val3.Key, "Brown Ale");
             Assert.AreEqual(val3.Value.Count, 5);
         }
+
+        [Test]
+        public void Test()
+        {
+            Assert.AreEqual("China / People's Republic of China", StringHelper.GetCutByFirstChars("China / People's Republic of China"));
+            Assert.AreEqual("China / People's Republic of China", StringHelper.GetCutByFirstChars("China / People's Republic of China", ";"));
+            Assert.AreEqual("China", StringHelper.GetCutByFirstChars("China / People's Republic of China", "/"));
+            Assert.AreEqual("Chi", StringHelper.GetCutByFirstChars("China / People's Republic of China", "/", "n"));
+            Assert.AreEqual("", StringHelper.GetCutByFirstChars("China / People's Republic of China", "/", "C"));
+        }
     }
 }

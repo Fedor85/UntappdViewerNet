@@ -2,7 +2,7 @@
 {
     public static class DefautlValues
     {
-        public static readonly string[] SeparatorsBeerTypeName = { "/", "-" };
+        public static readonly string[] SeparatorsName = { "/", "-" };
 
         public const double StepRating = 0.25;
 

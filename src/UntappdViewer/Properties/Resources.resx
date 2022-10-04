@@ -465,4 +465,12 @@
     <value>Style/Rating</value>
     <comment>en-en</comment>
   </data>
+  <data name="CountryCount" xml:space="preserve">
+    <value>Country/Count</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="CountryRating" xml:space="preserve">
+    <value>Country/Rating</value>
+    <comment>en-en</comment>
+  </data>
 </root>

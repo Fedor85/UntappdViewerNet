@@ -70,6 +70,18 @@ namespace UntappdViewer.Utils
             return name;
         }
 
+        public static string GetCutByFirstChars(string text, params string[] chars)
+        {
+            List<int> indexs = new List<int>();
+            foreach (string c in chars)
+            {
+                int index = text.IndexOf(c);
+                if (index >= 0)
+                    indexs.Add(index);
+            }
+            return indexs.Count > 0 ? text.Substring(0, indexs.Min()).Trim() : text;
+        }
+
         public static string GetSplitByLength(string text, int length)
         {
             if (String.IsNullOrEmpty(text))
