@@ -142,7 +142,6 @@ namespace UntappdViewer.Domain
                 else
                     dataChekinCount.Value++;
             }
-
             return dates.Select(keyValue => new KeyValue<string, int>($"{keyValue.Key:MM}.{keyValue.Key:yy}", keyValue.Value)).ToList();
         }
 

@@ -193,7 +193,7 @@
                         <ScrollViewer.Resources>
                             <system:Double x:Key="{x:Static SystemParameters.HorizontalScrollBarHeightKey}">10</system:Double>
                         </ScrollViewer.Resources>
-                        <chartingToolkit:Chart Height="{StaticResource DefautChartHeight}" MinWidth="1000" Margin="{StaticResource DefautChartMargin}" Title="{x:Static properties:Resources.ChekinsCountDate}"
+                        <chartingToolkit:Chart Height="{StaticResource DefautChartHeight}" MinWidth="{Binding MinWidthChartDateChekins}" Margin="{StaticResource DefautChartMargin}" Title="{x:Static properties:Resources.ChekinsCountDate}"
                                                TitleStyle="{StaticResource ChartTitleStyle}" Style="{StaticResource ChartStyleHideLegend}">
                             <chartingToolkit:Chart.Axes>
                                 <chartingToolkit:CategoryAxis Orientation="X" FontSize="10" >

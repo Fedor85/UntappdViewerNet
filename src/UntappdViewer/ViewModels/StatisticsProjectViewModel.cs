@@ -39,6 +39,8 @@ namespace UntappdViewer.ViewModels
 
         private int maxYAxisRatingScore;
 
+        private double minWidthChartDateChekins;
+
         private int maxXAxisBeerTypeCount;
 
         private double maxXAxisBeerTypeRating;
@@ -128,6 +130,16 @@ namespace UntappdViewer.ViewModels
                 SetProperty(ref maxYAxisRatingScore, value);
             }
         }
+
+        public double MinWidthChartDateChekins
+        {
+            get { return minWidthChartDateChekins; }
+            set
+            {
+                SetProperty(ref minWidthChartDateChekins, value);
+            }
+        }
+
         public int MaxXAxisBeerTypeCount
         {
             get { return maxXAxisBeerTypeCount; }
@@ -136,6 +148,7 @@ namespace UntappdViewer.ViewModels
                 SetProperty(ref maxXAxisBeerTypeCount, value);
             }
         }
+
         public double MaxXAxisBeerTypeRating
         {
             get { return maxXAxisBeerTypeRating; }
@@ -226,6 +239,9 @@ namespace UntappdViewer.ViewModels
             BeerRatingScore = null;
             AverageBeerRating = 0;
 
+            MinWidthChartDateChekins = 0;
+            DateChekins = null;
+
             HeightChartBeerType = 0;
             MaxXAxisBeerTypeCount = 0;
             BeerTypeCount = null;
@@ -257,7 +273,9 @@ namespace UntappdViewer.ViewModels
 
         private void SetDataCheckins()
         {
-            DateChekins = StatisticsCalculation.GetDateChekins(untappdService.GetCheckins());
+            List<KeyValue<string, int>> dateChekins = StatisticsCalculation.GetDateChekins(untappdService.GetCheckins());
+            MinWidthChartDateChekins = MathHelper.GetCeilingByStep(dateChekins.Count * 15, 100);
+            DateChekins = dateChekins;
         }
 
         private void SetBeerType()
