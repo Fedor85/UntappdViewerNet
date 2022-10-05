@@ -27,6 +27,8 @@ namespace UntappdViewer.ViewModels
 
         private IEnumerable beerRatingScore;
 
+        private IEnumerable dateChekins;
+
         private IEnumerable beerTypeCount;
 
         private IEnumerable beerTypeRating;
@@ -70,6 +72,15 @@ namespace UntappdViewer.ViewModels
             set
             {
                 SetProperty(ref beerRatingScore, value);
+            }
+        }
+
+        public IEnumerable DateChekins
+        {
+            get { return dateChekins; }
+            set
+            {
+                SetProperty(ref dateChekins, value);
             }
         }
 
@@ -200,6 +211,7 @@ namespace UntappdViewer.ViewModels
         {
             base.Activate();
             SetRatingScore();
+            SetDataCheckins();
             SetBeerType();
             SetBeerCountry();
         }
@@ -207,11 +219,24 @@ namespace UntappdViewer.ViewModels
         protected override void DeActivate()
         {
             base.DeActivate();
+
+            MaxYAxisRatingScore = 0;
             ChekinRatingScore = null;
             AverageChekinRating = 0;
             BeerRatingScore = null;
             AverageBeerRating = 0;
+
+            HeightChartBeerType = 0;
+            MaxXAxisBeerTypeCount = 0;
             BeerTypeCount = null;
+            MaxXAxisBeerTypeRating = 0;
+            BeerTypeRating = null;
+
+            HeightChartBeerCountry = 0;
+            MaxXAxisBeerCountryCount = 0;
+            BeerCountryCount = null;
+            MaxXAxisBeerCountryRating = 0;
+            BeerCountryRating = null;
         }
 
         private void SetRatingScore()
@@ -228,6 +253,11 @@ namespace UntappdViewer.ViewModels
 
             BeerRatingScore = beerRatingScore;
             AverageBeerRating = Math.Round(MathHelper.GetAverageValue(ConverterHelper.KeyValuesToDictionary(beerRatingScore)), 2);
+        }
+
+        private void SetDataCheckins()
+        {
+            DateChekins = StatisticsCalculation.GetDateChekins(untappdService.GetCheckins());
         }
 
         private void SetBeerType()

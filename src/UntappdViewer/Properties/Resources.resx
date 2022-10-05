@@ -473,4 +473,8 @@
     <value>Country/Rating</value>
     <comment>en-en</comment>
   </data>
+  <data name="ChekinsCountDate" xml:space="preserve">
+    <value>Chekins Count/Date</value>
+    <comment>en-en</comment>
+  </data>
 </root>

@@ -9,6 +9,7 @@
              xmlns:local="clr-namespace:UntappdViewer"
              xmlns:visualizationToolkit="clr-namespace:System.Windows.Controls.DataVisualization;assembly=DotNetProjects.DataVisualization.Toolkit"
              xmlns:primitives="clr-namespace:System.Windows.Controls.DataVisualization.Charting.Primitives;assembly=DotNetProjects.DataVisualization.Toolkit"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="1450" d:DesignWidth="800">
@@ -16,11 +17,25 @@
         <Style x:Key="ChartStyleHideLegend" TargetType="{x:Type chartingToolkit:Chart}">
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="Opacity" Value="0.8"/>
-            <Setter Property="LegendStyle">
+            <Setter Property="Template">
                 <Setter.Value>
-                    <Style TargetType="{x:Type visualizationToolkit:Legend}">
-                        <Setter Property="Width" Value="0" />
-                    </Style>
+                    <ControlTemplate TargetType="{x:Type chartingToolkit:Chart}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="10"/>
+                            </Grid.RowDefinitions>
+                            <visualizationToolkit:Title  Grid.Row="0" Content="{TemplateBinding Title}" Style="{TemplateBinding TitleStyle}"/>
+                            <Grid Grid.Row="1">
+                                <primitives:EdgePanel x:Name="ChartArea" Style="{TemplateBinding ChartAreaStyle}">
+                                    <Grid Style="{TemplateBinding PlotAreaStyle}" Panel.ZIndex="-1" Background="#ffffff"  Opacity="0.5"/>
+                                </primitives:EdgePanel>
+                            </Grid>
+                            <!--костыль, если поаернуть LinearAxis то не помещается-->
+                            <visualizationToolkit:Legend x:Name="Legend" Grid.Row="2" Width="0"/>
+                        </Grid>
+                    </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
@@ -36,8 +51,7 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <visualizationToolkit:Title  Grid.Row="0" Content="{TemplateBinding Title}" Style="{TemplateBinding TitleStyle}"
-                                                         Height="30" VerticalContentAlignment="Center"/>
+                            <visualizationToolkit:Title  Grid.Row="0" Content="{TemplateBinding Title}" Style="{TemplateBinding TitleStyle}"/>
                             <Grid Grid.Row="1">
                                 <primitives:EdgePanel x:Name="ChartArea" Style="{TemplateBinding ChartAreaStyle}">
                                     <Grid Style="{TemplateBinding PlotAreaStyle}" Panel.ZIndex="-1" Background="#ffffff"  Opacity="0.5"/>
@@ -73,8 +87,7 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <visualizationToolkit:Title  Grid.Row="0" Content="{TemplateBinding Title}" Style="{TemplateBinding TitleStyle}"
-                                                         Height="30" VerticalContentAlignment="Center"/>
+                            <visualizationToolkit:Title  Grid.Row="0" Content="{TemplateBinding Title}" Style="{TemplateBinding TitleStyle}"/>
                             <Grid Grid.Row="1">
                                 <primitives:EdgePanel x:Name="ChartArea" Style="{TemplateBinding ChartAreaStyle}">
                                     <Grid Style="{TemplateBinding PlotAreaStyle}" Panel.ZIndex="-1" Background="#ffffff"  Opacity="0.5"/>
@@ -113,7 +126,7 @@
             <Setter Property="Width" Value="12" />
             <Setter Property="Background" Value="#fd9532"/>
         </Style>
-        <Style x:Key="SeriesStyle" TargetType="{x:Type chartingToolkit:BarDataPoint}">
+        <Style x:Key="ColumnDataPointStyle" TargetType="{x:Type chartingToolkit:DataPoint}">
             <Setter Property="Background" Value="#ffc100"/>
             <Setter Property="BorderBrush" Value="#fd9532"/>
             <Setter Property="BorderThickness" Value="2"/>
@@ -121,7 +134,11 @@
         <Style x:Key="ChartTitleStyle" TargetType="{x:Type visualizationToolkit:Title}">
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Height" Value="30"/>
         </Style>
         <DataTemplate x:Key="AverageRatingContentTemplate">
             <DockPanel>
@@ -134,17 +151,20 @@
         <ControlTemplate  x:Key="BackgroundControl" TargetType="{x:Type ContentControl}">
             <ItemsControl Background="#ffffff" Opacity="0.5"/>
         </ControlTemplate>
+        <system:Double x:Key="DefautChartHeight">300</system:Double>
+        <Thickness x:Key="DefautChartMargin">5,0,5,0</Thickness>
+        <Thickness x:Key="DefautChartOffsetBottom">0,20,0,0</Thickness>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-        <ScrollViewer Grid.Row="0"  VerticalScrollBarVisibility="Auto">
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
             <StackPanel>
                 <Grid>
                     <ContentControl Template="{StaticResource BackgroundControl}"/>
-                    <chartingToolkit:Chart Height="300" Margin="5,0,0,0" Title="{x:Static properties:Resources.ChekinRatingScore}"
+                    <chartingToolkit:Chart Height="{StaticResource DefautChartHeight}" Margin="{StaticResource DefautChartMargin}" Title="{x:Static properties:Resources.ChekinRatingScore}"
                                        TitleStyle="{StaticResource ChartTitleStyle}" Style="{StaticResource RatingScoreChartStyle}">
                         <chartingToolkit:Chart.Axes>
                             <chartingToolkit:LinearAxis Orientation="Y" Interval="{Binding Source={x:Static local:DefautlValues.ChartRatingScoreYInterval}}" 
@@ -167,9 +187,38 @@
                         </chartingToolkit:SplineSeries>
                     </chartingToolkit:Chart>
                 </Grid>
-                <Grid  Margin="0,20,0,0">
+                <Grid Margin="{StaticResource DefautChartOffsetBottom}">
                     <ContentControl Template="{StaticResource BackgroundControl}"/>
-                    <Grid  Margin="5,0,5,0" Height="{Binding HeightChartBeerType}">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden">
+                        <ScrollViewer.Resources>
+                            <system:Double x:Key="{x:Static SystemParameters.HorizontalScrollBarHeightKey}">10</system:Double>
+                        </ScrollViewer.Resources>
+                        <chartingToolkit:Chart Height="{StaticResource DefautChartHeight}" MinWidth="1000" Margin="{StaticResource DefautChartMargin}" Title="{x:Static properties:Resources.ChekinsCountDate}"
+                                               TitleStyle="{StaticResource ChartTitleStyle}" Style="{StaticResource ChartStyleHideLegend}">
+                            <chartingToolkit:Chart.Axes>
+                                <chartingToolkit:CategoryAxis Orientation="X" FontSize="10" >
+                                    <chartingToolkit:CategoryAxis.AxisLabelStyle>
+                                        <Style TargetType="{x:Type chartingToolkit:AxisLabel}">
+                                            <Setter Property="Margin" Value="0,10,0,0" />
+                                            <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
+                                            <Setter Property="RenderTransform">
+                                                <Setter.Value>
+                                                    <RotateTransform Angle="-90" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </chartingToolkit:CategoryAxis.AxisLabelStyle>
+                                </chartingToolkit:CategoryAxis>
+                            </chartingToolkit:Chart.Axes>
+                            <chartingToolkit:ColumnSeries DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding DateChekins}" 
+                                                          IsSelectionEnabled="True" DataPointStyle="{StaticResource ColumnDataPointStyle}">
+                            </chartingToolkit:ColumnSeries>
+                        </chartingToolkit:Chart>
+                    </ScrollViewer>
+                </Grid>
+                <Grid Margin="{StaticResource DefautChartOffsetBottom}">
+                    <ContentControl Template="{StaticResource BackgroundControl}"/>
+                    <Grid  Margin="{StaticResource DefautChartMargin}" Height="{Binding HeightChartBeerType}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
@@ -181,7 +230,7 @@
                                 <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}"/>
                             </chartingToolkit:Chart.Axes>
                             <chartingToolkit:BarSeries  DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding BeerTypeCount}" IsSelectionEnabled="True"
-                                                        DataPointStyle="{StaticResource SeriesStyle}"/>
+                                                        DataPointStyle="{StaticResource ColumnDataPointStyle}"/>
                         </chartingToolkit:Chart>
                         <chartingToolkit:Chart Grid.Column="1" Style="{StaticResource BarSeriesChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
                                                 Title="{x:Static properties:Resources.StyleRating}">
@@ -189,14 +238,14 @@
                                 <chartingToolkit:LinearAxis Orientation="X" Maximum="{Binding MaxXAxisBeerTypeRating}" ShowGridLines="True"/>
                                 <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}"/>
                             </chartingToolkit:Chart.Axes>
-                            <chartingToolkit:BarSeries  DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding BeerTypeRating}" IsSelectionEnabled="True"
-                                                        DataPointStyle="{StaticResource SeriesStyle}"/>
+                            <chartingToolkit:BarSeries DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding BeerTypeRating}" IsSelectionEnabled="True"
+                                                        DataPointStyle="{StaticResource ColumnDataPointStyle}"/>
                         </chartingToolkit:Chart>
                     </Grid>
                 </Grid>
-                <Grid  Margin="0,20,0,0" Height="{Binding HeightChartBeerCountry}">
+                <Grid Margin="{StaticResource DefautChartOffsetBottom}">
                     <ContentControl Template="{StaticResource BackgroundControl}"/>
-                    <Grid Margin="5,0,5,0"  Height="1000">
+                    <Grid Margin="{StaticResource DefautChartMargin}" Height="{Binding HeightChartBeerCountry}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
@@ -208,7 +257,7 @@
                                 <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}"/>
                             </chartingToolkit:Chart.Axes>
                             <chartingToolkit:BarSeries  DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding BeerCountryCount}" IsSelectionEnabled="True"
-                                                        DataPointStyle="{StaticResource SeriesStyle}"/>
+                                                        DataPointStyle="{StaticResource ColumnDataPointStyle}"/>
                         </chartingToolkit:Chart>
                         <chartingToolkit:Chart Grid.Column="1" Style="{StaticResource BarSeriesChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
                                                 Title="{x:Static properties:Resources.CountryRating}">
@@ -217,7 +266,7 @@
                                 <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}"/>
                             </chartingToolkit:Chart.Axes>
                             <chartingToolkit:BarSeries  DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding BeerCountryRating}" IsSelectionEnabled="True"
-                                                        DataPointStyle="{StaticResource SeriesStyle}"/>
+                                                        DataPointStyle="{StaticResource ColumnDataPointStyle}"/>
                         </chartingToolkit:Chart>
                     </Grid>
                 </Grid>

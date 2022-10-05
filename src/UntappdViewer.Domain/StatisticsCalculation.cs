@@ -125,6 +125,27 @@ namespace UntappdViewer.Domain
             return dictionary;
         }
 
+        public static List<KeyValue<string, int>> GetDateChekins(List<Checkin> checkins)
+        {
+            List<KeyValue<DateTime, int>> dates = new List<KeyValue<DateTime, int>>();
+            if (!checkins.Any())
+                return null;
+
+            List<Checkin> newCheckins = new List<Checkin>(checkins);
+            newCheckins.Reverse();
+            foreach (Checkin checkin in newCheckins)
+            {
+                DateTime date = new DateTime(checkin.CreatedDate.Year, checkin.CreatedDate.Month, 1);
+                KeyValue<DateTime, int> dataChekinCount = dates.FirstOrDefault(item => item.Key.Equals(date));
+                if (dataChekinCount == null)
+                    dates.Add(new KeyValue<DateTime, int>(date, 1));
+                else
+                    dataChekinCount.Value++;
+            }
+
+            return dates.Select(keyValue => new KeyValue<string, int>($"{keyValue.Key:MM}.{keyValue.Key:yy}", keyValue.Value)).ToList();
+        }
+
         private static Dictionary<long, double> GetBeerByRoundRating(List<Beer> beers)
         {
             Dictionary<long, double> dictionary = new Dictionary<long, double>();
