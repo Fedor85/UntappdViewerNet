@@ -147,7 +147,7 @@ namespace UntappdViewer.Domain
         {
             List<KeyValue<DateTime, int>> dates = new List<KeyValue<DateTime, int>>();
             if (!checkins.Any())
-                return null;
+                return new List<KeyValue<string, int>>();
 
             List<Checkin> newCheckins = new List<Checkin>(checkins);
             newCheckins.Reverse();
