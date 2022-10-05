@@ -540,7 +540,7 @@ namespace UntappdViewer.ViewModels
             BeerType = checkin.Beer.Type;
             BeerABV = checkin.Beer.ABV.ToString();
             BeerIBU = GetBeerIBU(checkin.Beer.IBU);
-            BeerRating = checkin.Beer.GlobalRatingScore;
+            BeerRating = Math.Round(checkin.Beer.GlobalRatingScore, 2);
             BeerDescription = GetBeerDescription(checkin.Beer.Description);
             UpdateBeerLabel(checkin.Beer);
 
