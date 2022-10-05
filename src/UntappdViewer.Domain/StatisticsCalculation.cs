@@ -9,6 +9,8 @@ namespace UntappdViewer.Domain
 {
     public static class StatisticsCalculation
     {
+        private const int DefautDay = 1;
+
         public static List<KeyValue<double, int>> GetChekinRatingScore(List<Checkin> checkins)
         {
             List<KeyValue<double, int>> ratingsViewModels = new List<KeyValue<double, int>>();
@@ -138,11 +140,38 @@ namespace UntappdViewer.Domain
                 DateTime date = new DateTime(checkin.CreatedDate.Year, checkin.CreatedDate.Month, 1);
                 KeyValue<DateTime, int> dataChekinCount = dates.FirstOrDefault(item => item.Key.Equals(date));
                 if (dataChekinCount == null)
-                    dates.Add(new KeyValue<DateTime, int>(date, 1));
+                    dates.Add(new KeyValue<DateTime, int>(date, DefautDay));
                 else
                     dataChekinCount.Value++;
             }
+
+            dates = InsertEmptyMonth(dates);
             return dates.Select(keyValue => new KeyValue<string, int>($"{keyValue.Key:MM}.{keyValue.Key:yy}", keyValue.Value)).ToList();
+        }
+
+        private static List<KeyValue<DateTime, int>> InsertEmptyMonth(List<KeyValue<DateTime, int>> dates)
+        {
+            if (!dates.Any())
+                return dates;
+
+            List<KeyValue<DateTime, int>> sortDates = dates.OrderBy(item => item.Key.Year).ThenBy(item => item.Key.Month).ToList();
+            DateTime nowDate = DateTime.Today;
+            IEnumerable<IGrouping<int, KeyValue<DateTime, int>>> dateByYear = sortDates.GroupBy(item => item.Key.Year);
+            int minYear = dateByYear.Min(item => item.Key);
+            foreach (IGrouping<int, KeyValue<DateTime, int>> keyValues in dateByYear)
+            {
+                int firstMonth = keyValues.Key == minYear ? keyValues.Min(item => item.Key.Month) : 1;
+                int lastMonth = keyValues.Key == nowDate.Year ? nowDate.Month : 12;
+                for (int month = firstMonth; month <= lastMonth; month++)
+                {
+                    DateTime currentDate = new DateTime(keyValues.Key, month, DefautDay);
+                    if (sortDates.Any(item => item.Key.Equals(currentDate)))
+                        continue;
+
+                    sortDates.Add(new KeyValue<DateTime, int>(currentDate, 0));
+                }
+            }
+            return sortDates.OrderBy(item => item.Key.Year).ThenBy(item => item.Key.Month).ToList();
         }
 
         private static Dictionary<long, double> GetBeerByRoundRating(List<Beer> beers)
