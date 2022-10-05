@@ -197,6 +197,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Brewery count:.
+        /// </summary>
+        public static string BreweryCount {
+            get {
+                return ResourceManager.GetString("BreweryCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap can_3x {
@@ -250,6 +259,15 @@ namespace UntappdViewer.Properties {
         public static string Checkin {
             get {
                 return ResourceManager.GetString("Checkin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checkin count Total/Unique:.
+        /// </summary>
+        public static string CheckinCountTotalUnique {
+            get {
+                return ResourceManager.GetString("CheckinCountTotalUnique", resourceCulture);
             }
         }
         
@@ -314,6 +332,15 @@ namespace UntappdViewer.Properties {
         public static string CountryCount {
             get {
                 return ResourceManager.GetString("CountryCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Country count:.
+        /// </summary>
+        public static string CountryCountLabel {
+            get {
+                return ResourceManager.GetString("CountryCountLabel", resourceCulture);
             }
         }
         

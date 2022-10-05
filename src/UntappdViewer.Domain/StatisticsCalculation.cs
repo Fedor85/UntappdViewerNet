@@ -11,6 +11,11 @@ namespace UntappdViewer.Domain
     {
         private const int DefautDay = 1;
 
+        public static int GetCountrysCount(List<Checkin> checkins)
+        {
+            return GetCountrys(checkins).Count;
+        }
+
         public static List<KeyValue<double, int>> GetChekinRatingScore(List<Checkin> checkins)
         {
             List<KeyValue<double, int>> ratingsViewModels = new List<KeyValue<double, int>>();
@@ -110,11 +115,10 @@ namespace UntappdViewer.Domain
         public static List<KeyValue<string, List<long>>> GetCountryCheckinIds(List<Checkin> checkins)
         {
             List<KeyValue<string, List<long>>> dictionary = new List<KeyValue<string, List<long>>>();
-            IEnumerable<Checkin> checkinCountry = checkins.Where(item => item.Beer.Brewery.Venue != null && !String.IsNullOrEmpty(item.Beer.Brewery.Venue.Country));
-            if (!checkinCountry.Any())
+            List<string> countrys = GetCountrys(checkins);
+            if (!countrys.Any())
                 return dictionary;
 
-            List<string> countrys = checkinCountry.Select(item => item.Beer.Brewery.Venue.Country).Distinct().ToList();
             countrys.Sort();
             countrys.Reverse();
 
@@ -197,6 +201,15 @@ namespace UntappdViewer.Domain
                 dictionary.Add(beer.Id, MathHelper.GetRoundByStep(beer.GlobalRatingScore, DefautlValues.StepRating));
 
             return dictionary;
+        }
+
+        private static List<string> GetCountrys(List<Checkin> checkins)
+        {
+            IEnumerable<Checkin> checkinCountry = checkins.Where(item => item.Beer.Brewery.Venue != null && !String.IsNullOrEmpty(item.Beer.Brewery.Venue.Country));
+            if (!checkinCountry.Any())
+                return new List<string>();
+
+            return checkinCountry.Select(item => item.Beer.Brewery.Venue.Country).Distinct().ToList();
         }
     }
 }

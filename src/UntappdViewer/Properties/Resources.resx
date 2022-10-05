@@ -489,4 +489,15 @@
     <value>Total days:</value>
     <comment>en-en</comment>
   </data>
+  <data name="BreweryCount" xml:space="preserve">
+    <value>Brewery count:</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="CheckinCountTotalUnique" xml:space="preserve">
+    <value>Checkin count Total/Unique:</value>
+    <comment>en-ne</comment>
+  </data>
+  <data name="CountryCountLabel" xml:space="preserve">
+    <value>Country count:</value>
+  </data>
 </root>

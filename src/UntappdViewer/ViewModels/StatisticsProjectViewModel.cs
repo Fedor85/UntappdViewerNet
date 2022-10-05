@@ -37,6 +37,14 @@ namespace UntappdViewer.ViewModels
 
         private IEnumerable beerCountryRating;
 
+        private int totalCheckinCount;
+
+        private int uniqueCheckinCount;
+
+        private int breweryCount;
+
+        private int countryCount;
+
         private int maxYAxisRatingScore;
 
         private double minWidthChartDateChekins;
@@ -126,6 +134,41 @@ namespace UntappdViewer.ViewModels
             set
             {
                 SetProperty(ref beerCountryRating, value);
+            }
+        }
+        public int TotalCheckinCount
+        {
+            get { return totalCheckinCount; }
+            set
+            {
+                SetProperty(ref totalCheckinCount, value);
+            }
+        }
+
+        public int UniqueCheckinCount
+        {
+            get { return uniqueCheckinCount; }
+            set
+            {
+                SetProperty(ref uniqueCheckinCount, value);
+            }
+        }
+
+        public int BreweryCount
+        {
+            get { return breweryCount; }
+            set
+            {
+                SetProperty(ref breweryCount, value);
+            }
+        }
+
+        public int CountryCount
+        {
+            get { return countryCount; }
+            set
+            {
+                SetProperty(ref countryCount, value);
             }
         }
 
@@ -257,6 +300,7 @@ namespace UntappdViewer.ViewModels
         protected override void Activate()
         {
             base.Activate();
+            SetCountsPanel();
             SetRatingScore();
             SetDataCheckins();
             SetBeerType();
@@ -266,6 +310,11 @@ namespace UntappdViewer.ViewModels
         protected override void DeActivate()
         {
             base.DeActivate();
+
+            TotalCheckinCount =0;
+            UniqueCheckinCount = 0;
+            BreweryCount = 0;
+            CountryCount = 0;
 
             MaxYAxisRatingScore = 0;
             ChekinRatingScore = null;
@@ -292,6 +341,16 @@ namespace UntappdViewer.ViewModels
             BeerCountryRating = null;
         }
 
+        private void SetCountsPanel()
+        {
+            List<Checkin> checkins = untappdService.GetCheckins();
+            TotalCheckinCount = checkins.Count;
+
+            UniqueCheckinCount = untappdService.GetCheckins(true).Count;
+            BreweryCount = untappdService.GetBrewerys().Count;
+            CountryCount = StatisticsCalculation.GetCountrysCount(checkins);
+        }
+
         private void SetRatingScore()
         {
             List<KeyValue<double, int>> chekinRatingScore = StatisticsCalculation.GetChekinRatingScore(untappdService.GetCheckins());
@@ -310,13 +369,13 @@ namespace UntappdViewer.ViewModels
 
         private void SetDataCheckins()
         {
-            List<Checkin> chekin = untappdService.GetCheckins();
-            List<KeyValue<string, int>> dateChekins = StatisticsCalculation.GetDateChekins(chekin);
+            List<Checkin> checkins = untappdService.GetCheckins();
+            List<KeyValue<string, int>> dateChekins = StatisticsCalculation.GetDateChekins(checkins);
             MinWidthChartDateChekins = MathHelper.GetCeilingByStep(dateChekins.Count * 15, 100);
             DateChekins = dateChekins;
 
-            TotalDays = StatisticsCalculation.GetTotalDays(chekin);
-            AverageChekinsQuantity = Math.Round(StatisticsCalculation.GetAverageQuantity(chekin), 2);
+            TotalDays = StatisticsCalculation.GetTotalDays(checkins);
+            AverageChekinsQuantity = Math.Round(StatisticsCalculation.GetAverageQuantity(checkins), 2);
             AverageUniqueChekinsQuantity = Math.Round(StatisticsCalculation.GetAverageQuantity(untappdService.GetCheckins(true)), 2);
         }
 
