@@ -477,4 +477,16 @@
     <value>Chekins Count/Date</value>
     <comment>en-en</comment>
   </data>
+  <data name="AverageChekinsQuantity" xml:space="preserve">
+    <value>Average chekins quantity:</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="AverageUniqueChekinsQuantity" xml:space="preserve">
+    <value>Average unique chekins quantity:</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="TotalDays" xml:space="preserve">
+    <value>Total days:</value>
+    <comment>en-en</comment>
+  </data>
 </root>

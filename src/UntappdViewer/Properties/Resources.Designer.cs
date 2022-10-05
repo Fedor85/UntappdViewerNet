@@ -124,11 +124,29 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Average chekins quantity:.
+        /// </summary>
+        public static string AverageChekinsQuantity {
+            get {
+                return ResourceManager.GetString("AverageChekinsQuantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to average rating:.
         /// </summary>
         public static string AverageRating {
             get {
                 return ResourceManager.GetString("AverageRating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Average unique chekins quantity:.
+        /// </summary>
+        public static string AverageUniqueChekinsQuantity {
+            get {
+                return ResourceManager.GetString("AverageUniqueChekinsQuantity", resourceCulture);
             }
         }
         
@@ -829,6 +847,15 @@ namespace UntappdViewer.Properties {
         public static string ToEnd {
             get {
                 return ResourceManager.GetString("ToEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total days:.
+        /// </summary>
+        public static string TotalDays {
+            get {
+                return ResourceManager.GetString("TotalDays", resourceCulture);
             }
         }
         

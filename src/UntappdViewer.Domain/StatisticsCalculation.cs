@@ -127,6 +127,22 @@ namespace UntappdViewer.Domain
             return dictionary;
         }
 
+        public static int GetTotalDays(List<Checkin> checkins)
+        {
+            if (!checkins.Any())
+                return 0;
+
+            DateTime minData = checkins.Min(item => item.CreatedDate);
+            return Convert.ToInt32(Math.Ceiling((DateTime.Now - minData).TotalDays));
+        }
+
+        public static double GetAverageQuantity(List<Checkin> checkins)
+        {
+            int totalDays = GetTotalDays(checkins);
+            int count = checkins.Count;
+            return totalDays == 0 ? count : count / Convert.ToDouble(totalDays);
+        }
+
         public static List<KeyValue<string, int>> GetDateChekins(List<Checkin> checkins)
         {
             List<KeyValue<DateTime, int>> dates = new List<KeyValue<DateTime, int>>();
