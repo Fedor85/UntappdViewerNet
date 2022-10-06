@@ -13,5 +13,4 @@
     </ImageBrush>
     <helpers:BoolToVisibilityConverter x:Key="BTVConverter"/>
     <helpers:PathImageReSizeWidthConverter  x:Key="ImageReSizeWidthConverter"/>
-    <behaviors:SynchronisedScrollToken x:Key="ScrollToken" />
 </ResourceDictionary>

@@ -165,6 +165,7 @@
         <system:Double x:Key="DefautChartHeight">300</system:Double>
         <Thickness x:Key="DefautChartMargin">5,0,5,0</Thickness>
         <Thickness x:Key="DefautChartOffsetBottom">0,20,0,0</Thickness>
+        <behaviors:SynchronisedScrollToken x:Key="ScrollToken" />
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
