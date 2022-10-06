@@ -91,6 +91,7 @@
     <Compile Include="Different\Behaviors\CloseByEscapeBehavior.cs" />
     <Compile Include="Different\Behaviors\LoadedWindowBehavior.cs" />
     <Compile Include="Different\Behaviors\SelectedTreeViewItemBehavior.cs" />
+    <Compile Include="Different\Behaviors\SynchronisedScroll\SynchronisedScrollBehavior.cs" />
     <Compile Include="Different\CallBackConteiner.cs" />
     <Compile Include="Different\Helpers\BoolToVisibilityConverter.cs" />
     <Compile Include="Different\Helpers\ConverterHelper.cs" />
@@ -178,6 +179,7 @@
       <DependentUpon>StarRatingControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\ZoomBorder.cs" />
+    <Compile Include="Different\Behaviors\SynchronisedScroll\SynchronisedScrollToken.cs" />
     <Compile Include="Views\GalleryProject.xaml.cs">
       <DependentUpon>GalleryProject.xaml</DependentUpon>
     </Compile>

@@ -10,6 +10,8 @@
              xmlns:visualizationToolkit="clr-namespace:System.Windows.Controls.DataVisualization;assembly=DotNetProjects.DataVisualization.Toolkit"
              xmlns:primitives="clr-namespace:System.Windows.Controls.DataVisualization.Charting.Primitives;assembly=DotNetProjects.DataVisualization.Toolkit"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:behaviors="clr-namespace:UntappdViewer.Behaviors"
              mc:Ignorable="d" 
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="1450" d:DesignWidth="800">
@@ -237,6 +239,9 @@
                                                           IsSelectionEnabled="True" DataPointStyle="{StaticResource ColumnDataPointStyle}">
                                 </chartingToolkit:ColumnSeries>
                             </chartingToolkit:Chart>
+                            <b:Interaction.Behaviors>
+                                <behaviors:SynchronisedScrollBehavior RegisterToken="{StaticResource ScrollToken}" />
+                            </b:Interaction.Behaviors>
                         </ScrollViewer>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -274,6 +279,9 @@
                                                           IsSelectionEnabled="True" DataPointStyle="{StaticResource ChekinLineDataPointStyle}">
                             </chartingToolkit:AreaSeries>
                         </chartingToolkit:Chart>
+                        <b:Interaction.Behaviors>
+                            <behaviors:SynchronisedScrollBehavior RegisterToken="{StaticResource ScrollToken}" />
+                        </b:Interaction.Behaviors>
                     </ScrollViewer>
                 </Grid>
                 <Grid Margin="{StaticResource DefautChartOffsetBottom}">
