@@ -116,12 +116,12 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="LineDataPointStyleV1" TargetType="{x:Type chartingToolkit:LineDataPoint}">
+        <Style x:Key="ChekinLineDataPointStyle" TargetType="{x:Type chartingToolkit:DataPoint}">
             <Setter Property="Height" Value="10"/>
             <Setter Property="Width" Value="10" />
             <Setter Property="Background" Value="#ffc100"/>
         </Style>
-        <Style x:Key="LineDataPointStyleV2" TargetType="{x:Type chartingToolkit:LineDataPoint}">
+        <Style x:Key="BeerLineDataPointStyle" TargetType="{x:Type chartingToolkit:DataPoint}">
             <Setter Property="Height" Value="10"/>
             <Setter Property="Width" Value="10" />
             <Setter Property="Background" Value="#fd9532"/>
@@ -139,6 +139,15 @@
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Height" Value="30"/>
+        </Style>
+        <Style x:Key="DateXAxisLabel" TargetType="{x:Type chartingToolkit:AxisLabel}">
+            <Setter Property="Margin" Value="0,10,0,0" />
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <RotateTransform Angle="-90" />
+                </Setter.Value>
+            </Setter>
         </Style>
         <DataTemplate x:Key="AverageRatingContentTemplate">
             <DockPanel>
@@ -197,14 +206,14 @@
                             <chartingToolkit:LinearAxis Orientation="X" Interval="0.25" ShowGridLines="True"/>
                         </chartingToolkit:Chart.Axes>
                         <chartingToolkit:SplineSeries DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding BeerRatingScore}" IsSelectionEnabled="True"
-                                                        DataPointStyle="{StaticResource LineDataPointStyleV2}" LegendItemStyle="{StaticResource LegendItemStyle}"
+                                                        DataPointStyle="{StaticResource BeerLineDataPointStyle}" LegendItemStyle="{StaticResource LegendItemStyle}"
                                                         Title="{x:Static properties:Resources.Beer}">
                             <chartingToolkit:SplineSeries.LegendItems>
                                 <Label Content="{Binding AverageBeerRating}" ContentTemplate="{StaticResource AverageRatingContentTemplate}"/>
                             </chartingToolkit:SplineSeries.LegendItems>
                         </chartingToolkit:SplineSeries>
                         <chartingToolkit:SplineSeries DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding ChekinRatingScore}" IsSelectionEnabled="True"
-                                                        DataPointStyle="{StaticResource LineDataPointStyleV1}" LegendItemStyle="{StaticResource LegendItemStyle}"
+                                                        DataPointStyle="{StaticResource ChekinLineDataPointStyle}" LegendItemStyle="{StaticResource LegendItemStyle}"
                                                         Title="{x:Static properties:Resources.Checkin}">
                             <chartingToolkit:SplineSeries.LegendItems>
                                 <Label Content="{Binding AverageChekinRating}" ContentTemplate="{StaticResource AverageRatingContentTemplate}"/>
@@ -219,24 +228,12 @@
                             <ScrollViewer.Resources>
                                 <system:Double x:Key="{x:Static SystemParameters.HorizontalScrollBarHeightKey}">10</system:Double>
                             </ScrollViewer.Resources>
-                            <chartingToolkit:Chart Height="{StaticResource DefautChartHeight}" MinWidth="{Binding MinWidthChartDateChekins}" Margin="{StaticResource DefautChartMargin}" Title="{x:Static properties:Resources.ChekinsCountDate}"
-                                               TitleStyle="{StaticResource ChartTitleStyle}" Style="{StaticResource ChartStyleHideLegend}">
+                            <chartingToolkit:Chart Height="{StaticResource DefautChartHeight}" MinWidth="{Binding MinWidthChartDateChekins}" Margin="{StaticResource DefautChartMargin}"
+                                                   Title="{x:Static properties:Resources.ChekinsCountDate}" TitleStyle="{StaticResource ChartTitleStyle}" Style="{StaticResource ChartStyleHideLegend}">
                                 <chartingToolkit:Chart.Axes>
-                                    <chartingToolkit:CategoryAxis Orientation="X" FontSize="10" >
-                                        <chartingToolkit:CategoryAxis.AxisLabelStyle>
-                                            <Style TargetType="{x:Type chartingToolkit:AxisLabel}">
-                                                <Setter Property="Margin" Value="0,10,0,0" />
-                                                <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
-                                                <Setter Property="RenderTransform">
-                                                    <Setter.Value>
-                                                        <RotateTransform Angle="-90" />
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </Style>
-                                        </chartingToolkit:CategoryAxis.AxisLabelStyle>
-                                    </chartingToolkit:CategoryAxis>
+                                    <chartingToolkit:CategoryAxis Orientation="X" FontSize="10" AxisLabelStyle="{StaticResource DateXAxisLabel}"/>
                                 </chartingToolkit:Chart.Axes>
-                                <chartingToolkit:ColumnSeries DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding DateChekins}" 
+                                <chartingToolkit:ColumnSeries DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding DateChekinsCount}" 
                                                           IsSelectionEnabled="True" DataPointStyle="{StaticResource ColumnDataPointStyle}">
                                 </chartingToolkit:ColumnSeries>
                             </chartingToolkit:Chart>
@@ -261,6 +258,23 @@
                             </DockPanel>
                         </Grid>
                     </StackPanel>
+                </Grid>
+                <Grid Margin="{StaticResource DefautChartOffsetBottom}">
+                    <ContentControl Template="{StaticResource BackgroundControl}"/>
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden">
+                        <ScrollViewer.Resources>
+                            <system:Double x:Key="{x:Static SystemParameters.HorizontalScrollBarHeightKey}">10</system:Double>
+                        </ScrollViewer.Resources>
+                        <chartingToolkit:Chart Height="{StaticResource DefautChartHeight}" MinWidth="{Binding MinWidthChartDateChekins}" Margin="{StaticResource DefautChartMargin}"
+                                               Title="{x:Static properties:Resources.ChekinsAccumulateCountDate}" TitleStyle="{StaticResource ChartTitleStyle}" Style="{StaticResource ChartStyleHideLegend}">
+                            <chartingToolkit:Chart.Axes >
+                                <chartingToolkit:CategoryAxis Orientation="X" FontSize="10" AxisLabelStyle="{StaticResource DateXAxisLabel}"/>
+                            </chartingToolkit:Chart.Axes>
+                            <chartingToolkit:AreaSeries DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding DateChekinsAccumulateCount}" 
+                                                          IsSelectionEnabled="True" DataPointStyle="{StaticResource ChekinLineDataPointStyle}">
+                            </chartingToolkit:AreaSeries>
+                        </chartingToolkit:Chart>
+                    </ScrollViewer>
                 </Grid>
                 <Grid Margin="{StaticResource DefautChartOffsetBottom}">
                     <ContentControl Template="{StaticResource BackgroundControl}"/>

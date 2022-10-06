@@ -27,7 +27,9 @@ namespace UntappdViewer.ViewModels
 
         private IEnumerable beerRatingScore;
 
-        private IEnumerable dateChekins;
+        private IEnumerable dateChekinsCount;
+
+        private IEnumerable dateChekinsAccumulateCount;
 
         private IEnumerable beerTypeCount;
 
@@ -92,12 +94,21 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public IEnumerable DateChekins
+        public IEnumerable DateChekinsCount
         {
-            get { return dateChekins; }
+            get { return dateChekinsCount; }
             set
             {
-                SetProperty(ref dateChekins, value);
+                SetProperty(ref dateChekinsCount, value);
+            }
+        }
+
+        public IEnumerable DateChekinsAccumulateCount
+        {
+            get { return dateChekinsAccumulateCount; }
+            set
+            {
+                SetProperty(ref dateChekinsAccumulateCount, value);
             }
         }
 
@@ -323,10 +334,12 @@ namespace UntappdViewer.ViewModels
             AverageBeerRating = 0;
 
             MinWidthChartDateChekins = 0;
-            DateChekins = null;
+            DateChekinsCount = null;
             TotalDays = 0;
             AverageChekinsQuantity = 0;
             AverageUniqueChekinsQuantity = 0;
+
+            DateChekinsAccumulateCount = null;
 
             HeightChartBeerType = 0;
             MaxXAxisBeerTypeCount = 0;
@@ -370,14 +383,16 @@ namespace UntappdViewer.ViewModels
         private void SetDataCheckins()
         {
             List<Checkin> checkins = untappdService.GetCheckins();
-            List<KeyValue<string, int>> dateChekins = StatisticsCalculation.GetDateChekinsByCount(checkins);
-            MinWidthChartDateChekins = MathHelper.GetCeilingByStep(dateChekins.Count * 15, 100);
-            DateChekins = dateChekins;
+            List<KeyValue<string, int>> dateChekinsCount = StatisticsCalculation.GetDateChekinsByCount(checkins);
+            MinWidthChartDateChekins = MathHelper.GetCeilingByStep(dateChekinsCount.Count * 15, 100);
+            DateChekinsCount = dateChekinsCount;
 
             List<DateTime> dateCheckins = checkins.Select(item => item.CreatedDate).ToList();
             TotalDays = MathHelper.GetTotalDaysByNow(dateCheckins);
             AverageChekinsQuantity = Math.Round(MathHelper.GetAverageCountByNow(dateCheckins), 2);
             AverageUniqueChekinsQuantity = Math.Round(MathHelper.GetAverageCountByNow(untappdService.GetCheckins(true).Select(item => item.CreatedDate).ToList()), 2);
+
+            DateChekinsAccumulateCount = StatisticsCalculation.GetAccumulateValues(dateChekinsCount);
         }
 
         private void SetBeerType()

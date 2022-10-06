@@ -299,6 +299,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Chekins Accumulate Count/Date.
+        /// </summary>
+        public static string ChekinsAccumulateCountDate {
+            get {
+                return ResourceManager.GetString("ChekinsAccumulateCountDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chekins Count/Date.
         /// </summary>
         public static string ChekinsCountDate {

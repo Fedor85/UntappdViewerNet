@@ -500,4 +500,8 @@
   <data name="CountryCountLabel" xml:space="preserve">
     <value>Country count:</value>
   </data>
+  <data name="ChekinsAccumulateCountDate" xml:space="preserve">
+    <value>Chekins Accumulate Count/Date</value>
+    <comment>en-en</comment>
+  </data>
 </root>

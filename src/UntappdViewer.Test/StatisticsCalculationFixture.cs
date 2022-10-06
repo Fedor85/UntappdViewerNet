@@ -68,13 +68,13 @@ namespace UntappdViewer.Test
         [Test]
         public void TesGetDateChekinsByCount()
         {
-            List<KeyValue<string, int>> dataChekins = StatisticsCalculation.GetDateChekinsByCount(checkinsContainer.Checkins);
+            List<KeyValue<string, int>> dateChekinsCount = StatisticsCalculation.GetDateChekinsByCount(checkinsContainer.Checkins);
 
-            Assert.AreEqual(65, dataChekins.Count);
-            Assert.AreEqual("08.15", dataChekins[0].Key);
-            Assert.AreEqual(30, dataChekins[0].Value);
-            Assert.AreEqual("12.20", dataChekins[64].Key);
-            Assert.AreEqual(0, dataChekins[64].Value);
+            Assert.AreEqual(65, dateChekinsCount.Count);
+            Assert.AreEqual("08.15", dateChekinsCount[0].Key);
+            Assert.AreEqual(30, dateChekinsCount[0].Value);
+            Assert.AreEqual("12.20", dateChekinsCount[64].Key);
+            Assert.AreEqual(0, dateChekinsCount[64].Value);
         }
 
         [Test]
@@ -136,6 +136,36 @@ namespace UntappdViewer.Test
             Assert.AreEqual(2, beerCountrysCount[37].Value);
         }
 
+        [Test]
+        public void TestGetAccumulateValues()
+        {
+            List<KeyValue<string, int>> dataChekins = StatisticsCalculation.GetDateChekinsByCount(checkinsContainer.Checkins);
+            List<KeyValue<string, int>> dateChekinsAccumulateCount = StatisticsCalculation.GetAccumulateValues(dataChekins);
+
+            Assert.AreEqual(65, dataChekins.Count);
+            Assert.AreEqual(65, dateChekinsAccumulateCount.Count);
+
+            Assert.AreEqual("08.15", dataChekins[0].Key);
+            Assert.AreEqual(30, dataChekins[0].Value);
+            Assert.AreEqual("08.15", dateChekinsAccumulateCount[0].Key);
+            Assert.AreEqual(30, dateChekinsAccumulateCount[0].Value);
+
+
+            Assert.AreEqual("09.15", dataChekins[1].Key);
+            Assert.AreEqual(26, dataChekins[1].Value);
+            Assert.AreEqual("09.15", dateChekinsAccumulateCount[1].Key);
+            Assert.AreEqual(56, dateChekinsAccumulateCount[1].Value);
+
+            Assert.AreEqual("10.15", dataChekins[2].Key);
+            Assert.AreEqual(24, dataChekins[2].Value);
+            Assert.AreEqual("10.15", dateChekinsAccumulateCount[2].Key);
+            Assert.AreEqual(80, dateChekinsAccumulateCount[2].Value);
+
+            Assert.AreEqual("12.20", dataChekins[64].Key);
+            Assert.AreEqual(0, dataChekins[64].Value);
+            Assert.AreEqual("12.20", dateChekinsAccumulateCount[64].Key);
+            Assert.AreEqual(checkinsContainer.Checkins.Count, dateChekinsAccumulateCount[64].Value);
+        }
 
         [Test]
         public void TestGetAverageRatingByCheckinIds()
