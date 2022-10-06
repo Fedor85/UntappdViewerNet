@@ -72,7 +72,7 @@ namespace UntappdViewer.Test
         }
 
         [Test]
-        public void Test()
+        public void TestGetCutByFirstChars()
         {
             Assert.AreEqual("China / People's Republic of China", StringHelper.GetCutByFirstChars("China / People's Republic of China"));
             Assert.AreEqual("China / People's Republic of China", StringHelper.GetCutByFirstChars("China / People's Republic of China", ";"));

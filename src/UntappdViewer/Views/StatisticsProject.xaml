@@ -117,13 +117,13 @@
             </Setter>
         </Style>
         <Style x:Key="LineDataPointStyleV1" TargetType="{x:Type chartingToolkit:LineDataPoint}">
-            <Setter Property="Height" Value="12"/>
-            <Setter Property="Width" Value="12" />
+            <Setter Property="Height" Value="10"/>
+            <Setter Property="Width" Value="10" />
             <Setter Property="Background" Value="#ffc100"/>
         </Style>
         <Style x:Key="LineDataPointStyleV2" TargetType="{x:Type chartingToolkit:LineDataPoint}">
-            <Setter Property="Height" Value="12"/>
-            <Setter Property="Width" Value="12" />
+            <Setter Property="Height" Value="10"/>
+            <Setter Property="Width" Value="10" />
             <Setter Property="Background" Value="#fd9532"/>
         </Style>
         <Style x:Key="ColumnDataPointStyle" TargetType="{x:Type chartingToolkit:DataPoint}">

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace UntappdViewer.Utils
 {
@@ -44,6 +45,18 @@ namespace UntappdViewer.Utils
             }
 
             return counter == 0 ? totalValue : totalValue / counter;
+        }
+
+        public static int GetTotalDaysByNow(List<DateTime> dates)
+        {
+            return !dates.Any() ? 0 : Convert.ToInt32(Math.Ceiling((DateTime.Now - dates.Min()).TotalDays));
+        }
+
+        public static double GetAverageCountByNow(List<DateTime> dates)
+        {
+            int totalDays = GetTotalDaysByNow(dates);
+            int count = dates.Count;
+            return totalDays == 0 ? count : count / Convert.ToDouble(totalDays);
         }
     }
 }

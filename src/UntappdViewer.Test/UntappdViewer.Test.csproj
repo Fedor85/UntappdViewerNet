@@ -51,6 +51,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="ReportingFixture.cs" />
+    <Compile Include="StatisticsCalculationFixture.cs" />
     <Compile Include="TestHelper.cs" />
     <Compile Include="UntappdWebApiClientFixture.cs" />
     <Compile Include="Utils\ExtensionFixture.cs" />
