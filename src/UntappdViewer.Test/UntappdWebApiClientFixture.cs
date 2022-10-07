@@ -11,27 +11,36 @@ namespace UntappdViewer.Test
         //access_token
         private const string AccessToken = "access_token";
 
-        [Test, Ignore(AccessToken)]
-        public void TestCheckins()
-        {
-            Client untappdClient = new Client();
-            untappdClient.Initialize(AccessToken);
+        private CheckinsContainer checkinsContainer;
 
-            Assert.True(untappdClient.Check());
-            CheckinsContainer checkinsContainer = new CheckinsContainer();
-            untappdClient.FillFullCheckins(checkinsContainer);
+        private Client webApiClient;
+
+        public UntappdWebApiClientFixture()
+        {
+            checkinsContainer = TestHelper.GetCheckinsContainer();
+            webApiClient = new Client();
+            webApiClient.Initialize(AccessToken);
         }
 
         [Test, Ignore(AccessToken)]
-        public void TestBeers()
+        public void TestFillFullCheckins()
         {
-            Client untappdClient = new Client();
-            untappdClient.Initialize(AccessToken);
+            Assert.True(webApiClient.Check());
+            webApiClient.FillFullCheckins(checkinsContainer);
+        }
 
-            Assert.True(untappdClient.Check());
-            CheckinsContainer checkinsContainer = TestHelper.GetCheckinsContainer();
+        [Test, Ignore(AccessToken)]
+        public void TestUpdateBeers()
+        {
+            Assert.True(webApiClient.Check());
             long offset = 0;
-            untappdClient.UpdateBeers(checkinsContainer.Beers.Where(TestHelper.IsUpdateBeer).ToList(), TestHelper.IsUpdateBeer, ref offset);
+            webApiClient.UpdateBeers(checkinsContainer.Beers.Where(TestHelper.IsUpdateBeer).ToList(), TestHelper.IsUpdateBeer, ref offset);
+        }
+
+        [Test]
+        public void TestUpdateServing()
+        {
+            webApiClient.FillServingType(checkinsContainer.Checkins);
         }
     }
 }

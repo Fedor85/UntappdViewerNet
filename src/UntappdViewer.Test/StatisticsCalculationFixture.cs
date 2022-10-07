@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 using NUnit.Framework;
 using UntappdViewer.Domain;
-using UntappdViewer.Domain.Mappers;
 using UntappdViewer.Domain.Models;
 using UntappdViewer.Models;
-using UntappdViewer.Test.Properties;
 using UntappdViewer.Utils;
 
 namespace UntappdViewer.Test
@@ -16,22 +12,11 @@ namespace UntappdViewer.Test
     [TestFixture]
     public class  StatisticsCalculationFixture
     {
-
         private CheckinsContainer checkinsContainer;
 
         public StatisticsCalculationFixture()
         {
-            checkinsContainer = GetCheckinsContainer();
-        }
-
-        private CheckinsContainer GetCheckinsContainer()
-        {
-            using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(Resources.ResourcesTestFileName))
-            {
-                CheckinsContainer checkinsContainer = new CheckinsContainer();
-                CheckinCSVMapper.InitializeCheckinsContainer(checkinsContainer, stream);
-                return checkinsContainer;
-            }
+            checkinsContainer = TestHelper.GetCheckinsContainer();
         }
 
         [Test]

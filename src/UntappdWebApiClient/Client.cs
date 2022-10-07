@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using HtmlAgilityPack;
 using Newtonsoft.Json;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
@@ -91,6 +92,17 @@ namespace UntappdWebApiClient
 
                 if (predicate != null && !beers.Any(predicate))
                     isRun = false;
+            }
+        }
+
+        public void FillServingType(List<Checkin> checkins)
+        {
+            foreach (Checkin checkin in checkins)
+            {
+                string checkinUrl = UrlPathBuilder.GetСheckinUrl(checkin.Id);
+                string servingType = GetServingType(checkinUrl);
+                if (!String.IsNullOrEmpty(servingType) && !servingType.Equals(checkin.ServingType))
+                    checkin.ServingType = servingType;
             }
         }
 
@@ -218,6 +230,33 @@ namespace UntappdWebApiClient
         private void UploadedCountInvoke(string message)
         {
             UploadedProgress?.Invoke(message);
+        }
+
+        private string GetServingType(string checkinUrl)
+        {
+            string htmlPage = GetHtmlPage(checkinUrl);
+            if (String.IsNullOrEmpty(htmlPage))
+                return String.Empty;
+
+            HtmlDocument htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(htmlPage);
+            List<HtmlNode> servingNode = htmlDoc.DocumentNode.Descendants("p").Where(node => node.GetAttributeValue("class", "").Contains("serving")).ToList();
+            return servingNode.Count > 0 ? servingNode[0].InnerText.Trim() : String.Empty;
+        }
+
+        private string GetHtmlPage(string url)
+        {
+            using (WebClient client = new WebClient())
+            {
+                try
+                {
+                    return client.DownloadString(url); 
+                }
+                catch (Exception ex)
+                {
+                    return String.Empty;
+                }
+            }
         }
     }
 }

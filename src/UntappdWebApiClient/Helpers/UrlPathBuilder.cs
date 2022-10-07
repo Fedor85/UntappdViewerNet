@@ -18,5 +18,10 @@ namespace UntappdWebApiClient
         {
             return String.Concat(baseUrl, methodName, authenticationUri);
         }
+
+        public static string GetСheckinUrl(long checkinId)
+        {
+            return String.Concat(UriConstants.СheckinUrl, checkinId);
+        }
     }
 }
