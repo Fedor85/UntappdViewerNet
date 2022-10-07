@@ -6,6 +6,7 @@ using System.Windows.Input;
 using Prism.Commands;
 using Prism.Modularity;
 using Prism.Regions;
+using UntappdViewer.Interfaces;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
 using UntappdViewer.Modules;
@@ -33,6 +34,8 @@ namespace UntappdViewer.ViewModels
 
         private IInteractionRequestService interactionRequestService;
 
+        private ICancellationToken<Checkin> fillServingTypCancellation;
+
         public ICommand CheckAccessTokenCommand { get; }
 
         public ICommand FulllDownloadButtonCommand { get; }
@@ -45,7 +48,10 @@ namespace UntappdViewer.ViewModels
 
         public ICommand FillServingTypeButtonCommand { get; }
 
+        public ICommand CancelServingTypeButtonCommand { get; }
+
         public ICommand OkButtonCommand { get; }
+
 
         public bool? AccessToken
         {
@@ -83,6 +89,7 @@ namespace UntappdViewer.ViewModels
             }
         }
 
+
         public WebDownloadProjectViewModel(IRegionManager regionManager, IUntappdService untappdService,
                                                                          IWebApiClient webApiClient,
                                                                          IModuleManager moduleManager,
@@ -100,7 +107,11 @@ namespace UntappdViewer.ViewModels
             FirstDownloadButtonCommand = new DelegateCommand(FirstDownloadCheckins);
             ToEndDownloadButtonCommand = new DelegateCommand(ToEndDownloadCheckins);
             BeerUpdateButtonCommand = new DelegateCommand(UpdateBeers);
+
             FillServingTypeButtonCommand = new DelegateCommand(FillServingType);
+            CancelServingTypeButtonCommand = new DelegateCommand(() => fillServingTypCancellation.Cancel = true);
+            fillServingTypCancellation = webApiClient.GetCancellationToken<Checkin>();
+
             OkButtonCommand = new DelegateCommand(Exit);
         }
 
@@ -193,7 +204,6 @@ namespace UntappdViewer.ViewModels
             if (!checkins.Any())
                 return;
 
-            LoadingChangeActivity(true);
             FillServingType(checkins);
         }
 
@@ -238,7 +248,7 @@ namespace UntappdViewer.ViewModels
         {
             try
             {
-                await Task.Run(() => webApiClient.FillServingType(checkins));
+                await Task.Run(() => webApiClient.FillServingType(checkins, fillServingTypCancellation));
 
             }
             catch (Exception ex)
@@ -247,7 +257,8 @@ namespace UntappdViewer.ViewModels
             }
             finally
             {
-                LoadingChangeActivity(false);
+                Checkins = new List<Checkin>(untappdService.GetCheckins());
+                fillServingTypCancellation.Cancel = false;
             }
         }
 

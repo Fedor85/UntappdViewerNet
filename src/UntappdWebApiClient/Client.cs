@@ -9,6 +9,7 @@ using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
 using QuickType.Checkins.WebModels;
 using QuickType.Beers.WebModels;
+using UntappdViewer.Interfaces;
 using Beer = UntappdViewer.Models.Beer;
 using Brewery = UntappdViewer.Models.Brewery;
 using Venue = UntappdViewer.Models.Venue;
@@ -95,15 +96,26 @@ namespace UntappdWebApiClient
             }
         }
 
-        public void FillServingType(List<Checkin> checkins)
+        public void FillServingType(List<Checkin> checkins, ICancellationToken<Checkin> cancellation = null)
         {
             foreach (Checkin checkin in checkins)
             {
+                if (cancellation != null && cancellation.Cancel)
+                    return;
+
                 string checkinUrl = UrlPathBuilder.GetСheckinUrl(checkin.Id);
                 string servingType = GetServingType(checkinUrl);
                 if (!String.IsNullOrEmpty(servingType) && !servingType.Equals(checkin.ServingType))
+                {
                     checkin.ServingType = servingType;
+                    cancellation?.Items.Add(checkin);
+                }
             }
+        }
+
+        public ICancellationToken<T> GetCancellationToken<T>()
+        {
+            return new CancellationToken<T>();
         }
 
         private void FillCheckins(CheckinsContainer checkinsContainer, long maxId, long? minId = null)

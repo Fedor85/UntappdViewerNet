@@ -66,6 +66,8 @@
                 <Image Width="20" Height="20" Source="..\Resources\web.ico" Opacity="0.8"/>
                 <Separator Width="15" Visibility="Hidden"/>
                 <Button  Content="{x:Static properties:Resources.FillServingType}" Command="{Binding FillServingTypeButtonCommand}" Width="110" Height="20" IsDefault="True"/>
+                <Separator Width="15" Visibility="Hidden"/>
+                <Button  Content="{x:Static properties:Resources.Cancel}" Command="{Binding CancelServingTypeButtonCommand}" Width="50" Height="20" IsDefault="True"/>
             </DockPanel>
         </Grid>
         <Grid Grid.Row="1" >
