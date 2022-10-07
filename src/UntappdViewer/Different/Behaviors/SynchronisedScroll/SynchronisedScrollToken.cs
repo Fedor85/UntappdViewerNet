@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Controls;
+using UntappdViewer.Utils;
 
 namespace UntappdViewer.Behaviors
 {
@@ -7,30 +9,30 @@ namespace UntappdViewer.Behaviors
     {
         private List<ScrollViewer> registeredScrolls = new List<ScrollViewer>();
 
-        public void Unregister(ScrollViewer scroll)
-        {
-            scroll.ScrollChanged -= ScrollChanged;
-            registeredScrolls.Remove(scroll);
-        }
-
         public void Register(ScrollViewer scroll)
         {
             scroll.ScrollChanged += ScrollChanged;
             registeredScrolls.Add(scroll);
         }
 
+        public void Unregister(ScrollViewer scroll)
+        {
+            scroll.ScrollChanged -= ScrollChanged;
+            registeredScrolls.Remove(scroll);
+        }
+
         private void ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             ScrollViewer sendingScroll = sender as ScrollViewer;
-            foreach (ScrollViewer potentialScroll in registeredScrolls)
-            {
-                if (potentialScroll == sendingScroll)
-                    continue;
+            if (sendingScroll == null)
+                return;
 
-                if (potentialScroll.VerticalOffset != sendingScroll.VerticalOffset)
+            foreach (ScrollViewer potentialScroll in registeredScrolls.Where(item => item != sendingScroll))
+            {
+                if (!MathHelper.DoubleCompare(potentialScroll.VerticalOffset, sendingScroll.VerticalOffset))
                     potentialScroll.ScrollToVerticalOffset(sendingScroll.VerticalOffset);
 
-                if (potentialScroll.HorizontalOffset != sendingScroll.HorizontalOffset)
+                if (!MathHelper.DoubleCompare(potentialScroll.HorizontalOffset, sendingScroll.HorizontalOffset))
                     potentialScroll.ScrollToHorizontalOffset(sendingScroll.HorizontalOffset);
             }
         }
