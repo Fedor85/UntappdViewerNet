@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Prism.Commands;
@@ -41,6 +42,8 @@ namespace UntappdViewer.ViewModels
         public ICommand ToEndDownloadButtonCommand { get; }
         
         public ICommand BeerUpdateButtonCommand { get; }
+
+        public ICommand FillServingTypeButtonCommand { get; }
 
         public ICommand OkButtonCommand { get; }
 
@@ -97,6 +100,7 @@ namespace UntappdViewer.ViewModels
             FirstDownloadButtonCommand = new DelegateCommand(FirstDownloadCheckins);
             ToEndDownloadButtonCommand = new DelegateCommand(ToEndDownloadCheckins);
             BeerUpdateButtonCommand = new DelegateCommand(UpdateBeers);
+            FillServingTypeButtonCommand = new DelegateCommand(FillServingType);
             OkButtonCommand = new DelegateCommand(Exit);
         }
 
@@ -176,11 +180,21 @@ namespace UntappdViewer.ViewModels
         private void UpdateBeers()
         {
             List<Beer> beers = untappdService.GetBeers();
-            if (beers.Count == 0)
+            if (!beers.Any())
                 return;
 
             LoadingChangeActivity(true);
             UpdateBeers(beers);
+        }
+
+        private void FillServingType()
+        {
+            List<Checkin> checkins = untappdService.GetCheckins().Where(item => String.IsNullOrEmpty(item.ServingType)).ToList();
+            if (!checkins.Any())
+                return;
+
+            LoadingChangeActivity(true);
+            FillServingType(checkins);
         }
 
         private async void FillCheckins(Action<CheckinsContainer> fillCheckinsDelegate)
@@ -212,6 +226,23 @@ namespace UntappdViewer.ViewModels
             catch (Exception ex)
             {
                 SetOffsetUpdateBeer(offset);
+                interactionRequestService.ShowError(Properties.Resources.Error, StringHelper.GetFullExceptionMessage(ex));
+            }
+            finally
+            {
+                LoadingChangeActivity(false);
+            }
+        }
+
+        private async void FillServingType(List<Checkin> checkins)
+        {
+            try
+            {
+                await Task.Run(() => webApiClient.FillServingType(checkins));
+
+            }
+            catch (Exception ex)
+            {
                 interactionRequestService.ShowError(Properties.Resources.Error, StringHelper.GetFullExceptionMessage(ex));
             }
             finally

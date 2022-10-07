@@ -68,7 +68,15 @@ namespace UntappdViewer.Domain.Services
 
         private void InitializeToUNTP(string filePath)
         {
-            Untappd = FileHelper.OpenFile<Untappd>(filePath);
+            try
+            {
+                Untappd = FileHelper.OpenFile<Untappd>(filePath);
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException(String.Format(Properties.Resources.ArgumentExceptionInitializeUntappd, $"{filePath}\n{e.Message}"));
+            }
+
             if(!Untappd.IsValidVersion())
                 throw new ArgumentException($"{Properties.Resources.ArgumentExceptioValidUNTPProjectVersion}\n{filePath}");
         }

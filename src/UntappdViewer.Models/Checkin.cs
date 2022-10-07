@@ -4,8 +4,10 @@ using System.Collections.Generic;
 namespace UntappdViewer.Models
 {
     [Serializable]
-    public class Checkin
+    public class Checkin: BasePropertyChanged
     {
+        private string servingType;
+
         /// <summary>
         /// id чекина
         /// </summary>
@@ -29,7 +31,18 @@ namespace UntappdViewer.Models
         /// <summary>
         /// тип тары
         /// </summary>
-        public string ServingType { get; set; }
+        public string ServingType
+        {
+            get
+            {
+                return servingType; 
+            }
+            set
+            {
+                servingType = value;
+                OnPropertyChanged();
+            }
+        }
 
         /// <summary>
         /// профиль вкуса

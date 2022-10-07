@@ -19,7 +19,7 @@
     </UserControl.Background>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="150"/>
+            <RowDefinition Height="170"/>
             <RowDefinition/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
@@ -27,6 +27,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
+                <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
             <Image Grid.Row="0" Height="40" Width="40" Source="..\Resources\ut_connection_default.png" VerticalAlignment="Bottom"/>
@@ -40,7 +41,7 @@
                     </StackPanel>
                 </Button>
             </DockPanel>
-            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <DockPanel Grid.Row="2" HorizontalAlignment="Center">
                 <Button Name="FulllDownloadCheckinsButton" Content="{x:Static properties:Resources.Full}" IsEnabled="False"
                         Command="{Binding FulllDownloadButtonCommand}" Width="60" Height="20" IsDefault="True"/>
                 <Separator Width="10" Visibility="Hidden"/>
@@ -60,8 +61,12 @@
                                                TextBinding="{Binding OffsetUpdateBeer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Mask="\d+" MaxLength="5"/>
                     </StackPanel>
                 </Grid>
-
-            </StackPanel>
+            </DockPanel>
+            <DockPanel Grid.Row="3" HorizontalAlignment="Center">
+                <Image Width="20" Height="20" Source="..\Resources\web.ico" Opacity="0.8"/>
+                <Separator Width="15" Visibility="Hidden"/>
+                <Button  Content="{x:Static properties:Resources.FillServingType}" Command="{Binding FillServingTypeButtonCommand}" Width="110" Height="20" IsDefault="True"/>
+            </DockPanel>
         </Grid>
         <Grid Grid.Row="1" >
             <Grid.RowDefinitions>

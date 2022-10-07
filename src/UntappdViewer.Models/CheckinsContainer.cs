@@ -43,18 +43,19 @@ namespace UntappdViewer.Models
 
         public void AddCheckin(Checkin checkin)
         {
+            checkin.Changed += ItemChanged;
             Checkins.Add(checkin);
             IsСhanges = true;
         }
 
         public void AddBeer(Beer beer)
         {
-            beer.Changed += BeerChanged;
+            beer.Changed += ItemChanged;
             Beers.Add(beer);
             IsСhanges = true;
         }
 
-        private void BeerChanged()
+        private void ItemChanged()
         {
             IsСhanges = true;
         }

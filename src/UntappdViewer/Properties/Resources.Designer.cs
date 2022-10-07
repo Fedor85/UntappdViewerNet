@@ -487,6 +487,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fill Serving Type.
+        /// </summary>
+        public static string FillServingType {
+            get {
+                return ResourceManager.GetString("FillServingType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to filter.
         /// </summary>
         public static string Filter {

@@ -3,7 +3,7 @@
 namespace UntappdViewer.Models
 {
     [Serializable]
-    public class Beer
+    public class Beer: BasePropertyChanged
     {
         private string description;
 
@@ -90,8 +90,6 @@ namespace UntappdViewer.Models
         /// </summary>
         public Brewery Brewery { get; set; }
 
-        public event Action Changed;
-
         public Beer()
         {
             Brewery = new Brewery();
@@ -100,11 +98,6 @@ namespace UntappdViewer.Models
         public override string ToString()
         {
             return $"Name:{Name}/Type:{Type}";
-        }
-
-        private void OnPropertyChanged()
-        {
-            Changed?.Invoke();
         }
     }
 }

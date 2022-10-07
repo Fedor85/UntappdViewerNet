@@ -504,4 +504,8 @@
     <value>Chekins Accumulate Count/Date</value>
     <comment>en-en</comment>
   </data>
+  <data name="FillServingType" xml:space="preserve">
+    <value>Fill Serving Type</value>
+    <comment>en-en</comment>
+  </data>
 </root>
