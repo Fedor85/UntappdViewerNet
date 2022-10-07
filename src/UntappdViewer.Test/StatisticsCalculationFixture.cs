@@ -191,9 +191,9 @@ namespace UntappdViewer.Test
 
         private double GetTotalDay()
         {
-            double totalCheckinDays = Math.Ceiling((checkinsContainer.Checkins.Max(item => item.CreatedDate) - checkinsContainer.Checkins.Min(item => item.CreatedDate)).TotalDays);
-            double otherDaysNow = Math.Ceiling((DateTime.Now - checkinsContainer.Checkins.Max(item => item.CreatedDate)).TotalDays);
-            return totalCheckinDays + otherDaysNow;
+            double totalCheckinDays = (checkinsContainer.Checkins.Max(item => item.CreatedDate) - checkinsContainer.Checkins.Min(item => item.CreatedDate)).TotalDays;
+            double otherDaysNow = (DateTime.Now - checkinsContainer.Checkins.Max(item => item.CreatedDate)).TotalDays;
+            return Math.Ceiling(totalCheckinDays + otherDaysNow);
         }
     }
 }

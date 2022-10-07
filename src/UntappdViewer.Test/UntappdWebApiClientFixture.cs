@@ -11,7 +11,7 @@ namespace UntappdViewer.Test
         //access_token
         private const string AccessToken = "access_token";
 
-        [Test]
+        [Test, Ignore(AccessToken)]
         public void TestCheckins()
         {
             Client untappdClient = new Client();
@@ -22,7 +22,7 @@ namespace UntappdViewer.Test
             untappdClient.FillFullCheckins(checkinsContainer);
         }
 
-        [Test]
+        [Test, Ignore(AccessToken)]
         public void TestBeers()
         {
             Client untappdClient = new Client();
