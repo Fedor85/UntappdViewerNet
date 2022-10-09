@@ -27,8 +27,6 @@ namespace UntappdViewer.ViewModels
 
         private IInteractionRequestService interactionRequestService;
 
-        private IEventAggregator eventAggregator;
-
         private IWebDownloader webDownloader;
 
         private string checkinHeader;
@@ -471,11 +469,10 @@ namespace UntappdViewer.ViewModels
                                                                 IWebDownloader webDownloader,
                                                                 IEventAggregator eventAggregator,
                                                                 IModuleManager moduleManager,
-                                                                IRegionManager regionManager) : base(moduleManager, regionManager)
+                                                                IRegionManager regionManager) : base(moduleManager, regionManager, eventAggregator)
         {
             this.interactionRequestService = interactionRequestService;
             this.untappdService = untappdService;
-            this.eventAggregator = eventAggregator;
             this.webDownloader = webDownloader;
 
             loadingModuleName = typeof(PhotoLoadingModule).Name;

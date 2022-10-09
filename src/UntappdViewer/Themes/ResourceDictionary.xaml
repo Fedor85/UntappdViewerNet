@@ -13,4 +13,5 @@
     </ImageBrush>
     <helpers:BoolToVisibilityConverter x:Key="BTVConverter"/>
     <helpers:PathImageReSizeWidthConverter  x:Key="ImageReSizeWidthConverter"/>
+    <BooleanToVisibilityConverter x:Key="BooleanConverter" />
 </ResourceDictionary>

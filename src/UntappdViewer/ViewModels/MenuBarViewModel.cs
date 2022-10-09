@@ -32,8 +32,6 @@ namespace UntappdViewer.ViewModels
 
         private IModuleManager moduleManager;
 
-        private IEventAggregator eventAggregator;
-
         private IWebDownloader webDownloader;
 
         private IReportingService reportingService;
@@ -68,13 +66,12 @@ namespace UntappdViewer.ViewModels
                                                                  IRegionManager regionManager,
                                                                  IEventAggregator eventAggregator,
                                                                  IWebDownloader webDownloader,
-                                                                 IReportingService reportingService) : base(moduleManager, regionManager)
+                                                                 IReportingService reportingService) : base(moduleManager, regionManager, eventAggregator)
         {
             this.interactionRequestService = interactionRequestService;
             this.settingService = settingService;
             this.untappdService = untappdService;
             this.moduleManager = moduleManager;
-            this.eventAggregator = eventAggregator;
             this.webDownloader = webDownloader;
             this.reportingService = reportingService;
 

@@ -12,9 +12,6 @@
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="450" d:DesignWidth="450">
-    <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanConverter" />
-    </UserControl.Resources>
     <UserControl.Background>
         <SolidColorBrush Opacity="0.3" Color="#ffffff"/>
     </UserControl.Background>

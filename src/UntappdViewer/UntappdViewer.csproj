@@ -93,6 +93,8 @@
     <Compile Include="Different\Behaviors\SelectedTreeViewItemBehavior.cs" />
     <Compile Include="Different\Behaviors\SynchronisedScroll\SynchronisedScrollBehavior.cs" />
     <Compile Include="Different\CallBackConteiner.cs" />
+    <Compile Include="Different\Events\LoadingActivateCancel.cs" />
+    <Compile Include="Different\Events\LoadingCancel.cs" />
     <Compile Include="Different\Helpers\BoolToVisibilityConverter.cs" />
     <Compile Include="Different\Helpers\ConverterHelper.cs" />
     <Compile Include="Different\DefautlValues.cs" />
@@ -107,6 +109,7 @@
     <Compile Include="Different\Helpers\UIHelper.cs" />
     <Compile Include="Different\UntappdEntity.cs" />
     <Compile Include="Modules\StatisticsProjectModule.cs" />
+    <Compile Include="ViewModels\LoadingViewModel.cs" />
     <Compile Include="ViewModels\StatisticsProjectViewModel.cs" />
     <Compile Include="Views\Controls\RecyclerView\DataTemplate\ImageDataTemplate.xaml.cs">
       <DependentUpon>ImageDataTemplate.xaml</DependentUpon>

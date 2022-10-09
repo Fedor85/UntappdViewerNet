@@ -67,7 +67,7 @@ namespace UntappdWebApiClient
             if (beers.Count == 0)
                 return;
 
-            long countChek = 0;
+            long countCheck = 0;
             long countUpdate = 0;
             bool isRun = true;
             while (isRun)
@@ -79,12 +79,12 @@ namespace UntappdWebApiClient
                 string responseBody = httpResponse.Content.ReadAsStringAsync().Result;
                 BeersQuickType beersQuickType = JsonConvert.DeserializeObject<BeersQuickType>(responseBody, jsonSerializerSettings);
 
-                countChek += beersQuickType.Response.Beers.Count;
+                countCheck += beersQuickType.Response.Beers.Count;
                 int currentCountUpdate = UpdateBeersHelper.UpdateBeers(beers, beersQuickType);
                 if (currentCountUpdate > 0)
                     countUpdate += currentCountUpdate;
 
-                UploadedCountInvoke(GetUpdateBeersMessage(countChek, countUpdate));
+                UploadedCountInvoke(GetUpdateBeersMessage(countCheck, countUpdate));
 
                 if (beersQuickType.Response.Pagination.Offset.HasValue)
                     offset = beersQuickType.Response.Pagination.Offset.Value;
@@ -98,6 +98,9 @@ namespace UntappdWebApiClient
 
         public void FillServingType(List<Checkin> checkins, ICancellationToken<Checkin> cancellation = null)
         {
+            long countTotal = checkins.Count;
+            long countUpdate = 0;
+            long errorCount = 0;
             foreach (Checkin checkin in checkins)
             {
                 if (cancellation != null && cancellation.Cancel)
@@ -105,11 +108,23 @@ namespace UntappdWebApiClient
 
                 string checkinUrl = UrlPathBuilder.GetСheckinUrl(checkin.Id);
                 string servingType = GetServingType(checkinUrl);
-                if (!String.IsNullOrEmpty(servingType) && !servingType.Equals(checkin.ServingType))
+                if (String.IsNullOrEmpty(servingType))
+                {
+                    UploadedCountInvoke(Properties.Resources.ErrorUpdate);
+                    errorCount++;
+                    if (errorCount == 5)
+                        return;
+
+                    continue;
+                }
+                errorCount = 0;
+                if (!servingType.Equals(checkin.ServingType))
                 {
                     checkin.ServingType = servingType;
                     cancellation?.Items.Add(checkin);
+                    countUpdate++;
                 }
+                UploadedCountInvoke(GetServingTypeMessage(countTotal, countUpdate));
             }
         }
 
@@ -239,6 +254,12 @@ namespace UntappdWebApiClient
             return $"{Properties.Resources.Chek}:{countChek} / {Properties.Resources.Update}:{countUpdate} [{percent}%]";
         }
 
+        private string GetServingTypeMessage(long total, long countUpdate)
+        {
+            int percent = total > 0 ? (int)Math.Truncate((double)countUpdate / total * 100) : 0;
+            return $"{Properties.Resources.Total}:{total} / {Properties.Resources.Update}:{countUpdate} [{percent}%]";
+        }
+
         private void UploadedCountInvoke(string message)
         {
             UploadedProgress?.Invoke(message);
@@ -253,7 +274,7 @@ namespace UntappdWebApiClient
             HtmlDocument htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(htmlPage);
             List<HtmlNode> servingNode = htmlDoc.DocumentNode.Descendants("p").Where(node => node.GetAttributeValue("class", "").Contains("serving")).ToList();
-            return servingNode.Count > 0 ? servingNode[0].InnerText.Trim() : String.Empty;
+            return servingNode.Count > 0 ? servingNode[0].InnerText.Trim() : "NoName";
         }
 
         private string GetHtmlPage(string url)

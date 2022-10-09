@@ -121,6 +121,14 @@
     <value>Chek</value>
     <comment>en-en</comment>
   </data>
+  <data name="ErrorUpdate" xml:space="preserve">
+    <value>Error update.</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+    <comment>en-en</comment>
+  </data>
   <data name="Update" xml:space="preserve">
     <value>Update</value>
     <comment>en-en</comment>

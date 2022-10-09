@@ -70,6 +70,24 @@ namespace UntappdWebApiClient.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error update..
+        /// </summary>
+        internal static string ErrorUpdate {
+            get {
+                return ResourceManager.GetString("ErrorUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total.
+        /// </summary>
+        internal static string Total {
+            get {
+                return ResourceManager.GetString("Total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Update.
         /// </summary>
         internal static string Update {

@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Modularity;
 using Prism.Regions;
+using UntappdViewer.Events;
 using UntappdViewer.Interfaces;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
@@ -47,8 +49,6 @@ namespace UntappdViewer.ViewModels
         public ICommand BeerUpdateButtonCommand { get; }
 
         public ICommand FillServingTypeButtonCommand { get; }
-
-        public ICommand CancelServingTypeButtonCommand { get; }
 
         public ICommand OkButtonCommand { get; }
 
@@ -93,8 +93,9 @@ namespace UntappdViewer.ViewModels
         public WebDownloadProjectViewModel(IRegionManager regionManager, IUntappdService untappdService,
                                                                          IWebApiClient webApiClient,
                                                                          IModuleManager moduleManager,
+                                                                         IEventAggregator eventAggregator,
                                                                          ISettingService settingService,
-                                                                         IInteractionRequestService interactionRequestService) : base(moduleManager, regionManager)
+                                                                         IInteractionRequestService interactionRequestService) : base(moduleManager, regionManager, eventAggregator)
         {
             this.untappdService = untappdService;
             this.webApiClient = webApiClient;
@@ -109,7 +110,6 @@ namespace UntappdViewer.ViewModels
             BeerUpdateButtonCommand = new DelegateCommand(UpdateBeers);
 
             FillServingTypeButtonCommand = new DelegateCommand(FillServingType);
-            CancelServingTypeButtonCommand = new DelegateCommand(() => fillServingTypCancellation.Cancel = true);
             fillServingTypCancellation = webApiClient.GetCancellationToken<Checkin>();
 
             OkButtonCommand = new DelegateCommand(Exit);
@@ -204,6 +204,7 @@ namespace UntappdViewer.ViewModels
             if (!checkins.Any())
                 return;
 
+            LoadingChangeActivity(true, true);
             FillServingType(checkins);
         }
 
@@ -246,6 +247,7 @@ namespace UntappdViewer.ViewModels
 
         private async void FillServingType(List<Checkin> checkins)
         {
+            eventAggregator.GetEvent<LoadingCancel>().Subscribe(LoadingCanceled);
             try
             {
                 await Task.Run(() => webApiClient.FillServingType(checkins, fillServingTypCancellation));
@@ -257,9 +259,16 @@ namespace UntappdViewer.ViewModels
             }
             finally
             {
-                Checkins = new List<Checkin>(untappdService.GetCheckins());
                 fillServingTypCancellation.Cancel = false;
+                eventAggregator.GetEvent<LoadingCancel>().Unsubscribe(LoadingCanceled);
+                Checkins = new List<Checkin>(untappdService.GetCheckins());
+                LoadingChangeActivity(false);
             }
+        }
+
+        private void LoadingCanceled()
+        {
+            fillServingTypCancellation.Cancel = true;
         }
 
         private long GetOffsetUpdateBeer()

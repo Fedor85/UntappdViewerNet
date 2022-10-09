@@ -20,8 +20,6 @@ namespace UntappdViewer.ViewModels
     {
         private IUntappdService untappdService;
 
-        private IEventAggregator eventAggregator;
-
         private ISettingService settingService;
 
         private ObservableCollection<TreeItemViewModel> treeItems;
@@ -86,7 +84,7 @@ namespace UntappdViewer.ViewModels
         public TreeViewModel(IUntappdService untappdService, IModuleManager moduleManager,
                                                              IRegionManager regionManager,
                                                              IEventAggregator eventAggregator,
-                                                             ISettingService settingService) : base(moduleManager, regionManager)
+                                                             ISettingService settingService) : base(moduleManager, regionManager, eventAggregator)
         {
             this.untappdService = untappdService;
             this.eventAggregator = eventAggregator;
