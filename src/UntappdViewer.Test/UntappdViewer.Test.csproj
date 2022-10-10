@@ -79,6 +79,10 @@
       <Project>{bdc0b7dd-2833-4b95-9b93-ea520003ebe1}</Project>
       <Name>UntappdViewer.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UntappdViewer.Interfaces\UntappdViewer.Interfaces.csproj">
+      <Project>{BB613BE0-AE21-4A41-836A-C904D16444F6}</Project>
+      <Name>UntappdViewer.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UntappdViewer.Models\UntappdViewer.Models.csproj">
       <Project>{B1584484-7648-4349-B8F8-47352DD85FF1}</Project>
       <Name>UntappdViewer.Models</Name>
