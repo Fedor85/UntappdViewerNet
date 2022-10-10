@@ -78,21 +78,21 @@ namespace UntappdViewer.Domain
             List<string> types = checkins.Select(item => item.Beer.Type).Distinct().ToList();
             types.Sort();
 
-            foreach (KeyValuePair<string, List<string>> keyValuePair in StringHelper.GetGroupByList(types, DefautlValues.SeparatorsName))
+            foreach (KeyValuePair<string, List<string>> keyValuePair in StringHelper.GetGroupByList(types, DefaultValues.SeparatorsName))
             {
                 List<long> checkinIds = checkins.Where(item => keyValuePair.Value.Contains(item.Beer.Type)).Select(checkin => checkin.Id).ToList();
                 keyValues.Add(new KeyValue<string, List<long>>(keyValuePair.Key, checkinIds));
             }
 
-            KeyValue<string, List<long>> other = keyValues.FirstOrDefault(item => item.Key.Equals(DefautlValues.OtherNameGroupBeerType));
+            KeyValue<string, List<long>> other = keyValues.FirstOrDefault(item => item.Key.Equals(DefaultValues.OtherNameGroupBeerType));
             if (other == null)
-                other = new KeyValue<string, List<long>>(DefautlValues.OtherNameGroupBeerType, new List<long>());
+                other = new KeyValue<string, List<long>>(DefaultValues.OtherNameGroupBeerType, new List<long>());
             else
                 keyValues.Remove(other);
 
 
             List<string> removeKeys = new List<string>();
-            foreach (KeyValue<string, List<long>> keyValue in keyValues.Where(item => item.Value.Count <= DefautlValues.BeerTypeCountByOther))
+            foreach (KeyValue<string, List<long>> keyValue in keyValues.Where(item => item.Value.Count <= DefaultValues.BeerTypeCountByOther))
             {
                 removeKeys.Add(keyValue.Key);
                 other.Value.AddRange(keyValue.Value);
@@ -120,7 +120,7 @@ namespace UntappdViewer.Domain
             foreach (string country in countrys)
             {
                 List<long> checkinIds = checkins.Where(item => item.Beer.Brewery.Venue.Country.Equals(country)).Select(checkin => checkin.Id).ToList();
-                keyValues.Add(new KeyValue<string, List<long>>(StringHelper.GetCutByFirstChars(country, DefautlValues.SeparatorsName), checkinIds));
+                keyValues.Add(new KeyValue<string, List<long>>(StringHelper.GetCutByFirstChars(country, DefaultValues.SeparatorsName), checkinIds));
             }
 
             return keyValues;
@@ -195,7 +195,7 @@ namespace UntappdViewer.Domain
         {
             Dictionary<long, double> dictionary = new Dictionary<long, double>();
             foreach (Beer beer in beers)
-                dictionary.Add(beer.Id, MathHelper.GetRoundByStep(beer.GlobalRatingScore, DefautlValues.StepRating));
+                dictionary.Add(beer.Id, MathHelper.GetRoundByStep(beer.GlobalRatingScore, DefaultValues.StepRating));
 
             return dictionary;
         }

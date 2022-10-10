@@ -46,14 +46,14 @@
                                         <Run Text="{Binding BeerABV}"/>
                                     </TextBlock.Inlines>
                                 </TextBlock>
-                                <TextBlock Text="{Binding Source={x:Static local:DefautlValues.Separator}}" FontWeight="Bold"  VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding Source={x:Static local:DefaultValues.Separator}}" FontWeight="Bold"  VerticalAlignment="Center"/>
                                 <TextBlock TextWrapping="Wrap"  VerticalAlignment="Center">
                                     <TextBlock.Inlines>
                                         <Run FontWeight="Bold" Text="IBU: "/>
                                         <Run Text="{Binding BeerIBU}"/>
                                     </TextBlock.Inlines>
                                 </TextBlock>
-                                <TextBlock Text="{Binding Source={x:Static local:DefautlValues.Separator}}" FontWeight="Bold"  VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding Source={x:Static local:DefaultValues.Separator}}" FontWeight="Bold"  VerticalAlignment="Center"/>
                                 <starRating:StarRatingControl StarCount="5" StarSize="20" HorizontalAlignment="Left"
                                                               ViewStarsColor="#ffffff" ViewStarsOpacity="0.3"
                                                               BackgroundStarColor="#ffffff" BackgroundStarOpacity="1"

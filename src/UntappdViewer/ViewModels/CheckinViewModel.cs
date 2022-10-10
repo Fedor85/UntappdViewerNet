@@ -165,7 +165,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 SetProperty(ref checkinVenueCountry, value);
-                CheckinVenueCountrySeparator = !String.IsNullOrEmpty(CheckinVenueName) && !String.IsNullOrEmpty(value) ? DefautlValues.Separator : String.Empty;
+                CheckinVenueCountrySeparator = !String.IsNullOrEmpty(CheckinVenueName) && !String.IsNullOrEmpty(value) ? DefaultValues.Separator : String.Empty;
             }
         }
 
@@ -185,7 +185,7 @@ namespace UntappdViewer.ViewModels
             {
                 SetProperty(ref checkinVenueState, value);
                 CheckinVenueStateySeparator = (!String.IsNullOrEmpty(CheckinVenueName) || !String.IsNullOrEmpty(CheckinVenueCountry))
-                                                        && !String.IsNullOrEmpty(value) ? DefautlValues.Separator : String.Empty;
+                                                        && !String.IsNullOrEmpty(value) ? DefaultValues.Separator : String.Empty;
             }
         }
 
@@ -205,7 +205,7 @@ namespace UntappdViewer.ViewModels
             {
                 SetProperty(ref checkinVenueCity, value);
                 CheckinVenueCitySeparator = (!String.IsNullOrEmpty(CheckinVenueName) || !String.IsNullOrEmpty(CheckinVenueCountry) || !String.IsNullOrEmpty(CheckinVenueState))
-                                                                                                    && !String.IsNullOrEmpty(value) ? DefautlValues.Separator : String.Empty;
+                                                                                                    && !String.IsNullOrEmpty(value) ? DefaultValues.Separator : String.Empty;
             }
         }
 
@@ -397,7 +397,7 @@ namespace UntappdViewer.ViewModels
             {
                 SetProperty(ref breweryVenueCountry, value);
                 BreweryVenueCountrySeparator = !String.IsNullOrEmpty(BreweryVenueName) && !String.IsNullOrEmpty(value) 
-                                                                        ? DefautlValues.Separator : String.Empty;
+                                                                        ? DefaultValues.Separator : String.Empty;
             }
         }
 
@@ -417,7 +417,7 @@ namespace UntappdViewer.ViewModels
             {
                 SetProperty(ref breweryVenueState, value);
                 BreweryVenueStateSeparator = (!String.IsNullOrEmpty(BreweryVenueName) || !String.IsNullOrEmpty(BreweryVenueCountry)) 
-                                                        && !String.IsNullOrEmpty(value) ? DefautlValues.Separator : String.Empty;
+                                                        && !String.IsNullOrEmpty(value) ? DefaultValues.Separator : String.Empty;
             }
         }
 
@@ -437,7 +437,7 @@ namespace UntappdViewer.ViewModels
             {
                 SetProperty(ref breweryVenueCity, value);
                 BreweryVenueCitySeparator = (!String.IsNullOrEmpty(BreweryVenueName) || !String.IsNullOrEmpty(BreweryVenueCountry) || !String.IsNullOrEmpty(BreweryVenueState))
-                                            && !String.IsNullOrEmpty(value) ? DefautlValues.Separator : String.Empty;
+                                            && !String.IsNullOrEmpty(value) ? DefaultValues.Separator : String.Empty;
             }
         }
 
@@ -478,9 +478,9 @@ namespace UntappdViewer.ViewModels
             loadingModuleName = typeof(PhotoLoadingModule).Name;
             loadingRegionName = RegionNames.PhotoLoadingRegion;
 
-            CheckinUrl = DefautlValues.DefaultUrl;
-            BeerUrl = DefautlValues.DefaultUrl;
-            BreweryUrl = DefautlValues.DefaultUrl;
+            CheckinUrl = DefaultValues.DefaultUrl;
+            BeerUrl = DefaultValues.DefaultUrl;
+            BreweryUrl = DefaultValues.DefaultUrl;
             Badges = new List<ImageItemViewModel>();
 
             CheckinVenueLocationCommand  = new DelegateCommand(CheckinVenueLocation);
@@ -553,7 +553,7 @@ namespace UntappdViewer.ViewModels
         private void Clear()
         {
             CheckinHeader = GetCheckinHeader(null);
-            CheckinUrl = DefautlValues.DefaultUrl;
+            CheckinUrl = DefaultValues.DefaultUrl;
             CheckinRating = 0;
             VisibilityCheckinRating = false;
             CheckinVenueName = String.Empty;
@@ -561,11 +561,11 @@ namespace UntappdViewer.ViewModels
             CheckinVenueState = String.Empty;
             CheckinVenueCity = String.Empty;
             VisibilityCheckinVenueLocation = false;
-            CheckinServingType = DefautlValues.EmptyImage;
+            CheckinServingType = DefaultValues.EmptyImage;
             CheckinPhoto = null;
             Badges = new List<ImageItemViewModel>();
 
-            BeerUrl = DefautlValues.DefaultUrl;
+            BeerUrl = DefaultValues.DefaultUrl;
             BeerName = String.Empty;
             BeerType = String.Empty;
             BeerABV = String.Empty;
@@ -574,7 +574,7 @@ namespace UntappdViewer.ViewModels
             BeerDescription = null;
             BeerLabel = null;
 
-            BreweryUrl = DefautlValues.DefaultUrl;
+            BreweryUrl = DefaultValues.DefaultUrl;
             BreweryName = String.Empty;
             BreweryVenueCountry = String.Empty;
             BreweryVenueState= String.Empty;
@@ -613,7 +613,7 @@ namespace UntappdViewer.ViewModels
                 return;
 
             string labelPath = untappdService.GetBeerLabelFilePath(beer);
-            if (Path.GetFileNameWithoutExtension(labelPath).Equals(DefautlValues.DefaultBeerLabelName))
+            if (Path.GetFileNameWithoutExtension(labelPath).Equals(DefaultValues.DefaultBeerLabelName))
                 return;
 
             if (!File.Exists(labelPath))
@@ -636,7 +636,7 @@ namespace UntappdViewer.ViewModels
                 return;
 
             string labelPath = untappdService.GetBreweryLabelFilePath(brewery);
-            if (Path.GetFileNameWithoutExtension(labelPath).Equals(DefautlValues.DefaultBreweryLabelName))
+            if (Path.GetFileNameWithoutExtension(labelPath).Equals(DefaultValues.DefaultBreweryLabelName))
                 return;
 
             if (!File.Exists(labelPath))

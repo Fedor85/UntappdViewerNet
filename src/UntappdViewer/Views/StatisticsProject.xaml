@@ -204,7 +204,7 @@
                     <chartingToolkit:Chart Height="{StaticResource DefautChartHeight}" Margin="{StaticResource DefautChartMargin}" Title="{x:Static properties:Resources.ChekinRatingScore}"
                                        TitleStyle="{StaticResource ChartTitleStyle}" Style="{StaticResource RatingScoreChartStyle}">
                         <chartingToolkit:Chart.Axes>
-                            <chartingToolkit:LinearAxis Orientation="Y" Interval="{Binding Source={x:Static local:DefautlValues.ChartRatingScoreYInterval}}" 
+                            <chartingToolkit:LinearAxis Orientation="Y" Interval="{Binding Source={x:Static local:DefaultValues.ChartRatingScoreYInterval}}" 
                                                     Maximum="{Binding MaxYAxisRatingScore}" ShowGridLines="True"/>
                             <chartingToolkit:LinearAxis Orientation="X" Interval="0.25" ShowGridLines="True"/>
                         </chartingToolkit:Chart.Axes>

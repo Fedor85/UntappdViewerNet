@@ -1,6 +1,6 @@
 ﻿namespace UntappdViewer
 {
-    public static class DefautlValues
+    public static class DefaultValues
     {
         public const string NoImageIconResources = @"pack://application:,,,/UntappdViewer;component/Resources/no-image-icon.png";
 

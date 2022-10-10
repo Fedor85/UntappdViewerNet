@@ -36,7 +36,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Different\DefautlValues.cs" />
+    <Compile Include="Different\DefaultValues.cs" />
     <Compile Include="Different\Extensions.cs" />
     <Compile Include="Mappers\CheckinCSVMapper.cs" />
     <Compile Include="Mappers\CheckinParser\CheckinParser.cs" />

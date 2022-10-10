@@ -15,7 +15,7 @@ namespace UntappdViewer.Views
 
         private void HyperlinkOnRequestNavigate(object sender, RequestNavigateEventArgs e)
         {
-            if (!e.Uri.AbsoluteUri.Equals(DefautlValues.DefaultUrl))
+            if (!e.Uri.AbsoluteUri.Equals(DefaultValues.DefaultUrl))
                 System.Diagnostics.Process.Start(e.Uri.AbsoluteUri);
         }
     }

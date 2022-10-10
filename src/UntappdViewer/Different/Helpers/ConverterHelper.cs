@@ -13,7 +13,7 @@ namespace UntappdViewer.Helpers
         public static string GetServingTypeImagePath(string servingTypeName)
         {
             if (servingTypeName == null)
-                return DefautlValues.EmptyImage;
+                return DefaultValues.EmptyImage;
 
             switch (servingTypeName.ToLower())
             {
@@ -32,7 +32,7 @@ namespace UntappdViewer.Helpers
                 case "growler":
                     return @"..\Resources\ServingType\growler.png";
                 default:
-                    return DefautlValues.EmptyImage;
+                    return DefaultValues.EmptyImage;
             }
         }
 
@@ -42,7 +42,7 @@ namespace UntappdViewer.Helpers
         {
             RatingViewModel ratingViewModel = new RatingViewModel();
             ratingViewModel.Caption = checkin.Beer.Name;
-            ratingViewModel.ImagePath = File.Exists(photoPath) ? photoPath : DefautlValues.NoImageIconResources;
+            ratingViewModel.ImagePath = File.Exists(photoPath) ? photoPath : DefaultValues.NoImageIconResources;
             ratingViewModel.RatingScore = checkin.RatingScore ?? 0;
             return ratingViewModel;
         }

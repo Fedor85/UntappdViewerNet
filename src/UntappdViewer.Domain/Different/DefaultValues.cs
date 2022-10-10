@@ -1,6 +1,6 @@
 ﻿namespace UntappdViewer.Domain
 {
-    public static class DefautlValues
+    public static class DefaultValues
     {
         public static readonly string[] SeparatorsName = { "/", "-" };
 

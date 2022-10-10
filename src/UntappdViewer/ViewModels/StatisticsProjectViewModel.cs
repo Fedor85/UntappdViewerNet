@@ -400,7 +400,7 @@ namespace UntappdViewer.ViewModels
             List<Checkin> checkins = untappdService.GetCheckins();
             List<KeyValue<string, List<long>>> beerTypeCheckinIds = StatisticsCalculation.GetBeerTypesByCheckinIdsGroupByCount(checkins);
 
-            HeightChartBeerType = MathHelper.GetCeilingByStep(beerTypeCheckinIds.Count * DefautlValues.HeightBarSeriesChartYDelta, 100);
+            HeightChartBeerType = MathHelper.GetCeilingByStep(beerTypeCheckinIds.Count * DefaultValues.HeightBarSeriesChartYDelta, 100);
 
             List <KeyValue<string, int>> beerTypeCount = StatisticsCalculation.GetListCount(beerTypeCheckinIds);
             MaxXAxisBeerTypeCount = beerTypeCount.Count > 0 ? beerTypeCount.Max(item => item.Value) + 20 : 0;
@@ -416,7 +416,7 @@ namespace UntappdViewer.ViewModels
             List<Checkin> checkins = untappdService.GetCheckins();
             List<KeyValue<string, List<long>>> beerCountryCheckinIds = StatisticsCalculation.GetCountrysByCheckinIds(checkins);
 
-            HeightChartBeerCountry = MathHelper.GetCeilingByStep(beerCountryCheckinIds.Count * DefautlValues.HeightBarSeriesChartYDelta, 100);
+            HeightChartBeerCountry = MathHelper.GetCeilingByStep(beerCountryCheckinIds.Count * DefaultValues.HeightBarSeriesChartYDelta, 100);
 
             List<KeyValue<string, int>> beerCountryCount = StatisticsCalculation.GetListCount(beerCountryCheckinIds);
             MaxXAxisBeerCountryCount = beerCountryCount.Count > 0 ? beerCountryCount.Max(item => item.Value) + 20 : 0;
