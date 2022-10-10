@@ -126,6 +126,34 @@ namespace UntappdViewer.Domain
             return keyValues;
         }
 
+        public static List<KeyValue<string, List<long>>> GetServingTypeByCheckinIds(List<Checkin> checkins, string defaultServingType)
+        {
+            List<KeyValue<string, List<long>>> keyValues = new List<KeyValue<string, List<long>>>();
+            if (!checkins.Any())
+                return keyValues;
+
+            KeyValue<string, List<long>> checkinDefaultServingType = new KeyValue<string, List<long>>(defaultServingType, 
+                                                                        checkins.Where(item => String.IsNullOrEmpty(item.ServingType)).Select(item=> item.Id).ToList());
+
+            IEnumerable<Checkin> validCheckins = checkins.Where(item => !String.IsNullOrEmpty(item.ServingType));
+            List<string> types = validCheckins.Select(item => item.ServingType).Distinct().ToList();
+            types.Sort();
+
+            foreach (string type in types)
+            {
+                List<long> checkinIds = checkins.Where(item => item.ServingType.Equals(type)).Select(checkin => checkin.Id).ToList();
+                if (type.Equals(defaultServingType))
+                    checkinDefaultServingType.Value.AddRange(checkinIds);
+                else
+                    keyValues.Add(new KeyValue<string, List<long>>(type, checkinIds));
+            }
+
+            if (checkinDefaultServingType.Value.Count > 0)
+                keyValues.Add(checkinDefaultServingType);
+
+            return keyValues;
+        }
+
         public static List<KeyValue<string, int>> GetListCount(List<KeyValue<string, List<long>>> items)
         {
             List<KeyValue<string, int>> keyValues = new List<KeyValue<string, int>>();

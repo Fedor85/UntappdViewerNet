@@ -40,7 +40,7 @@ namespace UntappdViewer.Test
         [Test]
         public void TestUpdateServing()
         {
-            webApiClient.FillServingType(checkinsContainer.Checkins);
+            webApiClient.FillServingType(checkinsContainer.Checkins, DefaultValues.DefaultServingType);
         }
     }
 }

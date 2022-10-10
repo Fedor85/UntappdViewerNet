@@ -250,7 +250,7 @@ namespace UntappdViewer.ViewModels
             eventAggregator.GetEvent<LoadingCancel>().Subscribe(LoadingCanceled);
             try
             {
-                await Task.Run(() => webApiClient.FillServingType(checkins, fillServingTypCancellation));
+                await Task.Run(() => webApiClient.FillServingType(checkins, DefaultValues.DefaultServingType, fillServingTypCancellation));
 
             }
             catch (Exception ex)

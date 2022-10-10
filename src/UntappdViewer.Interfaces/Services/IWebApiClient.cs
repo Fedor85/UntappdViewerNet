@@ -20,7 +20,7 @@ namespace UntappdViewer.Interfaces.Services
 
         void UpdateBeers(List<Beer> beers, Func<Beer, bool> predicate, ref long offset);
 
-        void FillServingType(List<Checkin> checkins, ICancellationToken<Checkin> cancellation = null);
+        void FillServingType(List<Checkin> checkins, string defaultServingType, ICancellationToken<Checkin> cancellation = null);
 
         ICancellationToken<T> GetCancellationToken<T>();
     }

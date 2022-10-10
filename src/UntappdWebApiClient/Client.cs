@@ -96,7 +96,7 @@ namespace UntappdWebApiClient
             }
         }
 
-        public void FillServingType(List<Checkin> checkins, ICancellationToken<Checkin> cancellation = null)
+        public void FillServingType(List<Checkin> checkins, string defaultServingType, ICancellationToken<Checkin> cancellation = null)
         {
             long countTotal = checkins.Count;
             long countUpdate = 0;
@@ -107,7 +107,7 @@ namespace UntappdWebApiClient
                     return;
 
                 string checkinUrl = UrlPathBuilder.GetСheckinUrl(checkin.Id);
-                string servingType = GetServingType(checkinUrl);
+                string servingType = GetServingType(checkinUrl, defaultServingType);
                 if (String.IsNullOrEmpty(servingType))
                 {
                     UploadedCountInvoke(Properties.Resources.ErrorUpdate);
@@ -265,7 +265,7 @@ namespace UntappdWebApiClient
             UploadedProgress?.Invoke(message);
         }
 
-        private string GetServingType(string checkinUrl)
+        private string GetServingType(string checkinUrl, string defaultServingType)
         {
             string htmlPage = GetHtmlPage(checkinUrl);
             if (String.IsNullOrEmpty(htmlPage))
@@ -274,7 +274,7 @@ namespace UntappdWebApiClient
             HtmlDocument htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(htmlPage);
             List<HtmlNode> servingNode = htmlDoc.DocumentNode.Descendants("p").Where(node => node.GetAttributeValue("class", "").Contains("serving")).ToList();
-            return servingNode.Count > 0 ? servingNode[0].InnerText.Trim() : "NoName";
+            return servingNode.Count > 0 ? servingNode[0].InnerText.Trim() : defaultServingType;
         }
 
         private string GetHtmlPage(string url)

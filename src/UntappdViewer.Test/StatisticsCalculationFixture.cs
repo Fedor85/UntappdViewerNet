@@ -174,6 +174,18 @@ namespace UntappdViewer.Test
             Assert.AreEqual(4.25, beerCountryRating[37].Value);
         }
 
+        [Test]
+        public void TestGetServingTypeByCheckinIds()
+        {
+            List<KeyValue<string, List<long>>> servingTypeCheckinIds = StatisticsCalculation.GetServingTypeByCheckinIds(checkinsContainer.Checkins, DefaultValues.DefaultServingType);
+
+            Assert.AreEqual(5, servingTypeCheckinIds.Count);
+            Assert.AreEqual("Bottle", servingTypeCheckinIds[0].Key);
+            Assert.AreEqual(861, servingTypeCheckinIds[0].Value.Count);
+            Assert.AreEqual(DefaultValues.DefaultServingType, servingTypeCheckinIds[4].Key);
+            Assert.AreEqual(4, servingTypeCheckinIds[4].Value.Count);
+        }
+
         private double GetTotalDay()
         {
             double totalCheckinDays = (checkinsContainer.Checkins.Max(item => item.CreatedDate) - checkinsContainer.Checkins.Min(item => item.CreatedDate)).TotalDays;
