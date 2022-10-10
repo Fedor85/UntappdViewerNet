@@ -813,6 +813,24 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Serving Type/Count.
+        /// </summary>
+        public static string ServingTypeCount {
+            get {
+                return ResourceManager.GetString("ServingTypeCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Serving Type/Rating.
+        /// </summary>
+        public static string ServingTypeRating {
+            get {
+                return ResourceManager.GetString("ServingTypeRating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap Show {

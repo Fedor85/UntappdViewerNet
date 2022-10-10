@@ -508,4 +508,12 @@
     <value>Fill Serving Type</value>
     <comment>en-en</comment>
   </data>
+  <data name="ServingTypeCount" xml:space="preserve">
+    <value>Serving Type/Count</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="ServingTypeRating" xml:space="preserve">
+    <value>Serving Type/Rating</value>
+    <comment>en-en</comment>
+  </data>
 </root>

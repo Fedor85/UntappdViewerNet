@@ -138,6 +138,7 @@ namespace UntappdViewer.Domain
             IEnumerable<Checkin> validCheckins = checkins.Where(item => !String.IsNullOrEmpty(item.ServingType));
             List<string> types = validCheckins.Select(item => item.ServingType).Distinct().ToList();
             types.Sort();
+            types.Reverse();
 
             foreach (string type in types)
             {
@@ -149,7 +150,7 @@ namespace UntappdViewer.Domain
             }
 
             if (checkinDefaultServingType.Value.Count > 0)
-                keyValues.Add(checkinDefaultServingType);
+                keyValues.Insert(0, checkinDefaultServingType);
 
             return keyValues;
         }
