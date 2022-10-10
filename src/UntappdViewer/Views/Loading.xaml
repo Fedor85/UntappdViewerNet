@@ -13,7 +13,7 @@
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
             <Label Content="{x:Static properties:Resources.Loading}" FontSize="25" Foreground="#ffffff"/>
             <Label x:Name="StatusBar" Content=".............."  FontSize="25" FontWeight="Bold" Foreground="#ffffff"/>
-            <Label x:Name="StatusTimeBar" Content="time" HorizontalAlignment="Center" FontSize="15" Foreground="#ffffff"/>
+            <Label x:Name="StatusTimeBar" Content="time" HorizontalAlignment="Center" FontSize="15" Height="40" Foreground="#ffffff"/>
         </StackPanel>
         <Grid>
             <Grid.RowDefinitions>
