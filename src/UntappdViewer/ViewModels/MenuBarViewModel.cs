@@ -147,14 +147,14 @@ namespace UntappdViewer.ViewModels
             settingService.SetRecentFilePaths(FileHelper.AddFilePath(settingService.GetRecentFilePaths(), fileSavePath, settingService.GetMaxRecentFilePaths()));
         }
 
-        private async void SaveAsZipArchive()
+        private void SaveAsZipArchive()
         {
             if (!untappdService.IsUNTPProject())
             {
                 interactionRequestService.ShowMessage(Properties.Resources.Warning, Properties.Resources.WarningMessageSaveProjectToUNTP);
                 return;
             }
-
+            LoadingChangeActivity(true);
             SaveAsZipArchiveAsync();
         }
 
@@ -179,6 +179,7 @@ namespace UntappdViewer.ViewModels
             finally
             {
                 interactionRequestService.ShowMessageOnStatusBar(previousMessageOnStatusBar);
+                LoadingChangeActivity(false);
             }
         }
 
