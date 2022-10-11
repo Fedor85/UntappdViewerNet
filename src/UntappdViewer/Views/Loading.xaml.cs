@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
@@ -12,6 +13,8 @@ namespace UntappdViewer.Views
     {
         private bool isRunStatusBar;
 
+        private int runPause = 3000;
+
         public Loading()
         {
             InitializeComponent();
@@ -22,8 +25,8 @@ namespace UntappdViewer.Views
         private void LoadingLoaded(object sender, System.Windows.RoutedEventArgs e)
         {
             isRunStatusBar = true;
-            RunStatusBar();
-            RunStatusTimeBar();
+            RunStatusBarAsunc();
+            RunStatusTimeBarAsunc();
         }
 
         private void LoadingUnloaded(object sender, System.Windows.RoutedEventArgs e)
@@ -31,34 +34,59 @@ namespace UntappdViewer.Views
             isRunStatusBar = false;
         }
 
-        private async void RunStatusBar()
+        private async void RunStatusBarAsunc()
         {
+            await Task.Run(() => RunStatusBar());
+        }
+
+        private void RunStatusBar()
+        {
+            Thread.Sleep(runPause);
             while (isRunStatusBar)
             {
+                string message = String.Empty;
                 for (int i = 1; i <= 14; i++)
                 {
                     if (!isRunStatusBar)
                         break;
 
-                    await Task.Delay(200);
-                    StatusBar.Content += ".";
+                    Thread.Sleep(150);
+                    SetStatusBar(String.Empty);
+                    SetStatusBar(message += ".");
                 }
-                StatusBar.Content = String.Empty;
+                SetStatusBar(String.Empty);
             }
         }
 
-        private async void RunStatusTimeBar()
+        private async void RunStatusTimeBarAsunc()
+        {
+            await Task.Run(() => RunStatusTimeBar());
+        }
+
+        private void RunStatusTimeBar()
         {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
+            Thread.Sleep(runPause);
+ 
             while (isRunStatusBar)
             {
-                await Task.Delay(1);
                 TimeSpan timeSpan = stopWatch.Elapsed;
-                StatusTimeBar.Content = $"{timeSpan.Minutes:D2}:{timeSpan.Seconds:D2}";
+                Thread.Sleep(1000);
+                SetStatusTimeBar($"{timeSpan.Minutes:D2}:{timeSpan.Seconds:D2}");
             }
             stopWatch.Stop();
-            StatusTimeBar.Content = String.Empty;
+            SetStatusTimeBar(String.Empty);
+        }
+
+        private void SetStatusBar(object content)
+        {
+            Dispatcher.Invoke(() => StatusBar.Content = content);
+        }
+
+        private void SetStatusTimeBar(object content)
+        {
+            Dispatcher.Invoke(() => StatusTimeBar.Content = content);
         }
     }
 }

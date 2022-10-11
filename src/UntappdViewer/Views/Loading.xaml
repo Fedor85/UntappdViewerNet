@@ -12,8 +12,8 @@
         <ItemsControl Background="#000000" Opacity="0.5"/>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
             <Label Content="{x:Static properties:Resources.Loading}" FontSize="25" Foreground="#ffffff"/>
-            <Label x:Name="StatusBar" Content=".............."  FontSize="25" FontWeight="Bold" Foreground="#ffffff"/>
-            <Label x:Name="StatusTimeBar" Content="time" HorizontalAlignment="Center" FontSize="15" Height="40" Foreground="#ffffff"/>
+            <Label x:Name="StatusBar" FontSize="25" FontWeight="Bold" Height="40" Margin="0,-25,0,0" Foreground="#ffffff"/>
+            <Label x:Name="StatusTimeBar" HorizontalAlignment="Center" FontSize="15" Height="30" Foreground="#ffffff"/>
         </StackPanel>
         <Grid>
             <Grid.RowDefinitions>
