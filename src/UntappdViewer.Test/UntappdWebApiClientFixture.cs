@@ -37,7 +37,7 @@ namespace UntappdViewer.Test
             webApiClient.UpdateBeers(checkinsContainer.Beers.Where(TestHelper.IsUpdateBeer).ToList(), TestHelper.IsUpdateBeer, ref offset);
         }
 
-        [Test]
+        [Test, Ignore(DefaultValues.DefaultServingType)]
         public void TestUpdateServing()
         {
             webApiClient.FillServingType(checkinsContainer.Checkins, DefaultValues.DefaultServingType);
