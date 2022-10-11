@@ -142,7 +142,7 @@ namespace UntappdViewer.Domain
 
             foreach (string type in types)
             {
-                List<long> checkinIds = checkins.Where(item => item.ServingType.Equals(type)).Select(checkin => checkin.Id).ToList();
+                List<long> checkinIds = validCheckins.Where(item => item.ServingType.Equals(type)).Select(checkin => checkin.Id).ToList();
                 if (type.Equals(defaultServingType))
                     checkinDefaultServingType.Value.AddRange(checkinIds);
                 else
