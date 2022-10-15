@@ -1,20 +1,20 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using Microsoft.Xaml.Behaviors;
 
 namespace UntappdViewer.Behaviors
 {
-    public class SynchronisedScrollBehavior : Behavior<ScrollViewer>
+    public class SynchronisedBaseBehavior<TControl, TToken > : Behavior<TControl> where TControl : DependencyObject,
+                                                                             new() where TToken : SynchronisedBaseToken<TControl>
     {
 
-        public static readonly DependencyProperty DependencyProperty = DependencyProperty.Register("RegisterToken", typeof(SynchronisedScrollToken), typeof(SynchronisedScrollBehavior), null);
+        public static readonly DependencyProperty DependencyProperty = 
+            DependencyProperty.Register("RegisterToken", typeof(SynchronisedBaseToken<TControl>), typeof(SynchronisedBaseBehavior<TControl, TToken>), null);
 
-
-        public SynchronisedScrollToken RegisterToken
+        public TToken RegisterToken
         {
             get
             {
-                return (SynchronisedScrollToken)GetValue(DependencyProperty);
+                return (TToken)GetValue(DependencyProperty);
             }
             set
             {

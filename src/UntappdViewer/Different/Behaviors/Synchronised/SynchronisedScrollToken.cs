@@ -5,29 +5,27 @@ using UntappdViewer.Utils;
 
 namespace UntappdViewer.Behaviors
 {
-    public class SynchronisedScrollToken
+    public class SynchronisedScrollToken : SynchronisedBaseToken<ScrollViewer>
     {
-        private List<ScrollViewer> registeredScrolls = new List<ScrollViewer>();
-
-        public void Register(ScrollViewer scroll)
+        public override void Register(ScrollViewer scroll)
         {
+            base.Register(scroll);
             scroll.ScrollChanged += ScrollChanged;
-            registeredScrolls.Add(scroll);
         }
 
-        public void Unregister(ScrollViewer scroll)
+        public override void Unregister(ScrollViewer scroll)
         {
+            base.Unregister(scroll);
             scroll.ScrollChanged -= ScrollChanged;
-            registeredScrolls.Remove(scroll);
         }
 
         private void ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            ScrollViewer sendingScroll = sender as ScrollViewer;
+            ScrollViewer sendingScroll = GetObject(sender);
             if (sendingScroll == null)
                 return;
 
-            foreach (ScrollViewer potentialScroll in registeredScrolls.Where(item => item != sendingScroll))
+            foreach (ScrollViewer potentialScroll in GetOtherItems(sendingScroll))
             {
                 if (!MathHelper.DoubleCompare(potentialScroll.VerticalOffset, sendingScroll.VerticalOffset))
                     potentialScroll.ScrollToVerticalOffset(sendingScroll.VerticalOffset);

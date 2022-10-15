@@ -91,7 +91,11 @@
     <Compile Include="Different\Behaviors\CloseByEscapeBehavior.cs" />
     <Compile Include="Different\Behaviors\LoadedWindowBehavior.cs" />
     <Compile Include="Different\Behaviors\SelectedTreeViewItemBehavior.cs" />
-    <Compile Include="Different\Behaviors\SynchronisedScroll\SynchronisedScrollBehavior.cs" />
+    <Compile Include="Different\Behaviors\Synchronised\SynchronisedBaseBehavior.cs" />
+    <Compile Include="Different\Behaviors\Synchronised\SynchronisedBaseToken.cs" />
+    <Compile Include="Different\Behaviors\Synchronised\SynchronisedScrollBehavior.cs" />
+    <Compile Include="Different\Behaviors\Synchronised\SynchronisedWidthBehavior.cs" />
+    <Compile Include="Different\Behaviors\Synchronised\SynchronisedWidthToken.cs" />
     <Compile Include="Different\CallBackConteiner.cs" />
     <Compile Include="Different\Events\LoadingActivateCancel.cs" />
     <Compile Include="Different\Events\LoadingCancel.cs" />
@@ -182,7 +186,7 @@
       <DependentUpon>StarRatingControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\ZoomBorder.cs" />
-    <Compile Include="Different\Behaviors\SynchronisedScroll\SynchronisedScrollToken.cs" />
+    <Compile Include="Different\Behaviors\Synchronised\SynchronisedScrollToken.cs" />
     <Compile Include="Views\GalleryProject.xaml.cs">
       <DependentUpon>GalleryProject.xaml</DependentUpon>
     </Compile>
@@ -488,5 +492,6 @@
   <ItemGroup>
     <Resource Include="Resources\chart_icon.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
