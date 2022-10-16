@@ -18,6 +18,8 @@ namespace UntappdViewer.Services
 
         public event Action<string> ShowMessageOnStatusBarEvent;
 
+        public event Action<string> ShowMessageOnLoadingEvent;
+
         private string messageOnStatusBar;
 
         public InteractionRequestService(IDialogService dialogService)
@@ -75,6 +77,11 @@ namespace UntappdViewer.Services
         {
             ShowMessageOnStatusBarEvent?.Invoke(message);
             messageOnStatusBar = message;
+        }
+
+        public void ShowMessageOnLoading(string message)
+        {
+            ShowMessageOnLoadingEvent?.Invoke(message);
         }
 
         public string GetCurrentMessageOnStatusBar()

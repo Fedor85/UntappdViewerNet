@@ -33,6 +33,7 @@ namespace UntappdViewer.ViewModels
         {
             base.DeActivate();
             interactionRequestService.ShowMessageOnStatusBarEvent -= ShowMessage;
+            Message = String.Empty;
         }
 
         private void ShowMessage(string message)

@@ -7,6 +7,8 @@ namespace UntappdViewer.Interfaces.Services
     {
         event Action<string> ShowMessageOnStatusBarEvent;
 
+        event Action<string> ShowMessageOnLoadingEvent;
+
         void ShowMessage(string caption, string message);
 
         void ShowError(string caption, string message);
@@ -16,6 +18,8 @@ namespace UntappdViewer.Interfaces.Services
         bool AskReplaceText(string caption, ref string text);
 
         void ShowMessageOnStatusBar(string message);
+
+        void ShowMessageOnLoading(string message);
 
         string GetCurrentMessageOnStatusBar();
 

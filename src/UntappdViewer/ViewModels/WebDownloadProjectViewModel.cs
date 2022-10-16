@@ -52,7 +52,6 @@ namespace UntappdViewer.ViewModels
 
         public ICommand OkButtonCommand { get; }
 
-
         public bool? AccessToken
         {
             get
@@ -89,7 +88,6 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-
         public WebDownloadProjectViewModel(IRegionManager regionManager, IUntappdService untappdService,
                                                                          IWebApiClient webApiClient,
                                                                          IModuleManager moduleManager,
@@ -119,7 +117,7 @@ namespace UntappdViewer.ViewModels
         {
             base.Activate();
             Checkins = new List<Checkin>(untappdService.GetCheckins());
-            webApiClient.UploadedProgress += interactionRequestService.ShowMessageOnStatusBar;
+            webApiClient.UploadedProgress += interactionRequestService.ShowMessageOnLoading;
             interactionRequestService.ClearMessageOnStatusBar();
         }
 
