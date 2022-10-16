@@ -170,6 +170,7 @@
             <ItemsControl Background="#ffffff" Opacity="0.5"/>
         </ControlTemplate>
         <system:Double x:Key="DefautChartHeight">300</system:Double>
+        <system:Double x:Key="MaxRating">5</system:Double>
         <Thickness x:Key="DefautChartMargin">5,0,5,0</Thickness>
         <Thickness x:Key="DefautChartOffsetBottom">0,20,0,0</Thickness>
         <behaviors:SynchronisedScrollToken x:Key="ScrollToken" />
@@ -318,7 +319,7 @@
                         <chartingToolkit:Chart Grid.Column="2" Style="{StaticResource BarSeriesChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
                                                 Title="{x:Static properties:Resources.StyleRating}">
                             <chartingToolkit:Chart.Axes>
-                                <chartingToolkit:LinearAxis Orientation="X" Maximum="{Binding MaxXAxisBeerTypeRating}" ShowGridLines="True"/>
+                                <chartingToolkit:LinearAxis Orientation="X" Minimum="0" Maximum="{StaticResource MaxRating}" ShowGridLines="True"/>
                                 <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}">
                                     <b:Interaction.Behaviors>
                                         <behaviors:SynchronisedWidthBehavior RegisterToken="{StaticResource WidthTokenRight}" />
@@ -354,7 +355,7 @@
                         <chartingToolkit:Chart Grid.Column="2" Style="{StaticResource BarSeriesChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
                                                 Title="{x:Static properties:Resources.CountryRating}">
                             <chartingToolkit:Chart.Axes>
-                                <chartingToolkit:LinearAxis Orientation="X" Maximum="{Binding MaxXAxisBeerCountryRating}" ShowGridLines="True"/>
+                                <chartingToolkit:LinearAxis Orientation="X" Minimum="0" Maximum="{StaticResource MaxRating}" ShowGridLines="True"/>
                                 <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}">
                                     <b:Interaction.Behaviors>
                                         <behaviors:SynchronisedWidthBehavior RegisterToken="{StaticResource WidthTokenRight}" />
@@ -390,7 +391,7 @@
                         <chartingToolkit:Chart Grid.Column="2" Style="{StaticResource BarSeriesChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
                                                 Title="{x:Static properties:Resources.ServingTypeRating}">
                             <chartingToolkit:Chart.Axes>
-                                <chartingToolkit:LinearAxis Orientation="X" Maximum="{Binding MaxXAxisServingTypeRating}" ShowGridLines="True"/>
+                                <chartingToolkit:LinearAxis Orientation="X" Minimum="0" Maximum="{StaticResource MaxRating}" ShowGridLines="True"/>
                                 <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}">
                                     <b:Interaction.Behaviors>
                                         <behaviors:SynchronisedWidthBehavior RegisterToken="{StaticResource WidthTokenRight}" />

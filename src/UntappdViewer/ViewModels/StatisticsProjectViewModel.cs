@@ -57,13 +57,9 @@ namespace UntappdViewer.ViewModels
 
         private int maxXAxisBeerTypeCount;
 
-        private double maxXAxisBeerTypeRating;
-
         private int heightChartBeerType;
 
         private int maxXAxisBeerCountryCount;
-
-        private double maxXAxisBeerCountryRating;
 
         private int heightChartBeerCountry;
 
@@ -78,8 +74,6 @@ namespace UntappdViewer.ViewModels
         private double averageUniqueChekinsQuantity;
 
         private double maxXAxisServingTypeCount;
-
-        private double maxXAxisServingTypeRating;
 
         public ICommand OkButtonCommand { get; }
 
@@ -236,15 +230,6 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public double MaxXAxisBeerTypeRating
-        {
-            get { return maxXAxisBeerTypeRating; }
-            set
-            {
-                SetProperty(ref maxXAxisBeerTypeRating, value);
-            }
-        }
-
         public int HeightChartBeerType
         {
             get { return heightChartBeerType; }
@@ -260,14 +245,6 @@ namespace UntappdViewer.ViewModels
             set
             {
                 SetProperty(ref maxXAxisBeerCountryCount, value);
-            }
-        }
-        public double MaxXAxisBeerCountryRating
-        {
-            get { return maxXAxisBeerCountryRating; }
-            set
-            {
-                SetProperty(ref maxXAxisBeerCountryRating, value);
             }
         }
 
@@ -333,15 +310,6 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public double MaxXAxisServingTypeRating
-        {
-            get { return maxXAxisServingTypeRating; }
-            set
-            {
-                SetProperty(ref maxXAxisServingTypeRating, value);
-            }
-        }
-
         public StatisticsProjectViewModel(IRegionManager regionManager, IModuleManager moduleManager,
                                                                         IUntappdService untappdService) : base(regionManager)
         {
@@ -388,18 +356,15 @@ namespace UntappdViewer.ViewModels
             HeightChartBeerType = 0;
             MaxXAxisBeerTypeCount = 0;
             BeerTypeCount = null;
-            MaxXAxisBeerTypeRating = 0;
             BeerTypeRating = null;
 
             HeightChartBeerCountry = 0;
             MaxXAxisBeerCountryCount = 0;
             BeerCountryCount = null;
-            MaxXAxisBeerCountryRating = 0;
             BeerCountryRating = null;
 
             MaxXAxisServingTypeCount = 0;
             ServingTypeCount = null;
-            MaxXAxisServingTypeRating = 0;
             ServingTypeRating = null;
         }
 
@@ -455,9 +420,7 @@ namespace UntappdViewer.ViewModels
             MaxXAxisBeerTypeCount = beerTypeCount.Count > 0 ? beerTypeCount.Max(item => item.Value) + 20 : 0;
             BeerTypeCount = beerTypeCount;
 
-            List<KeyValue<string, double>> beerTypeRating = StatisticsCalculation.GetAverageRatingByCheckinIds(checkins, beerTypeCheckinIds);
-            MaxXAxisBeerTypeRating = beerTypeRating.Count > 0 ? beerTypeRating.Max(item => item.Value) + 0.1 : 0;
-            BeerTypeRating = beerTypeRating;
+            BeerTypeRating = StatisticsCalculation.GetAverageRatingByCheckinIds(checkins, beerTypeCheckinIds);
         }
 
         private void SetBeerCountry()
@@ -471,9 +434,7 @@ namespace UntappdViewer.ViewModels
             MaxXAxisBeerCountryCount = beerCountryCount.Count > 0 ? beerCountryCount.Max(item => item.Value) + 20 : 0;
             BeerCountryCount = beerCountryCount;
 
-            List<KeyValue<string, double>> beerCountryRating = StatisticsCalculation.GetAverageRatingByCheckinIds(checkins, beerCountryCheckinIds);
-            MaxXAxisBeerCountryRating = beerCountryRating.Count > 0 ? beerCountryRating.Max(item => item.Value) + 0.1 : 0;
-            BeerCountryRating = beerCountryRating;
+            BeerCountryRating = StatisticsCalculation.GetAverageRatingByCheckinIds(checkins, beerCountryCheckinIds);
         }
 
         private void SetServingType()
@@ -485,9 +446,7 @@ namespace UntappdViewer.ViewModels
             MaxXAxisServingTypeCount = servingTypeCount.Count > 0 ? servingTypeCount.Max(item => item.Value) + 20 : 0;
             ServingTypeCount = servingTypeCount;
 
-            List<KeyValue<string, double>> servingTypeRating = StatisticsCalculation.GetAverageRatingByCheckinIds(checkins, servingTypeByCheckinIds);
-            MaxXAxisServingTypeRating = servingTypeRating.Count > 0 ? servingTypeRating.Max(item => item.Value) + 0.1 : 0;
-            ServingTypeRating = servingTypeRating;
+            ServingTypeRating = StatisticsCalculation.GetAverageRatingByCheckinIds(checkins, servingTypeByCheckinIds);
         }
 
         private void Exit()
