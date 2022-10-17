@@ -24,6 +24,8 @@ namespace UntappdViewer.ViewModels
 
         private string offsetUpdateBeer;
 
+        private bool isEnabledFillServingTypeButton;
+
         private List<Checkin> checkins;
 
         private IUntappdService untappdService;
@@ -76,6 +78,15 @@ namespace UntappdViewer.ViewModels
             }
         }
 
+        public bool IsEnabledFillServingTypeButton
+        {
+            get { return isEnabledFillServingTypeButton; }
+            set
+            {
+                SetProperty(ref isEnabledFillServingTypeButton, value);
+            }
+        }
+
         public List<Checkin> Checkins
         {
             get
@@ -85,6 +96,7 @@ namespace UntappdViewer.ViewModels
             set
             {
                 SetProperty(ref checkins, value);
+                SetVisibilityFillServingTypeButton(value);
             }
         }
 
@@ -291,6 +303,11 @@ namespace UntappdViewer.ViewModels
         {
             settingService.SetOffsetUpdateBeer(offset);
             OffsetUpdateBeer = offset > 0 ? offset.ToString() : String.Empty;
+        }
+
+        private void SetVisibilityFillServingTypeButton(List<Checkin> value)
+        {
+            IsEnabledFillServingTypeButton =  value != null && value.Any(item => String.IsNullOrEmpty(item.ServingType));
         }
 
         private void Exit()
