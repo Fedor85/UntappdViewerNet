@@ -234,6 +234,12 @@ namespace UntappdViewer.ViewModels
 
         private void UploadProjectPhotos()
         {
+            if (!untappdService.IsUNTPProject())
+            {
+                interactionRequestService.ShowMessage(Properties.Resources.Warning, Properties.Resources.WarningMessageSaveProjectToUNTP);
+                return;
+            }
+
             string directoryPath = interactionRequestService.FolderBrowser(Path.GetDirectoryName(untappdService.FilePath));
             if (String.IsNullOrEmpty(directoryPath))
                 return;
@@ -320,6 +326,11 @@ namespace UntappdViewer.ViewModels
 
         private void GalleryProject()
         {
+            if (!untappdService.IsUNTPProject())
+            {
+                interactionRequestService.ShowMessage(Properties.Resources.Warning, Properties.Resources.WarningMessageSaveProjectToUNTP);
+                return;
+            }
             moduleManager.LoadModule(typeof(GalleryProjectModule).Name);
             ActivateView(RegionNames.MainRegion, typeof(GalleryProject));
         }
@@ -332,6 +343,12 @@ namespace UntappdViewer.ViewModels
 
         private void CheckinsProjectReport()
         {
+            if (!untappdService.IsUNTPProject())
+            {
+                interactionRequestService.ShowMessage(Properties.Resources.Warning, Properties.Resources.WarningMessageSaveProjectToUNTP);
+                return;
+            }
+
             LoadingChangeActivity(true);
             CheckinsProjectReportAsync();
         }
