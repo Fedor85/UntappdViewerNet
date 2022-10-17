@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
+using UntappdViewer.Utils;
 
 namespace UntappdViewer.Behaviors
 {
@@ -22,6 +23,9 @@ namespace UntappdViewer.Behaviors
 
         private void SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
         {
+            if (MathHelper.DoubleCompare(e.PreviousSize.Width, e.NewSize.Width))
+                return;
+
             Control control = GetObject(sender);
             if (control == null)
                 return;
@@ -47,12 +51,6 @@ namespace UntappdViewer.Behaviors
                 Unregister(item);
 
              countSizeChanged = 0;
-        }
-
-        private void RemoveEvent()
-        {
-            foreach (Control item in Items)
-                item.SizeChanged -= SizeChanged;
         }
     }
 }
