@@ -143,7 +143,7 @@ namespace UntappdViewer.ViewModels
             untappdService.Initialize(fileSavePath);
             untappdService.ResetСhanges();
             FileHelper.CreateDirectory(untappdService.GetFileDataDirectory());
-            interactionRequestService.ShowMessageOnStatusBar(untappdService.FilePath);
+            ShowMessageOnStatusBar(untappdService.FilePath);
             settingService.SetRecentFilePaths(FileHelper.AddFilePath(settingService.GetRecentFilePaths(), fileSavePath, settingService.GetMaxRecentFilePaths()));
         }
 
@@ -154,7 +154,7 @@ namespace UntappdViewer.ViewModels
                 interactionRequestService.ShowMessage(Properties.Resources.Warning, Properties.Resources.WarningMessageSaveProjectToUNTP);
                 return;
             }
-            LoadingChangeActivity(true);
+            LoadingChangeActivity(true, true);
             SaveAsZipArchiveAsync();
         }
 
@@ -162,12 +162,14 @@ namespace UntappdViewer.ViewModels
         {
             string previousMessageOnStatusBar = interactionRequestService.GetCurrentMessageOnStatusBar();
             string mainFilePath = untappdService.FilePath;
+
             ZipFileHelper zipFileHelper = new ZipFileHelper();
-            zipFileHelper.ZipProgress += ZipProgress;
+            zipFileHelper.ZipProgress += ShowMessageOnStatusBar;
             zipFileHelper.AddFile(mainFilePath);
             zipFileHelper.AddDirectory(untappdService.GetFileDataDirectory());
-            string resultPath = ZipFileHelper.GetResultPath(mainFilePath);
+            eventAggregator.GetEvent<LoadingCancel>().Subscribe(zipFileHelper.CancellationTokenSource.Cancel);
 
+            string resultPath = ZipFileHelper.GetResultPath(mainFilePath);
             try
             {
                 await Task.Run(() => zipFileHelper.SaveAsZip(resultPath));
@@ -178,12 +180,13 @@ namespace UntappdViewer.ViewModels
             }
             finally
             {
-                interactionRequestService.ShowMessageOnStatusBar(previousMessageOnStatusBar);
+                ShowMessageOnStatusBar(previousMessageOnStatusBar);
+                eventAggregator.GetEvent<LoadingCancel>().Unsubscribe(zipFileHelper.CancellationTokenSource.Cancel);
                 LoadingChangeActivity(false);
             }
         }
 
-        private void ZipProgress(string message)
+        private void ShowMessageOnStatusBar(string message)
         {
             interactionRequestService.ShowMessageOnStatusBar(message);
         }
@@ -205,10 +208,10 @@ namespace UntappdViewer.ViewModels
             int counter = 1;
             foreach (Checkin checkin in checkins)
             {
-                interactionRequestService.ShowMessageOnStatusBar(CommunicationHelper.GetLoadingMessage($"{counter++}/{count} -> {checkin.Beer.Name}"));
+                ShowMessageOnStatusBar(CommunicationHelper.GetLoadingMessage($"{counter++}/{count} -> {checkin.Beer.Name}"));
                 await Task.Run(() => DownloadFiles(checkin));
             }
-            interactionRequestService.ShowMessageOnStatusBar(CommunicationHelper.GetLoadingMessage(untappdService.FilePath));
+            ShowMessageOnStatusBar(CommunicationHelper.GetLoadingMessage(untappdService.FilePath));
         }
 
         private void DownloadFiles(Checkin checkin)
@@ -258,10 +261,10 @@ namespace UntappdViewer.ViewModels
                     continue;
 
                 string message = $"{Properties.Resources.Loading} {i + 1}/{checkinIds.Count}: {checkin.UrlPhoto}";
-                interactionRequestService.ShowMessageOnStatusBar(message);
+                ShowMessageOnStatusBar(message);
                 await Task.Run(() => UploadCheckinPhoto(checkin, uploadDirectory));
             }
-            interactionRequestService.ShowMessageOnStatusBar(CommunicationHelper.GetLoadingMessage(untappdService.FilePath));
+            ShowMessageOnStatusBar(CommunicationHelper.GetLoadingMessage(untappdService.FilePath));
         }
 
         private void UploadCheckinPhoto(Checkin checkin, string uploadDirectory)

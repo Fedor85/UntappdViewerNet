@@ -3,7 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Reflection;
+using System.Threading;
 
 namespace UntappdViewer.Infrastructure
 {
@@ -15,10 +16,13 @@ namespace UntappdViewer.Infrastructure
 
         public event Action<string> ZipProgress;
 
+        public CancellationTokenSource CancellationTokenSource { get; private set; }
+
         public ZipFileHelper()
         {
             fileItems = new List<FileItem>();
             directoryItems = new List<FileItem>();
+            CancellationTokenSource = new CancellationTokenSource();
         }
 
         public void AddFile(string filePath)
@@ -26,6 +30,7 @@ namespace UntappdViewer.Infrastructure
             int index = fileItems.Count == 0 ? 0 : fileItems.Max(item => item.Index) + 1;
             fileItems.Add(new FileItem(index, filePath));
         }
+
         public void AddDirectory(string directoryPath)
         {
             int index = directoryItems.Count == 0 ? 0 : directoryItems.Max(item => item.Index) + 1;
@@ -49,6 +54,9 @@ namespace UntappdViewer.Infrastructure
 
         private void ZipSaveProgress(object sender, SaveProgressEventArgs e)
         {
+            if (CancellationTokenSource.IsCancellationRequested)
+                e.Cancel = true;
+
             if (e.CurrentEntry == null || e.EntriesTotal == 0 || e.EntriesSaved == 0 || e.EventType != ZipProgressEventType.Saving_AfterWriteEntry)
                 return;
 
@@ -60,6 +68,16 @@ namespace UntappdViewer.Infrastructure
         private void ZipProgressInvoke(string message)
         {
             ZipProgress?.Invoke(message);
+        }
+
+        private string GetTempFilePath(object sender)
+        {
+            FieldInfo fieldInfo = sender.GetType().GetField("_temporaryFileName", BindingFlags.Instance | BindingFlags.NonPublic);
+            if (fieldInfo == null)
+                return String.Empty;
+
+            object tempFilePath = fieldInfo.GetValue(sender);
+            return tempFilePath?.ToString() ?? String.Empty;
         }
 
         public static string GetResultPath(string filePath)
