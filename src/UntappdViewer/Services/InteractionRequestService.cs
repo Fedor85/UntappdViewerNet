@@ -22,9 +22,13 @@ namespace UntappdViewer.Services
 
         private string messageOnStatusBar;
 
+        private string messageOnLoading;
+
+
         public InteractionRequestService(IDialogService dialogService)
         {
             messageOnStatusBar = String.Empty;
+            messageOnLoading = String.Empty;
             this.dialogService = dialogService;
         }
 
@@ -82,11 +86,17 @@ namespace UntappdViewer.Services
         public void ShowMessageOnLoading(string message)
         {
             ShowMessageOnLoadingEvent?.Invoke(message);
+            messageOnLoading = message;
         }
 
         public string GetCurrentMessageOnStatusBar()
         {
             return messageOnStatusBar;
+        }
+
+        public string GetCurrentMessageOnLoading()
+        {
+            return messageOnLoading;
         }
 
         public void ClearMessageOnStatusBar()

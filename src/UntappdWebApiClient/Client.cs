@@ -47,22 +47,22 @@ namespace UntappdWebApiClient
             return httpResponse.IsSuccessStatusCode;
         }
 
-        public void FillFullCheckins(CheckinsContainer checkinsContainer)
+        public void FillFullCheckins(CheckinsContainer checkinsContainer, ICancellationToken<Checkin> cancellation = null)
         {
-            FillCheckins(checkinsContainer, 0);
+            FillCheckins(checkinsContainer, 0, null, cancellation);
         }
 
-        public void FillFirstCheckins(CheckinsContainer checkinsContainer)
+        public void FillFirstCheckins(CheckinsContainer checkinsContainer, ICancellationToken<Checkin> cancellation = null)
         {
-            FillCheckins(checkinsContainer, 0, checkinsContainer.Checkins.Max(item => item.Id));
+            FillCheckins(checkinsContainer, 0, checkinsContainer.Checkins.Max(item => item.Id), cancellation);
         }
 
-        public void FillToEndCheckins(CheckinsContainer checkinsContainer)
+        public void FillToEndCheckins(CheckinsContainer checkinsContainer, ICancellationToken<Checkin> cancellation = null)
         {
-            FillCheckins(checkinsContainer, checkinsContainer.Checkins.Min(item => item.Id));
+            FillCheckins(checkinsContainer, checkinsContainer.Checkins.Min(item => item.Id), null, cancellation);
         }
 
-        public void UpdateBeers(List<Beer> beers, Func<Beer, bool> predicate, ref long offset)
+        public void UpdateBeers(List<Beer> beers, Func<Beer, bool> predicate, ref long offset, ICancellationToken<Checkin> cancellation = null)
         {
             if (beers.Count == 0)
                 return;
@@ -72,6 +72,7 @@ namespace UntappdWebApiClient
             bool isRun = true;
             while (isRun)
             {
+
                 HttpResponseMessage httpResponse = GetHttpResponse($"user/beers/?offset={offset}&limit=50");
                 if ((long)httpResponse.StatusCode == 429)
                     throw new ArgumentException(httpResponse.ReasonPhrase);
@@ -92,6 +93,9 @@ namespace UntappdWebApiClient
                     isRun = false;
 
                 if (predicate != null && !beers.Any(predicate))
+                    isRun = false;
+
+                if (cancellation != null && cancellation.Cancel)
                     isRun = false;
             }
         }
@@ -133,7 +137,7 @@ namespace UntappdWebApiClient
             return new CancellationToken<T>();
         }
 
-        private void FillCheckins(CheckinsContainer checkinsContainer, long maxId, long? minId = null)
+        private void FillCheckins(CheckinsContainer checkinsContainer, long maxId, long? minId = null, ICancellationToken<Checkin> cancellation = null)
         {
             long currentId = maxId;
             int counter = 0;
@@ -179,6 +183,10 @@ namespace UntappdWebApiClient
                 {
                     isRun = false;
                 }
+
+
+                if (cancellation != null && cancellation.Cancel)
+                    isRun = false;
             }
         }
 

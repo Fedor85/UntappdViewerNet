@@ -36,7 +36,7 @@ namespace UntappdViewer.ViewModels
 
         private IInteractionRequestService interactionRequestService;
 
-        private ICancellationToken<Checkin> fillServingTypCancellation;
+        private ICancellationToken<Checkin> webClientCancellation;
 
         public ICommand CheckAccessTokenCommand { get; }
 
@@ -108,7 +108,7 @@ namespace UntappdViewer.ViewModels
             BeerUpdateButtonCommand = new DelegateCommand(UpdateBeers);
 
             FillServingTypeButtonCommand = new DelegateCommand(FillServingType);
-            fillServingTypCancellation = webApiClient.GetCancellationToken<Checkin>();
+            webClientCancellation = webApiClient.GetCancellationToken<Checkin>();
 
             OkButtonCommand = new DelegateCommand(Exit);
         }
@@ -166,23 +166,22 @@ namespace UntappdViewer.ViewModels
             if (untappdService.GetCheckins().Count  > 0 && !interactionRequestService.Ask(Properties.Resources.Warning, Properties.Resources.AskDeletedCheckins))
                 return;
 
-            LoadingChangeActivity(true);
-
             Checkins.Clear();
             untappdService.GetCheckins().Clear();
 
+            LoadingChangeActivity(true, true);
             FillCheckins(webApiClient.FillFullCheckins);
         }
 
         private void FirstDownloadCheckins()
         {
-            LoadingChangeActivity(true);
+            LoadingChangeActivity(true, true);
             FillCheckins(webApiClient.FillFirstCheckins);
         }
 
         private void ToEndDownloadCheckins()
         {
-            LoadingChangeActivity(true);
+            LoadingChangeActivity(true, true);
             FillCheckins(webApiClient.FillToEndCheckins);
         }
 
@@ -192,7 +191,7 @@ namespace UntappdViewer.ViewModels
             if (!beers.Any())
                 return;
 
-            LoadingChangeActivity(true);
+            LoadingChangeActivity(true, true);
             UpdateBeers(beers);
         }
 
@@ -206,11 +205,12 @@ namespace UntappdViewer.ViewModels
             FillServingType(checkins);
         }
 
-        private async void FillCheckins(Action<CheckinsContainer> fillCheckinsDelegate)
+        private async void FillCheckins(Action<CheckinsContainer, ICancellationToken<Checkin>> fillCheckinsDelegate)
         {
+            BeforeRunWebClient();
             try
             {
-                await Task.Run(() => fillCheckinsDelegate(untappdService.Untappd.CheckinsContainer));
+                await Task.Run(() => fillCheckinsDelegate(untappdService.Untappd.CheckinsContainer, webClientCancellation));
             }
             catch (Exception ex)
             {
@@ -218,19 +218,18 @@ namespace UntappdViewer.ViewModels
             }
             finally
             {
-                untappdService.SortDataDescCheckins();
-                Checkins = new List<Checkin>(untappdService.GetCheckins());
-                LoadingChangeActivity(false);
+                AfterRunWebClient();
             }
         }
 
         private async void UpdateBeers(List<Beer> beers)
         {
+            BeforeRunWebClient();
             long offset = GetOffsetUpdateBeer();
             try
             {
-                await Task.Run(() => webApiClient.UpdateBeers(beers, null, ref offset));
-                SetOffsetUpdateBeer(0);
+                await Task.Run(() => webApiClient.UpdateBeers(beers, null, ref offset, webClientCancellation));
+                SetOffsetUpdateBeer(webClientCancellation.Cancel ? offset : 0);
             }
             catch (Exception ex)
             {
@@ -239,17 +238,16 @@ namespace UntappdViewer.ViewModels
             }
             finally
             {
-                LoadingChangeActivity(false);
+                AfterRunWebClient();
             }
         }
 
         private async void FillServingType(List<Checkin> checkins)
         {
-            eventAggregator.GetEvent<LoadingCancel>().Subscribe(LoadingCanceled);
+            BeforeRunWebClient();
             try
             {
-                await Task.Run(() => webApiClient.FillServingType(checkins, DefaultValues.DefaultServingType, fillServingTypCancellation));
-
+                await Task.Run(() => webApiClient.FillServingType(checkins, DefaultValues.DefaultServingType, webClientCancellation));
             }
             catch (Exception ex)
             {
@@ -257,16 +255,31 @@ namespace UntappdViewer.ViewModels
             }
             finally
             {
-                fillServingTypCancellation.Cancel = false;
-                eventAggregator.GetEvent<LoadingCancel>().Unsubscribe(LoadingCanceled);
-                Checkins = new List<Checkin>(untappdService.GetCheckins());
-                LoadingChangeActivity(false);
+                AfterRunWebClient();
             }
+        }
+
+        private void BeforeRunWebClient()
+        {
+            eventAggregator.GetEvent<LoadingCancel>().Subscribe(LoadingCanceled);
+            interactionRequestService.ShowMessageOnStatusBar(String.Empty);
+        }
+
+        private void AfterRunWebClient()
+        {
+            webClientCancellation.Cancel = false;
+            eventAggregator.GetEvent<LoadingCancel>().Unsubscribe(LoadingCanceled);
+
+            untappdService.SortDataDescCheckins();
+            Checkins = new List<Checkin>(untappdService.GetCheckins());
+
+            interactionRequestService.ShowMessageOnStatusBar(interactionRequestService.GetCurrentMessageOnLoading());
+            LoadingChangeActivity(false);
         }
 
         private void LoadingCanceled()
         {
-            fillServingTypCancellation.Cancel = true;
+            webClientCancellation.Cancel = true;
         }
 
         private long GetOffsetUpdateBeer()

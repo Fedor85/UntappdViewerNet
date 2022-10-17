@@ -12,13 +12,13 @@ namespace UntappdViewer.Interfaces.Services
 
         bool Check();
 
-        void FillFullCheckins(CheckinsContainer checkinsContainer);
+        void FillFullCheckins(CheckinsContainer checkinsContainer, ICancellationToken<Checkin> cancellation = null);
 
-        void FillFirstCheckins(CheckinsContainer checkinsContainer);
+        void FillFirstCheckins(CheckinsContainer checkinsContainer, ICancellationToken<Checkin> cancellation = null);
 
-        void FillToEndCheckins(CheckinsContainer checkinsContainer);
+        void FillToEndCheckins(CheckinsContainer checkinsContainer, ICancellationToken<Checkin> cancellation = null);
 
-        void UpdateBeers(List<Beer> beers, Func<Beer, bool> predicate, ref long offset);
+        void UpdateBeers(List<Beer> beers, Func<Beer, bool> predicate, ref long offset, ICancellationToken<Checkin> cancellation = null);
 
         void FillServingType(List<Checkin> checkins, string defaultServingType, ICancellationToken<Checkin> cancellation = null);
 
