@@ -135,10 +135,45 @@
             <Setter Property="Width" Value="10" />
             <Setter Property="Background" Value="#fd9532"/>
         </Style>
+        <ControlTemplate  x:Key="ColumnDataPointTemplate" TargetType="{x:Type ContentControl}">
+            <Grid>
+                <Border Opacity="0.8">
+                    <Border.Background>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#f1efc1" Offset="0" />
+                            <GradientStop Color="#ffc100" Offset="0.5" />
+                            <GradientStop Color="#fd9532" Offset="1" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <Border  BorderBrush="#fd9532" BorderThickness="2"/>
+            </Grid>
+        </ControlTemplate>
         <Style x:Key="ColumnDataPointStyle" TargetType="{x:Type chartingToolkit:DataPoint}">
-            <Setter Property="Background" Value="#ffc100"/>
-            <Setter Property="BorderBrush" Value="#fd9532"/>
-            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type chartingToolkit:DataPoint}">
+                        <ContentControl Template="{StaticResource ColumnDataPointTemplate}" RenderTransformOrigin="0.5, 0.5">
+                            <ContentControl.RenderTransform>
+                                <RotateTransform Angle="180"/>
+                            </ContentControl.RenderTransform>
+                        </ContentControl>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="BarDataPointStyle" TargetType="{x:Type chartingToolkit:DataPoint}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type chartingToolkit:DataPoint}">
+                        <Grid>
+                            <ContentControl Template="{StaticResource ColumnDataPointTemplate}"/>
+                            <TextBlock Text="{TemplateBinding FormattedDependentValue}" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                       FontWeight="Bold" Margin="0,0,-15,0"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
         <Style x:Key="ChartTitleStyle" TargetType="{x:Type visualizationToolkit:Title}">
             <Setter Property="FontWeight" Value="Bold" />
@@ -314,7 +349,7 @@
                                 </chartingToolkit:CategoryAxis>
                             </chartingToolkit:Chart.Axes>
                             <chartingToolkit:BarSeries  DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding BeerTypeCount}" IsSelectionEnabled="True"
-                                                        DataPointStyle="{StaticResource ColumnDataPointStyle}"/>
+                                                        DataPointStyle="{StaticResource BarDataPointStyle}"/>
                         </chartingToolkit:Chart>
                         <chartingToolkit:Chart Grid.Column="2" Style="{StaticResource BarSeriesChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
                                                 Title="{x:Static properties:Resources.StyleRating}">
@@ -327,7 +362,7 @@
                                 </chartingToolkit:CategoryAxis>
                             </chartingToolkit:Chart.Axes>
                             <chartingToolkit:BarSeries DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding BeerTypeRating}" IsSelectionEnabled="True"
-                                                        DataPointStyle="{StaticResource ColumnDataPointStyle}"/>
+                                                        DataPointStyle="{StaticResource BarDataPointStyle}"/>
                         </chartingToolkit:Chart>
                     </Grid>
                 </Grid>
@@ -350,7 +385,7 @@
                                 </chartingToolkit:CategoryAxis>
                             </chartingToolkit:Chart.Axes>
                             <chartingToolkit:BarSeries  DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding BeerCountryCount}" IsSelectionEnabled="True"
-                                                        DataPointStyle="{StaticResource ColumnDataPointStyle}"/>
+                                                        DataPointStyle="{StaticResource BarDataPointStyle}"/>
                         </chartingToolkit:Chart>
                         <chartingToolkit:Chart Grid.Column="2" Style="{StaticResource BarSeriesChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
                                                 Title="{x:Static properties:Resources.CountryRating}">
@@ -363,7 +398,7 @@
                                 </chartingToolkit:CategoryAxis>
                             </chartingToolkit:Chart.Axes>
                             <chartingToolkit:BarSeries  DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding BeerCountryRating}" IsSelectionEnabled="True"
-                                                        DataPointStyle="{StaticResource ColumnDataPointStyle}"/>
+                                                        DataPointStyle="{StaticResource BarDataPointStyle}"/>
                         </chartingToolkit:Chart>
                     </Grid>
                 </Grid>
@@ -386,7 +421,7 @@
                                 </chartingToolkit:CategoryAxis>
                             </chartingToolkit:Chart.Axes>
                             <chartingToolkit:BarSeries  DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding ServingTypeCount}" IsSelectionEnabled="True"
-                                                        DataPointStyle="{StaticResource ColumnDataPointStyle}"/>
+                                                        DataPointStyle="{StaticResource BarDataPointStyle}"/>
                         </chartingToolkit:Chart>
                         <chartingToolkit:Chart Grid.Column="2" Style="{StaticResource BarSeriesChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
                                                 Title="{x:Static properties:Resources.ServingTypeRating}">
@@ -399,7 +434,7 @@
                                 </chartingToolkit:CategoryAxis>
                             </chartingToolkit:Chart.Axes>
                             <chartingToolkit:BarSeries  DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding ServingTypeRating}" IsSelectionEnabled="True"
-                                                        DataPointStyle="{StaticResource ColumnDataPointStyle}"/>
+                                                        DataPointStyle="{StaticResource BarDataPointStyle}"/>
                         </chartingToolkit:Chart>
                     </Grid>
                 </Grid>
