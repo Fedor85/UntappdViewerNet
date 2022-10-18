@@ -341,7 +341,7 @@
                         <chartingToolkit:Chart Grid.Column="0" Style="{StaticResource BarSeriesChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
                                                 Title="{x:Static properties:Resources.StyleCount}">
                             <chartingToolkit:Chart.Axes>
-                                <chartingToolkit:LinearAxis Orientation="X" Maximum="{Binding MaxXAxisBeerTypeCount}" ShowGridLines="True"/>
+                                <chartingToolkit:LinearAxis Orientation="X" Minimum="0" Maximum="{Binding MaxXAxisBeerTypeCount}" ShowGridLines="True"/>
                                 <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}">
                                     <b:Interaction.Behaviors>
                                         <behaviors:SynchronisedWidthBehavior RegisterToken="{StaticResource WidthTokenLeft}"/>
@@ -377,7 +377,7 @@
                         <chartingToolkit:Chart Grid.Column="0" Style="{StaticResource BarSeriesChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
                                                 Title="{x:Static properties:Resources.CountryCount}">
                             <chartingToolkit:Chart.Axes>
-                                <chartingToolkit:LinearAxis Orientation="X" Maximum="{Binding MaxXAxisBeerCountryCount}" ShowGridLines="True" />
+                                <chartingToolkit:LinearAxis Orientation="X" Minimum="0" Maximum="{Binding MaxXAxisBeerCountryCount}" ShowGridLines="True" />
                                 <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}">
                                     <b:Interaction.Behaviors>
                                         <behaviors:SynchronisedWidthBehavior RegisterToken="{StaticResource WidthTokenLeft}" />
@@ -413,7 +413,7 @@
                         <chartingToolkit:Chart Grid.Column="0" Style="{StaticResource BarSeriesChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
                                                 Title="{x:Static properties:Resources.ServingTypeCount}">
                             <chartingToolkit:Chart.Axes>
-                                <chartingToolkit:LinearAxis Orientation="X" Maximum="{Binding MaxXAxisServingTypeCount}" ShowGridLines="True" />
+                                <chartingToolkit:LinearAxis Orientation="X" Minimum="0" Maximum="{Binding MaxXAxisServingTypeCount}" ShowGridLines="True" />
                                 <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}">
                                     <b:Interaction.Behaviors>
                                         <behaviors:SynchronisedWidthBehavior RegisterToken="{StaticResource WidthTokenLeft}" />

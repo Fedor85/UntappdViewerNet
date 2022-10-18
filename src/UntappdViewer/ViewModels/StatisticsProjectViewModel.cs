@@ -73,7 +73,7 @@ namespace UntappdViewer.ViewModels
 
         private double averageUniqueChekinsQuantity;
 
-        private double maxXAxisServingTypeCount;
+        private int maxXAxisServingTypeCount;
 
         public ICommand OkButtonCommand { get; }
 
@@ -301,7 +301,7 @@ namespace UntappdViewer.ViewModels
                 SetProperty(ref averageUniqueChekinsQuantity, value);
             }
         }
-        public double MaxXAxisServingTypeCount
+        public int MaxXAxisServingTypeCount
         {
             get { return maxXAxisServingTypeCount; }
             set
@@ -417,7 +417,7 @@ namespace UntappdViewer.ViewModels
             HeightChartBeerType = MathHelper.GetCeilingByStep(beerTypeCheckinIds.Count * DefaultValues.HeightBarSeriesChartYDelta, 100);
 
             List <KeyValue<string, int>> beerTypeCount = StatisticsCalculation.GetListCount(beerTypeCheckinIds);
-            MaxXAxisBeerTypeCount = beerTypeCount.Count > 0 ? beerTypeCount.Max(item => item.Value) + 20 : 0;
+            MaxXAxisBeerTypeCount = GetMaxXAxis(beerTypeCount.Count > 0 ? beerTypeCount.Max(item => item.Value): 0);
             BeerTypeCount = beerTypeCount;
 
             BeerTypeRating = StatisticsCalculation.GetAverageRatingByCheckinIds(checkins, beerTypeCheckinIds);
@@ -431,7 +431,7 @@ namespace UntappdViewer.ViewModels
             HeightChartBeerCountry = MathHelper.GetCeilingByStep(beerCountryCheckinIds.Count * DefaultValues.HeightBarSeriesChartYDelta, 100);
 
             List<KeyValue<string, int>> beerCountryCount = StatisticsCalculation.GetListCount(beerCountryCheckinIds);
-            MaxXAxisBeerCountryCount = beerCountryCount.Count > 0 ? beerCountryCount.Max(item => item.Value) + 20 : 0;
+            MaxXAxisBeerCountryCount = GetMaxXAxis(beerCountryCount.Count > 0 ? beerCountryCount.Max(item => item.Value) : 0);
             BeerCountryCount = beerCountryCount;
 
             BeerCountryRating = StatisticsCalculation.GetAverageRatingByCheckinIds(checkins, beerCountryCheckinIds);
@@ -443,10 +443,16 @@ namespace UntappdViewer.ViewModels
             List<KeyValue<string, List<long>>> servingTypeByCheckinIds = StatisticsCalculation.GetServingTypeByCheckinIds(checkins, DefaultValues.DefaultServingType);
 
             List<KeyValue<string, int>> servingTypeCount = StatisticsCalculation.GetListCount(servingTypeByCheckinIds);
-            MaxXAxisServingTypeCount = servingTypeCount.Count > 0 ? servingTypeCount.Max(item => item.Value) + 20 : 0;
+            MaxXAxisServingTypeCount = GetMaxXAxis(servingTypeCount.Count > 0 ? servingTypeCount.Max(item => item.Value): 0);
             ServingTypeCount = servingTypeCount;
 
             ServingTypeRating = StatisticsCalculation.GetAverageRatingByCheckinIds(checkins, servingTypeByCheckinIds);
+        }
+
+        private int GetMaxXAxis(int maxCount)
+        {
+            double percentage = MathHelper.GetPercentageOf(maxCount, 2);
+            return maxCount + Convert.ToInt32(Math.Ceiling(percentage));
         }
 
         private void Exit()

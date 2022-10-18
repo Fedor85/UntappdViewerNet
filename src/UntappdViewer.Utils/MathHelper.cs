@@ -47,6 +47,11 @@ namespace UntappdViewer.Utils
             return counter == 0 ? totalValue : totalValue / counter;
         }
 
+        public static double GetPercentageOf(double value, double percentag)
+        {
+            return value / 100 * percentag;
+        }
+
         public static int GetTotalDaysByNow(List<DateTime> dates)
         {
             return !dates.Any() ? 0 : Convert.ToInt32(Math.Ceiling((DateTime.Now - dates.Min()).TotalDays));
