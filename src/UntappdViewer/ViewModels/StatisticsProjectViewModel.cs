@@ -75,6 +75,8 @@ namespace UntappdViewer.ViewModels
 
         private int maxXAxisServingTypeCount;
 
+        private int heightChartServingType;
+
         public ICommand OkButtonCommand { get; }
 
         public IEnumerable ChekinRatingScore
@@ -310,6 +312,15 @@ namespace UntappdViewer.ViewModels
             }
         }
 
+        public int HeightChartServingType
+        {
+            get { return heightChartServingType; }
+            set
+            {
+                SetProperty(ref heightChartServingType, value);
+            }
+        }
+
         public StatisticsProjectViewModel(IRegionManager regionManager, IModuleManager moduleManager,
                                                                         IUntappdService untappdService) : base(regionManager)
         {
@@ -413,13 +424,12 @@ namespace UntappdViewer.ViewModels
         {
             List<Checkin> checkins = untappdService.GetCheckins();
             List<KeyValue<string, List<long>>> beerTypeCheckinIds = StatisticsCalculation.GetBeerTypesByCheckinIdsGroupByCount(checkins);
-
-            HeightChartBeerType = MathHelper.GetCeilingByStep(beerTypeCheckinIds.Count * DefaultValues.HeightBarSeriesChartYDelta, 100);
-
             List <KeyValue<string, int>> beerTypeCount = StatisticsCalculation.GetListCount(beerTypeCheckinIds);
-            MaxXAxisBeerTypeCount = GetMaxXAxis(beerTypeCount.Count > 0 ? beerTypeCount.Max(item => item.Value): 0);
-            BeerTypeCount = beerTypeCount;
 
+            HeightChartBeerType = GetHeightChart(beerTypeCount.Count);
+            MaxXAxisBeerTypeCount = GetMaxXAxis(beerTypeCount.Count > 0 ? beerTypeCount.Max(item => item.Value): 0);
+
+            BeerTypeCount = beerTypeCount;
             BeerTypeRating = StatisticsCalculation.GetAverageRatingByCheckinIds(checkins, beerTypeCheckinIds);
         }
 
@@ -427,13 +437,12 @@ namespace UntappdViewer.ViewModels
         {
             List<Checkin> checkins = untappdService.GetCheckins();
             List<KeyValue<string, List<long>>> beerCountryCheckinIds = StatisticsCalculation.GetCountrysByCheckinIds(checkins);
-
-            HeightChartBeerCountry = MathHelper.GetCeilingByStep(beerCountryCheckinIds.Count * DefaultValues.HeightBarSeriesChartYDelta, 100);
-
             List<KeyValue<string, int>> beerCountryCount = StatisticsCalculation.GetListCount(beerCountryCheckinIds);
-            MaxXAxisBeerCountryCount = GetMaxXAxis(beerCountryCount.Count > 0 ? beerCountryCount.Max(item => item.Value) : 0);
-            BeerCountryCount = beerCountryCount;
 
+            HeightChartBeerCountry = GetHeightChart(beerCountryCount.Count);
+            MaxXAxisBeerCountryCount = GetMaxXAxis(beerCountryCount.Count > 0 ? beerCountryCount.Max(item => item.Value) : 0);
+
+            BeerCountryCount = beerCountryCount;
             BeerCountryRating = StatisticsCalculation.GetAverageRatingByCheckinIds(checkins, beerCountryCheckinIds);
         }
 
@@ -441,14 +450,19 @@ namespace UntappdViewer.ViewModels
         {
             List<Checkin> checkins = untappdService.GetCheckins();
             List<KeyValue<string, List<long>>> servingTypeByCheckinIds = StatisticsCalculation.GetServingTypeByCheckinIds(checkins, DefaultValues.DefaultServingType);
-
             List<KeyValue<string, int>> servingTypeCount = StatisticsCalculation.GetListCount(servingTypeByCheckinIds);
-            MaxXAxisServingTypeCount = GetMaxXAxis(servingTypeCount.Count > 0 ? servingTypeCount.Max(item => item.Value): 0);
-            ServingTypeCount = servingTypeCount;
 
+            HeightChartServingType = GetHeightChart(servingTypeCount.Count);
+            MaxXAxisServingTypeCount = GetMaxXAxis(servingTypeCount.Count > 0 ? servingTypeCount.Max(item => item.Value): 0);
+
+            ServingTypeCount = servingTypeCount;
             ServingTypeRating = StatisticsCalculation.GetAverageRatingByCheckinIds(checkins, servingTypeByCheckinIds);
         }
 
+        private int GetHeightChart(int count)
+        {
+            return count * 23 + 20;
+        }
         private int GetMaxXAxis(int maxCount)
         {
             double percentage = MathHelper.GetPercentageOf(maxCount, 2);

@@ -168,8 +168,12 @@
                     <ControlTemplate TargetType="{x:Type chartingToolkit:DataPoint}">
                         <Grid>
                             <ContentControl Template="{StaticResource ColumnDataPointTemplate}"/>
-                            <TextBlock Text="{TemplateBinding FormattedDependentValue}" HorizontalAlignment="Left" VerticalAlignment="Center"
-                                       FontSize="10" FontWeight="Bold" Margin="0,0,-15,0"/>
+                            <DockPanel>
+                                <Label Width="5"/>
+                                <TextBlock Text="{TemplateBinding FormattedDependentValue}" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                           FontSize="10" FontWeight="Bold" Margin="0,0,-15,0"/>
+                            </DockPanel>
+                      
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -332,14 +336,19 @@
                 </Grid>
                 <Grid Margin="{StaticResource DefautChartOffsetBottom}">
                     <ContentControl Template="{StaticResource BackgroundControl}"/>
-                    <Grid  Margin="{StaticResource DefautChartMargin}" Height="{Binding HeightChartBeerType}">
+                    <Grid  Margin="{StaticResource DefautChartMargin}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition Width="10"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <chartingToolkit:Chart Grid.Column="0" Style="{StaticResource BarSeriesChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
-                                                Title="{x:Static properties:Resources.StyleCount}">
+                                                Title="{x:Static properties:Resources.StyleCount}" >
+                            <chartingToolkit:Chart.ChartAreaStyle>
+                                <Style TargetType="{x:Type FrameworkElement}">
+                                    <Setter Property="Height" Value="{Binding HeightChartBeerType}" />
+                                </Style>
+                            </chartingToolkit:Chart.ChartAreaStyle>
                             <chartingToolkit:Chart.Axes>
                                 <chartingToolkit:LinearAxis Orientation="X" Minimum="0" Maximum="{Binding MaxXAxisBeerTypeCount}" ShowGridLines="True"/>
                                 <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}">
@@ -353,6 +362,11 @@
                         </chartingToolkit:Chart>
                         <chartingToolkit:Chart Grid.Column="2" Style="{StaticResource BarSeriesChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
                                                 Title="{x:Static properties:Resources.StyleRating}">
+                            <chartingToolkit:Chart.ChartAreaStyle>
+                                <Style TargetType="{x:Type FrameworkElement}">
+                                    <Setter Property="Height" Value="{Binding HeightChartBeerType}" />
+                                </Style>
+                            </chartingToolkit:Chart.ChartAreaStyle>
                             <chartingToolkit:Chart.Axes>
                                 <chartingToolkit:LinearAxis Orientation="X" Minimum="0" Maximum="{StaticResource MaxRating}" ShowGridLines="True"/>
                                 <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}">
@@ -368,7 +382,7 @@
                 </Grid>
                 <Grid Margin="{StaticResource DefautChartOffsetBottom}">
                     <ContentControl Template="{StaticResource BackgroundControl}"/>
-                    <Grid Margin="{StaticResource DefautChartMargin}" Height="{Binding HeightChartBeerCountry}">
+                    <Grid Margin="{StaticResource DefautChartMargin}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition Width="10"/>
@@ -376,6 +390,11 @@
                         </Grid.ColumnDefinitions>
                         <chartingToolkit:Chart Grid.Column="0" Style="{StaticResource BarSeriesChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
                                                 Title="{x:Static properties:Resources.CountryCount}">
+                            <chartingToolkit:Chart.ChartAreaStyle>
+                                <Style TargetType="{x:Type FrameworkElement}">
+                                    <Setter Property="Height" Value="{Binding HeightChartBeerCountry}" />
+                                </Style>
+                            </chartingToolkit:Chart.ChartAreaStyle>
                             <chartingToolkit:Chart.Axes>
                                 <chartingToolkit:LinearAxis Orientation="X" Minimum="0" Maximum="{Binding MaxXAxisBeerCountryCount}" ShowGridLines="True" />
                                 <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}">
@@ -389,6 +408,11 @@
                         </chartingToolkit:Chart>
                         <chartingToolkit:Chart Grid.Column="2" Style="{StaticResource BarSeriesChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
                                                 Title="{x:Static properties:Resources.CountryRating}">
+                            <chartingToolkit:Chart.ChartAreaStyle>
+                                <Style TargetType="{x:Type FrameworkElement}">
+                                    <Setter Property="Height" Value="{Binding HeightChartBeerCountry}" />
+                                </Style>
+                            </chartingToolkit:Chart.ChartAreaStyle>
                             <chartingToolkit:Chart.Axes>
                                 <chartingToolkit:LinearAxis Orientation="X" Minimum="0" Maximum="{StaticResource MaxRating}" ShowGridLines="True"/>
                                 <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}">
@@ -404,7 +428,7 @@
                 </Grid>
                 <Grid Margin="{StaticResource DefautChartOffsetBottom}">
                     <ContentControl Template="{StaticResource BackgroundControl}"/>
-                    <Grid Margin="{StaticResource DefautChartMargin}" Height="150">
+                    <Grid Margin="{StaticResource DefautChartMargin}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition Width="10"/>
@@ -412,6 +436,11 @@
                         </Grid.ColumnDefinitions>
                         <chartingToolkit:Chart Grid.Column="0" Style="{StaticResource BarSeriesChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
                                                 Title="{x:Static properties:Resources.ServingTypeCount}">
+                            <chartingToolkit:Chart.ChartAreaStyle>
+                                <Style TargetType="{x:Type FrameworkElement}">
+                                    <Setter Property="Height" Value="{Binding HeightChartServingType}" />
+                                </Style>
+                            </chartingToolkit:Chart.ChartAreaStyle>
                             <chartingToolkit:Chart.Axes>
                                 <chartingToolkit:LinearAxis Orientation="X" Minimum="0" Maximum="{Binding MaxXAxisServingTypeCount}" ShowGridLines="True" />
                                 <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}">
@@ -424,7 +453,12 @@
                                                         DataPointStyle="{StaticResource BarDataPointStyle}"/>
                         </chartingToolkit:Chart>
                         <chartingToolkit:Chart Grid.Column="2" Style="{StaticResource BarSeriesChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
-                                                Title="{x:Static properties:Resources.ServingTypeRating}">
+                                               Title="{x:Static properties:Resources.ServingTypeRating}">
+                            <chartingToolkit:Chart.ChartAreaStyle>
+                                <Style TargetType="{x:Type FrameworkElement}">
+                                    <Setter Property="Height" Value="{Binding HeightChartServingType}" />
+                                </Style>
+                            </chartingToolkit:Chart.ChartAreaStyle>
                             <chartingToolkit:Chart.Axes>
                                 <chartingToolkit:LinearAxis Orientation="X" Minimum="0" Maximum="{StaticResource MaxRating}" ShowGridLines="True"/>
                                 <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}">
