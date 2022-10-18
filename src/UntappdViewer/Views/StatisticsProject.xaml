@@ -140,7 +140,7 @@
                 <Border Opacity="0.8">
                     <Border.Background>
                         <LinearGradientBrush>
-                            <GradientStop Color="#f1efc1" Offset="0" />
+                            <GradientStop Color="#ffffff" Offset="0" />
                             <GradientStop Color="#ffc100" Offset="0.5" />
                             <GradientStop Color="#fd9532" Offset="1" />
                         </LinearGradientBrush>
@@ -169,7 +169,7 @@
                         <Grid>
                             <ContentControl Template="{StaticResource ColumnDataPointTemplate}"/>
                             <TextBlock Text="{TemplateBinding FormattedDependentValue}" HorizontalAlignment="Left" VerticalAlignment="Center"
-                                       FontWeight="Bold" Margin="0,0,-15,0"/>
+                                       FontSize="10" FontWeight="Bold" Margin="0,0,-15,0"/>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
