@@ -117,8 +117,8 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type chartingToolkit:AxisLabel}">
                         <DockPanel>
-                            <Image Source="{TemplateBinding FormattedContent, Converter={StaticResource FlagConverter}}"/>
                             <TextBox Text="{TemplateBinding FormattedContent}" IsReadOnly="True" IsHitTestVisible="false" Background="Transparent" BorderBrush="Transparent"/>
+                            <Image Source="{TemplateBinding FormattedContent, Converter={StaticResource FlagConverter}}"/>
                         </DockPanel>
                     </ControlTemplate>
                 </Setter.Value>
