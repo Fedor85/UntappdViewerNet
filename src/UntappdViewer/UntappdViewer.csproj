@@ -117,6 +117,7 @@
     <Compile Include="Different\Helpers\EnumsHelper.cs" />
     <Compile Include="Different\Helpers\ImageConverter.cs" />
     <Compile Include="Different\Helpers\PathImageReSizeWidthConverter.cs" />
+    <Compile Include="Different\Helpers\ServingTypeConverter.cs" />
     <Compile Include="Different\Helpers\UIHelper.cs" />
     <Compile Include="Different\UntappdEntity.cs" />
     <Compile Include="Modules\StatisticsProjectModule.cs" />
