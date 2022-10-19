@@ -83,6 +83,8 @@ namespace UntappdViewer.ViewModels
 
         private string breweryVenueCountrySeparator;
 
+        private string breweryVenueCountryFlag;
+
         private string breweryVenueCountry;
 
         private string breweryVenueStateSeparator;
@@ -390,6 +392,12 @@ namespace UntappdViewer.ViewModels
             }
         }
 
+        public string BreweryVenueCountryFlag
+        {
+            get { return breweryVenueCountryFlag; }
+            set {SetProperty(ref breweryVenueCountryFlag, value);}
+        }
+
         public string BreweryVenueCountry
         {
             get { return breweryVenueCountry; }
@@ -398,6 +406,7 @@ namespace UntappdViewer.ViewModels
                 SetProperty(ref breweryVenueCountry, value);
                 BreweryVenueCountrySeparator = !String.IsNullOrEmpty(BreweryVenueName) && !String.IsNullOrEmpty(value) 
                                                                         ? DefaultValues.Separator : String.Empty;
+                BreweryVenueCountryFlag = value;
             }
         }
 

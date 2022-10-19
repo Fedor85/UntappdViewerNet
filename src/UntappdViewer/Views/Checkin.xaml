@@ -90,16 +90,19 @@
                                 </Hyperlink>
                             </TextBlock>
                                     <TextBlock TextWrapping="Wrap" Text="{Binding BreweryName}" FontWeight="Bold"/>
-                                    <TextBlock TextWrapping="Wrap" VerticalAlignment="Center">
-                                        <Run Text="{Binding BreweryVenueName}"/>
-                                        <Run Text="{Binding BreweryVenueCountrySeparator}" FontWeight="Bold" />
-                                        <Run Text="{Binding BreweryVenueCountry}"/>
-                                        <Run Text="{Binding BreweryVenueStateSeparator}" FontWeight="Bold"/>
-                                        <Run Text="{Binding BreweryVenueState}"/>
-                                        <Run Text="{Binding BreweryVenueCitySeparator}" FontWeight="Bold" />
-                                        <Run Text="{Binding BreweryVenueCity}"/>
-                                    </TextBlock>
-    
+                                    <DockPanel>
+                                        <Image Source="{Binding BreweryVenueCountryFlag, Converter={StaticResource FlagConverter}}"
+                                               Stretch="None"/>
+                                        <TextBlock TextWrapping="Wrap" VerticalAlignment="Center">
+                                            <Run Text="{Binding BreweryVenueName}"/>
+                                            <Run Text="{Binding BreweryVenueCountrySeparator}" FontWeight="Bold" />
+                                            <Run Text="{Binding BreweryVenueCountry}"/>
+                                            <Run Text="{Binding BreweryVenueStateSeparator}" FontWeight="Bold"/>
+                                            <Run Text="{Binding BreweryVenueState}"/>
+                                            <Run Text="{Binding BreweryVenueCitySeparator}" FontWeight="Bold" />
+                                            <Run Text="{Binding BreweryVenueCity}"/>
+                                        </TextBlock>
+                                    </DockPanel>
                                 </StackPanel>
                             </DockPanel>
                         </GroupBox>
