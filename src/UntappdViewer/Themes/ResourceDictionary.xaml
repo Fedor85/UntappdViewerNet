@@ -12,5 +12,6 @@
     </ImageBrush>
     <helpers:BoolToVisibilityConverter x:Key="BTVConverter"/>
     <helpers:PathImageReSizeWidthConverter  x:Key="ImageReSizeWidthConverter"/>
+    <helpers:CountryNameToFlagConverter x:Key="FlagConverter"/>
     <BooleanToVisibilityConverter x:Key="BooleanConverter" />
 </ResourceDictionary>

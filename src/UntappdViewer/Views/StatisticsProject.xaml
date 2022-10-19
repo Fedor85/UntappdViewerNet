@@ -112,6 +112,18 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="CountryAxisLabelStyle" TargetType="{x:Type chartingToolkit:AxisLabel}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type chartingToolkit:AxisLabel}">
+                        <DockPanel>
+                            <Image Source="{TemplateBinding FormattedContent, Converter={StaticResource FlagConverter}}"/>
+                            <TextBox Text="{TemplateBinding FormattedContent}" IsReadOnly="True" IsHitTestVisible="false" Background="Transparent" BorderBrush="Transparent"/>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style x:Key="LegendItemStyle" TargetType="{x:Type chartingToolkit:LegendItem}">
             <Setter Property="IsTabStop" Value="False"/>
             <Setter Property="Template">
@@ -173,7 +185,6 @@
                                 <TextBlock Text="{TemplateBinding FormattedDependentValue}" HorizontalAlignment="Left" VerticalAlignment="Center"
                                            FontSize="10" FontWeight="Bold" Margin="0,0,-15,0"/>
                             </DockPanel>
-                      
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -397,7 +408,7 @@
                             </chartingToolkit:Chart.ChartAreaStyle>
                             <chartingToolkit:Chart.Axes>
                                 <chartingToolkit:LinearAxis Orientation="X" Minimum="0" Maximum="{Binding MaxXAxisBeerCountryCount}" ShowGridLines="True" />
-                                <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}">
+                                <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}" AxisLabelStyle="{StaticResource CountryAxisLabelStyle}">
                                     <b:Interaction.Behaviors>
                                         <behaviors:SynchronisedWidthBehavior RegisterToken="{StaticResource WidthTokenLeft}" />
                                     </b:Interaction.Behaviors>
@@ -415,7 +426,7 @@
                             </chartingToolkit:Chart.ChartAreaStyle>
                             <chartingToolkit:Chart.Axes>
                                 <chartingToolkit:LinearAxis Orientation="X" Minimum="0" Maximum="{StaticResource MaxRating}" ShowGridLines="True"/>
-                                <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}">
+                                <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}" AxisLabelStyle="{StaticResource CountryAxisLabelStyle}">
                                     <b:Interaction.Behaviors>
                                         <behaviors:SynchronisedWidthBehavior RegisterToken="{StaticResource WidthTokenRight}" />
                                     </b:Interaction.Behaviors>
