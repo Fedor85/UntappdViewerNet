@@ -200,7 +200,7 @@ namespace UntappdViewer.Domain
         public static List<KeyValue<double, double>> GetABVToIBU(List<Beer> beers)
         {
             List<KeyValue<double, double>> keyValues = new List<KeyValue<double, double>>();
-            foreach (Beer beer in beers.Where(beer => !MathHelper.DoubleCompare(beer.ABV, 0) && beer.IBU.HasValue && beer.IBU.Value != 0))
+            foreach (Beer beer in beers.Where(beer => !MathHelper.DoubleCompare(beer.ABV, 0) && beer.IBU.HasValue && !MathHelper.DoubleCompare(beer.IBU.Value, 0)))
             {
                 KeyValue<double, double> keyValue = new KeyValue<double, double>(beer.ABV, beer.IBU.Value);
                 if (!keyValues.Contains(keyValue))
