@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 using UntappdViewer.Utils;
 
@@ -13,17 +13,30 @@ namespace UntappdViewer.Behaviors
         {
             base.Register(control);
             control.SizeChanged += SizeChanged;
+            control.IsVisibleChanged += IsVisibleChanged;
         }
 
         public override void Unregister(Control control)
         {
             base.Unregister(control);
             control.SizeChanged -= SizeChanged;
+            control.IsVisibleChanged -= IsVisibleChanged;
         }
 
-        private void SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
+        private void IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (MathHelper.DoubleCompare(e.PreviousSize.Width, e.NewSize.Width))
+            if (Convert.ToBoolean(e.NewValue))
+                return;
+
+            Control control = GetObject(sender);
+            control.Width = double.NaN;
+        }
+
+        private void SizeChanged(object sender,SizeChangedEventArgs e)
+        {
+            if (MathHelper.DoubleCompare(e.PreviousSize.Width, e.NewSize.Width) ||
+                MathHelper.DoubleCompare(e.NewSize.Width, 0) ||
+               !MathHelper.DoubleCompare(e.PreviousSize.Width, 0))
                 return;
 
             Control control = GetObject(sender);
@@ -46,9 +59,6 @@ namespace UntappdViewer.Behaviors
 
             foreach (Control item in Items)
                 item.Width = maxWidth;
-
-            foreach (Control item in new List<Control>(Items))
-                Unregister(item);
 
              countSizeChanged = 0;
         }
