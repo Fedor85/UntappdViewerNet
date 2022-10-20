@@ -197,6 +197,18 @@ namespace UntappdViewer.Domain
             return keyValues;
         }
 
+        public static List<KeyValue<double, double>> GetABVToIBU(List<Beer> beers)
+        {
+            List<KeyValue<double, double>> keyValues = new List<KeyValue<double, double>>();
+            foreach (Beer beer in beers.Where(beer => !MathHelper.DoubleCompare(beer.ABV, 0) && beer.IBU.HasValue && beer.IBU.Value != 0))
+            {
+                KeyValue<double, double> keyValue = new KeyValue<double, double>(beer.ABV, beer.IBU.Value);
+                if (!keyValues.Contains(keyValue))
+                    keyValues.Add(keyValue);
+            }
+            return keyValues;
+        }
+
         private static List<KeyValue<DateTime, int>> InsertEmptyMonth(List<KeyValue<DateTime, int>> dates)
         {
             if (!dates.Any())

@@ -18,6 +18,15 @@
             Value = value;
         }
 
+        public override bool Equals(object obj)
+        {
+            KeyValue<T1, T2> keyValue = obj as KeyValue<T1, T2>;
+            if (keyValue == null)
+                return false;
+
+            return Key.Equals(keyValue.Key) && Value.Equals(keyValue.Value);
+        }
+
         public override string ToString()
         {
             return $"{Key}:{Value}";

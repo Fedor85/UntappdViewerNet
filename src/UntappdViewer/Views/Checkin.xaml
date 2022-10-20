@@ -42,14 +42,16 @@
                             <DockPanel>
                                 <TextBlock TextWrapping="Wrap" VerticalAlignment="Center">
                                     <TextBlock.Inlines>
-                                        <Run FontWeight="Bold" Text="ABV: "/>
+                                        <Run FontWeight="Bold" Text="{x:Static properties:Resources.ABV}"/>
+                                        <Run FontWeight="Bold" Text=": "/>
                                         <Run Text="{Binding BeerABV}"/>
                                     </TextBlock.Inlines>
                                 </TextBlock>
                                 <TextBlock Text="{Binding Source={x:Static local:DefaultValues.Separator}}" FontWeight="Bold"  VerticalAlignment="Center"/>
                                 <TextBlock TextWrapping="Wrap"  VerticalAlignment="Center">
                                     <TextBlock.Inlines>
-                                        <Run FontWeight="Bold" Text="IBU: "/>
+                                        <Run FontWeight="Bold" Text="{x:Static properties:Resources.IBU}"/>
+                                        <Run FontWeight="Bold" Text=": "/>
                                         <Run Text="{Binding BeerIBU}"/>
                                     </TextBlock.Inlines>
                                 </TextBlock>

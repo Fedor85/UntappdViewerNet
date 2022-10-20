@@ -79,6 +79,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ABV.
+        /// </summary>
+        public static string ABV {
+            get {
+                return ResourceManager.GetString("ABV", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to UntappdViewer.
         /// </summary>
         public static string AppName {
@@ -587,6 +596,24 @@ namespace UntappdViewer.Properties {
             get {
                 object obj = ResourceManager.GetObject("Hide", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IBU.
+        /// </summary>
+        public static string IBU {
+            get {
+                return ResourceManager.GetString("IBU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IBU/ABV.
+        /// </summary>
+        public static string IBUToABV {
+            get {
+                return ResourceManager.GetString("IBUToABV", resourceCulture);
             }
         }
         

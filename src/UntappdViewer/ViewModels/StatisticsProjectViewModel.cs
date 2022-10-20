@@ -43,6 +43,8 @@ namespace UntappdViewer.ViewModels
 
         private IEnumerable servingTypeRating;
 
+        private IEnumerable ibutoAbv;
+
         private int totalCheckinCount;
 
         private int uniqueCheckinCount;
@@ -168,6 +170,16 @@ namespace UntappdViewer.ViewModels
                 SetProperty(ref servingTypeRating, value);
             }
         }
+
+        public IEnumerable IBUToABV
+        {
+            get { return ibutoAbv; }
+            set
+            {
+                SetProperty(ref ibutoAbv, value);
+            }
+        }
+
 
         public int TotalCheckinCount
         {
@@ -339,6 +351,7 @@ namespace UntappdViewer.ViewModels
             SetBeerType();
             SetBeerCountry();
             SetServingType();
+            SetIBUToABV();
         }
 
         protected override void DeActivate()
@@ -377,6 +390,8 @@ namespace UntappdViewer.ViewModels
             MaxXAxisServingTypeCount = 0;
             ServingTypeCount = null;
             ServingTypeRating = null;
+
+            IBUToABV = null;
         }
 
         private void SetCountsPanel()
@@ -457,6 +472,11 @@ namespace UntappdViewer.ViewModels
 
             ServingTypeCount = servingTypeCount;
             ServingTypeRating = StatisticsCalculation.GetAverageRatingByCheckinIds(checkins, servingTypeByCheckinIds);
+        }
+
+        private void SetIBUToABV()
+        {
+            IBUToABV = StatisticsCalculation.GetABVToIBU(untappdService.GetBeers());
         }
 
         private int GetHeightChart(int count)

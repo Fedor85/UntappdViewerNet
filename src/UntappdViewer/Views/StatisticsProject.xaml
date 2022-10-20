@@ -159,6 +159,15 @@
             <Setter Property="Width" Value="10" />
             <Setter Property="Background" Value="#fd9532"/>
         </Style>
+        <Style x:Key="ScatterDataPointStyle" TargetType="{x:Type chartingToolkit:DataPoint}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type chartingToolkit:DataPoint}">
+                        <Border BorderBrush="#fd9532" BorderThickness="1" Background="#ffc100" CornerRadius="5"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <ControlTemplate  x:Key="ColumnDataPointTemplate" TargetType="{x:Type ContentControl}">
             <Grid>
                 <Border Opacity="0.8">
@@ -492,6 +501,20 @@
                             </chartingToolkit:Chart.Axes>
                             <chartingToolkit:BarSeries  DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding ServingTypeRating}" IsSelectionEnabled="True"
                                                         DataPointStyle="{StaticResource BarDataPointStyle}"/>
+                        </chartingToolkit:Chart>
+                    </Grid>
+                </Grid>
+                <Grid Margin="{StaticResource DefautChartOffsetBottom}">
+                    <ContentControl Template="{StaticResource BackgroundControl}"/>
+                    <Grid Margin="{StaticResource DefautChartMargin}">
+                        <chartingToolkit:Chart Style="{StaticResource ChartStyleHideLegend}" TitleStyle="{StaticResource ChartTitleStyle}"
+                                               Title="{x:Static properties:Resources.IBUToABV}" Height="500">
+                            <chartingToolkit:Chart.Axes>
+                                <chartingToolkit:LinearAxis Orientation="X" Title="{x:Static properties:Resources.ABV}" ShowGridLines="True"/>
+                                <chartingToolkit:LinearAxis Orientation="Y" Title="{x:Static properties:Resources.IBU}" ShowGridLines="True"/>
+                            </chartingToolkit:Chart.Axes>
+                            <chartingToolkit:ScatterSeries DependentValuePath="Value" IndependentValuePath="Key"  ItemsSource="{Binding IBUToABV}"
+                                                           DataPointStyle="{StaticResource ScatterDataPointStyle}"/>
                         </chartingToolkit:Chart>
                     </Grid>
                 </Grid>
