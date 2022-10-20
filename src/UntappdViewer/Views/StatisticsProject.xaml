@@ -14,7 +14,7 @@
              xmlns:behaviors="clr-namespace:UntappdViewer.Behaviors"
              mc:Ignorable="d" 
              mvvm:ViewModelLocator.AutoWireViewModel="True"
-             d:DesignHeight="1450" d:DesignWidth="800">
+             d:DesignHeight="2450" d:DesignWidth="800">
     <UserControl.Resources>
         <Style x:Key="ChartStyleHideLegend" TargetType="{x:Type chartingToolkit:Chart}">
             <Setter Property="BorderBrush" Value="Transparent"/>
@@ -152,18 +152,21 @@
         <Style x:Key="ChekinLineDataPointStyle" TargetType="{x:Type chartingToolkit:DataPoint}">
             <Setter Property="Height" Value="10"/>
             <Setter Property="Width" Value="10" />
-            <Setter Property="Background" Value="#ffc100"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type chartingToolkit:DataPoint}">
+                        <Border Background="#ffc100"  BorderBrush="#000000" BorderThickness="1" CornerRadius="10"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
         <Style x:Key="BeerLineDataPointStyle" TargetType="{x:Type chartingToolkit:DataPoint}">
             <Setter Property="Height" Value="10"/>
             <Setter Property="Width" Value="10" />
-            <Setter Property="Background" Value="#fd9532"/>
-        </Style>
-        <Style x:Key="ScatterDataPointStyle" TargetType="{x:Type chartingToolkit:DataPoint}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type chartingToolkit:DataPoint}">
-                        <Border BorderBrush="#fd9532" BorderThickness="1" Background="#ffc100" CornerRadius="5"/>
+                        <Border Background="#fd9532"  BorderBrush="#000000" BorderThickness="1" CornerRadius="10"/>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -514,7 +517,7 @@
                                 <chartingToolkit:LinearAxis Orientation="Y" Title="{x:Static properties:Resources.IBU}" ShowGridLines="True"/>
                             </chartingToolkit:Chart.Axes>
                             <chartingToolkit:ScatterSeries DependentValuePath="Value" IndependentValuePath="Key"  ItemsSource="{Binding IBUToABV}"
-                                                           DataPointStyle="{StaticResource ScatterDataPointStyle}"/>
+                                                           DataPointStyle="{StaticResource BeerLineDataPointStyle}"/>
                         </chartingToolkit:Chart>
                     </Grid>
                 </Grid>
