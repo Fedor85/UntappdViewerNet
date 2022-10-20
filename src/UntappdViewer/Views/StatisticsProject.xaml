@@ -149,27 +149,27 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="ChekinLineDataPointStyle" TargetType="{x:Type chartingToolkit:DataPoint}">
+        <ControlTemplate x:Key="BaseDataPointTemplate" TargetType="{x:Type chartingToolkit:DataPoint}">
+            <Border Background="{TemplateBinding Background}"  BorderBrush="#000000" BorderThickness="1" CornerRadius="10">
+                <Border.ToolTip>
+                    <TextBlock>
+                        <Run Text="{TemplateBinding FormattedDependentValue}"/>
+                        <Run Text="/"/>
+                        <Run Text="{TemplateBinding FormattedIndependentValue}"/>
+                    </TextBlock>
+                </Border.ToolTip>
+            </Border>
+        </ControlTemplate>
+        <Style x:Key="BaseLineDataPointStyle" TargetType="{x:Type chartingToolkit:DataPoint}">
             <Setter Property="Height" Value="10"/>
             <Setter Property="Width" Value="10" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type chartingToolkit:DataPoint}">
-                        <Border Background="#ffc100"  BorderBrush="#000000" BorderThickness="1" CornerRadius="10"/>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+            <Setter Property="Template" Value="{StaticResource BaseDataPointTemplate}"/>
         </Style>
-        <Style x:Key="BeerLineDataPointStyle" TargetType="{x:Type chartingToolkit:DataPoint}">
-            <Setter Property="Height" Value="10"/>
-            <Setter Property="Width" Value="10" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type chartingToolkit:DataPoint}">
-                        <Border Background="#fd9532"  BorderBrush="#000000" BorderThickness="1" CornerRadius="10"/>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+        <Style x:Key="BeerLineDataPointStyle" TargetType="{x:Type chartingToolkit:DataPoint}" BasedOn="{StaticResource BaseLineDataPointStyle}">
+            <Setter Property="Background" Value="#fd9532"/>
+        </Style>
+        <Style x:Key="ChekinLineDataPointStyle" TargetType="{x:Type chartingToolkit:DataPoint}" BasedOn="{StaticResource BaseLineDataPointStyle}">
+            <Setter Property="Background" Value="#ffc100"/>
         </Style>
         <ControlTemplate  x:Key="ColumnDataPointTemplate" TargetType="{x:Type ContentControl}">
             <Grid>
