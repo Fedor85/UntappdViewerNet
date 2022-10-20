@@ -49,10 +49,10 @@ namespace UntappdViewer.Different.Helpers
             if (countryInfo != null)
                 return countryInfo;
 
-            List<string> names = alternativeNames.FirstOrDefault(item => item.Contains(country));
+            List<string> names = alternativeNames.FirstOrDefault(item => item.Contains(country.ToLower()));
             if (names != null)
             {
-                foreach (string name in names.Where(item => !item.Equals(country)))
+                foreach (string name in names.Where(item => !item.Equals(country.ToLower())))
                 {
                     countryInfo = countryProvider.GetCountryByName(name);
                     if (countryInfo != null)
@@ -67,13 +67,13 @@ namespace UntappdViewer.Different.Helpers
             List<List<string>> alternativeNames = new List<List<string>>();
 
             List<string> sr = new List<string>();
-            sr.Add("Surinam");
-            sr.Add("Suriname");
+            sr.Add("surinam");
+            sr.Add("suriname");
             alternativeNames.Add(sr);
 
             List<string> gb = new List<string>();
-            gb.Add("United Kingdom");
-            gb.Add("England");
+            gb.Add("united kingdom");
+            gb.Add("england");
             alternativeNames.Add(gb);
 
             return alternativeNames;
