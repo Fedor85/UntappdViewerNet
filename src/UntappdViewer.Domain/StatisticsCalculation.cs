@@ -209,6 +209,72 @@ namespace UntappdViewer.Domain
             return keyValues;
         }
 
+        public static List<KeyValue<string, int>> GetRangeABVByCount(List<Beer> beers, double range, double maxValue)
+        {
+            if (!beers.Any())
+                return new List<KeyValue<string, int>>();
+
+            List<double> abvs = beers.Select(item => MathHelper.GetCeilingByStep(item.ABV, range)).Distinct().ToList();
+            abvs.Sort();
+
+            List<KeyValue<double, int>> abvCount = new List<KeyValue<double, int>>();
+            foreach (double abv in abvs)
+            {
+                int currentABVCount = beers.Count(item => MathHelper.DoubleCompare(abv, MathHelper.GetCeilingByStep(item.ABV, range)));
+                abvCount.Add(new KeyValue<double, int>(abv, currentABVCount));
+            }
+
+            MergeByMore(abvCount, maxValue);
+            return GetRangeNameToCount(abvCount);
+        }
+
+        public static List<KeyValue<string, int>> GetRangeIBUByCount(List<Beer> beers, double range, double maxValue)
+        {
+            IEnumerable<Beer> currentBeers = beers.Where(item => item.IBU.HasValue);
+            if (!currentBeers.Any())
+                return new List<KeyValue<string, int>>(); ;
+
+            List<double> ibus = currentBeers.Select(item => MathHelper.GetCeilingByStep(item.IBU.Value, range)).Distinct().ToList();
+            ibus.Sort();
+
+            List<KeyValue<double, int>> ibuCount = new List<KeyValue<double, int>>();
+            foreach (double ibu in ibus)
+            {
+                int currentIBUCount = currentBeers.Count(item => MathHelper.DoubleCompare(ibu, MathHelper.GetCeilingByStep(item.IBU.Value, range)));
+                ibuCount.Add(new KeyValue<double, int>(ibu, currentIBUCount));
+            }
+
+            MergeByMore(ibuCount, maxValue);
+            return GetRangeNameToCount(ibuCount);
+        }
+        private static void MergeByMore(List<KeyValue<double, int>> keyValues, double maxValue)
+        {
+            List<KeyValue<double, int>> moreCount = keyValues.Where(item => item.Key > maxValue).ToList();
+            if (moreCount.Count != keyValues.Count)
+            {
+                int index = keyValues.Count - moreCount.Count - 1;
+                keyValues[index].Value += moreCount.Select(item => item.Value).Sum();
+                keyValues.RemoveRange(index + 1, moreCount.Count());
+            }
+        }
+
+        private static List<KeyValue<string, int>> GetRangeNameToCount(List<KeyValue<double, int>> items)
+        {
+            List<KeyValue<string, int>> keyValues = new List<KeyValue<string, int>>();
+            int count = items.Count;
+            for (int i = 0; i < count; i++)
+            {
+                string prefix = i == items.Count - 1 ? ">" : String.Empty;
+                string start = i == 0 ? "0" : items[i - 1].Key.ToString();
+                string end = i != items.Count - 1 ? $"-{items[i].Key}" : String.Empty;
+                KeyValue<string, int> keyValue = new KeyValue<string, int>($"{prefix}{start}{end}", items[i].Value);
+                keyValue.Parameters.Add("index", i);
+                keyValue.Parameters.Add("count", count);
+                keyValues.Add(keyValue);
+            }
+            return keyValues;
+        }
+
         private static List<KeyValue<DateTime, int>> InsertEmptyMonth(List<KeyValue<DateTime, int>> dates)
         {
             if (!dates.Any())

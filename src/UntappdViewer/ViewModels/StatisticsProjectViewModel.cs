@@ -14,6 +14,7 @@ using UntappdViewer.Modules;
 using UntappdViewer.Utils;
 using UntappdViewer.Views;
 using Checkin = UntappdViewer.Models.Checkin;
+using Beer = UntappdViewer.Models.Beer;
 
 namespace UntappdViewer.ViewModels
 {
@@ -43,7 +44,11 @@ namespace UntappdViewer.ViewModels
 
         private IEnumerable servingTypeRating;
 
-        private IEnumerable ibutoAbv;
+        private IEnumerable ibuToAbv;
+
+        private IEnumerable aBVCount;
+
+        private IEnumerable iBUCount;
 
         private int totalCheckinCount;
 
@@ -173,13 +178,30 @@ namespace UntappdViewer.ViewModels
 
         public IEnumerable IBUToABV
         {
-            get { return ibutoAbv; }
+            get { return ibuToAbv; }
             set
             {
-                SetProperty(ref ibutoAbv, value);
+                SetProperty(ref ibuToAbv, value);
             }
         }
 
+        public IEnumerable ABVCount
+        {
+            get { return aBVCount; }
+            set
+            {
+                SetProperty(ref aBVCount, value);
+            }
+        }
+
+        public IEnumerable IBUCount
+        {
+            get { return iBUCount; }
+            set
+            {
+                SetProperty(ref iBUCount, value);
+            }
+        }
 
         public int TotalCheckinCount
         {
@@ -392,6 +414,8 @@ namespace UntappdViewer.ViewModels
             ServingTypeRating = null;
 
             IBUToABV = null;
+            ABVCount = null;
+            IBUCount = null;
         }
 
         private void SetCountsPanel()
@@ -476,7 +500,10 @@ namespace UntappdViewer.ViewModels
 
         private void SetIBUToABV()
         {
-            IBUToABV = StatisticsCalculation.GetABVToIBU(untappdService.GetBeers());
+            List<Beer> beers = untappdService.GetBeers();
+            IBUToABV = StatisticsCalculation.GetABVToIBU(beers);
+            ABVCount = StatisticsCalculation.GetRangeABVByCount(beers, 2.5, 15);
+            IBUCount = StatisticsCalculation.GetRangeIBUByCount(beers, 15, 100);
         }
 
         private int GetHeightChart(int count)

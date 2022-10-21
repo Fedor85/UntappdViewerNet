@@ -253,6 +253,16 @@
         <behaviors:SynchronisedScrollToken x:Key="ScrollToken" />
         <behaviors:SynchronisedWidthToken x:Key="WidthTokenLeft"/>
         <behaviors:SynchronisedWidthToken x:Key="WidthTokenRight"/>
+        <GradientStopCollection x:Key="PipeGradient" >
+            <GradientStop Color="#ffffff" Offset="0" />
+            <GradientStop Color="#ffc100" Offset="0.5" />
+            <GradientStop Color="#fd9532" Offset="1" />
+        </GradientStopCollection>
+        <Style x:Key="PipeDataPointStyle" TargetType="{x:Type chartingToolkit:PieDataPoint}">
+            <Setter Property="Background" Value="{Binding Path=Parameters, Converter={StaticResource PieBackgroundConverter}, ConverterParameter= {StaticResource PipeGradient}}"/>
+            <Setter Property="BorderBrush" Value="#000000"/>
+            <Setter Property="BorderThickness" Value="2"/>
+        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -526,6 +536,27 @@
                                 </chartingToolkit:Chart.Axes>
                                 <chartingToolkit:ScatterSeries DependentValuePath="Value" IndependentValuePath="Key"  ItemsSource="{Binding IBUToABV}"
                                                            DataPointStyle="{StaticResource ScatterDataPointStyle}"/>
+                            </chartingToolkit:Chart>
+                        </Grid>
+                    </Grid>
+                    <Grid Margin="{StaticResource DefautChartOffsetBottom}">
+                        <ContentControl Template="{StaticResource BackgroundControl}"/>
+                        <Grid Margin="{StaticResource DefautChartMargin}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <chartingToolkit:Chart Grid.Column="0" Style="{StaticResource RatingScoreChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
+                                                   Title="{x:Static properties:Resources.ABV}" Height="300">
+                                <chartingToolkit:PieSeries DependentValuePath="Value" IndependentValuePath="Key"  ItemsSource="{Binding ABVCount}"
+                                                           LegendItemStyle="{StaticResource LegendItemStyle}" DataPointStyle="{StaticResource PipeDataPointStyle}"/>
+                            </chartingToolkit:Chart>
+                            <chartingToolkit:Chart Grid.Column="2" Style="{StaticResource RatingScoreChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
+                                                   Title="{x:Static properties:Resources.IBU}" Height="300">
+                                <chartingToolkit:PieSeries DependentValuePath="Value" IndependentValuePath="Key"  ItemsSource="{Binding IBUCount}"
+                                                           LegendItemStyle="{StaticResource LegendItemStyle}" DataPointStyle="{StaticResource PipeDataPointStyle}">
+                                </chartingToolkit:PieSeries>
                             </chartingToolkit:Chart>
                         </Grid>
                     </Grid>

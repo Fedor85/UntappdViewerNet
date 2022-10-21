@@ -12,8 +12,11 @@
         /// </summary>
         public T2 Value { get; set; }
 
+        public ParametersContainer Parameters { get; private set; }
+
         public KeyValue(T1 key, T2 value)
         {
+            Parameters = new ParametersContainer();
             Key = key;
             Value = value;
         }
