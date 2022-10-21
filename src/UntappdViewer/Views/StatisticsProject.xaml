@@ -174,15 +174,16 @@
         <Style x:Key="ChekinLineDataPointStyle" TargetType="{x:Type chartingToolkit:DataPoint}" BasedOn="{StaticResource BaseLineDataPointStyle}">
             <Setter Property="Background" Value="#ffc100"/>
         </Style>
+        <GradientStopCollection x:Key="DataPointGradient" >
+            <GradientStop Color="#ffffff" Offset="0" />
+            <GradientStop Color="#ffc100" Offset="0.5" />
+            <GradientStop Color="#fd9532" Offset="1" />
+        </GradientStopCollection>
         <ControlTemplate  x:Key="ColumnDataPointTemplate" TargetType="{x:Type ContentControl}">
             <Grid>
                 <Border Opacity="0.8">
                     <Border.Background>
-                        <LinearGradientBrush>
-                            <GradientStop Color="#ffffff" Offset="0" />
-                            <GradientStop Color="#ffc100" Offset="0.5" />
-                            <GradientStop Color="#fd9532" Offset="1" />
-                        </LinearGradientBrush>
+                        <LinearGradientBrush GradientStops="{StaticResource DataPointGradient}"/>
                     </Border.Background>
                 </Border>
                 <Border  BorderBrush="#fd9532" BorderThickness="2"/>
@@ -216,6 +217,11 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+        </Style>
+        <Style x:Key="PipeDataPointStyle" TargetType="{x:Type chartingToolkit:DataPoint}">
+            <Setter Property="Background" Value="{Binding Path=Parameters, Converter={StaticResource PieBackgroundConverter}, ConverterParameter= {StaticResource DataPointGradient}}"/>
+            <Setter Property="BorderBrush" Value="#000000"/>
+            <Setter Property="BorderThickness" Value="2"/>
         </Style>
         <Style x:Key="ChartTitleStyle" TargetType="{x:Type visualizationToolkit:Title}">
             <Setter Property="FontWeight" Value="Bold" />
@@ -253,16 +259,6 @@
         <behaviors:SynchronisedScrollToken x:Key="ScrollToken" />
         <behaviors:SynchronisedWidthToken x:Key="WidthTokenLeft"/>
         <behaviors:SynchronisedWidthToken x:Key="WidthTokenRight"/>
-        <GradientStopCollection x:Key="PipeGradient" >
-            <GradientStop Color="#ffffff" Offset="0" />
-            <GradientStop Color="#ffc100" Offset="0.5" />
-            <GradientStop Color="#fd9532" Offset="1" />
-        </GradientStopCollection>
-        <Style x:Key="PipeDataPointStyle" TargetType="{x:Type chartingToolkit:PieDataPoint}">
-            <Setter Property="Background" Value="{Binding Path=Parameters, Converter={StaticResource PieBackgroundConverter}, ConverterParameter= {StaticResource PipeGradient}}"/>
-            <Setter Property="BorderBrush" Value="#000000"/>
-            <Setter Property="BorderThickness" Value="2"/>
-        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>

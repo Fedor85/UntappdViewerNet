@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Data;
 using System.Windows.Media;
 using UntappdViewer.Domain.Models;
+using UntappdViewer.Utils;
 
 namespace UntappdViewer.Different.Helpers
 {
@@ -39,13 +40,14 @@ namespace UntappdViewer.Different.Helpers
             var point = gsc.SingleOrDefault(f => f.Offset == offset);
             if (point != null) return point.Color;
 
-            GradientStop before = gsc.Where(w => w.Offset == gsc.Min(m => m.Offset)).First();
-            GradientStop after = gsc.Where(w => w.Offset == gsc.Max(m => m.Offset)).First();
+            GradientStop before = gsc.First(w => MathHelper.DoubleCompare(w.Offset, gsc.Min(m => m.Offset)));
+            GradientStop after = gsc.First(w => MathHelper.DoubleCompare(w.Offset, gsc.Max(m => m.Offset)));
 
             foreach (var gs in gsc)
             {
                 if (gs.Offset < offset && gs.Offset > before.Offset)
                     before = gs;
+
                 if (gs.Offset > offset && gs.Offset < after.Offset)
                     after = gs;
             }
