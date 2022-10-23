@@ -105,7 +105,7 @@
     <Compile Include="Different\CallBackConteiner.cs" />
     <Compile Include="Different\Events\LoadingActivateCancel.cs" />
     <Compile Include="Different\Events\LoadingCancel.cs" />
-    <Compile Include="Different\Helpers\BoolToVisibilityConverter.cs" />
+    <Compile Include="Different\Helpers\IValueConverters\BoolToVisibilityConverter.cs" />
     <Compile Include="Different\Helpers\ConverterHelper.cs" />
     <Compile Include="Different\DefaultValues.cs" />
     <Compile Include="Different\Events\ChekinUpdateEvent.cs" />
@@ -113,12 +113,12 @@
     <Compile Include="Different\Events\RequestCheckinsEvent.cs" />
     <Compile Include="Different\Events\SaveUntappdToFileEvent.cs" />
     <Compile Include="Different\Helpers\CommunicationHelper.cs" />
-    <Compile Include="Different\Helpers\CountryNameToFlagConverter.cs" />
+    <Compile Include="Different\Helpers\IValueConverters\CountryNameToFlagConverter.cs" />
     <Compile Include="Different\Helpers\EnumsHelper.cs" />
     <Compile Include="Different\Helpers\ImageConverter.cs" />
-    <Compile Include="Different\Helpers\PathImageReSizeWidthConverter.cs" />
-    <Compile Include="Different\Helpers\PieSeriesBackgroundConverter.cs" />
-    <Compile Include="Different\Helpers\ServingTypeConverter.cs" />
+    <Compile Include="Different\Helpers\IValueConverters\PathImageReSizeWidthConverter.cs" />
+    <Compile Include="Different\Helpers\IValueConverters\PieSeriesBackgroundConverter.cs" />
+    <Compile Include="Different\Helpers\IValueConverters\ServingTypeConverter.cs" />
     <Compile Include="Different\Helpers\UIHelper.cs" />
     <Compile Include="Different\UntappdEntity.cs" />
     <Compile Include="Modules\StatisticsProjectModule.cs" />
