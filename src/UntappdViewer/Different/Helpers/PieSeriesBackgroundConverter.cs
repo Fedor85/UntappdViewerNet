@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Data;
 using System.Windows.Media;
+using UntappdViewer.Domain;
 using UntappdViewer.Domain.Models;
 using UntappdViewer.Utils;
 
@@ -13,8 +14,8 @@ namespace UntappdViewer.Different.Helpers
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             ParametersContainer parametersContainer = value as ParametersContainer;
-            int index = parametersContainer.Get<int>("index");
-            int count = parametersContainer.Get<int>("count");
+            int index = parametersContainer.Get<int>(ParameterNames.Index);
+            int count = parametersContainer.Get<int>(ParameterNames.Count);
             double offset = GetOffSet(index, count);
             GradientStopCollection gradientStopCollection = parameter as GradientStopCollection;
             Color color = GetRelativeColor(gradientStopCollection, offset);

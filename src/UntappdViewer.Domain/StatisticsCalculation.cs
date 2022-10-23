@@ -268,8 +268,8 @@ namespace UntappdViewer.Domain
                 string start = i == 0 ? "0" : items[i - 1].Key.ToString();
                 string end = i != items.Count - 1 ? $"-{items[i].Key}" : String.Empty;
                 KeyValue<string, int> keyValue = new KeyValue<string, int>($"{prefix}{start}{end}", items[i].Value);
-                keyValue.Parameters.Add("index", i);
-                keyValue.Parameters.Add("count", count);
+                keyValue.Parameters.Add(ParameterNames.Index, i);
+                keyValue.Parameters.Add(ParameterNames.Count, count);
                 keyValues.Add(keyValue);
             }
             return keyValues;
