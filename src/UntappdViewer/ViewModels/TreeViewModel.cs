@@ -121,9 +121,12 @@ namespace UntappdViewer.ViewModels
 
         private void UpdateContent()
         {
+            if (SelectedTreeItem == null)
+                return;
+
             moduleManager.LoadModule(typeof(CheckinModule).Name);
             ActivateView(RegionNames.ContentRegion, typeof(Views.Checkin));
-            eventAggregator.GetEvent<ChekinUpdateEvent>().Publish(SelectedTreeItem != null ? untappdService.GetCheckin(SelectedTreeItem.Id) : null);
+            eventAggregator.GetEvent<ChekinUpdateEvent>().Publish(untappdService.GetCheckin(SelectedTreeItem.Id));
         }
 
         private void UniqueChecked(bool? isChecked)
