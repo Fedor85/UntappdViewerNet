@@ -26,9 +26,11 @@ namespace UntappdViewer.Different.Helpers
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null)
-                return DefaultValues.DefaultFlag;
+                return null;
 
             string country = value.ToString();
+            if (String.IsNullOrEmpty(country))
+                return null;
 
             ICountryInfo countryInfo = GetCountryInfo(country);
             if (countryInfo != null)
