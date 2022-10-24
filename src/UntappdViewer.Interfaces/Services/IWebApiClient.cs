@@ -22,6 +22,10 @@ namespace UntappdViewer.Interfaces.Services
 
         void FillServingType(List<Checkin> checkins, string defaultServingType, ICancellationToken<Checkin> cancellation = null);
 
+        string GetDevAvatarImageUrl();
+
+        string GetDevProfileHeaderImageUrl();
+
         ICancellationToken<T> GetCancellationToken<T>();
     }
 }

@@ -132,6 +132,32 @@ namespace UntappdWebApiClient
             }
         }
 
+        public string GetDevAvatarImageUrl()
+        {
+            HtmlDocument htmlDoc = GetHtmlDocument(UriConstants.DeveloperProfileUrl);
+            if (htmlDoc == null)
+                return String.Empty;
+
+            List<HtmlNode> avatarNodea = htmlDoc.DocumentNode.Descendants("div").Where(node => node.GetAttributeValue("class", String.Empty).Contains("avatar-holder")).ToList();
+            foreach (HtmlNode htmlNode in avatarNodea)
+            {
+                List<string> avatarUrl = htmlNode.Descendants("img").Select(item => item.GetAttributeValue("src", String.Empty)).Where(item => !String.IsNullOrEmpty(item)).ToList();
+                if (avatarUrl.Count > 0)
+                    return avatarUrl[0];
+            }
+            return String.Empty;
+        }
+
+        public string GetDevProfileHeaderImageUrl()
+        {
+            HtmlDocument htmlDoc = GetHtmlDocument(UriConstants.DeveloperProfileUrl);
+            if (htmlDoc == null)
+                return String.Empty;
+
+            List<HtmlNode> coverNodes = htmlDoc.DocumentNode.Descendants("div").Where(node => node.GetAttributeValue("class", String.Empty).Contains("profile_header")).ToList();
+            return coverNodes.Count == 0 ? String.Empty : coverNodes[0].GetAttributeValue("data-image-url", "");
+        }
+
         public ICancellationToken<T> GetCancellationToken<T>()
         {
             return new CancellationToken<T>();
@@ -275,27 +301,28 @@ namespace UntappdWebApiClient
 
         private string GetServingType(string checkinUrl, string defaultServingType)
         {
-            string htmlPage = GetHtmlPage(checkinUrl);
-            if (String.IsNullOrEmpty(htmlPage))
+            HtmlDocument htmlDoc = GetHtmlDocument(checkinUrl);
+            if (htmlDoc == null)
                 return String.Empty;
 
-            HtmlDocument htmlDoc = new HtmlDocument();
-            htmlDoc.LoadHtml(htmlPage);
-            List<HtmlNode> servingNode = htmlDoc.DocumentNode.Descendants("p").Where(node => node.GetAttributeValue("class", "").Contains("serving")).ToList();
+            List<HtmlNode> servingNode = htmlDoc.DocumentNode.Descendants("p").Where(node => node.GetAttributeValue("class", String.Empty).Contains("serving")).ToList();
             return servingNode.Count > 0 ? servingNode[0].InnerText.Trim() : defaultServingType;
         }
 
-        private string GetHtmlPage(string url)
+        private HtmlDocument GetHtmlDocument(string url)
         {
             using (WebClient client = new WebClient())
             {
                 try
                 {
-                    return client.DownloadString(url); 
+                    string htmlPage = client.DownloadString(url);
+                    HtmlDocument htmlDoc = new HtmlDocument();
+                    htmlDoc.LoadHtml(htmlPage);
+                    return htmlDoc;
                 }
                 catch (Exception ex)
                 {
-                    return String.Empty;
+                    return null;
                 }
             }
         }

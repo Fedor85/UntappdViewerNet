@@ -42,5 +42,12 @@ namespace UntappdViewer.Test
         {
             webApiClient.FillServingType(checkinsContainer.Checkins, DefaultValues.DefaultServingType);
         }
+
+        [Test]
+        public void TestDevProfileData()
+        {
+            Assert.NotNull(webApiClient.GetDevAvatarImageUrl());
+            Assert.NotNull(webApiClient.GetDevProfileHeaderImageUrl());
+        }
     }
 }

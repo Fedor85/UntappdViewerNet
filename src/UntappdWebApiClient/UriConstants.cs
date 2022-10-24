@@ -7,5 +7,7 @@
         public const string BaseUri = @"https://untappd.com/";
 
         public const string СheckinUrl = @"https://untappd.com/user/user/checkin/";
+
+        public const string DeveloperProfileUrl = @"https://untappd.com/user/Feador";
     }
 }
