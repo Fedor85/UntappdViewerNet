@@ -58,6 +58,8 @@ namespace UntappdViewer.ViewModels
 
         public ICommand CheckinsProjectReportCommand { get; }
 
+        public ICommand StatisticsProjectReportCommand { get; }
+
         public ICommand HelpCommand { get; }
 
         public MenuBarViewModel(IUntappdService untappdService,  IInteractionRequestService interactionRequestService,
@@ -86,6 +88,7 @@ namespace UntappdViewer.ViewModels
             GalleryProjectCommand = new DelegateCommand(GalleryProject);
             StatisticsProjectCommand = new DelegateCommand(StatisticsProject);
             CheckinsProjectReportCommand = new DelegateCommand(CheckinsProjectReport);
+            StatisticsProjectReportCommand = new DelegateCommand(StatisticsProjectReport);
             HelpCommand = new DelegateCommand(Help);
         }
 
@@ -356,13 +359,17 @@ namespace UntappdViewer.ViewModels
             CheckinsProjectReportAsync();
         }
 
+        private void StatisticsProjectReport()
+        {
+            string report = reportingService.CreateStatisticsReport(untappdService.Untappd, untappdService.GetReportsDirectory());
+        }
+
         private async void CheckinsProjectReportAsync()
         {
             try
             {
                 string reportPath = await reportingService.CreateAllCheckinsReportrAsync(untappdService.GetCheckins(),
-                                                                                         untappdService.GetReportsDirectory(),
-                                                                                         untappdService.Untappd.UserName);
+                                                                                         untappdService.GetReportsDirectory());
                 System.Diagnostics.Process.Start(reportPath);
             }
             catch (Exception ex)

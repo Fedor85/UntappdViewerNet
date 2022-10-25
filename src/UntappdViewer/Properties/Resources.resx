@@ -541,4 +541,12 @@
     <value>Empty</value>
     <comment>en-en</comment>
   </data>
+  <data name="Reports" xml:space="preserve">
+    <value>Reports</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="StatisticsReport" xml:space="preserve">
+    <value>Statistics Report</value>
+    <comment>en-en</comment>
+  </data>
 </root>

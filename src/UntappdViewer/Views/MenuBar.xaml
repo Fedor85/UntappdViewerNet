@@ -60,10 +60,12 @@
                 </MenuItem.Icon>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static properties:Resources.CheckinsReport}" Command="{Binding CheckinsProjectReportCommand}">
+            <MenuItem Header="{x:Static properties:Resources.Reports}">
                 <MenuItem.Icon>
                     <Image Source="../Resources/excel_report.ico"/>
                 </MenuItem.Icon>
+                <MenuItem Header="{x:Static properties:Resources.CheckinsReport}" Command="{Binding CheckinsProjectReportCommand}"/>
+                <MenuItem Header="{x:Static properties:Resources.StatisticsReport}" Command="{Binding StatisticsProjectReportCommand}"/>
             </MenuItem>
         </MenuItem>
         <MenuItem Header="{x:Static properties:Resources.HelpMenuItem}" Command="{Binding HelpCommand}"/>

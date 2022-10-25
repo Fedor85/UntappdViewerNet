@@ -822,6 +822,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reports.
+        /// </summary>
+        public static string Reports {
+            get {
+                return ResourceManager.GetString("Reports", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap sad_face {
@@ -939,6 +948,15 @@ namespace UntappdViewer.Properties {
         public static string Statistics {
             get {
                 return ResourceManager.GetString("Statistics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Statistics Report.
+        /// </summary>
+        public static string StatisticsReport {
+            get {
+                return ResourceManager.GetString("StatisticsReport", resourceCulture);
             }
         }
         

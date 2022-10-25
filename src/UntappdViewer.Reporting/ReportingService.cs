@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -11,21 +12,29 @@ namespace UntappdViewer.Reporting
 {
     public class ReportingService: IReportingService
     {
-        public async Task<string> CreateAllCheckinsReportrAsync(List<Checkin> checkins, string directory, string fileName)
+        public async Task<string> CreateAllCheckinsReportrAsync(List<Checkin> checkins, string directory)
         {
-            return await Task.Run(() => CreateAllCheckinsReport(checkins, directory, fileName));
+            return await Task.Run(() => CreateAllCheckinsReport(checkins, directory));
         }
 
-        public string CreateAllCheckinsReport(List<Checkin> checkins, string directory, string fileName)
+        public string CreateStatisticsReport(Untappd untappd, string directory)
         {
-            IList<Checkin> checkinsSort = checkins.OrderBy(item => item.Beer.Brewery.Name).ThenBy(item => item.Beer.Name).ToList();
-            Workbook workbook = new Workbook();
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            string templateFileName = $@"{assembly.GetName().Name}.Resources.AllCheckinsTemplate.xlsx";
-            string outputPath = Path.Combine(directory, $"{fileName}{Path.GetExtension(templateFileName)}");
-            using (Stream stream = assembly.GetManifestResourceStream(templateFileName))
-                workbook.LoadFromStream(stream);
+            const string reportName = "Statistics";
+            Workbook workbook = GetWorkbook(reportName);
+            string outputPath = Path.Combine(directory, $"{reportName}.xlsx");
 
+            workbook.SaveToFile(outputPath);
+            return outputPath;
+        }
+
+        public string CreateAllCheckinsReport(List<Checkin> checkins, string directory)
+        {
+            const string reportName = "AllCheckins";
+
+            Workbook workbook = GetWorkbook(reportName);
+            string outputPath = Path.Combine(directory, $"{reportName}.xlsx");
+
+            IList<Checkin> checkinsSort = checkins.OrderBy(item => item.Beer.Brewery.Name).ThenBy(item => item.Beer.Name).ToList();
             Worksheet sheet = workbook.Worksheets[0];
             for (int i = 0; i < checkinsSort.Count; i++)
             {
@@ -47,6 +56,18 @@ namespace UntappdViewer.Reporting
             sheet.AutoFitColumn(4);
             workbook.SaveToFile(outputPath);
             return outputPath;
+        }
+
+
+        private Workbook GetWorkbook(string reportName)
+        {
+            Workbook workbook = new Workbook();
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            string templateFileName = $@"{assembly.GetName().Name}.Resources.{reportName}Template.xlsx";
+            using (Stream stream = assembly.GetManifestResourceStream(templateFileName))
+                workbook.LoadFromStream(stream);
+
+            return workbook;
         }
     }
 }

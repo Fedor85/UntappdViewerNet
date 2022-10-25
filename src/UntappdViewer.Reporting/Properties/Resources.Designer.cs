@@ -69,5 +69,15 @@ namespace UntappdViewer.Reporting.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] StatisticsTemplate {
+            get {
+                object obj = ResourceManager.GetObject("StatisticsTemplate", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

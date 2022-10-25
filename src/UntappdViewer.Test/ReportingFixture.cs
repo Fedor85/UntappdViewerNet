@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Reflection;
 using NUnit.Framework;
 using UntappdViewer.Domain.Mappers;
@@ -19,7 +20,7 @@ namespace UntappdViewer.Test
             {
                 CheckinsContainer checkinsContainer = new CheckinsContainer();
                 CheckinCSVMapper.InitializeCheckinsContainer(checkinsContainer, stream);
-                reportingService.CreateAllCheckinsReport(checkinsContainer.Checkins, @"", "result");
+                reportingService.CreateAllCheckinsReport(checkinsContainer.Checkins, String.Empty);
             }
         }
     }
