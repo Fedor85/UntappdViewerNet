@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.IO;
 using System.Windows.Input;
 using Prism.Commands;
 using Prism.Modularity;
@@ -10,7 +9,6 @@ using UntappdViewer.Domain;
 using UntappdViewer.Helpers;
 using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
-using UntappdViewer.Interfaces.Services.DataBase;
 using UntappdViewer.Modules;
 using UntappdViewer.Utils;
 
@@ -29,12 +27,6 @@ namespace UntappdViewer.ViewModels
         private IModuleManager moduleManager;
 
         private IArgumentsProvider argumentsProvider;
-
-        private IDevEntityDbService devEntityDbService;
-
-        private IWebApiClient webApiClient;
-
-        private IWebDownloader webDownloader;
 
         private string title;
 
@@ -66,10 +58,7 @@ namespace UntappdViewer.ViewModels
                                                               IRegionManager regionManager,
                                                               ISettingService settingService,
                                                               IModuleManager moduleManager,
-                                                              IArgumentsProvider argumentsProvider,
-                                                              IDevEntityDbService devEntityDbService,
-                                                              IWebApiClient webApiClient,
-                                                              IWebDownloader webDownloader)
+                                                              IArgumentsProvider argumentsProvider)
         {
             this.untappdService = untappdService;
             this.interactionRequestService = interactionRequestService;
@@ -77,9 +66,7 @@ namespace UntappdViewer.ViewModels
             this.settingService = settingService;
             this.moduleManager = moduleManager;
             this.argumentsProvider = argumentsProvider;
-            this.devEntityDbService = devEntityDbService;
-            this.webApiClient = webApiClient;
-            this.webDownloader = webDownloader;
+
             ClosingCommand = new DelegateCommand<CancelEventArgs>(Closing);
             untappdService.UpdateUntappdUserNameEvent += UpdateTitle;
             untappdService.CleanUntappdEvent += UpdateTitle;
@@ -88,7 +75,6 @@ namespace UntappdViewer.ViewModels
         private void Activate()
         {
             UpdateTitle();
-            UpdateDevSetting();
             Run();
         }
 
@@ -98,48 +84,6 @@ namespace UntappdViewer.ViewModels
             {
                 foreach (object view in region.Views)
                     region.Deactivate(view);
-            }
-        }
-
-        private void UpdateDevSetting()
-        {
-            UpdateDevAvatarImage();
-            UpdateDevProfileHeaderImage();
-        }
-
-        private void UpdateDevAvatarImage()
-        {
-            string avatarImageUrl = webApiClient.GetDevAvatarImageUrl();
-            if (String.IsNullOrEmpty(avatarImageUrl))
-                return;
-
-            string avatarImageUrlDb = devEntityDbService.GetValue<string>("avatarImageUrl");
-            if(avatarImageUrl.Equals(avatarImageUrlDb))
-                return;
-
-            Stream stream = webDownloader.DownloadToStream(avatarImageUrl);
-            if (stream != null)
-            {
-                devEntityDbService.Add("avatarImageUrl", avatarImageUrl);
-                devEntityDbService.AddFile("avatarImage", stream);
-            }
-        }
-
-        private void UpdateDevProfileHeaderImage()
-        {
-            string profileHeaderImage = webApiClient.GetDevProfileHeaderImageUrl();
-            if (String.IsNullOrEmpty(profileHeaderImage))
-                return;
-
-            string profileHeaderImageDb = devEntityDbService.GetValue<string>("profileHeaderImageUrl");
-            if (profileHeaderImage.Equals(profileHeaderImageDb))
-                return;
-
-            Stream stream = webDownloader.DownloadToStream(profileHeaderImage);
-            if (stream != null)
-            {
-                devEntityDbService.Add("profileHeaderImageUrl", profileHeaderImage);
-                devEntityDbService.AddFile("profileHeaderImage", stream);
             }
         }
 
