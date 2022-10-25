@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using UntappdViewer.Interfaces.Services;
 
@@ -6,7 +7,7 @@ namespace UntappdViewer.Infrastructure.Services
 {
     public class WebDownloader: IWebDownloader
     {
-        public bool DownloadFile(string urlFile, string filePath)
+        public bool DownloadToFile(string urlFile, string filePath)
         {
             using (WebClient client = new WebClient())
             {
@@ -18,6 +19,21 @@ namespace UntappdViewer.Infrastructure.Services
                 catch (Exception ex)
                 {
                     return false;
+                }
+            }
+        }
+
+        public Stream DownloadToStream(string urlFile)
+        {
+            using (WebClient client = new WebClient())
+            {
+                try
+                {
+                    return client.OpenRead(urlFile);
+                }
+                catch (Exception ex)
+                {
+                    return null;
                 }
             }
         }

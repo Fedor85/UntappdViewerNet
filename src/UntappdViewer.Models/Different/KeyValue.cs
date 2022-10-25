@@ -12,6 +12,10 @@
         /// </summary>
         public T2 Value { get; set; }
 
+        protected KeyValue()
+        {
+        }
+
         public KeyValue(T1 key, T2 value)
         {
             Key = key;

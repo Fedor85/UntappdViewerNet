@@ -31,12 +31,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ICancellationToken.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DataBase\IDevEntityDbService.cs" />
+    <Compile Include="Services\DataBase\IEntityDbService.cs" />
     <Compile Include="Services\IArgumentsProvider.cs" />
     <Compile Include="Services\IInteractionRequestService.cs" />
     <Compile Include="Services\IReportingService.cs" />

@@ -34,10 +34,14 @@
     <Reference Include="DotNetZip, Version=1.16.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
       <HintPath>..\packages\DotNetZip.1.16.0\lib\net40\DotNetZip.dll</HintPath>
     </Reference>
+    <Reference Include="LiteDB, Version=5.0.12.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiteDB.5.0.12\lib\net45\LiteDB.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -51,6 +55,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Services\ArgumentsProvider.cs" />
+    <Compile Include="Services\DataBase\BaseEntityDbService.cs" />
+    <Compile Include="Services\DataBase\DbContext.cs" />
+    <Compile Include="Services\DataBase\DevEntityDbService.cs" />
+    <Compile Include="Services\DataBase\IDbContext.cs" />
     <Compile Include="Services\SettingService.cs" />
     <Compile Include="Services\WebDownloader.cs" />
     <Compile Include="ZipFileHelper.cs" />
@@ -59,6 +67,10 @@
     <ProjectReference Include="..\UntappdViewer.Interfaces\UntappdViewer.Interfaces.csproj">
       <Project>{bb613be0-ae21-4a41-836a-c904d16444f6}</Project>
       <Name>UntappdViewer.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UntappdViewer.Models\UntappdViewer.Models.csproj">
+      <Project>{B1584484-7648-4349-B8F8-47352DD85FF1}</Project>
+      <Name>UntappdViewer.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -69,5 +81,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -631,7 +631,7 @@ namespace UntappdViewer.ViewModels
                 if (!Directory.Exists(directoryName))
                     FileHelper.CreateDirectory(directoryName);
 
-                if (!webDownloader.DownloadFile(beer.LabelUrl, labelPath))
+                if (!webDownloader.DownloadToFile(beer.LabelUrl, labelPath))
                     return;
             }
 
@@ -654,7 +654,7 @@ namespace UntappdViewer.ViewModels
                 if (!Directory.Exists(directoryName))
                     FileHelper.CreateDirectory(directoryName);
 
-                if (!webDownloader.DownloadFile(brewery.LabelUrl, labelPath))
+                if (!webDownloader.DownloadToFile(brewery.LabelUrl, labelPath))
                     return;
             }
 
@@ -708,7 +708,7 @@ namespace UntappdViewer.ViewModels
             if (!Directory.Exists(directoryName))
                 FileHelper.CreateDirectory(directoryName);
 
-            if (!webDownloader.DownloadFile(checkin.UrlPhoto, photoPath))
+            if (!webDownloader.DownloadToFile(checkin.UrlPhoto, photoPath))
                 return null;
             
             BitmapSource photo = ImageConverter.GetBitmapSource(photoPath);
@@ -742,7 +742,7 @@ namespace UntappdViewer.ViewModels
             if (!Directory.Exists(directoryName))
                 FileHelper.CreateDirectory(directoryName);
 
-            return webDownloader.DownloadFile(badge.ImageUrl, badgeImagePath) ? badgeImagePath : String.Empty;
+            return webDownloader.DownloadToFile(badge.ImageUrl, badgeImagePath) ? badgeImagePath : String.Empty;
         }
     }
 }

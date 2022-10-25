@@ -10,7 +10,9 @@ using Prism.Unity;
 using Unity;
 using UntappdViewer.Domain.Services;
 using UntappdViewer.Infrastructure.Services;
+using UntappdViewer.Infrastructure.Services.DataBase;
 using UntappdViewer.Interfaces.Services;
+using UntappdViewer.Interfaces.Services.DataBase;
 using UntappdViewer.Modules;
 using UntappdViewer.Reporting;
 using UntappdViewer.Services;
@@ -62,6 +64,10 @@ namespace UntappdViewer
 
             containerRegistry.Register<IWebDownloader, WebDownloader>();
             containerRegistry.Register<IWebApiClient, Client>();
+
+            IDbContext untappdDbContext = new DbContext("Untappd");
+            IDevEntityDbService devEntityDbService = new DevEntityDbService(untappdDbContext);
+            containerRegistry.RegisterInstance(devEntityDbService);
 
             containerRegistry.Register<IReportingService, ReportingService>();
         }

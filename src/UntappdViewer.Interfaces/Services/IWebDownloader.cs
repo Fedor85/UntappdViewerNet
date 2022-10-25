@@ -1,7 +1,11 @@
-﻿namespace UntappdViewer.Interfaces.Services
+﻿using System.IO;
+
+namespace UntappdViewer.Interfaces.Services
 {
     public interface IWebDownloader
     {
-        bool DownloadFile(string urlFile, string filePath);
+        bool DownloadToFile(string urlFile, string filePath);
+
+        Stream DownloadToStream(string urlFile);
     }
 }

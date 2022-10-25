@@ -232,7 +232,7 @@ namespace UntappdViewer.ViewModels
             if (!Directory.Exists(directoryName))
                 FileHelper.CreateDirectory(directoryName);
 
-            webDownloader.DownloadFile(webPath, filePath);
+            webDownloader.DownloadToFile(webPath, filePath);
         }
 
         private void UploadProjectPhotos()
@@ -272,7 +272,7 @@ namespace UntappdViewer.ViewModels
             string photoPath = untappdService.GetCheckinPhotoFilePath(checkin);
             if (!File.Exists(photoPath))
             {
-                if (!webDownloader.DownloadFile(checkin.UrlPhoto, photoPath))
+                if (!webDownloader.DownloadToFile(checkin.UrlPhoto, photoPath))
                     return;
             }
 
