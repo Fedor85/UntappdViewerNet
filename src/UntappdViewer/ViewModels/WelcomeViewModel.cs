@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Modularity;
@@ -36,6 +37,10 @@ namespace UntappdViewer.ViewModels
 
         private IWebDownloader webDownloader;
 
+        private BitmapSource avatarImage;
+
+        private BitmapSource profileHeaderImage;
+
         public ICommand OpenFileCommand { get; }
 
         public ICommand DropFileCommand { get; }
@@ -45,6 +50,24 @@ namespace UntappdViewer.ViewModels
         public string EmailUrl
         {
             get { return StringHelper.GetEmailUrl(Properties.Resources.Email); }
+        }
+
+        public BitmapSource AvatarImage
+        {
+            get { return avatarImage; }
+            set
+            {
+                SetProperty(ref avatarImage, value);
+            }
+        }
+
+        public BitmapSource ProfileHeaderImage
+        {
+            get { return profileHeaderImage; }
+            set
+            {
+                SetProperty(ref profileHeaderImage, value);
+            }
         }
 
         public WelcomeViewModel(IUntappdService untappdService, IInteractionRequestService interactionRequestService,
@@ -74,11 +97,11 @@ namespace UntappdViewer.ViewModels
         protected override void Activate()
         {
             base.Activate();
-            UpdateDevSetting();
             untappdService.CleanUpUntappd();
             eventAggregator.GetEvent<OpenFileEvent>().Subscribe(RunUntappd);
             moduleManager.LoadModule(typeof(RecentFilesModule).Name);
             ActivateView(RegionNames.RecentFilesRegion, typeof(RecentFiles));
+            SetDevData();
         }
 
         protected override void DeActivate()
@@ -150,10 +173,23 @@ namespace UntappdViewer.ViewModels
             ActivateView(RegionNames.RootRegion, typeof(Main));
             interactionRequestService.ShowMessageOnStatusBar(filePath);
         }
-        private void UpdateDevSetting()
+
+        private void SetDevData()
+        {
+            AvatarImage = GetAvatarImage();
+            ProfileHeaderImage = GetProfileHeaderImage();
+        }
+
+        private BitmapSource GetAvatarImage()
         {
             UpdateDevAvatarImage();
+            return devEntityDbService.GetBitmapSource("avatarImage");
+        }
+
+        private BitmapSource GetProfileHeaderImage()
+        {
             UpdateDevProfileHeaderImage();
+            return devEntityDbService.GetBitmapSource("profileHeaderImage");
         }
 
         private void UpdateDevAvatarImage()
@@ -167,11 +203,11 @@ namespace UntappdViewer.ViewModels
                 return;
 
             Stream stream = webDownloader.DownloadToStream(avatarImageUrl);
-            if (stream != null)
-            {
-                devEntityDbService.Add("avatarImageUrl", avatarImageUrl);
-                devEntityDbService.AddFile("avatarImage", stream);
-            }
+            if (stream == null)
+                return;
+
+            devEntityDbService.Add("avatarImageUrl", avatarImageUrl);
+            devEntityDbService.AddFile("avatarImage", stream);
         }
 
         private void UpdateDevProfileHeaderImage()
@@ -185,11 +221,11 @@ namespace UntappdViewer.ViewModels
                 return;
 
             Stream stream = webDownloader.DownloadToStream(profileHeaderImage);
-            if (stream != null)
-            {
-                devEntityDbService.Add("profileHeaderImageUrl", profileHeaderImage);
-                devEntityDbService.AddFile("profileHeaderImage", stream);
-            }
+            if (stream == null)
+                return;
+
+            devEntityDbService.Add("profileHeaderImageUrl", profileHeaderImage);
+            devEntityDbService.AddFile("profileHeaderImage", stream);
         }
     }
 }

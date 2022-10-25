@@ -72,12 +72,14 @@ namespace UntappdViewer.Infrastructure.Services.DataBase
             LiteFileInfo<string> file = database.FileStorage.FindById(key);
             if (file == null)
                 return null;
-
-            using (Stream stream = new MemoryStream())
+            byte[] bytes = { };
+            using (MemoryStream stream = new MemoryStream())
             {
                 database.FileStorage.Download(key, stream);
-                return stream;
+                bytes = stream.ToArray();
             }
+
+            return bytes.Length == 0 ? null : new MemoryStream(bytes);
         }
 
         private TE GetObject<TE>(params object[] args)

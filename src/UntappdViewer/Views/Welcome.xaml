@@ -22,15 +22,35 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Image Height="50" Width="50" Source="..\Resources\default_avatar.png"/>
-            <TextBlock >
-                <Hyperlink NavigateUri="{Binding Source={x:Static local:DefaultValues.DeveloperProfileUrl}}"
-                           TextDecorations="" RequestNavigate="HyperlinkOnRequestNavigate">
-                    <TextBlock Text="{x:Static properties:Resources.DeveloperProfile}" Foreground="#ffffff"/>
-                </Hyperlink>
-            </TextBlock>
-        </StackPanel>
+        <Grid Grid.Row="0">
+            <ItemsControl Background="White" Opacity="0.8"/>
+            <Image Source="{Binding ProfileHeaderImage}" Stretch="UniformToFill"  VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="0.5">
+                <Image.Effect>
+                    <BlurEffect Radius="5"/>
+                </Image.Effect>
+            </Image>
+            <Border  Width="600" Height="150" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="0.8">
+                <Border.Background>
+                    <ImageBrush ImageSource="{Binding ProfileHeaderImage}" Stretch="UniformToFill"/>
+                </Border.Background>
+            </Border>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Ellipse Height="60" Width="60" Stroke="White" StrokeThickness="2">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding AvatarImage}"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Grid>
+                    <ItemsControl Background="Black" Opacity="0.2"/>
+                    <TextBlock >
+                        <Hyperlink NavigateUri="{Binding Source={x:Static local:DefaultValues.DeveloperProfileUrl}}"
+                                   TextDecorations="" RequestNavigate="HyperlinkOnRequestNavigate">
+                            <TextBlock Text="{x:Static properties:Resources.DeveloperProfile}" Foreground="#ffffff"/>
+                        </Hyperlink>
+                    </TextBlock>
+                </Grid>
+            </StackPanel>
+        </Grid>
         <ItemsControl Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock HorizontalAlignment="Center">
                 <Hyperlink NavigateUri="{Binding Source={x:Static local:DefaultValues.UntappdtUrl}}"
