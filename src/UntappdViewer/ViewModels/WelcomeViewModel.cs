@@ -97,6 +97,8 @@ namespace UntappdViewer.ViewModels
         protected override void Activate()
         {
             base.Activate();
+
+            settingService.SetStartWelcomeView(true);
             untappdService.CleanUpUntappd();
             eventAggregator.GetEvent<OpenFileEvent>().Subscribe(RunUntappd);
             moduleManager.LoadModule(typeof(RecentFilesModule).Name);

@@ -109,5 +109,17 @@ namespace UntappdViewer.Infrastructure.Properties {
                 this["OffsetUpdateBeer"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IsStartWelcomeView {
+            get {
+                return ((bool)(this["IsStartWelcomeView"]));
+            }
+            set {
+                this["IsStartWelcomeView"] = value;
+            }
+        }
     }
 }

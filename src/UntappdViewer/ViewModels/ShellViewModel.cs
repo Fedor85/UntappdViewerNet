@@ -101,6 +101,12 @@ namespace UntappdViewer.ViewModels
                 filePath = FileHelper.GetFirstFileItemPath(settingService.GetRecentFilePaths());
             }
 
+            if (!isUsedArgument && settingService.IsStartWelcomeView())
+            {
+                moduleManager.LoadModule(typeof(WelcomeModule).Name);
+                return;
+            }
+
             FileStatus fileStatus = FileHelper.Check(filePath, Extensions.GetSupportExtensions());
             if (EnumsHelper.IsValidFileStatus(fileStatus))
             {

@@ -29,5 +29,9 @@
         long GetOffsetUpdateBeer();
 
         void SetOffsetUpdateBeer(long offSet);
+
+        void SetStartWelcomeView(bool isStart);
+
+        bool IsStartWelcomeView();
     }
 }

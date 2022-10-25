@@ -79,5 +79,16 @@ namespace UntappdViewer.Infrastructure.Services
             Settings.Default.OffsetUpdateBeer = offSet;
             Settings.Default.Save();
         }
+
+        public void SetStartWelcomeView(bool isStart)
+        {
+            Settings.Default.IsStartWelcomeView = isStart;
+            Settings.Default.Save();
+        }
+
+        public bool IsStartWelcomeView()
+        {
+            return Settings.Default.IsStartWelcomeView;
+        }
     }
 }
