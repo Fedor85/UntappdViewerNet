@@ -44,6 +44,7 @@
     <Compile Include="Services\IInteractionRequestService.cs" />
     <Compile Include="Services\IReportingService.cs" />
     <Compile Include="Services\ISettingService.cs" />
+    <Compile Include="Services\IStatisticsCalculation.cs" />
     <Compile Include="Services\IUntappdService.cs" />
     <Compile Include="Services\IWebApiClient.cs" />
     <Compile Include="Services\IWebDownloader.cs" />

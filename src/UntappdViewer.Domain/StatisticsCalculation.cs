@@ -1,26 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
 using UntappdViewer.Models.Different;
 using UntappdViewer.Utils;
 
 namespace UntappdViewer.Domain
 {
-    public static class StatisticsCalculation
+    public class StatisticsCalculation : IStatisticsCalculation
     {
         private const int DefautDay = 1;
 
-        public static int GetCountrysCount(List<Checkin> checkins)
+        private CheckinsContainer checkinsContainer;
+
+        public StatisticsCalculation(CheckinsContainer checkinsContainer)
         {
-            return GetCountrys(checkins).Count;
+            this.checkinsContainer = checkinsContainer;
         }
 
-        public static List<KeyValue<double, int>> GetChekinsRatingByCount(List<Checkin> checkins)
+        public int GetCountrysCount()
+        {
+            return GetCountrys(checkinsContainer.Checkins).Count;
+        }
+
+        public List<KeyValue<double, int>> GetChekinsRatingByCount()
         {
             List<KeyValue<double, int>> keyValues = new List<KeyValue<double, int>>();
 
-            IEnumerable<Checkin> chekinRating = checkins.Where(item => item.RatingScore.HasValue);
+            IEnumerable<Checkin> chekinRating = checkinsContainer.Checkins.Where(item => item.RatingScore.HasValue);
             if (!chekinRating.Any())
                 return keyValues;
 
@@ -33,13 +41,13 @@ namespace UntappdViewer.Domain
             return keyValues;
         }
 
-        public static List<KeyValue<double, int>> GetBeersRatingByCount(List<Beer> beers)
+        public List<KeyValue<double, int>> GetBeersRatingByCount()
         {
             List<KeyValue<double, int>> keyValues = new List<KeyValue<double, int>>();
-            if (!beers.Any())
+            if (!checkinsContainer.Beers.Any())
                 return keyValues;
 
-            Dictionary<long, double> beerRating = GetBeerIdByRoundRating(beers);
+            Dictionary<long, double> beerRating = GetBeerIdByRoundRating(checkinsContainer.Beers);
             List<double> ratings = beerRating.Select(item => item.Value).Distinct().ToList();
             ratings.Sort();
 
@@ -49,13 +57,13 @@ namespace UntappdViewer.Domain
             return keyValues;
         }
 
-        public static List<KeyValue<string, int>> GetDateChekinsByCount(List<Checkin> checkins)
+        public List<KeyValue<string, int>> GetDateChekinsByCount()
         {
             List<KeyValue<DateTime, int>> dates = new List<KeyValue<DateTime, int>>();
-            if (!checkins.Any())
+            if (!checkinsContainer.Checkins.Any())
                 return new List<KeyValue<string, int>>();
 
-            foreach (Checkin checkin in checkins.OrderBy(item => item.CreatedDate).ToList())
+            foreach (Checkin checkin in checkinsContainer.Checkins.OrderBy(item => item.CreatedDate).ToList())
             {
                 DateTime date = new DateTime(checkin.CreatedDate.Year, checkin.CreatedDate.Month, 1);
                 KeyValue<DateTime, int> dataChekinCount = dates.FirstOrDefault(item => item.Key.Equals(date));
@@ -69,18 +77,18 @@ namespace UntappdViewer.Domain
             return dates.Select(keyValue => new KeyValue<string, int>($"{keyValue.Key:MM}.{keyValue.Key:yy}", keyValue.Value)).ToList();
         }
 
-        public static List<KeyValue<string, List<long>>> GetBeerTypesByCheckinIdsGroupByCount(List<Checkin> checkins)
+        public List<KeyValue<string, List<long>>> GetBeerTypesByCheckinIdsGroupByCount()
         {
             List<KeyValue<string, List<long>>> keyValues = new List<KeyValue<string, List<long>>>();
-            if (!checkins.Any())
+            if (!checkinsContainer.Checkins.Any())
                 return keyValues;
 
-            List<string> types = checkins.Select(item => item.Beer.Type).Distinct().ToList();
+            List<string> types = checkinsContainer.Checkins.Select(item => item.Beer.Type).Distinct().ToList();
             types.Sort();
 
             foreach (KeyValuePair<string, List<string>> keyValuePair in StringHelper.GetGroupByList(types, DefaultValues.SeparatorsName))
             {
-                List<long> checkinIds = checkins.Where(item => keyValuePair.Value.Contains(item.Beer.Type)).Select(checkin => checkin.Id).ToList();
+                List<long> checkinIds = checkinsContainer.Checkins.Where(item => keyValuePair.Value.Contains(item.Beer.Type)).Select(checkin => checkin.Id).ToList();
                 keyValues.Add(new KeyValue<string, List<long>>(keyValuePair.Key, checkinIds));
             }
 
@@ -107,10 +115,10 @@ namespace UntappdViewer.Domain
             return keyValues;
         }
 
-        public static List<KeyValue<string, List<long>>> GetCountrysByCheckinIds(List<Checkin> checkins)
+        public List<KeyValue<string, List<long>>> GetCountrysByCheckinIds()
         {
             List<KeyValue<string, List<long>>> keyValues = new List<KeyValue<string, List<long>>>();
-            List<string> countrys = GetCountrys(checkins);
+            List<string> countrys = GetCountrys(checkinsContainer.Checkins);
             if (!countrys.Any())
                 return keyValues;
 
@@ -119,23 +127,23 @@ namespace UntappdViewer.Domain
 
             foreach (string country in countrys)
             {
-                List<long> checkinIds = checkins.Where(item => item.Beer.Brewery.Venue.Country.Equals(country)).Select(checkin => checkin.Id).ToList();
+                List<long> checkinIds = checkinsContainer.Checkins.Where(item => item.Beer.Brewery.Venue.Country.Equals(country)).Select(checkin => checkin.Id).ToList();
                 keyValues.Add(new KeyValue<string, List<long>>(StringHelper.GetCutByFirstChars(country, DefaultValues.SeparatorsName), checkinIds));
             }
 
             return keyValues;
         }
 
-        public static List<KeyValue<string, List<long>>> GetServingTypeByCheckinIds(List<Checkin> checkins, string defaultServingType)
+        public List<KeyValue<string, List<long>>> GetServingTypeByCheckinIds(string defaultServingType)
         {
             List<KeyValue<string, List<long>>> keyValues = new List<KeyValue<string, List<long>>>();
-            if (!checkins.Any())
+            if (!checkinsContainer.Checkins.Any())
                 return keyValues;
 
             KeyValue<string, List<long>> checkinDefaultServingType = new KeyValue<string, List<long>>(defaultServingType, 
-                                                                        checkins.Where(item => String.IsNullOrEmpty(item.ServingType)).Select(item=> item.Id).ToList());
+                                                                        checkinsContainer.Checkins.Where(item => String.IsNullOrEmpty(item.ServingType)).Select(item=> item.Id).ToList());
 
-            IEnumerable<Checkin> validCheckins = checkins.Where(item => !String.IsNullOrEmpty(item.ServingType));
+            IEnumerable<Checkin> validCheckins = checkinsContainer.Checkins.Where(item => !String.IsNullOrEmpty(item.ServingType));
             List<string> types = validCheckins.Select(item => item.ServingType).Distinct().ToList();
             types.Sort();
             types.Reverse();
@@ -155,7 +163,7 @@ namespace UntappdViewer.Domain
             return keyValues;
         }
 
-        public static List<KeyValue<string, int>> GetListCount(List<KeyValue<string, List<long>>> items)
+        public List<KeyValue<string, int>> GetListCount(List<KeyValue<string, List<long>>> items)
         {
             List<KeyValue<string, int>> keyValues = new List<KeyValue<string, int>>();
 
@@ -165,7 +173,7 @@ namespace UntappdViewer.Domain
             return keyValues;
         }
 
-        public static List<KeyValue<string, int>> GetAccumulateValues(List<KeyValue<string, int>> items)
+        public List<KeyValue<string, int>> GetAccumulateValues(List<KeyValue<string, int>> items)
         {
             List<KeyValue<string, int>> keyValues = new List<KeyValue<string, int>>();
             if (!items.Any())
@@ -182,14 +190,14 @@ namespace UntappdViewer.Domain
             return keyValues;
         }
 
-        public static List<KeyValue<string, double>> GetAverageRatingByCheckinIds(List<Checkin> checkins, List<KeyValue<string, List<long>>> checkinIds)
+        public List<KeyValue<string, double>> GetAverageRatingByCheckinIds(List<KeyValue<string, List<long>>> checkinIds)
         {
             List<KeyValue<string, double>> keyValues = new List<KeyValue<string, double>>();
 
             foreach (KeyValue<string, List<long>> keyValue in checkinIds)
             {
-                int count = checkins.Count(item => keyValue.Value.Contains(item.Id) && item.RatingScore.HasValue);
-                double sumRating = checkins.Where(item => keyValue.Value.Contains(item.Id) && item.RatingScore.HasValue).Sum(checkin => checkin.RatingScore.Value);
+                int count = checkinsContainer.Checkins.Count(item => keyValue.Value.Contains(item.Id) && item.RatingScore.HasValue);
+                double sumRating = checkinsContainer.Checkins.Where(item => keyValue.Value.Contains(item.Id) && item.RatingScore.HasValue).Sum(checkin => checkin.RatingScore.Value);
                 double rating = sumRating / (count > 0 ? count : 1);
                 keyValues.Add(new KeyValue<string, double>(keyValue.Key, Math.Round(rating, 2)));
             }
@@ -197,10 +205,10 @@ namespace UntappdViewer.Domain
             return keyValues;
         }
 
-        public static List<KeyValue<double, double>> GetABVToIBU(List<Beer> beers)
+        public List<KeyValue<double, double>> GetABVToIBU()
         {
             List<KeyValue<double, double>> keyValues = new List<KeyValue<double, double>>();
-            foreach (Beer beer in beers.Where(beer => !MathHelper.DoubleCompare(beer.ABV, 0) && beer.IBU.HasValue && !MathHelper.DoubleCompare(beer.IBU.Value, 0)))
+            foreach (Beer beer in checkinsContainer.Beers.Where(beer => !MathHelper.DoubleCompare(beer.ABV, 0) && beer.IBU.HasValue && !MathHelper.DoubleCompare(beer.IBU.Value, 0)))
             {
                 KeyValue<double, double> keyValue = new KeyValue<double, double>(beer.ABV, beer.IBU.Value);
                 if (!keyValues.Contains(keyValue))
@@ -209,18 +217,18 @@ namespace UntappdViewer.Domain
             return keyValues;
         }
 
-        public static List<KeyValueParam<string, int>> GetRangeABVByCount(List<Beer> beers, double range, double maxValue)
+        public List<KeyValueParam<string, int>> GetRangeABVByCount(double range, double maxValue)
         {
-            if (!beers.Any())
+            if (!checkinsContainer.Beers.Any())
                 return new List<KeyValueParam<string, int>>();
 
-            List<double> abvs = beers.Select(item => MathHelper.GetCeilingByStep(item.ABV, range)).Distinct().ToList();
+            List<double> abvs = checkinsContainer.Beers.Select(item => MathHelper.GetCeilingByStep(item.ABV, range)).Distinct().ToList();
             abvs.Sort();
 
             List<KeyValue<double, int>> abvCount = new List<KeyValue<double, int>>();
             foreach (double abv in abvs)
             {
-                int currentABVCount = beers.Count(item => MathHelper.DoubleCompare(abv, MathHelper.GetCeilingByStep(item.ABV, range)));
+                int currentABVCount = checkinsContainer.Beers.Count(item => MathHelper.DoubleCompare(abv, MathHelper.GetCeilingByStep(item.ABV, range)));
                 abvCount.Add(new KeyValue<double, int>(abv, currentABVCount));
             }
 
@@ -228,9 +236,9 @@ namespace UntappdViewer.Domain
             return GetRangeNameToCount(abvCount);
         }
 
-        public static List<KeyValueParam<string, int>> GetRangeIBUByCount(List<Beer> beers, double range, double maxValue)
+        public List<KeyValueParam<string, int>> GetRangeIBUByCount(double range, double maxValue)
         {
-            IEnumerable<Beer> currentBeers = beers.Where(item => item.IBU.HasValue);
+            IEnumerable<Beer> currentBeers = checkinsContainer.Beers.Where(item => item.IBU.HasValue);
             if (!currentBeers.Any())
                 return new List<KeyValueParam<string, int>>(); ;
 
@@ -247,7 +255,7 @@ namespace UntappdViewer.Domain
             MergeByMore(ibuCount, maxValue);
             return GetRangeNameToCount(ibuCount);
         }
-        private static void MergeByMore(List<KeyValue<double, int>> keyValues, double maxValue)
+        private void MergeByMore(List<KeyValue<double, int>> keyValues, double maxValue)
         {
             List<KeyValue<double, int>> moreCount = keyValues.Where(item => item.Key > maxValue).ToList();
             if (moreCount.Count != keyValues.Count)
@@ -258,7 +266,7 @@ namespace UntappdViewer.Domain
             }
         }
 
-        private static List<KeyValueParam<string, int>> GetRangeNameToCount(List<KeyValue<double, int>> items)
+        private List<KeyValueParam<string, int>> GetRangeNameToCount(List<KeyValue<double, int>> items)
         {
             List<KeyValueParam<string, int>> keyValues = new List<KeyValueParam<string, int>>();
             int count = items.Count;
@@ -275,7 +283,7 @@ namespace UntappdViewer.Domain
             return keyValues;
         }
 
-        private static List<KeyValue<DateTime, int>> InsertEmptyMonth(List<KeyValue<DateTime, int>> dates)
+        private List<KeyValue<DateTime, int>> InsertEmptyMonth(List<KeyValue<DateTime, int>> dates)
         {
             if (!dates.Any())
                 return dates;
@@ -298,7 +306,7 @@ namespace UntappdViewer.Domain
             return sortDates.OrderBy(item => item.Key.Year).ThenBy(item => item.Key.Month).ToList();
         }
 
-        private static Dictionary<long, double> GetBeerIdByRoundRating(List<Beer> beers)
+        private Dictionary<long, double> GetBeerIdByRoundRating(List<Beer> beers)
         {
             Dictionary<long, double> dictionary = new Dictionary<long, double>();
             foreach (Beer beer in beers)
@@ -307,7 +315,7 @@ namespace UntappdViewer.Domain
             return dictionary;
         }
 
-        private static List<string> GetCountrys(List<Checkin> checkins)
+        private List<string> GetCountrys(List<Checkin> checkins)
         {
             IEnumerable<Checkin> checkinCountry = checkins.Where(item => item.Beer.Brewery.Venue != null && !String.IsNullOrEmpty(item.Beer.Brewery.Venue.Country));
             if (!checkinCountry.Any())

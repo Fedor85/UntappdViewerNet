@@ -224,6 +224,11 @@ namespace UntappdViewer.Domain.Services
             return $"{checkin.CreatedDate.ToString("yyyy_MM_dd")}_{checkin.Id}.{FileHelper.GetExtensionWihtoutPoint(checkin.UrlPhoto)}";
         }
 
+        public IStatisticsCalculation GetStatisticsCalculation()
+        {
+            return new StatisticsCalculation(Untappd.CheckinsContainer);
+        }
+
         private string GetUntappdUserName(string userName)
         {
             return String.IsNullOrEmpty(userName) ? settingService.GetDefaultUserName() : userName;

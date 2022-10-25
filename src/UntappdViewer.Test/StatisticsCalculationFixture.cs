@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using UntappdViewer.Domain;
+using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
 using UntappdViewer.Models.Different;
 using UntappdViewer.Utils;
@@ -13,23 +14,25 @@ namespace UntappdViewer.Test
     public class  StatisticsCalculationFixture
     {
         private CheckinsContainer checkinsContainer;
+        private IStatisticsCalculation statisticsCalculation;
 
         public StatisticsCalculationFixture()
         {
             checkinsContainer = TestHelper.GetCheckinsContainer();
+            statisticsCalculation = new StatisticsCalculation(checkinsContainer);
         }
 
         [Test]
         public void TestGetCountrysCount()
         {
-            int countrysCount = StatisticsCalculation.GetCountrysCount(checkinsContainer.Checkins);
+            int countrysCount = statisticsCalculation.GetCountrysCount();
             Assert.AreEqual(38, countrysCount);
         }
 
         [Test]
         public void TestGetChekinsRatingByCount()
         {
-            List<KeyValue<double, int>> chekinsRating = StatisticsCalculation.GetChekinsRatingByCount(checkinsContainer.Checkins);
+            List<KeyValue<double, int>> chekinsRating = statisticsCalculation.GetChekinsRatingByCount();
 
             Assert.AreEqual(31, chekinsRating.Count);
             Assert.AreEqual(0.25, chekinsRating[0].Key);
@@ -41,7 +44,7 @@ namespace UntappdViewer.Test
         [Test]
         public void TestGetBeersRatingByCount()
         {
-            List<KeyValue<double, int>> beersRating = StatisticsCalculation.GetBeersRatingByCount(checkinsContainer.Beers);
+            List<KeyValue<double, int>> beersRating = statisticsCalculation.GetBeersRatingByCount();
 
             Assert.AreEqual(11, beersRating.Count);
             Assert.AreEqual(0, beersRating[0].Key);
@@ -53,7 +56,7 @@ namespace UntappdViewer.Test
         [Test]
         public void TesGetDateChekinsByCount()
         {
-            List<KeyValue<string, int>> dateChekinsCount = StatisticsCalculation.GetDateChekinsByCount(checkinsContainer.Checkins);
+            List<KeyValue<string, int>> dateChekinsCount = statisticsCalculation.GetDateChekinsByCount();
 
             Assert.AreEqual(65, dateChekinsCount.Count);
             Assert.AreEqual("08.15", dateChekinsCount[0].Key);
@@ -78,7 +81,7 @@ namespace UntappdViewer.Test
         [Test]
         public void TestGetBeerTypesByCheckinIdsGroupByCount()
         {
-            List<KeyValue<string, List<long>>> beerTypeCheckinIds = StatisticsCalculation.GetBeerTypesByCheckinIdsGroupByCount(checkinsContainer.Checkins);
+            List<KeyValue<string, List<long>>> beerTypeCheckinIds = statisticsCalculation.GetBeerTypesByCheckinIdsGroupByCount();
 
             Assert.AreEqual(16, beerTypeCheckinIds.Count);
             Assert.AreEqual("Other", beerTypeCheckinIds[0].Key);
@@ -90,7 +93,7 @@ namespace UntappdViewer.Test
         [Test]
         public void TestGetCountrysByCheckinIds()
         {
-            List<KeyValue<string, List<long>>> beerCountryCheckinIds = StatisticsCalculation.GetCountrysByCheckinIds(checkinsContainer.Checkins);
+            List<KeyValue<string, List<long>>> beerCountryCheckinIds = statisticsCalculation.GetCountrysByCheckinIds();
 
             Assert.AreEqual(38, beerCountryCheckinIds.Count);
             Assert.AreEqual("United States", beerCountryCheckinIds[0].Key);
@@ -102,8 +105,8 @@ namespace UntappdViewer.Test
         [Test]
         public void TestGetListCount()
         {
-            List<KeyValue<string, List<long>>> beerTypeCheckinIds = StatisticsCalculation.GetBeerTypesByCheckinIdsGroupByCount(checkinsContainer.Checkins);
-            List<KeyValue<string, int>> beerTypesCount = StatisticsCalculation.GetListCount(beerTypeCheckinIds);
+            List<KeyValue<string, List<long>>> beerTypeCheckinIds = statisticsCalculation.GetBeerTypesByCheckinIdsGroupByCount();
+            List<KeyValue<string, int>> beerTypesCount = statisticsCalculation.GetListCount(beerTypeCheckinIds);
 
             Assert.AreEqual(16, beerTypesCount.Count);
             Assert.AreEqual("Other", beerTypesCount[0].Key);
@@ -111,8 +114,8 @@ namespace UntappdViewer.Test
             Assert.AreEqual("Belgian", beerTypesCount[15].Key);
             Assert.AreEqual(26, beerTypesCount[15].Value);
 
-            List<KeyValue<string, List<long>>> beerCountryCheckinIds = StatisticsCalculation.GetCountrysByCheckinIds(checkinsContainer.Checkins);
-            List<KeyValue<string, int>> beerCountrysCount = StatisticsCalculation.GetListCount(beerCountryCheckinIds);
+            List<KeyValue<string, List<long>>> beerCountryCheckinIds = statisticsCalculation.GetCountrysByCheckinIds();
+            List<KeyValue<string, int>> beerCountrysCount = statisticsCalculation.GetListCount(beerCountryCheckinIds);
 
             Assert.AreEqual(38, beerCountrysCount.Count);
             Assert.AreEqual("United States", beerCountrysCount[0].Key);
@@ -124,8 +127,8 @@ namespace UntappdViewer.Test
         [Test]
         public void TestGetAccumulateValues()
         {
-            List<KeyValue<string, int>> dataChekins = StatisticsCalculation.GetDateChekinsByCount(checkinsContainer.Checkins);
-            List<KeyValue<string, int>> dateChekinsAccumulateCount = StatisticsCalculation.GetAccumulateValues(dataChekins);
+            List<KeyValue<string, int>> dataChekins = statisticsCalculation.GetDateChekinsByCount();
+            List<KeyValue<string, int>> dateChekinsAccumulateCount = statisticsCalculation.GetAccumulateValues(dataChekins);
 
             Assert.AreEqual(65, dataChekins.Count);
             Assert.AreEqual(65, dateChekinsAccumulateCount.Count);
@@ -155,8 +158,8 @@ namespace UntappdViewer.Test
         [Test]
         public void TestGetAverageRatingByCheckinIds()
         {
-            List<KeyValue<string, List<long>>> beerTypeCheckinIds = StatisticsCalculation.GetBeerTypesByCheckinIdsGroupByCount(checkinsContainer.Checkins);
-            List<KeyValue<string, double>> beerTypeRating = StatisticsCalculation.GetAverageRatingByCheckinIds(checkinsContainer.Checkins, beerTypeCheckinIds);
+            List<KeyValue<string, List<long>>> beerTypeCheckinIds = statisticsCalculation.GetBeerTypesByCheckinIdsGroupByCount();
+            List<KeyValue<string, double>> beerTypeRating = statisticsCalculation.GetAverageRatingByCheckinIds(beerTypeCheckinIds);
 
             Assert.AreEqual(16, beerTypeRating.Count);
             Assert.AreEqual("Other", beerTypeRating[0].Key);
@@ -164,8 +167,8 @@ namespace UntappdViewer.Test
             Assert.AreEqual("Belgian", beerTypeRating[15].Key);
             Assert.AreEqual(3.38, beerTypeRating[15].Value);
 
-            List<KeyValue<string, List<long>>> beerCountryCheckinIds = StatisticsCalculation.GetCountrysByCheckinIds(checkinsContainer.Checkins);
-            List<KeyValue<string, double>> beerCountryRating = StatisticsCalculation.GetAverageRatingByCheckinIds(checkinsContainer.Checkins, beerCountryCheckinIds);
+            List<KeyValue<string, List<long>>> beerCountryCheckinIds = statisticsCalculation.GetCountrysByCheckinIds();
+            List<KeyValue<string, double>> beerCountryRating = statisticsCalculation.GetAverageRatingByCheckinIds(beerCountryCheckinIds);
 
             Assert.AreEqual(38, beerCountryRating.Count);
             Assert.AreEqual("United States", beerCountryRating[0].Key);
@@ -177,7 +180,7 @@ namespace UntappdViewer.Test
         [Test]
         public void TestGetServingTypeByCheckinIds()
         {
-            List<KeyValue<string, List<long>>> servingTypeCheckinIds = StatisticsCalculation.GetServingTypeByCheckinIds(checkinsContainer.Checkins, DefaultValues.DefaultServingType);
+            List<KeyValue<string, List<long>>> servingTypeCheckinIds = statisticsCalculation.GetServingTypeByCheckinIds(DefaultValues.DefaultServingType);
 
             Assert.AreEqual(5, servingTypeCheckinIds.Count);
             Assert.AreEqual(DefaultValues.DefaultServingType, servingTypeCheckinIds[0].Key);

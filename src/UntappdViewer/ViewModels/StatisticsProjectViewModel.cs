@@ -6,7 +6,6 @@ using System.Windows.Input;
 using Prism.Commands;
 using Prism.Modularity;
 using Prism.Regions;
-using UntappdViewer.Domain;
 using UntappdViewer.Helpers;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models.Different;
@@ -23,6 +22,8 @@ namespace UntappdViewer.ViewModels
         private IModuleManager moduleManager;
 
         private IUntappdService untappdService;
+
+        private IStatisticsCalculation statisticsCalculation;
 
         private IEnumerable chekinRatingScore;
 
@@ -360,6 +361,7 @@ namespace UntappdViewer.ViewModels
         {
             this.moduleManager = moduleManager;
             this.untappdService = untappdService;
+            this.statisticsCalculation = untappdService.GetStatisticsCalculation();
 
             OkButtonCommand = new DelegateCommand(Exit);
         }
@@ -425,13 +427,13 @@ namespace UntappdViewer.ViewModels
 
             UniqueCheckinCount = untappdService.GetCheckins(true).Count;
             BreweryCount = untappdService.GetBrewerys().Count;
-            CountryCount = StatisticsCalculation.GetCountrysCount(checkins);
+            CountryCount = statisticsCalculation.GetCountrysCount();
         }
 
         private void SetRatingScore()
         {
-            List<KeyValue<double, int>> chekinRatingScore = StatisticsCalculation.GetChekinsRatingByCount(untappdService.GetCheckins());
-            List<KeyValue<double, int>> beerRatingScore = StatisticsCalculation.GetBeersRatingByCount(untappdService.GetBeers());
+            List<KeyValue<double, int>> chekinRatingScore = statisticsCalculation.GetChekinsRatingByCount();
+            List<KeyValue<double, int>> beerRatingScore = statisticsCalculation.GetBeersRatingByCount();
 
             int chekinMaxCount = chekinRatingScore.Count >0 ? chekinRatingScore.Select(item => item.Value).Max() : 0;
             int beerMaxCount = beerRatingScore.Count > 0 ? beerRatingScore.Select(item => item.Value).Max() : 0;
@@ -446,64 +448,60 @@ namespace UntappdViewer.ViewModels
 
         private void SetDataCheckins()
         {
-            List<Checkin> checkins = untappdService.GetCheckins();
-            List<KeyValue<string, int>> dateChekinsCount = StatisticsCalculation.GetDateChekinsByCount(checkins);
+            List<KeyValue<string, int>> dateChekinsCount = statisticsCalculation.GetDateChekinsByCount();
             MinWidthChartDateChekins = MathHelper.GetCeilingByStep(dateChekinsCount.Count * 15, 100);
             DateChekinsCount = dateChekinsCount;
 
-            List<DateTime> dateCheckins = checkins.Select(item => item.CreatedDate).ToList();
+            List<DateTime> dateCheckins = untappdService.GetCheckins().Select(item => item.CreatedDate).ToList();
             TotalDays = MathHelper.GetTotalDaysByNow(dateCheckins);
             AverageChekinsQuantity = Math.Round(MathHelper.GetAverageCountByNow(dateCheckins), 2);
             AverageUniqueChekinsQuantity = Math.Round(MathHelper.GetAverageCountByNow(untappdService.GetCheckins(true).Select(item => item.CreatedDate).ToList()), 2);
 
-            DateChekinsAccumulateCount = StatisticsCalculation.GetAccumulateValues(dateChekinsCount);
+            DateChekinsAccumulateCount = statisticsCalculation.GetAccumulateValues(dateChekinsCount);
         }
 
         private void SetBeerType()
         {
-            List<Checkin> checkins = untappdService.GetCheckins();
-            List<KeyValue<string, List<long>>> beerTypeCheckinIds = StatisticsCalculation.GetBeerTypesByCheckinIdsGroupByCount(checkins);
-            List <KeyValue<string, int>> beerTypeCount = StatisticsCalculation.GetListCount(beerTypeCheckinIds);
+            List<KeyValue<string, List<long>>> beerTypeCheckinIds = statisticsCalculation.GetBeerTypesByCheckinIdsGroupByCount();
+            List <KeyValue<string, int>> beerTypeCount = statisticsCalculation.GetListCount(beerTypeCheckinIds);
 
             HeightChartBeerType = GetHeightChart(beerTypeCount.Count);
             MaxXAxisBeerTypeCount = GetMaxXAxis(beerTypeCount.Count > 0 ? beerTypeCount.Max(item => item.Value): 0);
 
             BeerTypeCount = beerTypeCount;
-            BeerTypeRating = StatisticsCalculation.GetAverageRatingByCheckinIds(checkins, beerTypeCheckinIds);
+            BeerTypeRating = statisticsCalculation.GetAverageRatingByCheckinIds(beerTypeCheckinIds);
         }
 
         private void SetBeerCountry()
         {
-            List<Checkin> checkins = untappdService.GetCheckins();
-            List<KeyValue<string, List<long>>> beerCountryCheckinIds = StatisticsCalculation.GetCountrysByCheckinIds(checkins);
-            List<KeyValue<string, int>> beerCountryCount = StatisticsCalculation.GetListCount(beerCountryCheckinIds);
+            List<KeyValue<string, List<long>>> beerCountryCheckinIds = statisticsCalculation.GetCountrysByCheckinIds();
+            List<KeyValue<string, int>> beerCountryCount = statisticsCalculation.GetListCount(beerCountryCheckinIds);
 
             HeightChartBeerCountry = GetHeightChart(beerCountryCount.Count);
             MaxXAxisBeerCountryCount = GetMaxXAxis(beerCountryCount.Count > 0 ? beerCountryCount.Max(item => item.Value) : 0);
 
             BeerCountryCount = beerCountryCount;
-            BeerCountryRating = StatisticsCalculation.GetAverageRatingByCheckinIds(checkins, beerCountryCheckinIds);
+            BeerCountryRating = statisticsCalculation.GetAverageRatingByCheckinIds(beerCountryCheckinIds);
         }
 
         private void SetServingType()
         {
-            List<Checkin> checkins = untappdService.GetCheckins();
-            List<KeyValue<string, List<long>>> servingTypeByCheckinIds = StatisticsCalculation.GetServingTypeByCheckinIds(checkins, DefaultValues.DefaultServingType);
-            List<KeyValue<string, int>> servingTypeCount = StatisticsCalculation.GetListCount(servingTypeByCheckinIds);
+            List<KeyValue<string, List<long>>> servingTypeByCheckinIds = statisticsCalculation.GetServingTypeByCheckinIds(DefaultValues.DefaultServingType);
+            List<KeyValue<string, int>> servingTypeCount = statisticsCalculation.GetListCount(servingTypeByCheckinIds);
 
             HeightChartServingType = GetHeightChart(servingTypeCount.Count);
             MaxXAxisServingTypeCount = GetMaxXAxis(servingTypeCount.Count > 0 ? servingTypeCount.Max(item => item.Value): 0);
 
             ServingTypeCount = servingTypeCount;
-            ServingTypeRating = StatisticsCalculation.GetAverageRatingByCheckinIds(checkins, servingTypeByCheckinIds);
+            ServingTypeRating = statisticsCalculation.GetAverageRatingByCheckinIds(servingTypeByCheckinIds);
         }
 
         private void SetIBUToABV()
         {
             List<Beer> beers = untappdService.GetBeers();
-            IBUToABV = StatisticsCalculation.GetABVToIBU(beers);
-            ABVCount = StatisticsCalculation.GetRangeABVByCount(beers, 2.5, 15);
-            IBUCount = StatisticsCalculation.GetRangeIBUByCount(beers, 15, 100);
+            IBUToABV = statisticsCalculation.GetABVToIBU();
+            ABVCount = statisticsCalculation.GetRangeABVByCount(2.5, 15);
+            IBUCount = statisticsCalculation.GetRangeIBUByCount(15, 100);
         }
 
         private int GetHeightChart(int count)
