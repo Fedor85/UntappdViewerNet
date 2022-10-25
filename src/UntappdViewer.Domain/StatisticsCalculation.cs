@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using UntappdViewer.Domain.Models;
 using UntappdViewer.Models;
+using UntappdViewer.Models.Different;
 using UntappdViewer.Utils;
 
 namespace UntappdViewer.Domain
@@ -209,10 +209,10 @@ namespace UntappdViewer.Domain
             return keyValues;
         }
 
-        public static List<KeyValue<string, int>> GetRangeABVByCount(List<Beer> beers, double range, double maxValue)
+        public static List<KeyValueParam<string, int>> GetRangeABVByCount(List<Beer> beers, double range, double maxValue)
         {
             if (!beers.Any())
-                return new List<KeyValue<string, int>>();
+                return new List<KeyValueParam<string, int>>();
 
             List<double> abvs = beers.Select(item => MathHelper.GetCeilingByStep(item.ABV, range)).Distinct().ToList();
             abvs.Sort();
@@ -228,11 +228,11 @@ namespace UntappdViewer.Domain
             return GetRangeNameToCount(abvCount);
         }
 
-        public static List<KeyValue<string, int>> GetRangeIBUByCount(List<Beer> beers, double range, double maxValue)
+        public static List<KeyValueParam<string, int>> GetRangeIBUByCount(List<Beer> beers, double range, double maxValue)
         {
             IEnumerable<Beer> currentBeers = beers.Where(item => item.IBU.HasValue);
             if (!currentBeers.Any())
-                return new List<KeyValue<string, int>>(); ;
+                return new List<KeyValueParam<string, int>>(); ;
 
             List<double> ibus = currentBeers.Select(item => MathHelper.GetCeilingByStep(item.IBU.Value, range)).Distinct().ToList();
             ibus.Sort();
@@ -258,16 +258,16 @@ namespace UntappdViewer.Domain
             }
         }
 
-        private static List<KeyValue<string, int>> GetRangeNameToCount(List<KeyValue<double, int>> items)
+        private static List<KeyValueParam<string, int>> GetRangeNameToCount(List<KeyValue<double, int>> items)
         {
-            List<KeyValue<string, int>> keyValues = new List<KeyValue<string, int>>();
+            List<KeyValueParam<string, int>> keyValues = new List<KeyValueParam<string, int>>();
             int count = items.Count;
             for (int i = 0; i < count; i++)
             {
                 string prefix = i == items.Count - 1 ? ">" : String.Empty;
                 string start = i == 0 ? "0" : items[i - 1].Key.ToString();
                 string end = i != items.Count - 1 ? $"-{items[i].Key}" : String.Empty;
-                KeyValue<string, int> keyValue = new KeyValue<string, int>($"{prefix}{start}{end}", items[i].Value);
+                KeyValueParam<string, int> keyValue = new KeyValueParam<string, int>($"{prefix}{start}{end}", items[i].Value);
                 keyValue.Parameters.Add(ParameterNames.Index, i);
                 keyValue.Parameters.Add(ParameterNames.Count, count);
                 keyValues.Add(keyValue);

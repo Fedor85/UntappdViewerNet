@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows.Data;
 using System.Windows.Media;
 using UntappdViewer.Domain;
-using UntappdViewer.Domain.Models;
+using UntappdViewer.Models.Different;
 using UntappdViewer.Utils;
 
 namespace UntappdViewer.Different.Helpers

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace UntappdViewer.Domain.Models
+namespace UntappdViewer.Models.Different
 {
     public class ParametersContainer
     {

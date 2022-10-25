@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using UntappdViewer.Domain;
-using UntappdViewer.Domain.Models;
 using UntappdViewer.Models;
+using UntappdViewer.Models.Different;
 using UntappdViewer.Utils;
 
 namespace UntappdViewer.Test

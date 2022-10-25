@@ -41,6 +41,9 @@
     <Compile Include="Brewery.cs" />
     <Compile Include="Checkin.cs" />
     <Compile Include="CheckinsContainer.cs" />
+    <Compile Include="Different\KeyValue.cs" />
+    <Compile Include="Different\KeyValueParam.cs" />
+    <Compile Include="Different\ParametersContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Untappd.cs" />
     <Compile Include="Venue.cs" />

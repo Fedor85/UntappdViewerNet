@@ -45,8 +45,6 @@
     <Compile Include="Mappers\CheckinParser\ParameterNames.cs" />
     <Compile Include="Mappers\CheckinParser\ParameterNumber.cs" />
     <Compile Include="Mappers\CheckinParser\ParameterValue.cs" />
-    <Compile Include="Models\KeyValue.cs" />
-    <Compile Include="Models\ParametersContainer.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using UntappdViewer.Domain.Models;
 using UntappdViewer.Models;
+using UntappdViewer.Models.Different;
 using UntappdViewer.Utils;
 using UntappdViewer.Views.Controls.ViewModel;
 
