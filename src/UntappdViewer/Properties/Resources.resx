@@ -531,4 +531,14 @@
     <value>IBU</value>
     <comment>en-en</comment>
   </data>
+  <data name="noun_pint_glass" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\noun_pint_glass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sad_face" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sad_face.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Empty" xml:space="preserve">
+    <value>Empty</value>
+    <comment>en-en</comment>
+  </data>
 </root>

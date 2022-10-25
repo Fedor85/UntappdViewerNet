@@ -468,6 +468,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Empty.
+        /// </summary>
+        public static string Empty {
+            get {
+                return ResourceManager.GetString("Empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap empty_1x1 {
@@ -710,6 +719,16 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap noun_pint_glass {
+            get {
+                object obj = ResourceManager.GetObject("noun_pint_glass", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to offset.
         /// </summary>
         public static string Offset {
@@ -799,6 +818,16 @@ namespace UntappdViewer.Properties {
         public static string RenameProject {
             get {
                 return ResourceManager.GetString("RenameProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap sad_face {
+            get {
+                object obj = ResourceManager.GetObject("sad_face", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

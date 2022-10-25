@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="UntappdViewer.Views.EmptyContent"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:properties="clr-namespace:UntappdViewer.Properties"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="400">
+    <Grid Opacity="0.7" Width="200">
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" >
+            <Image Source="..\Resources\sad_face.png" Stretch="None"/>
+            <TextBox Text="{x:Static properties:Resources.Empty}" FontWeight="Bold" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                     IsReadOnly="True" IsHitTestVisible="false" Background="Transparent" BorderBrush="Transparent"/>
+        </StackPanel>
+        <Image Source="..\Resources\noun_pint_glass.png"/>
+    </Grid>
+</UserControl>

@@ -28,6 +28,8 @@ namespace UntappdViewer.Interfaces.Services
 
         bool IsDirtyUntappd();
 
+        bool IsEmptyUntappd();
+
         void ResetСhanges();
 
         string GetUntappdUserName();

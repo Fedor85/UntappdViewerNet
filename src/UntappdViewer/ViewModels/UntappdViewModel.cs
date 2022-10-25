@@ -49,7 +49,13 @@ namespace UntappdViewer.ViewModels
             moduleManager.LoadModule(typeof(TreeModue).Name);
             ActivateView(RegionNames.TreeRegion, typeof(Tree));
 
-            if(!String.IsNullOrEmpty(untappdService.FilePath))
+            if (untappdService.IsEmptyUntappd())
+            {
+                moduleManager.LoadModule(typeof(EmptyContentModule).Name);
+                ActivateView(RegionNames.ContentRegion, typeof(EmptyContent));
+            }
+
+            if (!String.IsNullOrEmpty(untappdService.FilePath))
                 interactionRequestService.ShowMessageOnStatusBar(CommunicationHelper.GetLoadingMessage(untappdService.FilePath));
         }
 

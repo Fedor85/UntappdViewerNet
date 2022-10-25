@@ -121,6 +121,7 @@
     <Compile Include="Different\Helpers\IValueConverters\ServingTypeConverter.cs" />
     <Compile Include="Different\Helpers\UIHelper.cs" />
     <Compile Include="Different\UntappdEntity.cs" />
+    <Compile Include="Modules\EmptyContentModule.cs" />
     <Compile Include="Modules\StatisticsProjectModule.cs" />
     <Compile Include="ViewModels\LoadingViewModel.cs" />
     <Compile Include="ViewModels\StatisticsProjectViewModel.cs" />
@@ -196,6 +197,9 @@
     </Compile>
     <Compile Include="Views\Controls\ZoomBorder.cs" />
     <Compile Include="Different\Behaviors\Synchronised\SynchronisedScrollToken.cs" />
+    <Compile Include="Views\EmptyContent.xaml.cs">
+      <DependentUpon>EmptyContent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\GalleryProject.xaml.cs">
       <DependentUpon>GalleryProject.xaml</DependentUpon>
     </Compile>
@@ -275,6 +279,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Controls\StarRating\StarRatingControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EmptyContent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -503,6 +511,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\earth_planet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\noun_pint_glass.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\sad_face.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

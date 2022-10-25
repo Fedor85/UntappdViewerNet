@@ -114,6 +114,11 @@ namespace UntappdViewer.Domain.Services
             return Untappd.IsСhanges();
         }
 
+        public bool IsEmptyUntappd()
+        {
+            return Untappd.CheckinsContainer.Checkins.Count == 0;
+        }
+
         public void ResetСhanges()
         {
             Untappd.ResetСhanges();
