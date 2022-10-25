@@ -17,7 +17,7 @@ namespace UntappdViewer.Reporting
             return await Task.Run(() => CreateAllCheckinsReport(checkins, directory));
         }
 
-        public string CreateStatisticsReport(Untappd untappd, string directory)
+        public string CreateStatisticsReport(IStatisticsCalculation statisticsCalculation, string directory)
         {
             const string reportName = "Statistics";
             Workbook workbook = GetWorkbook(reportName);

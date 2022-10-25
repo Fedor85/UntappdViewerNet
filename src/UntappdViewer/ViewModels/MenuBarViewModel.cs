@@ -361,7 +361,20 @@ namespace UntappdViewer.ViewModels
 
         private void StatisticsProjectReport()
         {
-            string report = reportingService.CreateStatisticsReport(untappdService.Untappd, untappdService.GetReportsDirectory());
+            try
+            {
+                string reportPath = reportingService.CreateStatisticsReport(untappdService.GetStatisticsCalculation(), untappdService.GetReportsDirectory());
+                System.Diagnostics.Process.Start(reportPath);
+            }
+            catch (Exception ex)
+            {
+                interactionRequestService.ShowError(Properties.Resources.Error, StringHelper.GetFullExceptionMessage(ex));
+            }
+            finally
+            {
+                LoadingChangeActivity(false);
+            }
+          
         }
 
         private async void CheckinsProjectReportAsync()

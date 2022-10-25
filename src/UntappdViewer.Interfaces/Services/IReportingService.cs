@@ -10,6 +10,6 @@ namespace UntappdViewer.Interfaces.Services
 
         string CreateAllCheckinsReport(List<Checkin> checkins, string directory);
 
-        string CreateStatisticsReport(Untappd untappd, string directory);
+        string CreateStatisticsReport(IStatisticsCalculation statisticsCalculation, string directory);
     }
 }
