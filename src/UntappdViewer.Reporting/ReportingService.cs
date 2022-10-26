@@ -32,6 +32,8 @@ namespace UntappdViewer.Reporting
             FillStyleCountRating(workbook.Worksheets["StyleCountRating"], statisticsCalculation);
             FillCountryCountRating(workbook.Worksheets["CountryCountRating"], statisticsCalculation);
             FillServingTypeCountRating(workbook.Worksheets["ServingTypeCountRating"], statisticsCalculation);
+            FillIBUToABV(workbook.Worksheets["IBUToABV"], statisticsCalculation);
+
             workbook.SaveToFile(outputPath);
             return outputPath;
         }
@@ -161,6 +163,19 @@ namespace UntappdViewer.Reporting
                 if (beerTypeRating != null)
                     sheet[indexRow, 3].Value2 = beerTypeRating.Value;
 
+                indexRow++;
+            }
+        }
+
+        private void FillIBUToABV(Worksheet sheet, IStatisticsCalculation statisticsCalculation)
+        {
+            List<KeyValue<double, double>> iBUToABV = statisticsCalculation.GetABVToIBU();
+            int indexRow = 2;
+            foreach (KeyValue<double, double> keyValue in iBUToABV)
+            {
+                sheet.ShowRow(indexRow);
+                sheet[indexRow, 1].Value2 = keyValue.Key;
+                sheet[indexRow, 2].Value2 = keyValue.Value;
                 indexRow++;
             }
         }
