@@ -7,6 +7,8 @@ namespace UntappdViewer.Interfaces.Services
     {
         int BeerTypeCountByOther { get; }
 
+        string DefaultServingType { get; }
+
         int GetCountrysCount();
 
         List<KeyValue<double, int>> GetChekinsRatingByCount();

@@ -8,6 +8,8 @@
 
         public const string OtherNameGroupBeerType = "Other";
 
+        public const string DefaultServingType = "NoName";
+
         public const int BeerTypeCountByOther = 15;
     }
 }

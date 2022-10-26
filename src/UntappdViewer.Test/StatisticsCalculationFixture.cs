@@ -181,10 +181,10 @@ namespace UntappdViewer.Test
         [Test]
         public void TestGetServingTypeByCheckinIds()
         {
-            List<KeyValue<string, List<long>>> servingTypeCheckinIds = statisticsCalculation.GetServingTypeByCheckinIds(DefaultValues.DefaultServingType);
+            List<KeyValue<string, List<long>>> servingTypeCheckinIds = statisticsCalculation.GetServingTypeByCheckinIds(statisticsCalculation.DefaultServingType);
 
             Assert.AreEqual(5, servingTypeCheckinIds.Count);
-            Assert.AreEqual(DefaultValues.DefaultServingType, servingTypeCheckinIds[0].Key);
+            Assert.AreEqual(statisticsCalculation.DefaultServingType, servingTypeCheckinIds[0].Key);
             Assert.AreEqual(4, servingTypeCheckinIds[0].Value.Count);
             Assert.AreEqual("Bottle", servingTypeCheckinIds[4].Key);
             Assert.AreEqual(861, servingTypeCheckinIds[4].Value.Count);

@@ -20,6 +20,7 @@ namespace UntappdViewer.Domain
         }
 
         public int BeerTypeCountByOther { get { return DefaultValues.BeerTypeCountByOther; } }
+        public string DefaultServingType { get { return DefaultValues.DefaultServingType; } }
 
         public int GetCountrysCount()
         {

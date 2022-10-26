@@ -31,6 +31,7 @@ namespace UntappdViewer.Reporting
             FillChekinCountDate(workbook.Worksheets["ChekinCountDate"], statisticsCalculation);
             FillStyleCountRating(workbook.Worksheets["StyleCountRating"], statisticsCalculation);
             FillCountryCountRating(workbook.Worksheets["CountryCountRating"], statisticsCalculation);
+            FillServingTypeCountRating(workbook.Worksheets["ServingTypeCountRating"], statisticsCalculation);
             workbook.SaveToFile(outputPath);
             return outputPath;
         }
@@ -138,6 +139,25 @@ namespace UntappdViewer.Reporting
                 sheet[indexRow, 1].Value2 = beerCountryCount.Key;
                 sheet[indexRow, 2].Value2 = beerCountryCount.Value;
                 KeyValue<string, double> beerTypeRating = beerCountrysRating.FirstOrDefault(item => item.Key.Equals(beerCountryCount.Key));
+                if (beerTypeRating != null)
+                    sheet[indexRow, 3].Value2 = beerTypeRating.Value;
+
+                indexRow++;
+            }
+        }
+
+        private void FillServingTypeCountRating(Worksheet sheet, IStatisticsCalculation statisticsCalculation)
+        {
+            List<KeyValue<string, List<long>>> servingTypeByCheckinIds = statisticsCalculation.GetServingTypeByCheckinIds(statisticsCalculation.DefaultServingType);
+            List<KeyValue<string, int>> servingTypesCount = KeyValuesHelper.GetListCount(servingTypeByCheckinIds);
+            List<KeyValue<string, double>> servingTypesRating = statisticsCalculation.GetAverageRatingByCheckinIds(servingTypeByCheckinIds);
+            int indexRow = 2;
+            foreach (KeyValue<string, int> servingTypeCount in servingTypesCount)
+            {
+                sheet.ShowRow(indexRow);
+                sheet[indexRow, 1].Value2 = servingTypeCount.Key;
+                sheet[indexRow, 2].Value2 = servingTypeCount.Value;
+                KeyValue<string, double> beerTypeRating = servingTypesRating.FirstOrDefault(item => item.Key.Equals(servingTypeCount.Key));
                 if (beerTypeRating != null)
                     sheet[indexRow, 3].Value2 = beerTypeRating.Value;
 

@@ -486,7 +486,7 @@ namespace UntappdViewer.ViewModels
 
         private void SetServingType()
         {
-            List<KeyValue<string, List<long>>> servingTypeByCheckinIds = statisticsCalculation.GetServingTypeByCheckinIds(DefaultValues.DefaultServingType);
+            List<KeyValue<string, List<long>>> servingTypeByCheckinIds = statisticsCalculation.GetServingTypeByCheckinIds(statisticsCalculation.DefaultServingType);
             List<KeyValue<string, int>> servingTypeCount = KeyValuesHelper.GetListCount(servingTypeByCheckinIds);
 
             HeightChartServingType = GetHeightChart(servingTypeCount.Count);
