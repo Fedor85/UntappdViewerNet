@@ -45,5 +45,15 @@ namespace UntappdViewer.Infrastructure
             }
             return keyValues;
         }
+
+        public static List<KeyValue<TK, int>> GetListCount<TK, TV>(List<KeyValue<TK, List<TV>>> items)
+        {
+            List<KeyValue<TK, int>> keyValues = new List<KeyValue<TK, int>>();
+
+            foreach (KeyValue<TK, List<TV>> item in items)
+                keyValues.Add(new KeyValue<TK, int>(item.Key, item.Value.Count));
+
+            return keyValues;
+        }
     }
 }

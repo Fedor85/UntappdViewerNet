@@ -82,7 +82,7 @@ namespace UntappdViewer.Test
         [Test]
         public void TestGetBeerTypesByCheckinIdsGroupByCount()
         {
-            List<KeyValue<string, List<long>>> beerTypeCheckinIds = statisticsCalculation.GetBeerTypesByCheckinIdsGroupByCount();
+            List<KeyValue<string, List<long>>> beerTypeCheckinIds = statisticsCalculation.GetBeerTypesByCheckinIdsGroupByCount(statisticsCalculation.BeerTypeCountByOther);
 
             Assert.AreEqual(16, beerTypeCheckinIds.Count);
             Assert.AreEqual("Other", beerTypeCheckinIds[0].Key);
@@ -106,8 +106,8 @@ namespace UntappdViewer.Test
         [Test]
         public void TestGetListCount()
         {
-            List<KeyValue<string, List<long>>> beerTypeCheckinIds = statisticsCalculation.GetBeerTypesByCheckinIdsGroupByCount();
-            List<KeyValue<string, int>> beerTypesCount = statisticsCalculation.GetListCount(beerTypeCheckinIds);
+            List<KeyValue<string, List<long>>> beerTypeCheckinIds = statisticsCalculation.GetBeerTypesByCheckinIdsGroupByCount(statisticsCalculation.BeerTypeCountByOther);
+            List<KeyValue<string, int>> beerTypesCount = KeyValuesHelper.GetListCount(beerTypeCheckinIds);
 
             Assert.AreEqual(16, beerTypesCount.Count);
             Assert.AreEqual("Other", beerTypesCount[0].Key);
@@ -116,7 +116,7 @@ namespace UntappdViewer.Test
             Assert.AreEqual(26, beerTypesCount[15].Value);
 
             List<KeyValue<string, List<long>>> beerCountryCheckinIds = statisticsCalculation.GetCountrysByCheckinIds();
-            List<KeyValue<string, int>> beerCountrysCount = statisticsCalculation.GetListCount(beerCountryCheckinIds);
+            List<KeyValue<string, int>> beerCountrysCount = KeyValuesHelper.GetListCount(beerCountryCheckinIds);
 
             Assert.AreEqual(38, beerCountrysCount.Count);
             Assert.AreEqual("United States", beerCountrysCount[0].Key);
@@ -159,7 +159,7 @@ namespace UntappdViewer.Test
         [Test]
         public void TestGetAverageRatingByCheckinIds()
         {
-            List<KeyValue<string, List<long>>> beerTypeCheckinIds = statisticsCalculation.GetBeerTypesByCheckinIdsGroupByCount();
+            List<KeyValue<string, List<long>>> beerTypeCheckinIds = statisticsCalculation.GetBeerTypesByCheckinIdsGroupByCount(statisticsCalculation.BeerTypeCountByOther);
             List<KeyValue<string, double>> beerTypeRating = statisticsCalculation.GetAverageRatingByCheckinIds(beerTypeCheckinIds);
 
             Assert.AreEqual(16, beerTypeRating.Count);

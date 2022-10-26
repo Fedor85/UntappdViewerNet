@@ -5,6 +5,8 @@ namespace UntappdViewer.Interfaces.Services
 {
     public interface IStatisticsCalculation
     {
+        int BeerTypeCountByOther { get; }
+
         int GetCountrysCount();
 
         List<KeyValue<double, int>> GetChekinsRatingByCount();
@@ -13,13 +15,11 @@ namespace UntappdViewer.Interfaces.Services
 
         List<KeyValue<string, int>> GetDateChekinsByCount();
 
-        List<KeyValue<string, List<long>>> GetBeerTypesByCheckinIdsGroupByCount();
+        List<KeyValue<string, List<long>>> GetBeerTypesByCheckinIdsGroupByCount(int countByOther);
 
         List<KeyValue<string, List<long>>> GetCountrysByCheckinIds();
 
         List<KeyValue<string, List<long>>> GetServingTypeByCheckinIds(string defaultServingType);
-
-        List<KeyValue<string, int>> GetListCount(List<KeyValue<string, List<long>>> items);
 
         List<KeyValue<string, double>> GetAverageRatingByCheckinIds(List<KeyValue<string, List<long>>> checkinIds);
 

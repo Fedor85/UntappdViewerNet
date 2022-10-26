@@ -29,7 +29,7 @@ namespace UntappdViewer.Reporting
 
             FillBeerChekinRatingScore(workbook.Worksheets["BeerChekinRatingScore"], statisticsCalculation);
             FillChekinCountDate(workbook.Worksheets["ChekinCountDate"], statisticsCalculation);
-
+            FillStyleCountRating(workbook.Worksheets["StyleCountRating"], statisticsCalculation);
             workbook.SaveToFile(outputPath);
             return outputPath;
         }
@@ -101,6 +101,25 @@ namespace UntappdViewer.Reporting
                 KeyValue<string, int> accumulateCountValue = accumulateCountValues.FirstOrDefault(item => item.Key.Equals(dateChekinCount.Key));
                 if (accumulateCountValue != null)
                     sheet[indexRow, 3].Value2 = accumulateCountValue.Value;
+
+                indexRow++;
+            }
+        }
+
+        private void FillStyleCountRating(Worksheet sheet, IStatisticsCalculation statisticsCalculation)
+        {
+            List<KeyValue<string, List<long>>> beerTypeCheckinIds = statisticsCalculation.GetBeerTypesByCheckinIdsGroupByCount(statisticsCalculation.BeerTypeCountByOther);
+            List<KeyValue<string, int>> beerTypesCount = KeyValuesHelper.GetListCount(beerTypeCheckinIds);
+            List<KeyValue<string, double>> beerTypesRating = statisticsCalculation.GetAverageRatingByCheckinIds(beerTypeCheckinIds);
+            int indexRow = 2;
+            foreach (KeyValue<string, int> beerTypeCount in beerTypesCount)
+            {
+                sheet.ShowRow(indexRow);
+                sheet[indexRow, 1].Value2 = beerTypeCount.Key;
+                sheet[indexRow, 2].Value2 = beerTypeCount.Value;
+                KeyValue<string, double> beerTypeRating = beerTypesRating.FirstOrDefault(item => item.Key.Equals(beerTypeCount.Key));
+                if (beerTypeRating != null)
+                    sheet[indexRow, 3].Value2 = beerTypeRating.Value;
 
                 indexRow++;
             }

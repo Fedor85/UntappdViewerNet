@@ -462,8 +462,8 @@ namespace UntappdViewer.ViewModels
 
         private void SetBeerType()
         {
-            List<KeyValue<string, List<long>>> beerTypeCheckinIds = statisticsCalculation.GetBeerTypesByCheckinIdsGroupByCount();
-            List <KeyValue<string, int>> beerTypeCount = statisticsCalculation.GetListCount(beerTypeCheckinIds);
+            List<KeyValue<string, List<long>>> beerTypeCheckinIds = statisticsCalculation.GetBeerTypesByCheckinIdsGroupByCount(statisticsCalculation.BeerTypeCountByOther);
+            List <KeyValue<string, int>> beerTypeCount = KeyValuesHelper.GetListCount(beerTypeCheckinIds);
 
             HeightChartBeerType = GetHeightChart(beerTypeCount.Count);
             MaxXAxisBeerTypeCount = GetMaxXAxis(beerTypeCount.Count > 0 ? beerTypeCount.Max(item => item.Value): 0);
@@ -475,7 +475,7 @@ namespace UntappdViewer.ViewModels
         private void SetBeerCountry()
         {
             List<KeyValue<string, List<long>>> beerCountryCheckinIds = statisticsCalculation.GetCountrysByCheckinIds();
-            List<KeyValue<string, int>> beerCountryCount = statisticsCalculation.GetListCount(beerCountryCheckinIds);
+            List<KeyValue<string, int>> beerCountryCount = KeyValuesHelper.GetListCount(beerCountryCheckinIds);
 
             HeightChartBeerCountry = GetHeightChart(beerCountryCount.Count);
             MaxXAxisBeerCountryCount = GetMaxXAxis(beerCountryCount.Count > 0 ? beerCountryCount.Max(item => item.Value) : 0);
@@ -487,7 +487,7 @@ namespace UntappdViewer.ViewModels
         private void SetServingType()
         {
             List<KeyValue<string, List<long>>> servingTypeByCheckinIds = statisticsCalculation.GetServingTypeByCheckinIds(DefaultValues.DefaultServingType);
-            List<KeyValue<string, int>> servingTypeCount = statisticsCalculation.GetListCount(servingTypeByCheckinIds);
+            List<KeyValue<string, int>> servingTypeCount = KeyValuesHelper.GetListCount(servingTypeByCheckinIds);
 
             HeightChartServingType = GetHeightChart(servingTypeCount.Count);
             MaxXAxisServingTypeCount = GetMaxXAxis(servingTypeCount.Count > 0 ? servingTypeCount.Max(item => item.Value): 0);

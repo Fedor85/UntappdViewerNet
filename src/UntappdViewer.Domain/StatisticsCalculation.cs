@@ -19,6 +19,8 @@ namespace UntappdViewer.Domain
             this.checkinsContainer = checkinsContainer;
         }
 
+        public int BeerTypeCountByOther { get { return DefaultValues.BeerTypeCountByOther; } }
+
         public int GetCountrysCount()
         {
             return GetCountrys(checkinsContainer.Checkins).Count;
@@ -77,7 +79,7 @@ namespace UntappdViewer.Domain
             return dates.Select(keyValue => new KeyValue<string, int>($"{keyValue.Key:MM}.{keyValue.Key:yy}", keyValue.Value)).ToList();
         }
 
-        public List<KeyValue<string, List<long>>> GetBeerTypesByCheckinIdsGroupByCount()
+        public List<KeyValue<string, List<long>>> GetBeerTypesByCheckinIdsGroupByCount(int countByOther)
         {
             List<KeyValue<string, List<long>>> keyValues = new List<KeyValue<string, List<long>>>();
             if (!checkinsContainer.Checkins.Any())
@@ -100,7 +102,7 @@ namespace UntappdViewer.Domain
 
 
             List<string> removeKeys = new List<string>();
-            foreach (KeyValue<string, List<long>> keyValue in keyValues.Where(item => item.Value.Count <= DefaultValues.BeerTypeCountByOther))
+            foreach (KeyValue<string, List<long>> keyValue in keyValues.Where(item => item.Value.Count <= countByOther))
             {
                 removeKeys.Add(keyValue.Key);
                 other.Value.AddRange(keyValue.Value);
@@ -159,16 +161,6 @@ namespace UntappdViewer.Domain
 
             if (checkinDefaultServingType.Value.Count > 0)
                 keyValues.Insert(0, checkinDefaultServingType);
-
-            return keyValues;
-        }
-
-        public List<KeyValue<string, int>> GetListCount(List<KeyValue<string, List<long>>> items)
-        {
-            List<KeyValue<string, int>> keyValues = new List<KeyValue<string, int>>();
-
-            foreach (KeyValue<string, List<long>> item in items)
-                keyValues.Add(new KeyValue<string, int>(item.Key, item.Value.Count));
 
             return keyValues;
         }
