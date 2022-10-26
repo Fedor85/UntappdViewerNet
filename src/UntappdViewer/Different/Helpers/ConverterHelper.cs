@@ -85,14 +85,5 @@ namespace UntappdViewer.Helpers
         }
 
         #endregion
-
-        public static Dictionary<double, int> KeyValuesToDictionary(List<KeyValue<double, int>> keyValues)
-        {
-            Dictionary<double, int> dictionary = new Dictionary<double, int>();
-            foreach (KeyValue<double, int> keyValue in keyValues)
-                dictionary.Add(keyValue.Key, keyValue.Value);
-
-            return dictionary;
-        }
     }
 }

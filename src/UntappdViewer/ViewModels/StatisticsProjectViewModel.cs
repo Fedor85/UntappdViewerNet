@@ -6,7 +6,7 @@ using System.Windows.Input;
 using Prism.Commands;
 using Prism.Modularity;
 using Prism.Regions;
-using UntappdViewer.Helpers;
+using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models.Different;
 using UntappdViewer.Modules;
@@ -440,10 +440,10 @@ namespace UntappdViewer.ViewModels
             MaxYAxisRatingScore = Math.Max(chekinMaxCount, beerMaxCount) + 100;
 
             ChekinRatingScore = chekinRatingScore;
-            AverageChekinRating = Math.Round(MathHelper.GetAverageValue(ConverterHelper.KeyValuesToDictionary(chekinRatingScore)), 2);
+            AverageChekinRating = Math.Round(MathHelper.GetAverageValue(KeyValuesHelper.KeyValuesToDictionary(chekinRatingScore)), 2);
 
             BeerRatingScore = beerRatingScore;
-            AverageBeerRating = Math.Round(MathHelper.GetAverageValue(ConverterHelper.KeyValuesToDictionary(beerRatingScore)), 2);
+            AverageBeerRating = Math.Round(MathHelper.GetAverageValue(KeyValuesHelper.KeyValuesToDictionary(beerRatingScore)), 2);
         }
 
         private void SetDataCheckins()
@@ -498,7 +498,6 @@ namespace UntappdViewer.ViewModels
 
         private void SetIBUToABV()
         {
-            List<Beer> beers = untappdService.GetBeers();
             IBUToABV = statisticsCalculation.GetABVToIBU();
             ABVCount = statisticsCalculation.GetRangeABVByCount(2.5, 15);
             IBUCount = statisticsCalculation.GetRangeIBUByCount(15, 100);

@@ -53,6 +53,10 @@
     <EmbeddedResource Include="Resources\AllCheckinsTemplate.xlsx" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\UntappdViewer.Infrastructure\UntappdViewer.Infrastructure.csproj">
+      <Project>{BDC0B7DD-2833-4B95-9B93-EA520003EBE1}</Project>
+      <Name>UntappdViewer.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UntappdViewer.Interfaces\UntappdViewer.Interfaces.csproj">
       <Project>{bb613be0-ae21-4a41-836a-c904d16444f6}</Project>
       <Name>UntappdViewer.Interfaces</Name>
@@ -60,6 +64,10 @@
     <ProjectReference Include="..\UntappdViewer.Models\UntappdViewer.Models.csproj">
       <Project>{B1584484-7648-4349-B8F8-47352DD85FF1}</Project>
       <Name>UntappdViewer.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UntappdViewer.Utils\UntappdViewer.Utils.csproj">
+      <Project>{5FA116C9-7571-494C-A74D-7E121857FFE9}</Project>
+      <Name>UntappdViewer.Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

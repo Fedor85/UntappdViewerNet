@@ -5,8 +5,12 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Spire.Xls;
+using Spire.Xls.Core.Spreadsheet;
+using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
+using UntappdViewer.Models.Different;
+using UntappdViewer.Utils;
 
 namespace UntappdViewer.Reporting
 {
@@ -22,6 +26,8 @@ namespace UntappdViewer.Reporting
             const string reportName = "Statistics";
             Workbook workbook = GetWorkbook(reportName);
             string outputPath = Path.Combine(directory, $"{reportName}.xlsx");
+
+            FillBeerChekinRatingScore(workbook.Worksheets["BeerChekinRatingScore"], statisticsCalculation);
 
             workbook.SaveToFile(outputPath);
             return outputPath;
@@ -58,6 +64,37 @@ namespace UntappdViewer.Reporting
             return outputPath;
         }
 
+        private void FillBeerChekinRatingScore(Worksheet sheet, IStatisticsCalculation statisticsCalculation)
+        {
+            List<KeyValue<double, int>> beerRatingScore = statisticsCalculation.GetBeersRatingByCount();
+            List<KeyValue<double, int>> chekinRatingScore = statisticsCalculation.GetChekinsRatingByCount();
+
+            List<double> commonRatingScore = KeyValuesHelper.GetDistinctKeys(KeyValuesHelper.GetMerged(beerRatingScore, chekinRatingScore));
+            commonRatingScore.Sort();
+
+            SetValueByNameRanges(sheet.Workbook, "BeerAverageRating", Math.Round(MathHelper.GetAverageValue(KeyValuesHelper.KeyValuesToDictionary(beerRatingScore)), 2));
+            SetValueByNameRanges(sheet.Workbook, "ChekinAverageRating", Math.Round(MathHelper.GetAverageValue(KeyValuesHelper.KeyValuesToDictionary(chekinRatingScore)), 2));
+            sheet.CalculateAllValue();
+
+            int indexRow = 2;
+            foreach (double ratingScore in commonRatingScore)
+            {
+                sheet.ShowRow(indexRow);
+                sheet[indexRow, 1].Value2 = ratingScore;
+                sheet[indexRow, 2].Value2 = beerRatingScore.Where(item => MathHelper.DoubleCompare(item.Key, ratingScore)).Sum(item => item.Value);
+                sheet[indexRow, 3].Value2 = chekinRatingScore.Where(item => MathHelper.DoubleCompare(item.Key, ratingScore)).Sum(item => item.Value);
+                indexRow++;
+            }
+        }
+
+        private void SetValueByNameRanges(Workbook workbook, string nameRange, object value)
+        {
+            XlsName range = workbook.NameRanges.GetByName(nameRange) as XlsName;
+            if (range == null || range.Count == 0)
+                return;
+
+            range.CellList[0].Value2 = value;
+        }
 
         private Workbook GetWorkbook(string reportName)
         {
