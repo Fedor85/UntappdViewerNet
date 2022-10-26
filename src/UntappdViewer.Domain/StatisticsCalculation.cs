@@ -173,23 +173,6 @@ namespace UntappdViewer.Domain
             return keyValues;
         }
 
-        public List<KeyValue<string, int>> GetAccumulateValues(List<KeyValue<string, int>> items)
-        {
-            List<KeyValue<string, int>> keyValues = new List<KeyValue<string, int>>();
-            if (!items.Any())
-                return keyValues;
-
-            KeyValue<string, int> firstItem = items[0];
-            keyValues.Add(new KeyValue<string, int>(firstItem.Key, firstItem.Value));
-            for (int i = 1; i < items.Count; i++)
-            {
-                KeyValue<string, int> previousItem = keyValues[i -1];
-                KeyValue<string, int> currentItem = items[i];
-                keyValues.Add(new KeyValue<string, int>(currentItem.Key, currentItem.Value + previousItem.Value));
-            }
-            return keyValues;
-        }
-
         public List<KeyValue<string, double>> GetAverageRatingByCheckinIds(List<KeyValue<string, List<long>>> checkinIds)
         {
             List<KeyValue<string, double>> keyValues = new List<KeyValue<string, double>>();

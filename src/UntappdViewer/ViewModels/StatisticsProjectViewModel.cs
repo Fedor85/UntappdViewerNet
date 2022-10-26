@@ -457,7 +457,7 @@ namespace UntappdViewer.ViewModels
             AverageChekinsQuantity = Math.Round(MathHelper.GetAverageCountByNow(dateCheckins), 2);
             AverageUniqueChekinsQuantity = Math.Round(MathHelper.GetAverageCountByNow(untappdService.GetCheckins(true).Select(item => item.CreatedDate).ToList()), 2);
 
-            DateChekinsAccumulateCount = statisticsCalculation.GetAccumulateValues(dateChekinsCount);
+            DateChekinsAccumulateCount = KeyValuesHelper.GetAccumulateValues(dateChekinsCount);
         }
 
         private void SetBeerType()

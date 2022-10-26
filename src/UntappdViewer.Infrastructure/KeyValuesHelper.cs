@@ -28,5 +28,22 @@ namespace UntappdViewer.Infrastructure
 
             return list;
         }
+
+        public static List<KeyValue<T, int>> GetAccumulateValues<T>(List<KeyValue<T, int>> items)
+        {
+            List<KeyValue<T, int>> keyValues = new List<KeyValue<T, int>>();
+            if (!items.Any())
+                return keyValues;
+
+            KeyValue<T, int> firstItem = items[0];
+            keyValues.Add(new KeyValue<T, int>(firstItem.Key, firstItem.Value));
+            for (int i = 1; i < items.Count; i++)
+            {
+                KeyValue<T, int> previousItem = keyValues[i - 1];
+                KeyValue<T, int> currentItem = items[i];
+                keyValues.Add(new KeyValue<T, int>(currentItem.Key, currentItem.Value + previousItem.Value));
+            }
+            return keyValues;
+        }
     }
 }

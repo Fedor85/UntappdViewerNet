@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using UntappdViewer.Domain;
+using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
 using UntappdViewer.Models.Different;
@@ -128,7 +129,7 @@ namespace UntappdViewer.Test
         public void TestGetAccumulateValues()
         {
             List<KeyValue<string, int>> dataChekins = statisticsCalculation.GetDateChekinsByCount();
-            List<KeyValue<string, int>> dateChekinsAccumulateCount = statisticsCalculation.GetAccumulateValues(dataChekins);
+            List<KeyValue<string, int>> dateChekinsAccumulateCount = KeyValuesHelper.GetAccumulateValues(dataChekins);
 
             Assert.AreEqual(65, dataChekins.Count);
             Assert.AreEqual(65, dateChekinsAccumulateCount.Count);

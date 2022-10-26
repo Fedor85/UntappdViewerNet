@@ -28,6 +28,7 @@ namespace UntappdViewer.Reporting
             string outputPath = Path.Combine(directory, $"{reportName}.xlsx");
 
             FillBeerChekinRatingScore(workbook.Worksheets["BeerChekinRatingScore"], statisticsCalculation);
+            FillChekinCountDate(workbook.Worksheets["ChekinCountDate"], statisticsCalculation);
 
             workbook.SaveToFile(outputPath);
             return outputPath;
@@ -83,6 +84,24 @@ namespace UntappdViewer.Reporting
                 sheet[indexRow, 1].Value2 = ratingScore;
                 sheet[indexRow, 2].Value2 = beerRatingScore.Where(item => MathHelper.DoubleCompare(item.Key, ratingScore)).Sum(item => item.Value);
                 sheet[indexRow, 3].Value2 = chekinRatingScore.Where(item => MathHelper.DoubleCompare(item.Key, ratingScore)).Sum(item => item.Value);
+                indexRow++;
+            }
+        }
+
+        private void FillChekinCountDate(Worksheet sheet, IStatisticsCalculation statisticsCalculation)
+        {
+            List<KeyValue<string, int>> dateChekinsCount = statisticsCalculation.GetDateChekinsByCount();
+            List<KeyValue<string, int>> accumulateCountValues = KeyValuesHelper.GetAccumulateValues(dateChekinsCount);
+            int indexRow = 2;
+            foreach (KeyValue<string, int> dateChekinCount in dateChekinsCount)
+            {
+                sheet.ShowRow(indexRow);
+                sheet[indexRow, 1].Value2 = dateChekinCount.Key;
+                sheet[indexRow, 2].Value2 = dateChekinCount.Value;
+                KeyValue<string, int> accumulateCountValue = accumulateCountValues.FirstOrDefault(item => item.Key.Equals(dateChekinCount.Key));
+                if (accumulateCountValue != null)
+                    sheet[indexRow, 3].Value2 = accumulateCountValue.Value;
+
                 indexRow++;
             }
         }

@@ -21,8 +21,6 @@ namespace UntappdViewer.Interfaces.Services
 
         List<KeyValue<string, int>> GetListCount(List<KeyValue<string, List<long>>> items);
 
-        List<KeyValue<string, int>> GetAccumulateValues(List<KeyValue<string, int>> items);
-
         List<KeyValue<string, double>> GetAverageRatingByCheckinIds(List<KeyValue<string, List<long>>> checkinIds);
 
         List<KeyValue<double, double>> GetABVToIBU();
