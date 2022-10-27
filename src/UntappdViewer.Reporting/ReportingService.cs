@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Spire.Xls;
+using Spire.Xls.Charts;
+using Spire.Xls.Core;
 using Spire.Xls.Core.Spreadsheet;
 using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
@@ -33,6 +36,8 @@ namespace UntappdViewer.Reporting
             FillCountryCountRating(workbook.Worksheets["CountryCountRating"], statisticsCalculation);
             FillServingTypeCountRating(workbook.Worksheets["ServingTypeCountRating"], statisticsCalculation);
             FillIBUToABV(workbook.Worksheets["IBUToABV"], statisticsCalculation);
+            FillABVCount(workbook.Worksheets["ABVCount"], statisticsCalculation);
+            FillIBUCount(workbook.Worksheets["IBUCount"], statisticsCalculation);
 
             workbook.SaveToFile(outputPath);
             return outputPath;
@@ -174,9 +179,41 @@ namespace UntappdViewer.Reporting
             foreach (KeyValue<double, double> keyValue in iBUToABV)
             {
                 sheet.ShowRow(indexRow);
-                sheet[indexRow, 1].Value2 = keyValue.Key;
+                sheet[indexRow, 1].Value2 = $"'{keyValue.Key}";
                 sheet[indexRow, 2].Value2 = keyValue.Value;
                 indexRow++;
+            }
+        }
+
+        private void FillABVCount(Worksheet sheet, IStatisticsCalculation statisticsCalculation)
+        {
+            List<KeyValueParam<string, int>> aBVCount = statisticsCalculation.GetRangeABVByCount(2.5, 15);
+            int indexRow = 2;
+            foreach (KeyValueParam<string, int> keyValue in aBVCount)
+            {
+                sheet.ShowRow(indexRow);
+                sheet[indexRow, 1].Value2 = $"'{keyValue.Key}";
+                sheet[indexRow, 2].Value2 = keyValue.Value;
+                indexRow++;
+            }
+        }
+
+        private void FillIBUCount(Worksheet sheet, IStatisticsCalculation statisticsCalculation)
+        {
+
+            List<KeyValueParam<string, int>> iBUCount = statisticsCalculation.GetRangeIBUByCount(15, 100);
+            int indexRow = 2;
+            foreach (KeyValueParam<string, int> keyValue in iBUCount)
+            {
+                sheet.ShowRow(indexRow);
+                sheet[indexRow, 1].Value2 = $"'{keyValue.Key}";
+                sheet[indexRow, 2].Value2 = keyValue.Value;
+                indexRow++;
+            }
+
+            foreach (IChart chart in sheet.Workbook.Charts)
+            {
+
             }
         }
 
