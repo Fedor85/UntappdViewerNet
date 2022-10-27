@@ -361,9 +361,21 @@ namespace UntappdViewer.ViewModels
 
         private void StatisticsProjectReport()
         {
+            if (!untappdService.IsUNTPProject())
+            {
+                interactionRequestService.ShowMessage(Properties.Resources.Warning, Properties.Resources.WarningMessageSaveProjectToUNTP);
+                return;
+            }
+
+            LoadingChangeActivity(true);
+            StatisticsProjectReportAsync();
+        }
+
+        private async void StatisticsProjectReportAsync()
+        {
             try
             {
-                string reportPath = reportingService.CreateStatisticsReport(untappdService.GetStatisticsCalculation(), untappdService.GetReportsDirectory());
+                string reportPath = await reportingService.CreateStatisticsReportAsync(untappdService.GetStatisticsCalculation(), untappdService.GetReportsDirectory());
                 System.Diagnostics.Process.Start(reportPath);
             }
             catch (Exception ex)

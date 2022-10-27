@@ -8,7 +8,9 @@ namespace UntappdViewer.Interfaces.Services
     {
         void SetPieGradien(IGradientHelper gradientHelper);
 
-         Task<string> CreateAllCheckinsReportrAsync(List<Checkin> checkins, string directory);
+        Task<string> CreateAllCheckinsReportrAsync(List<Checkin> checkins, string directory);
+
+        Task<string> CreateStatisticsReportAsync(IStatisticsCalculation statisticsCalculation, string directory);
 
         string CreateAllCheckinsReport(List<Checkin> checkins, string directory);
 

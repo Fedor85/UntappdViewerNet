@@ -33,32 +33,9 @@ namespace UntappdViewer.Reporting
             return await Task.Run(() => CreateAllCheckinsReport(checkins, directory));
         }
 
-        public string CreateStatisticsReport(IStatisticsCalculation statisticsCalculation, string directory)
+        public async Task<string> CreateStatisticsReportAsync(IStatisticsCalculation statisticsCalculation, string directory)
         {
-            const string reportName = "Statistics";
-            Workbook workbook = GetWorkbook(reportName);
-            string outputPath = Path.Combine(directory, $"{reportName}.xlsx");
-
-            FillBeerChekinRatingScore(workbook.Worksheets["BeerChekinRatingScore"], statisticsCalculation);
-            FillChekinCountDate(workbook.Worksheets["ChekinCountDate"], statisticsCalculation);
-            FillStyleCountRating(workbook.Worksheets["StyleCountRating"], statisticsCalculation);
-            FillCountryCountRating(workbook.Worksheets["CountryCountRating"], statisticsCalculation);
-            FillServingTypeCountRating(workbook.Worksheets["ServingTypeCountRating"], statisticsCalculation);
-            FillIBUToABV(workbook.Worksheets["IBUToABV"], statisticsCalculation);
-
-            Dictionary<string, int> pieCharts = new Dictionary<string, int>();
-            int aBVCount = FillABVCount(workbook.Worksheets["ABVCount"], statisticsCalculation);
-            if (aBVCount > 0)
-                pieCharts.Add("PieABV", aBVCount);
-
-            int iBUCount = FillIBUCount(workbook.Worksheets["IBUCount"], statisticsCalculation);
-            if (aBVCount > 0)
-                pieCharts.Add("PieIBU", iBUCount);
-
-            UpdatePieGradien(workbook.Worksheets["Statistics"], pieCharts);
-
-            workbook.SaveToFile(outputPath);
-            return outputPath;
+            return await Task.Run(() => CreateStatisticsReport(statisticsCalculation, directory));
         }
 
         public string CreateAllCheckinsReport(List<Checkin> checkins, string directory)
@@ -88,6 +65,34 @@ namespace UntappdViewer.Reporting
             }
             sheet.AutoFitColumn(3);
             sheet.AutoFitColumn(4);
+            workbook.SaveToFile(outputPath);
+            return outputPath;
+        }
+
+        public string CreateStatisticsReport(IStatisticsCalculation statisticsCalculation, string directory)
+        {
+            const string reportName = "Statistics";
+            Workbook workbook = GetWorkbook(reportName);
+            string outputPath = Path.Combine(directory, $"{reportName}.xlsx");
+
+            FillBeerChekinRatingScore(workbook.Worksheets["BeerChekinRatingScore"], statisticsCalculation);
+            FillChekinCountDate(workbook.Worksheets["ChekinCountDate"], statisticsCalculation);
+            FillStyleCountRating(workbook.Worksheets["StyleCountRating"], statisticsCalculation);
+            FillCountryCountRating(workbook.Worksheets["CountryCountRating"], statisticsCalculation);
+            FillServingTypeCountRating(workbook.Worksheets["ServingTypeCountRating"], statisticsCalculation);
+            FillIBUToABV(workbook.Worksheets["IBUToABV"], statisticsCalculation);
+
+            Dictionary<string, int> pieCharts = new Dictionary<string, int>();
+            int aBVCount = FillABVCount(workbook.Worksheets["ABVCount"], statisticsCalculation);
+            if (aBVCount > 0)
+                pieCharts.Add("PieABV", aBVCount);
+
+            int iBUCount = FillIBUCount(workbook.Worksheets["IBUCount"], statisticsCalculation);
+            if (aBVCount > 0)
+                pieCharts.Add("PieIBU", iBUCount);
+
+            UpdatePieGradien(workbook.Worksheets["Statistics"], pieCharts);
+
             workbook.SaveToFile(outputPath);
             return outputPath;
         }

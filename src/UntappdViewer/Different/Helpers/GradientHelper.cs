@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Windows.Media;
+using System.Windows.Threading;
 using UntappdViewer.Interfaces;
 using UntappdViewer.Utils;
 
@@ -7,10 +8,12 @@ namespace UntappdViewer.Helpers
 {
     public class GradientHelper : IGradientHelper
     {
+        private Dispatcher dispatcher = Dispatcher.CurrentDispatcher;
         private GradientStopCollection gradientStopCollection;
 
         public GradientHelper(GradientStopCollection gradientStopCollection)
         {
+            dispatcher = Dispatcher.CurrentDispatcher;
             this.gradientStopCollection = gradientStopCollection;
         }
 
@@ -21,8 +24,14 @@ namespace UntappdViewer.Helpers
 
         public Color GetRelativeColor(double offset)
         {
+            return dispatcher.Invoke(() => GetOffsetColor(offset));
+        }
+
+        private Color GetOffsetColor(double offset)
+        {
             var point = gradientStopCollection.SingleOrDefault(f => f.Offset == offset);
-            if (point != null) return point.Color;
+            if (point != null)
+                return point.Color;
 
             GradientStop before = gradientStopCollection.First(w => MathHelper.DoubleCompare(w.Offset, gradientStopCollection.Min(m => m.Offset)));
             GradientStop after = gradientStopCollection.First(w => MathHelper.DoubleCompare(w.Offset, gradientStopCollection.Max(m => m.Offset)));
