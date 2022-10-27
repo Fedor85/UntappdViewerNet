@@ -64,8 +64,16 @@
                 <MenuItem.Icon>
                     <Image Source="../Resources/excel_report.ico"/>
                 </MenuItem.Icon>
-                <MenuItem Header="{x:Static properties:Resources.CheckinsReport}" Command="{Binding CheckinsProjectReportCommand}"/>
-                <MenuItem Header="{x:Static properties:Resources.StatisticsReport}" Command="{Binding StatisticsProjectReportCommand}"/>
+                <MenuItem Header="{x:Static properties:Resources.CheckinsReport}" Command="{Binding CheckinsProjectReportCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="../Resources/beer_glass.ico"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="{x:Static properties:Resources.StatisticsReport}" Command="{Binding StatisticsProjectReportCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="../Resources/chart_icon.ico"/>
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
         </MenuItem>
         <MenuItem Header="{x:Static properties:Resources.HelpMenuItem}" Command="{Binding HelpCommand}"/>

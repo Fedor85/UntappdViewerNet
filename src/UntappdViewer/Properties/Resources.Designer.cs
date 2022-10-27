@@ -178,6 +178,16 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        public static System.Drawing.Icon beer_glass {
+            get {
+                object obj = ResourceManager.GetObject("beer_glass", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Beer Update.
         /// </summary>
         public static string BeerUpdate {
