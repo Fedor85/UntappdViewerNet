@@ -197,7 +197,7 @@ namespace UntappdViewer.Reporting
             foreach (KeyValue<double, double> keyValue in iBUToABV)
             {
                 sheet.ShowRow(indexRow);
-                sheet[indexRow, 1].Value2 = $"'{keyValue.Key}";
+                sheet[indexRow, 1].Value2 = keyValue.Key;
                 sheet[indexRow, 2].Value2 = keyValue.Value;
                 indexRow++;
             }
