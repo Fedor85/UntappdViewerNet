@@ -174,16 +174,12 @@
         <Style x:Key="ChekinLineDataPointStyle" TargetType="{x:Type chartingToolkit:DataPoint}" BasedOn="{StaticResource BaseLineDataPointStyle}">
             <Setter Property="Background" Value="#ffc100"/>
         </Style>
-        <GradientStopCollection x:Key="DataPointGradient" >
-            <GradientStop Color="#ffffff" Offset="0" />
-            <GradientStop Color="#ffc100" Offset="0.5" />
-            <GradientStop Color="#fd9532" Offset="1" />
-        </GradientStopCollection>
+
         <ControlTemplate  x:Key="ColumnDataPointTemplate" TargetType="{x:Type ContentControl}">
             <Grid>
                 <Border Opacity="0.8">
                     <Border.Background>
-                        <LinearGradientBrush GradientStops="{StaticResource DataPointGradient}"/>
+                        <LinearGradientBrush GradientStops="{x:Static local:DefaultValues.MainGradient3}"/>
                     </Border.Background>
                 </Border>
                 <Border  BorderBrush="#fd9532" BorderThickness="2"/>
@@ -219,7 +215,7 @@
             </Setter>
         </Style>
         <Style x:Key="PipeDataPointStyle" TargetType="{x:Type chartingToolkit:DataPoint}">
-            <Setter Property="Background" Value="{Binding Path=Parameters, Converter={StaticResource PieBackgroundConverter}, ConverterParameter= {StaticResource DataPointGradient}}"/>
+            <Setter Property="Background" Value="{Binding Path=Parameters, Converter={StaticResource PieBackgroundConverter}}"/>
             <Setter Property="BorderBrush" Value="#000000"/>
             <Setter Property="BorderThickness" Value="2"/>
         </Style>

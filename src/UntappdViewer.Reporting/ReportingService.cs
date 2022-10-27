@@ -10,15 +10,24 @@ using Spire.Xls.Charts;
 using Spire.Xls.Core;
 using Spire.Xls.Core.Spreadsheet;
 using UntappdViewer.Infrastructure;
+using UntappdViewer.Interfaces;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
 using UntappdViewer.Models.Different;
 using UntappdViewer.Utils;
+using MediaColor = System.Windows.Media.Color;
 
 namespace UntappdViewer.Reporting
 {
     public class ReportingService: IReportingService
     {
+        private IGradientHelper pieGradientHelper { get; set; }
+
+        public void SetPieGradien(IGradientHelper gradientHelper)
+        {
+            pieGradientHelper = gradientHelper;
+        }
+
         public async Task<string> CreateAllCheckinsReportrAsync(List<Checkin> checkins, string directory)
         {
             return await Task.Run(() => CreateAllCheckinsReport(checkins, directory));
@@ -36,8 +45,17 @@ namespace UntappdViewer.Reporting
             FillCountryCountRating(workbook.Worksheets["CountryCountRating"], statisticsCalculation);
             FillServingTypeCountRating(workbook.Worksheets["ServingTypeCountRating"], statisticsCalculation);
             FillIBUToABV(workbook.Worksheets["IBUToABV"], statisticsCalculation);
-            FillABVCount(workbook.Worksheets["ABVCount"], statisticsCalculation);
-            FillIBUCount(workbook.Worksheets["IBUCount"], statisticsCalculation);
+
+            Dictionary<string, int> pieCharts = new Dictionary<string, int>();
+            int aBVCount = FillABVCount(workbook.Worksheets["ABVCount"], statisticsCalculation);
+            if (aBVCount > 0)
+                pieCharts.Add("PieABV", aBVCount);
+
+            int iBUCount = FillIBUCount(workbook.Worksheets["IBUCount"], statisticsCalculation);
+            if (aBVCount > 0)
+                pieCharts.Add("PieIBU", iBUCount);
+
+            UpdatePieGradien(workbook.Worksheets["Statistics"], pieCharts);
 
             workbook.SaveToFile(outputPath);
             return outputPath;
@@ -185,7 +203,7 @@ namespace UntappdViewer.Reporting
             }
         }
 
-        private void FillABVCount(Worksheet sheet, IStatisticsCalculation statisticsCalculation)
+        private int FillABVCount(Worksheet sheet, IStatisticsCalculation statisticsCalculation)
         {
             List<KeyValueParam<string, int>> aBVCount = statisticsCalculation.GetRangeABVByCount(2.5, 15);
             int indexRow = 2;
@@ -196,11 +214,11 @@ namespace UntappdViewer.Reporting
                 sheet[indexRow, 2].Value2 = keyValue.Value;
                 indexRow++;
             }
+            return aBVCount.Count;
         }
 
-        private void FillIBUCount(Worksheet sheet, IStatisticsCalculation statisticsCalculation)
+        private int FillIBUCount(Worksheet sheet, IStatisticsCalculation statisticsCalculation)
         {
-
             List<KeyValueParam<string, int>> iBUCount = statisticsCalculation.GetRangeIBUByCount(15, 100);
             int indexRow = 2;
             foreach (KeyValueParam<string, int> keyValue in iBUCount)
@@ -210,10 +228,29 @@ namespace UntappdViewer.Reporting
                 sheet[indexRow, 2].Value2 = keyValue.Value;
                 indexRow++;
             }
+            return iBUCount.Count;
+        }
 
-            foreach (IChart chart in sheet.Workbook.Charts)
+        private void UpdatePieGradien(Worksheet sheet, Dictionary<string, int> pieCharts)
+        {
+            if (pieGradientHelper == null || !pieCharts.Any())
+                return;
+
+            foreach (KeyValuePair<string, int> pieChart in pieCharts.Where(item => item.Value > 0))
             {
+                Chart chart = sheet.Charts.OfType<Chart>().FirstOrDefault(item => item.Name.Equals(pieChart.Key));
+                if (chart == null)
+                    continue;
 
+                chart.RefreshChart();
+                foreach (IChartSerie chartSeries in chart.Series)
+                {
+                    for (int i = 0; i <= pieChart.Value; i++)
+                    {
+                        MediaColor relativeColorv = pieGradientHelper.GetRelativeColor(i, pieChart.Value);
+                        chartSeries.DataPoints[i].DataFormat.Fill.ForeColor = Color.FromArgb(relativeColorv.A, relativeColorv.R, relativeColorv.G, relativeColorv.B);
+                    }
+                }
             }
         }
 

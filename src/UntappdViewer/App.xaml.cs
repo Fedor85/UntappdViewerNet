@@ -9,6 +9,7 @@ using Prism.Services.Dialogs;
 using Prism.Unity;
 using Unity;
 using UntappdViewer.Domain.Services;
+using UntappdViewer.Helpers;
 using UntappdViewer.Infrastructure.Services;
 using UntappdViewer.Infrastructure.Services.DataBase;
 using UntappdViewer.Interfaces.Services;
@@ -69,7 +70,9 @@ namespace UntappdViewer
             IDevEntityDbService devEntityDbService = new DevEntityDbService(untappdDbContext);
             containerRegistry.RegisterInstance(devEntityDbService);
 
-            containerRegistry.Register<IReportingService, ReportingService>();
+            IReportingService reportingService = new ReportingService();
+            reportingService.SetPieGradien(new GradientHelper(DefaultValues.MainGradient3));
+            containerRegistry.RegisterInstance(reportingService);
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
