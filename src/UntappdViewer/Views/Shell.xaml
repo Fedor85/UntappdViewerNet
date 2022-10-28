@@ -10,7 +10,7 @@
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         prism:ViewModelLocator.AutoWireViewModel="True"
-        Title="{Binding Title}" Height="850" Width="800" MinHeight="600" MinWidth="800" Background="{StaticResource MainColor}" WindowStartupLocation ="CenterScreen">
+        Title="{Binding Title}" Height="850" Width="800" MinHeight="600" MinWidth="800" Background="{StaticResource MainGradient2}" WindowStartupLocation ="CenterScreen">
     <b:Interaction.Behaviors>
         <behaviors:LoadedWindowBehavior LoadedWindow ="{Binding LoadedWindow, Mode=TwoWay}"/>
     </b:Interaction.Behaviors>

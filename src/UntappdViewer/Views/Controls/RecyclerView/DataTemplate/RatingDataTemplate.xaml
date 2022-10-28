@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:starRating="clr-namespace:UntappdViewer.Views.Controls.StarRating"
+             xmlns:local="clr-namespace:UntappdViewer"
              mc:Ignorable="d" 
              Width="170" Height="250">
     <Grid>
@@ -27,7 +28,7 @@
             <starRating:StarRatingControl Grid.Row="2" StarCount="5" StarSize="20" HorizontalAlignment="Center"
                                           BackgroundStarColor="#ffffff" BackgroundStarOpacity="1"
                                           BorderStarColor="#000000" BorderStarThickness="5"
-                                          ForegroundStarColor="#ffc100" Rating="{Binding RatingScore}" VerticalAlignment="Center"/>
+                                          ForegroundStarColor="{x:Static local:DefaultValues.MainColorLight}" Rating="{Binding RatingScore}" VerticalAlignment="Center"/>
         </Grid>
     </Grid>
 </UserControl>

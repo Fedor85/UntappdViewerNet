@@ -30,9 +30,9 @@ namespace UntappdViewer
 
         public static  Color White { get { return Color.FromRgb(255, 255, 255); } }
 
-        public static Color MainLight { get { return Color.FromRgb(255, 193, 0); } }
+        public static Color MainColorLight { get { return Color.FromRgb(255, 193, 0); } }
 
-        public static Color MainDark { get { return Color.FromRgb(253, 149, 50); } }
+        public static Color MainColorDark { get { return Color.FromRgb(253, 149, 50); } }
 
         public static GradientStopCollection MainGradient3
         {
@@ -40,8 +40,8 @@ namespace UntappdViewer
             {
                 GradientStopCollection gradient = new GradientStopCollection();
                 gradient.Add(new GradientStop(White, 0));
-                gradient.Add(new GradientStop(MainLight, 0.5));
-                gradient.Add(new GradientStop(MainDark, 1));
+                gradient.Add(new GradientStop(MainColorLight, 0.5));
+                gradient.Add(new GradientStop(MainColorDark, 1));
                 return gradient;
             }
         }

@@ -166,13 +166,13 @@
             <Setter Property="Template" Value="{StaticResource BaseDataPointTemplate}"/>
         </Style>
         <Style x:Key="BeerLineDataPointStyle" TargetType="{x:Type chartingToolkit:DataPoint}" BasedOn="{StaticResource BaseLineDataPointStyle}">
-            <Setter Property="Background" Value="#fd9532"/>
+            <Setter Property="Background" Value="{StaticResource MainSolidBrushDark}"/>
         </Style>
         <Style x:Key="ScatterDataPointStyle" TargetType="{x:Type chartingToolkit:DataPoint}" BasedOn="{StaticResource BeerLineDataPointStyle}">
             <Setter Property="Opacity" Value="0.7"/>
         </Style>
         <Style x:Key="ChekinLineDataPointStyle" TargetType="{x:Type chartingToolkit:DataPoint}" BasedOn="{StaticResource BaseLineDataPointStyle}">
-            <Setter Property="Background" Value="#ffc100"/>
+            <Setter Property="Background" Value="{StaticResource MainSolidBrushLight}"/>
         </Style>
 
         <ControlTemplate  x:Key="ColumnDataPointTemplate" TargetType="{x:Type ContentControl}">
@@ -182,7 +182,7 @@
                         <LinearGradientBrush GradientStops="{x:Static local:DefaultValues.MainGradient3}"/>
                     </Border.Background>
                 </Border>
-                <Border  BorderBrush="#fd9532" BorderThickness="2"/>
+                <Border  BorderBrush="{StaticResource MainSolidBrushDark}" BorderThickness="2"/>
             </Grid>
         </ControlTemplate>
         <Style x:Key="ColumnDataPointStyle" TargetType="{x:Type chartingToolkit:DataPoint}">

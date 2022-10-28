@@ -60,7 +60,7 @@
                                                               ViewStarsColor="#ffffff" ViewStarsOpacity="0.3"
                                                               BackgroundStarColor="#ffffff" BackgroundStarOpacity="1"
                                                               BorderStarColor="#000000" BorderStarThickness="5"
-                                                              ForegroundStarColor="#ffc100" Rating="{Binding BeerRating}" VerticalAlignment="Center"/>
+                                                              ForegroundStarColor="{x:Static local:DefaultValues.MainColorLight}" Rating="{Binding BeerRating}" VerticalAlignment="Center"/>
                                 <TextBlock VerticalAlignment="Center">
                                     <TextBlock.Inlines>
                                         <Run Text=" ("/>
@@ -114,7 +114,7 @@
                                                       ViewStarsColor="#ffffff" ViewStarsOpacity="0.3"
                                                       BackgroundStarColor="#ffffff" BackgroundStarOpacity="1"
                                                       BorderStarColor="#000000" BorderStarThickness="5"
-                                                      ForegroundStarColor="#ffc100" Rating="{Binding CheckinRating}" VerticalAlignment="Center"/>
+                                                      ForegroundStarColor="{x:Static local:DefaultValues.MainColorLight}" Rating="{Binding CheckinRating}" VerticalAlignment="Center"/>
                                 <TextBlock VerticalAlignment="Center">
                                     <TextBlock.Inlines>
                                         <Run Text=" ("/>

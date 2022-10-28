@@ -9,7 +9,7 @@
              xmlns:behaviors="clr-namespace:UntappdViewer.Behaviors"
              mc:Ignorable="d" 
              mvvm:ViewModelLocator.AutoWireViewModel="True"
-             Height="120" Width="300" Background="{StaticResource MainColor}">
+             Height="120" Width="300" Background="{StaticResource MainGradient2}">
     <b:Interaction.Behaviors>
         <behaviors:CloseByEscapeBehavior/>
     </b:Interaction.Behaviors>

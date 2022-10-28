@@ -10,32 +10,62 @@ namespace UntappdViewer.Views.Controls.StarRating
     {
         public Color BackgroundStarColor
         {
-            set { ((SolidColorBrush)BackgroundStar.Fill).Color = value; }
+            set
+            {
+                Brush brush = GetBrush(BackgroundStar.Fill);
+                ((SolidColorBrush)brush).Color = value;
+                BackgroundStar.Fill = brush;
+            }
         }
 
         public double BackgroundStarOpacity
         {
-            set { ((SolidColorBrush)BackgroundStar.Fill).Opacity = value; }
+            set
+            {
+                Brush brush = GetBrush(BackgroundStar.Fill);
+                brush.Opacity = value;
+                BackgroundStar.Fill = brush;
+            }
         }
 
         public Color ForegroundStarColor
         {
-            set { ((SolidColorBrush)ForegroundStar.Foreground).Color = value; }
+            set
+            {
+                Brush brush = GetBrush(ForegroundStar.Foreground);
+                ((SolidColorBrush)brush).Color = value;
+                ForegroundStar.Foreground = brush;
+            }
         }
 
         public double ForegroundStarOpacity
         {
-            set { ((SolidColorBrush)ForegroundStar.Foreground).Opacity = value; }
+            set
+            {
+                Brush brush = GetBrush(ForegroundStar.Foreground);
+                brush.Opacity = value;
+                ForegroundStar.Foreground = brush;
+            }
         }
 
         public Color BorderStarColor
         {
-            set { ((SolidColorBrush)BorderStar.Stroke).Color = value; }
+            set
+            {
+                Brush brush = GetBrush(BorderStar.Stroke);
+                ((SolidColorBrush)brush).Color = value;
+                BorderStar.Stroke = brush;
+            }
         }
 
         public double BorderStarOpacity
         {
-            set { ((SolidColorBrush)BorderStar.Stroke).Opacity = value; }
+            set
+            {
+                Brush brush = GetBrush(BorderStar.Stroke);
+                brush.Opacity = value;
+                BorderStar.Stroke = brush;
+            }
         }
 
         public double BorderStarThickness
@@ -51,6 +81,14 @@ namespace UntappdViewer.Views.Controls.StarRating
         public StarProgressBar()
         {
             InitializeComponent();
+        }
+
+        private Brush GetBrush(Brush brush)
+        {
+            if (brush.IsFrozen)
+                brush = brush.Clone();
+
+            return brush;
         }
     }
 }
