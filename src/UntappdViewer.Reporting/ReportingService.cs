@@ -46,10 +46,10 @@ namespace UntappdViewer.Reporting
 
             IList<Checkin> checkinsSort = checkins.OrderBy(item => item.Beer.Brewery.Name).ThenBy(item => item.Beer.Name).ToList();
             Worksheet sheet = workbook.Worksheets[0];
+            int indexRow = 5;
             for (int i = 0; i < checkinsSort.Count; i++)
             {
                 Checkin currentCheckin = checkinsSort[i];
-                int indexRow = i + 2;
 
                 sheet[indexRow, 1].Text = (i + 1).ToString();
                 if (currentCheckin.Beer.Brewery.Venue != null)
@@ -60,10 +60,10 @@ namespace UntappdViewer.Reporting
 
                 sheet[indexRow, 5].Text = currentCheckin.RatingScore.ToString();
                 sheet[indexRow, 6].Text = currentCheckin.CreatedDate.ToString();
-
+                indexRow++;
             }
-            sheet.AutoFitColumn(3);
-            sheet.AutoFitColumn(4);
+
+            SetValueByNameRanges(sheet.Workbook, "Today", DateTime.Now);
             workbook.SaveToFile(outputPath);
             return outputPath;
         }
