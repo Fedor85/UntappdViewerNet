@@ -357,11 +357,12 @@ namespace UntappdViewer.ViewModels
         }
 
         public StatisticsProjectViewModel(IRegionManager regionManager, IModuleManager moduleManager,
-                                                                        IUntappdService untappdService) : base(regionManager)
+                                                                        IUntappdService untappdService,
+                                                                        IStatisticsCalculation statisticsCalculation) : base(regionManager)
         {
             this.moduleManager = moduleManager;
             this.untappdService = untappdService;
-            this.statisticsCalculation = untappdService.GetStatisticsCalculation();
+            this.statisticsCalculation = statisticsCalculation;
 
             OkButtonCommand = new DelegateCommand(Exit);
         }
@@ -452,10 +453,9 @@ namespace UntappdViewer.ViewModels
             MinWidthChartDateChekins = MathHelper.GetCeilingByStep(dateChekinsCount.Count * 15, 100);
             DateChekinsCount = dateChekinsCount;
 
-            List<DateTime> dateCheckins = untappdService.GetCheckins().Select(item => item.CreatedDate).ToList();
-            TotalDays = MathHelper.GetTotalDaysByNow(dateCheckins);
-            AverageChekinsQuantity = Math.Round(MathHelper.GetAverageCountByNow(dateCheckins), 2);
-            AverageUniqueChekinsQuantity = Math.Round(MathHelper.GetAverageCountByNow(untappdService.GetCheckins(true).Select(item => item.CreatedDate).ToList()), 2);
+            TotalDays = statisticsCalculation.GetTotalDaysByNow();
+            AverageChekinsQuantity = Math.Round(statisticsCalculation.GetAverageCountByNow(), 2);
+            AverageUniqueChekinsQuantity = Math.Round(statisticsCalculation.GetAverageCountByNow(true), 2);
 
             DateChekinsAccumulateCount = KeyValuesHelper.GetAccumulateValues(dateChekinsCount);
         }

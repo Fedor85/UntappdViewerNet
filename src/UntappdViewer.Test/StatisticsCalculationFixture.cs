@@ -15,12 +15,14 @@ namespace UntappdViewer.Test
     public class  StatisticsCalculationFixture
     {
         private CheckinsContainer checkinsContainer;
+
         private IStatisticsCalculation statisticsCalculation;
 
         public StatisticsCalculationFixture()
         {
-            checkinsContainer = TestHelper.GetCheckinsContainer();
-            statisticsCalculation = new StatisticsCalculation(checkinsContainer);
+            IUntappdService untappdService = TestHelper.GetUntappdService();
+            checkinsContainer = untappdService.Untappd.CheckinsContainer;
+            statisticsCalculation = new StatisticsCalculation(untappdService);
         }
 
         [Test]
@@ -69,13 +71,13 @@ namespace UntappdViewer.Test
         [Test]
         public void TestGetTotalDaysByNow()
         {
-            Assert.AreEqual(GetTotalDay(), MathHelper.GetTotalDaysByNow(checkinsContainer.Checkins.Select(item => item.CreatedDate).ToList()));
+            Assert.AreEqual(GetTotalDay(), statisticsCalculation.GetTotalDaysByNow());
         }
 
         [Test]
         public void TestGetAverageCountByNow()
         {
-            double averageCount = Math.Round(checkinsContainer.Checkins.Count / GetTotalDay(), 2);
+            double averageCount = Math.Round(statisticsCalculation.GetAverageCountByNow(), 2);
             Assert.AreEqual(averageCount, Math.Round(MathHelper.GetAverageCountByNow(checkinsContainer.Checkins.Select(item => item.CreatedDate).ToList()), 2));
         }
 

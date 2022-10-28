@@ -11,6 +11,10 @@ namespace UntappdViewer.Interfaces.Services
 
         int GetCountrysCount();
 
+        int GetTotalDaysByNow();
+
+        double GetAverageCountByNow(bool unique = false);
+
         List<KeyValue<double, int>> GetChekinsRatingByCount();
 
         List<KeyValue<double, int>> GetBeersRatingByCount();

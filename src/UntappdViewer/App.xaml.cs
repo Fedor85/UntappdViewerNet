@@ -8,6 +8,7 @@ using Prism.Modularity;
 using Prism.Services.Dialogs;
 using Prism.Unity;
 using Unity;
+using UntappdViewer.Domain;
 using UntappdViewer.Domain.Services;
 using UntappdViewer.Helpers;
 using UntappdViewer.Infrastructure.Services;
@@ -55,7 +56,11 @@ namespace UntappdViewer
             //    settingService.Reset();
 
             containerRegistry.RegisterInstance(settingService);
-            containerRegistry.RegisterInstance<IUntappdService>(new UntappdService(settingService));
+            IUntappdService untappdService = new UntappdService(settingService);
+            containerRegistry.RegisterInstance(untappdService);
+
+            IStatisticsCalculation statisticsCalculation = new StatisticsCalculation(untappdService);
+            containerRegistry.RegisterInstance(statisticsCalculation);
 
             IDialogService dialogService = containerRegistry.GetContainer().Resolve<IDialogService>();
             containerRegistry.RegisterInstance<IInteractionRequestService>(new InteractionRequestService(dialogService));

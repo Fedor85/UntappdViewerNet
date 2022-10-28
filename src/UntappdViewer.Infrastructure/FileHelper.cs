@@ -55,6 +55,16 @@ namespace UntappdViewer.Infrastructure
             }
         }
 
+        public static void SaveStreamToFile(Stream stream, string filePath)
+        {
+            using (FileStream fileStream = File.Create(filePath))
+            {
+                byte[] bytesInStream = new byte[stream.Length];
+                stream.Read(bytesInStream, 0, bytesInStream.Length);
+                fileStream.Write(bytesInStream, 0, bytesInStream.Length);
+            }
+        }
+
         public static void CreateDirectory(string path)
         {
             if (!Directory.Exists(path))

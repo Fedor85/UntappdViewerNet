@@ -65,7 +65,5 @@ namespace UntappdViewer.Interfaces.Services
         string GetTreeViewCheckinDisplayName(Checkin checkin, int number);
 
         string GetUploadSavePhotoFileName(Checkin checkin);
-
-        IStatisticsCalculation GetStatisticsCalculation();
     }
 }

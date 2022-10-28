@@ -6,7 +6,6 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Spire.Xls;
-using Spire.Xls.Charts;
 using Spire.Xls.Core;
 using Spire.Xls.Core.Spreadsheet;
 using UntappdViewer.Infrastructure;
@@ -91,7 +90,9 @@ namespace UntappdViewer.Reporting
             if (aBVCount > 0)
                 pieCharts.Add("PieIBU", iBUCount);
 
-            UpdatePieGradien(workbook.Worksheets["Statistics"], pieCharts);
+            Worksheet mainSheet = workbook.Worksheets["Statistics"];
+            UpdatePieGradien(mainSheet, pieCharts);
+            mainSheet.CalculateAllValue();
 
             workbook.SaveToFile(outputPath);
             return outputPath;
@@ -136,6 +137,12 @@ namespace UntappdViewer.Reporting
 
                 indexRow++;
             }
+
+            SetValueByNameRanges(sheet.Workbook, "Today", DateTime.Now);
+            SetValueByNameRanges(sheet.Workbook, "TotalDays", statisticsCalculation.GetTotalDaysByNow());
+            SetValueByNameRanges(sheet.Workbook, "AverageChekinsQuantity", Math.Round(statisticsCalculation.GetAverageCountByNow(), 2));
+            SetValueByNameRanges(sheet.Workbook, "AverageUniqueChekinsQuantity", Math.Round(statisticsCalculation.GetAverageCountByNow(true), 2));
+            sheet.CalculateAllValue();
         }
 
         private void FillStyleCountRating(Worksheet sheet, IStatisticsCalculation statisticsCalculation)

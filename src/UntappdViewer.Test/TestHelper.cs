@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using UntappdViewer.Domain.Mappers;
+using UntappdViewer.Domain.Services;
+using UntappdViewer.Infrastructure;
+using UntappdViewer.Infrastructure.Services;
+using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
 using UntappdViewer.Test.Properties;
 
@@ -25,6 +29,16 @@ namespace UntappdViewer.Test
                     stream.CopyTo(fileStream);
             }
             return tempFilePath;
+        }
+
+        public static IUntappdService GetUntappdService()
+        {
+            string filePath = $"Temp{Path.GetFileName(Resources.ResourcesTestFileName)}";
+            SaveResourceToFile(Resources.ResourcesTestFileName, filePath);
+            IUntappdService untappdService = new UntappdService(new SettingService());
+            untappdService.Initialize(filePath);
+            File.Delete(filePath);
+            return untappdService;
         }
 
         public static CheckinsContainer GetCheckinsContainer()
@@ -61,6 +75,12 @@ namespace UntappdViewer.Test
             string randomFileName = Path.GetRandomFileName();
             string randomFileNameExtension = Path.ChangeExtension(randomFileName, extension);
             return Path.Combine(tempPathDirectory, randomFileNameExtension);
+        }
+
+        private static void SaveResourceToFile(string resourcesName, string filePath)
+        {
+            using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourcesName))
+                FileHelper.SaveStreamToFile(stream, filePath);
         }
     }
 }

@@ -26,6 +26,8 @@ namespace UntappdViewer.ViewModels
     {
         private IUntappdService untappdService;
 
+        private IStatisticsCalculation statisticsCalculation;
+
         private IInteractionRequestService interactionRequestService;
 
         private ISettingService settingService;
@@ -63,6 +65,7 @@ namespace UntappdViewer.ViewModels
         public ICommand HelpCommand { get; }
 
         public MenuBarViewModel(IUntappdService untappdService,  IInteractionRequestService interactionRequestService,
+                                                                 IStatisticsCalculation statisticsCalculation,
                                                                  ISettingService settingService,
                                                                  IModuleManager moduleManager,
                                                                  IRegionManager regionManager,
@@ -71,6 +74,7 @@ namespace UntappdViewer.ViewModels
                                                                  IReportingService reportingService) : base(moduleManager, regionManager, eventAggregator)
         {
             this.interactionRequestService = interactionRequestService;
+            this.statisticsCalculation = statisticsCalculation;
             this.settingService = settingService;
             this.untappdService = untappdService;
             this.moduleManager = moduleManager;
@@ -375,7 +379,7 @@ namespace UntappdViewer.ViewModels
         {
             try
             {
-                string reportPath = await reportingService.CreateStatisticsReportAsync(untappdService.GetStatisticsCalculation(), untappdService.GetReportsDirectory());
+                string reportPath = await reportingService.CreateStatisticsReportAsync(statisticsCalculation, untappdService.GetReportsDirectory());
                 System.Diagnostics.Process.Start(reportPath);
             }
             catch (Exception ex)
