@@ -525,6 +525,16 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap facebook_like_beer {
+            get {
+                object obj = ResourceManager.GetObject("facebook_like_beer", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fill Serving Type.
         /// </summary>
         public static string FillServingType {

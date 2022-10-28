@@ -55,6 +55,8 @@ namespace UntappdViewer.ViewModels
 
         private BitmapSource checkinPhoto;
 
+        private bool visibilityLikeBeer;
+
         private string beerUrl;
 
         private string beerName;
@@ -256,6 +258,15 @@ namespace UntappdViewer.ViewModels
             set
             {
                 SetProperty(ref visibilityBadges, value);
+            }
+        }
+
+        public bool VisibilityLikeBeer
+        {
+            get { return visibilityLikeBeer; }
+            set
+            {
+                SetProperty(ref visibilityLikeBeer, value);
             }
         }
 
@@ -520,18 +531,23 @@ namespace UntappdViewer.ViewModels
                 Clear();
                 return;
             }
+
             CheckinHeader = GetCheckinHeader(checkin.CreatedDate);
             CheckinUrl = checkin.Url;
+
             if (checkin.RatingScore.HasValue)
             {
                 VisibilityCheckinRating = true;
                 CheckinRating = checkin.RatingScore.Value;
+                VisibilityLikeBeer = checkin.RatingScore.Value >= DefaultValues.MinCheckinRatingByLikeBeer;
             }
             else
             {
                 CheckinRating = 0;
                 VisibilityCheckinRating = false;
+                VisibilityLikeBeer = false;
             }
+
             CheckinVenueName = checkin.Venue.Name;
             CheckinVenueCountry = checkin.Venue.Country;
             CheckinVenueState = checkin.Venue.State;
@@ -573,6 +589,7 @@ namespace UntappdViewer.ViewModels
             CheckinServingType = DefaultValues.EmptyImage;
             CheckinPhoto = null;
             Badges = new List<ImageItemViewModel>();
+            VisibilityLikeBeer = false;
 
             BeerUrl = DefaultValues.DefaultUrl;
             BeerName = String.Empty;

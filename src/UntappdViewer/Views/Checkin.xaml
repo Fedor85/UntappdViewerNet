@@ -162,6 +162,8 @@
                         <Image Source="{Binding CheckinPhoto, TargetNullValue={x:Null}}"/>
                     </controls:ZoomBorder>
                     <ContentControl prism:RegionManager.RegionName="{x:Static local:RegionNames.PhotoLoadingRegion}"/>
+                    <Image Source="..\Resources\facebook-like-beer.png" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                           Visibility="{Binding VisibilityLikeBeer, Converter={StaticResource BTVConverter}}"/>
                 </Grid>
             </GroupBox>
         </Grid>

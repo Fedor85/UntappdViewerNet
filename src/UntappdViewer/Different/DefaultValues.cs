@@ -26,6 +26,8 @@ namespace UntappdViewer
 
         public const int ChartRatingScoreYInterval = 250;
 
+        public const int MinCheckinRatingByLikeBeer = 4;
+
         public static  Color White { get { return Color.FromRgb(255, 255, 255); } }
 
         public static Color MainLight { get { return Color.FromRgb(255, 193, 0); } }
