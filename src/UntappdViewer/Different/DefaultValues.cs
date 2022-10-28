@@ -28,22 +28,19 @@ namespace UntappdViewer
 
         public const int MinCheckinRatingByLikeBeer = 4;
 
-        public static  Color White { get { return Color.FromRgb(255, 255, 255); } }
+        public static readonly Color MainColorLight = Color.FromRgb(255, 193, 0);
 
-        public static Color MainColorLight { get { return Color.FromRgb(255, 193, 0); } }
+        public static readonly Color MainColorDark = Color.FromRgb(253, 149, 50);
 
-        public static Color MainColorDark { get { return Color.FromRgb(253, 149, 50); } }
+        public static readonly GradientStopCollection MainGradient3 = GetMainGradient3();
 
-        public static GradientStopCollection MainGradient3
+        private static GradientStopCollection GetMainGradient3()
         {
-            get
-            {
-                GradientStopCollection gradient = new GradientStopCollection();
-                gradient.Add(new GradientStop(White, 0));
-                gradient.Add(new GradientStop(MainColorLight, 0.5));
-                gradient.Add(new GradientStop(MainColorDark, 1));
-                return gradient;
-            }
+            GradientStopCollection gradient = new GradientStopCollection();
+            gradient.Add(new GradientStop(Color.FromRgb(255, 255, 255), 0));
+            gradient.Add(new GradientStop(MainColorLight, 0.5));
+            gradient.Add(new GradientStop(MainColorDark, 1));
+            return gradient;
         }
     }
 }
