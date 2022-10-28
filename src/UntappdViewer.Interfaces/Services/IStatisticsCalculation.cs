@@ -9,6 +9,14 @@ namespace UntappdViewer.Interfaces.Services
 
         string DefaultServingType { get; }
 
+        double RangeABVByCount { get; }
+
+        double MaxABVByCount { get; }
+
+        double RangeIBUByCount { get; }
+
+        double MaxIBUByCount { get; }
+
         int GetCheckinCount(bool unique = false);
 
         int GetBreweryCount();

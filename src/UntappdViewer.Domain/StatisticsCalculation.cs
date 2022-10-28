@@ -23,6 +23,14 @@ namespace UntappdViewer.Domain
 
         public string DefaultServingType { get { return DefaultValues.DefaultServingType; } }
 
+        public double RangeABVByCount { get { return DefaultValues.RangeABVByCount; } }
+
+        public double MaxABVByCount { get { return DefaultValues.MaxABVByCount; } }
+
+        public double RangeIBUByCount { get { return DefaultValues.RangeIBUByCount; } }
+
+        public double MaxIBUByCount { get { return DefaultValues.MaxIBUByCount; } }
+
         public int GetCheckinCount(bool unique = false)
         {
             return untappdService.GetCheckins(unique).Count;

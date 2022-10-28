@@ -497,8 +497,8 @@ namespace UntappdViewer.ViewModels
         private void SetIBUToABV()
         {
             IBUToABV = statisticsCalculation.GetABVToIBU();
-            ABVCount = statisticsCalculation.GetRangeABVByCount(2.5, 15);
-            IBUCount = statisticsCalculation.GetRangeIBUByCount(15, 100);
+            ABVCount = statisticsCalculation.GetRangeABVByCount(statisticsCalculation.RangeABVByCount, statisticsCalculation.MaxABVByCount);
+            IBUCount = statisticsCalculation.GetRangeIBUByCount(statisticsCalculation.RangeIBUByCount, statisticsCalculation.MaxIBUByCount);
         }
 
         private int GetHeightChart(int count)

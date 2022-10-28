@@ -222,7 +222,7 @@ namespace UntappdViewer.Reporting
 
         private int FillABVCount(Worksheet sheet, IStatisticsCalculation statisticsCalculation)
         {
-            List<KeyValueParam<string, int>> aBVCount = statisticsCalculation.GetRangeABVByCount(2.5, 15);
+            List<KeyValueParam<string, int>> aBVCount = statisticsCalculation.GetRangeABVByCount(statisticsCalculation.RangeABVByCount, statisticsCalculation.MaxABVByCount);
             int indexRow = 2;
             foreach (KeyValueParam<string, int> keyValue in aBVCount)
             {
@@ -236,7 +236,7 @@ namespace UntappdViewer.Reporting
 
         private int FillIBUCount(Worksheet sheet, IStatisticsCalculation statisticsCalculation)
         {
-            List<KeyValueParam<string, int>> iBUCount = statisticsCalculation.GetRangeIBUByCount(15, 100);
+            List<KeyValueParam<string, int>> iBUCount = statisticsCalculation.GetRangeIBUByCount(statisticsCalculation.RangeIBUByCount, statisticsCalculation.MaxIBUByCount);
             int indexRow = 2;
             foreach (KeyValueParam<string, int> keyValue in iBUCount)
             {
