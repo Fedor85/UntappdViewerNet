@@ -9,6 +9,10 @@ namespace UntappdViewer.Interfaces.Services
 
         string DefaultServingType { get; }
 
+        int GetCheckinCount(bool unique = false);
+
+        int GetBreweryCount();
+
         int GetCountrysCount();
 
         int GetTotalDaysByNow();

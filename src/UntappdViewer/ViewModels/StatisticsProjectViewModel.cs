@@ -423,11 +423,9 @@ namespace UntappdViewer.ViewModels
 
         private void SetCountsPanel()
         {
-            List<Checkin> checkins = untappdService.GetCheckins();
-            TotalCheckinCount = checkins.Count;
-
-            UniqueCheckinCount = untappdService.GetCheckins(true).Count;
-            BreweryCount = untappdService.GetBrewerys().Count;
+            TotalCheckinCount = statisticsCalculation.GetCheckinCount();
+            UniqueCheckinCount = statisticsCalculation.GetCheckinCount(true);
+            BreweryCount = statisticsCalculation.GetBreweryCount();
             CountryCount = statisticsCalculation.GetCountrysCount();
         }
 

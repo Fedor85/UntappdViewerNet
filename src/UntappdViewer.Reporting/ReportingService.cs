@@ -106,10 +106,6 @@ namespace UntappdViewer.Reporting
             List<double> commonRatingScore = KeyValuesHelper.GetDistinctKeys(KeyValuesHelper.GetMerged(beerRatingScore, chekinRatingScore));
             commonRatingScore.Sort();
 
-            SetValueByNameRanges(sheet.Workbook, "BeerAverageRating", Math.Round(MathHelper.GetAverageValue(KeyValuesHelper.KeyValuesToDictionary(beerRatingScore)), 2));
-            SetValueByNameRanges(sheet.Workbook, "ChekinAverageRating", Math.Round(MathHelper.GetAverageValue(KeyValuesHelper.KeyValuesToDictionary(chekinRatingScore)), 2));
-            sheet.CalculateAllValue();
-
             int indexRow = 2;
             foreach (double ratingScore in commonRatingScore)
             {
@@ -119,6 +115,15 @@ namespace UntappdViewer.Reporting
                 sheet[indexRow, 3].Value2 = chekinRatingScore.Where(item => MathHelper.DoubleCompare(item.Key, ratingScore)).Sum(item => item.Value);
                 indexRow++;
             }
+
+            SetValueByNameRanges(sheet.Workbook, "BeerAverageRating", Math.Round(MathHelper.GetAverageValue(KeyValuesHelper.KeyValuesToDictionary(beerRatingScore)), 2));
+            SetValueByNameRanges(sheet.Workbook, "ChekinAverageRating", Math.Round(MathHelper.GetAverageValue(KeyValuesHelper.KeyValuesToDictionary(chekinRatingScore)), 2));
+            sheet.CalculateAllValue();
+
+            SetValueByNameRanges(sheet.Workbook, "TotalCheckinCount", statisticsCalculation.GetCheckinCount());
+            SetValueByNameRanges(sheet.Workbook, "UniqueCheckinCount", statisticsCalculation.GetCheckinCount(true));
+            SetValueByNameRanges(sheet.Workbook, "BreweryCount", statisticsCalculation.GetBreweryCount());
+            SetValueByNameRanges(sheet.Workbook, "CountryCount", statisticsCalculation.GetCountrysCount());
         }
 
         private void FillChekinCountDate(Worksheet sheet, IStatisticsCalculation statisticsCalculation)
