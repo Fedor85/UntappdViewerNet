@@ -28,8 +28,10 @@ namespace UntappdViewer
 
         public const int MinCheckinRatingByLikeBeer = 4;
 
+        //#ffc100
         public static readonly Color MainColorLight = Color.FromRgb(255, 193, 0);
 
+        //#fd9532
         public static readonly Color MainColorDark = Color.FromRgb(253, 149, 50);
 
         public static readonly GradientStopCollection MainGradient3 = GetMainGradient3();
