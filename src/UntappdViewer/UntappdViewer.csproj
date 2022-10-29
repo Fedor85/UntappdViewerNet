@@ -103,6 +103,7 @@
     <Compile Include="Different\Behaviors\Synchronised\SynchronisedWidthBehavior.cs" />
     <Compile Include="Different\Behaviors\Synchronised\SynchronisedWidthToken.cs" />
     <Compile Include="Different\CallBackConteiner.cs" />
+    <Compile Include="Different\Helpers\ColorPalette.cs" />
     <Compile Include="Different\Events\LoadingActivateCancel.cs" />
     <Compile Include="Different\Events\LoadingCancel.cs" />
     <Compile Include="Different\Helpers\GradientHelper.cs" />

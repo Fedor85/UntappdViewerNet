@@ -76,7 +76,7 @@ namespace UntappdViewer
             containerRegistry.RegisterInstance(devEntityDbService);
 
             IReportingService reportingService = new ReportingService();
-            reportingService.SetPieGradien(new GradientHelper(DefaultValues.MainGradient3));
+            reportingService.SetColorPalette(ColorPalette.GetMainColorPalette());
             containerRegistry.RegisterInstance(reportingService);
         }
 

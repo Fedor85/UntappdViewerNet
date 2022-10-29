@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Spire.Xls;
+using Spire.Xls.Charts;
 using Spire.Xls.Core;
 using Spire.Xls.Core.Spreadsheet;
 using UntappdViewer.Infrastructure;
@@ -20,11 +21,11 @@ namespace UntappdViewer.Reporting
 {
     public class ReportingService: IReportingService
     {
-        private IGradientHelper pieGradientHelper { get; set; }
+        private IColorPalette colorPalette { get; set; }
 
-        public void SetPieGradien(IGradientHelper gradientHelper)
+        public void SetColorPalette(IColorPalette colorPalette)
         {
-            pieGradientHelper = gradientHelper;
+            this.colorPalette = colorPalette;
         }
 
         public async Task<string> CreateAllCheckinsReportrAsync(List<Checkin> checkins, string directory)
@@ -74,8 +75,13 @@ namespace UntappdViewer.Reporting
             Workbook workbook = GetWorkbook(reportName);
             string outputPath = Path.Combine(directory, $"{reportName}.xlsx");
 
+            Worksheet mainSheet = workbook.Worksheets["Statistics"];
+
             FillBeerChekinRatingScore(workbook.Worksheets["BeerChekinRatingScore"], statisticsCalculation);
+
+            SetColorBeerChekinRatingScore(mainSheet);
             FillChekinCountDate(workbook.Worksheets["ChekinCountDate"], statisticsCalculation);
+
             FillStyleCountRating(workbook.Worksheets["StyleCountRating"], statisticsCalculation);
             FillCountryCountRating(workbook.Worksheets["CountryCountRating"], statisticsCalculation);
             FillServingTypeCountRating(workbook.Worksheets["ServingTypeCountRating"], statisticsCalculation);
@@ -90,7 +96,6 @@ namespace UntappdViewer.Reporting
             if (aBVCount > 0)
                 pieCharts.Add("PieIBU", iBUCount);
 
-            Worksheet mainSheet = workbook.Worksheets["Statistics"];
             UpdatePieGradien(mainSheet, pieCharts);
             mainSheet.CalculateAllValue();
 
@@ -248,9 +253,27 @@ namespace UntappdViewer.Reporting
             return iBUCount.Count;
         }
 
+        private void SetColorBeerChekinRatingScore(Worksheet sheet)
+        {
+            if (colorPalette == null)
+                return;
+
+            Chart chart = sheet.Charts.OfType<Chart>().FirstOrDefault(item => item.Name.Equals("ChartRatingScore"));
+            if (chart == null)
+                return;
+
+            foreach (ChartSerie chartSerie in chart.Series.Cast<ChartSerie>())
+            {
+                MediaColor mediaColor = chartSerie.NamedRange.DisplayedText.ToLower().Contains("beer") ? colorPalette.MainColorDark : colorPalette.MainColorLight;
+                Color color = colorPalette.ConvertColor(mediaColor);
+                chartSerie.DataFormat.MarkerBackgroundColor = color;
+                chartSerie.DataFormat.LineProperties.Color = color;
+            }
+        }
+
         private void UpdatePieGradien(Worksheet sheet, Dictionary<string, int> pieCharts)
         {
-            if (pieGradientHelper == null || !pieCharts.Any())
+            if (colorPalette == null || !pieCharts.Any())
                 return;
 
             foreach (KeyValuePair<string, int> pieChart in pieCharts.Where(item => item.Value > 0))
@@ -264,8 +287,8 @@ namespace UntappdViewer.Reporting
                 {
                     for (int i = 0; i <= pieChart.Value; i++)
                     {
-                        MediaColor relativeColorv = pieGradientHelper.GetRelativeColor(i, pieChart.Value);
-                        chartSeries.DataPoints[i].DataFormat.Fill.ForeColor = Color.FromArgb(relativeColorv.A, relativeColorv.R, relativeColorv.G, relativeColorv.B);
+                        MediaColor relativeColor = colorPalette.GradientHelper.GetRelativeColor(i, pieChart.Value);
+                        chartSeries.DataPoints[i].DataFormat.Fill.ForeColor = colorPalette.ConvertColor(relativeColor);
                     }
                 }
             }

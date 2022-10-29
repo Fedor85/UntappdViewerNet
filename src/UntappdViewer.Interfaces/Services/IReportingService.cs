@@ -6,7 +6,7 @@ namespace UntappdViewer.Interfaces.Services
 {
     public interface IReportingService
     {
-        void SetPieGradien(IGradientHelper gradientHelper);
+        void SetColorPalette(IColorPalette colorPalette);
 
         Task<string> CreateAllCheckinsReportrAsync(List<Checkin> checkins, string directory);
 
