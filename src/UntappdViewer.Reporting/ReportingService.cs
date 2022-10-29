@@ -77,9 +77,9 @@ namespace UntappdViewer.Reporting
 
             Worksheet mainSheet = workbook.Worksheets["Statistics"];
 
-            FillBeerChekinRatingScore(workbook.Worksheets["BeerChekinRatingScore"], statisticsCalculation);
-
             SetColorBeerChekinRatingScore(mainSheet);
+            FillBeerChekinRatingScore(workbook.Worksheets["BeerChekinRatingScore"], statisticsCalculation);
+        
             FillChekinCountDate(workbook.Worksheets["ChekinCountDate"], statisticsCalculation);
 
             FillStyleCountRating(workbook.Worksheets["StyleCountRating"], statisticsCalculation);
@@ -258,7 +258,7 @@ namespace UntappdViewer.Reporting
             if (colorPalette == null)
                 return;
 
-            Chart chart = sheet.Charts.OfType<Chart>().FirstOrDefault(item => item.Name.Equals("ChartRatingScore"));
+            Chart chart = sheet.Charts.OfType<Chart>().FirstOrDefault(item => item.Name.Equals("BeerChekinRatingScore"));
             if (chart == null)
                 return;
 
