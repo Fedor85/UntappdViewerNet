@@ -81,14 +81,22 @@ namespace UntappdViewer.Reporting
             SetColorBeerChekinRatingScore(mainSheet);
             FillBeerChekinRatingScore(workbook.Worksheets["BeerChekinRatingScore"], statisticsCalculation);
 
-            SetColorChekinCountDate(mainSheet);
+            SetGradientChart(mainSheet, "ChekinCountDate", false);
+            SetColorChekinAccrescentCountDate(mainSheet);
             FillChekinCountDate(workbook.Worksheets["ChekinCountDate"], statisticsCalculation);
 
-            SetColorChekinAccrescentCountDate(mainSheet);
+            SetGradientChart(mainSheet, "StyleCount", true);
+            SetGradientChart(mainSheet, "StyleRating", true);
             FillStyleCountRating(workbook.Worksheets["StyleCountRating"], statisticsCalculation);
 
+            SetGradientChart(mainSheet, "CountryCount", true);
+            SetGradientChart(mainSheet, "CountryRating", true);
             FillCountryCountRating(workbook.Worksheets["CountryCountRating"], statisticsCalculation);
+
+            SetGradientChart(mainSheet, "ServingTypeCount", true);
+            SetGradientChart(mainSheet, "ServingTypeRating", true);
             FillServingTypeCountRating(workbook.Worksheets["ServingTypeCountRating"], statisticsCalculation);
+
             FillIBUToABV(workbook.Worksheets["IBUToABV"], statisticsCalculation);
 
             Dictionary<string, int> pieCharts = new Dictionary<string, int>();
@@ -275,12 +283,12 @@ namespace UntappdViewer.Reporting
             }
         }
 
-        private void SetColorChekinCountDate(Worksheet sheet)
+        private void SetGradientChart(Worksheet sheet, string chartName, bool isHorizontal)
         {
             if (colorPalette == null)
                 return;
 
-            Chart chart = sheet.Charts.Cast<Chart>().FirstOrDefault(item => item.Name.Equals("ChekinCountDate"));
+            Chart chart = sheet.Charts.Cast<Chart>().FirstOrDefault(item => item.Name.Equals(chartName));
             if (chart == null)
                 return;
 
@@ -299,9 +307,20 @@ namespace UntappdViewer.Reporting
             shapeFill.GradientStops.GradientType = GradientType.Liniar;
 
             shapeFill.GradientStops.Clear();
-            shapeFill.GradientStops.Add(new XlsGradientStop(new OColor(colorPalette.ConvertColor(colorPalette.GradientHelper.GetColor(2))), 0, 100000));
-            shapeFill.GradientStops.Add(new XlsGradientStop(new OColor(colorPalette.ConvertColor(colorPalette.GradientHelper.GetColor(1))), 50000, 100000));
-            shapeFill.GradientStops.Add(new XlsGradientStop(new OColor(colorPalette.ConvertColor(colorPalette.GradientHelper.GetColor(0))), 99999, 100000));
+            if (isHorizontal)
+            {
+                shapeFill.GradientStops.Add(new XlsGradientStop(new OColor(colorPalette.ConvertColor(colorPalette.GradientHelper.GetColor(0))), 0, 100000));
+                shapeFill.GradientStops.Add(new XlsGradientStop(new OColor(colorPalette.ConvertColor(colorPalette.GradientHelper.GetColor(1))), 50000, 100000));
+                shapeFill.GradientStops.Add(new XlsGradientStop(new OColor(colorPalette.ConvertColor(colorPalette.GradientHelper.GetColor(2))), 99999, 100000));
+                shapeFill.GradientStops.Angle = 0;
+            }
+            else
+            {
+                shapeFill.GradientStops.Add(new XlsGradientStop(new OColor(colorPalette.ConvertColor(colorPalette.GradientHelper.GetColor(2))), 0, 100000));
+                shapeFill.GradientStops.Add(new XlsGradientStop(new OColor(colorPalette.ConvertColor(colorPalette.GradientHelper.GetColor(1))), 50000, 100000));
+                shapeFill.GradientStops.Add(new XlsGradientStop(new OColor(colorPalette.ConvertColor(colorPalette.GradientHelper.GetColor(0))), 99999, 100000));
+            }
+
             chartSerie.DataFormat.LineProperties.Color = colorPalette.ConvertColor(colorPalette.MainColorDark);
         }
 
