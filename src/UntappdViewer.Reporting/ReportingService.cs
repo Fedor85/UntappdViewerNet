@@ -97,6 +97,7 @@ namespace UntappdViewer.Reporting
             SetGradientChart(mainSheet, "ServingTypeRating", true);
             FillServingTypeCountRating(workbook.Worksheets["ServingTypeCountRating"], statisticsCalculation);
 
+            SetColorIBUToABV(mainSheet);
             FillIBUToABV(workbook.Worksheets["IBUToABV"], statisticsCalculation);
 
             Dictionary<string, int> pieCharts = new Dictionary<string, int>();
@@ -346,6 +347,22 @@ namespace UntappdViewer.Reporting
             {
                 ccrescentChekinCountAreaSerie.DataFormat.Fill.ForeColor = colorPalette.ConvertColor(colorPalette.MainColorLight);
             }
+        }
+
+        private void SetColorIBUToABV(Worksheet sheet)
+        {
+            if (colorPalette == null)
+                return;
+
+            Chart chart = sheet.Charts.Cast<Chart>().FirstOrDefault(item => item.Name.Equals("IBUToABV"));
+            if (chart == null)
+                return;
+
+            ChartSerie iBUToABVeSerie = chart.Series.Cast<ChartSerie>().FirstOrDefault(item => item.Name.Equals("IBUToABV"));
+            if (iBUToABVeSerie == null)
+                return;
+
+            iBUToABVeSerie.DataFormat.MarkerBackgroundColor = colorPalette.ConvertColor(colorPalette.MainColorDark);
         }
 
         private void SetPieGradien(Worksheet sheet, Dictionary<string, int> pieCharts)
