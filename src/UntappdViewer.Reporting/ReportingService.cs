@@ -83,9 +83,10 @@ namespace UntappdViewer.Reporting
 
             SetColorChekinCountDate(mainSheet);
             FillChekinCountDate(workbook.Worksheets["ChekinCountDate"], statisticsCalculation);
-  
 
+            SetColorChekinAccrescentCountDate(mainSheet);
             FillStyleCountRating(workbook.Worksheets["StyleCountRating"], statisticsCalculation);
+
             FillCountryCountRating(workbook.Worksheets["CountryCountRating"], statisticsCalculation);
             FillServingTypeCountRating(workbook.Worksheets["ServingTypeCountRating"], statisticsCalculation);
             FillIBUToABV(workbook.Worksheets["IBUToABV"], statisticsCalculation);
@@ -282,6 +283,7 @@ namespace UntappdViewer.Reporting
             Chart chart = sheet.Charts.Cast<Chart>().FirstOrDefault(item => item.Name.Equals("ChekinCountDate"));
             if (chart == null)
                 return;
+
             chart.RefreshChart();
             ChartSerie chartSerie = chart.Series.Cast<ChartSerie>().FirstOrDefault();
             if (chartSerie == null)
@@ -301,6 +303,30 @@ namespace UntappdViewer.Reporting
             shapeFill.GradientStops.Add(new XlsGradientStop(new OColor(colorPalette.ConvertColor(colorPalette.GradientHelper.GetColor(1))), 50000, 100000));
             shapeFill.GradientStops.Add(new XlsGradientStop(new OColor(colorPalette.ConvertColor(colorPalette.GradientHelper.GetColor(0))), 99999, 100000));
             chartSerie.DataFormat.LineProperties.Color = colorPalette.ConvertColor(colorPalette.MainColorDark);
+        }
+
+        private void SetColorChekinAccrescentCountDate(Worksheet sheet)
+        {
+            if (colorPalette == null)
+                return;
+
+            Chart chart = sheet.Charts.Cast<Chart>().FirstOrDefault(item => item.Name.Equals("ChekinAccrescentCountDate"));
+            if (chart == null)
+                return;
+
+            ChartSerie accrescentChekinCountLineSerie = chart.Series.Cast<ChartSerie>().FirstOrDefault(item => item.Name.Equals("AccrescentChekinCountLine"));
+            if (accrescentChekinCountLineSerie != null)
+            {
+                Color color = colorPalette.ConvertColor(colorPalette.MainColorLight);
+                accrescentChekinCountLineSerie.DataFormat.MarkerBackgroundColor = color;
+                accrescentChekinCountLineSerie.DataFormat.LineProperties.Color = color;
+            }
+
+            ChartSerie ccrescentChekinCountAreaSerie = chart.Series.Cast<ChartSerie>().FirstOrDefault(item => item.Name.Equals("AccrescentChekinCountArea"));
+            if (ccrescentChekinCountAreaSerie != null)
+            {
+                ccrescentChekinCountAreaSerie.DataFormat.Fill.ForeColor = colorPalette.ConvertColor(colorPalette.MainColorLight);
+            }
         }
 
         private void SetPieGradien(Worksheet sheet, Dictionary<string, int> pieCharts)
