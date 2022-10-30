@@ -9,6 +9,7 @@ using Spire.Xls;
 using Spire.Xls.Charts;
 using Spire.Xls.Core;
 using Spire.Xls.Core.Spreadsheet;
+using Spire.Xls.Core.Spreadsheet.Shapes;
 using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces;
 using UntappdViewer.Interfaces.Services;
@@ -79,8 +80,10 @@ namespace UntappdViewer.Reporting
 
             SetColorBeerChekinRatingScore(mainSheet);
             FillBeerChekinRatingScore(workbook.Worksheets["BeerChekinRatingScore"], statisticsCalculation);
-        
+
+            SetColorChekinCountDate(mainSheet);
             FillChekinCountDate(workbook.Worksheets["ChekinCountDate"], statisticsCalculation);
+  
 
             FillStyleCountRating(workbook.Worksheets["StyleCountRating"], statisticsCalculation);
             FillCountryCountRating(workbook.Worksheets["CountryCountRating"], statisticsCalculation);
@@ -96,7 +99,7 @@ namespace UntappdViewer.Reporting
             if (aBVCount > 0)
                 pieCharts.Add("PieIBU", iBUCount);
 
-            UpdatePieGradien(mainSheet, pieCharts);
+            SetPieGradien(mainSheet, pieCharts);
             mainSheet.CalculateAllValue();
 
             workbook.SaveToFile(outputPath);
@@ -258,7 +261,7 @@ namespace UntappdViewer.Reporting
             if (colorPalette == null)
                 return;
 
-            Chart chart = sheet.Charts.OfType<Chart>().FirstOrDefault(item => item.Name.Equals("BeerChekinRatingScore"));
+            Chart chart = sheet.Charts.Cast<Chart>().FirstOrDefault(item => item.Name.Equals("BeerChekinRatingScore"));
             if (chart == null)
                 return;
 
@@ -271,7 +274,36 @@ namespace UntappdViewer.Reporting
             }
         }
 
-        private void UpdatePieGradien(Worksheet sheet, Dictionary<string, int> pieCharts)
+        private void SetColorChekinCountDate(Worksheet sheet)
+        {
+            if (colorPalette == null)
+                return;
+
+            Chart chart = sheet.Charts.Cast<Chart>().FirstOrDefault(item => item.Name.Equals("ChekinCountDate"));
+            if (chart == null)
+                return;
+            chart.RefreshChart();
+            ChartSerie chartSerie = chart.Series.Cast<ChartSerie>().FirstOrDefault();
+            if (chartSerie == null)
+                return;
+
+            //Reset
+            XlsShapeFill shapeFill = chartSerie.DataFormat.Fill as XlsShapeFill;
+            shapeFill.FillType = ShapeFillType.SolidColor;
+            shapeFill.ForeColor = colorPalette.ConvertColor(colorPalette.MainColorLight);
+
+            shapeFill.FillType = ShapeFillType.Gradient;
+            shapeFill.IsGradientSupported = true;
+            shapeFill.GradientStops.GradientType = GradientType.Liniar;
+
+            shapeFill.GradientStops.Clear();
+            shapeFill.GradientStops.Add(new XlsGradientStop(new OColor(colorPalette.ConvertColor(colorPalette.GradientHelper.GetColor(2))), 0, 100000));
+            shapeFill.GradientStops.Add(new XlsGradientStop(new OColor(colorPalette.ConvertColor(colorPalette.GradientHelper.GetColor(1))), 50000, 100000));
+            shapeFill.GradientStops.Add(new XlsGradientStop(new OColor(colorPalette.ConvertColor(colorPalette.GradientHelper.GetColor(0))), 99999, 100000));
+            chartSerie.DataFormat.LineProperties.Color = colorPalette.ConvertColor(colorPalette.MainColorDark);
+        }
+
+        private void SetPieGradien(Worksheet sheet, Dictionary<string, int> pieCharts)
         {
             if (colorPalette == null || !pieCharts.Any())
                 return;

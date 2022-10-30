@@ -22,12 +22,27 @@ namespace UntappdViewer.Helpers
             return GetRelativeColor(GetOffSet(index, count));
         }
 
-        public Color GetRelativeColor(double offset)
+        public Color GetColor(int index)
         {
-            return dispatcher.Invoke(() => GetOffsetColor(offset));
+            return dispatcher.Invoke(() => GetColorDispatcher(index));
         }
 
-        private Color GetOffsetColor(double offset)
+        public Color GetRelativeColor(double offset)
+        {
+            return dispatcher.Invoke(() => GetRelativeColorDispatcher(offset));
+        }
+
+        private Color GetColorDispatcher(int index)
+        {
+            if (gradientStopCollection.Count == 0 ||
+                index >= gradientStopCollection.Count)
+                return Color.FromArgb(0, 0, 0, 0);
+
+            return gradientStopCollection[index].Color;
+        }
+
+
+        private Color GetRelativeColorDispatcher(double offset)
         {
             var point = gradientStopCollection.SingleOrDefault(f => f.Offset == offset);
             if (point != null)
@@ -36,7 +51,7 @@ namespace UntappdViewer.Helpers
             GradientStop before = gradientStopCollection.First(w => MathHelper.DoubleCompare(w.Offset, gradientStopCollection.Min(m => m.Offset)));
             GradientStop after = gradientStopCollection.First(w => MathHelper.DoubleCompare(w.Offset, gradientStopCollection.Max(m => m.Offset)));
 
-            foreach (var gs in gradientStopCollection)
+            foreach (GradientStop gs in gradientStopCollection)
             {
                 if (gs.Offset < offset && gs.Offset > before.Offset)
                     before = gs;
@@ -45,7 +60,7 @@ namespace UntappdViewer.Helpers
                     after = gs;
             }
 
-            var color = new Color();
+            Color color = new Color();
 
             color.ScA = (float)((offset - before.Offset) * (after.Color.ScA - before.Color.ScA) / (after.Offset - before.Offset) + before.Color.ScA);
             color.ScR = (float)((offset - before.Offset) * (after.Color.ScR - before.Color.ScR) / (after.Offset - before.Offset) + before.Color.ScR);

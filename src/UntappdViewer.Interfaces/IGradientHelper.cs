@@ -7,5 +7,7 @@ namespace UntappdViewer.Interfaces
         Color GetRelativeColor(int index, int count);
 
         Color GetRelativeColor(double offset);
+
+        Color GetColor(int index);
     }
 }
