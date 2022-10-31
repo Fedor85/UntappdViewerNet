@@ -12,16 +12,12 @@ using UntappdViewer.Models.Different;
 using UntappdViewer.Modules;
 using UntappdViewer.Utils;
 using UntappdViewer.Views;
-using Checkin = UntappdViewer.Models.Checkin;
-using Beer = UntappdViewer.Models.Beer;
 
 namespace UntappdViewer.ViewModels
 {
     public class StatisticsProjectViewModel : RegionManagerBaseModel
     {
         private IModuleManager moduleManager;
-
-        private IUntappdService untappdService;
 
         private IStatisticsCalculation statisticsCalculation;
 
@@ -357,11 +353,9 @@ namespace UntappdViewer.ViewModels
         }
 
         public StatisticsProjectViewModel(IRegionManager regionManager, IModuleManager moduleManager,
-                                                                        IUntappdService untappdService,
                                                                         IStatisticsCalculation statisticsCalculation) : base(regionManager)
         {
             this.moduleManager = moduleManager;
-            this.untappdService = untappdService;
             this.statisticsCalculation = statisticsCalculation;
 
             OkButtonCommand = new DelegateCommand(Exit);

@@ -174,7 +174,6 @@
         <Style x:Key="ChekinLineDataPointStyle" TargetType="{x:Type chartingToolkit:DataPoint}" BasedOn="{StaticResource BaseLineDataPointStyle}">
             <Setter Property="Background" Value="{StaticResource MainSolidBrushLight}"/>
         </Style>
-
         <ControlTemplate  x:Key="ColumnDataPointTemplate" TargetType="{x:Type ContentControl}">
             <Grid>
                 <Border Opacity="0.8">
