@@ -318,7 +318,7 @@ namespace UntappdViewer.Reporting
             else
             {
                 shapeFill.GradientStops.Add(new XlsGradientStop(new OColor(colorPalette.ConvertColor(colorPalette.GradientHelper.GetColor(2))), 0, 100000));
-                shapeFill.GradientStops.Add(new XlsGradientStop(new OColor(colorPalette.ConvertColor(colorPalette.GradientHelper.GetColor(1))), 70000, 100000));
+                shapeFill.GradientStops.Add(new XlsGradientStop(new OColor(colorPalette.ConvertColor(colorPalette.GradientHelper.GetColor(1))), 30000, 100000));
                 shapeFill.GradientStops.Add(new XlsGradientStop(new OColor(colorPalette.ConvertColor(colorPalette.GradientHelper.GetColor(0))), 99999, 100000));
             }
 
