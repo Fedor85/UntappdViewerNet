@@ -49,21 +49,9 @@ namespace UntappdViewer.Reporting
             IList<Checkin> checkinsSort = checkins.OrderBy(item => item.Beer.Brewery.Name).ThenBy(item => item.Beer.Name).ToList();
             Worksheet sheet = workbook.Worksheets[0];
             int indexRow = 5;
-            for (int i = 0; i < checkinsSort.Count; i++)
-            {
-                Checkin currentCheckin = checkinsSort[i];
 
-                sheet[indexRow, 1].Text = (i + 1).ToString();
-                if (currentCheckin.Beer.Brewery.Venue != null)
-                    sheet[indexRow, 2].Text = currentCheckin.Beer.Brewery.Venue.Country;
-
-                sheet[indexRow, 3].Text = currentCheckin.Beer.Brewery.Name;
-                sheet[indexRow, 4].Text = currentCheckin.Beer.Name;
-
-                sheet[indexRow, 5].Text = currentCheckin.RatingScore.ToString();
-                sheet[indexRow, 6].Text = currentCheckin.CreatedDate.ToString();
-                indexRow++;
-            }
+            FillCheckinsData(sheet, checkinsSort, indexRow);
+            SetColorCheckins(sheet, checkinsSort.Count, indexRow);
 
             SetValueByNameRanges(sheet.Workbook, "Today", DateTime.Now);
             workbook.SaveToFile(outputPath);
@@ -114,6 +102,26 @@ namespace UntappdViewer.Reporting
 
             workbook.SaveToFile(outputPath);
             return outputPath;
+        }
+
+        private void FillCheckinsData(Worksheet sheet, IList<Checkin> checkins, int indexRow)
+        {
+            for (int i = 0; i < checkins.Count; i++)
+            {
+                Checkin currentCheckin = checkins[i];
+
+                sheet[indexRow, 1].Text = (i + 1).ToString();
+                if (currentCheckin.Beer.Brewery.Venue != null)
+                    sheet[indexRow, 2].Text = currentCheckin.Beer.Brewery.Venue.Country;
+
+                sheet[indexRow, 3].Text = currentCheckin.Beer.Brewery.Name;
+                sheet[indexRow, 4].Text = currentCheckin.Beer.Name;
+
+                sheet[indexRow, 5].Text = currentCheckin.RatingScore.ToString();
+                sheet[indexRow, 6].Text = currentCheckin.CreatedDate.ToString();
+
+                indexRow++;
+            }
         }
 
         private void FillBeerChekinRatingScore(Worksheet sheet, IStatisticsCalculation statisticsCalculation)
@@ -264,6 +272,18 @@ namespace UntappdViewer.Reporting
                 indexRow++;
             }
             return iBUCount.Count;
+        }
+
+        private void SetColorCheckins(Worksheet sheet, int checkinsCount, int indexRow)
+        {
+            if (colorPalette == null || checkinsCount == 0)
+                return;
+
+            Color color = colorPalette.ConvertColor(colorPalette.MainColorLight);
+            int startIndex = ++indexRow;
+            int offsetCount = checkinsCount + startIndex;
+            for (int i = startIndex; i < offsetCount; i = i + 2)
+                sheet.Range[i, 1, i, 6].Style.Color = color;
         }
 
         private void SetColorBeerChekinRatingScore(Worksheet sheet)
