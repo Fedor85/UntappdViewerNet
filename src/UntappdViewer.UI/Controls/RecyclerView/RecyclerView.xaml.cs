@@ -16,7 +16,7 @@ namespace UntappdViewer.Views.Controls
         public RecyclerView()
         {
             //anything that’s only used in XAML and not in code behind, isn't deemed to be 'in use' by MSBuild.
-            VirtualizingWrapPanel useByMSBuild = null;
+            VirtualizingWrapPanel useByMSBuild = new VirtualizingWrapPanel();
 
             InitializeComponent();
             TypeDescriptor.GetProperties(this)["ItemsSource"].AddValueChanged(this, ListViewItemsSourceChanged);
