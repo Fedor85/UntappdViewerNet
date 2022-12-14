@@ -9,7 +9,7 @@ using UntappdViewer.Helpers;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
 using UntappdViewer.Modules;
-using UntappdViewer.Views.Controls.ViewModel;
+using UntappdViewer.UI.Controls.ViewModel;
 using Checkin = UntappdViewer.Models.Checkin;
 using Untappd = UntappdViewer.Views.Untappd;
 

@@ -336,16 +336,6 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        public static System.Drawing.Icon close_icon {
-            get {
-                object obj = ResourceManager.GetObject("close_icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Count.
         /// </summary>
         public static string Count {
@@ -615,16 +605,6 @@ namespace UntappdViewer.Properties {
         public static string HelpMenuItem {
             get {
                 return ResourceManager.GetString("HelpMenuItem", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap Hide {
-            get {
-                object obj = ResourceManager.GetObject("Hide", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -922,16 +902,6 @@ namespace UntappdViewer.Properties {
         public static string ServingTypeRating {
             get {
                 return ResourceManager.GetString("ServingTypeRating", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap Show {
-            get {
-                object obj = ResourceManager.GetObject("Show", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

@@ -12,7 +12,7 @@ using UntappdViewer.Events;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
 using UntappdViewer.Modules;
-using UntappdViewer.Views.Controls.ViewModel;
+using UntappdViewer.UI.Controls.ViewModel;
 
 namespace UntappdViewer.ViewModels
 {

@@ -81,9 +81,6 @@
     <Reference Include="Unity.Container, Version=5.11.11.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.Container.5.11.11\lib\net48\Unity.Container.dll</HintPath>
     </Reference>
-    <Reference Include="VirtualizingWrapPanel, Version=1.5.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\VirtualizingWrapPanel.1.5.7\lib\net452\VirtualizingWrapPanel.dll</HintPath>
-    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -117,23 +114,13 @@
     <Compile Include="Different\Helpers\CommunicationHelper.cs" />
     <Compile Include="Different\Helpers\IValueConverters\CountryNameToFlagConverter.cs" />
     <Compile Include="Different\Helpers\EnumsHelper.cs" />
-    <Compile Include="Different\Helpers\ImageConverter.cs" />
-    <Compile Include="Different\Helpers\IValueConverters\PathImageReSizeWidthConverter.cs" />
     <Compile Include="Different\Helpers\IValueConverters\PieSeriesBackgroundConverter.cs" />
     <Compile Include="Different\Helpers\IValueConverters\ServingTypeConverter.cs" />
-    <Compile Include="Different\Helpers\UIHelper.cs" />
     <Compile Include="Different\UntappdEntity.cs" />
     <Compile Include="Modules\EmptyContentModule.cs" />
     <Compile Include="Modules\StatisticsProjectModule.cs" />
     <Compile Include="ViewModels\LoadingViewModel.cs" />
     <Compile Include="ViewModels\StatisticsProjectViewModel.cs" />
-    <Compile Include="Views\Controls\RecyclerView\DataTemplate\ImageDataTemplate.xaml.cs">
-      <DependentUpon>ImageDataTemplate.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Controls\RecyclerView\ViewModel\ImageViewModel.cs" />
-    <Compile Include="Views\Controls\ViewModel\Entity.cs" />
-    <Compile Include="Views\Controls\ViewModel\ImageItemViewModel.cs" />
-    <Compile Include="Views\Controls\ViewModel\TreeItemViewModel.cs" />
     <Compile Include="Modules\Base\BaseLoadingModule.cs" />
     <Compile Include="Modules\Base\BaseModue.cs" />
     <Compile Include="Modules\CheckinModule.cs" />
@@ -174,30 +161,6 @@
     <Compile Include="Views\Checkin.xaml.cs">
       <DependentUpon>Checkin.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\LoopAutoScrollImageListBox.xaml.cs">
-      <DependentUpon>LoopAutoScrollImageListBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Controls\RecyclerView\DataTemplate\RatingDataTemplate.xaml.cs">
-      <DependentUpon>RatingDataTemplate.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Controls\RecyclerView\RecyclerView.xaml.cs">
-      <DependentUpon>RecyclerView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Controls\RecyclerView\ViewModel\RatingViewModel.cs" />
-    <Compile Include="Views\Controls\SmartTextBox.xaml.cs">
-      <DependentUpon>SmartTextBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Controls\SliderImagesControl.xaml.cs">
-      <DependentUpon>SliderImagesControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Controls\StarRating\ProgressBarSolidBrushConverter.cs" />
-    <Compile Include="Views\Controls\StarRating\StarProgressBar.xaml.cs">
-      <DependentUpon>StarProgressBar.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Controls\StarRating\StarRatingControl.xaml.cs">
-      <DependentUpon>StarRatingControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Controls\ZoomBorder.cs" />
     <Compile Include="Different\Behaviors\Synchronised\SynchronisedScrollToken.cs" />
     <Compile Include="Views\EmptyContent.xaml.cs">
       <DependentUpon>EmptyContent.xaml</DependentUpon>
@@ -249,38 +212,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Checkin.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Controls\LoopAutoScrollImageListBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Controls\RecyclerView\DataTemplate\ImageDataTemplate.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Controls\RecyclerView\DataTemplate\RatingDataTemplate.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Controls\RecyclerView\RecyclerView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Controls\SmartTextBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Controls\SliderImagesControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Controls\StarRating\StarProgressBar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Controls\StarRating\StarRatingControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -411,6 +342,10 @@
     <ProjectReference Include="..\UntappdViewer.Reporting\UntappdViewer.Reporting.csproj">
       <Project>{f1bbfaf1-b399-436b-a644-a2cb462c0589}</Project>
       <Name>UntappdViewer.Reporting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UntappdViewer.UI\UntappdViewer.UI.csproj">
+      <Project>{1d82fdec-28e3-4689-b6f8-ed402b1c5294}</Project>
+      <Name>UntappdViewer.UI</Name>
     </ProjectReference>
     <ProjectReference Include="..\UntappdViewer.Utils\UntappdViewer.Utils.csproj">
       <Project>{5fa116c9-7571-494c-a74d-7e121857ffe9}</Project>

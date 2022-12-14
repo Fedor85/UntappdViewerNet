@@ -20,7 +20,7 @@ namespace UntappdViewer.ViewModels
         {
            base.OnDialogOpened(parameters);
             if (parameters.Keys.Contains("icon"))
-                IconSource = Helpers.ImageConverter.GerBitmapSource(parameters.GetValue<Icon>("icon"));
+                IconSource = UI.Helpers.ImageConverter.GerBitmapSource(parameters.GetValue<Icon>("icon"));
         }
     }
 }

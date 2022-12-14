@@ -7,8 +7,8 @@
              xmlns:properties="clr-namespace:UntappdViewer.Properties"
              xmlns:behaviors="clr-namespace:UntappdViewer.Behaviors"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:controls="clr-namespace:UntappdViewer.Views.Controls"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:controls="clr-namespace:UntappdViewer.UI.Controls;assembly=UntappdViewer.UI"
              mc:Ignorable="d" 
              prism:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="600" d:DesignWidth="250">

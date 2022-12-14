@@ -1,7 +1,6 @@
-﻿using System;
-using UntappdViewer.Different;
+﻿using UntappdViewer.Different;
 using UntappdViewer.Infrastructure;
-using UntappdViewer.Views.Controls.ViewModel;
+using UntappdViewer.UI.Controls.ViewModel;
 
 namespace UntappdViewer.Helpers
 {

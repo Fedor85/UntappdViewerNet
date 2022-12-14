@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using UntappdViewer.Models;
-using UntappdViewer.Models.Different;
+using UntappdViewer.UI.Controls.ViewModel;
 using UntappdViewer.Utils;
-using UntappdViewer.Views.Controls.ViewModel;
 
 namespace UntappdViewer.Helpers
 {

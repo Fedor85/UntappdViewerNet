@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Xaml.Behaviors;
-using UntappdViewer.Different.Helpers;
+using UntappdViewer.UI.Helpers;
 
 namespace UntappdViewer.Behaviors
 {

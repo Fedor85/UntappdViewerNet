@@ -16,8 +16,9 @@ using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
 using UntappdViewer.Modules;
+using UntappdViewer.UI.Controls.ViewModel;
+using UntappdViewer.UI.Helpers;
 using UntappdViewer.Utils;
-using UntappdViewer.Views.Controls.ViewModel;
 
 namespace UntappdViewer.ViewModels
 {

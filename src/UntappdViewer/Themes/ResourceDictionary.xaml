@@ -14,7 +14,6 @@
         </ImageBrush.Transform>
     </ImageBrush>
     <helpers:BoolToVisibilityConverter x:Key="BTVConverter"/>
-    <helpers:PathImageReSizeWidthConverter  x:Key="ImageReSizeWidthConverter"/>
     <helpers:PieSeriesBackgroundConverter  x:Key="PieBackgroundConverter"/>
     <helpers:ServingTypeConverter  x:Key="ServingTypeConverter"/>
     <helpers:CountryNameToFlagConverter x:Key="FlagConverter"/>
