@@ -98,7 +98,7 @@
     "name": "LiteDB",
     "slug": "litedb",
     "versionFormat": "5.0.{build}",
-    "nextBuildNumber": 627,
+    "nextBuildNumber": 644,
     "repositoryType": "gitHub",
     "repositoryScm": "git",
     "repositoryName": "mbdavid/LiteDB",
@@ -348,6 +348,12 @@
       "osType": "Linux"
     },
     {
+      "buildWorkerImageId": 2564,
+      "name": "Ubuntu2004-arm_hidden",
+      "buildCloudName": "aws-us-east-1",
+      "osType": "Linux"
+    },
+    {
       "buildWorkerImageId": 2335,
       "name": "Visual Studio 2022",
       "buildCloudName": "pro-vs2019;pro-backup",
@@ -356,7 +362,7 @@
     {
       "buildWorkerImageId": 886,
       "name": "Visual Studio 2019",
-      "buildCloudName": "pro-vs2019;pro-ubuntu;pro-backup",
+      "buildCloudName": "pro-vs2019;pro-backup",
       "osType": "Windows"
     },
     {
