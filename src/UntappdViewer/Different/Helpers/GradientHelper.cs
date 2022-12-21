@@ -17,6 +17,11 @@ namespace UntappdViewer.Helpers
             this.gradientStopCollection = gradientStopCollection;
         }
 
+        public Color GetRelativeColor(double min, double max, double current)
+        {
+            return GetRelativeColor(GetOffSet(min, max, current));
+        }
+
         public Color GetRelativeColor(int index, int count)
         {
             return GetRelativeColor(GetOffSet(index, count));
@@ -25,6 +30,11 @@ namespace UntappdViewer.Helpers
         public Color GetColor(int index)
         {
             return dispatcher.Invoke(() => GetColorDispatcher(index));
+        }
+
+        public object GetGradientStopCollection()
+        {
+            return gradientStopCollection;
         }
 
         public Color GetRelativeColor(double offset)
@@ -77,6 +87,14 @@ namespace UntappdViewer.Helpers
 
             double step = 1 / ((double)count - 1);
             return index * step;
+        }
+
+        private double GetOffSet(double min, double max, double current)
+        {
+            if (MathHelper.DoubleCompare(current, min))
+                return 0;
+
+            return 1 / ((max - min) / (current - min));
         }
     }
 }

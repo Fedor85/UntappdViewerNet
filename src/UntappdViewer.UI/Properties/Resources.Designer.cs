@@ -83,10 +83,44 @@ namespace UntappdViewer.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap other {
+            get {
+                object obj = ResourceManager.GetObject("other", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Show {
             get {
                 object obj = ResourceManager.GetObject("Show", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;!--
+        ///	(c) lvcharts.net
+        ///	Map Version 1.0
+        ///	This work is licensed under a Creative Commons
+        ///	Attribution-NonCommercial-ShareAlike 4.0 International License
+        ///	https://creativecommons.org/licenses/by-nc-sa/4.0/
+        ///--&gt;
+        ///&lt;LiveChartsMap xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
+        ///  &lt;Height&gt;2592&lt;/Height&gt;
+        ///  &lt;Width&gt;4008&lt;/Width&gt;
+        ///  &lt;Shapes&gt;
+        ///    &lt;MapShape&gt;
+        ///      &lt;Id&gt;AF&lt;/Id&gt;
+        ///      &lt;Name&gt;Afghanistan&lt;/Name&gt;
+        ///      &lt;Path&gt;M2685,1419L2696,1 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string World {
+            get {
+                return ResourceManager.GetString("World", resourceCulture);
             }
         }
     }

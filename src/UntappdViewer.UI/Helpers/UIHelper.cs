@@ -15,7 +15,7 @@ namespace UntappdViewer.UI.Helpers
                 return window;
 
             UserControl parentControl = control.Parent as UserControl;
-            return window != null ? window : GetWindow(parentControl);
+            return GetWindow(parentControl);
         }
     }
 }

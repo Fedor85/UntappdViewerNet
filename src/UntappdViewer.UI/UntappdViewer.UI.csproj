@@ -37,12 +37,29 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
     <Reference Include="VirtualizingWrapPanel, Version=1.5.7.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\VirtualizingWrapPanel.1.5.7\lib\net452\VirtualizingWrapPanel.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\GeoMap\Data\GeoData.cs" />
+    <Compile Include="Controls\GeoMap\Data\LvcMap.cs" />
+    <Compile Include="Controls\GeoMap\Data\MapData.cs" />
+    <Compile Include="Controls\GeoMap\Elements\GridLines.cs" />
+    <Compile Include="Controls\GeoMap\Elements\ScaleLine.cs" />
+    <Compile Include="Controls\GeoMap\Elements\ScaleText.cs" />
+    <Compile Include="Controls\GeoMap\GeoDataTooltip.xaml.cs">
+      <DependentUpon>GeoDataTooltip.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GeoMap\GeoMap.xaml.cs">
+      <DependentUpon>GeoMap.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GeoMap\Data\MapResolver.cs" />
+    <Compile Include="Controls\GeoMap\GradientScale.xaml.cs">
+      <DependentUpon>GradientScale.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LoopAutoScrollImageListBox.xaml.cs">
       <DependentUpon>LoopAutoScrollImageListBox.xaml</DependentUpon>
     </Compile>
@@ -85,6 +102,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\GeoMap\GeoDataTooltip.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\GeoMap\GeoMap.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\GeoMap\GradientScale.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\LoopAutoScrollImageListBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -122,6 +151,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -131,6 +161,10 @@
     <Resource Include="Resources\Show.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\UntappdViewer.Interfaces\UntappdViewer.Interfaces.csproj">
+      <Project>{bb613be0-ae21-4a41-836a-c904d16444f6}</Project>
+      <Name>UntappdViewer.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UntappdViewer.Utils\UntappdViewer.Utils.csproj">
       <Project>{5FA116C9-7571-494C-A74D-7E121857FFE9}</Project>
       <Name>UntappdViewer.Utils</Name>
@@ -143,6 +177,12 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\other.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\World.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
