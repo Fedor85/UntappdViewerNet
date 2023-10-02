@@ -17,8 +17,7 @@ namespace UntappdViewer.Infrastructure
                 return String.Empty;
 
             ICountryInfo countryInfo = GetCountryInfo(countryName);
-           return countryInfo != null ? countryInfo.Alpha2Code.ToString() : countryName;
-
+            return countryInfo != null ? countryInfo.Alpha2Code.ToString() : countryName;
         }
 
         private static ICountryInfo GetCountryInfo(string country)
