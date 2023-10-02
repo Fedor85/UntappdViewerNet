@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using UntappdViewer.Models;
+using UntappdViewer.Models.Different;
 using UntappdViewer.UI.Controls.ViewModel;
 using UntappdViewer.Utils;
 
@@ -80,6 +82,17 @@ namespace UntappdViewer.Helpers
                 imageViewModel.Description = StringHelper.GetSplitByLength(badge.Description, 40);
 
             return imageViewModel;
+        }
+
+        public static Dictionary<T1, T3> KeyValueToDirectory<T1, T2, T3>(List<KeyValue<T1, T2>> values)
+        {
+            Dictionary<T1, T3> dictionary = new Dictionary<T1, T3>();
+            foreach (KeyValue<T1, T2> value in values)
+            {
+                if (!dictionary.ContainsKey(value.Key))
+                    dictionary.Add(value.Key, ParserAndConvertHelper.GetConvertValue<T3>(value.Value));
+            }
+            return dictionary;
         }
 
         #endregion

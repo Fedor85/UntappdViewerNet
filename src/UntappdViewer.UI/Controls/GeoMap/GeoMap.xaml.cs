@@ -10,6 +10,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using UntappdViewer.Interfaces;
 using UntappdViewer.UI.Controls.GeoMap.Data;
+using UntappdViewer.Utils;
 using Path = System.Windows.Shapes.Path;
 
 namespace UntappdViewer.UI.Controls.GeoMap
@@ -72,7 +73,7 @@ namespace UntappdViewer.UI.Controls.GeoMap
             set { SetValue(VisibilityDataProperty, value); }
         }
 
-        public Brush BackgroundData
+        public Brush BackgroundDataElement
         {
             get { return (Brush)GetValue(BackgroundDataElementProperty); }
             set { SetValue(BackgroundDataElementProperty, value); }
@@ -308,7 +309,7 @@ namespace UntappdViewer.UI.Controls.GeoMap
 
         private void UndefinedGeoDataMouseEnter(object sender, MouseEventArgs e)
         {
-            if (VisibilityData && UndefinedGeoDataTooltip.ItemsGeoData.Count > 0)
+            if (VisibilityData && UndefinedGeoDataTooltip.ItemsGeoData != null && UndefinedGeoDataTooltip.ItemsGeoData.Count > 0)
                 UndefinedGeoDataTooltip.Visibility = Visibility.Visible;
         }
 
@@ -475,8 +476,7 @@ namespace UntappdViewer.UI.Controls.GeoMap
             Point p2 = new Point(toOffset, toComponent);
 
             double deltaX = p2.X - p1.X;
-            double m = (p2.Y - p1.Y) / (deltaX == 0 ? double.MinValue : deltaX);
-
+            double m = (p2.Y - p1.Y) / (MathHelper.DoubleCompare(deltaX, 0) ? double.MinValue : deltaX);
             return m * (value - p1.X) + p1.Y;
         }
 
@@ -520,7 +520,6 @@ namespace UntappdViewer.UI.Controls.GeoMap
                 geoMap.SetRangeValue(heatMap.Values.Min(), heatMap.Values.Max());
                 geoMap.ShowMeSomeHeat();
             }
-
         }
 
         private static void SourceChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)

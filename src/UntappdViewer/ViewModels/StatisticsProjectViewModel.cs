@@ -6,6 +6,7 @@ using System.Windows.Input;
 using Prism.Commands;
 using Prism.Modularity;
 using Prism.Regions;
+using UntappdViewer.Helpers;
 using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models.Different;
@@ -35,7 +36,11 @@ namespace UntappdViewer.ViewModels
 
         private IEnumerable beerCountryCount;
 
+        private IEnumerable beerCountryCountMap;
+
         private IEnumerable beerCountryRating;
+
+        private IEnumerable beerCountryRatingMap;
 
         private IEnumerable servingTypeCount;
 
@@ -146,12 +151,30 @@ namespace UntappdViewer.ViewModels
             }
         }
 
+        public IEnumerable BeerCountryCountMap
+        {
+            get { return beerCountryCountMap; }
+            set
+            {
+                SetProperty(ref beerCountryCountMap, value);
+            }
+        }
+
         public IEnumerable BeerCountryRating
         {
             get { return beerCountryRating; }
             set
             {
                 SetProperty(ref beerCountryRating, value);
+            }
+        }
+
+        public IEnumerable BeerCountryRatingMap
+        {
+            get { return beerCountryRatingMap; }
+            set
+            {
+                SetProperty(ref beerCountryRatingMap, value);
             }
         }
 
@@ -473,7 +496,16 @@ namespace UntappdViewer.ViewModels
             MaxXAxisBeerCountryCount = GetMaxXAxis(beerCountryCount.Count > 0 ? beerCountryCount.Max(item => item.Value) : 0);
 
             BeerCountryCount = beerCountryCount;
-            BeerCountryRating = statisticsCalculation.GetAverageRatingByCheckinIds(beerCountryCheckinIds);
+            List<KeyValue<string, double>> beerCountryRating = statisticsCalculation.GetAverageRatingByCheckinIds(beerCountryCheckinIds);
+            BeerCountryRating = beerCountryRating;
+
+            Dictionary<string, double> beerCountryNameCountMap = ConverterHelper.KeyValueToDirectory<string, int, double>(beerCountryCount);
+            Dictionary<string, double> beerCountryCodeCountMap = CountryNameHelper.ConvertNameToCode(beerCountryNameCountMap);
+            BeerCountryCountMap = beerCountryCodeCountMap;
+
+            Dictionary<string, double> beerCountryNameRatingtMap = ConverterHelper.KeyValueToDirectory<string, double, double>(beerCountryRating);
+            Dictionary<string, double> beerCountryCodeRatingtMap = CountryNameHelper.ConvertNameToCode(beerCountryNameRatingtMap);
+            BeerCountryRatingMap = beerCountryCodeRatingtMap;
         }
 
         private void SetServingType()
