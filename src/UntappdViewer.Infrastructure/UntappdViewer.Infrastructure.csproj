@@ -37,6 +37,9 @@
     <Reference Include="LiteDB, Version=5.0.17.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
       <HintPath>..\packages\LiteDB.5.0.17\lib\net45\LiteDB.dll</HintPath>
     </Reference>
+    <Reference Include="Nager.Country, Version=3.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nager.Country.3.1.1\lib\net461\Nager.Country.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -45,6 +48,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CountryNameHelper.cs" />
     <Compile Include="Enums\FileStatus.cs" />
     <Compile Include="FileHelper.cs" />
     <Compile Include="FileItem.cs" />

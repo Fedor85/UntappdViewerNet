@@ -500,11 +500,11 @@ namespace UntappdViewer.ViewModels
             BeerCountryRating = beerCountryRating;
 
             Dictionary<string, double> beerCountryNameCountMap = ConverterHelper.KeyValueToDirectory<string, int, double>(beerCountryCount);
-            Dictionary<string, double> beerCountryCodeCountMap = CountryNameHelper.ConvertNameToCode(beerCountryNameCountMap);
+            Dictionary<string, double> beerCountryCodeCountMap = ConverterHelper.ConvertNameToCode(beerCountryNameCountMap);
             BeerCountryCountMap = beerCountryCodeCountMap;
 
             Dictionary<string, double> beerCountryNameRatingtMap = ConverterHelper.KeyValueToDirectory<string, double, double>(beerCountryRating);
-            Dictionary<string, double> beerCountryCodeRatingtMap = CountryNameHelper.ConvertNameToCode(beerCountryNameRatingtMap);
+            Dictionary<string, double> beerCountryCodeRatingtMap = ConverterHelper.ConvertNameToCode(beerCountryNameRatingtMap);
             BeerCountryRatingMap = beerCountryCodeRatingtMap;
         }
 

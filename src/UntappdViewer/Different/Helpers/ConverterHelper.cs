@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using UntappdViewer.Infrastructure;
 using UntappdViewer.Models;
 using UntappdViewer.Models.Different;
 using UntappdViewer.UI.Controls.ViewModel;
@@ -96,5 +97,16 @@ namespace UntappdViewer.Helpers
         }
 
         #endregion
+
+        public static Dictionary<string, T> ConvertNameToCode<T>(Dictionary<string, T> countries)
+        {
+            Dictionary<string, T> countryCodes = new Dictionary<string, T>();
+            foreach (KeyValuePair<string, T> country in countries)
+            {
+                string code = CountryNameHelper.GetCountryCode(country.Key);
+                countryCodes.Add(String.IsNullOrEmpty(code) ? country.Key : code, country.Value);
+            }
+            return countryCodes;
+        }
     }
 }
