@@ -40,8 +40,8 @@ namespace UntappdViewer.UI.Controls.GeoMap
 
         private static readonly DependencyProperty LandOpacityProperty = DependencyProperty.Register("LandOpacity", typeof(double), typeof(GeoMap), new PropertyMetadata(default(double)));
 
-        private static readonly DependencyProperty HeatMapProperty = DependencyProperty.Register("HeatMap", typeof(Dictionary<string, double>), typeof(GeoMap), new PropertyMetadata(new Dictionary<string, double>(), HeatMapChanged));
-        private static readonly DependencyProperty LanguagePackProperty = DependencyProperty.Register("LanguagePack", typeof(Dictionary<string, string>), typeof(GeoMap), new PropertyMetadata(new Dictionary<string, string>(), LanguagePackChanged));
+        private static readonly DependencyProperty HeatMapProperty = DependencyProperty.Register("HeatMap", typeof(Dictionary<string, double>), typeof(GeoMap), new PropertyMetadata(HeatMapChanged));
+        private static readonly DependencyProperty LanguagePackProperty = DependencyProperty.Register("LanguagePack", typeof(Dictionary<string, string>), typeof(GeoMap), new PropertyMetadata(LanguagePackChanged));
 
         private static readonly DependencyProperty SourceProperty = DependencyProperty.Register("Source", typeof(string), typeof(GeoMap), new PropertyMetadata(default(string), SourceChanged));
 
@@ -542,7 +542,7 @@ namespace UntappdViewer.UI.Controls.GeoMap
             }
         }
 
-        private static void LanguagePackChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        private static void LanguagePackChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
             GeoMap geoMap = dependencyObject as GeoMap;
             geoMap.UpdateUndefinedGeoData();

@@ -153,21 +153,21 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public IEnumerable BeerCountryCountMap
-        {
-            get { return beerCountryCountMap; }
-            set
-            {
-                SetProperty(ref beerCountryCountMap, value);
-            }
-        }
-
         public IEnumerable BeerCountryRating
         {
             get { return beerCountryRating; }
             set
             {
                 SetProperty(ref beerCountryRating, value);
+            }
+        }
+
+        public IEnumerable BeerCountryCountMap
+        {
+            get { return beerCountryCountMap; }
+            set
+            {
+                SetProperty(ref beerCountryCountMap, value);
             }
         }
 
