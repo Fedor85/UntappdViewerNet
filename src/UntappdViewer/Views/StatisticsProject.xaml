@@ -582,21 +582,21 @@
                                     <ContentControl Template="{StaticResource BackgroundControl}"/>
                                     <ContentControl ContentTemplate="{StaticResource ChartTitle}" Content="{x:Static properties:Resources.CountryCount}"/>
                                 </Grid>
-                                <geoMap:GeoMap Grid.Row="1"  HeatMap="{Binding BeerCountryCountMap}" Height="400"
+                                <geoMap:GeoMap HeatMap="{Binding BeerCountryCountMap}" Height="400" LanguagePack="{Binding CountryLanguagePack}"
                                                GradientHelper="{Binding Source={StaticResource GradientHelper}}" LandBordeThickness="5" 
                                                Background="{StaticResource BackgroundMap}" BackgroundGrid="{StaticResource BackgroundMapGrid}"
-                                               VisibilityData="True" EnableZoomingAndPanning="True" DisableAnimations="True">
+                                               VisibilityData="True" EnableZoomingAndPanning="True">
                                 </geoMap:GeoMap>
                             </StackPanel>
                             <StackPanel Grid.Row="1">
-                                <Grid Grid.Row="2" Margin="{StaticResource DefautChartOffsetBottom}">
+                                <Grid Margin="{StaticResource DefautChartOffsetBottom}">
                                     <ContentControl Template="{StaticResource BackgroundControl}"/>
                                     <ContentControl ContentTemplate="{StaticResource ChartTitle}" Content="{x:Static properties:Resources.CountryRating}"/>
                                 </Grid>
-                                <geoMap:GeoMap Grid.Row="3"  HeatMap="{Binding BeerCountryRatingMap}" Height="400"
+                                <geoMap:GeoMap HeatMap="{Binding BeerCountryRatingMap}" Height="400" LanguagePack="{Binding CountryLanguagePack}"
                                                GradientHelper="{Binding Source={StaticResource GradientHelper}}" LandBordeThickness="5" 
                                                Background="{StaticResource BackgroundMap}" BackgroundGrid="{StaticResource BackgroundMapGrid}"
-                                               VisibilityData="True" EnableZoomingAndPanning="True" DisableAnimations="True">
+                                               VisibilityData="True" EnableZoomingAndPanning="True">
                                 </geoMap:GeoMap>
                             </StackPanel>
 

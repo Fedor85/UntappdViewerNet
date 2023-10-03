@@ -42,6 +42,8 @@ namespace UntappdViewer.ViewModels
 
         private IEnumerable beerCountryRatingMap;
 
+        private IEnumerable countryLanguagePack;
+
         private IEnumerable servingTypeCount;
 
         private IEnumerable servingTypeRating;
@@ -175,6 +177,15 @@ namespace UntappdViewer.ViewModels
             set
             {
                 SetProperty(ref beerCountryRatingMap, value);
+            }
+        }
+
+        public IEnumerable CountryLanguagePack
+        {
+            get { return countryLanguagePack; }
+            set
+            {
+                SetProperty(ref countryLanguagePack, value);
             }
         }
 
@@ -428,6 +439,9 @@ namespace UntappdViewer.ViewModels
             MaxXAxisBeerCountryCount = 0;
             BeerCountryCount = null;
             BeerCountryRating = null;
+            BeerCountryCountMap = null;
+            BeerCountryRatingMap = null;
+            CountryLanguagePack = null;
 
             MaxXAxisServingTypeCount = 0;
             ServingTypeCount = null;
@@ -500,12 +514,14 @@ namespace UntappdViewer.ViewModels
             BeerCountryRating = beerCountryRating;
 
             Dictionary<string, double> beerCountryNameCountMap = ConverterHelper.KeyValueToDirectory<string, int, double>(beerCountryCount);
-            Dictionary<string, double> beerCountryCodeCountMap = ConverterHelper.ConvertNameToCode(beerCountryNameCountMap);
+            Dictionary<string, double> beerCountryCodeCountMap = ConverterHelper.ConvertCountryNameToCode(beerCountryNameCountMap);
             BeerCountryCountMap = beerCountryCodeCountMap;
 
             Dictionary<string, double> beerCountryNameRatingtMap = ConverterHelper.KeyValueToDirectory<string, double, double>(beerCountryRating);
-            Dictionary<string, double> beerCountryCodeRatingtMap = ConverterHelper.ConvertNameToCode(beerCountryNameRatingtMap);
+            Dictionary<string, double> beerCountryCodeRatingtMap = ConverterHelper.ConvertCountryNameToCode(beerCountryNameRatingtMap);
             BeerCountryRatingMap = beerCountryCodeRatingtMap;
+
+            CountryLanguagePack = ConverterHelper.GetCountryNameByCode(beerCountryNameCountMap.Keys.ToList());
         }
 
         private void SetServingType()

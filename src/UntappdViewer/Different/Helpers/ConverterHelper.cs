@@ -98,15 +98,34 @@ namespace UntappdViewer.Helpers
 
         #endregion
 
-        public static Dictionary<string, T> ConvertNameToCode<T>(Dictionary<string, T> countries)
+        #region CountryNameToCode
+
+        public static Dictionary<string, T> ConvertCountryNameToCode<T>(Dictionary<string, T> countries)
         {
             Dictionary<string, T> countryCodes = new Dictionary<string, T>();
+
             foreach (KeyValuePair<string, T> country in countries)
-            {
-                string code = CountryNameHelper.GetCountryCode(country.Key);
-                countryCodes.Add(String.IsNullOrEmpty(code) ? country.Key : code, country.Value);
-            }
+                countryCodes.Add(GetCountryCode(country.Key), country.Value);
+
             return countryCodes;
         }
+
+        public static Dictionary<string, string> GetCountryNameByCode(List<string> countryNames)
+        {
+            Dictionary<string, string> countryNameByCode = new Dictionary<string, string>();
+
+            foreach (string countryName in countryNames)
+                countryNameByCode.Add(GetCountryCode(countryName), countryName);
+
+            return countryNameByCode;
+        }
+
+        private static string GetCountryCode(string countryName)
+        {
+            string code = CountryNameHelper.GetCountryCode(countryName);
+            return String.IsNullOrEmpty(code) ? countryName : code;
+        }
+
+        #endregion
     }
 }

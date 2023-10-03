@@ -41,7 +41,7 @@ namespace UntappdViewer.UI.Controls.GeoMap
         private static readonly DependencyProperty LandOpacityProperty = DependencyProperty.Register("LandOpacity", typeof(double), typeof(GeoMap), new PropertyMetadata(default(double)));
 
         private static readonly DependencyProperty HeatMapProperty = DependencyProperty.Register("HeatMap", typeof(Dictionary<string, double>), typeof(GeoMap), new PropertyMetadata(new Dictionary<string, double>(), HeatMapChanged));
-        private static readonly DependencyProperty LanguagePackProperty = DependencyProperty.Register("LanguagePack", typeof(Dictionary<string, string>), typeof(GeoMap), new PropertyMetadata(new Dictionary<string, string>()));
+        private static readonly DependencyProperty LanguagePackProperty = DependencyProperty.Register("LanguagePack", typeof(Dictionary<string, string>), typeof(GeoMap), new PropertyMetadata(new Dictionary<string, string>(), LanguagePackChanged));
 
         private static readonly DependencyProperty SourceProperty = DependencyProperty.Register("Source", typeof(string), typeof(GeoMap), new PropertyMetadata(default(string), SourceChanged));
 
@@ -218,6 +218,7 @@ namespace UntappdViewer.UI.Controls.GeoMap
             mapData.Shape = path;
             Map.Children.Add(path);
         }
+
         private void ShowMeSomeHeat()
         {
             double min = HeatMap.Values.Min();
@@ -253,9 +254,22 @@ namespace UntappdViewer.UI.Controls.GeoMap
 
             IEnumerable<string> ids = lvcMap.Data.Select(item => item.Id);
             foreach (KeyValuePair<string, double> keyValuePair in HeatMap.Where(item => !ids.Contains(item.Key)))
-                geoDatas.Add(new GeoData(keyValuePair.Key, keyValuePair.Value));
+            {
+                string name = keyValuePair.Key;
+                UpdateLanguageCountryName(name.Clone().ToString(), ref name);
+                geoDatas.Add(new GeoData(name, keyValuePair.Value));
+            }
 
             UndefinedGeoDataTooltip.ItemsGeoData = geoDatas;
+        }
+
+        private void UpdateUndefinedGeoData()
+        {
+            if(HeatMap == null)
+                return;
+
+            UndefinedGeoDataTooltip.ItemsGeoData = null;
+            FillUndefinedGeoData();
         }
 
         #region PathEvent
@@ -408,10 +422,16 @@ namespace UntappdViewer.UI.Controls.GeoMap
         {
             string name = mapData.Name;
             double value = HeatMap[mapData.Id];
-            if (LanguagePack != null && LanguagePack.ContainsKey(mapData.Id))
-                name = LanguagePack[mapData.Id];
+
+            UpdateLanguageCountryName(mapData.Id, ref name);
 
             return new GeoData(name, value);
+        }
+
+        private void UpdateLanguageCountryName(string mapId, ref string name)
+        {
+            if (LanguagePack != null && LanguagePack.ContainsKey(mapId))
+                name = LanguagePack[mapId];
         }
 
         private double SetMapSize(double width, double height)
@@ -520,6 +540,12 @@ namespace UntappdViewer.UI.Controls.GeoMap
                 geoMap.SetRangeValue(heatMap.Values.Min(), heatMap.Values.Max());
                 geoMap.ShowMeSomeHeat();
             }
+        }
+
+        private static void LanguagePackChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        {
+            GeoMap geoMap = dependencyObject as GeoMap;
+            geoMap.UpdateUndefinedGeoData();
         }
 
         private static void SourceChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
