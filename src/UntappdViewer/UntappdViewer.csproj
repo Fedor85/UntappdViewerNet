@@ -90,6 +90,7 @@
     <Compile Include="Different\Behaviors\AccessTokenBehavior.cs" />
     <Compile Include="Different\Behaviors\CloseByEscapeBehavior.cs" />
     <Compile Include="Different\Behaviors\LoadedWindowBehavior.cs" />
+    <Compile Include="Different\Behaviors\ParentScrollingBehavior.cs" />
     <Compile Include="Different\Behaviors\SelectedTreeViewItemBehavior.cs" />
     <Compile Include="Different\Behaviors\Synchronised\SynchronisedBaseBehavior.cs" />
     <Compile Include="Different\Behaviors\Synchronised\SynchronisedBaseToken.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="Different\Helpers\EnumsHelper.cs" />
     <Compile Include="Different\Helpers\IValueConverters\PieSeriesBackgroundConverter.cs" />
     <Compile Include="Different\Helpers\IValueConverters\ServingTypeConverter.cs" />
+    <Compile Include="Different\Behaviors\ParentScrollingToken.cs" />
     <Compile Include="Different\UntappdEntity.cs" />
     <Compile Include="Modules\EmptyContentModule.cs" />
     <Compile Include="Modules\StatisticsProjectModule.cs" />

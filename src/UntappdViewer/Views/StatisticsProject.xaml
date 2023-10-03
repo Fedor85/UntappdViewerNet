@@ -266,6 +266,7 @@
         <Thickness x:Key="DefautChartMargin">5,0,5,0</Thickness>
         <Thickness x:Key="DefautChartOffsetBottom">0,20,0,0</Thickness>
         <behaviors:SynchronisedScrollToken x:Key="ScrollToken" />
+        <behaviors:ParentScrollingToken x:Key="ScrollingToken"/>
         <behaviors:SynchronisedWidthToken x:Key="WidthTokenLeft"/>
         <behaviors:SynchronisedWidthToken x:Key="WidthTokenRight"/>
     </UserControl.Resources>
@@ -351,6 +352,7 @@
                                         </chartingToolkit:Chart>
                                         <b:Interaction.Behaviors>
                                             <behaviors:SynchronisedScrollBehavior RegisterToken="{StaticResource ScrollToken}" />
+                                            <behaviors:ParentScrollingBehavior ChildScrollViewer="{StaticResource ScrollingToken}" />
                                         </b:Interaction.Behaviors>
                                     </ScrollViewer>
                                     <Grid>
@@ -390,7 +392,8 @@
                                         </chartingToolkit:AreaSeries>
                                     </chartingToolkit:Chart>
                                     <b:Interaction.Behaviors>
-                                        <behaviors:SynchronisedScrollBehavior RegisterToken="{StaticResource ScrollToken}" />
+                                        <behaviors:SynchronisedScrollBehavior RegisterToken="{StaticResource ScrollToken}"/>
+                                        <behaviors:ParentScrollingBehavior ChildScrollViewer="{StaticResource ScrollingToken}" />
                                     </b:Interaction.Behaviors>
                                 </ScrollViewer>
                             </Grid>
@@ -568,6 +571,9 @@
                                 </Grid>
                             </Grid>
                         </StackPanel>
+                        <b:Interaction.Behaviors>
+                            <behaviors:ParentScrollingBehavior ParentScrollViewer="{StaticResource ScrollingToken}" />
+                        </b:Interaction.Behaviors>
                     </ScrollViewer>
                 </TabItem>
                 <TabItem Header="{x:Static properties:Resources.Map}">
