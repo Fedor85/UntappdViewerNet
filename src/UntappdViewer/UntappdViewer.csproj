@@ -94,6 +94,8 @@
     <Compile Include="Different\Behaviors\SelectedTreeViewItemBehavior.cs" />
     <Compile Include="Different\Behaviors\Synchronised\SynchronisedBaseBehavior.cs" />
     <Compile Include="Different\Behaviors\Synchronised\SynchronisedBaseToken.cs" />
+    <Compile Include="Different\Behaviors\Synchronised\SynchronisedMapBehavior.cs" />
+    <Compile Include="Different\Behaviors\Synchronised\SynchronisedMapToken.cs" />
     <Compile Include="Different\Behaviors\Synchronised\SynchronisedScrollBehavior.cs" />
     <Compile Include="Different\Behaviors\Synchronised\SynchronisedWidthBehavior.cs" />
     <Compile Include="Different\Behaviors\Synchronised\SynchronisedWidthToken.cs" />

@@ -10,6 +10,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using UntappdViewer.Interfaces;
 using UntappdViewer.UI.Controls.GeoMap.Data;
+using UntappdViewer.UI.Helpers;
 using UntappdViewer.Utils;
 using Path = System.Windows.Shapes.Path;
 
@@ -159,6 +160,8 @@ namespace UntappdViewer.UI.Controls.GeoMap
 
         public event Action<GeoData> LandClick;
 
+        public event Action<object, ZoomEventArgs> ZoomMouseWheel;
+
         public GeoMap()
         {
             InitializeComponent();
@@ -184,7 +187,15 @@ namespace UntappdViewer.UI.Controls.GeoMap
             GridLines.SetBinding(GridLines.ThicknessGridProperty, new Binding { Path = new PropertyPath(ThicknessGridElementProperty), Source = this });
             GridLines.SetBinding(GridLines.StepGridProperty, new Binding { Path = new PropertyPath(StepGridElementProperty), Source = this });
 
+            ZoomHelper.InitializeTransformGroup(Map);
+
             InitializeWorld();
+        }
+
+        public void GeoMapZoom(Point point, int delta)
+        {
+            if (EnableZoomingAndPanning)
+                ZoomHelper.Zoom(Map, delta, point);
         }
 
         private void InitializeWorld()
@@ -340,19 +351,14 @@ namespace UntappdViewer.UI.Controls.GeoMap
                 return;
 
             e.Handled = true;
-            ScaleTransform scaleTransform = Map.RenderTransform as ScaleTransform;
-            double scaleX = scaleTransform?.ScaleX ?? 1;
-            scaleX += e.Delta > 0 ? 0.05 : -0.05;
-            scaleX = scaleX < 1 ? 1 : scaleX;
+
             Point point = e.GetPosition(Map);
+            GeoMapZoom(point, e.Delta);
 
-            if (e.Delta > 0)
-                Map.RenderTransformOrigin = new Point(point.X / Map.ActualWidth, point.Y / Map.ActualWidth);
-
-            Map.RenderTransform = new ScaleTransform(scaleX, scaleX);
+            ZoomMouseWheel?.Invoke(sender, new ZoomEventArgs(point, e.Delta));
         }
 
-        private void MainLeftMouseDown(object sender, MouseButtonEventArgs e)
+        private void MainMouseLeftDown(object sender, MouseButtonEventArgs e)
         {
             if (!EnableZoomingAndPanning)
                 return;
@@ -360,7 +366,7 @@ namespace UntappdViewer.UI.Controls.GeoMap
             dragOrigin = e.GetPosition(this);
         }
 
-        private void MainLeftMouseUp(object sender, MouseButtonEventArgs e)
+        private void MainMouseLeftUp(object sender, MouseButtonEventArgs e)
         {
             if (!EnableZoomingAndPanning)
                 return;
@@ -387,14 +393,9 @@ namespace UntappdViewer.UI.Controls.GeoMap
                 MovieUIElement(path, 0, 0);
 
             if (DisableAnimations)
-            {
-                Map.RenderTransform = new ScaleTransform(1, 1);
-            }
+                ZoomHelper.Reset(Map);
             else if (!Map.RenderTransform.IsFrozen)
-            {
-                Map.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(1, AnimationsSpeed));
-                Map.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(1, AnimationsSpeed));
-            }
+                ZoomHelper.AnimationReset(Map, AnimationsSpeed);
         }
 
         private void MainSizeChanged(object sender, SizeChangedEventArgs e)
@@ -455,7 +456,6 @@ namespace UntappdViewer.UI.Controls.GeoMap
             }
             return scale;
         }
-
 
         private void MovieUIElement(UIElement path, double x, double y)
         {
@@ -537,8 +537,15 @@ namespace UntappdViewer.UI.Controls.GeoMap
             else
             {
                 Dictionary<string, double> heatMap = e.NewValue as Dictionary<string, double>;
-                geoMap.SetRangeValue(heatMap.Values.Min(), heatMap.Values.Max());
-                geoMap.ShowMeSomeHeat();
+                if (heatMap.Values.Count > 0)
+                {
+                    geoMap.SetRangeValue(heatMap.Values.Min(), heatMap.Values.Max());
+                    geoMap.ShowMeSomeHeat();
+                }
+                else
+                {
+                    geoMap.SetRangeValue(null, null);
+                }
             }
         }
 

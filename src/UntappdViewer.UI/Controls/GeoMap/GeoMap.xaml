@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:UntappdViewer.UI.Controls.GeoMap"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"  Background="#D7FFFD" ClipToBounds="True" MinHeight="110" MinWidth="200"
-             MouseWheel="MainMouseWheel" MouseLeftButtonDown="MainLeftMouseDown" MouseLeftButtonUp="MainLeftMouseUp"
+             MouseWheel="MainMouseWheel" MouseLeftButtonDown="MainMouseLeftDown" MouseLeftButtonUp="MainMouseLeftUp"
              MouseRightButtonUp="MainMouseRightUp" SizeChanged="MainSizeChanged">
     <Grid>
         <local:GridLines x:Name="GridLines"/>

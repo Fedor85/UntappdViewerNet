@@ -269,6 +269,7 @@
         <behaviors:ParentScrollingToken x:Key="ScrollingToken"/>
         <behaviors:SynchronisedWidthToken x:Key="WidthTokenLeft"/>
         <behaviors:SynchronisedWidthToken x:Key="WidthTokenRight"/>
+        <behaviors:SynchronisedMapToken x:Key="MapToken"/>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -592,6 +593,9 @@
                                                GradientHelper="{Binding Source={StaticResource GradientHelper}}" LandBordeThickness="5" 
                                                Background="{StaticResource BackgroundMap}" BackgroundGrid="{StaticResource BackgroundMapGrid}"
                                                VisibilityData="True" EnableZoomingAndPanning="True">
+                                    <b:Interaction.Behaviors>
+                                        <behaviors:SynchronisedMapBehavior RegisterToken="{StaticResource MapToken}" />
+                                    </b:Interaction.Behaviors>
                                 </geoMap:GeoMap>
                             </StackPanel>
                             <StackPanel Grid.Row="1">
@@ -603,9 +607,11 @@
                                                GradientHelper="{Binding Source={StaticResource GradientHelper}}" LandBordeThickness="5" 
                                                Background="{StaticResource BackgroundMap}" BackgroundGrid="{StaticResource BackgroundMapGrid}"
                                                VisibilityData="True" EnableZoomingAndPanning="True">
+                                    <b:Interaction.Behaviors>
+                                        <behaviors:SynchronisedMapBehavior RegisterToken="{StaticResource MapToken}" />
+                                    </b:Interaction.Behaviors>
                                 </geoMap:GeoMap>
                             </StackPanel>
-
                         </Grid>
                     </ScrollViewer>
                 </TabItem>
