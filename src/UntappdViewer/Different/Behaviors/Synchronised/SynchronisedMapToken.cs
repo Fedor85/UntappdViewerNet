@@ -25,6 +25,8 @@ namespace UntappdViewer.Behaviors
             map.MouseLeftButtonDown += MapMouseLeftButtonDown;
             map.MouseLeftButtonUp += MapMouseLeftButtonUp;
             map.MouseRightButtonUp += MapMouseRightButtonUp;
+
+            map.UndefinedGeoDataVisibility += MapUndefinedGeoDataVisibility;
         }
 
         private void DetachingEvents(GeoMap map)
@@ -33,6 +35,8 @@ namespace UntappdViewer.Behaviors
             map.MouseLeftButtonDown -= MapMouseLeftButtonDown;
             map.MouseLeftButtonUp -= MapMouseLeftButtonUp;
             map.MouseRightButtonUp -= MapMouseRightButtonUp;
+
+            map.UndefinedGeoDataVisibility -= MapUndefinedGeoDataVisibility;
         }
 
         private void MapZoomMouseWheel(object sender, ZoomEventArgs e)
@@ -72,6 +76,20 @@ namespace UntappdViewer.Behaviors
             {
                 DetachingEvents(map);
                 map.RaiseEvent(mouseButtonEventArgs);
+                AttachedEvents(map);
+            }
+        }
+
+        private void MapUndefinedGeoDataVisibility(object sender, bool visible)
+        {
+            GeoMap sendingMap = GetObject(sender);
+            if (sendingMap == null)
+                return;
+
+            foreach (GeoMap map in GetOtherItems(sendingMap))
+            {
+                DetachingEvents(map);
+                map.UndefinedGeoDataSetVisibility(visible);
                 AttachedEvents(map);
             }
         }

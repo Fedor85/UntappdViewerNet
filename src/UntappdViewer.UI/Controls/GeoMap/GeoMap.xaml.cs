@@ -162,6 +162,8 @@ namespace UntappdViewer.UI.Controls.GeoMap
 
         public event Action<object, ZoomEventArgs> ZoomMouseWheel;
 
+        public event Action<object, bool> UndefinedGeoDataVisibility;
+
         public GeoMap()
         {
             InitializeComponent();
@@ -196,6 +198,12 @@ namespace UntappdViewer.UI.Controls.GeoMap
         {
             if (EnableZoomingAndPanning)
                 ZoomHelper.Zoom(Map, delta, point);
+        }
+
+        public void UndefinedGeoDataSetVisibility(bool visible)
+        {
+            UndefinedGeoDataTooltip.Visibility = visible ? Visibility.Visible : Visibility.Hidden;
+            UndefinedGeoDataVisibility?.Invoke(this, visible);
         }
 
         private void InitializeWorld()
@@ -335,12 +343,12 @@ namespace UntappdViewer.UI.Controls.GeoMap
         private void UndefinedGeoDataMouseEnter(object sender, MouseEventArgs e)
         {
             if (VisibilityData && UndefinedGeoDataTooltip.ItemsGeoData != null && UndefinedGeoDataTooltip.ItemsGeoData.Count > 0)
-                UndefinedGeoDataTooltip.Visibility = Visibility.Visible;
+                UndefinedGeoDataSetVisibility(true);
         }
 
         private void UndefinedGeoDataMouseLeave(object sender, MouseEventArgs e)
         {
-            UndefinedGeoDataTooltip.Visibility = Visibility.Hidden;
+            UndefinedGeoDataSetVisibility(false);
         }
 
         #region MainCanvasEvent
