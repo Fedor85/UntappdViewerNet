@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Input;
 using UntappdViewer.UI.Controls;
 using UntappdViewer.UI.Controls.GeoMap;
@@ -49,12 +50,7 @@ namespace UntappdViewer.Behaviors
 
         private void MapZoomMouseWheel(object sender, ZoomEventArgs e)
         {
-            GeoMap sendingMap = GetObject(sender);
-            if (sendingMap == null)
-                return;
-
-            foreach (GeoMap map in GetOtherItems(sendingMap))
-                map.GeoMapZoom(e.Point, e.Delta);
+            UpdateOtheMaps(sender, map => { map.GeoMapZoom(e.Point, e.Delta); });
         }
 
         private void MapMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -62,7 +58,7 @@ namespace UntappdViewer.Behaviors
             MapButtonRaiseEvent(sender, e, UIElement.MouseLeftButtonDownEvent);
         }
 
-        private void MapMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void MapMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             MapButtonRaiseEvent(sender, e, UIElement.MouseLeftButtonUpEvent);
         }
@@ -74,63 +70,32 @@ namespace UntappdViewer.Behaviors
 
         private void MapButtonRaiseEvent(object sender, MouseButtonEventArgs e, RoutedEvent routedEvent)
         {
-            GeoMap sendingMap = GetObject(sender);
-            if (sendingMap == null)
-                return;
-
             MouseButtonEventArgs mouseButtonEventArgs = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, e.ChangedButton);
             mouseButtonEventArgs.RoutedEvent = routedEvent;
-            foreach (GeoMap map in GetOtherItems(sendingMap))
-            {
-                DetachingEvents(map);
-                map.RaiseEvent(mouseButtonEventArgs);
-                AttachedEvents(map);
-            }
+            UpdateOtheMaps(sender, map => { map.RaiseEvent(mouseButtonEventArgs); });
         }
 
         private void MapPathMouseEnter(object sender, string pathName)
         {
-            GeoMap sendingMap = GetObject(sender);
-            if (sendingMap == null)
-                return;
-
-            foreach (GeoMap map in GetOtherItems(sendingMap))
-            {
-                DetachingEvents(map);
-                map.PathEnter(pathName);
-                AttachedEvents(map);
-            }
+            UpdateOtheMaps(sender, map => { map.PathEnter(pathName); });
         }
 
         private void MapPathMouseLeave(object sender, string pathName)
         {
-            GeoMap sendingMap = GetObject(sender);
-            if (sendingMap == null)
-                return;
-
-            foreach (GeoMap map in GetOtherItems(sendingMap))
-            {
-                DetachingEvents(map);
-                map.PathLeave(pathName);
-                AttachedEvents(map);
-            }
+            UpdateOtheMaps(sender, map => { map.PathLeave(pathName); });
         }
 
         private void MapPathMouseMove(object sender, Point point)
         {
-            GeoMap sendingMap = GetObject(sender);
-            if (sendingMap == null)
-                return;
-
-            foreach (GeoMap map in GetOtherItems(sendingMap))
-            {
-                DetachingEvents(map);
-                map.PathMouseMove(point);
-                AttachedEvents(map);
-            }
+            UpdateOtheMaps(sender, map => { map.PathMouseMove(point); });
         }
 
         private void MapUndefinedGeoDataVisibility(object sender, bool visible)
+        {
+            UpdateOtheMaps(sender, map => { map.UndefinedGeoDataSetVisibility(visible); });   
+        }
+
+        private void UpdateOtheMaps(object sender, Action<GeoMap> funcUpdate)
         {
             GeoMap sendingMap = GetObject(sender);
             if (sendingMap == null)
@@ -139,7 +104,7 @@ namespace UntappdViewer.Behaviors
             foreach (GeoMap map in GetOtherItems(sendingMap))
             {
                 DetachingEvents(map);
-                map.UndefinedGeoDataSetVisibility(visible);
+                funcUpdate(map);
                 AttachedEvents(map);
             }
         }
