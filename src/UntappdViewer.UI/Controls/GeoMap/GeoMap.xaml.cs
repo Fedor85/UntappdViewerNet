@@ -162,6 +162,12 @@ namespace UntappdViewer.UI.Controls.GeoMap
 
         public event Action<object, ZoomEventArgs> ZoomMouseWheel;
 
+        public event Action<object, string> MapPathMouseEnter;
+
+        public event Action<object, string> MapPathMouseLeave;
+
+        public event Action<object, Point> MapPathMouseMove;
+
         public event Action<object, bool> UndefinedGeoDataVisibility;
 
         public GeoMap()
@@ -200,6 +206,30 @@ namespace UntappdViewer.UI.Controls.GeoMap
                 ZoomHelper.Zoom(Map, delta, point);
         }
 
+        public void PathEnter(string namePath)
+        {
+            Path path = Map.Children.OfType<Path>().FirstOrDefault(item => item.Name.Equals(namePath));
+            if (path != null)
+                PathEnter(path);
+        }      
+
+        public void PathLeave(string namePath)
+        {
+            Path path = Map.Children.OfType<Path>().FirstOrDefault(item => item.Name.Equals(namePath));
+            if (path != null)
+                PathLeave(path);
+        }        
+
+        public void PathMouseMove(Point point)
+        {
+            GeoDataTooltip.UpdateLayout();
+            const double delta = 5;
+            double x = ActualWidth < point.X + delta + GeoDataTooltip.ActualWidth ? point.X - delta - GeoDataTooltip.ActualWidth : point.X + delta;
+            double y = ActualHeight < point.Y + delta + GeoDataTooltip.ActualHeight ? point.Y - delta - GeoDataTooltip.ActualHeight : point.Y + delta;
+            Canvas.SetLeft(GeoDataTooltip, x);
+            Canvas.SetTop(GeoDataTooltip, y);
+        }
+
         public void UndefinedGeoDataSetVisibility(bool visible)
         {
             UndefinedGeoDataTooltip.Visibility = visible ? Visibility.Visible : Visibility.Hidden;
@@ -219,6 +249,7 @@ namespace UntappdViewer.UI.Controls.GeoMap
         {
             Path path = new Path();
 
+            path.Name = "_" + String.Concat(mapData.Id.Trim().Where(item => Char.IsLetterOrDigit(item)));
             path.Data = Geometry.Parse(mapData.Data);
 
             path.SetBinding(Shape.StrokeProperty, new Binding { Path = new PropertyPath(LandBorderProperty), Source = this });
@@ -296,6 +327,12 @@ namespace UntappdViewer.UI.Controls.GeoMap
         private void PathMouseEnter(object sender, MouseEventArgs e)
         {
             Path path = sender as Path;
+            PathEnter(path);
+            MapPathMouseEnter?.Invoke(this, path.Name);
+        }
+
+        private void PathEnter(Path path)
+        {
             path.Opacity = LandOpacity - 0.3;
 
             if (HeatMap == null || !VisibilityData)
@@ -315,19 +352,21 @@ namespace UntappdViewer.UI.Controls.GeoMap
         private void PathMouseLeave(object sender, MouseEventArgs e)
         {
             Path path = sender as Path;
+            PathLeave(path);
+            MapPathMouseLeave?.Invoke(this, path.Name);
+        }
+
+        private void PathLeave(Path path)
+        {
             path.Opacity = LandOpacity;
             GeoDataTooltip.Visibility = Visibility.Hidden;
         }
 
         private void PathMouseMove(object sender, MouseEventArgs e)
         {
-            Point location = e.GetPosition(this);
-            GeoDataTooltip.UpdateLayout();
-            const double delta = 5;
-            double x = ActualWidth < location.X + delta + GeoDataTooltip.ActualWidth ? location.X - delta - GeoDataTooltip.ActualWidth : location.X + delta;
-            double y = ActualHeight < location.Y + delta + GeoDataTooltip.ActualHeight ? location.Y - delta - GeoDataTooltip.ActualHeight : location.Y + delta;
-            Canvas.SetLeft(GeoDataTooltip, x);
-            Canvas.SetTop(GeoDataTooltip, y);
+            Point point = e.GetPosition(this);
+            PathMouseMove(point);
+            MapPathMouseMove?.Invoke(this, point);
         }
 
         private void PathMouseDown(object sender, MouseButtonEventArgs e)

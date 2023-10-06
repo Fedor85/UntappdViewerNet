@@ -26,6 +26,10 @@ namespace UntappdViewer.Behaviors
             map.MouseLeftButtonUp += MapMouseLeftButtonUp;
             map.MouseRightButtonUp += MapMouseRightButtonUp;
 
+            map.MapPathMouseEnter += MapPathMouseEnter;
+            map.MapPathMouseLeave += MapPathMouseLeave;
+            map.MapPathMouseMove += MapPathMouseMove;
+
             map.UndefinedGeoDataVisibility += MapUndefinedGeoDataVisibility;
         }
 
@@ -35,6 +39,10 @@ namespace UntappdViewer.Behaviors
             map.MouseLeftButtonDown -= MapMouseLeftButtonDown;
             map.MouseLeftButtonUp -= MapMouseLeftButtonUp;
             map.MouseRightButtonUp -= MapMouseRightButtonUp;
+
+            map.MapPathMouseEnter -= MapPathMouseEnter;
+            map.MapPathMouseLeave -= MapPathMouseLeave;
+            map.MapPathMouseMove -= MapPathMouseMove;
 
             map.UndefinedGeoDataVisibility -= MapUndefinedGeoDataVisibility;
         }
@@ -76,6 +84,48 @@ namespace UntappdViewer.Behaviors
             {
                 DetachingEvents(map);
                 map.RaiseEvent(mouseButtonEventArgs);
+                AttachedEvents(map);
+            }
+        }
+
+        private void MapPathMouseEnter(object sender, string pathName)
+        {
+            GeoMap sendingMap = GetObject(sender);
+            if (sendingMap == null)
+                return;
+
+            foreach (GeoMap map in GetOtherItems(sendingMap))
+            {
+                DetachingEvents(map);
+                map.PathEnter(pathName);
+                AttachedEvents(map);
+            }
+        }
+
+        private void MapPathMouseLeave(object sender, string pathName)
+        {
+            GeoMap sendingMap = GetObject(sender);
+            if (sendingMap == null)
+                return;
+
+            foreach (GeoMap map in GetOtherItems(sendingMap))
+            {
+                DetachingEvents(map);
+                map.PathLeave(pathName);
+                AttachedEvents(map);
+            }
+        }
+
+        private void MapPathMouseMove(object sender, Point point)
+        {
+            GeoMap sendingMap = GetObject(sender);
+            if (sendingMap == null)
+                return;
+
+            foreach (GeoMap map in GetOtherItems(sendingMap))
+            {
+                DetachingEvents(map);
+                map.PathMouseMove(point);
                 AttachedEvents(map);
             }
         }
