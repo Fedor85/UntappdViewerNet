@@ -145,7 +145,7 @@ namespace UntappdWebApiClient
                 if (cancellation != null && cancellation.Cancel)
                     return;
 
-                string beerUrl = UrlPathBuilder.GetBeerUrl(3069407);
+                string beerUrl = UrlPathBuilder.GetBeerUrl(beer.Id);
                 if (!TryCollaborationBreweryIds(beerUrl, out List<long> breweryIds))
                 {
                     UploadedCountInvoke(Properties.Resources.ErrorUpdate);
