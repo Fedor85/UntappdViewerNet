@@ -159,15 +159,17 @@ namespace UntappdWebApiClient
                 if (breweryIds.Count == 0)
                 {
                     beer.Collaboration.SetDefined();
-                    continue;
                 }
-
-                foreach (long breweryId in breweryIds)
+                else
                 {
-                    Brewery brewery = breweries.FirstOrDefault(item => item.Id == breweryId) ?? GetBrewery(breweryId);
-                    breweries.Add(brewery);
-                    beer.Collaboration.AddBrewery(brewery);
+                    foreach (long breweryId in breweryIds)
+                    {
+                        Brewery brewery = breweries.FirstOrDefault(item => item.Id == breweryId) ?? GetBrewery(breweryId);
+                        breweries.Add(brewery);
+                        beer.Collaboration.AddBrewery(brewery);
+                    }
                 }
+                countUpdate++;
                 UploadedCountInvoke(GetTotalUpdateMessage(countTotal, countUpdate));
             }
         }
