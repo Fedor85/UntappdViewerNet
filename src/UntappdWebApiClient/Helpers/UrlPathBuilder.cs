@@ -23,5 +23,10 @@ namespace UntappdWebApiClient
         {
             return String.Concat(UriConstants.СheckinUrl, checkinId);
         }
+
+        public static string GetBeerUrl(long beerId)
+        {
+            return String.Concat(UriConstants.BeerUrl, beerId);
+        }
     }
 }

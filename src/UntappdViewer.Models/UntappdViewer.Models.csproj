@@ -41,6 +41,8 @@
     <Compile Include="Brewery.cs" />
     <Compile Include="Checkin.cs" />
     <Compile Include="CheckinsContainer.cs" />
+    <Compile Include="Collaboration.cs" />
+    <Compile Include="Different\CollaborationState.cs" />
     <Compile Include="Different\Entity.cs" />
     <Compile Include="Different\KeyValue.cs" />
     <Compile Include="Different\KeyValueParam.cs" />

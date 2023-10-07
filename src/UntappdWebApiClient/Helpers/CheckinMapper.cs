@@ -6,8 +6,6 @@ using Beer = UntappdViewer.Models.Beer;
 using Venue = UntappdViewer.Models.Venue;
 using VenueWeb = QuickType.Checkins.WebModels.Venue;
 using BeerWeb = QuickType.Checkins.WebModels.Beer;
-using Brewery = UntappdViewer.Models.Brewery;
-using BreweryWeb = QuickType.Checkins.WebModels.Brewery;
 
 namespace UntappdWebApiClient
 {
@@ -38,7 +36,7 @@ namespace UntappdWebApiClient
                 FillVenue(checkin.Venue, checkinsItem.Venue[0]);
 
             FillBeer(checkin.Beer, checkinsItem.Beer);
-            FillBrewery(checkin.Beer.Brewery, checkinsItem.Brewery);
+            BreweryMapper.FillBrewery(checkin.Beer.Brewery, checkinsItem.Brewery);
             FillBadges(checkin.Badges, checkinsItem.Badges);
 
             return checkin;
@@ -71,19 +69,6 @@ namespace UntappdWebApiClient
             beer.ABV = beerWeb.BeerAbv;
             beer.Url = $"{UriConstants.BaseUri}beer/{beerWeb.Bid}";
             beer.LabelUrl = beerWeb.BeerLabel.ToString();
-        }
-
-        private static void FillBrewery(Brewery brewery, BreweryWeb breweryWeb)
-        {
-            brewery.Id = breweryWeb.BreweryId;
-            brewery.Name = breweryWeb.BreweryName;
-            brewery.Url = $"{UriConstants.BaseUri}brewery/{breweryWeb.BreweryId}";
-            brewery.Venue.Country = breweryWeb.CountryName;
-            brewery.Venue.City = breweryWeb.Location.BreweryCity;
-            brewery.Venue.State = breweryWeb.Location.BreweryState;
-            brewery.Venue.Latitude = breweryWeb.Location.Lat;
-            brewery.Venue.Longitude = breweryWeb.Location.Lng;
-            brewery.LabelUrl = breweryWeb.BreweryLabel.ToString();
         }
 
         private static void FillBadges(List<Badge> checkinBadges, Badges webCheckinsBadges)

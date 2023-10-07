@@ -9,6 +9,7 @@ using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
 using QuickType.Checkins.WebModels;
 using QuickType.Beers.WebModels;
+using QuickType.Brewery.WebModels;
 using UntappdViewer.Interfaces;
 using Beer = UntappdViewer.Models.Beer;
 using Brewery = UntappdViewer.Models.Brewery;
@@ -18,6 +19,8 @@ namespace UntappdWebApiClient
 {
     public class Client : IWebApiClient
     {
+        private const int CountAttemptsToGetHtmlDocument = 5;
+
         private UrlPathBuilder urlPathBuilder;
 
         private JsonSerializerSettings jsonSerializerSettings;
@@ -85,7 +88,7 @@ namespace UntappdWebApiClient
                 if (currentCountUpdate > 0)
                     countUpdate += currentCountUpdate;
 
-                UploadedCountInvoke(GetUpdateBeersMessage(countCheck, countUpdate));
+                UploadedCountInvoke(GetChekUpdateMessage(countCheck, countUpdate));
 
                 if (beersQuickType.Response.Pagination.Offset.HasValue)
                     offset = beersQuickType.Response.Pagination.Offset.Value;
@@ -111,12 +114,11 @@ namespace UntappdWebApiClient
                     return;
 
                 string checkinUrl = UrlPathBuilder.GetСheckinUrl(checkin.Id);
-                string servingType = GetServingType(checkinUrl, defaultServingType);
-                if (String.IsNullOrEmpty(servingType))
+                if (!TryServingType(checkinUrl, defaultServingType, out string servingType))
                 {
                     UploadedCountInvoke(Properties.Resources.ErrorUpdate);
                     errorCount++;
-                    if (errorCount == 5)
+                    if (errorCount == CountAttemptsToGetHtmlDocument)
                         return;
 
                     continue;
@@ -128,7 +130,45 @@ namespace UntappdWebApiClient
                     cancellation?.Items.Add(checkin);
                     countUpdate++;
                 }
-                UploadedCountInvoke(GetServingTypeMessage(countTotal, countUpdate));
+                UploadedCountInvoke(GetTotalUpdateMessage(countTotal, countUpdate));
+            }
+        }
+
+        public void FillCollaboration(List<Beer> beers, List<Brewery> breweries, ICancellationToken<Checkin> cancellation = null)
+        {
+            long countTotal = beers.Count;
+            long countUpdate = 0;
+            long errorCount = 0;
+
+            foreach (Beer beer in beers)
+            {
+                if (cancellation != null && cancellation.Cancel)
+                    return;
+
+                string beerUrl = UrlPathBuilder.GetBeerUrl(3069407);
+                if (!TryCollaborationBreweryIds(beerUrl, out List<long> breweryIds))
+                {
+                    UploadedCountInvoke(Properties.Resources.ErrorUpdate);
+                    errorCount++;
+                    if (errorCount == CountAttemptsToGetHtmlDocument)
+                        return;
+
+                    continue;
+                }
+
+                if (breweryIds.Count == 0)
+                {
+                    beer.Collaboration.SetDefined();
+                    continue;
+                }
+
+                foreach (long breweryId in breweryIds)
+                {
+                    Brewery brewery = breweries.FirstOrDefault(item => item.Id == breweryId) ?? GetBrewery(breweryId);
+                    breweries.Add(brewery);
+                    beer.Collaboration.AddBrewery(brewery);
+                }
+                UploadedCountInvoke(GetTotalUpdateMessage(countTotal, countUpdate));
             }
         }
 
@@ -138,14 +178,8 @@ namespace UntappdWebApiClient
             if (htmlDoc == null)
                 return String.Empty;
 
-            List<HtmlNode> avatarNodea = htmlDoc.DocumentNode.Descendants("div").Where(node => node.GetAttributeValue("class", String.Empty).Contains("avatar-holder")).ToList();
-            foreach (HtmlNode htmlNode in avatarNodea)
-            {
-                List<string> avatarUrl = htmlNode.Descendants("img").Select(item => item.GetAttributeValue("src", String.Empty)).Where(item => !String.IsNullOrEmpty(item)).ToList();
-                if (avatarUrl.Count > 0)
-                    return avatarUrl[0];
-            }
-            return String.Empty;
+            HtmlNode avatarNodea = htmlDoc.DocumentNode.Descendants("div").FirstOrDefault(node => node.GetAttributeValue("class", String.Empty).Contains("avatar-holder"));
+            return avatarNodea == null ? String.Empty : avatarNodea.Descendants("img").Select(item => item.GetAttributeValue("src", String.Empty)).FirstOrDefault();
         }
 
         public string GetDevProfileHeaderImageUrl()
@@ -154,8 +188,8 @@ namespace UntappdWebApiClient
             if (htmlDoc == null)
                 return String.Empty;
 
-            List<HtmlNode> coverNodes = htmlDoc.DocumentNode.Descendants("div").Where(node => node.GetAttributeValue("class", String.Empty).Contains("profile_header")).ToList();
-            return coverNodes.Count == 0 ? String.Empty : coverNodes[0].GetAttributeValue("data-image-url", "");
+            HtmlNode coverNodes = htmlDoc.DocumentNode.Descendants("div").FirstOrDefault(node => node.GetAttributeValue("class", String.Empty).Contains("profile_header"));
+            return coverNodes == null ? String.Empty : coverNodes.GetAttributeValue("data-image-url", String.Empty);
         }
 
         public ICancellationToken<T> GetCancellationToken<T>()
@@ -192,7 +226,7 @@ namespace UntappdWebApiClient
                             AddCheckin(currentCheckin, checkinsContainer);
                             counter++;
                         }
-                        UploadedCountInvoke(GetFillCheckinsMessage(counter));
+                        UploadedCountInvoke(GetFillCountMessage(counter));
                     }
                     else
                     {
@@ -201,7 +235,7 @@ namespace UntappdWebApiClient
                             AddCheckin(currentCheckin, checkinsContainer);
                             counter++;
                         }
-                        UploadedCountInvoke(GetFillCheckinsMessage(counter));
+                        UploadedCountInvoke(GetFillCountMessage(counter));
                     }
                     currentId = checkinsQuickType.Response.Pagination.MaxId.Value;
                 }
@@ -277,18 +311,18 @@ namespace UntappdWebApiClient
             }
         }
 
-        private string GetFillCheckinsMessage(int count)
+        private string GetFillCountMessage(int count)
         {
             return $"{Properties.Resources.Uploaded}: {count}";
         }
 
-        private string GetUpdateBeersMessage(long countChek, long countUpdate)
+        private string GetChekUpdateMessage(long countChek, long countUpdate)
         {
             int percent = countChek > 0 ? (int) Math.Truncate((double) countUpdate / countChek * 100) : 0;
             return $"{Properties.Resources.Chek}:{countChek} / {Properties.Resources.Update}:{countUpdate} [{percent}%]";
         }
 
-        private string GetServingTypeMessage(long total, long countUpdate)
+        private string GetTotalUpdateMessage(long total, long countUpdate)
         {
             int percent = total > 0 ? (int)Math.Truncate((double)countUpdate / total * 100) : 0;
             return $"{Properties.Resources.Total}:{total} / {Properties.Resources.Update}:{countUpdate} [{percent}%]";
@@ -299,14 +333,49 @@ namespace UntappdWebApiClient
             UploadedProgress?.Invoke(message);
         }
 
-        private string GetServingType(string checkinUrl, string defaultServingType)
+        private bool TryServingType(string checkinUrl, string defaultServingType, out string servingType)
         {
+            servingType = String.Empty;
             HtmlDocument htmlDoc = GetHtmlDocument(checkinUrl);
             if (htmlDoc == null)
-                return String.Empty;
+                return false;
 
             List<HtmlNode> servingNode = htmlDoc.DocumentNode.Descendants("p").Where(node => node.GetAttributeValue("class", String.Empty).Contains("serving")).ToList();
-            return servingNode.Count > 0 ? servingNode[0].InnerText.Trim() : defaultServingType;
+            servingType = servingNode.Count > 0 ? servingNode[0].InnerText.Trim() : defaultServingType;
+            return true;
+        }
+
+        private bool TryCollaborationBreweryIds(string beerUrl, out List<long> breweryIds)
+        {
+            breweryIds = new List<long>();
+            HtmlDocument htmlDoc = GetHtmlDocument(beerUrl);
+            if (htmlDoc == null)
+                return false;
+
+            HtmlNode collaboration = htmlDoc.DocumentNode.Descendants("p").FirstOrDefault(node => node.InnerText.Trim().ToLower().Contains("collaboration"));
+            if (collaboration != null)
+            {
+                foreach (string breweryNode in collaboration.Descendants("a").Select(item => item.GetAttributeValue("href", String.Empty)))
+                {
+                    string breweryId = String.Concat(breweryNode.Where(Char.IsDigit).ToArray());
+                    breweryIds.Add(Convert.ToInt64(breweryId));
+                }
+            }
+            return true;
+        }
+
+        private Brewery GetBrewery(long breweryId)
+        {
+            HttpResponseMessage httpResponse = GetHttpResponse($"brewery/info/{breweryId}/?");
+            if ((long)httpResponse.StatusCode == 429)
+                throw new ArgumentException(httpResponse.ReasonPhrase);
+
+            string responseBody = httpResponse.Content.ReadAsStringAsync().Result;
+            BreweryQuickType checkinsQuickType = JsonConvert.DeserializeObject<BreweryQuickType>(responseBody);
+
+            Brewery brewery = new Brewery();
+            BreweryMapper.FillBrewery(brewery, checkinsQuickType.Response.Brewery);
+            return brewery;
         }
 
         private HtmlDocument GetHtmlDocument(string url)

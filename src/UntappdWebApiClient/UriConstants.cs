@@ -6,8 +6,10 @@
 
         public const string BaseUri = @"https://untappd.com/";
 
-        public const string СheckinUrl = @"https://untappd.com/user/user/checkin/";
+        public const string СheckinUrl = BaseUri + @"user/user/checkin/";
 
-        public const string DeveloperProfileUrl = @"https://untappd.com/user/Feador";
+        public const string BeerUrl = BaseUri + @"beer/";
+
+        public const string DeveloperProfileUrl = BaseUri + @"user/Feador";
     }
 }

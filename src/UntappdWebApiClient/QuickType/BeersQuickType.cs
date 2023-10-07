@@ -1,6 +1,10 @@
 ﻿using System;
 using Newtonsoft.Json;
+using QuickType.Common.WebModels;
 
+/// <summary>
+/// Сгенерировавано с помощью https://app.quicktype.io/
+/// </summary>
 namespace QuickType.Beers.WebModels
 {
     public partial class BeersQuickType
@@ -13,62 +17,6 @@ namespace QuickType.Beers.WebModels
 
         [JsonProperty("response")]
         public Response Response { get; set; }
-    }
-
-    public partial class Meta
-    {
-        [JsonProperty("code")]
-        public long Code { get; set; }
-
-        [JsonProperty("response_time")]
-        public Time ResponseTime { get; set; }
-
-        [JsonProperty("init_time")]
-        public Time InitTime { get; set; }
-    }
-
-    public partial class Time
-    {
-        [JsonProperty("time")]
-        public double TimeTime { get; set; }
-
-        [JsonProperty("measure")]
-        public string Measure { get; set; }
-    }
-
-    public partial class Notifications
-    {
-        [JsonProperty("type")]
-        public string Type { get; set; }
-
-        [JsonProperty("unread_count")]
-        public UnreadCount UnreadCount { get; set; }
-    }
-    public partial class UnreadCount
-    {
-        [JsonProperty("comments")]
-        public long Comments { get; set; }
-
-        [JsonProperty("toasts")]
-        public long Toasts { get; set; }
-
-        [JsonProperty("friends")]
-        public long Friends { get; set; }
-
-        [JsonProperty("messages")]
-        public long Messages { get; set; }
-
-        [JsonProperty("venues")]
-        public long Venues { get; set; }
-
-        [JsonProperty("veunes")]
-        public long Veunes { get; set; }
-
-        [JsonProperty("others")]
-        public long Others { get; set; }
-
-        [JsonProperty("news")]
-        public long News { get; set; }
     }
 
     public partial class Response
@@ -149,7 +97,7 @@ namespace QuickType.Beers.WebModels
         public long Count { get; set; }
 
         [JsonProperty("items")]
-        public Item[] Items { get; set; }
+        public BeersItem[] Items { get; set; }
 
         [JsonProperty("sort_english")]
         public string SortEnglish { get; set; }
@@ -158,7 +106,7 @@ namespace QuickType.Beers.WebModels
         public string SortName { get; set; }
     }
 
-    public partial class Item
+    public partial class BeersItem
     {
         [JsonProperty("first_checkin_id")]
         public long FirstCheckinId { get; set; }

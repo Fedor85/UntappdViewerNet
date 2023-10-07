@@ -90,9 +90,12 @@ namespace UntappdViewer.Models
         /// </summary>
         public Brewery Brewery { get; set; }
 
+        public Collaboration Collaboration { get; set; }
+
         public Beer()
         {
             Brewery = new Brewery();
+            Collaboration = new Collaboration();
         }
 
         public override string ToString()

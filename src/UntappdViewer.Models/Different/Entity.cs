@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UntappdViewer.Models.Different
+﻿namespace UntappdViewer.Models.Different
 {
     public class Entity: KeyValue<string, object>
     {

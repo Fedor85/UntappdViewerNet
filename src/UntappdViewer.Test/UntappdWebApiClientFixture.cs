@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using NUnit.Framework;
 using UntappdViewer.Models;
 using UntappdWebApiClient;
@@ -35,19 +36,32 @@ namespace UntappdViewer.Test
             Assert.True(webApiClient.Check());
             long offset = 0;
             webApiClient.UpdateBeers(checkinsContainer.Beers.Where(TestHelper.IsUpdateBeer).ToList(), TestHelper.IsUpdateBeer, ref offset);
+            Assert.AreNotEqual(offset, 0);
         }
 
-        [Test, Ignore(DefaultValues.DefaultServingType)]
+        [Test]
         public void TestUpdateServing()
         {
+            foreach (Checkin checkin in checkinsContainer.Checkins)
+                checkin.ServingType = String.Empty;
+
             webApiClient.FillServingType(checkinsContainer.Checkins, DefaultValues.DefaultServingType);
+            int servingTypeCount = checkinsContainer.Checkins.Count(item => !String.IsNullOrEmpty(item.ServingType) && !item.ServingType.Equals(DefaultValues.DefaultServingType));
+            Assert.AreNotEqual(servingTypeCount, 0);
+        }
+
+        [Test, Ignore(AccessToken)]
+        public void FillCollaboration()
+        {
+            Assert.True(webApiClient.Check());
+            webApiClient.FillCollaboration(checkinsContainer.Beers, checkinsContainer.Brewerys);
         }
 
         [Test]
         public void TestDevProfileData()
         {
-            Assert.NotNull(webApiClient.GetDevAvatarImageUrl());
-            Assert.NotNull(webApiClient.GetDevProfileHeaderImageUrl());
+            Assert.True(!String.IsNullOrEmpty(webApiClient.GetDevAvatarImageUrl()));
+            Assert.True(!String.IsNullOrEmpty(webApiClient.GetDevProfileHeaderImageUrl()));
         }
     }
 }

@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CancellationToken.cs" />
+    <Compile Include="Helpers\BreweryMapper.cs" />
     <Compile Include="Helpers\CheckinMapper.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -52,9 +53,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="QuickType\BreweryQuickType.cs" />
     <Compile Include="QuickType\BeersQuickType.cs" />
     <Compile Include="QuickType\CheckinsQuickType.cs" />
     <Compile Include="Helpers\UpdateBeersHelper.cs" />
+    <Compile Include="QuickType\CommonQuickType.cs" />
     <Compile Include="UriConstants.cs" />
     <Compile Include="Helpers\UrlPathBuilder.cs" />
   </ItemGroup>

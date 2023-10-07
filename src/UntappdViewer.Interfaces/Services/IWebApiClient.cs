@@ -22,6 +22,8 @@ namespace UntappdViewer.Interfaces.Services
 
         void FillServingType(List<Checkin> checkins, string defaultServingType, ICancellationToken<Checkin> cancellation = null);
 
+        void FillCollaboration(List<Beer> beers, List<Brewery> breweries, ICancellationToken<Checkin> cancellation = null);
+
         string GetDevAvatarImageUrl();
 
         string GetDevProfileHeaderImageUrl();
