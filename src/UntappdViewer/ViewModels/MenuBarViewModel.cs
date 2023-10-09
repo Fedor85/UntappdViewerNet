@@ -225,7 +225,10 @@ namespace UntappdViewer.ViewModels
         {
             DownloadFile(checkin.UrlPhoto, untappdService.GetCheckinPhotoFilePath(checkin));
             DownloadFile(checkin.Beer.LabelUrl, untappdService.GetBeerLabelFilePath(checkin.Beer));
-            DownloadFile(checkin.Beer.Brewery.LabelUrl, untappdService.GetBreweryLabelFilePath(checkin.Beer.Brewery));
+
+            foreach (Brewery brewery in checkin.Beer.GetFullBreweries())
+                DownloadFile(brewery.LabelUrl, untappdService.GetBreweryLabelFilePath(brewery));
+
             foreach (Badge badge in checkin.Badges)
                 DownloadFile(badge.ImageUrl, untappdService.GetBadgeImageFilePath(badge));
         }

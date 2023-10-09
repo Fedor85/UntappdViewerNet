@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace UntappdViewer.Models
 {
@@ -96,6 +97,14 @@ namespace UntappdViewer.Models
         {
             Brewery = new Brewery();
             Collaboration = new Collaboration();
+        }
+
+        public IEnumerable<Brewery> GetFullBreweries()
+        {
+            List<Brewery> breweries = new List<Brewery>();
+            breweries.Add(Brewery);
+            breweries.AddRange(Collaboration.Brewerys);
+            return breweries;
         }
 
         public override string ToString()
