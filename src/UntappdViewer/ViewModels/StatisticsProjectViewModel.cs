@@ -54,15 +54,15 @@ namespace UntappdViewer.ViewModels
 
         private IEnumerable iBUCount;
 
-        private int totalCheckinCount;
+        private int totalCheckinsCount;
 
-        private int uniqueCheckinCount;
+        private int uniqueCheckinsCount;
 
-        private int breweryMainCount;
+        private int breweriesMainCount;
 
-        private int breweryCollaborationCount;
+        private int breweriesCollaborationCount;
 
-        private int countryCount;
+        private int countriesCount;
 
         private int maxYAxisRatingScore;
 
@@ -236,48 +236,48 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public int TotalCheckinCount
+        public int TotalCheckinsCount
         {
-            get { return totalCheckinCount; }
+            get { return totalCheckinsCount; }
             set
             {
-                SetProperty(ref totalCheckinCount, value);
+                SetProperty(ref totalCheckinsCount, value);
             }
         }
 
-        public int UniqueCheckinCount
+        public int UniqueCheckinsCount
         {
-            get { return uniqueCheckinCount; }
+            get { return uniqueCheckinsCount; }
             set
             {
-                SetProperty(ref uniqueCheckinCount, value);
+                SetProperty(ref uniqueCheckinsCount, value);
             }
         }
 
-        public int BreweryMainCount
+        public int BreweriesMainCount
         {
-            get { return breweryMainCount; }
+            get { return breweriesMainCount; }
             set
             {
-                SetProperty(ref breweryMainCount, value);
+                SetProperty(ref breweriesMainCount, value);
             }
         }
 
-        public int BreweryCollaborationCount
+        public int BreweriesCollaborationCount
         {
-            get { return breweryCollaborationCount; }
+            get { return breweriesCollaborationCount; }
             set
             {
-                SetProperty(ref breweryCollaborationCount, value);
+                SetProperty(ref breweriesCollaborationCount, value);
             }
         }
 
-        public int CountryCount
+        public int CountriesCount
         {
-            get { return countryCount; }
+            get { return countriesCount; }
             set
             {
-                SetProperty(ref countryCount, value);
+                SetProperty(ref countriesCount, value);
             }
         }
 
@@ -422,11 +422,11 @@ namespace UntappdViewer.ViewModels
         {
             base.DeActivate();
 
-            TotalCheckinCount =0;
-            UniqueCheckinCount = 0;
-            BreweryMainCount = 0;
-            BreweryCollaborationCount = 0;
-            CountryCount = 0;
+            TotalCheckinsCount = 0;
+            UniqueCheckinsCount = 0;
+            BreweriesMainCount = 0;
+            BreweriesCollaborationCount = 0;
+            CountriesCount = 0;
 
             MaxYAxisRatingScore = 0;
             ChekinRatingScore = null;
@@ -466,11 +466,11 @@ namespace UntappdViewer.ViewModels
 
         private void SetCountsPanel()
         {
-            TotalCheckinCount = statisticsCalculation.GetCheckinsCount();
-            UniqueCheckinCount = statisticsCalculation.GetCheckinsCount(true);
-            BreweryMainCount = statisticsCalculation.GetBreweriesCount();
-            BreweryCollaborationCount = statisticsCalculation.GetBreweriesCount(true);
-            CountryCount = statisticsCalculation.GetCountriesCount();
+            TotalCheckinsCount = statisticsCalculation.GetCheckinsCount();
+            UniqueCheckinsCount = statisticsCalculation.GetCheckinsCount(true);
+            BreweriesMainCount = statisticsCalculation.GetBreweriesCount();
+            BreweriesCollaborationCount = statisticsCalculation.GetBreweriesCount(true);
+            CountriesCount = statisticsCalculation.GetCountriesCount();
         }
 
         private void SetRatingScore()

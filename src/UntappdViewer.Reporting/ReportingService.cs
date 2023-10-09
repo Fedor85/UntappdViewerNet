@@ -146,10 +146,11 @@ namespace UntappdViewer.Reporting
             SetValueByNameRanges(sheet.Workbook, "ChekinAverageRating", Math.Round(MathHelper.GetAverageValue(KeyValuesHelper.KeyValuesToDictionary(chekinRatingScore)), 2));
             sheet.CalculateAllValue();
 
-            SetValueByNameRanges(sheet.Workbook, "TotalCheckinCount", statisticsCalculation.GetCheckinsCount());
-            SetValueByNameRanges(sheet.Workbook, "UniqueCheckinCount", statisticsCalculation.GetCheckinsCount(true));
-            SetValueByNameRanges(sheet.Workbook, "BreweryCount", statisticsCalculation.GetBreweriesCount());
-            SetValueByNameRanges(sheet.Workbook, "CountryCount", statisticsCalculation.GetCountriesCount());
+            SetValueByNameRanges(sheet.Workbook, "TotalCheckinsCount", statisticsCalculation.GetCheckinsCount());
+            SetValueByNameRanges(sheet.Workbook, "UniqueCheckinsCount", statisticsCalculation.GetCheckinsCount(true));
+            SetValueByNameRanges(sheet.Workbook, "BreweriesMainCount", statisticsCalculation.GetBreweriesCount());
+            SetValueByNameRanges(sheet.Workbook, "BreweriesCollaborationCount", statisticsCalculation.GetBreweriesCount(true));
+            SetValueByNameRanges(sheet.Workbook, "CountriesCount", statisticsCalculation.GetCountriesCount());
         }
 
         private void FillChekinCountDate(Worksheet sheet, IStatisticsCalculation statisticsCalculation)

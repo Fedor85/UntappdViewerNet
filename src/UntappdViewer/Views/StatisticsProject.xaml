@@ -292,19 +292,19 @@
                     </Grid.ColumnDefinitions>
                     <DockPanel Grid.Column="0" HorizontalAlignment="Center">
                         <Label Content="{x:Static properties:Resources.CheckinsCountTotalUnique}" FontWeight="Bold"/>
-                        <Label Content="{Binding TotalCheckinCount}" FontWeight="Bold"/>
+                        <Label Content="{Binding TotalCheckinsCount}" FontWeight="Bold"/>
                         <Label Content="/" FontWeight="Bold"/>
-                        <Label Content="{Binding UniqueCheckinCount}" FontWeight="Bold"/>
+                        <Label Content="{Binding UniqueCheckinsCount}" FontWeight="Bold"/>
                     </DockPanel>
                     <DockPanel Grid.Column="1" HorizontalAlignment="Center">
                         <Label Content="{x:Static properties:Resources.BreweriesCountMainCollaboration}" FontWeight="Bold"/>
-                        <Label Content="{Binding BreweryMainCount}" FontWeight="Bold"/>
+                        <Label Content="{Binding BreweriesMainCount}" FontWeight="Bold"/>
                         <Label Content="/" FontWeight="Bold"/>
-                        <Label Content="{Binding BreweryCollaborationCount}" FontWeight="Bold"/>
+                        <Label Content="{Binding BreweriesCollaborationCount}" FontWeight="Bold"/>
                     </DockPanel>
                     <DockPanel Grid.Column="2" HorizontalAlignment="Center">
                         <Label Content="{x:Static properties:Resources.CountriesCountLabel}" FontWeight="Bold"/>
-                        <Label Content="{Binding CountryCount}" FontWeight="Bold"/>
+                        <Label Content="{Binding CountriesCount}" FontWeight="Bold"/>
                     </DockPanel>
                 </Grid>
             </Grid>
