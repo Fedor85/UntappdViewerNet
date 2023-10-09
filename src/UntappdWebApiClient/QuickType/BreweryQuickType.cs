@@ -44,9 +44,6 @@ namespace QuickType.Brewery.WebModels
         [JsonProperty("brewery_type_id")]
         public long BreweryTypeId { get; set; }
 
-        [JsonProperty("location")]
-        public new BreweryLocation Location { get; set; }
-
         [JsonProperty("rating")]
         public Rating Rating { get; set; }
 
@@ -76,12 +73,6 @@ namespace QuickType.Brewery.WebModels
 
         [JsonProperty("mute_status")]
         public string MuteStatus { get; set; }
-    }
-
-    public partial class BreweryLocation: Common.WebModels.BreweryLocation
-    {
-        [JsonProperty("brewery_address")]
-        public string BreweryAddress { get; set; }
     }
 
     public partial class Rating

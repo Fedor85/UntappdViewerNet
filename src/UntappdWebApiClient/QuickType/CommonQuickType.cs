@@ -108,6 +108,9 @@ namespace QuickType.Common.WebModels
 
     public partial class BreweryLocation
     {
+        [JsonProperty("brewery_address")]
+        public string BreweryAddress { get; set; }
+
         [JsonProperty("brewery_city")]
         public string BreweryCity { get; set; }
 

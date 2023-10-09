@@ -11,6 +11,7 @@ using QuickType.Checkins.WebModels;
 using QuickType.Beers.WebModels;
 using QuickType.Brewery.WebModels;
 using UntappdViewer.Interfaces;
+using UntappdViewer.Models.Different;
 using Beer = UntappdViewer.Models.Beer;
 using Brewery = UntappdViewer.Models.Brewery;
 using Venue = UntappdViewer.Models.Venue;
@@ -137,6 +138,7 @@ namespace UntappdWebApiClient
         public void FillCollaboration(List<Beer> beers, List<Brewery> breweries, ICancellationToken<Checkin> cancellation = null)
         {
             long countTotal = beers.Count;
+            long countCheck = 0;
             long countUpdate = 0;
             long errorCount = 0;
 
@@ -155,7 +157,7 @@ namespace UntappdWebApiClient
 
                     continue;
                 }
-
+                countCheck++;
                 if (breweryIds.Count == 0)
                 {
                     beer.Collaboration.SetDefined();
@@ -164,13 +166,25 @@ namespace UntappdWebApiClient
                 {
                     foreach (long breweryId in breweryIds)
                     {
-                        Brewery brewery = breweries.FirstOrDefault(item => item.Id == breweryId) ?? GetBrewery(breweryId);
-                        breweries.Add(brewery);
+                        Brewery brewery = breweries.FirstOrDefault(item => item.Id == breweryId);
+                        if (brewery == null)
+                        {
+                            brewery = GetBrewery(breweryId);
+                            if (brewery == null)
+                                continue;
+
+                           breweries.Add(brewery);
+                        }
                         beer.Collaboration.AddBrewery(brewery);
                     }
+
+                    if (beer.Collaboration.State == CollaborationState.Undefined)
+                        beer.Collaboration.SetDefined();
+                    else
+                        countUpdate++;
                 }
-                countUpdate++;
-                UploadedCountInvoke(GetTotalUpdateMessage(countTotal, countUpdate));
+            
+                UploadedCountInvoke(GetTotaAndCheklUpdateMessage(countTotal, countCheck, countUpdate));
             }
         }
 
@@ -330,6 +344,13 @@ namespace UntappdWebApiClient
             return $"{Properties.Resources.Total}:{total} / {Properties.Resources.Update}:{countUpdate} [{percent}%]";
         }
 
+        private string GetTotaAndCheklUpdateMessage(long total, long countChek, long countUpdate)
+        {
+            int percentChek = total > 0 ? (int)Math.Truncate((double)countChek / total * 100) : 0;
+            int percentUpdate = countChek > 0 ? (int)Math.Truncate((double)countUpdate / countChek * 100) : 0;
+            return $"{Properties.Resources.Total}:{total} / {Properties.Resources.Chek}:{countChek} [{percentChek}%] / {Properties.Resources.Update}:{countUpdate} [{percentUpdate}%]";
+        }
+
         private void UploadedCountInvoke(string message)
         {
             UploadedProgress?.Invoke(message);
@@ -354,13 +375,15 @@ namespace UntappdWebApiClient
             if (htmlDoc == null)
                 return false;
 
-            HtmlNode collaboration = htmlDoc.DocumentNode.Descendants("p").FirstOrDefault(node => node.InnerText.Trim().ToLower().Contains("collaboration"));
+            HtmlNode collaboration = htmlDoc.DocumentNode.Descendants("p").FirstOrDefault(node => node.InnerText.Trim().ToLower().Contains("collaboration with"));
             if (collaboration != null)
             {
-                foreach (string breweryNode in collaboration.Descendants("a").Select(item => item.GetAttributeValue("href", String.Empty)))
+                IEnumerable<HtmlNode> htmlNodes  = collaboration.Descendants("a").Where(item => item.GetAttributeValue("href", String.Empty).ToLower().Contains("/brewery/"));
+                foreach (string breweryNode in htmlNodes.Select(item => item.GetAttributeValue("href", String.Empty)))
                 {
                     string breweryId = String.Concat(breweryNode.Where(Char.IsDigit).ToArray());
-                    breweryIds.Add(Convert.ToInt64(breweryId));
+                    if(!String.IsNullOrEmpty(breweryId))
+                        breweryIds.Add(Convert.ToInt64(breweryId));
                 }
             }
             return true;
@@ -369,8 +392,12 @@ namespace UntappdWebApiClient
         private Brewery GetBrewery(long breweryId)
         {
             HttpResponseMessage httpResponse = GetHttpResponse($"brewery/info/{breweryId}/?");
-            if ((long)httpResponse.StatusCode == 429)
+            long statusCode = (long) httpResponse.StatusCode;
+            if (statusCode == 429)
                 throw new ArgumentException(httpResponse.ReasonPhrase);
+
+            if (statusCode == 404)
+                return null;
 
             string responseBody = httpResponse.Content.ReadAsStringAsync().Result;
             BreweryQuickType checkinsQuickType = JsonConvert.DeserializeObject<BreweryQuickType>(responseBody);
