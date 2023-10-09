@@ -11,6 +11,7 @@ using UntappdViewer.Events;
 using UntappdViewer.Interfaces;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
+using UntappdViewer.Models.Different;
 using UntappdViewer.Modules;
 using UntappdViewer.Utils;
 using Checkin = UntappdViewer.Models.Checkin;
@@ -25,6 +26,8 @@ namespace UntappdViewer.ViewModels
         private string offsetUpdateBeer;
 
         private bool isEnabledFillServingTypeButton;
+
+        private bool isEnabledCollaborationButton;
 
         private List<Checkin> checkins;
 
@@ -51,6 +54,8 @@ namespace UntappdViewer.ViewModels
         public ICommand BeerUpdateButtonCommand { get; }
 
         public ICommand FillServingTypeButtonCommand { get; }
+
+        public ICommand FillCollaborationButtonCommand { get; }
 
         public ICommand OkButtonCommand { get; }
 
@@ -87,6 +92,15 @@ namespace UntappdViewer.ViewModels
             }
         }
 
+        public bool IsEnabledCollaborationButton
+        {
+            get { return isEnabledCollaborationButton; }
+            set
+            {
+                SetProperty(ref isEnabledCollaborationButton, value);
+            }
+        }
+
         public List<Checkin> Checkins
         {
             get
@@ -97,6 +111,7 @@ namespace UntappdViewer.ViewModels
             {
                 SetProperty(ref checkins, value);
                 SetVisibilityFillServingTypeButton(value);
+                SetVisibilityCollaborationButton();
             }
         }
 
@@ -120,6 +135,8 @@ namespace UntappdViewer.ViewModels
             BeerUpdateButtonCommand = new DelegateCommand(UpdateBeers);
 
             FillServingTypeButtonCommand = new DelegateCommand(FillServingType);
+            FillCollaborationButtonCommand = new DelegateCommand(FillCollaboration);
+
             webClientCancellation = webApiClient.GetCancellationToken<Checkin>();
 
             OkButtonCommand = new DelegateCommand(Exit);
@@ -161,6 +178,8 @@ namespace UntappdViewer.ViewModels
                     long settingOffsetUpdateBeer = settingService.GetOffsetUpdateBeer();
                     if (settingOffsetUpdateBeer > 0)
                         OffsetUpdateBeer = settingOffsetUpdateBeer.ToString();
+
+                    SetVisibilityCollaborationButton();
                 }
             }
             catch (Exception ex)
@@ -217,6 +236,16 @@ namespace UntappdViewer.ViewModels
             FillServingType(checkins);
         }
 
+        private void FillCollaboration()
+        {
+            List<Beer> beers = untappdService.GetBeers().Where(item => item.Collaboration.State == CollaborationState.Undefined).ToList();
+            if (!beers.Any())
+                return;
+
+            LoadingChangeActivity(true, true);
+            FillCollaboration(beers);
+        }
+
         private async void FillCheckins(Action<CheckinsContainer, ICancellationToken<Checkin>> fillCheckinsDelegate)
         {
             BeforeRunWebClient();
@@ -271,6 +300,23 @@ namespace UntappdViewer.ViewModels
             }
         }
 
+        private async void FillCollaboration(List<Beer> beers)
+        {
+            BeforeRunWebClient();
+            try
+            {
+                await Task.Run(() => webApiClient.FillCollaboration(beers, untappdService.GetBrewerys(), webClientCancellation));
+            }
+            catch (Exception ex)
+            {
+                interactionRequestService.ShowError(Properties.Resources.Error, StringHelper.GetFullExceptionMessage(ex));
+            }
+            finally
+            {
+                AfterRunWebClient();
+            }
+        }
+
         private void BeforeRunWebClient()
         {
             eventAggregator.GetEvent<LoadingCancel>().Subscribe(LoadingCanceled);
@@ -305,9 +351,15 @@ namespace UntappdViewer.ViewModels
             OffsetUpdateBeer = offset > 0 ? offset.ToString() : String.Empty;
         }
 
-        private void SetVisibilityFillServingTypeButton(List<Checkin> value)
+        private void SetVisibilityFillServingTypeButton(List<Checkin> checkins)
         {
-            IsEnabledFillServingTypeButton =  value != null && value.Any(item => String.IsNullOrEmpty(item.ServingType));
+            IsEnabledFillServingTypeButton = checkins != null && checkins.Any(item => String.IsNullOrEmpty(item.ServingType));
+        }
+
+        private void SetVisibilityCollaborationButton()
+        {
+            List<Beer> beers = untappdService.GetBeers();
+            IsEnabledCollaborationButton = AccessToken.HasValue && AccessToken.Value && beers != null && beers.Any(item => item.Collaboration.State == CollaborationState.Undefined);
         }
 
         private void Exit()

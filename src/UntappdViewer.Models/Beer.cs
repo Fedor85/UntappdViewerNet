@@ -90,7 +90,7 @@ namespace UntappdViewer.Models
         /// </summary>
         public Brewery Brewery { get; set; }
 
-        public Collaboration Collaboration { get; set; }
+        public Collaboration Collaboration { get; }
 
         public Beer()
         {

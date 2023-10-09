@@ -67,6 +67,9 @@
                 <Separator Width="15" Visibility="Hidden"/>
                 <Button  Content="{x:Static properties:Resources.FillServingType}" Command="{Binding FillServingTypeButtonCommand}" Width="110" Height="20" IsDefault="True"
                          IsEnabled="{Binding IsEnabledFillServingTypeButton}"/>
+                <Separator Width="10" Visibility="Hidden"/>
+                <Button  Content="{x:Static properties:Resources.FillCollaboration}" Command="{Binding FillCollaborationButtonCommand}" Width="110" Height="20" IsDefault="True"
+                         IsEnabled="{Binding IsEnabledCollaborationButton}"/>
             </DockPanel>
         </Grid>
         <Grid Grid.Row="1" >

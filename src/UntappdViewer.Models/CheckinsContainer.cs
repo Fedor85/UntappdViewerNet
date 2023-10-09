@@ -51,6 +51,7 @@ namespace UntappdViewer.Models
         public void AddBeer(Beer beer)
         {
             beer.Changed += ItemChanged;
+            beer.Collaboration.Changed += ItemChanged;
             Beers.Add(beer);
             IsСhanges = true;
         }

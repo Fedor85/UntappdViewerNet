@@ -525,6 +525,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fill Collaboration.
+        /// </summary>
+        public static string FillCollaboration {
+            get {
+                return ResourceManager.GetString("FillCollaboration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fill Serving Type.
         /// </summary>
         public static string FillServingType {
