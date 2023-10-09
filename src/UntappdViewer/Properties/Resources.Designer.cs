@@ -207,20 +207,20 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Breweries count Main/Collaboration:.
+        /// </summary>
+        public static string BreweriesCountMainCollaboration {
+            get {
+                return ResourceManager.GetString("BreweriesCountMainCollaboration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Brewery.
         /// </summary>
         public static string Brewery {
             get {
                 return ResourceManager.GetString("Brewery", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Brewery count:.
-        /// </summary>
-        public static string BreweryCount {
-            get {
-                return ResourceManager.GetString("BreweryCount", resourceCulture);
             }
         }
         
@@ -282,20 +282,20 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Checkin count Total/Unique:.
-        /// </summary>
-        public static string CheckinCountTotalUnique {
-            get {
-                return ResourceManager.GetString("CheckinCountTotalUnique", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Checkins.
         /// </summary>
         public static string Checkins {
             get {
                 return ResourceManager.GetString("Checkins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checkins count Total/Unique:.
+        /// </summary>
+        public static string CheckinsCountTotalUnique {
+            get {
+                return ResourceManager.GetString("CheckinsCountTotalUnique", resourceCulture);
             }
         }
         
@@ -345,20 +345,20 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Countries count:.
+        /// </summary>
+        public static string CountriesCountLabel {
+            get {
+                return ResourceManager.GetString("CountriesCountLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Country/Count.
         /// </summary>
         public static string CountryCount {
             get {
                 return ResourceManager.GetString("CountryCount", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Country count:.
-        /// </summary>
-        public static string CountryCountLabel {
-            get {
-                return ResourceManager.GetString("CountryCountLabel", resourceCulture);
             }
         }
         

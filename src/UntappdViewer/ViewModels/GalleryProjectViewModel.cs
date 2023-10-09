@@ -136,7 +136,7 @@ namespace UntappdViewer.ViewModels
         private IEnumerable GetBreweryItems()
         {
             List<ImageViewModel> viewModels = new List<ImageViewModel>();
-            foreach (Brewery brewery in untappdService.GetBrewerys())
+            foreach (Brewery brewery in untappdService.GetFullBreweries())
             {
                 string labelPath = untappdService.GetBreweryLabelFilePath(brewery);
                 viewModels.Add(ConverterHelper.GetBreweryViewModel(brewery, labelPath));

@@ -31,19 +31,19 @@ namespace UntappdViewer.Domain
 
         public double MaxIBUByCount { get { return DefaultValues.MaxIBUByCount; } }
 
-        public int GetCheckinCount(bool unique = false)
+        public int GetCheckinsCount(bool unique = false)
         {
             return untappdService.GetCheckins(unique).Count;
         }
 
-        public int GetBreweryCount()
+        public int GetBreweriesCount(bool full = false)
         {
-            return untappdService.GetBrewerys().Count;
+            return full ? untappdService.GetFullBreweries().Count : untappdService.GetBreweries().Count;
         }
 
-        public int GetCountrysCount()
+        public int GetCountriesCount()
         {
-            return GetCountrys(untappdService.GetCheckins()).Count;
+            return GetCountries(untappdService.GetCheckins()).Count;
         }
 
         public int GetTotalDaysByNow()
@@ -147,17 +147,17 @@ namespace UntappdViewer.Domain
             return keyValues;
         }
 
-        public List<KeyValue<string, List<long>>> GetCountrysByCheckinIds()
+        public List<KeyValue<string, List<long>>> GetCountriesByCheckinIds()
         {
             List<KeyValue<string, List<long>>> keyValues = new List<KeyValue<string, List<long>>>();
-            List<string> countrys = GetCountrys(untappdService.GetCheckins());
-            if (!countrys.Any())
+            List<string> countries = GetCountries(untappdService.GetCheckins());
+            if (!countries.Any())
                 return keyValues;
 
-            countrys.Sort();
-            countrys.Reverse();
+            countries.Sort();
+            countries.Reverse();
 
-            foreach (string country in countrys)
+            foreach (string country in countries)
             {
                 List<long> checkinIds = untappdService.GetCheckins().Where(item => item.Beer.Brewery.Venue.Country.Equals(country)).Select(checkin => checkin.Id).ToList();
                 keyValues.Add(new KeyValue<string, List<long>>(StringHelper.GetCutByFirstChars(country, DefaultValues.SeparatorsName), checkinIds));
@@ -320,7 +320,7 @@ namespace UntappdViewer.Domain
             return dictionary;
         }
 
-        private List<string> GetCountrys(List<Checkin> checkins)
+        private List<string> GetCountries(List<Checkin> checkins)
         {
             IEnumerable<Checkin> checkinCountry = checkins.Where(item => item.Beer.Brewery.Venue != null && !String.IsNullOrEmpty(item.Beer.Brewery.Venue.Country));
             if (!checkinCountry.Any())

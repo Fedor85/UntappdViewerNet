@@ -146,10 +146,10 @@ namespace UntappdViewer.Reporting
             SetValueByNameRanges(sheet.Workbook, "ChekinAverageRating", Math.Round(MathHelper.GetAverageValue(KeyValuesHelper.KeyValuesToDictionary(chekinRatingScore)), 2));
             sheet.CalculateAllValue();
 
-            SetValueByNameRanges(sheet.Workbook, "TotalCheckinCount", statisticsCalculation.GetCheckinCount());
-            SetValueByNameRanges(sheet.Workbook, "UniqueCheckinCount", statisticsCalculation.GetCheckinCount(true));
-            SetValueByNameRanges(sheet.Workbook, "BreweryCount", statisticsCalculation.GetBreweryCount());
-            SetValueByNameRanges(sheet.Workbook, "CountryCount", statisticsCalculation.GetCountrysCount());
+            SetValueByNameRanges(sheet.Workbook, "TotalCheckinCount", statisticsCalculation.GetCheckinsCount());
+            SetValueByNameRanges(sheet.Workbook, "UniqueCheckinCount", statisticsCalculation.GetCheckinsCount(true));
+            SetValueByNameRanges(sheet.Workbook, "BreweryCount", statisticsCalculation.GetBreweriesCount());
+            SetValueByNameRanges(sheet.Workbook, "CountryCount", statisticsCalculation.GetCountriesCount());
         }
 
         private void FillChekinCountDate(Worksheet sheet, IStatisticsCalculation statisticsCalculation)
@@ -197,7 +197,7 @@ namespace UntappdViewer.Reporting
 
         private void FillCountryCountRating(Worksheet sheet, IStatisticsCalculation statisticsCalculation)
         {
-            List<KeyValue<string, List<long>>> beerCountryCheckinIds = statisticsCalculation.GetCountrysByCheckinIds();
+            List<KeyValue<string, List<long>>> beerCountryCheckinIds = statisticsCalculation.GetCountriesByCheckinIds();
             List<KeyValue<string, int>> beerCountrysCount = KeyValuesHelper.GetListCount(beerCountryCheckinIds);
             List<KeyValue<string, double>> beerCountrysRating = statisticsCalculation.GetAverageRatingByCheckinIds(beerCountryCheckinIds);
             int indexRow = 2;

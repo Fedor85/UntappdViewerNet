@@ -305,7 +305,7 @@ namespace UntappdViewer.ViewModels
             BeforeRunWebClient();
             try
             {
-                await Task.Run(() => webApiClient.FillCollaboration(beers, untappdService.GetBrewerys(), webClientCancellation));
+                await Task.Run(() => webApiClient.FillCollaboration(beers, untappdService.GetFullBreweries(), webClientCancellation));
             }
             catch (Exception ex)
             {

@@ -36,6 +36,16 @@ namespace UntappdViewer.Models
             return Brewerys.FirstOrDefault(item => item.Id == breweryId);
         }
 
+        public List<Brewery> GetBreweries()
+        {
+            return Checkins.Select(item => item.Beer.Brewery).Distinct().ToList();
+        }
+        public List<Brewery> GetFullBreweries()
+        {
+            return Brewerys;
+        }
+
+
         public Venue GetVenue(Venue venue)
         {
             return venues.FirstOrDefault(item => item.Equals(venue));

@@ -17,11 +17,11 @@ namespace UntappdViewer.Interfaces.Services
 
         double MaxIBUByCount { get; }
 
-        int GetCheckinCount(bool unique = false);
+        int GetCheckinsCount(bool unique = false);
 
-        int GetBreweryCount();
+        int GetBreweriesCount(bool full = false);
 
-        int GetCountrysCount();
+        int GetCountriesCount();
 
         int GetTotalDaysByNow();
 
@@ -35,7 +35,7 @@ namespace UntappdViewer.Interfaces.Services
 
         List<KeyValue<string, List<long>>> GetBeerTypesByCheckinIdsGroupByCount(int countByOther);
 
-        List<KeyValue<string, List<long>>> GetCountrysByCheckinIds();
+        List<KeyValue<string, List<long>>> GetCountriesByCheckinIds();
 
         List<KeyValue<string, List<long>>> GetServingTypeByCheckinIds(string defaultServingType);
 

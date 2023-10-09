@@ -58,7 +58,9 @@ namespace UntappdViewer.ViewModels
 
         private int uniqueCheckinCount;
 
-        private int breweryCount;
+        private int breweryMainCount;
+
+        private int breweryCollaborationCount;
 
         private int countryCount;
 
@@ -252,12 +254,21 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        public int BreweryCount
+        public int BreweryMainCount
         {
-            get { return breweryCount; }
+            get { return breweryMainCount; }
             set
             {
-                SetProperty(ref breweryCount, value);
+                SetProperty(ref breweryMainCount, value);
+            }
+        }
+
+        public int BreweryCollaborationCount
+        {
+            get { return breweryCollaborationCount; }
+            set
+            {
+                SetProperty(ref breweryCollaborationCount, value);
             }
         }
 
@@ -413,7 +424,8 @@ namespace UntappdViewer.ViewModels
 
             TotalCheckinCount =0;
             UniqueCheckinCount = 0;
-            BreweryCount = 0;
+            BreweryMainCount = 0;
+            BreweryCollaborationCount = 0;
             CountryCount = 0;
 
             MaxYAxisRatingScore = 0;
@@ -454,10 +466,11 @@ namespace UntappdViewer.ViewModels
 
         private void SetCountsPanel()
         {
-            TotalCheckinCount = statisticsCalculation.GetCheckinCount();
-            UniqueCheckinCount = statisticsCalculation.GetCheckinCount(true);
-            BreweryCount = statisticsCalculation.GetBreweryCount();
-            CountryCount = statisticsCalculation.GetCountrysCount();
+            TotalCheckinCount = statisticsCalculation.GetCheckinsCount();
+            UniqueCheckinCount = statisticsCalculation.GetCheckinsCount(true);
+            BreweryMainCount = statisticsCalculation.GetBreweriesCount();
+            BreweryCollaborationCount = statisticsCalculation.GetBreweriesCount(true);
+            CountryCount = statisticsCalculation.GetCountriesCount();
         }
 
         private void SetRatingScore()
@@ -503,7 +516,7 @@ namespace UntappdViewer.ViewModels
 
         private void SetBeerCountry()
         {
-            List<KeyValue<string, List<long>>> beerCountryCheckinIds = statisticsCalculation.GetCountrysByCheckinIds();
+            List<KeyValue<string, List<long>>> beerCountryCheckinIds = statisticsCalculation.GetCountriesByCheckinIds();
             List<KeyValue<string, int>> beerCountryCount = KeyValuesHelper.GetListCount(beerCountryCheckinIds);
 
             HeightChartBeerCountry = GetHeightChart(beerCountryCount.Count);

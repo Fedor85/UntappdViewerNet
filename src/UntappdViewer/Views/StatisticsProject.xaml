@@ -287,21 +287,23 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition MinWidth="300"/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition  MinWidth="300"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <DockPanel Grid.Column="0" HorizontalAlignment="Center">
-                        <Label Content="{x:Static properties:Resources.CheckinCountTotalUnique}" FontWeight="Bold"/>
+                        <Label Content="{x:Static properties:Resources.CheckinsCountTotalUnique}" FontWeight="Bold"/>
                         <Label Content="{Binding TotalCheckinCount}" FontWeight="Bold"/>
                         <Label Content="/" FontWeight="Bold"/>
                         <Label Content="{Binding UniqueCheckinCount}" FontWeight="Bold"/>
                     </DockPanel>
                     <DockPanel Grid.Column="1" HorizontalAlignment="Center">
-                        <Label Content="{x:Static properties:Resources.BreweryCount}" FontWeight="Bold"/>
-                        <Label Content="{Binding BreweryCount}" FontWeight="Bold"/>
+                        <Label Content="{x:Static properties:Resources.BreweriesCountMainCollaboration}" FontWeight="Bold"/>
+                        <Label Content="{Binding BreweryMainCount}" FontWeight="Bold"/>
+                        <Label Content="/" FontWeight="Bold"/>
+                        <Label Content="{Binding BreweryCollaborationCount}" FontWeight="Bold"/>
                     </DockPanel>
                     <DockPanel Grid.Column="2" HorizontalAlignment="Center">
-                        <Label Content="{x:Static properties:Resources.CountryCountLabel}" FontWeight="Bold"/>
+                        <Label Content="{x:Static properties:Resources.CountriesCountLabel}" FontWeight="Bold"/>
                         <Label Content="{Binding CountryCount}" FontWeight="Bold"/>
                     </DockPanel>
                 </Grid>

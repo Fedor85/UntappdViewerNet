@@ -58,7 +58,9 @@ namespace UntappdViewer.Interfaces.Services
 
         List<Beer> GetBeers();
 
-        List<Brewery> GetBrewerys();
+        List<Brewery> GetBreweries();
+
+        List<Brewery> GetFullBreweries();
 
         List<Badge> GetBadges();
 

@@ -480,16 +480,16 @@
     <value>Total days:</value>
     <comment>en-en</comment>
   </data>
-  <data name="BreweryCount" xml:space="preserve">
-    <value>Brewery count:</value>
+  <data name="BreweriesCountMainCollaboration" xml:space="preserve">
+    <value>Breweries count Main/Collaboration:</value>
     <comment>en-en</comment>
   </data>
-  <data name="CheckinCountTotalUnique" xml:space="preserve">
-    <value>Checkin count Total/Unique:</value>
+  <data name="CheckinsCountTotalUnique" xml:space="preserve">
+    <value>Checkins count Total/Unique:</value>
     <comment>en-ne</comment>
   </data>
-  <data name="CountryCountLabel" xml:space="preserve">
-    <value>Country count:</value>
+  <data name="CountriesCountLabel" xml:space="preserve">
+    <value>Countries count:</value>
   </data>
   <data name="ChekinsAccumulateCountDate" xml:space="preserve">
     <value>Chekins Accumulate Count/Date</value>

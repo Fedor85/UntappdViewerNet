@@ -28,7 +28,7 @@ namespace UntappdViewer.Test
         [Test]
         public void TestGetCountrysCount()
         {
-            int countrysCount = statisticsCalculation.GetCountrysCount();
+            int countrysCount = statisticsCalculation.GetCountriesCount();
             Assert.AreEqual(38, countrysCount);
         }
 
@@ -96,7 +96,7 @@ namespace UntappdViewer.Test
         [Test]
         public void TestGetCountrysByCheckinIds()
         {
-            List<KeyValue<string, List<long>>> beerCountryCheckinIds = statisticsCalculation.GetCountrysByCheckinIds();
+            List<KeyValue<string, List<long>>> beerCountryCheckinIds = statisticsCalculation.GetCountriesByCheckinIds();
 
             Assert.AreEqual(38, beerCountryCheckinIds.Count);
             Assert.AreEqual("United States", beerCountryCheckinIds[0].Key);
@@ -117,7 +117,7 @@ namespace UntappdViewer.Test
             Assert.AreEqual("Belgian", beerTypesCount[15].Key);
             Assert.AreEqual(26, beerTypesCount[15].Value);
 
-            List<KeyValue<string, List<long>>> beerCountryCheckinIds = statisticsCalculation.GetCountrysByCheckinIds();
+            List<KeyValue<string, List<long>>> beerCountryCheckinIds = statisticsCalculation.GetCountriesByCheckinIds();
             List<KeyValue<string, int>> beerCountrysCount = KeyValuesHelper.GetListCount(beerCountryCheckinIds);
 
             Assert.AreEqual(38, beerCountrysCount.Count);
@@ -170,7 +170,7 @@ namespace UntappdViewer.Test
             Assert.AreEqual("Belgian", beerTypeRating[15].Key);
             Assert.AreEqual(3.38, beerTypeRating[15].Value);
 
-            List<KeyValue<string, List<long>>> beerCountryCheckinIds = statisticsCalculation.GetCountrysByCheckinIds();
+            List<KeyValue<string, List<long>>> beerCountryCheckinIds = statisticsCalculation.GetCountriesByCheckinIds();
             List<KeyValue<string, double>> beerCountryRating = statisticsCalculation.GetAverageRatingByCheckinIds(beerCountryCheckinIds);
 
             Assert.AreEqual(38, beerCountryRating.Count);

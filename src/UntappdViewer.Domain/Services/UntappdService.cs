@@ -193,9 +193,14 @@ namespace UntappdViewer.Domain.Services
             return Untappd.CheckinsContainer.Beers;
         }
 
-        public List<Brewery> GetBrewerys()
+        public List<Brewery> GetBreweries()
         {
-            return Untappd.CheckinsContainer.Brewerys;
+            return Untappd.CheckinsContainer.GetBreweries();
+        }
+
+        public List<Brewery> GetFullBreweries()
+        {
+            return Untappd.CheckinsContainer.GetFullBreweries();
         }
 
         public List<Badge> GetBadges()
