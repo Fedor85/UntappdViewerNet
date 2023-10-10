@@ -45,7 +45,7 @@ namespace UntappdViewer.ViewModels
 
         public ICommand CheckAccessTokenCommand { get; }
 
-        public ICommand FulllDownloadButtonCommand { get; }
+        public ICommand FullDownloadButtonCommand { get; }
 
         public ICommand FirstDownloadButtonCommand { get; }
 
@@ -129,7 +129,7 @@ namespace UntappdViewer.ViewModels
             this.interactionRequestService = interactionRequestService;
 
             CheckAccessTokenCommand = new DelegateCommand<string>(CheckAccessToken);
-            FulllDownloadButtonCommand = new DelegateCommand(FulllDownloadCheckins);
+            FullDownloadButtonCommand = new DelegateCommand(FullDownloadCheckins);
             FirstDownloadButtonCommand = new DelegateCommand(FirstDownloadCheckins);
             ToEndDownloadButtonCommand = new DelegateCommand(ToEndDownloadCheckins);
             BeerUpdateButtonCommand = new DelegateCommand(UpdateBeers);
@@ -192,7 +192,7 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        private void FulllDownloadCheckins()
+        private void FullDownloadCheckins()
         {
             if (untappdService.GetCheckins().Count  > 0 && !interactionRequestService.Ask(Properties.Resources.Warning, Properties.Resources.AskDeletedCheckins))
                 return;

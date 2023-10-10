@@ -43,7 +43,7 @@
             </DockPanel>
             <DockPanel Grid.Row="2" HorizontalAlignment="Center">
                 <Button Name="FulllDownloadCheckinsButton" Content="{x:Static properties:Resources.Full}" IsEnabled="False"
-                        Command="{Binding FulllDownloadButtonCommand}" Width="60" Height="20" IsDefault="True"/>
+                        Command="{Binding FullDownloadButtonCommand}" Width="60" Height="20" IsDefault="True"/>
                 <Separator Width="10" Visibility="Hidden"/>
                 <Button Name="FirstDownloadCheckinsButton" Content="{x:Static properties:Resources.First}" IsEnabled="False"
                         Command="{Binding FirstDownloadButtonCommand}" Width="60" Height="20" IsDefault="True"/>
