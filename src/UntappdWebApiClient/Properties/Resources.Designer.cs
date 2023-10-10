@@ -79,6 +79,33 @@ namespace UntappdWebApiClient.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to FillCheckins -&gt; .
+        /// </summary>
+        internal static string FillCheckins {
+            get {
+                return ResourceManager.GetString("FillCheckins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FillCollaboration -&gt; .
+        /// </summary>
+        internal static string FillCollaboration {
+            get {
+                return ResourceManager.GetString("FillCollaboration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FillServingType -&gt; .
+        /// </summary>
+        internal static string FillServingType {
+            get {
+                return ResourceManager.GetString("FillServingType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Total.
         /// </summary>
         internal static string Total {
@@ -93,6 +120,15 @@ namespace UntappdWebApiClient.Properties {
         internal static string Update {
             get {
                 return ResourceManager.GetString("Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UpdateBeers -&gt; .
+        /// </summary>
+        internal static string UpdateBeers {
+            get {
+                return ResourceManager.GetString("UpdateBeers", resourceCulture);
             }
         }
         

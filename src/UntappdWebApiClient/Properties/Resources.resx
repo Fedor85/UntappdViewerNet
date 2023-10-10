@@ -125,12 +125,28 @@
     <value>Error update.</value>
     <comment>en-en</comment>
   </data>
+  <data name="FillCheckins" xml:space="preserve">
+    <value>FillCheckins -&gt; </value>
+    <comment>en-en</comment>
+  </data>
+  <data name="FillCollaboration" xml:space="preserve">
+    <value>FillCollaboration -&gt; </value>
+    <comment>en-en</comment>
+  </data>
+  <data name="FillServingType" xml:space="preserve">
+    <value>FillServingType -&gt; </value>
+    <comment>en-en</comment>
+  </data>
   <data name="Total" xml:space="preserve">
     <value>Total</value>
     <comment>en-en</comment>
   </data>
   <data name="Update" xml:space="preserve">
     <value>Update</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="UpdateBeers" xml:space="preserve">
+    <value>UpdateBeers -&gt; </value>
     <comment>en-en</comment>
   </data>
   <data name="Uploaded" xml:space="preserve">

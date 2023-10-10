@@ -89,7 +89,7 @@ namespace UntappdWebApiClient
                 if (currentCountUpdate > 0)
                     countUpdate += currentCountUpdate;
 
-                UploadedCountInvoke(GetChekUpdateMessage(countCheck, countUpdate));
+                UploadedProgressByMessage(Properties.Resources.UpdateBeers + GetChekUpdateMessage(countCheck, countUpdate));
 
                 if (beersQuickType.Response.Pagination.Offset.HasValue)
                     offset = beersQuickType.Response.Pagination.Offset.Value;
@@ -117,7 +117,7 @@ namespace UntappdWebApiClient
                 string checkinUrl = UrlPathBuilder.GetСheckinUrl(checkin.Id);
                 if (!TryServingType(checkinUrl, defaultServingType, out string servingType))
                 {
-                    UploadedCountInvoke(Properties.Resources.ErrorUpdate);
+                    UploadedProgressByMessage(Properties.Resources.ErrorUpdate);
                     errorCount++;
                     if (errorCount == CountAttemptsToGetHtmlDocument)
                         return;
@@ -131,7 +131,7 @@ namespace UntappdWebApiClient
                     cancellation?.Items.Add(checkin);
                     countUpdate++;
                 }
-                UploadedCountInvoke(GetTotalUpdateMessage(countTotal, countUpdate));
+                UploadedProgressByMessage(Properties.Resources.FillServingType + GetTotalUpdateMessage(countTotal, countUpdate));
             }
         }
 
@@ -150,7 +150,7 @@ namespace UntappdWebApiClient
                 string beerUrl = UrlPathBuilder.GetBeerUrl(beer.Id);
                 if (!TryCollaborationBreweryIds(beerUrl, out List<long> breweryIds))
                 {
-                    UploadedCountInvoke(Properties.Resources.ErrorUpdate);
+                    UploadedProgressByMessage(Properties.Resources.ErrorUpdate);
                     errorCount++;
                     if (errorCount == CountAttemptsToGetHtmlDocument)
                         return;
@@ -183,8 +183,8 @@ namespace UntappdWebApiClient
                     else
                         countUpdate++;
                 }
-            
-                UploadedCountInvoke(GetTotaAndCheklUpdateMessage(countTotal, countCheck, countUpdate));
+
+                UploadedProgressByMessage(Properties.Resources.FillCollaboration + GetTotaAndCheklUpdateMessage(countTotal, countCheck, countUpdate));
             }
         }
 
@@ -242,7 +242,7 @@ namespace UntappdWebApiClient
                             AddCheckin(currentCheckin, checkinsContainer);
                             counter++;
                         }
-                        UploadedCountInvoke(GetFillCountMessage(counter));
+                        UploadedProgressByMessage(Properties.Resources.FillCheckins + GetFillCountMessage(counter));
                     }
                     else
                     {
@@ -251,7 +251,7 @@ namespace UntappdWebApiClient
                             AddCheckin(currentCheckin, checkinsContainer);
                             counter++;
                         }
-                        UploadedCountInvoke(GetFillCountMessage(counter));
+                        UploadedProgressByMessage(Properties.Resources.FillCheckins + GetFillCountMessage(counter));
                     }
                     currentId = checkinsQuickType.Response.Pagination.MaxId.Value;
                 }
@@ -259,7 +259,6 @@ namespace UntappdWebApiClient
                 {
                     isRun = false;
                 }
-
 
                 if (cancellation != null && cancellation.Cancel)
                     isRun = false;
@@ -351,7 +350,7 @@ namespace UntappdWebApiClient
             return $"{Properties.Resources.Total}:{total} / {Properties.Resources.Chek}:{countChek} [{percentChek}%] / {Properties.Resources.Update}:{countUpdate} [{percentUpdate}%]";
         }
 
-        private void UploadedCountInvoke(string message)
+        private void UploadedProgressByMessage(string message)
         {
             UploadedProgress?.Invoke(message);
         }
