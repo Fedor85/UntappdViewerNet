@@ -30,6 +30,11 @@ namespace UntappdViewer.Helpers
             return $"{statusMessage}:\n{filePath}";
         }
 
+        public static string GetLoadingMessage(int counter, int count, string objectName)
+        {
+            return GetLoadingMessage($"{counter++}/{count} -> {objectName}");
+        }
+
         public static string GetLoadingMessage(string text)
         {
             return $"{Properties.Resources.LoadingFrom}: {text}";

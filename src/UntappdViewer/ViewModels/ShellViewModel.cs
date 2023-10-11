@@ -107,12 +107,13 @@ namespace UntappdViewer.ViewModels
                 return;
             }
 
+            string name = settingService.GetDefaultUserName();
             FileStatus fileStatus = FileHelper.Check(filePath, Extensions.GetSupportExtensions());
             if (EnumsHelper.IsValidFileStatus(fileStatus))
             {
                 try
                 {
-                    untappdService.Initialize(filePath);
+                    untappdService.Initialize(filePath, name);
                     if (isUsedArgument)
                         settingService.SetRecentFilePaths(FileHelper.AddFilePath(settingService.GetRecentFilePaths(), filePath, settingService.GetMaxRecentFilePaths()));
 

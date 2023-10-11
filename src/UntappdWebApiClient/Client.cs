@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using HtmlAgilityPack;
 using Newtonsoft.Json;
+using QuickType.Beer.WebModels.QuickType;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
 using QuickType.Checkins.WebModels;
@@ -12,6 +13,7 @@ using QuickType.Beers.WebModels;
 using QuickType.Brewery.WebModels;
 using UntappdViewer.Interfaces;
 using UntappdViewer.Models.Different;
+using BeerWeb = QuickType.Beers.WebModels.Beer;
 using Beer = UntappdViewer.Models.Beer;
 using Brewery = UntappdViewer.Models.Brewery;
 using Venue = UntappdViewer.Models.Venue;
@@ -71,12 +73,11 @@ namespace UntappdWebApiClient
             if (beers.Count == 0)
                 return;
 
-            long countCheck = 0;
+            List<long> beersCheck = new List<long>();
             long countUpdate = 0;
             bool isRun = true;
             while (isRun)
             {
-
                 HttpResponseMessage httpResponse = GetHttpResponse($"user/beers/?offset={offset}&limit=50");
                 if ((long)httpResponse.StatusCode == 429)
                     throw new ArgumentException(httpResponse.ReasonPhrase);
@@ -84,17 +85,32 @@ namespace UntappdWebApiClient
                 string responseBody = httpResponse.Content.ReadAsStringAsync().Result;
                 BeersQuickType beersQuickType = JsonConvert.DeserializeObject<BeersQuickType>(responseBody, jsonSerializerSettings);
 
-                countCheck += beersQuickType.Response.Beers.Count;
-                int currentCountUpdate = UpdateBeersHelper.UpdateBeers(beers, beersQuickType);
-                if (currentCountUpdate > 0)
-                    countUpdate += currentCountUpdate;
+                List<BeerWeb> beersWeb = beersQuickType.Response.Beers.Items.Select(item => item.Beer).ToList();
+                beersCheck.AddRange(beersWeb.Select(item => item.Bid));
+                int currentCountUpdate = UpdateBeersHelper.UpdateBeers(beers, beersWeb);
+                countUpdate += currentCountUpdate;
 
-                UploadedProgressByMessage(Properties.Resources.UpdateBeers + GetChekUpdateMessage(countCheck, countUpdate));
+                UploadedProgressByMessage(Properties.Resources.UpdateBeers + GetChekUpdateMessage(beersCheck.Count, countUpdate));
 
                 if (beersQuickType.Response.Pagination.Offset.HasValue)
                     offset = beersQuickType.Response.Pagination.Offset.Value;
                 else
                     isRun = false;
+
+                if (beersCheck.Count >= beers.Count)
+                {
+                    List<Beer> notCheckBeers = beers.Where(item => !beersCheck.Contains(item.Id)).ToList();
+                    if (notCheckBeers.Count > 0)
+                    {
+                        beersCheck.AddRange(notCheckBeers.Select(item => item.Id));
+
+                        currentCountUpdate = UpdateBeers(notCheckBeers);
+                        countUpdate += currentCountUpdate;
+
+                        UploadedProgressByMessage(Properties.Resources.UpdateBeers + GetChekUpdateMessage(beersCheck.Count, countUpdate));
+                    }
+                    isRun = false;
+                }
 
                 if (predicate != null && !beers.Any(predicate))
                     isRun = false;
@@ -128,7 +144,6 @@ namespace UntappdWebApiClient
                 if (!servingType.Equals(checkin.ServingType))
                 {
                     checkin.ServingType = servingType;
-                    cancellation?.Items.Add(checkin);
                     countUpdate++;
                 }
                 UploadedProgressByMessage(Properties.Resources.FillServingType + GetTotalUpdateMessage(countTotal, countUpdate));
@@ -240,6 +255,7 @@ namespace UntappdWebApiClient
                                 break;
                             }
                             AddCheckin(currentCheckin, checkinsContainer);
+                            cancellation?.Items.Add(currentCheckin);
                             counter++;
                         }
                         UploadedProgressByMessage(Properties.Resources.FillCheckins + GetFillCountMessage(counter));
@@ -249,6 +265,7 @@ namespace UntappdWebApiClient
                         foreach (Checkin currentCheckin in currentCheckins)
                         {
                             AddCheckin(currentCheckin, checkinsContainer);
+                            cancellation?.Items.Add(currentCheckin);
                             counter++;
                         }
                         UploadedProgressByMessage(Properties.Resources.FillCheckins + GetFillCountMessage(counter));
@@ -294,6 +311,23 @@ namespace UntappdWebApiClient
 
             FillCheckinVenue(checkin, checkinsContainer);
             checkinsContainer.AddCheckin(checkin);
+        }
+
+        private int UpdateBeers(List<Beer> beers)
+        {
+            int counter = 0;
+            foreach (Beer beer in beers)
+            {
+                HttpResponseMessage httpResponse = GetHttpResponse($"beer/info/{beer.Id}/?");
+                if ((long)httpResponse.StatusCode == 429)
+                    throw new ArgumentException(httpResponse.ReasonPhrase);
+
+                string responseBody = httpResponse.Content.ReadAsStringAsync().Result;
+                BeerQuickType beerQuickType = JsonConvert.DeserializeObject<BeerQuickType>(responseBody);
+                if (UpdateBeersHelper.UpdateBeer(beer, beerQuickType.Response.Beer))
+                    counter++;
+            }
+            return counter;
         }
 
         private static bool IsUpdateVenue(ref Venue venue, CheckinsContainer checkinsContainer)

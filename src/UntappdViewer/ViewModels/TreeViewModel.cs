@@ -156,11 +156,12 @@ namespace UntappdViewer.ViewModels
         private ObservableCollection<TreeItemViewModel> GeTreeViewItems(bool isUniqueCheckins)
         {
             ObservableCollection<TreeItemViewModel> treeViewItems = new ObservableCollection<TreeItemViewModel>();
+            int treeItemNameMaxLength =  settingService.GetTreeItemNameMaxLength();
             List<Checkin> checkins = untappdService.GetCheckins(isUniqueCheckins);
             for (int i = 0; i < checkins.Count; i++)
             {
                 Checkin checkin = checkins[i];
-                treeViewItems.Add(new TreeItemViewModel(checkin.Id, untappdService.GetTreeViewCheckinDisplayName(checkin, i + 1)));
+                treeViewItems.Add(new TreeItemViewModel(checkin.Id, untappdService.GetTreeViewCheckinDisplayName(checkin, i + 1, treeItemNameMaxLength)));
             }
             return treeViewItems;
         }

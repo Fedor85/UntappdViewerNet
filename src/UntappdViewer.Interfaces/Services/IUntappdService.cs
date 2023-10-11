@@ -18,7 +18,7 @@ namespace UntappdViewer.Interfaces.Services
 
         void Create(string userName);
 
-        void Initialize(string filePath, string userName = null);
+        void Initialize(string filePath, string userName);
 
         void SortDataDescCheckins();
 
@@ -52,6 +52,8 @@ namespace UntappdViewer.Interfaces.Services
 
         string GetReportsDirectory();
 
+        void DownloadMediaFiles(IWebDownloader webDownloader, Checkin checkin);
+
         List<Checkin> GetCheckins(bool isUniqueCheckins = false);
 
         Checkin GetCheckin(long checkinId);
@@ -64,7 +66,7 @@ namespace UntappdViewer.Interfaces.Services
 
         List<Badge> GetBadges();
 
-        string GetTreeViewCheckinDisplayName(Checkin checkin, int number);
+        string GetTreeViewCheckinDisplayName(Checkin checkin, int number, int treeItemNameMaxLength);
 
         string GetUploadSavePhotoFileName(Checkin checkin);
     }

@@ -12,8 +12,6 @@ namespace UntappdViewer.Domain.Services
 {
     public class UntappdService : IUntappdService
     {
-        private ISettingService settingService;
-
         public Untappd Untappd { get; private set; }
 
         public Action<Untappd> InitializeUntappdEvent { get; set; }
@@ -24,21 +22,20 @@ namespace UntappdViewer.Domain.Services
 
         public string FilePath { get; private set; }
 
-        public UntappdService(ISettingService settingService)
+        public UntappdService()
         {
-            this.settingService = settingService;
             Untappd = new Untappd(String.Empty);
         }
 
         public void Create(string userName)
         {
-            Untappd = new Untappd(GetUntappdUserName(userName));
+            Untappd = new Untappd(userName);
             InitializeUntappdEvent?.Invoke(Untappd);
             UpdateUntappdUserNameEvent?.Invoke(Untappd.UserName);
             ResetСhanges();
         }
 
-        public void Initialize(string filePath, string userName = null)
+        public void Initialize(string filePath, string userName)
         {
             switch (FileHelper.GetExtensionWihtoutPoint(filePath))
             {
@@ -59,7 +56,7 @@ namespace UntappdViewer.Domain.Services
 
         private void InitializeToCSV(string filePath, string userName)
         {     
-            Untappd = new Untappd(GetUntappdUserName(userName));
+            Untappd = new Untappd(userName);
             using (FileStream fileStream = File.OpenRead(filePath))
                 CheckinCSVMapper.InitializeCheckinsContainer(Untappd.CheckinsContainer, fileStream);
 
@@ -134,7 +131,7 @@ namespace UntappdViewer.Domain.Services
             if (Untappd.UserName.Equals(untappdUserName))
                 return;
 
-            Untappd.SetUserName(GetUntappdUserName(untappdUserName));
+            Untappd.SetUserName(untappdUserName);
             UpdateUntappdUserNameEvent?.Invoke(Untappd.UserName);
         }
 
@@ -178,6 +175,18 @@ namespace UntappdViewer.Domain.Services
             return Path.Combine(GetFileDataDirectory(), "Reports");
         }
 
+        public void DownloadMediaFiles(IWebDownloader webDownloader, Checkin checkin)
+        {
+            DownloadFile(webDownloader, checkin.UrlPhoto, GetCheckinPhotoFilePath(checkin));
+            DownloadFile(webDownloader, checkin.Beer.LabelUrl,GetBeerLabelFilePath(checkin.Beer));
+
+            foreach (Brewery brewery in checkin.Beer.GetFullBreweries())
+                DownloadFile(webDownloader, brewery.LabelUrl, GetBreweryLabelFilePath(brewery));
+
+            foreach (Badge badge in checkin.Badges)
+                DownloadFile(webDownloader, badge.ImageUrl, GetBadgeImageFilePath(badge));
+        }
+
         public List<Checkin> GetCheckins(bool isUniqueCheckins = false)
         {
             return isUniqueCheckins ? GetUniqueCheckins() : Untappd.CheckinsContainer.Checkins;
@@ -217,21 +226,16 @@ namespace UntappdViewer.Domain.Services
             return badges;
         }
 
-        public string GetTreeViewCheckinDisplayName(Checkin checkin, int number)
+        public string GetTreeViewCheckinDisplayName(Checkin checkin, int number, int treeItemNameMaxLength)
         {
             string prefix = $"#{number} {checkin.CreatedDate.ToString("yyyy-MMM-dd")} ";
             string fullName = $"{prefix}{StringHelper.GetShortName(checkin.Beer.Name)}";
-            return StringHelper.GeBreakForLongName(fullName, settingService.GetTreeItemNameMaxLength(), prefix.Length * 2 - 2);
+            return StringHelper.GeBreakForLongName(fullName, treeItemNameMaxLength, prefix.Length * 2 - 2);
         }
 
         public string GetUploadSavePhotoFileName(Checkin checkin)
         {
             return $"{checkin.CreatedDate.ToString("yyyy_MM_dd")}_{checkin.Id}.{FileHelper.GetExtensionWihtoutPoint(checkin.UrlPhoto)}";
-        }
-
-        private string GetUntappdUserName(string userName)
-        {
-            return String.IsNullOrEmpty(userName) ? settingService.GetDefaultUserName() : userName;
         }
 
         private List<Checkin> GetUniqueCheckins()
@@ -281,6 +285,18 @@ namespace UntappdViewer.Domain.Services
                 return -1;
 
             return 1;
+        }
+
+        private void DownloadFile(IWebDownloader webDownloader, string webPath, string filePath)
+        {
+            if (String.IsNullOrEmpty(webPath) || File.Exists(filePath))
+                return;
+
+            string directoryName = Path.GetDirectoryName(filePath);
+            if (!Directory.Exists(directoryName))
+                FileHelper.CreateDirectory(directoryName);
+
+            webDownloader.DownloadToFile(webPath, filePath);
         }
     }
 }

@@ -56,7 +56,7 @@ namespace UntappdViewer
             //    settingService.Reset();
 
             containerRegistry.RegisterInstance(settingService);
-            IUntappdService untappdService = new UntappdService(settingService);
+            IUntappdService untappdService = new UntappdService();
             containerRegistry.RegisterInstance(untappdService);
 
             IStatisticsCalculation statisticsCalculation = new StatisticsCalculation(untappdService);

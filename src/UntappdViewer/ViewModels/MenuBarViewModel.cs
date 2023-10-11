@@ -14,7 +14,6 @@ using UntappdViewer.Events;
 using UntappdViewer.Helpers;
 using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
-using UntappdViewer.Models;
 using UntappdViewer.Modules;
 using UntappdViewer.Utils;
 using UntappdViewer.Views;
@@ -147,7 +146,7 @@ namespace UntappdViewer.ViewModels
                 return;
 
             FileHelper.SaveFile(fileSavePath, untappdService.Untappd);
-            untappdService.Initialize(fileSavePath);
+            untappdService.Initialize(fileSavePath, settingService.GetDefaultUserName());
             untappdService.ResetСhanges();
             FileHelper.CreateDirectory(untappdService.GetFileDataDirectory());
             ShowMessageOnStatusBar(untappdService.FilePath);
@@ -215,34 +214,10 @@ namespace UntappdViewer.ViewModels
             int counter = 1;
             foreach (Checkin checkin in checkins)
             {
-                ShowMessageOnStatusBar(CommunicationHelper.GetLoadingMessage($"{counter++}/{count} -> {checkin.Beer.Name}"));
-                await Task.Run(() => DownloadFiles(checkin));
+                ShowMessageOnStatusBar(CommunicationHelper.GetLoadingMessage(counter++, count, checkin.Beer.Name));
+                await Task.Run(() => untappdService.DownloadMediaFiles(webDownloader, checkin));
             }
             ShowMessageOnStatusBar(CommunicationHelper.GetLoadingMessage(untappdService.FilePath));
-        }
-
-        private void DownloadFiles(Checkin checkin)
-        {
-            DownloadFile(checkin.UrlPhoto, untappdService.GetCheckinPhotoFilePath(checkin));
-            DownloadFile(checkin.Beer.LabelUrl, untappdService.GetBeerLabelFilePath(checkin.Beer));
-
-            foreach (Brewery brewery in checkin.Beer.GetFullBreweries())
-                DownloadFile(brewery.LabelUrl, untappdService.GetBreweryLabelFilePath(brewery));
-
-            foreach (Badge badge in checkin.Badges)
-                DownloadFile(badge.ImageUrl, untappdService.GetBadgeImageFilePath(badge));
-        }
-
-        private void DownloadFile(string webPath, string filePath)
-        {
-            if (String.IsNullOrEmpty(webPath) || File.Exists(filePath))
-                return;
-
-            string directoryName = Path.GetDirectoryName(filePath);
-            if (!Directory.Exists(directoryName))
-                FileHelper.CreateDirectory(directoryName);
-
-            webDownloader.DownloadToFile(webPath, filePath);
         }
 
         private void UploadProjectPhotos()

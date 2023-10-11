@@ -99,7 +99,7 @@ namespace UntappdViewer.Models
             Collaboration = new Collaboration();
         }
 
-        public IEnumerable<Brewery> GetFullBreweries()
+        public List<Brewery> GetFullBreweries()
         {
             List<Brewery> breweries = new List<Brewery>();
             breweries.Add(Brewery);

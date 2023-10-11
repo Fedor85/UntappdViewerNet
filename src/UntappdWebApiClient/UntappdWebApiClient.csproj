@@ -53,6 +53,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="QuickType\BeerQuickType.cs" />
     <Compile Include="QuickType\BreweryQuickType.cs" />
     <Compile Include="QuickType\BeersQuickType.cs" />
     <Compile Include="QuickType\CheckinsQuickType.cs" />

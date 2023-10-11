@@ -35,8 +35,8 @@ namespace UntappdViewer.Test
         {
             string filePath = $"Temp{Path.GetFileName(Resources.ResourcesTestFileName)}";
             SaveResourceToFile(Resources.ResourcesTestFileName, filePath);
-            IUntappdService untappdService = new UntappdService(new SettingService());
-            untappdService.Initialize(filePath);
+            IUntappdService untappdService = new UntappdService();
+            untappdService.Initialize(filePath, new SettingService().GetDefaultUserName());
             File.Delete(filePath);
             return untappdService;
         }

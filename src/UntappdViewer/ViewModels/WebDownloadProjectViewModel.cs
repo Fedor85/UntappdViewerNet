@@ -8,6 +8,7 @@ using Prism.Events;
 using Prism.Modularity;
 using Prism.Regions;
 using UntappdViewer.Events;
+using UntappdViewer.Helpers;
 using UntappdViewer.Interfaces;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
@@ -34,6 +35,8 @@ namespace UntappdViewer.ViewModels
         private IUntappdService untappdService;
 
         private IWebApiClient webApiClient;
+
+        private IWebDownloader webDownloader;
 
         private IModuleManager moduleManager;
 
@@ -117,6 +120,7 @@ namespace UntappdViewer.ViewModels
 
         public WebDownloadProjectViewModel(IRegionManager regionManager, IUntappdService untappdService,
                                                                          IWebApiClient webApiClient,
+                                                                         IWebDownloader webDownloader,
                                                                          IModuleManager moduleManager,
                                                                          IEventAggregator eventAggregator,
                                                                          ISettingService settingService,
@@ -124,6 +128,7 @@ namespace UntappdViewer.ViewModels
         {
             this.untappdService = untappdService;
             this.webApiClient = webApiClient;
+            this.webDownloader = webDownloader;
             this.moduleManager = moduleManager;
             this.settingService = settingService;
             this.interactionRequestService = interactionRequestService;
@@ -207,7 +212,58 @@ namespace UntappdViewer.ViewModels
         private void FirstDownloadCheckins()
         {
             LoadingChangeActivity(true, true);
-            FillCheckins(webApiClient.FillFirstCheckins);
+            if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                FillFullFirstCheckinsAsync();
+            else
+                FillCheckins(webApiClient.FillFirstCheckins);
+        }
+
+        private async void FillFullFirstCheckinsAsync()
+        {
+            BeforeRunWebClient();
+            try
+            {
+                await Task.Run(() => FillFullFirstCheckins());
+            }
+            catch (Exception ex)
+            {
+                interactionRequestService.ShowError(Properties.Resources.Error, StringHelper.GetFullExceptionMessage(ex));
+            }
+            finally
+            {
+                AfterRunWebClient();
+            }
+        }
+
+        private void FillFullFirstCheckins()
+        {
+            webApiClient.FillFirstCheckins(untappdService.Untappd.CheckinsContainer, webClientCancellation);
+            List<Checkin> checkins = webClientCancellation.Items;
+             if (checkins.Count == 0)
+                return;
+
+            string message = interactionRequestService.GetCurrentMessageOnLoading();
+            webApiClient.FillServingType(checkins, DefaultValues.DefaultServingType, webClientCancellation);
+
+            List<Beer> beers = untappdService.Untappd.CheckinsContainer.GetBeers(checkins);
+            long offset = 0;
+            webApiClient.UpdateBeers(beers, null, ref offset, webClientCancellation);
+
+            webApiClient.FillCollaboration(beers, untappdService.GetFullBreweries(), webClientCancellation);
+
+            DownloadMediaFiles(checkins);
+            interactionRequestService.ShowMessageOnLoading(message);
+        }
+
+        private void DownloadMediaFiles(List<Checkin> checkins)
+        {
+            int count = checkins.Count;
+            int counter = 1;
+            foreach (Checkin checkin in checkins)
+            {
+                interactionRequestService.ShowMessageOnLoading(CommunicationHelper.GetLoadingMessage(counter++, count, checkin.Beer.Name));
+                untappdService.DownloadMediaFiles(webDownloader, checkin);
+            }
         }
 
         private void ToEndDownloadCheckins()
@@ -326,6 +382,7 @@ namespace UntappdViewer.ViewModels
         private void AfterRunWebClient()
         {
             webClientCancellation.Cancel = false;
+            webClientCancellation.Items.Clear();
             eventAggregator.GetEvent<LoadingCancel>().Unsubscribe(LoadingCanceled);
 
             untappdService.SortDataDescCheckins();

@@ -573,7 +573,7 @@ namespace UntappdViewer.ViewModels
             BreweryVenueCountry = checkin.Beer.Brewery.Venue.Country;
             BreweryVenueState = checkin.Beer.Brewery.Venue.State;
             BreweryVenueCity = checkin.Beer.Brewery.Venue.City;
-            UpdateBreweryLabel(checkin.Beer.Brewery);
+            UpdateBreweriesLabel(checkin.Beer.GetFullBreweries());
         }
 
         private void Clear()
@@ -654,6 +654,12 @@ namespace UntappdViewer.ViewModels
             }
 
             BeerLabel = ImageConverter.GetBitmapSource(labelPath);
+        }
+
+        private void UpdateBreweriesLabel(List<Brewery> breweries)
+        {
+            foreach (Brewery brewery in breweries)
+                UpdateBreweryLabel(brewery);
         }
 
         private void UpdateBreweryLabel(Brewery brewery)
