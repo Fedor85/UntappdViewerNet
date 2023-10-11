@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 using UntappdViewer.UI.Helpers;
 
 namespace UntappdViewer.Views
@@ -19,20 +21,21 @@ namespace UntappdViewer.Views
             TokenTextBox.TextChanged += TextChanged;
             Loaded += WebDownloadProjectLoaded;
             Unloaded += WebDownloadProjectUnloaded;
-            TableCheckins.Items.CurrentChanged += TableCheckinsItemsCurrentChanged;
+
+            TableCheckins.Items.CurrentChanged += TableCheckinsItemsCurrentChanged;          
         }
 
         private void WebDownloadProjectLoaded(object sender, RoutedEventArgs e)
         {
             if (!String.IsNullOrEmpty(TokenTextBox.Text))
                 AccessTokenButton.IsEnabled = true;
-        }
 
-        private void TableCheckinsItemsCurrentChanged(object sender, System.EventArgs e)
-        {
-            TableCaption.Content = $"{Properties.Resources.Checkins} ({TableCheckins.Items.Count}):";
-            if (isAccessToken.HasValue && isAccessToken.Value)
-                SetEnabledDownloadButtons();
+            Window window = UIHelper.GetWindow(this);
+            if (window != null)
+            {
+                window.KeyDown += WindowKeyStatesChanged;
+                window.KeyUp += WindowKeyStatesChanged;
+            } 
         }
 
         private void WebDownloadProjectUnloaded(object sender, RoutedEventArgs e)
@@ -42,6 +45,25 @@ namespace UntappdViewer.Views
             FirstDownloadCheckinsButton.IsEnabled = false;
             ToEndDownloadCheckinsButton.IsEnabled = false;
             UpdateBeersPanelEnabled(false);
+
+            Window window = UIHelper.GetWindow(this);
+            if (window != null)
+            {
+                window.KeyDown -= WindowKeyStatesChanged;
+                window.KeyUp -= WindowKeyStatesChanged;
+            }
+        }
+
+        private void TableCheckinsItemsCurrentChanged(object sender, EventArgs e)
+        {
+            TableCaption.Content = $"{Properties.Resources.Checkins} ({TableCheckins.Items.Count}):";
+            if (isAccessToken.HasValue && isAccessToken.Value)
+                SetEnabledDownloadButtons();
+        }
+
+        private void WindowKeyStatesChanged(object sender, KeyEventArgs e)
+        {
+            MarkFillFullFirstCheckins.Background = Keyboard.IsKeyDown(Key.LeftCtrl) ? Brushes.GreenYellow : Brushes.OrangeRed;
         }
 
         public void SetAccessToken(bool? isAccessToken)

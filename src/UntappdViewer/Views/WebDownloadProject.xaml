@@ -45,21 +45,28 @@
                 <Button Name="FulllDownloadCheckinsButton" Content="{x:Static properties:Resources.Full}" IsEnabled="False"
                         Command="{Binding FullDownloadButtonCommand}" Width="60" Height="20" IsDefault="True"/>
                 <Separator Width="10" Visibility="Hidden"/>
-                <Button Name="FirstDownloadCheckinsButton" Content="{x:Static properties:Resources.First}" IsEnabled="False"
-                        Command="{Binding FirstDownloadButtonCommand}" Width="60" Height="20" IsDefault="True"/>
+                <Grid Width="90">
+                    <ItemsControl Background="#000000" Opacity="0.1"/>
+                    <DockPanel HorizontalAlignment="Center">
+                        <Border Name="MarkFillFullFirstCheckins" BorderThickness="1" BorderBrush="Black" Background="#FFFF4500" CornerRadius="10" MinWidth="10" Height="10"/>
+                        <Separator Width="6" Visibility="Hidden"/>
+                        <Button Name="FirstDownloadCheckinsButton" Content="{x:Static properties:Resources.First}" IsEnabled="False"
+                                Command="{Binding FirstDownloadButtonCommand}" Width="60" Height="20" IsDefault="True"/>
+                    </DockPanel>
+                </Grid>
                 <Separator Width="10" Visibility="Hidden"/>
                 <Button Name="ToEndDownloadCheckinsButton" Content="{x:Static properties:Resources.ToEnd}" IsEnabled="False"
                         Command="{Binding ToEndDownloadButtonCommand}" Width="60" Height="20" IsDefault="True"/>
-                <Separator Width="15" Visibility="Hidden"/>
+                <Separator Width="10" Visibility="Hidden"/>
                 <Grid>
                     <ItemsControl Background="#000000" Opacity="0.1"/>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                    <DockPanel>
                         <Button Name="UpdateBeersButton" Content="{x:Static properties:Resources.BeerUpdate}" IsEnabled="False" Margin="5,0,0,0"
                                 Command="{Binding BeerUpdateButtonCommand}" Width="100" Height="20" IsDefault="True"/>
                         <Separator Width="10" Visibility="Hidden"/>
                         <controls:SmartTextBox x:Name="OffsetUpdateBeersTextBox" HintText="{x:Static properties:Resources.Offset}" IsEnabled="False" Height="20" Width="55" Margin="0,0,5,0"
                                                TextBinding="{Binding OffsetUpdateBeer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Mask="\d+" MaxLength="5"/>
-                    </StackPanel>
+                    </DockPanel>
                 </Grid>
             </DockPanel>
             <DockPanel Grid.Row="3" HorizontalAlignment="Center">
