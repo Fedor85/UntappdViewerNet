@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace UntappdViewer.Views
@@ -22,14 +23,13 @@ namespace UntappdViewer.Views
             Unloaded += LoadingUnloaded;
         }
 
-        private void LoadingLoaded(object sender, System.Windows.RoutedEventArgs e)
+        private void LoadingLoaded(object sender, RoutedEventArgs e)
         {
             isRunStatusBar = true;
             RunStatusBarAsunc();
-            RunStatusTimeBarAsunc();
         }
 
-        private void LoadingUnloaded(object sender, System.Windows.RoutedEventArgs e)
+        private void LoadingUnloaded(object sender, RoutedEventArgs e)
         {
             isRunStatusBar = false;
         }
@@ -41,47 +41,29 @@ namespace UntappdViewer.Views
 
         private void RunStatusBar()
         {
-            Thread.Sleep(runPause);
-            while (isRunStatusBar)
-            {
-                string message = String.Empty;
-                for (int i = 1; i <= 14; i++)
-                {
-                    if (!isRunStatusBar)
-                        break;
-
-                    Thread.Sleep(150);
-                    SetStatusBar(String.Empty);
-                    SetStatusBar(message += ".");
-                }
-                SetStatusBar(String.Empty);
-            }
-        }
-
-        private async void RunStatusTimeBarAsunc()
-        {
-            await Task.Run(() => RunStatusTimeBar());
-        }
-
-        private void RunStatusTimeBar()
-        {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
             Thread.Sleep(runPause);
- 
+            bool isVisibleImageAwesome = false;
             while (isRunStatusBar)
             {
                 TimeSpan timeSpan = stopWatch.Elapsed;
                 Thread.Sleep(1000);
+                if (!isVisibleImageAwesome)
+                {
+                    SetImageAwesome(Visibility.Visible);
+                    isVisibleImageAwesome = true;
+                }
                 SetStatusTimeBar($"{timeSpan.Minutes:D2}:{timeSpan.Seconds:D2}");
             }
             stopWatch.Stop();
             SetStatusTimeBar(String.Empty);
+            SetImageAwesome(Visibility.Hidden);
         }
 
-        private void SetStatusBar(object content)
+        private void SetImageAwesome(Visibility visibility)
         {
-            Dispatcher.Invoke(() => StatusBar.Content = content);
+            Dispatcher.Invoke(() => ImageAwesome.Visibility = visibility);
         }
 
         private void SetStatusTimeBar(object content)

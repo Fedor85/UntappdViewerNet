@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:properties="clr-namespace:UntappdViewer.Properties"
              xmlns:mvvm="http://prismlibrary.com/"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -16,8 +17,10 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                <Label Content="{x:Static properties:Resources.Loading}" HorizontalAlignment="Center" FontSize="25" Foreground="#ffffff"/>
-                <Label x:Name="StatusBar" FontSize="25" FontWeight="Bold" Height="40" Margin="0,-25,0,0" Foreground="#ffffff"/>
+                <Grid>
+                    <Label Content="{x:Static properties:Resources.Loading}" HorizontalAlignment="Center" VerticalAlignment ="Center" FontSize="16" FontWeight="Bold"  Foreground="#ffffff"/>
+                    <fa:ImageAwesome Name="ImageAwesome" Grid.Row="0" Icon="CircleOutlineNotch" Spin="True" SpinDuration="2" Height="100" Width="100" Foreground="#ffffff" Visibility="Hidden"/>
+                </Grid>
                 <Label x:Name="StatusTimeBar" HorizontalAlignment="Center" FontSize="15" Height="30" Foreground="#ffffff"/>
             </StackPanel>
             <Grid Grid.Row="1">
