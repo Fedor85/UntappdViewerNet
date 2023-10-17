@@ -59,7 +59,7 @@ namespace UntappdViewer.UI.Controls
             {
                 MainView.DataContext = null;
                 OthersView.DataContext = null;
-                Expander.Visibility = Visibility.Hidden;
+                Expander.Visibility = Visibility.Collapsed;
                 return;
             }
             ArrayList arrayList = new ArrayList(iCollection);
@@ -72,7 +72,7 @@ namespace UntappdViewer.UI.Controls
             else
             {
                 OthersView.DataContext = null;
-                Expander.Visibility = Visibility.Hidden;
+                Expander.Visibility = Visibility.Collapsed;
             }
         }
 
