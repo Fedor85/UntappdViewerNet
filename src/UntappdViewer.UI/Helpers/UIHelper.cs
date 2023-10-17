@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace UntappdViewer.UI.Helpers
 {
@@ -7,15 +8,18 @@ namespace UntappdViewer.UI.Helpers
     {
         public static Window GetWindow(UserControl control)
         {
-            if (control == null)
+            return FindParent<Window>(control);
+        }
+
+        public static T FindParent<T>(DependencyObject child) where T : DependencyObject
+        {
+            DependencyObject parentObject = VisualTreeHelper.GetParent(child);
+
+            if (parentObject == null)
                 return null;
 
-            Window window = Window.GetWindow(control);
-            if (window != null)
-                return window;
-
-            UserControl parentControl = control.Parent as UserControl;
-            return GetWindow(parentControl);
+            T parent = parentObject as T;
+            return parent != null ? parent : FindParent<T>(parentObject);
         }
     }
 }

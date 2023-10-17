@@ -60,14 +60,17 @@
     <Compile Include="Controls\GeoMap\GradientScale.xaml.cs">
       <DependentUpon>GradientScale.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ListViewExpander.xaml.cs">
+      <DependentUpon>ListViewExpander.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ZoomEventArgs.cs" />
     <Compile Include="Controls\LoopAutoScrollImageListBox.xaml.cs">
       <DependentUpon>LoopAutoScrollImageListBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\RecyclerView\DataTemplate\ImageDataTemplate.xaml.cs">
+    <Compile Include="Controls\RecyclerView\DataTemplates\ImageDataTemplate.xaml.cs">
       <DependentUpon>ImageDataTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\RecyclerView\DataTemplate\RatingDataTemplate.xaml.cs">
+    <Compile Include="Controls\RecyclerView\DataTemplates\RatingDataTemplate.xaml.cs">
       <DependentUpon>RatingDataTemplate.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\RecyclerView\RecyclerView.xaml.cs">
@@ -93,7 +96,9 @@
     <Compile Include="Controls\ViewModel\TreeItemViewModel.cs" />
     <Compile Include="Controls\ZoomBorder.cs" />
     <Compile Include="Helpers\ImageConverter.cs" />
+    <Compile Include="Helpers\IndexToVisibilityConverter.cs" />
     <Compile Include="Helpers\PathImageReSizeWidthConverter.cs" />
+    <Compile Include="Helpers\PropertyMetadataParameter.cs" />
     <Compile Include="Helpers\UIHelper.cs" />
     <Compile Include="Helpers\ZoomHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -116,15 +121,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\ListViewExpander.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\LoopAutoScrollImageListBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\RecyclerView\DataTemplate\ImageDataTemplate.xaml">
+    <Page Include="Controls\RecyclerView\DataTemplates\ImageDataTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\RecyclerView\DataTemplate\RatingDataTemplate.xaml">
+    <Page Include="Controls\RecyclerView\DataTemplates\RatingDataTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -151,7 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>

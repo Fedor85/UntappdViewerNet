@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="UntappdViewer.UI.Controls.ListViewExpander"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:helpers="clr-namespace:UntappdViewer.UI.Helpers"
+             xmlns:properties="clr-namespace:UntappdViewer.UI.Properties"
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="500" DataContextChanged="OnDataContextChanged">
+    <UserControl.Resources>
+        <Style x:Key="ListViewItemStyle" TargetType="ContentControl">
+            <Setter Property="Focusable" Value="false"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ContentControl">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalAlignment}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <DataTemplate x:Key="ContentTemplate"/>
+        <DataTemplate x:Key="SeparatorTemplate"/>
+        <helpers:IndexToVisibilityConverter x:Key="ITVConverter"/>
+    </UserControl.Resources>
+    <ScrollViewer x:Name="ScrollViewer" Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Border}},Path=ActualHeight}" 
+                  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" PreviewMouseWheel="OnPreviewMouseWheel">
+        <StackPanel>
+            <ContentControl x:Name="MainView" Content="{Binding}" Background="Transparent"/>
+            <Expander  x:Name="Expander" Header="{x:Static properties:Resources.Others}" Visibility="Hidden" VerticalContentAlignment="Stretch">
+                <ListView  x:Name="OthersView" Background="Transparent" BorderThickness="0" ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                           ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <ContentControl Content="{Binding}" ContentTemplate="{DynamicResource ContentTemplate}"/>
+                                <ContentControl Content="{Binding}" ContentTemplate="{DynamicResource SeparatorTemplate}"
+                                                Visibility ="{Binding Path=., Converter={StaticResource ITVConverter}, ConverterParameter={x:Reference OthersView}}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Expander>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

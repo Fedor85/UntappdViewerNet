@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace UntappdViewer.UI.Controls.DataTemplate
+namespace UntappdViewer.UI.Controls.DataTemplates
 {
     /// <summary>
     /// Interaction logic for ImageDataTemplate.xaml
