@@ -24,6 +24,8 @@ namespace UntappdViewer
 
         public const string DefaultServingType = "NoName";
 
+        public const string NoIBU = "No IBU";
+
         public const int ChartRatingScoreYInterval = 250;
 
         public const int MinCheckinRatingByLikeBeer = 4;

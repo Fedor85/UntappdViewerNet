@@ -56,25 +56,6 @@ namespace UntappdViewer.ViewModels
 
         private bool visibilityLikeBeer;
 
-        private string beerUrl;
-
-        private string beerName;
-
-        private string beerType;
-
-        private string beerABV;
-
-        private string beerIBU;
-
-        private double beerRating;
-
-        private string beerDescription;
-
-        private bool visibilityBeerDescription;
-
-        private BitmapSource beerLabel;
-
-        private bool visibilityBeerLabel;
       
         private IList badges;
 
@@ -243,100 +224,21 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        #region Beer
+        private BeerViewModel beerViewModel;
 
-        public string BeerUrl
+        public BeerViewModel BeerViewModel
         {
-            get { return beerUrl; }
-            set
-            {
-                SetProperty(ref beerUrl, value);
-            }
+            get { return beerViewModel; }
+            set { SetProperty(ref beerViewModel, value); }
         }
 
-        public string BeerName
-        {
-            get { return beerName; }
-            set
-            {
-                SetProperty(ref beerName, value);
-            }
-        }
+        private IEnumerable<BreweryViewModel> breweryViewModels;
 
-        public string BeerType
+        public IEnumerable<BreweryViewModel> BreweryViewModels
         {
-            get { return beerType; }
-            set
-            {
-                SetProperty(ref beerType, value);
-            }
+            get { return breweryViewModels; }
+            set { SetProperty(ref breweryViewModels, value); }
         }
-
-        public string BeerABV
-        {
-            get { return beerABV; }
-            set
-            {
-                SetProperty(ref beerABV, value);
-            }
-        }
-
-        public string BeerIBU
-        {
-            get { return beerIBU; }
-            set
-            {
-                SetProperty(ref beerIBU, value);
-            }
-        }
-
-        public double BeerRating
-        {
-            get { return beerRating; }
-            set
-            {
-                SetProperty(ref beerRating, value);
-            }
-        }
-
-        public string BeerDescription
-        {
-            get { return beerDescription; }
-            set
-            {
-                SetProperty(ref beerDescription, value);
-                VisibilityBeerDescription = !String.IsNullOrEmpty(value);
-            }
-        }
-        
-        public bool VisibilityBeerDescription
-        {
-            get { return visibilityBeerDescription; }
-            set
-            {
-                SetProperty(ref visibilityBeerDescription, value);
-            }
-        }
-        public BitmapSource BeerLabel
-        {
-            get { return beerLabel; }
-            set
-            {
-                SetProperty(ref beerLabel, value);
-                VisibilityBeerLabel = value != null;
-            }
-        }
-
-        public bool VisibilityBeerLabel
-        {
-            get { return visibilityBeerLabel; }
-            set
-            {
-                SetProperty(ref visibilityBeerLabel, value);
-            }
-        }
-
-        #endregion
 
         public ICommand CheckinVenueLocationCommand { get; }
 
@@ -353,7 +255,6 @@ namespace UntappdViewer.ViewModels
             loadingRegionName = RegionNames.PhotoLoadingRegion;
 
             CheckinUrl = DefaultValues.DefaultUrl;
-            BeerUrl = DefaultValues.DefaultUrl;
             Badges = new List<ImageItemViewModel>();
 
             CheckinVenueLocationCommand  = new DelegateCommand(CheckinVenueLocation);
@@ -412,15 +313,7 @@ namespace UntappdViewer.ViewModels
             UpdateCheckinPhoto(checkin);
             UpdateBadges(checkin.Badges);
 
-            BeerUrl = checkin.Beer.Url;
-            BeerName = checkin.Beer.Name;
-            BeerType = checkin.Beer.Type;
-            BeerABV = checkin.Beer.ABV.ToString();
-            BeerIBU = GetBeerIBU(checkin.Beer.IBU);
-            BeerRating = Math.Round(checkin.Beer.GlobalRatingScore, 2);
-            BeerDescription = GetBeerDescription(checkin.Beer.Description);
-            UpdateBeerLabel(checkin.Beer);
-
+            BeerViewModel = GetBeerViewModel(checkin.Beer);
             BreweryViewModels = GetBreweryViewModels(checkin.Beer.GetFullBreweries());
         }
 
@@ -440,21 +333,23 @@ namespace UntappdViewer.ViewModels
             Badges = new List<ImageItemViewModel>();
             VisibilityLikeBeer = false;
 
-            BeerUrl = DefaultValues.DefaultUrl;
-            BeerName = String.Empty;
-            BeerType = String.Empty;
-            BeerABV = String.Empty;
-            BeerIBU = String.Empty;
-            BeerRating = 0;
-            BeerDescription = null;
-            BeerLabel = null;
-
+            BeerViewModel = null;
             BreweryViewModels = null;
+        }
+
+        private BeerViewModel GetBeerViewModel(Beer beer)
+        {
+            string labelPath = untappdService.GetBeerLabelFilePath(beer);
+            BitmapSource label = null;
+            if (!String.IsNullOrEmpty(beer.LabelUrl) && !Path.GetFileNameWithoutExtension(labelPath).Equals(DefaultValues.DefaultBeerLabelName))
+                label = ImageConverter.GetBitmapSource(labelPath);
+
+            return Mapper.GetBeerViewModel(beer, label);
         }
 
         private IEnumerable<BreweryViewModel> GetBreweryViewModels(List<Brewery> breweries)
         {
-            List< BreweryViewModel> breweryViewModelses = new List<BreweryViewModel>();
+            List< BreweryViewModel> breweryViewModels = new List<BreweryViewModel>();
             foreach (Brewery brewery in breweries)
             {
                 string labelPath = untappdService.GetBreweryLabelFilePath(brewery);
@@ -462,52 +357,16 @@ namespace UntappdViewer.ViewModels
                 if (!String.IsNullOrEmpty(labelPath) && !Path.GetFileNameWithoutExtension(labelPath).Equals(DefaultValues.DefaultBreweryLabelName))
                     label = ImageConverter.GetBitmapSource(labelPath);
 
-                BreweryViewModel breweryViewModels = Mapper.GetBreweryViewModels(brewery, label);
-                breweryViewModelses.Add(breweryViewModels);
+                BreweryViewModel breweryViewModel = Mapper.GetBreweryViewModels(brewery, label);
+                breweryViewModels.Add(breweryViewModel);
             }
-            return breweryViewModelses;
+            return breweryViewModels;
         }
 
-        private IEnumerable<BreweryViewModel> breweryViewModels;
-
-        public IEnumerable<BreweryViewModel> BreweryViewModels
-        {
-            get { return breweryViewModels; }
-            set { SetProperty(ref breweryViewModels, value); }
-        }
 
         private string GetCheckinHeader(DateTime? checkinCreatedDate)
         {
             return $"{Properties.Resources.Checkin}: {checkinCreatedDate}";
-        }
-
-        private string GetBeerIBU(double? beerIBU)
-        {
-            return beerIBU.HasValue ? beerIBU.Value.ToString() : "No IBU";
-        }
-
-        /// <summary>
-        /// Если ToolTip String.Empty то отображается пустой
-        /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        private string GetBeerDescription(string text)
-        {
-            if (String.IsNullOrEmpty(text))
-                return null;
-
-            string description = StringHelper.GetRemoveEmptyLines(text);
-            return StringHelper.GetSplitByLength(description, 50);
-        }
-
-        private void UpdateBeerLabel(Beer beer)
-        {
-            string labelPath = untappdService.GetBeerLabelFilePath(beer);
-
-            if (String.IsNullOrEmpty(beer.LabelUrl) || Path.GetFileNameWithoutExtension(labelPath).Equals(DefaultValues.DefaultBeerLabelName))
-                return;
-
-            BeerLabel = ImageConverter.GetBitmapSource(labelPath);
         }
 
         private void UpdateCheckinPhoto(Checkin checkin)
