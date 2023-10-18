@@ -18,6 +18,8 @@ namespace UntappdViewer.UI.Controls
 
         private static readonly DependencyProperty SeparatorTemplateProperty = DependencyProperty.Register("SeparatorTemplate", typeof(DataTemplate), typeof(ListViewExpander), new PropertyMetadataParameter<string>(UpdateResources, "SeparatorTemplate"));
 
+        private static readonly DependencyProperty OthersItemCountProperty = DependencyProperty.Register("OthersItemCount", typeof(int), typeof(ListViewExpander));
+
         public string ExpanderHeader
         {
             get { return (string)GetValue(ExpanderHeaderProperty); }
@@ -45,6 +47,12 @@ namespace UntappdViewer.UI.Controls
             }
         }
 
+        public int OthersItemCount
+        {
+            get { return (int)GetValue(OthersItemCountProperty); }
+            private set { SetValue(OthersItemCountProperty, value); }
+        }
+
         public ListViewExpander()
         {
             InitializeComponent();
@@ -58,22 +66,31 @@ namespace UntappdViewer.UI.Controls
             if (iCollection == null || iCollection.Count == 0)
             {
                 MainView.DataContext = null;
-                OthersView.DataContext = null;
-                Expander.Visibility = Visibility.Collapsed;
+                ClearOtherItems();
                 return;
             }
+
             ArrayList arrayList = new ArrayList(iCollection);
+            int count = arrayList.Count;
             MainView.DataContext = arrayList[0];
-            if (arrayList.Count > 1)
+            if (count > 1)
             {
-                OthersView.ItemsSource = arrayList.GetRange(1, arrayList.Count - 1);
+                int otherCount = count - 1;
+                OthersView.ItemsSource = arrayList.GetRange(1, otherCount);
+                OthersItemCount = otherCount;
                 Expander.Visibility = Visibility.Visible;
             }
             else
             {
-                OthersView.DataContext = null;
-                Expander.Visibility = Visibility.Collapsed;
+                ClearOtherItems();
             }
+        }
+
+        private void ClearOtherItems()
+        {
+            OthersView.DataContext = null;
+            OthersItemCount = 0;
+            Expander.Visibility = Visibility.Collapsed;
         }
 
         private void OnPreviewMouseWheel(object sender, MouseWheelEventArgs e)
