@@ -30,7 +30,7 @@ namespace UntappdViewer.UI.Controls
             set { SetValue(ItemDataTemplateProperty, value); }
         }
 
-        public DataTemplate SeparatorTemplatepTemplate
+        public DataTemplate SeparatorTemplate
         {
             get { return (DataTemplate)GetValue(SeparatorTemplateProperty); }
             set { SetValue(SeparatorTemplateProperty, value); }

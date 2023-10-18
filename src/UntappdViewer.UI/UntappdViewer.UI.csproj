@@ -63,6 +63,9 @@
     <Compile Include="Controls\ListViewExpander.xaml.cs">
       <DependentUpon>ListViewExpander.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SeparatorControl.xaml.cs">
+      <DependentUpon>SeparatorControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TextBlockJoin.cs" />
     <Compile Include="Controls\ZoomEventArgs.cs" />
     <Compile Include="Controls\LoopAutoScrollImageListBox.xaml.cs">
@@ -141,6 +144,10 @@
     <Page Include="Controls\RecyclerView\RecyclerView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\SeparatorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\SliderImagesControl.xaml">
       <Generator>MSBuild:Compile</Generator>
