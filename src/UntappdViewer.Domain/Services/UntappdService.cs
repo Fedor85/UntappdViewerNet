@@ -147,55 +147,36 @@ namespace UntappdViewer.Domain.Services
 
         public string GetCheckinPhotoFilePath(Checkin checkin)
         {
-            string urlPhoto = StringHelper.GetNormalizedJPGPath(checkin.UrlPhoto);
-            if (String.IsNullOrEmpty(urlPhoto))
-                return String.Empty;
-
-            if (IsUNTPProject())
-                return Path.Combine(GetFileDataDirectory(), DefaultValues.CheckinPhotos, Path.GetFileName(urlPhoto));
-
-            return FileHelper.GetTempFilePathByPath(urlPhoto, DefaultValues.CheckinPhotos);
+            return GetImageFilePath(checkin.UrlPhoto, DefaultValues.CheckinPhotos);
         }
 
         public string GetBeerLabelFilePath(Beer beer)
         {
-            string labelUrl = StringHelper.GetNormalizedJPGPath(beer.LabelUrl);
-            if (String.IsNullOrEmpty(labelUrl))
-                return String.Empty;
-
-            if (IsUNTPProject())
-                return Path.Combine(GetFileDataDirectory(), DefaultValues.BeerLabels, Path.GetFileName(labelUrl));
-
-            return FileHelper.GetTempFilePathByPath(labelUrl, DefaultValues.BeerLabels);
+            return GetImageFilePath(beer.LabelUrl, DefaultValues.BeerLabels);
         }
 
         public string GetBreweryLabelFilePath(Brewery brewery)
         {
-            string labelUrl = StringHelper.GetNormalizedJPGPath(brewery.LabelUrl);
-            if (String.IsNullOrEmpty(labelUrl))
-                return String.Empty;
-
-            if (IsUNTPProject())
-                return Path.Combine(GetFileDataDirectory(), DefaultValues.BreweryLabels, Path.GetFileName(labelUrl));
-
-            return FileHelper.GetTempFilePathByPath(labelUrl, DefaultValues.BreweryLabels);
+            return GetImageFilePath(brewery.LabelUrl, DefaultValues.BreweryLabels);
         }
 
         public string GetBadgeImageFilePath(Badge badge)
         {
-            string imageUrl = StringHelper.GetNormalizedJPGPath(badge.ImageUrl);
+            return GetImageFilePath(badge.ImageUrl, DefaultValues.BadgeImages);
+        }
+
+        private string GetImageFilePath(string url, string prefix)
+        {
+            string imageUrl = StringHelper.GetNormalizedJPGPath(url);
             if (String.IsNullOrEmpty(imageUrl))
                 return String.Empty;
 
-            if (IsUNTPProject())
-                return Path.Combine(GetBadgeImageDirectory(), Path.GetFileName(imageUrl));
-
-            return FileHelper.GetTempFilePathByPath(imageUrl, DefaultValues.BadgeImages);
+            return IsUNTPProject() ? Path.Combine(GetFileDataDirectory(), prefix, Path.GetFileName(imageUrl)) : FileHelper.GetTempFilePathByPath(imageUrl, prefix);
         }
 
         public string GetBadgeImageDirectory()
         {
-            return Path.Combine(GetFileDataDirectory(), DefaultValues.BadgeImages);
+            return Path.Combine(IsUNTPProject() ? GetFileDataDirectory() : FileHelper.TempDirectory, DefaultValues.BadgeImages);
         }
 
         public string GetReportsDirectory()

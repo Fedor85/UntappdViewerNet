@@ -9,7 +9,7 @@ namespace UntappdViewer.Infrastructure
 {
     public static class FileHelper
     {
-        private static readonly string TempDirectory = Path.Combine(Path.GetTempPath(), $"uv_{Guid.NewGuid()}");
+        public static readonly string TempDirectory = Path.Combine(Path.GetTempPath(), $"uv_{Guid.NewGuid()}");
 
         public const int ExifImageDateTimeOriginal = 36867;
 
