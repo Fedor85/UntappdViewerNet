@@ -11,14 +11,18 @@ namespace UntappdViewer.UI.Controls.StarRating
     /// </summary>
     public partial class StarRatingControl : UserControl
     {
-        public static readonly DependencyProperty DependencyProperty = DependencyProperty.Register("Rating", typeof(double), typeof(StarRatingControl), new FrameworkPropertyMetadata(null, UpdateRating));
+        public static readonly DependencyProperty DependencyProperty = DependencyProperty.Register("Rating", typeof(double), typeof(StarRatingControl), new PropertyMetadata(UpdateRating));
 
-        private static object UpdateRating(DependencyObject dependencyObject, object rating)
+        private static void UpdateRating(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (rating != null)
-                ((StarRatingControl)dependencyObject).Rating = Convert.ToDouble(rating);
+            StarRatingControl listControl = d as StarRatingControl;
+            listControl.UpdateRating(e.NewValue == null ? 0 : Convert.ToDouble(e.NewValue));
+        }
 
-            return rating;
+        public double Rating
+        {
+            get { return (double)GetValue(DependencyProperty); }
+            set { SetValue(DependencyProperty, value); }
         }
 
         public Color ViewStarsColor
@@ -118,11 +122,6 @@ namespace UntappdViewer.UI.Controls.StarRating
                         StarratingPanel.Children.Add(new Label { Content = " " });
                 }
             }
-        }
-
-        public double Rating
-        {
-            set { UpdateRating(value); }
         }
 
         public StarRatingControl()
