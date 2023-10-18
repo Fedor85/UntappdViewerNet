@@ -558,4 +558,12 @@
     <value>Fill Collaboration</value>
     <comment>en-en</comment>
   </data>
+  <data name="CollaborationWith" xml:space="preserve">
+    <value>Collaboration with</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="PCS" xml:space="preserve">
+    <value>pcs.</value>
+    <comment>en-en</comment>
+  </data>
 </root>

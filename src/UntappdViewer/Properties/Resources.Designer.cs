@@ -336,6 +336,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Collaboration with.
+        /// </summary>
+        public static string CollaborationWith {
+            get {
+                return ResourceManager.GetString("CollaborationWith", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Count.
         /// </summary>
         public static string Count {
@@ -798,6 +807,15 @@ namespace UntappdViewer.Properties {
             get {
                 object obj = ResourceManager.GetObject("pbu_320_white", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to pcs..
+        /// </summary>
+        public static string PCS {
+            get {
+                return ResourceManager.GetString("PCS", resourceCulture);
             }
         }
         

@@ -9,9 +9,20 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:starRating="clr-namespace:UntappdViewer.UI.Controls.StarRating;assembly=UntappdViewer.UI"
              xmlns:controls="clr-namespace:UntappdViewer.UI.Controls;assembly=UntappdViewer.UI"
+             xmlns:viewControls="clr-namespace:UntappdViewer.Views.Controls"
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="450" d:DesignWidth="450">
+    <UserControl.Resources>
+        <DataTemplate x:Key="BreweryControl">
+            <viewControls:BreweryControl/>
+        </DataTemplate>
+        <DataTemplate x:Key="SeparatorControl">
+            <StackPanel>
+                <Rectangle Height="3" Fill="#ffffff" Margin="0, 2, 0, 2" Opacity="0.8"/>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
     <UserControl.Background>
         <SolidColorBrush Opacity="0.3" Color="#ffffff"/>
     </UserControl.Background>
@@ -82,31 +93,16 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0">
                         <GroupBox Header="{x:Static properties:Resources.Brewery}">
-                            <DockPanel>
-                                <Image Width="50" Source="{Binding BreweryLabel, TargetNullValue={x:Null}}" Margin="0, 0, 10, 0"
-                               Visibility="{Binding Path =VisibilityBreweryLabel, Converter={StaticResource BooleanConverter}}"/>
-                                <StackPanel>
-                                    <TextBlock >
-                                <Hyperlink NavigateUri="{Binding BreweryUrl}" RequestNavigate="HyperlinkOnRequestNavigate">
-                                    <TextBlock Text="{x:Static properties:Resources.UntappdPage}"/>
-                                </Hyperlink>
-                            </TextBlock>
-                                    <TextBlock TextWrapping="Wrap" Text="{Binding BreweryName}" FontWeight="Bold"/>
-                                    <DockPanel>
-                                        <Image Source="{Binding BreweryVenueCountryFlag, Converter={StaticResource FlagConverter}}"
-                                               Stretch="None"/>
-                                        <TextBlock TextWrapping="Wrap" VerticalAlignment="Center">
-                                            <Run Text="{Binding BreweryVenueName}"/>
-                                            <Run Text="{Binding BreweryVenueCountrySeparator}" FontWeight="Bold" />
-                                            <Run Text="{Binding BreweryVenueCountry}"/>
-                                            <Run Text="{Binding BreweryVenueStateSeparator}" FontWeight="Bold"/>
-                                            <Run Text="{Binding BreweryVenueState}"/>
-                                            <Run Text="{Binding BreweryVenueCitySeparator}" FontWeight="Bold" />
-                                            <Run Text="{Binding BreweryVenueCity}"/>
-                                        </TextBlock>
-                                    </DockPanel>
-                                </StackPanel>
-                            </DockPanel>
+                            <controls:ListViewExpander DataContext="{Binding BreweryViewModels}" ItemDataTemplate="{StaticResource BreweryControl}"
+                                                       SeparatorTemplate="{StaticResource SeparatorControl}" ScrollViewerDisable="True">
+                                <controls:ListViewExpander.ExpanderHeader>
+                                    <MultiBinding StringFormat="{}{0} ({1} {2}):">
+                                        <Binding Source="{x:Static properties:Resources.CollaborationWith}"/>
+                                        <Binding RelativeSource="{RelativeSource Mode=Self}" Path="OthersItemCount"/>
+                                        <Binding Source="{x:Static properties:Resources.PCS}"/>
+                                    </MultiBinding>
+                                </controls:ListViewExpander.ExpanderHeader>
+                            </controls:ListViewExpander>
                         </GroupBox>
                         <DockPanel>
                             <DockPanel  Visibility="{Binding Path =VisibilityCheckinRating, Converter={StaticResource BooleanConverter}}">

@@ -20,5 +20,12 @@
 
         public const double MaxIBUByCount = 100;
 
+        public const string CheckinPhotos = "CheckinPhotos";
+
+        public const string BadgeImages = "BadgeImages";
+
+        public const string BeerLabels = "BeerLabels";
+
+        public const string BreweryLabels = "BreweryLabels";
     }
 }

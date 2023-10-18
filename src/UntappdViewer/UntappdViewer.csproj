@@ -107,6 +107,7 @@
     <Compile Include="Different\Events\LoadingActivateCancel.cs" />
     <Compile Include="Different\Events\LoadingCancel.cs" />
     <Compile Include="Different\Helpers\GradientHelper.cs" />
+    <Compile Include="Different\Helpers\HyperlinkExtensions.cs" />
     <Compile Include="Different\Helpers\IValueConverters\BoolToVisibilityConverter.cs" />
     <Compile Include="Different\Helpers\ConverterHelper.cs" />
     <Compile Include="Different\DefaultValues.cs" />
@@ -120,9 +121,11 @@
     <Compile Include="Different\Helpers\IValueConverters\PieSeriesBackgroundConverter.cs" />
     <Compile Include="Different\Helpers\IValueConverters\ServingTypeConverter.cs" />
     <Compile Include="Different\Behaviors\ParentScrollingToken.cs" />
+    <Compile Include="Different\Helpers\Mapper.cs" />
     <Compile Include="Different\UntappdEntity.cs" />
     <Compile Include="Modules\EmptyContentModule.cs" />
     <Compile Include="Modules\StatisticsProjectModule.cs" />
+    <Compile Include="Views\Controls\BreweryViewModel.cs" />
     <Compile Include="ViewModels\LoadingViewModel.cs" />
     <Compile Include="ViewModels\StatisticsProjectViewModel.cs" />
     <Compile Include="Modules\Base\BaseLoadingModule.cs" />
@@ -166,6 +169,9 @@
       <DependentUpon>Checkin.xaml</DependentUpon>
     </Compile>
     <Compile Include="Different\Behaviors\Synchronised\SynchronisedScrollToken.cs" />
+    <Compile Include="Views\Controls\BreweryControl.xaml.cs">
+      <DependentUpon>BreweryControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EmptyContent.xaml.cs">
       <DependentUpon>EmptyContent.xaml</DependentUpon>
     </Compile>
@@ -216,6 +222,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Checkin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\BreweryControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -464,6 +474,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\facebook-like-beer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\Controls\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

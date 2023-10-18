@@ -160,11 +160,11 @@ namespace UntappdViewer.Infrastructure
             propertyItem.Len = lenght;
         }
 
-        public static string GetTempFilePathByPath(string path)
+        public static string GetTempFilePathByPath(string path, string prefix = null)
         {
             CreateDirectory(TempDirectory);
             string fileName = Path.GetFileName(path);
-            return Path.Combine(TempDirectory, fileName);
+            return Path.Combine(TempDirectory, prefix ?? String.Empty, fileName);
         }
 
         public static void DeleteTempDirectory()

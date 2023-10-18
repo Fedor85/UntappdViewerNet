@@ -147,27 +147,55 @@ namespace UntappdViewer.Domain.Services
 
         public string GetCheckinPhotoFilePath(Checkin checkin)
         {
-            return Path.Combine(GetFileDataDirectory(), "CheckinPhotos", Path.GetFileName(StringHelper.GetNormalizedJPGPath(checkin.UrlPhoto)));
+            string urlPhoto = StringHelper.GetNormalizedJPGPath(checkin.UrlPhoto);
+            if (String.IsNullOrEmpty(urlPhoto))
+                return String.Empty;
+
+            if (IsUNTPProject())
+                return Path.Combine(GetFileDataDirectory(), DefaultValues.CheckinPhotos, Path.GetFileName(urlPhoto));
+
+            return FileHelper.GetTempFilePathByPath(urlPhoto, DefaultValues.CheckinPhotos);
         }
 
         public string GetBeerLabelFilePath(Beer beer)
         {
-            return Path.Combine(GetFileDataDirectory(), "BeerLabels", Path.GetFileName(StringHelper.GetNormalizedJPGPath(beer.LabelUrl)));
+            string labelUrl = StringHelper.GetNormalizedJPGPath(beer.LabelUrl);
+            if (String.IsNullOrEmpty(labelUrl))
+                return String.Empty;
+
+            if (IsUNTPProject())
+                return Path.Combine(GetFileDataDirectory(), DefaultValues.BeerLabels, Path.GetFileName(labelUrl));
+
+            return FileHelper.GetTempFilePathByPath(labelUrl, DefaultValues.BeerLabels);
         }
 
         public string GetBreweryLabelFilePath(Brewery brewery)
         {
-            return Path.Combine(GetFileDataDirectory(), "BreweryLabels", Path.GetFileName(StringHelper.GetNormalizedJPGPath(brewery.LabelUrl)));
+            string labelUrl = StringHelper.GetNormalizedJPGPath(brewery.LabelUrl);
+            if (String.IsNullOrEmpty(labelUrl))
+                return String.Empty;
+
+            if (IsUNTPProject())
+                return Path.Combine(GetFileDataDirectory(), DefaultValues.BreweryLabels, Path.GetFileName(labelUrl));
+
+            return FileHelper.GetTempFilePathByPath(labelUrl, DefaultValues.BreweryLabels);
         }
 
         public string GetBadgeImageFilePath(Badge badge)
         {
-            return Path.Combine(GetBadgeImageDirectory(), Path.GetFileName(StringHelper.GetNormalizedJPGPath(badge.ImageUrl)));
+            string imageUrl = StringHelper.GetNormalizedJPGPath(badge.ImageUrl);
+            if (String.IsNullOrEmpty(imageUrl))
+                return String.Empty;
+
+            if (IsUNTPProject())
+                return Path.Combine(GetBadgeImageDirectory(), Path.GetFileName(imageUrl));
+
+            return FileHelper.GetTempFilePathByPath(imageUrl, DefaultValues.BadgeImages);
         }
 
         public string GetBadgeImageDirectory()
         {
-            return Path.Combine(GetFileDataDirectory(), "BadgeImages");
+            return Path.Combine(GetFileDataDirectory(), DefaultValues.BadgeImages);
         }
 
         public string GetReportsDirectory()

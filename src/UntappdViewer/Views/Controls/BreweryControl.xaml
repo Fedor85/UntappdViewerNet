@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="UntappdViewer.Views.Controls.BreweryControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:UntappdViewer.Views.Controls"
+             xmlns:properties="clr-namespace:UntappdViewer.Properties"
+             xmlns:helpers="clr-namespace:UntappdViewer.Helpers"
+             xmlns:controls="clr-namespace:UntappdViewer.UI.Controls;assembly=UntappdViewer.UI"
+             xmlns:untappdViewer="clr-namespace:UntappdViewer"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <DockPanel>
+        <Image Width="50" Source="{Binding BreweryLabel, TargetNullValue={x:Null}}" Margin="0, 0, 10, 0"
+               Visibility="{Binding Path =VisibilityBreweryLabel, Converter={StaticResource BooleanConverter}}"/>
+        <StackPanel>
+            <TextBlock  >
+                <Hyperlink NavigateUri="{Binding BreweryUrl}" helpers:HyperlinkExtensions.IsExternal="true">
+                    <TextBlock Text="{x:Static properties:Resources.UntappdPage}"
+                               Visibility="{Binding Path =VisibilityBreweryUrl, Converter={StaticResource BooleanConverter}}"/>
+                </Hyperlink>
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" Text="{Binding BreweryName}" FontWeight="Bold"/>
+            <DockPanel>
+                <Image Source="{Binding BreweryVenueCountryFlag, Converter={StaticResource FlagConverter}}" Stretch="None"/>
+                <controls:TextBlockJoin TextWrapping="Wrap" VerticalAlignment="Center" Separator="{Binding Source={x:Static untappdViewer:DefaultValues.Separator}}"
+                                        DataContext="{Binding BreweryVenue}" Margin="10, 0, 0, 0"/>
+            </DockPanel>
+        </StackPanel>
+    </DockPanel>
+</UserControl>

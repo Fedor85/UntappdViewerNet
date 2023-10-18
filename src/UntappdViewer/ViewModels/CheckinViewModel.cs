@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using Prism.Commands;
@@ -12,21 +10,19 @@ using Prism.Modularity;
 using Prism.Regions;
 using UntappdViewer.Events;
 using UntappdViewer.Helpers;
-using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
 using UntappdViewer.Modules;
 using UntappdViewer.UI.Controls.ViewModel;
 using UntappdViewer.UI.Helpers;
 using UntappdViewer.Utils;
+using UntappdViewer.Views.Controls.ViewModels;
 
 namespace UntappdViewer.ViewModels
 {
     public class CheckinViewModel : LoadingBaseModel
     {
         private IUntappdService untappdService;
-
-        private IInteractionRequestService interactionRequestService;
 
         private IWebDownloader webDownloader;
 
@@ -51,6 +47,8 @@ namespace UntappdViewer.ViewModels
         private string checkinVenueCitySeparator;
 
         private string checkinVenueCity;
+
+        private bool visibilityCheckinVenueLocation;
 
         private string checkinServingType;
 
@@ -77,33 +75,7 @@ namespace UntappdViewer.ViewModels
         private BitmapSource beerLabel;
 
         private bool visibilityBeerLabel;
-
-        private string breweryUrl;
-
-        private string breweryName;
-
-        private string breweryVenueName;
-
-        private string breweryVenueCountrySeparator;
-
-        private string breweryVenueCountryFlag;
-
-        private string breweryVenueCountry;
-
-        private string breweryVenueStateSeparator;
-
-        private string breweryVenueState;
-
-        private string breweryVenueCitySeparator;
-
-        private string breweryVenueCity;
-
-        private bool visibilityCheckinVenueLocation;
-
-        private BitmapSource breweryLabel;
-
-        private bool visibilityBreweryLabel;
-
+      
         private IList badges;
 
         private bool visibilityBadges;
@@ -366,133 +338,14 @@ namespace UntappdViewer.ViewModels
 
         #endregion
 
-        #region Brewery
-
-        public string BreweryUrl
-        {
-            get { return breweryUrl; }
-            set
-            {
-                SetProperty(ref breweryUrl, value);
-            }
-        }
-
-        public string BreweryName
-        {
-            get { return breweryName; }
-            set
-            {
-                SetProperty(ref breweryName, value);
-            }
-        }
-
-        public string BreweryVenueName
-        {
-            get { return breweryVenueName; }
-            set
-            {
-                SetProperty(ref breweryVenueName, value);
-            }
-        }
-
-        public string BreweryVenueCountrySeparator
-        {
-            get { return breweryVenueCountrySeparator; }
-            set
-            {
-                SetProperty(ref breweryVenueCountrySeparator, value);
-            }
-        }
-
-        public string BreweryVenueCountryFlag
-        {
-            get { return breweryVenueCountryFlag; }
-            set {SetProperty(ref breweryVenueCountryFlag, value);}
-        }
-
-        public string BreweryVenueCountry
-        {
-            get { return breweryVenueCountry; }
-            set
-            {
-                SetProperty(ref breweryVenueCountry, value);
-                BreweryVenueCountrySeparator = !String.IsNullOrEmpty(BreweryVenueName) && !String.IsNullOrEmpty(value) 
-                                                                        ? DefaultValues.Separator : String.Empty;
-                BreweryVenueCountryFlag = value;
-            }
-        }
-
-        public string BreweryVenueStateSeparator
-        {
-            get { return breweryVenueStateSeparator; }
-            set
-            {
-                SetProperty(ref breweryVenueStateSeparator, value);
-            }
-        }
-
-        public string BreweryVenueState
-        {
-            get { return breweryVenueState; }
-            set
-            {
-                SetProperty(ref breweryVenueState, value);
-                BreweryVenueStateSeparator = (!String.IsNullOrEmpty(BreweryVenueName) || !String.IsNullOrEmpty(BreweryVenueCountry)) 
-                                                        && !String.IsNullOrEmpty(value) ? DefaultValues.Separator : String.Empty;
-            }
-        }
-
-        public string BreweryVenueCitySeparator
-        {
-            get { return breweryVenueCitySeparator; }
-            set
-            {
-                SetProperty(ref breweryVenueCitySeparator, value);
-            }
-        }
-
-        public string BreweryVenueCity
-        {
-            get { return breweryVenueCity; }
-            set
-            {
-                SetProperty(ref breweryVenueCity, value);
-                BreweryVenueCitySeparator = (!String.IsNullOrEmpty(BreweryVenueName) || !String.IsNullOrEmpty(BreweryVenueCountry) || !String.IsNullOrEmpty(BreweryVenueState))
-                                            && !String.IsNullOrEmpty(value) ? DefaultValues.Separator : String.Empty;
-            }
-        }
-
-        public BitmapSource BreweryLabel
-        {
-            get { return breweryLabel; }
-            set
-            {
-                SetProperty(ref breweryLabel, value);
-                VisibilityBreweryLabel = value != null;
-            }
-        }
-
-        public bool VisibilityBreweryLabel
-        {
-            get { return visibilityBreweryLabel; }
-            set
-            {
-                SetProperty(ref visibilityBreweryLabel, value);
-            }
-        }
-
-        #endregion
-
         public ICommand CheckinVenueLocationCommand { get; }
 
 
-        public CheckinViewModel(IUntappdService untappdService, IInteractionRequestService interactionRequestService,
-                                                                IWebDownloader webDownloader,
+        public CheckinViewModel(IUntappdService untappdService, IWebDownloader webDownloader,
                                                                 IEventAggregator eventAggregator,
                                                                 IModuleManager moduleManager,
                                                                 IRegionManager regionManager) : base(moduleManager, regionManager, eventAggregator)
         {
-            this.interactionRequestService = interactionRequestService;
             this.untappdService = untappdService;
             this.webDownloader = webDownloader;
 
@@ -501,7 +354,6 @@ namespace UntappdViewer.ViewModels
 
             CheckinUrl = DefaultValues.DefaultUrl;
             BeerUrl = DefaultValues.DefaultUrl;
-            BreweryUrl = DefaultValues.DefaultUrl;
             Badges = new List<ImageItemViewModel>();
 
             CheckinVenueLocationCommand  = new DelegateCommand(CheckinVenueLocation);
@@ -532,6 +384,8 @@ namespace UntappdViewer.ViewModels
                 Clear();
                 return;
             }
+            
+            untappdService.DownloadMediaFiles(webDownloader, checkin);
 
             CheckinHeader = GetCheckinHeader(checkin.CreatedDate);
             CheckinUrl = checkin.Url;
@@ -567,13 +421,7 @@ namespace UntappdViewer.ViewModels
             BeerDescription = GetBeerDescription(checkin.Beer.Description);
             UpdateBeerLabel(checkin.Beer);
 
-            BreweryUrl = checkin.Beer.Brewery.Url;
-            BreweryName = checkin.Beer.Brewery.Name;
-            BreweryVenueName = checkin.Beer.Brewery.Venue.Name;
-            BreweryVenueCountry = checkin.Beer.Brewery.Venue.Country;
-            BreweryVenueState = checkin.Beer.Brewery.Venue.State;
-            BreweryVenueCity = checkin.Beer.Brewery.Venue.City;
-            UpdateBreweriesLabel(checkin.Beer.GetFullBreweries());
+            BreweryViewModels = GetBreweryViewModels(checkin.Beer.GetFullBreweries());
         }
 
         private void Clear()
@@ -601,12 +449,31 @@ namespace UntappdViewer.ViewModels
             BeerDescription = null;
             BeerLabel = null;
 
-            BreweryUrl = DefaultValues.DefaultUrl;
-            BreweryName = String.Empty;
-            BreweryVenueCountry = String.Empty;
-            BreweryVenueState= String.Empty;
-            BreweryVenueCity = String.Empty;
-            BreweryLabel = null;
+            BreweryViewModels = null;
+        }
+
+        private IEnumerable<BreweryViewModel> GetBreweryViewModels(List<Brewery> breweries)
+        {
+            List< BreweryViewModel> breweryViewModelses = new List<BreweryViewModel>();
+            foreach (Brewery brewery in breweries)
+            {
+                string labelPath = untappdService.GetBreweryLabelFilePath(brewery);
+                BitmapSource label = null;
+                if (!String.IsNullOrEmpty(labelPath) && !Path.GetFileNameWithoutExtension(labelPath).Equals(DefaultValues.DefaultBreweryLabelName))
+                    label = ImageConverter.GetBitmapSource(labelPath);
+
+                BreweryViewModel breweryViewModels = Mapper.GetBreweryViewModels(brewery, label);
+                breweryViewModelses.Add(breweryViewModels);
+            }
+            return breweryViewModelses;
+        }
+
+        private IEnumerable<BreweryViewModel> breweryViewModels;
+
+        public IEnumerable<BreweryViewModel> BreweryViewModels
+        {
+            get { return breweryViewModels; }
+            set { SetProperty(ref breweryViewModels, value); }
         }
 
         private string GetCheckinHeader(DateTime? checkinCreatedDate)
@@ -635,138 +502,35 @@ namespace UntappdViewer.ViewModels
 
         private void UpdateBeerLabel(Beer beer)
         {
-            BeerLabel = null;
-            if(!untappdService.IsUNTPProject() || String.IsNullOrEmpty(beer.LabelUrl))
-                return;
-
             string labelPath = untappdService.GetBeerLabelFilePath(beer);
-            if (Path.GetFileNameWithoutExtension(labelPath).Equals(DefaultValues.DefaultBeerLabelName))
+
+            if (String.IsNullOrEmpty(beer.LabelUrl) || Path.GetFileNameWithoutExtension(labelPath).Equals(DefaultValues.DefaultBeerLabelName))
                 return;
-
-            if (!File.Exists(labelPath))
-            {
-                string directoryName = Path.GetDirectoryName(labelPath);
-                if (!Directory.Exists(directoryName))
-                    FileHelper.CreateDirectory(directoryName);
-
-                if (!webDownloader.DownloadToFile(beer.LabelUrl, labelPath))
-                    return;
-            }
 
             BeerLabel = ImageConverter.GetBitmapSource(labelPath);
         }
 
-        private void UpdateBreweriesLabel(List<Brewery> breweries)
-        {
-            foreach (Brewery brewery in breweries)
-                UpdateBreweryLabel(brewery);
-        }
-
-        private void UpdateBreweryLabel(Brewery brewery)
-        {
-            BreweryLabel = null;
-            if (!untappdService.IsUNTPProject() || String.IsNullOrEmpty(brewery.LabelUrl))
-                return;
-
-            string labelPath = untappdService.GetBreweryLabelFilePath(brewery);
-            if (Path.GetFileNameWithoutExtension(labelPath).Equals(DefaultValues.DefaultBreweryLabelName))
-                return;
-
-            if (!File.Exists(labelPath))
-            {
-                string directoryName = Path.GetDirectoryName(labelPath);
-                if (!Directory.Exists(directoryName))
-                    FileHelper.CreateDirectory(directoryName);
-
-                if (!webDownloader.DownloadToFile(brewery.LabelUrl, labelPath))
-                    return;
-            }
-
-            BreweryLabel = ImageConverter.GetBitmapSource(labelPath);
-        }
-
         private void UpdateCheckinPhoto(Checkin checkin)
         {
-            CheckinPhoto = null;
+            string photoPath = untappdService.GetCheckinPhotoFilePath(checkin);
 
-            if (String.IsNullOrEmpty(checkin.UrlPhoto))
-            {
-                CheckinPhoto = ImageConverter.GetBitmapSource(Properties.Resources.no_image_icon);
-                return;
-            }
-
-            string photoPath = untappdService.IsUNTPProject()
-                                ? untappdService.GetCheckinPhotoFilePath(checkin)
-                                : FileHelper.GetTempFilePathByPath(checkin.UrlPhoto);
-
-            if (File.Exists(photoPath))
-            {
-                CheckinPhoto = ImageConverter.GetBitmapSource(photoPath);
-                return;
-            }
-            LoadingChangeActivity(true);
-            UpdateCheckinPhotoAsunc(checkin, photoPath);
-        }
-
-        private async void UpdateCheckinPhotoAsunc(Checkin checkin, string photoPath)
-        {
-            try
-            {
-                BitmapSource checkinPhoto = await Task.Run(() => GetCheckinPhoto(checkin, photoPath));
-                if (checkinPhoto != null)
-                    CheckinPhoto = checkinPhoto;
-            }
-            catch (Exception ex)
-            {
-                interactionRequestService.ShowError(Properties.Resources.Error, StringHelper.GetFullExceptionMessage(ex));
-            }
-            finally
-            {
-                LoadingChangeActivity(false);
-            }
-        }
-
-        private BitmapSource GetCheckinPhoto(Checkin checkin, string photoPath)
-        {
-            string directoryName = Path.GetDirectoryName(photoPath);
-            if (!Directory.Exists(directoryName))
-                FileHelper.CreateDirectory(directoryName);
-
-            if (!webDownloader.DownloadToFile(checkin.UrlPhoto, photoPath))
-                return null;
-            
-            BitmapSource photo = ImageConverter.GetBitmapSource(photoPath);
-            photo.Freeze();
-            return photo;
+            CheckinPhoto = String.IsNullOrEmpty(photoPath) ? ImageConverter.GetBitmapSource(Properties.Resources.no_image_icon) : 
+                                                             ImageConverter.GetBitmapSource(photoPath);
         }
 
         private void UpdateBadges(List<Badge> checkinBadges)
         {
-            Badges = new List<ImageItemViewModel>();
-            if (!untappdService.IsUNTPProject() || checkinBadges == null || checkinBadges.Count == 0)
+            if (checkinBadges.Count == 0)
                 return;
 
             List<ImageItemViewModel> currentBadges = new List<ImageItemViewModel>();
-            foreach (Badge badge in checkinBadges.Where(item => !String.IsNullOrEmpty(item.ImageUrl)))
+            foreach (Badge badge in checkinBadges)
             {
-                string badgeImagePath = GetBadgeImagePath(badge);
+                string badgeImagePath = untappdService.GetBadgeImageFilePath(badge);
                 if (!String.IsNullOrEmpty(badgeImagePath))
                     currentBadges.Add(new ImageItemViewModel(badgeImagePath, $"{badge.Name}\n{badge.Description}"));
             }
             Badges = currentBadges;
-        }
-
-        private string GetBadgeImagePath(Badge badge)
-        {
-            string badgeImagePath = untappdService.GetBadgeImageFilePath(badge);
-            if (File.Exists(badgeImagePath))
-                return badgeImagePath;
-
-            string directoryName = Path.GetDirectoryName(badgeImagePath);
-            if (!Directory.Exists(directoryName))
-                FileHelper.CreateDirectory(directoryName);
-
-            return webDownloader.DownloadToFile(badge.ImageUrl, badgeImagePath) ? badgeImagePath : String.Empty;
         }
     }
 }
