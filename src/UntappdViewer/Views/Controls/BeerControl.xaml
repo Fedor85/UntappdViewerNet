@@ -14,10 +14,9 @@
         <Image Width="60" Source="{Binding BeerLabel, TargetNullValue={x:Null}}" Margin="0, 0, 10, 0"
                Visibility="{Binding Path =VisibilityBeerLabel, Converter={StaticResource BooleanConverter}}"/>
         <StackPanel>
-            <TextBlock >
+            <TextBlock Visibility="{Binding Path =VisibilityBeerUrl, Converter={StaticResource BooleanConverter}}">
                 <Hyperlink NavigateUri="{Binding BeerUrl}" helpers:HyperlinkExtensions.IsExternal="true">
-                    <TextBlock Text="{x:Static properties:Resources.UntappdPage}"
-                               Visibility="{Binding Path =VisibilityBeerUrl, Converter={StaticResource BooleanConverter}}"/>
+                    <TextBlock Text="{x:Static properties:Resources.UntappdPage}"/>
                 </Hyperlink>
              </TextBlock>
             <TextBlock TextWrapping="Wrap" Text="{Binding BeerName}" FontWeight="Bold"/>

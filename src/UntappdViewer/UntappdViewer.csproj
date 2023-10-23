@@ -125,11 +125,12 @@
     <Compile Include="Different\UntappdEntity.cs" />
     <Compile Include="Modules\EmptyContentModule.cs" />
     <Compile Include="Modules\StatisticsProjectModule.cs" />
+    <Compile Include="ViewModels\Controls\CheckinViewModel.cs" />
     <Compile Include="Views\Controls\BeerControl.xaml.cs">
       <DependentUpon>BeerControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\BeerViewModel.cs" />
-    <Compile Include="Views\Controls\BreweryViewModel.cs" />
+    <Compile Include="ViewModels\Controls\BeerViewModel.cs" />
+    <Compile Include="ViewModels\Controls\BreweryViewModel.cs" />
     <Compile Include="ViewModels\LoadingViewModel.cs" />
     <Compile Include="ViewModels\StatisticsProjectViewModel.cs" />
     <Compile Include="Modules\Base\BaseLoadingModule.cs" />

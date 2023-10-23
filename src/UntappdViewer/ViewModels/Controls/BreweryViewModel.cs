@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Media.Imaging;
 
-namespace UntappdViewer.Views.Controls.ViewModels
+namespace UntappdViewer.ViewModels.Controls
 {
     public class BreweryViewModel
     {

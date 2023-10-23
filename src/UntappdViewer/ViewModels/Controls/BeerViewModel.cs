@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Media.Imaging;
 
-namespace UntappdViewer.Views.Controls.ViewModels
+namespace UntappdViewer.ViewModels.Controls
 {
     public class BeerViewModel
     {
@@ -34,6 +35,13 @@ namespace UntappdViewer.Views.Controls.ViewModels
         public bool VisibilityBeerDescription
         {
             get { return !String.IsNullOrEmpty(BeerDescription); }
+        }
+
+        public List<BreweryViewModel> BreweryViewModels { get; }
+
+        public BeerViewModel()
+        {
+            BreweryViewModels = new List<BreweryViewModel>();
         }
     }
 }
