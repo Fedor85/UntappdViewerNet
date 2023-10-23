@@ -380,7 +380,10 @@ namespace UntappdViewer.ViewModels
         private void UpdateBadges(List<Badge> checkinBadges)
         {
             if (checkinBadges.Count == 0)
+            {
+                Badges = null;
                 return;
+            }
 
             List<ImageItemViewModel> currentBadges = new List<ImageItemViewModel>();
             foreach (Badge badge in checkinBadges)

@@ -6,10 +6,10 @@
              xmlns:prism="http://prismlibrary.com/"
              xmlns:properties="clr-namespace:UntappdViewer.Properties"
              xmlns:local="clr-namespace:UntappdViewer"
-             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:starRating="clr-namespace:UntappdViewer.UI.Controls.StarRating;assembly=UntappdViewer.UI"
              xmlns:controls="clr-namespace:UntappdViewer.UI.Controls;assembly=UntappdViewer.UI"
              xmlns:viewControls="clr-namespace:UntappdViewer.Views.Controls"
+             xmlns:helpers="clr-namespace:UntappdViewer.Helpers"
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="450" d:DesignWidth="450">
@@ -34,7 +34,7 @@
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0">
                 <TextBlock >
-                        <Hyperlink NavigateUri="{Binding CheckinUrl}" RequestNavigate="HyperlinkOnRequestNavigate">
+                        <Hyperlink NavigateUri="{Binding CheckinUrl}" helpers:HyperlinkExtensions.IsExternal="true">
                             <TextBlock Text="{x:Static properties:Resources.UntappdPage}"/>
                         </Hyperlink>
                     </TextBlock>
