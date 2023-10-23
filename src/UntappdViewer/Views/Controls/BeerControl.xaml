@@ -11,22 +11,22 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
-        <Image Width="60" Source="{Binding BeerLabel, TargetNullValue={x:Null}}" Margin="0, 0, 10, 0"
-               Visibility="{Binding Path =VisibilityBeerLabel, Converter={StaticResource BooleanConverter}}"/>
+        <Image Width="60" Source="{Binding Label, TargetNullValue={x:Null}}" Margin="0, 0, 10, 0"
+               Visibility="{Binding VisibilityLabel, Converter={StaticResource BooleanConverter}}"/>
         <StackPanel>
-            <TextBlock Visibility="{Binding Path =VisibilityBeerUrl, Converter={StaticResource BooleanConverter}}">
-                <Hyperlink NavigateUri="{Binding BeerUrl}" helpers:HyperlinkExtensions.IsExternal="true">
+            <TextBlock Visibility="{Binding VisibilityUrl, Converter={StaticResource BooleanConverter}}">
+                <Hyperlink NavigateUri="{Binding Url}" helpers:HyperlinkExtensions.IsExternal="true">
                     <TextBlock Text="{x:Static properties:Resources.UntappdPage}"/>
                 </Hyperlink>
              </TextBlock>
-            <TextBlock TextWrapping="Wrap" Text="{Binding BeerName}" FontWeight="Bold"/>
-            <TextBlock TextWrapping="Wrap" Text="{Binding BeerType}"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding Name}" FontWeight="Bold"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding Type}"/>
             <DockPanel>
                 <TextBlock TextWrapping="Wrap" VerticalAlignment="Center">
                     <TextBlock.Inlines>
                         <Run FontWeight="Bold" Text="{x:Static properties:Resources.ABV}"/>
                         <Run FontWeight="Bold" Text=": "/>
-                        <Run Text="{Binding BeerABV}"/>
+                        <Run Text="{Binding ABV}"/>
                     </TextBlock.Inlines>
                 </TextBlock>
                 <TextBlock Text="{Binding Source={x:Static untappdViewer:DefaultValues.Separator}}" FontWeight="Bold"  VerticalAlignment="Center"/>
@@ -34,14 +34,14 @@
                     <TextBlock.Inlines>
                         <Run FontWeight="Bold" Text="{x:Static properties:Resources.IBU}"/>
                         <Run FontWeight="Bold" Text=": "/>
-                        <Run Text="{Binding BeerIBU}"/>
+                        <Run Text="{Binding IBU}"/>
                     </TextBlock.Inlines>
                 </TextBlock>
                 <TextBlock Text="{Binding Source={x:Static untappdViewer:DefaultValues.Separator}}" FontWeight="Bold"  VerticalAlignment="Center"/>
-                <starRating:StarRatingControl Rating="{Binding BeerRating}" Style="{StaticResource StarRatingStyle}"/>
+                <starRating:StarRatingControl Rating="{Binding Rating}" Style="{StaticResource StarRatingStyle}"/>
                 <Image Source="..\..\Resources\description_icon.png" Width="20" Height="20" Margin="10,0,0,0" HorizontalAlignment="Left"
                                        ToolTipService.ShowDuration="{x:Static Member=sys:Int32.MaxValue}"
-                                       ToolTip="{Binding BeerDescription}" Visibility="{Binding VisibilityBeerDescription, Converter={StaticResource BTVConverter}}"/>
+                                       ToolTip="{Binding Description}" Visibility="{Binding VisibilityDescription, Converter={StaticResource BTVConverter}}"/>
             </DockPanel>
         </StackPanel>
     </DockPanel>

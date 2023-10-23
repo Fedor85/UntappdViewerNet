@@ -6,35 +6,35 @@ namespace UntappdViewer.ViewModels.Controls
 {
     public class BeerViewModel
     {
-        public string BeerUrl { get; set; }
+        public string Url { get; set; }
 
-        public bool VisibilityBeerUrl
+        public bool VisibilityUrl
         {
-            get { return !String.IsNullOrEmpty(BeerUrl); }
+            get { return !String.IsNullOrEmpty(Url); }
         }
 
-        public string BeerName { get; set; }
+        public string Name { get; set; }
 
-        public BitmapSource BeerLabel { get; set; }
+        public BitmapSource Label { get; set; }
 
-        public bool VisibilityBeerLabel
+        public bool VisibilityLabel
         {
-            get { return BeerLabel != null; }
+            get { return Label != null; }
         }
 
-        public string BeerType { get; set; }
+        public string Type { get; set; }
 
-        public string BeerABV { get; set; }
+        public string ABV { get; set; }
 
-        public string BeerIBU { get; set; }
+        public string IBU { get; set; }
 
-        public double BeerRating { get; set; }
+        public double Rating { get; set; }
 
-        public string BeerDescription { get; set; }
+        public string Description { get; set; }
 
-        public bool VisibilityBeerDescription
+        public bool VisibilityDescription
         {
-            get { return !String.IsNullOrEmpty(BeerDescription); }
+            get { return !String.IsNullOrEmpty(Description); }
         }
 
         public List<BreweryViewModel> BreweryViewModels { get; }

@@ -16,9 +16,9 @@ namespace UntappdViewer.Helpers
         public static CheckinViewModel GetCheckinViewModel(IUntappdService untappdService, Checkin checkin)
         {
             CheckinViewModel checkinViewModel = new CheckinViewModel();
-            checkinViewModel.CheckinHeader = GetCheckinHeader(checkin.CreatedDate);
-            checkinViewModel.CheckinUrl = checkin.Url;
-            checkinViewModel.CheckinRating = checkin.RatingScore;
+            checkinViewModel.Header = GetCheckinHeader(checkin.CreatedDate);
+            checkinViewModel.Url = checkin.Url;
+            checkinViewModel.Rating = checkin.RatingScore;
             if(checkin.Venue != null)
             {
                 checkinViewModel.AddVenue(checkin.Venue.Name);
@@ -26,8 +26,8 @@ namespace UntappdViewer.Helpers
                 checkinViewModel.AddVenue(checkin.Venue.State);
                 checkinViewModel.AddVenue(checkin.Venue.City);
             }
-            checkinViewModel.CheckinServingType = ConverterHelper.GetServingTypeImagePath(checkin.ServingType);
-            checkinViewModel.CheckinPhoto = GetCheckinPhoto(untappdService, checkin);
+            checkinViewModel.ServingType = ConverterHelper.GetServingTypeImagePath(checkin.ServingType);
+            checkinViewModel.Photo = GetCheckinPhoto(untappdService, checkin);
             FillBadges(untappdService, checkin, checkinViewModel);
             checkinViewModel.BeerViewModel = GetBeerViewModel(untappdService, checkin.Beer);
             return checkinViewModel;
@@ -36,14 +36,14 @@ namespace UntappdViewer.Helpers
         private static BeerViewModel GetBeerViewModel(IUntappdService untappdService, Beer beer)
         {
             BeerViewModel beerViewModel = new BeerViewModel();
-            beerViewModel.BeerLabel = GetBeerLabel(untappdService, beer);
-            beerViewModel.BeerUrl = beer.Url;
-            beerViewModel.BeerName = beer.Name;
-            beerViewModel.BeerType = beer.Type;
-            beerViewModel.BeerABV = beer.ABV.ToString();
-            beerViewModel.BeerIBU = beer.IBU?.ToString() ?? DefaultValues.NoIBU;
-            beerViewModel.BeerRating = Math.Round(beer.GlobalRatingScore, 2);
-            beerViewModel.BeerDescription = GetBeerDescription(beer.Description);
+            beerViewModel.Label = GetBeerLabel(untappdService, beer);
+            beerViewModel.Url = beer.Url;
+            beerViewModel.Name = beer.Name;
+            beerViewModel.Type = beer.Type;
+            beerViewModel.ABV = beer.ABV.ToString();
+            beerViewModel.IBU = beer.IBU?.ToString() ?? DefaultValues.NoIBU;
+            beerViewModel.Rating = Math.Round(beer.GlobalRatingScore, 2);
+            beerViewModel.Description = GetBeerDescription(beer.Description);
             FillBreweryViewModels(untappdService, beer, beerViewModel);
             return beerViewModel;
         }
@@ -53,7 +53,7 @@ namespace UntappdViewer.Helpers
             foreach (Brewery brewery in beer.GetFullBreweries())
             {
                 BreweryViewModel breweryViewModel = Mapper.GetBreweryViewModels(brewery);
-                breweryViewModel.BreweryLabel = GetBreweryLabel(untappdService, brewery);
+                breweryViewModel.Label = GetBreweryLabel(untappdService, brewery);
                 beerViewModel.BreweryViewModels.Add(breweryViewModel);
             }
         }
@@ -61,12 +61,12 @@ namespace UntappdViewer.Helpers
         private static BreweryViewModel GetBreweryViewModels(Brewery brewery)
         {
             BreweryViewModel breweryViewModels = new BreweryViewModel();
-            breweryViewModels.BreweryUrl = brewery.Url;
-            breweryViewModels.BreweryName = brewery.Name;
+            breweryViewModels.Url = brewery.Url;
+            breweryViewModels.Name = brewery.Name;
             
             if (brewery.Venue != null)
             {
-                breweryViewModels.BreweryVenueCountryFlag = brewery.Venue.Country;
+                breweryViewModels.VenueCountryFlag = brewery.Venue.Country;
                 breweryViewModels.AddVenue(brewery.Venue.Name);
                 breweryViewModels.AddVenue(brewery.Venue.Country);
                 breweryViewModels.AddVenue(brewery.Venue.State);

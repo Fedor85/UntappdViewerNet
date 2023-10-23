@@ -26,15 +26,15 @@
     <UserControl.Background>
         <SolidColorBrush Opacity="0.3" Color="#ffffff"/>
     </UserControl.Background>
-    <GroupBox Header="{Binding Checkin.CheckinHeader}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+    <GroupBox Header="{Binding Checkin.Header}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0">
-                <TextBlock Visibility="{Binding Path =Checkin.VisibilityCheckinUrl, Converter={StaticResource BooleanConverter}}">
-                    <Hyperlink NavigateUri="{Binding Checkin.CheckinUrl}" helpers:HyperlinkExtensions.IsExternal="true">
+                <TextBlock Visibility="{Binding Checkin.VisibilityUrl, Converter={StaticResource BooleanConverter}}">
+                    <Hyperlink NavigateUri="{Binding Checkin.Url}" helpers:HyperlinkExtensions.IsExternal="true">
                         <TextBlock Text="{x:Static properties:Resources.UntappdPage}"/>
                     </Hyperlink>
                 </TextBlock>
@@ -60,11 +60,11 @@
                             </controls:ListViewExpander>
                         </GroupBox>
                         <DockPanel>
-                            <DockPanel Visibility="{Binding Path =Checkin.VisibilityCheckinRating, Converter={StaticResource BooleanConverter}}">
-                                <starRating:StarRatingControl Rating="{Binding Checkin.CheckinRating}" Style="{StaticResource StarRatingStyle}"/>
+                            <DockPanel Visibility="{Binding Checkin.VisibilityRating, Converter={StaticResource BooleanConverter}}">
+                                <starRating:StarRatingControl Rating="{Binding Checkin.Rating}" Style="{StaticResource StarRatingStyle}"/>
                             </DockPanel>
                             <TextBlock Text="  " />
-                            <Image Source="{Binding Checkin.CheckinServingType, TargetNullValue={x:Null}}" Width="25" Height="25" HorizontalAlignment="Left"/>
+                            <Image Source="{Binding Checkin.ServingType, TargetNullValue={x:Null}}" Width="25" Height="25" HorizontalAlignment="Left"/>
                         </DockPanel>
                         <DockPanel>
                             <!--<Image Source="..\Resources\icons8-location-24.png" Width="20" Height="20" HorizontalAlignment="Left"
@@ -75,7 +75,7 @@
                             </Image.InputBindings>
                         </Image>-->
                             <controls:TextBlockJoin TextWrapping="Wrap" VerticalAlignment="Center" Separator="{Binding Source={x:Static local:DefaultValues.Separator}}"
-                                                DataContext="{Binding Checkin.CheckinVenue}" Margin="10, 0, 0, 0"/>
+                                                DataContext="{Binding Checkin.Venues}" Margin="10, 0, 0, 0"/>
                         </DockPanel>
                     </StackPanel>
                     <GroupBox Grid.Column="1" Header="{x:Static properties:Resources.Badges}" Width="100"
@@ -92,7 +92,7 @@
                         <Label Content="{x:Static properties:Resources.ZoomBorderRightMouseButtonUse}" FontSize="10"/>
                     </StackPanel>
                     <controls:ZoomBorder ClipToBounds="True">
-                        <Image Source="{Binding Checkin.CheckinPhoto, TargetNullValue={x:Null}}"/>
+                        <Image Source="{Binding Checkin.Photo, TargetNullValue={x:Null}}"/>
                     </controls:ZoomBorder>
                     <ContentControl prism:RegionManager.RegionName="{x:Static local:RegionNames.PhotoLoadingRegion}"/>
                     <Image Source="..\Resources\facebook-like-beer.png" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Bottom"

@@ -7,26 +7,26 @@ namespace UntappdViewer.ViewModels.Controls
 {
     public class CheckinViewModel
     {
-        public string CheckinHeader { get; set; }
+        public string Header { get; set; }
 
-        public string CheckinUrl { get; set; }
+        public string Url { get; set; }
 
-        public bool VisibilityCheckinUrl
+        public bool VisibilityUrl
         {
-            get { return !String.IsNullOrEmpty(CheckinUrl); }
+            get { return !String.IsNullOrEmpty(Url); }
         }
 
-        public double? CheckinRating { get; set; }
+        public double? Rating { get; set; }
 
-        public bool VisibilityCheckinRating
+        public bool VisibilityRating
         {
-            get { return CheckinRating.HasValue; }
+            get { return Rating.HasValue; }
         }
 
-        public string CheckinServingType { get; set; }
+        public string ServingType { get; set; }
 
 
-        public List<string> CheckinVenue { get; }
+        public List<string> Venues { get; }
 
         public List<ImageItemViewModel>  Badges { get; }
 
@@ -35,18 +35,18 @@ namespace UntappdViewer.ViewModels.Controls
             get { return Badges.Count > 0; }
         }
 
-        public BitmapSource CheckinPhoto { get; set; }
+        public BitmapSource Photo { get; set; }
 
         public bool VisibilityLikeBeer
         {
-            get { return VisibilityCheckinRating && CheckinRating.Value >= DefaultValues.MinCheckinRatingByLikeBeer; }
+            get { return VisibilityRating && Rating.Value >= DefaultValues.MinCheckinRatingByLikeBeer; }
         }
 
         public BeerViewModel BeerViewModel { get; set; }
 
         public CheckinViewModel()
         {
-            CheckinVenue = new List<string>();
+            Venues = new List<string>();
             Badges = new List<ImageItemViewModel>();
             BeerViewModel = new BeerViewModel(); 
         }
@@ -54,7 +54,7 @@ namespace UntappdViewer.ViewModels.Controls
         public void AddVenue(string venue)
         {
             if (!String.IsNullOrEmpty(venue))
-                CheckinVenue.Add(venue);
+                Venues.Add(venue);
         }
     }
 }

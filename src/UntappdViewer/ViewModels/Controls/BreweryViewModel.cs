@@ -6,35 +6,35 @@ namespace UntappdViewer.ViewModels.Controls
 {
     public class BreweryViewModel
     {
-        public string BreweryUrl { get; set; }
+        public string Url { get; set; }
 
-        public bool VisibilityBreweryUrl
+        public bool VisibilityUrl
         {
-            get { return !String.IsNullOrEmpty(BreweryUrl); }
+            get { return !String.IsNullOrEmpty(Url); }
         }
 
-        public string BreweryName { get; set; }
+        public string Name { get; set; }
 
-        public BitmapSource BreweryLabel { get; set; }
+        public BitmapSource Label { get; set; }
 
-        public bool VisibilityBreweryLabel
+        public bool VisibilityLabel
         {
-            get { return BreweryLabel != null; }           
+            get { return Label != null; }           
         }
 
-        public string BreweryVenueCountryFlag { get; set; }
+        public string VenueCountryFlag { get; set; }
 
-        public List<string> BreweryVenue { get; }
+        public List<string> Venues { get; }
 
         public BreweryViewModel()
         {
-            BreweryVenue = new List<string>();
+            Venues = new List<string>();
         }
 
         public void AddVenue(string venue)
         {
             if (!String.IsNullOrEmpty(venue))
-                BreweryVenue.Add(venue);
+                Venues.Add(venue);
         }
     }
 }
