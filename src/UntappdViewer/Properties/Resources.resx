@@ -298,7 +298,7 @@
     <value>fvasilets@gmail.com</value>
   </data>
   <data name="Signature2" xml:space="preserve">
-    <value>(с) 2022</value>
+    <value>(с) 2023</value>
   </data>
   <data name="default_avatar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\default_avatar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

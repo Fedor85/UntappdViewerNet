@@ -960,7 +960,7 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to (с) 2022.
+        ///   Looks up a localized string similar to (с) 2023.
         /// </summary>
         public static string Signature2 {
             get {
