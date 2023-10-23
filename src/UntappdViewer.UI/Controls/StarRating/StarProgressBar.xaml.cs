@@ -1,5 +1,8 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace UntappdViewer.UI.Controls.StarRating
 {
@@ -8,70 +11,19 @@ namespace UntappdViewer.UI.Controls.StarRating
     /// </summary>
     public partial class StarProgressBar : UserControl
     {
-        public Color BackgroundStarColor
-        {
-            set
-            {
-                Brush brush = GetBrush(BackgroundStar.Fill);
-                ((SolidColorBrush)brush).Color = value;
-                BackgroundStar.Fill = brush;
-            }
-        }
+        public static readonly DependencyProperty BorderStarThicknessProperty = DependencyProperty.Register("BorderStarThickness", typeof(double), typeof(StarProgressBar));
 
-        public double BackgroundStarOpacity
-        {
-            set
-            {
-                Brush brush = GetBrush(BackgroundStar.Fill);
-                brush.Opacity = value;
-                BackgroundStar.Fill = brush;
-            }
-        }
+        public static readonly DependencyProperty BackgroundStarColorProperty = DependencyProperty.Register("BackgroundStarColor", typeof(Brush), typeof(StarProgressBar));
 
-        public Color ForegroundStarColor
-        {
-            set
-            {
-                Brush brush = GetBrush(ForegroundStar.Foreground);
-                ((SolidColorBrush)brush).Color = value;
-                ForegroundStar.Foreground = brush;
-            }
-        }
+        public static readonly DependencyProperty BackgroundStarOpacityProperty = DependencyProperty.Register("BackgroundStarOpacity", typeof(double), typeof(StarProgressBar));
 
-        public double ForegroundStarOpacity
-        {
-            set
-            {
-                Brush brush = GetBrush(ForegroundStar.Foreground);
-                brush.Opacity = value;
-                ForegroundStar.Foreground = brush;
-            }
-        }
+        public static readonly DependencyProperty ForegroundStarColorProperty = DependencyProperty.Register("ForegroundStarColor", typeof(Brush), typeof(StarProgressBar));
 
-        public Color BorderStarColor
-        {
-            set
-            {
-                Brush brush = GetBrush(BorderStar.Stroke);
-                ((SolidColorBrush)brush).Color = value;
-                BorderStar.Stroke = brush;
-            }
-        }
+        public static readonly DependencyProperty ForegroundStarOpacityProperty = DependencyProperty.Register("ForegroundStarOpacity", typeof(double), typeof(StarProgressBar));
 
-        public double BorderStarOpacity
-        {
-            set
-            {
-                Brush brush = GetBrush(BorderStar.Stroke);
-                brush.Opacity = value;
-                BorderStar.Stroke = brush;
-            }
-        }
+        public static readonly DependencyProperty BorderStarColorProperty = DependencyProperty.Register("BorderStarColor", typeof(Brush), typeof(StarProgressBar));
 
-        public double BorderStarThickness
-        {
-            set { BorderStar.StrokeThickness = value; }
-        }
+        public static readonly DependencyProperty BorderStarOpacityProperty = DependencyProperty.Register("BorderStarOpacity", typeof(double), typeof(StarProgressBar));
 
         public double Value
         {
@@ -81,14 +33,15 @@ namespace UntappdViewer.UI.Controls.StarRating
         public StarProgressBar()
         {
             InitializeComponent();
-        }
+            BackgroundStar.SetBinding(Path.FillProperty, new Binding { Path = new PropertyPath(BackgroundStarColorProperty), Source = this });
+            BackgroundStar.SetBinding(Path.OpacityProperty, new Binding { Path = new PropertyPath(BackgroundStarOpacityProperty), Source = this });
 
-        private Brush GetBrush(Brush brush)
-        {
-            if (brush.IsFrozen)
-                brush = brush.Clone();
+            ForegroundStar.SetBinding(ProgressBar.ForegroundProperty, new Binding { Path = new PropertyPath(ForegroundStarColorProperty), Source = this });
+            ForegroundStar.SetBinding(ProgressBar.OpacityProperty, new Binding { Path = new PropertyPath(ForegroundStarOpacityProperty), Source = this });
 
-            return brush;
+            BorderStar.SetBinding(Path.StrokeThicknessProperty, new Binding { Path = new PropertyPath(BorderStarThicknessProperty), Source = this });
+            BorderStar.SetBinding(Path.StrokeProperty, new Binding { Path = new PropertyPath(BorderStarColorProperty), Source = this });
+            BorderStar.SetBinding(Path.OpacityProperty, new Binding { Path = new PropertyPath(BorderStarOpacityProperty), Source = this });
         }
     }
 }

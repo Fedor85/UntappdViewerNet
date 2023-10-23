@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:helpers="clr-namespace:UntappdViewer.Different.Helpers"
-                    xmlns:local="clr-namespace:UntappdViewer">
+                    xmlns:local="clr-namespace:UntappdViewer"
+                    xmlns:starRating="clr-namespace:UntappdViewer.UI.Controls.StarRating;assembly=UntappdViewer.UI">
     <SolidColorBrush  x:Key="MainSolidBrushLight" Color="{x:Static local:DefaultValues.MainColorLight}"/>
     <SolidColorBrush  x:Key="MainSolidBrushDark" Color="{x:Static local:DefaultValues.MainColorDark}"/>
     <LinearGradientBrush x:Key="MainGradient2" SpreadMethod="Reflect" EndPoint="0,1">
@@ -18,4 +19,17 @@
     <helpers:ServingTypeConverter  x:Key="ServingTypeConverter"/>
     <helpers:CountryNameToFlagConverter x:Key="FlagConverter"/>
     <BooleanToVisibilityConverter x:Key="BooleanConverter" />
+    <Style x:Key="StarRatingStyle" TargetType="{x:Type starRating:StarRatingControl}">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="StarCount" Value="5"/>
+        <Setter Property="StarSize" Value="20"/>
+        <Setter Property="BorderStarThickness" Value="5"/>
+        <Setter Property="ViewStarsColor" Value="#ffffff"/>
+        <Setter Property="ViewStarsOpacity" Value="0.3"/>
+        <Setter Property="BackgroundStarColor" Value="#ffffff"/>
+        <Setter Property="BackgroundStarOpacity" Value="1"/>
+        <Setter Property="BorderStarColor" Value="#000000"/>
+        <Setter Property="ForegroundStarColor" Value="{StaticResource MainSolidBrushLight}"/>
+    </Style>
 </ResourceDictionary>

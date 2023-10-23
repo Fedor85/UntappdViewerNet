@@ -61,18 +61,7 @@
                         </GroupBox>
                         <DockPanel>
                             <DockPanel  Visibility="{Binding Path =VisibilityCheckinRating, Converter={StaticResource BooleanConverter}}">
-                                <starRating:StarRatingControl StarCount="5" StarSize="20" HorizontalAlignment="Left"
-                                                      ViewStarsColor="#ffffff" ViewStarsOpacity="0.3"
-                                                      BackgroundStarColor="#ffffff" BackgroundStarOpacity="1"
-                                                      BorderStarColor="#000000" BorderStarThickness="5"
-                                                      ForegroundStarColor="{x:Static local:DefaultValues.MainColorLight}" Rating="{Binding CheckinRating}" VerticalAlignment="Center"/>
-                                <TextBlock VerticalAlignment="Center">
-                                    <TextBlock.Inlines>
-                                        <Run Text=" ("/>
-                                        <Run Text="{Binding CheckinRating}"/>
-                                        <Run Text=")"/>
-                                    </TextBlock.Inlines>
-                                </TextBlock>
+                                <starRating:StarRatingControl Rating="{Binding CheckinRating}" Style="{StaticResource StarRatingStyle}"/>
                             </DockPanel>
                             <TextBlock Text="  " />
                             <Image Source="{Binding CheckinServingType, TargetNullValue={x:Null}}" Width="25" Height="25" HorizontalAlignment="Left"/>

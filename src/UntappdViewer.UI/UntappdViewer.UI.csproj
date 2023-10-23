@@ -99,6 +99,7 @@
     <Compile Include="Helpers\ImageConverter.cs" />
     <Compile Include="Helpers\IndexToVisibilityConverter.cs" />
     <Compile Include="Helpers\PathImageReSizeWidthConverter.cs" />
+    <Compile Include="Helpers\PercentageChangeValueConverter.cs" />
     <Compile Include="Helpers\PropertyMetadataParameter.cs" />
     <Compile Include="Helpers\UIHelper.cs" />
     <Compile Include="Helpers\ZoomHelper.cs" />
