@@ -167,10 +167,10 @@ namespace UntappdViewer.Domain.Services
 
         private string GetImageFilePath(string url, string prefix)
         {
-            string imageUrl = StringHelper.GetNormalizedJPGPath(url);
-            if (String.IsNullOrEmpty(imageUrl))
+            if (String.IsNullOrEmpty(url))
                 return String.Empty;
 
+            string imageUrl = StringHelper.GetNormalizedJPGPath(url);
             return IsUNTPProject() ? Path.Combine(GetFileDataDirectory(), prefix, Path.GetFileName(imageUrl)) : FileHelper.GetTempFilePathByPath(imageUrl, prefix);
         }
 
