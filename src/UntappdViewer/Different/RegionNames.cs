@@ -18,6 +18,6 @@
 
         public const string LoadingRegion = "LoadingRegion";
 
-        public const string PhotoLoadingRegion = "PhotoLoadingRegion";
+        public const string CheckinLoadingRegion = "CheckinLoadingRegion";
     }
 }

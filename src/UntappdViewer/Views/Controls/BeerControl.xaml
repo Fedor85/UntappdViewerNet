@@ -22,23 +22,28 @@
             <TextBlock TextWrapping="Wrap" Text="{Binding Name}" FontWeight="Bold"/>
             <TextBlock TextWrapping="Wrap" Text="{Binding Type}"/>
             <DockPanel>
-                <TextBlock TextWrapping="Wrap" VerticalAlignment="Center">
-                    <TextBlock.Inlines>
-                        <Run FontWeight="Bold" Text="{x:Static properties:Resources.ABV}"/>
-                        <Run FontWeight="Bold" Text=": "/>
-                        <Run Text="{Binding ABV}"/>
-                    </TextBlock.Inlines>
-                </TextBlock>
-                <TextBlock Text="{Binding Source={x:Static untappdViewer:DefaultValues.Separator}}" FontWeight="Bold"  VerticalAlignment="Center"/>
-                <TextBlock TextWrapping="Wrap"  VerticalAlignment="Center">
-                    <TextBlock.Inlines>
-                        <Run FontWeight="Bold" Text="{x:Static properties:Resources.IBU}"/>
-                        <Run FontWeight="Bold" Text=": "/>
-                        <Run Text="{Binding IBU}"/>
-                    </TextBlock.Inlines>
-                </TextBlock>
-                <TextBlock Text="{Binding Source={x:Static untappdViewer:DefaultValues.Separator}}" FontWeight="Bold"  VerticalAlignment="Center"/>
-                <starRating:StarRatingControl Rating="{Binding Rating}" Style="{StaticResource StarRatingStyle}"/>
+                <DockPanel Visibility="{Binding VisibilityABV, Converter={StaticResource BTVConverter}}">
+                    <TextBlock TextWrapping="Wrap" VerticalAlignment="Center">
+                        <TextBlock.Inlines>
+                            <Run FontWeight="Bold" Text="{x:Static properties:Resources.ABV}"/>
+                            <Run FontWeight="Bold" Text=": "/>
+                            <Run Text="{Binding ABV}"/>
+                        </TextBlock.Inlines>
+                    </TextBlock>
+                    <TextBlock Text="{Binding Source={x:Static untappdViewer:DefaultValues.Separator}}" FontWeight="Bold"  VerticalAlignment="Center"/>
+                </DockPanel>
+                <DockPanel Visibility="{Binding VisibilityIBU, Converter={StaticResource BTVConverter}}">
+                    <TextBlock TextWrapping="Wrap"  VerticalAlignment="Center">
+                        <TextBlock.Inlines>
+                            <Run FontWeight="Bold" Text="{x:Static properties:Resources.IBU}"/>
+                            <Run FontWeight="Bold" Text=": "/>
+                            <Run Text="{Binding IBU}"/>
+                        </TextBlock.Inlines>
+                    </TextBlock>
+                    <TextBlock Text="{Binding Source={x:Static untappdViewer:DefaultValues.Separator}}" FontWeight="Bold"  VerticalAlignment="Center"/>
+                </DockPanel>
+                <starRating:StarRatingControl Rating="{Binding Rating}" Style="{StaticResource StarRatingStyle}"
+                                              Visibility="{Binding VisibilityRating, Converter={StaticResource BooleanConverter}}"/>
                 <Image Source="..\..\Resources\description_icon.png" Width="20" Height="20" Margin="10,0,0,0" HorizontalAlignment="Left"
                                        ToolTipService.ShowDuration="{x:Static Member=sys:Int32.MaxValue}"
                                        ToolTip="{Binding Description}" Visibility="{Binding VisibilityDescription, Converter={StaticResource BTVConverter}}"/>

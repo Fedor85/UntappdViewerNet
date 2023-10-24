@@ -1,4 +1,6 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Modularity;
@@ -8,6 +10,7 @@ using UntappdViewer.Helpers;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
 using UntappdViewer.Modules;
+using UntappdViewer.Utils;
 using CheckinVM = UntappdViewer.ViewModels.Controls.CheckinViewModel;
 
 namespace UntappdViewer.ViewModels
@@ -17,6 +20,10 @@ namespace UntappdViewer.ViewModels
         private IUntappdService untappdService;
 
         private IWebDownloader webDownloader;
+
+        private IInteractionRequestService interactionRequestService;
+
+        private readonly CheckinVM emptyCheckin = CheckinVM.GetEmpty();
 
         private CheckinVM checkin;
 
@@ -32,13 +39,15 @@ namespace UntappdViewer.ViewModels
         public CheckinViewModel(IUntappdService untappdService, IWebDownloader webDownloader,
                                                                 IEventAggregator eventAggregator,
                                                                 IModuleManager moduleManager,
-                                                                IRegionManager regionManager) : base(moduleManager, regionManager, eventAggregator)
+                                                                IRegionManager regionManager,
+                                                                IInteractionRequestService interactionRequestService) : base(moduleManager, regionManager, eventAggregator)
         {
             this.untappdService = untappdService;
             this.webDownloader = webDownloader;
+            this.interactionRequestService = interactionRequestService;
 
-            loadingModuleName = typeof(PhotoLoadingModule).Name;
-            loadingRegionName = RegionNames.PhotoLoadingRegion;
+            loadingModuleName = typeof(CheckinLoadingModule).Name;
+            loadingRegionName = RegionNames.CheckinLoadingRegion;
             CheckinVenueLocationCommand  = new DelegateCommand(CheckinVenueLocation);
         }
 
@@ -50,26 +59,40 @@ namespace UntappdViewer.ViewModels
         protected override void Activate()
         {
             base.Activate();
-            eventAggregator.GetEvent<ChekinUpdateEvent>().Subscribe(ChekinUpdate);
+            eventAggregator.GetEvent<ChekinUpdateEvent>().Subscribe(FillChekin);
         }
 
         protected override void DeActivate()
         {
             base.DeActivate();
             Checkin = null;
-            eventAggregator.GetEvent<ChekinUpdateEvent>().Unsubscribe(ChekinUpdate);
+            eventAggregator.GetEvent<ChekinUpdateEvent>().Unsubscribe(FillChekin);
         }
 
-        private void ChekinUpdate(Checkin checkin)
+        private void FillChekin(Checkin checkin)
         {
-            if (checkin != null)
+            Checkin = emptyCheckin;
+            if (checkin == null)
+                return;
+
+            LoadingChangeActivity(true);
+            FillChekinAsuc(checkin);
+        }
+
+        private async void FillChekinAsuc(Checkin checkin)
+        {
+            try
             {
-                untappdService.DownloadMediaFiles(webDownloader, checkin);
+                await Task.Run(() => untappdService.DownloadMediaFiles(webDownloader, checkin));
                 Checkin = Mapper.GetCheckinViewModel(untappdService, checkin);
             }
-            else
+            catch (Exception ex)
             {
-                Checkin = null;
+                interactionRequestService.ShowError(Properties.Resources.Error, StringHelper.GetFullExceptionMessage(ex));
+            }
+            finally
+            {
+                LoadingChangeActivity(false);
             }
         }
     }

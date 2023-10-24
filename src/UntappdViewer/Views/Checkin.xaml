@@ -26,79 +26,81 @@
     <UserControl.Background>
         <SolidColorBrush Opacity="0.3" Color="#ffffff"/>
     </UserControl.Background>
-    <GroupBox Header="{Binding Checkin.Header}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0">
-                <TextBlock Visibility="{Binding Checkin.VisibilityUrl, Converter={StaticResource BooleanConverter}}">
+    <Grid>
+        <ContentControl prism:RegionManager.RegionName="{x:Static local:RegionNames.CheckinLoadingRegion}"/>
+        <GroupBox Header="{Binding Checkin.Header}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                  Visibility="{Binding Checkin.IsNotEmpty, Converter={StaticResource BooleanConverter}}" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0">
+                    <TextBlock Visibility="{Binding Checkin.VisibilityUrl, Converter={StaticResource BooleanConverter}}">
                     <Hyperlink NavigateUri="{Binding Checkin.Url}" helpers:HyperlinkExtensions.IsExternal="true">
                         <TextBlock Text="{x:Static properties:Resources.UntappdPage}"/>
                     </Hyperlink>
                 </TextBlock>
-                <GroupBox Header="{x:Static properties:Resources.Beer}">
-                    <viewControls:BeerControl DataContext="{Binding Checkin.BeerViewModel}"/>
-                </GroupBox>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0">
-                        <GroupBox Header="{x:Static properties:Resources.Brewery}">
-                            <controls:ListViewExpander DataContext="{Binding Checkin.BeerViewModel.BreweryViewModels}" ItemDataTemplate="{StaticResource BreweryControl}"
+                    <GroupBox Header="{x:Static properties:Resources.Beer}">
+                        <viewControls:BeerControl DataContext="{Binding Checkin.BeerViewModel}"/>
+                    </GroupBox>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <GroupBox Header="{x:Static properties:Resources.Brewery}">
+                                <controls:ListViewExpander DataContext="{Binding Checkin.BeerViewModel.BreweryViewModels}" ItemDataTemplate="{StaticResource BreweryControl}"
                                                        SeparatorTemplate="{StaticResource SeparatorControl}" ScrollViewerDisable="True">
-                                <controls:ListViewExpander.ExpanderHeader>
-                                    <MultiBinding StringFormat="{}{0} ({1} {2}):">
-                                        <Binding Source="{x:Static properties:Resources.CollaborationWith}"/>
-                                        <Binding RelativeSource="{RelativeSource Mode=Self}" Path="OthersItemCount"/>
-                                        <Binding Source="{x:Static properties:Resources.PCS}"/>
-                                    </MultiBinding>
-                                </controls:ListViewExpander.ExpanderHeader>
-                            </controls:ListViewExpander>
-                        </GroupBox>
-                        <DockPanel>
-                            <DockPanel Visibility="{Binding Checkin.VisibilityRating, Converter={StaticResource BooleanConverter}}">
-                                <starRating:StarRatingControl Rating="{Binding Checkin.Rating}" Style="{StaticResource StarRatingStyle}"/>
+                                    <controls:ListViewExpander.ExpanderHeader>
+                                        <MultiBinding StringFormat="{}{0} ({1} {2}):">
+                                            <Binding Source="{x:Static properties:Resources.CollaborationWith}"/>
+                                            <Binding RelativeSource="{RelativeSource Mode=Self}" Path="OthersItemCount"/>
+                                            <Binding Source="{x:Static properties:Resources.PCS}"/>
+                                        </MultiBinding>
+                                    </controls:ListViewExpander.ExpanderHeader>
+                                </controls:ListViewExpander>
+                            </GroupBox>
+                            <DockPanel>
+                                <starRating:StarRatingControl Rating="{Binding Checkin.Rating}" Style="{StaticResource StarRatingStyle}"
+                                                          Visibility="{Binding Checkin.VisibilityRating, Converter={StaticResource BooleanConverter}}"/>
+                                <TextBlock Text="  " />
+                                <Image Source="{Binding Checkin.ServingType, TargetNullValue={x:Null}}" Width="25" Height="25" HorizontalAlignment="Left"/>
                             </DockPanel>
-                            <TextBlock Text="  " />
-                            <Image Source="{Binding Checkin.ServingType, TargetNullValue={x:Null}}" Width="25" Height="25" HorizontalAlignment="Left"/>
-                        </DockPanel>
-                        <DockPanel>
-                            <!--<Image Source="..\Resources\icons8-location-24.png" Width="20" Height="20" HorizontalAlignment="Left"
+                            <DockPanel>
+                                <!--<Image Source="..\Resources\icons8-location-24.png" Width="20" Height="20" HorizontalAlignment="Left"
                                Cursor="Hand" MouseDown="UIElement_OnMouseDown"
                                Visibility="{Binding Path =VisibilityCheckinVenueLocation, Converter={StaticResource BooleanConverter}}">
                             <Image.InputBindings>
                                 <MouseBinding Gesture="LeftClick" Command="{Binding CheckinVenueLocationCommand, Mode=OneTime}" />
                             </Image.InputBindings>
                         </Image>-->
-                            <controls:TextBlockJoin TextWrapping="Wrap" VerticalAlignment="Center" Separator="{Binding Source={x:Static local:DefaultValues.Separator}}"
+                                <controls:TextBlockJoin TextWrapping="Wrap" VerticalAlignment="Center" Separator="{Binding Source={x:Static local:DefaultValues.Separator}}"
                                                 DataContext="{Binding Checkin.Venues}" Margin="10, 0, 0, 0"/>
-                        </DockPanel>
-                    </StackPanel>
-                    <GroupBox Grid.Column="1" Header="{x:Static properties:Resources.Badges}" Width="100"
+                            </DockPanel>
+                        </StackPanel>
+                        <GroupBox Grid.Column="1" Header="{x:Static properties:Resources.Badges}" Width="100"
                               Visibility="{Binding Checkin.VisibilityBadges, Converter={StaticResource BTVConverter}}">
-                        <controls:SliderImagesControl ItemsSource="{Binding Checkin.Badges}" ArrowsSize="10"/>
-                    </GroupBox>
-                </Grid>
-            </StackPanel>
-            <GroupBox Grid.Row="1" Header="{x:Static properties:Resources.Photo}">
-                <Grid>
-                    <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Opacity="0.4">
-                        <Label Content="{x:Static properties:Resources.ZoomBorderScrollUse}" FontSize="10"/>
-                        <Label Content="{x:Static properties:Resources.ZoomBorderLeftMouseButtonUse}" FontSize="10"/>
-                        <Label Content="{x:Static properties:Resources.ZoomBorderRightMouseButtonUse}" FontSize="10"/>
-                    </StackPanel>
-                    <controls:ZoomBorder ClipToBounds="True">
-                        <Image Source="{Binding Checkin.Photo, TargetNullValue={x:Null}}"/>
-                    </controls:ZoomBorder>
-                    <ContentControl prism:RegionManager.RegionName="{x:Static local:RegionNames.PhotoLoadingRegion}"/>
-                    <Image Source="..\Resources\facebook-like-beer.png" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                            <controls:SliderImagesControl ItemsSource="{Binding Checkin.Badges}" ArrowsSize="10"/>
+                        </GroupBox>
+                    </Grid>
+                </StackPanel>
+                <GroupBox Grid.Row="1" Header="{x:Static properties:Resources.Photo}">
+                    <Grid>
+                        <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Opacity="0.4">
+                            <Label Content="{x:Static properties:Resources.ZoomBorderScrollUse}" FontSize="10"/>
+                            <Label Content="{x:Static properties:Resources.ZoomBorderLeftMouseButtonUse}" FontSize="10"/>
+                            <Label Content="{x:Static properties:Resources.ZoomBorderRightMouseButtonUse}" FontSize="10"/>
+                        </StackPanel>
+                        <controls:ZoomBorder ClipToBounds="True">
+                            <Image Source="{Binding Checkin.Photo, TargetNullValue={x:Null}}"/>
+                        </controls:ZoomBorder>
+                        <Image Source="..\Resources\facebook-like-beer.png" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Bottom"
                            Visibility="{Binding Checkin.VisibilityLikeBeer, Converter={StaticResource BTVConverter}}"/>
-                </Grid>
-            </GroupBox>
-        </Grid>
-    </GroupBox>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+        </GroupBox>
+    </Grid>
 </UserControl>

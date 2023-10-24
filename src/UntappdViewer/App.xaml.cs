@@ -95,7 +95,7 @@ namespace UntappdViewer
             moduleCatalog.AddModule(typeof(RecentFilesModule), InitializationMode.OnDemand);
 
             moduleCatalog.AddModule(typeof(CheckinModule), InitializationMode.OnDemand);
-            moduleCatalog.AddModule(typeof(PhotoLoadingModule), InitializationMode.OnDemand);
+            moduleCatalog.AddModule(typeof(CheckinLoadingModule), InitializationMode.OnDemand);
             moduleCatalog.AddModule(typeof(WebDownloadProjectModule), InitializationMode.OnDemand);
             moduleCatalog.AddModule(typeof(GalleryProjectModule), InitializationMode.OnDemand);
             moduleCatalog.AddModule(typeof(StatisticsProjectModule), InitializationMode.OnDemand);

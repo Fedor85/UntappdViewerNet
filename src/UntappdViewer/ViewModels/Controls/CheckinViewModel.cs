@@ -7,6 +7,8 @@ namespace UntappdViewer.ViewModels.Controls
 {
     public class CheckinViewModel
     {
+        public bool IsNotEmpty { get; private set; }
+
         public string Header { get; set; }
 
         public string Url { get; set; }
@@ -46,6 +48,7 @@ namespace UntappdViewer.ViewModels.Controls
 
         public CheckinViewModel()
         {
+            IsNotEmpty = true;
             Venues = new List<string>();
             Badges = new List<ImageItemViewModel>();
             BeerViewModel = new BeerViewModel(); 
@@ -55,6 +58,14 @@ namespace UntappdViewer.ViewModels.Controls
         {
             if (!String.IsNullOrEmpty(venue))
                 Venues.Add(venue);
+        }
+
+        public static CheckinViewModel GetEmpty()
+        {
+            CheckinViewModel checkin = new CheckinViewModel();
+            checkin.IsNotEmpty = false;
+            checkin.BeerViewModel.BreweryViewModels.Add(new BreweryViewModel());
+            return checkin;
         }
     }
 }

@@ -140,7 +140,7 @@
     <Compile Include="Modules\LoadingModule.cs" />
     <Compile Include="Modules\MainModule.cs" />
     <Compile Include="Modules\MenuBarModule.cs" />
-    <Compile Include="Modules\PhotoLoadingModule.cs" />
+    <Compile Include="Modules\CheckinLoadingModule.cs" />
     <Compile Include="Modules\RecentFilesModule.cs" />
     <Compile Include="Modules\StatusBarModule.cs" />
     <Compile Include="Modules\TreeModue.cs" />
