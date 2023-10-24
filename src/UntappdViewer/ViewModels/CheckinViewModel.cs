@@ -65,7 +65,7 @@ namespace UntappdViewer.ViewModels
         protected override void DeActivate()
         {
             base.DeActivate();
-            Checkin = null;
+            Checkin = emptyCheckin;
             eventAggregator.GetEvent<ChekinUpdateEvent>().Unsubscribe(FillChekin);
         }
 
