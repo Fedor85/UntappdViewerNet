@@ -7,6 +7,7 @@ namespace UntappdViewer.Behaviors
     public class ParentScrollingBehavior : Behavior<ScrollViewer>
     {
         public static readonly DependencyProperty ParentDependencyProperty = DependencyProperty.Register("ParentScrollViewer", typeof(ParentScrollingToken), typeof(ParentScrollingBehavior));
+
         public static readonly DependencyProperty ChildDependencyProperty =  DependencyProperty.Register("ChildScrollViewer", typeof(ParentScrollingToken), typeof(ParentScrollingBehavior));
 
         public ParentScrollingToken ParentScrollViewer
@@ -32,6 +33,7 @@ namespace UntappdViewer.Behaviors
                 SetValue(ChildDependencyProperty, value);
             }
         }
+
         protected override void OnAttached()
         {
             base.OnAttached();
