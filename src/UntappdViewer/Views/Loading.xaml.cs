@@ -63,7 +63,7 @@ namespace UntappdViewer.Views
 
         private void SetImageAwesome(Visibility visibility)
         {
-            Dispatcher.Invoke(() => ImageAwesome.Visibility = visibility);
+            Dispatcher.Invoke(() => LoadingImageAwesome.VisibilityImageAwesome = visibility);
         }
 
         private void SetStatusTimeBar(object content)
