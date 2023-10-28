@@ -27,8 +27,11 @@ namespace UntappdViewer.UI.Controls.GeoMap
 
         protected override void OnRender(DrawingContext drawingContext)
         {
-            if (!Start.HasValue && !End.HasValue)
+            if (!Start.HasValue || !End.HasValue)
+            {
+                Width = 5;
                 return;
+            }
 
             List<double> widths = new List<double>();
 

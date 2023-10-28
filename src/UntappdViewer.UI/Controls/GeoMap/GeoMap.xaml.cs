@@ -245,6 +245,14 @@ namespace UntappdViewer.UI.Controls.GeoMap
                 AddLand(mapData);
         }
 
+        private void Reset()
+        {
+            SetRangeValue(null, null);
+            UndefinedGeoDataTooltip.ItemsGeoData = null;
+            InitializeWorld();
+            DrawWorld();
+        }
+
         private void AddLand(MapData mapData)
         {
             Path path = new Path();
@@ -280,7 +288,6 @@ namespace UntappdViewer.UI.Controls.GeoMap
                 if (path == null)
                     continue;
 
-                path.SetBinding(Shape.FillProperty, new Binding { Path = new PropertyPath(LandFillProperty), Source = this });
                 if (!HeatMap.ContainsKey(mapData.Id))
                     continue;
 
@@ -447,15 +454,10 @@ namespace UntappdViewer.UI.Controls.GeoMap
 
         private void MainSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            Draw();
+            DrawWorld();
         }
 
         #endregion
-
-        private void Draw()
-        {
-            DrawWorld();
-        }
 
         private void DrawWorld()
         {
@@ -577,23 +579,22 @@ namespace UntappdViewer.UI.Controls.GeoMap
         private static void HeatMapChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
             GeoMap geoMap = dependencyObject as GeoMap;
+
             if (e.NewValue == null)
             {
-                geoMap.SetRangeValue(null, null);
+                geoMap.Reset();
+                return;
             }
-            else
+
+            Dictionary<string, double> heatMap = e.NewValue as Dictionary<string, double>;
+            if (heatMap.Values.Count <= 0)
             {
-                Dictionary<string, double> heatMap = e.NewValue as Dictionary<string, double>;
-                if (heatMap.Values.Count > 0)
-                {
-                    geoMap.SetRangeValue(heatMap.Values.Min(), heatMap.Values.Max());
-                    geoMap.ShowMeSomeHeat();
-                }
-                else
-                {
-                    geoMap.SetRangeValue(null, null);
-                }
+                geoMap.Reset();
+                return;
             }
+
+            geoMap.SetRangeValue(heatMap.Values.Min(), heatMap.Values.Max());
+            geoMap.ShowMeSomeHeat();
         }
 
         private static void LanguagePackChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
