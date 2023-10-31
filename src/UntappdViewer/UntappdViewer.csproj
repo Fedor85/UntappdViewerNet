@@ -100,12 +100,12 @@
     <Compile Include="Different\Behaviors\Synchronised\SynchronisedWidthBehavior.cs" />
     <Compile Include="Different\Behaviors\Synchronised\SynchronisedWidthToken.cs" />
     <Compile Include="Different\CallBackConteiner.cs" />
-    <Compile Include="Different\Helpers\DataPointSeriesExtensions.cs" />
+    <Compile Include="Different\Helpers\Extensions\DataPointSeriesExtensions.cs" />
     <Compile Include="Different\Helpers\ColorPalette.cs" />
     <Compile Include="Different\Events\LoadingActivateCancel.cs" />
     <Compile Include="Different\Events\LoadingCancel.cs" />
     <Compile Include="Different\Helpers\GradientHelper.cs" />
-    <Compile Include="Different\Helpers\HyperlinkExtensions.cs" />
+    <Compile Include="Different\Helpers\Extensions\HyperlinkExtensions.cs" />
     <Compile Include="Different\Helpers\IValueConverters\BoolToVisibilityConverter.cs" />
     <Compile Include="Different\Helpers\ConverterHelper.cs" />
     <Compile Include="Different\DefaultValues.cs" />
