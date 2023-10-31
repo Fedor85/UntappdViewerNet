@@ -7,44 +7,44 @@ namespace UntappdViewer.Behaviors
 {
     public class ParentScrollingToken
     {
-        private ScrollViewer ParentScrollViewer;
+        private ScrollViewer parentScrollViewer;
 
-        private List<ScrollViewer> ChildScrollViewers;
+        private List<ScrollViewer> childScrollViewers;
 
         public ParentScrollingToken()
         {
-            ChildScrollViewers = new List<ScrollViewer>();
+            childScrollViewers = new List<ScrollViewer>();
         }
 
         public void SetParentScrollViewer(ScrollViewer scrollViewer)
         {
-            ParentScrollViewer = scrollViewer;
+            parentScrollViewer = scrollViewer;
         }
 
         public void AddChildScrollViewer(ScrollViewer scrollViewer)
         {
             scrollViewer.PreviewMouseWheel += PreviewMouseWheel;
-            ChildScrollViewers.Add(scrollViewer);
+            childScrollViewers.Add(scrollViewer);
         }
 
         public void Clear()
         {
-            foreach (ScrollViewer scrollViewer in ChildScrollViewers)
+            foreach (ScrollViewer scrollViewer in childScrollViewers)
                 scrollViewer.PreviewMouseWheel -= PreviewMouseWheel;
 
-            ChildScrollViewers.Clear();
+            childScrollViewers.Clear();
         }
 
         private void PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            if (ParentScrollViewer == null)
+            if (parentScrollViewer == null)
                 return;
 
             //Block child PreviewMouseWheel
             e.Handled = true;
             MouseWheelEventArgs mouseWheelEventArgs = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta);
             mouseWheelEventArgs.RoutedEvent = UIElement.MouseWheelEvent;
-            ParentScrollViewer.RaiseEvent(mouseWheelEventArgs);
+            parentScrollViewer.RaiseEvent(mouseWheelEventArgs);
         }
     }
 }
