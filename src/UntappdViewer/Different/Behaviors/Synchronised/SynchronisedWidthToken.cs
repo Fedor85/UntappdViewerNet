@@ -13,24 +13,14 @@ namespace UntappdViewer.Behaviors
         {
             base.Register(control);
             control.SizeChanged += SizeChanged;
-            control.IsVisibleChanged += IsVisibleChanged;
         }
 
         public override void Unregister(Control control)
         {
             base.Unregister(control);
             control.SizeChanged -= SizeChanged;
-            control.IsVisibleChanged -= IsVisibleChanged;
         }
 
-        private void IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (Convert.ToBoolean(e.NewValue))
-                return;
-
-            //Control control = GetObject(sender);
-            //control.Width = double.NaN;
-        }
 
         private void SizeChanged(object sender,SizeChangedEventArgs e)
         {
