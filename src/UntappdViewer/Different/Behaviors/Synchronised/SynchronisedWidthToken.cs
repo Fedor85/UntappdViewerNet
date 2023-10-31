@@ -28,8 +28,8 @@ namespace UntappdViewer.Behaviors
             if (Convert.ToBoolean(e.NewValue))
                 return;
 
-            Control control = GetObject(sender);
-            control.Width = double.NaN;
+            //Control control = GetObject(sender);
+            //control.Width = double.NaN;
         }
 
         private void SizeChanged(object sender,SizeChangedEventArgs e)

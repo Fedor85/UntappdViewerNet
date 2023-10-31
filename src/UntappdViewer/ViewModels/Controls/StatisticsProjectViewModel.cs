@@ -386,7 +386,6 @@ namespace UntappdViewer.ViewModels.Controls
             }
         }
 
-
         private IStatisticsCalculation statisticsCalculation;
 
         public StatisticsProjectViewModel(IStatisticsCalculation statisticsCalculation)
@@ -428,7 +427,11 @@ namespace UntappdViewer.ViewModels.Controls
             TotalDays = statisticsCalculation.GetTotalDaysByNow();
             AverageChekinsQuantity = Math.Round(statisticsCalculation.GetAverageCountByNow(), 2);
             AverageUniqueChekinsQuantity = Math.Round(statisticsCalculation.GetAverageCountByNow(true), 2);
+        }
 
+        public void SetAccumulateDataCheckins()
+        {
+            List<KeyValue<string, int>> dateChekinsCount = statisticsCalculation.GetDateChekinsByCount(); 
             DateChekinsAccumulateCount = KeyValuesHelper.GetAccumulateValues(dateChekinsCount);
         }
 
@@ -455,16 +458,6 @@ namespace UntappdViewer.ViewModels.Controls
             BeerCountryCount = beerCountryCount;
             List<KeyValue<string, double>> beerCountryRating = statisticsCalculation.GetAverageRatingByCheckinIds(beerCountryCheckinIds);
             BeerCountryRating = beerCountryRating;
-
-            Dictionary<string, double> beerCountryNameCountMap = ConverterHelper.KeyValueToDirectory<string, int, double>(beerCountryCount);
-            Dictionary<string, double> beerCountryCodeCountMap = ConverterHelper.ConvertCountryNameToCode(beerCountryNameCountMap);
-            BeerCountryCountMap = beerCountryCodeCountMap;
-
-            Dictionary<string, double> beerCountryNameRatingtMap = ConverterHelper.KeyValueToDirectory<string, double, double>(beerCountryRating);
-            Dictionary<string, double> beerCountryCodeRatingtMap = ConverterHelper.ConvertCountryNameToCode(beerCountryNameRatingtMap);
-            BeerCountryRatingMap = beerCountryCodeRatingtMap;
-
-            CountryLanguagePack = ConverterHelper.GetCountryNameByCode(beerCountryNameCountMap.Keys.ToList());
         }
 
         public void SetServingType()
@@ -482,8 +475,34 @@ namespace UntappdViewer.ViewModels.Controls
         public void SetIBUToABV()
         {
             IBUToABV = statisticsCalculation.GetABVToIBU();
+        }
+
+        public void SetIBUAndABVCount()
+        {
             ABVCount = statisticsCalculation.GetRangeABVByCount(statisticsCalculation.RangeABVByCount, statisticsCalculation.MaxABVByCount);
             IBUCount = statisticsCalculation.GetRangeIBUByCount(statisticsCalculation.RangeIBUByCount, statisticsCalculation.MaxIBUByCount);
+        }
+
+        public void SetBeerCountryCountMap()
+        {
+            List<KeyValue<string, List<long>>> beerCountryCheckinIds = statisticsCalculation.GetCountriesByCheckinIds();
+            List<KeyValue<string, int>> beerCountryCount = KeyValuesHelper.GetListCount(beerCountryCheckinIds);
+
+            Dictionary<string, double> beerCountryNameCountMap = ConverterHelper.KeyValueToDirectory<string, int, double>(beerCountryCount);
+            Dictionary<string, double> beerCountryCodeCountMap = ConverterHelper.ConvertCountryNameToCode(beerCountryNameCountMap);
+            BeerCountryCountMap = beerCountryCodeCountMap;
+
+            CountryLanguagePack = ConverterHelper.GetCountryNameByCode(beerCountryNameCountMap.Keys.ToList());
+        }
+
+        public void SetBeerCountryRatingMap()
+        {
+            List<KeyValue<string, List<long>>> beerCountryCheckinIds = statisticsCalculation.GetCountriesByCheckinIds();
+
+            List<KeyValue<string, double>> beerCountryRating = statisticsCalculation.GetAverageRatingByCheckinIds(beerCountryCheckinIds);
+            Dictionary<string, double> beerCountryNameRatingtMap = ConverterHelper.KeyValueToDirectory<string, double, double>(beerCountryRating);
+            Dictionary<string, double> beerCountryCodeRatingtMap = ConverterHelper.ConvertCountryNameToCode(beerCountryNameRatingtMap);
+            BeerCountryRatingMap = beerCountryCodeRatingtMap;
         }
 
         public void Clear()
@@ -522,6 +541,7 @@ namespace UntappdViewer.ViewModels.Controls
             CountryLanguagePack = null;
 
             MaxXAxisServingTypeCount = 0;
+            HeightChartServingType = 0;
             ServingTypeCount = null;
             ServingTypeRating = null;
 
