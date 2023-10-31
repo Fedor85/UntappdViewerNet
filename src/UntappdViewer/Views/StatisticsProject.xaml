@@ -322,7 +322,7 @@
                                                                     Maximum="{Binding StatisticsProject.MaxYAxisRatingScore}" ShowGridLines="True"/>
                                         <chartingToolkit:LinearAxis Orientation="X" Interval="0.25" ShowGridLines="True"/>
                                     </chartingToolkit:Chart.Axes>
-                                    <chartingToolkit:SplineSeries DependentValuePath="Value" IndependentValuePath="Key"
+                                    <chartingToolkit:SplineSeries DependentValuePath="Value" IndependentValuePath="Key" helpers:DataPointSeriesExtensions.Register="True"
                                                                   ItemsSource="{Binding StatisticsProject.BeerRatingScore, IsAsync=True}"
                                                                   DataPointStyle="{StaticResource BeerLineDataPointStyle}" LegendItemStyle="{StaticResource LegendItemStyle}"
                                                                   Title="{x:Static properties:Resources.Beer}" IsSelectionEnabled="True">
@@ -330,7 +330,7 @@
                                             <Label Content="{Binding StatisticsProject.AverageBeerRating}" ContentTemplate="{StaticResource AverageRatingContentTemplate}"/>
                                         </chartingToolkit:SplineSeries.LegendItems>
                                     </chartingToolkit:SplineSeries>
-                                    <chartingToolkit:SplineSeries DependentValuePath="Value" IndependentValuePath="Key"
+                                    <chartingToolkit:SplineSeries DependentValuePath="Value" IndependentValuePath="Key" helpers:DataPointSeriesExtensions.Register="True"
                                                                   ItemsSource="{Binding StatisticsProject.ChekinRatingScore, IsAsync=True}"
                                                                   DataPointStyle="{StaticResource ChekinLineDataPointStyle}" LegendItemStyle="{StaticResource LegendItemStyle}"
                                                                   Title="{x:Static properties:Resources.Checkin}" IsSelectionEnabled="True">
@@ -397,7 +397,7 @@
                                         <chartingToolkit:Chart.Axes >
                                             <chartingToolkit:CategoryAxis Orientation="X" FontSize="10" AxisLabelStyle="{StaticResource DateXAxisLabel}"/>
                                         </chartingToolkit:Chart.Axes>
-                                        <chartingToolkit:AreaSeries DependentValuePath="Value" IndependentValuePath="Key"
+                                        <chartingToolkit:AreaSeries DependentValuePath="Value" IndependentValuePath="Key" helpers:DataPointSeriesExtensions.Register="True"
                                                                     ItemsSource="{Binding StatisticsProject.DateChekinsAccumulateCount, IsAsync=True}" 
                                                                     IsSelectionEnabled="True" DataPointStyle="{StaticResource ChekinLineDataPointStyle}"/>
                                     </chartingToolkit:Chart>
@@ -564,7 +564,7 @@
                                             <chartingToolkit:LinearAxis Orientation="X" Title="{x:Static properties:Resources.ABV}" ShowGridLines="True"/>
                                             <chartingToolkit:LinearAxis Orientation="Y" Title="{x:Static properties:Resources.IBU}" ShowGridLines="True"/>
                                         </chartingToolkit:Chart.Axes>
-                                        <chartingToolkit:ScatterSeries DependentValuePath="Value" IndependentValuePath="Key"
+                                        <chartingToolkit:ScatterSeries DependentValuePath="Value" IndependentValuePath="Key" helpers:DataPointSeriesExtensions.Register="True"
                                                                        ItemsSource="{Binding StatisticsProject.IBUToABV, IsAsync=True}"
                                                                        DataPointStyle="{StaticResource ScatterDataPointStyle}"/>
                                     </chartingToolkit:Chart>
