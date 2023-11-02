@@ -21,5 +21,22 @@ namespace UntappdViewer.UI.Helpers
             T parent = parentObject as T;
             return parent != null ? parent : FindParent<T>(parentObject);
         }
+
+        public static T FindFirstChild<T>(DependencyObject parent) where T : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                DependencyObject childObject = VisualTreeHelper.GetChild(parent, i);
+
+                T child = childObject as T;
+                if (child != null)
+                    return child;
+
+                child = FindFirstChild<T>(childObject);
+                if (child != null)
+                    return child;
+            }
+            return null;
+        }
     }
 }
