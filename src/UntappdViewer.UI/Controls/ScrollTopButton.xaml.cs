@@ -19,7 +19,7 @@ namespace UntappdViewer.UI.Controls
 
         public static readonly DependencyProperty SizeProperty = DependencyProperty.Register("Size", typeof(double), typeof(ScrollTopButton), new PropertyMetadata(100d));
 
-        public static readonly DependencyProperty StrokeThicknessProperty = DependencyProperty.Register("StrokeThickness", typeof(double), typeof(ScrollTopButton), new PropertyMetadata(0));
+        public static readonly DependencyProperty StrokeThicknessProperty = DependencyProperty.Register("StrokeThickness", typeof(double), typeof(ScrollTopButton), new PropertyMetadata(0d));
 
         private static readonly DependencyProperty BackgroundEllipseProperty = DependencyProperty.Register("BackgroundEllipse", typeof(Brush), typeof(ScrollTopButton), new PropertyMetadata(new SolidColorBrush(Color.FromRgb(0, 0, 0))));
 
