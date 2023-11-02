@@ -2,14 +2,16 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:helpers="clr-namespace:UntappdViewer.Different.Helpers"
                     xmlns:local="clr-namespace:UntappdViewer"
-                    xmlns:starRating="clr-namespace:UntappdViewer.UI.Controls.StarRating;assembly=UntappdViewer.UI">
+                    xmlns:starRating="clr-namespace:UntappdViewer.UI.Controls.StarRating;assembly=UntappdViewer.UI"
+                    xmlns:controls="clr-namespace:UntappdViewer.UI.Controls;assembly=UntappdViewer.UI">
     <SolidColorBrush  x:Key="MainSolidBrushLight" Color="{x:Static local:DefaultValues.MainColorLight}"/>
     <SolidColorBrush  x:Key="MainSolidBrushDark" Color="{x:Static local:DefaultValues.MainColorDark}"/>
     <LinearGradientBrush x:Key="MainGradient2" SpreadMethod="Reflect" EndPoint="0,1">
         <GradientStop Color="{x:Static local:DefaultValues.MainColorLight}" Offset="0" />
         <GradientStop Color="{x:Static local:DefaultValues.MainColorDark}" Offset="1" />
     </LinearGradientBrush>
-    <ImageBrush x:Key="MainBackground" ImageSource="..\Resources\untappd_bottles.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0 0 80 80" Opacity="0.4">
+    <SolidColorBrush  x:Key="BackgroundPointerBrush"  Color="{x:Static local:DefaultValues.MainColorLight}" Opacity="0.5"/>
+        <ImageBrush x:Key="MainBackground" ImageSource="..\Resources\untappd_bottles.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0 0 80 80" Opacity="0.4">
         <ImageBrush.Transform>
             <RotateTransform Angle="-45"/>
         </ImageBrush.Transform>
@@ -31,5 +33,12 @@
         <Setter Property="BackgroundStarOpacity" Value="1"/>
         <Setter Property="BorderStarColor" Value="#000000"/>
         <Setter Property="ForegroundStarColor" Value="{StaticResource MainSolidBrushLight}"/>
+    </Style>
+    <Style x:Key="ScrollTopButtonStyle" TargetType="{x:Type controls:ScrollTopButton}">
+        <Setter Property="Size" Value="35"/>
+        <Setter Property="BackgroundEllipse" Value="{StaticResource MainSolidBrushDark}"/>
+        <Setter Property="BackgroundPointer" Value="{StaticResource BackgroundPointerBrush}"/>
+        <Setter Property="BackgroundStroke" Value="#000000"/>
+        <Setter Property="StrokeThickness" Value="0.3"/>
     </Style>
 </ResourceDictionary>
