@@ -311,340 +311,346 @@
             </Grid>
             <TabControl Grid.Row="1" Background="Transparent" x:Name="MainLoadControl">
                 <TabItem Header="{x:Static properties:Resources.General}">
-                    <ScrollViewer  VerticalScrollBarVisibility="Auto">
-                        <StackPanel>
-                            <Grid>
-                                <ContentControl Template="{StaticResource BackgroundControl}"/>
-                                <chartingToolkit:Chart Height="{StaticResource DefautChartHeight}" Margin="{StaticResource DefautChartMargin}" Title="{x:Static properties:Resources.ChekinRatingScore}"
+                    <Grid>
+                        <ScrollViewer  VerticalScrollBarVisibility="Auto">
+                            <StackPanel>
+                                <Grid>
+                                    <ContentControl Template="{StaticResource BackgroundControl}"/>
+                                    <chartingToolkit:Chart Height="{StaticResource DefautChartHeight}" Margin="{StaticResource DefautChartMargin}" Title="{x:Static properties:Resources.ChekinRatingScore}"
                                                        TitleStyle="{StaticResource ChartTitleStyle}" Style="{StaticResource RatingScoreChartStyle}">
-                                    <chartingToolkit:Chart.Axes>
-                                        <chartingToolkit:LinearAxis Orientation="Y" Interval="{Binding Source={x:Static local:DefaultValues.ChartRatingScoreYInterval}}" 
+                                        <chartingToolkit:Chart.Axes>
+                                            <chartingToolkit:LinearAxis Orientation="Y" Interval="{Binding Source={x:Static local:DefaultValues.ChartRatingScoreYInterval}}" 
                                                                     Maximum="{Binding StatisticsProject.MaxYAxisRatingScore}" ShowGridLines="True"/>
-                                        <chartingToolkit:LinearAxis Orientation="X" Interval="0.25" ShowGridLines="True"/>
-                                    </chartingToolkit:Chart.Axes>
-                                    <chartingToolkit:SplineSeries DependentValuePath="Value" IndependentValuePath="Key" helpers:DataPointSeriesExtensions.Register="True"
+                                            <chartingToolkit:LinearAxis Orientation="X" Interval="0.25" ShowGridLines="True"/>
+                                        </chartingToolkit:Chart.Axes>
+                                        <chartingToolkit:SplineSeries DependentValuePath="Value" IndependentValuePath="Key" helpers:DataPointSeriesExtensions.Register="True"
                                                                   ItemsSource="{Binding StatisticsProject.BeerRatingScore, IsAsync=True}"
                                                                   DataPointStyle="{StaticResource BeerLineDataPointStyle}" LegendItemStyle="{StaticResource LegendItemStyle}"
                                                                   Title="{x:Static properties:Resources.Beer}" IsSelectionEnabled="True">
-                                        <chartingToolkit:SplineSeries.LegendItems>
-                                            <Label Content="{Binding StatisticsProject.AverageBeerRating}" ContentTemplate="{StaticResource AverageRatingContentTemplate}"/>
-                                        </chartingToolkit:SplineSeries.LegendItems>
-                                    </chartingToolkit:SplineSeries>
-                                    <chartingToolkit:SplineSeries DependentValuePath="Value" IndependentValuePath="Key" helpers:DataPointSeriesExtensions.Register="True"
+                                            <chartingToolkit:SplineSeries.LegendItems>
+                                                <Label Content="{Binding StatisticsProject.AverageBeerRating}" ContentTemplate="{StaticResource AverageRatingContentTemplate}"/>
+                                            </chartingToolkit:SplineSeries.LegendItems>
+                                        </chartingToolkit:SplineSeries>
+                                        <chartingToolkit:SplineSeries DependentValuePath="Value" IndependentValuePath="Key" helpers:DataPointSeriesExtensions.Register="True"
                                                                   ItemsSource="{Binding StatisticsProject.ChekinRatingScore, IsAsync=True}"
                                                                   DataPointStyle="{StaticResource ChekinLineDataPointStyle}" LegendItemStyle="{StaticResource LegendItemStyle}"
                                                                   Title="{x:Static properties:Resources.Checkin}" IsSelectionEnabled="True">
-                                        <chartingToolkit:SplineSeries.LegendItems>
-                                            <Label Content="{Binding StatisticsProject.AverageChekinRating}" ContentTemplate="{StaticResource AverageRatingContentTemplate}"/>
-                                        </chartingToolkit:SplineSeries.LegendItems>
-                                    </chartingToolkit:SplineSeries>
-                                </chartingToolkit:Chart>
-                                <controls:Loading VisibilityImageAwesome="Collapsed" AutoCollapsed="True" LoadedContainer="{Binding ElementName=MainLoadControl}"/>
-                            </Grid>
-                            <Grid Margin="{StaticResource DefautChartOffsetBottom}">
-                                <ContentControl Template="{StaticResource BackgroundControl}"/>
-                                <StackPanel>
+                                            <chartingToolkit:SplineSeries.LegendItems>
+                                                <Label Content="{Binding StatisticsProject.AverageChekinRating}" ContentTemplate="{StaticResource AverageRatingContentTemplate}"/>
+                                            </chartingToolkit:SplineSeries.LegendItems>
+                                        </chartingToolkit:SplineSeries>
+                                    </chartingToolkit:Chart>
+                                    <controls:Loading VisibilityImageAwesome="Collapsed" AutoCollapsed="True" LoadedContainer="{Binding ElementName=MainLoadControl}"/>
+                                </Grid>
+                                <Grid Margin="{StaticResource DefautChartOffsetBottom}">
+                                    <ContentControl Template="{StaticResource BackgroundControl}"/>
+                                    <StackPanel>
+                                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden">
+                                            <ScrollViewer.Resources>
+                                                <system:Double x:Key="{x:Static SystemParameters.HorizontalScrollBarHeightKey}">10</system:Double>
+                                            </ScrollViewer.Resources>
+                                            <chartingToolkit:Chart Height="{StaticResource DefautChartHeight}" MinWidth="{Binding StatisticsProject.MinWidthChartDateChekins}"
+                                                               Margin="{StaticResource DefautChartMargin}" Title="{x:Static properties:Resources.ChekinsCountDate}"
+                                                               TitleStyle="{StaticResource ChartTitleStyle}" Style="{StaticResource ChartStyleHideLegend}">
+                                                <chartingToolkit:Chart.Axes>
+                                                    <chartingToolkit:CategoryAxis Orientation="X" FontSize="10" AxisLabelStyle="{StaticResource DateXAxisLabel}"/>
+                                                </chartingToolkit:Chart.Axes>
+                                                <chartingToolkit:ColumnSeries DependentValuePath="Value" IndependentValuePath="Key"
+                                                                          ItemsSource="{Binding StatisticsProject.DateChekinsCount, IsAsync=True}" 
+                                                                          IsSelectionEnabled="True" DataPointStyle="{StaticResource ColumnDataPointStyle}"/>
+                                            </chartingToolkit:Chart>
+                                            <b:Interaction.Behaviors>
+                                                <behaviors:SynchronisedScrollBehavior RegisterToken="{StaticResource ScrollToken}" />
+                                                <behaviors:ParentScrollingBehavior ChildScrollViewer="{StaticResource ScrollingToken}" />
+                                            </b:Interaction.Behaviors>
+                                        </ScrollViewer>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <DockPanel Grid.Column="0" HorizontalAlignment="Center">
+                                                <Label Content="{x:Static properties:Resources.TotalDays}" FontWeight="Bold"/>
+                                                <Label Content="{Binding StatisticsProject.TotalDays}" FontWeight="Bold"/>
+                                            </DockPanel>
+                                            <DockPanel Grid.Column="1" HorizontalAlignment="Center">
+                                                <Label Content="{x:Static properties:Resources.AverageChekinsQuantity}" FontWeight="Bold"/>
+                                                <Label Content="{Binding StatisticsProject.AverageChekinsQuantity}" FontWeight="Bold"/>
+                                            </DockPanel>
+                                            <DockPanel Grid.Column="2" HorizontalAlignment="Center">
+                                                <Label Content="{x:Static properties:Resources.AverageUniqueChekinsQuantity}" FontWeight="Bold"/>
+                                                <Label Content="{Binding StatisticsProject.AverageUniqueChekinsQuantity}" FontWeight="Bold"/>
+                                            </DockPanel>
+                                        </Grid>
+                                    </StackPanel>
+                                    <controls:Loading VisibilityImageAwesome="Collapsed" AutoCollapsed="True" LoadedContainer="{Binding ElementName=MainLoadControl}"/>
+                                </Grid>
+                                <Grid Margin="{StaticResource DefautChartOffsetBottom}">
+                                    <ContentControl Template="{StaticResource BackgroundControl}"/>
                                     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden">
                                         <ScrollViewer.Resources>
                                             <system:Double x:Key="{x:Static SystemParameters.HorizontalScrollBarHeightKey}">10</system:Double>
                                         </ScrollViewer.Resources>
                                         <chartingToolkit:Chart Height="{StaticResource DefautChartHeight}" MinWidth="{Binding StatisticsProject.MinWidthChartDateChekins}"
-                                                               Margin="{StaticResource DefautChartMargin}" Title="{x:Static properties:Resources.ChekinsCountDate}"
-                                                               TitleStyle="{StaticResource ChartTitleStyle}" Style="{StaticResource ChartStyleHideLegend}">
-                                            <chartingToolkit:Chart.Axes>
+                                                           Margin="{StaticResource DefautChartMargin}" Title="{x:Static properties:Resources.ChekinsAccumulateCountDate}"
+                                                           TitleStyle="{StaticResource ChartTitleStyle}" Style="{StaticResource ChartStyleHideLegend}">
+                                            <chartingToolkit:Chart.Axes >
                                                 <chartingToolkit:CategoryAxis Orientation="X" FontSize="10" AxisLabelStyle="{StaticResource DateXAxisLabel}"/>
                                             </chartingToolkit:Chart.Axes>
-                                            <chartingToolkit:ColumnSeries DependentValuePath="Value" IndependentValuePath="Key"
-                                                                          ItemsSource="{Binding StatisticsProject.DateChekinsCount, IsAsync=True}" 
-                                                                          IsSelectionEnabled="True" DataPointStyle="{StaticResource ColumnDataPointStyle}"/>
+                                            <chartingToolkit:AreaSeries DependentValuePath="Value" IndependentValuePath="Key" helpers:DataPointSeriesExtensions.Register="True"
+                                                                    ItemsSource="{Binding StatisticsProject.DateChekinsAccumulateCount, IsAsync=True}" 
+                                                                    IsSelectionEnabled="True" DataPointStyle="{StaticResource ChekinLineDataPointStyle}"/>
                                         </chartingToolkit:Chart>
                                         <b:Interaction.Behaviors>
-                                            <behaviors:SynchronisedScrollBehavior RegisterToken="{StaticResource ScrollToken}" />
+                                            <behaviors:SynchronisedScrollBehavior RegisterToken="{StaticResource ScrollToken}"/>
                                             <behaviors:ParentScrollingBehavior ChildScrollViewer="{StaticResource ScrollingToken}" />
                                         </b:Interaction.Behaviors>
                                     </ScrollViewer>
-                                    <Grid>
+                                    <controls:Loading VisibilityImageAwesome="Collapsed" AutoCollapsed="True" LoadedContainer="{Binding ElementName=MainLoadControl}"/>
+                                </Grid>
+                                <Grid Margin="{StaticResource DefautChartOffsetBottom}">
+                                    <ContentControl Template="{StaticResource BackgroundControl}"/>
+                                    <Grid  Margin="{StaticResource DefautChartMargin}">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition/>
-                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="10"/>
                                             <ColumnDefinition/>
                                         </Grid.ColumnDefinitions>
-                                        <DockPanel Grid.Column="0" HorizontalAlignment="Center">
-                                            <Label Content="{x:Static properties:Resources.TotalDays}" FontWeight="Bold"/>
-                                            <Label Content="{Binding StatisticsProject.TotalDays}" FontWeight="Bold"/>
-                                        </DockPanel>
-                                        <DockPanel Grid.Column="1" HorizontalAlignment="Center">
-                                            <Label Content="{x:Static properties:Resources.AverageChekinsQuantity}" FontWeight="Bold"/>
-                                            <Label Content="{Binding StatisticsProject.AverageChekinsQuantity}" FontWeight="Bold"/>
-                                        </DockPanel>
-                                        <DockPanel Grid.Column="2" HorizontalAlignment="Center">
-                                            <Label Content="{x:Static properties:Resources.AverageUniqueChekinsQuantity}" FontWeight="Bold"/>
-                                            <Label Content="{Binding StatisticsProject.AverageUniqueChekinsQuantity}" FontWeight="Bold"/>
-                                        </DockPanel>
-                                    </Grid>
-                                </StackPanel>
-                                <controls:Loading VisibilityImageAwesome="Collapsed" AutoCollapsed="True" LoadedContainer="{Binding ElementName=MainLoadControl}"/>
-                            </Grid>
-                            <Grid Margin="{StaticResource DefautChartOffsetBottom}">
-                                <ContentControl Template="{StaticResource BackgroundControl}"/>
-                                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden">
-                                    <ScrollViewer.Resources>
-                                        <system:Double x:Key="{x:Static SystemParameters.HorizontalScrollBarHeightKey}">10</system:Double>
-                                    </ScrollViewer.Resources>
-                                    <chartingToolkit:Chart Height="{StaticResource DefautChartHeight}" MinWidth="{Binding StatisticsProject.MinWidthChartDateChekins}"
-                                                           Margin="{StaticResource DefautChartMargin}" Title="{x:Static properties:Resources.ChekinsAccumulateCountDate}"
-                                                           TitleStyle="{StaticResource ChartTitleStyle}" Style="{StaticResource ChartStyleHideLegend}">
-                                        <chartingToolkit:Chart.Axes >
-                                            <chartingToolkit:CategoryAxis Orientation="X" FontSize="10" AxisLabelStyle="{StaticResource DateXAxisLabel}"/>
-                                        </chartingToolkit:Chart.Axes>
-                                        <chartingToolkit:AreaSeries DependentValuePath="Value" IndependentValuePath="Key" helpers:DataPointSeriesExtensions.Register="True"
-                                                                    ItemsSource="{Binding StatisticsProject.DateChekinsAccumulateCount, IsAsync=True}" 
-                                                                    IsSelectionEnabled="True" DataPointStyle="{StaticResource ChekinLineDataPointStyle}"/>
-                                    </chartingToolkit:Chart>
-                                    <b:Interaction.Behaviors>
-                                        <behaviors:SynchronisedScrollBehavior RegisterToken="{StaticResource ScrollToken}"/>
-                                        <behaviors:ParentScrollingBehavior ChildScrollViewer="{StaticResource ScrollingToken}" />
-                                    </b:Interaction.Behaviors>
-                                </ScrollViewer>
-                                <controls:Loading VisibilityImageAwesome="Collapsed" AutoCollapsed="True" LoadedContainer="{Binding ElementName=MainLoadControl}"/>
-                            </Grid>
-                            <Grid Margin="{StaticResource DefautChartOffsetBottom}">
-                                <ContentControl Template="{StaticResource BackgroundControl}"/>
-                                <Grid  Margin="{StaticResource DefautChartMargin}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition Width="10"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <chartingToolkit:Chart Grid.Column="0" Style="{StaticResource BarSeriesChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
+                                        <chartingToolkit:Chart Grid.Column="0" Style="{StaticResource BarSeriesChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
                                                            Title="{x:Static properties:Resources.StyleCount}" >
-                                        <chartingToolkit:Chart.ChartAreaStyle>
-                                            <Style TargetType="{x:Type FrameworkElement}">
-                                                <Setter Property="Height" Value="{Binding StatisticsProject.HeightChartBeerType}" />
-                                            </Style>
-                                        </chartingToolkit:Chart.ChartAreaStyle>
-                                        <chartingToolkit:Chart.Axes>
-                                            <chartingToolkit:LinearAxis Orientation="X" Minimum="0" Maximum="{Binding StatisticsProject.MaxXAxisBeerTypeCount}" ShowGridLines="True"/>
-                                            <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}">
-                                                <b:Interaction.Behaviors>
-                                                    <behaviors:SynchronisedWidthBehavior RegisterToken="{StaticResource WidthTokenLeft}"/>
-                                                </b:Interaction.Behaviors>
-                                            </chartingToolkit:CategoryAxis>
-                                        </chartingToolkit:Chart.Axes>
-                                        <chartingToolkit:BarSeries  DependentValuePath="Value" IndependentValuePath="Key"
+                                            <chartingToolkit:Chart.ChartAreaStyle>
+                                                <Style TargetType="{x:Type FrameworkElement}">
+                                                    <Setter Property="Height" Value="{Binding StatisticsProject.HeightChartBeerType}" />
+                                                </Style>
+                                            </chartingToolkit:Chart.ChartAreaStyle>
+                                            <chartingToolkit:Chart.Axes>
+                                                <chartingToolkit:LinearAxis Orientation="X" Minimum="0" Maximum="{Binding StatisticsProject.MaxXAxisBeerTypeCount}" ShowGridLines="True"/>
+                                                <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}">
+                                                    <b:Interaction.Behaviors>
+                                                        <behaviors:SynchronisedWidthBehavior RegisterToken="{StaticResource WidthTokenLeft}"/>
+                                                    </b:Interaction.Behaviors>
+                                                </chartingToolkit:CategoryAxis>
+                                            </chartingToolkit:Chart.Axes>
+                                            <chartingToolkit:BarSeries  DependentValuePath="Value" IndependentValuePath="Key"
                                                                     ItemsSource="{Binding StatisticsProject.BeerTypeCount, IsAsync=True}"
                                                                     DataPointStyle="{StaticResource BarDataPointStyle}" IsSelectionEnabled="True"/>
-                                    </chartingToolkit:Chart>
-                                    <chartingToolkit:Chart Grid.Column="2" Style="{StaticResource BarSeriesChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
+                                        </chartingToolkit:Chart>
+                                        <chartingToolkit:Chart Grid.Column="2" Style="{StaticResource BarSeriesChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
                                                            Title="{x:Static properties:Resources.StyleRating}">
-                                        <chartingToolkit:Chart.ChartAreaStyle>
-                                            <Style TargetType="{x:Type FrameworkElement}">
-                                                <Setter Property="Height" Value="{Binding StatisticsProject.HeightChartBeerType}" />
-                                            </Style>
-                                        </chartingToolkit:Chart.ChartAreaStyle>
-                                        <chartingToolkit:Chart.Axes>
-                                            <chartingToolkit:LinearAxis Orientation="X" Minimum="0" Maximum="{StaticResource MaxRating}" ShowGridLines="True"/>
-                                            <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}">
-                                                <b:Interaction.Behaviors>
-                                                    <behaviors:SynchronisedWidthBehavior RegisterToken="{StaticResource WidthTokenRight}" />
-                                                </b:Interaction.Behaviors>
-                                            </chartingToolkit:CategoryAxis>
-                                        </chartingToolkit:Chart.Axes>
-                                        <chartingToolkit:BarSeries DependentValuePath="Value" IndependentValuePath="Key"
+                                            <chartingToolkit:Chart.ChartAreaStyle>
+                                                <Style TargetType="{x:Type FrameworkElement}">
+                                                    <Setter Property="Height" Value="{Binding StatisticsProject.HeightChartBeerType}" />
+                                                </Style>
+                                            </chartingToolkit:Chart.ChartAreaStyle>
+                                            <chartingToolkit:Chart.Axes>
+                                                <chartingToolkit:LinearAxis Orientation="X" Minimum="0" Maximum="{StaticResource MaxRating}" ShowGridLines="True"/>
+                                                <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}">
+                                                    <b:Interaction.Behaviors>
+                                                        <behaviors:SynchronisedWidthBehavior RegisterToken="{StaticResource WidthTokenRight}" />
+                                                    </b:Interaction.Behaviors>
+                                                </chartingToolkit:CategoryAxis>
+                                            </chartingToolkit:Chart.Axes>
+                                            <chartingToolkit:BarSeries DependentValuePath="Value" IndependentValuePath="Key"
                                                                    ItemsSource="{Binding StatisticsProject.BeerTypeRating, IsAsync=True}"
                                                                    DataPointStyle="{StaticResource BarDataPointStyle}" IsSelectionEnabled="True"/>
-                                    </chartingToolkit:Chart>
+                                        </chartingToolkit:Chart>
+                                    </Grid>
+                                    <controls:Loading VisibilityImageAwesome="Collapsed" AutoCollapsed="True" LoadedContainer="{Binding ElementName=MainLoadControl}"/>
                                 </Grid>
-                                <controls:Loading VisibilityImageAwesome="Collapsed" AutoCollapsed="True" LoadedContainer="{Binding ElementName=MainLoadControl}"/>
-                            </Grid>
-                            <Grid Margin="{StaticResource DefautChartOffsetBottom}">
-                                <ContentControl Template="{StaticResource BackgroundControl}"/>
-                                <Grid Margin="{StaticResource DefautChartMargin}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition Width="10"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <chartingToolkit:Chart Grid.Column="0" Style="{StaticResource BarSeriesChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
+                                <Grid Margin="{StaticResource DefautChartOffsetBottom}">
+                                    <ContentControl Template="{StaticResource BackgroundControl}"/>
+                                    <Grid Margin="{StaticResource DefautChartMargin}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="10"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <chartingToolkit:Chart Grid.Column="0" Style="{StaticResource BarSeriesChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
                                                            Title="{x:Static properties:Resources.CountryCount}">
-                                        <chartingToolkit:Chart.ChartAreaStyle>
-                                            <Style TargetType="{x:Type FrameworkElement}">
-                                                <Setter Property="Height" Value="{Binding StatisticsProject.HeightChartBeerCountry}" />
-                                            </Style>
-                                        </chartingToolkit:Chart.ChartAreaStyle>
-                                        <chartingToolkit:Chart.Axes>
-                                            <chartingToolkit:LinearAxis Orientation="X" Minimum="0" Maximum="{Binding StatisticsProject.MaxXAxisBeerCountryCount}" ShowGridLines="True" />
-                                            <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}" AxisLabelStyle="{StaticResource CountryAxisLabelStyle}">
-                                                <b:Interaction.Behaviors>
-                                                    <behaviors:SynchronisedWidthBehavior RegisterToken="{StaticResource WidthTokenLeft}" />
-                                                </b:Interaction.Behaviors>
-                                            </chartingToolkit:CategoryAxis>
-                                        </chartingToolkit:Chart.Axes>
-                                        <chartingToolkit:BarSeries  DependentValuePath="Value" IndependentValuePath="Key"
+                                            <chartingToolkit:Chart.ChartAreaStyle>
+                                                <Style TargetType="{x:Type FrameworkElement}">
+                                                    <Setter Property="Height" Value="{Binding StatisticsProject.HeightChartBeerCountry}" />
+                                                </Style>
+                                            </chartingToolkit:Chart.ChartAreaStyle>
+                                            <chartingToolkit:Chart.Axes>
+                                                <chartingToolkit:LinearAxis Orientation="X" Minimum="0" Maximum="{Binding StatisticsProject.MaxXAxisBeerCountryCount}" ShowGridLines="True" />
+                                                <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}" AxisLabelStyle="{StaticResource CountryAxisLabelStyle}">
+                                                    <b:Interaction.Behaviors>
+                                                        <behaviors:SynchronisedWidthBehavior RegisterToken="{StaticResource WidthTokenLeft}" />
+                                                    </b:Interaction.Behaviors>
+                                                </chartingToolkit:CategoryAxis>
+                                            </chartingToolkit:Chart.Axes>
+                                            <chartingToolkit:BarSeries  DependentValuePath="Value" IndependentValuePath="Key"
                                                                     ItemsSource="{Binding StatisticsProject.BeerCountryCount, IsAsync=True}"
                                                                     DataPointStyle="{StaticResource BarDataPointStyle}" IsSelectionEnabled="True"/>
-                                    </chartingToolkit:Chart>
-                                    <chartingToolkit:Chart Grid.Column="2" Style="{StaticResource BarSeriesChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
+                                        </chartingToolkit:Chart>
+                                        <chartingToolkit:Chart Grid.Column="2" Style="{StaticResource BarSeriesChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
                                                            Title="{x:Static properties:Resources.CountryRating}">
-                                        <chartingToolkit:Chart.ChartAreaStyle>
-                                            <Style TargetType="{x:Type FrameworkElement}">
-                                                <Setter Property="Height" Value="{Binding StatisticsProject.HeightChartBeerCountry}" />
-                                            </Style>
-                                        </chartingToolkit:Chart.ChartAreaStyle>
-                                        <chartingToolkit:Chart.Axes>
-                                            <chartingToolkit:LinearAxis Orientation="X" Minimum="0" Maximum="{StaticResource MaxRating}" ShowGridLines="True"/>
-                                            <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}" AxisLabelStyle="{StaticResource CountryAxisLabelStyle}">
-                                                <b:Interaction.Behaviors>
-                                                    <behaviors:SynchronisedWidthBehavior RegisterToken="{StaticResource WidthTokenRight}" />
-                                                </b:Interaction.Behaviors>
-                                            </chartingToolkit:CategoryAxis>
-                                        </chartingToolkit:Chart.Axes>
-                                        <chartingToolkit:BarSeries  DependentValuePath="Value" IndependentValuePath="Key"
+                                            <chartingToolkit:Chart.ChartAreaStyle>
+                                                <Style TargetType="{x:Type FrameworkElement}">
+                                                    <Setter Property="Height" Value="{Binding StatisticsProject.HeightChartBeerCountry}" />
+                                                </Style>
+                                            </chartingToolkit:Chart.ChartAreaStyle>
+                                            <chartingToolkit:Chart.Axes>
+                                                <chartingToolkit:LinearAxis Orientation="X" Minimum="0" Maximum="{StaticResource MaxRating}" ShowGridLines="True"/>
+                                                <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}" AxisLabelStyle="{StaticResource CountryAxisLabelStyle}">
+                                                    <b:Interaction.Behaviors>
+                                                        <behaviors:SynchronisedWidthBehavior RegisterToken="{StaticResource WidthTokenRight}" />
+                                                    </b:Interaction.Behaviors>
+                                                </chartingToolkit:CategoryAxis>
+                                            </chartingToolkit:Chart.Axes>
+                                            <chartingToolkit:BarSeries  DependentValuePath="Value" IndependentValuePath="Key"
                                                                     ItemsSource="{Binding StatisticsProject.BeerCountryRating, IsAsync=True}"
                                                                     DataPointStyle="{StaticResource BarDataPointStyle}" IsSelectionEnabled="True"/>
-                                    </chartingToolkit:Chart>
+                                        </chartingToolkit:Chart>
+                                    </Grid>
+                                    <controls:Loading VisibilityImageAwesome="Collapsed" AutoCollapsed="True" LoadedContainer="{Binding ElementName=MainLoadControl}"/>
                                 </Grid>
-                                <controls:Loading VisibilityImageAwesome="Collapsed" AutoCollapsed="True" LoadedContainer="{Binding ElementName=MainLoadControl}"/>
-                            </Grid>
-                            <Grid Margin="{StaticResource DefautChartOffsetBottom}">
-                                <ContentControl Template="{StaticResource BackgroundControl}"/>
-                                <Grid Margin="{StaticResource DefautChartMargin}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition Width="10"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <chartingToolkit:Chart Grid.Column="0" Style="{StaticResource BarSeriesChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
+                                <Grid Margin="{StaticResource DefautChartOffsetBottom}">
+                                    <ContentControl Template="{StaticResource BackgroundControl}"/>
+                                    <Grid Margin="{StaticResource DefautChartMargin}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="10"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <chartingToolkit:Chart Grid.Column="0" Style="{StaticResource BarSeriesChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
                                                            Title="{x:Static properties:Resources.ServingTypeCount}">
-                                        <chartingToolkit:Chart.ChartAreaStyle>
-                                            <Style TargetType="{x:Type FrameworkElement}">
-                                                <Setter Property="Height" Value="{Binding StatisticsProject.HeightChartServingType}" />
-                                            </Style>
-                                        </chartingToolkit:Chart.ChartAreaStyle>
-                                        <chartingToolkit:Chart.Axes>
-                                            <chartingToolkit:LinearAxis Orientation="X" Minimum="0" Maximum="{Binding StatisticsProject.MaxXAxisServingTypeCount}" ShowGridLines="True" />
-                                            <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}" AxisLabelStyle="{StaticResource ServingTypeAxisLabelStyle}">
-                                                <b:Interaction.Behaviors>
-                                                    <behaviors:SynchronisedWidthBehavior RegisterToken="{StaticResource WidthTokenLeft}" />
-                                                </b:Interaction.Behaviors>
-                                            </chartingToolkit:CategoryAxis>
-                                        </chartingToolkit:Chart.Axes>
-                                        <chartingToolkit:BarSeries  DependentValuePath="Value" IndependentValuePath="Key"
+                                            <chartingToolkit:Chart.ChartAreaStyle>
+                                                <Style TargetType="{x:Type FrameworkElement}">
+                                                    <Setter Property="Height" Value="{Binding StatisticsProject.HeightChartServingType}" />
+                                                </Style>
+                                            </chartingToolkit:Chart.ChartAreaStyle>
+                                            <chartingToolkit:Chart.Axes>
+                                                <chartingToolkit:LinearAxis Orientation="X" Minimum="0" Maximum="{Binding StatisticsProject.MaxXAxisServingTypeCount}" ShowGridLines="True" />
+                                                <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}" AxisLabelStyle="{StaticResource ServingTypeAxisLabelStyle}">
+                                                    <b:Interaction.Behaviors>
+                                                        <behaviors:SynchronisedWidthBehavior RegisterToken="{StaticResource WidthTokenLeft}" />
+                                                    </b:Interaction.Behaviors>
+                                                </chartingToolkit:CategoryAxis>
+                                            </chartingToolkit:Chart.Axes>
+                                            <chartingToolkit:BarSeries  DependentValuePath="Value" IndependentValuePath="Key"
                                                                     ItemsSource="{Binding StatisticsProject.ServingTypeCount, IsAsync=True}"
                                                                     DataPointStyle="{StaticResource BarDataPointStyle}" IsSelectionEnabled="True"/>
-                                    </chartingToolkit:Chart>
-                                    <chartingToolkit:Chart Grid.Column="2" Style="{StaticResource BarSeriesChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
+                                        </chartingToolkit:Chart>
+                                        <chartingToolkit:Chart Grid.Column="2" Style="{StaticResource BarSeriesChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
                                                    Title="{x:Static properties:Resources.ServingTypeRating}">
-                                        <chartingToolkit:Chart.ChartAreaStyle>
-                                            <Style TargetType="{x:Type FrameworkElement}">
-                                                <Setter Property="Height" Value="{Binding StatisticsProject.HeightChartServingType}" />
-                                            </Style>
-                                        </chartingToolkit:Chart.ChartAreaStyle>
-                                        <chartingToolkit:Chart.Axes>
-                                            <chartingToolkit:LinearAxis Orientation="X" Minimum="0" Maximum="{StaticResource MaxRating}" ShowGridLines="True"/>
-                                            <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}" AxisLabelStyle="{StaticResource ServingTypeAxisLabelStyle}">
-                                                <b:Interaction.Behaviors>
-                                                    <behaviors:SynchronisedWidthBehavior RegisterToken="{StaticResource WidthTokenRight}" />
-                                                </b:Interaction.Behaviors>
-                                            </chartingToolkit:CategoryAxis>
-                                        </chartingToolkit:Chart.Axes>
-                                        <chartingToolkit:BarSeries  DependentValuePath="Value" IndependentValuePath="Key"
+                                            <chartingToolkit:Chart.ChartAreaStyle>
+                                                <Style TargetType="{x:Type FrameworkElement}">
+                                                    <Setter Property="Height" Value="{Binding StatisticsProject.HeightChartServingType}" />
+                                                </Style>
+                                            </chartingToolkit:Chart.ChartAreaStyle>
+                                            <chartingToolkit:Chart.Axes>
+                                                <chartingToolkit:LinearAxis Orientation="X" Minimum="0" Maximum="{StaticResource MaxRating}" ShowGridLines="True"/>
+                                                <chartingToolkit:CategoryAxis Style="{StaticResource BarSeriesYLinearAxisStyle}" AxisLabelStyle="{StaticResource ServingTypeAxisLabelStyle}">
+                                                    <b:Interaction.Behaviors>
+                                                        <behaviors:SynchronisedWidthBehavior RegisterToken="{StaticResource WidthTokenRight}" />
+                                                    </b:Interaction.Behaviors>
+                                                </chartingToolkit:CategoryAxis>
+                                            </chartingToolkit:Chart.Axes>
+                                            <chartingToolkit:BarSeries  DependentValuePath="Value" IndependentValuePath="Key"
                                                                     ItemsSource="{Binding StatisticsProject.ServingTypeRating, IsAsync=True}"
                                                                     DataPointStyle="{StaticResource BarDataPointStyle}" IsSelectionEnabled="True"/>
-                                    </chartingToolkit:Chart>
+                                        </chartingToolkit:Chart>
+                                    </Grid>
+                                    <controls:Loading VisibilityImageAwesome="Collapsed" AutoCollapsed="True" LoadedContainer="{Binding ElementName=MainLoadControl}"/>
                                 </Grid>
-                                <controls:Loading VisibilityImageAwesome="Collapsed" AutoCollapsed="True" LoadedContainer="{Binding ElementName=MainLoadControl}"/>
-                            </Grid>
-                            <Grid Margin="{StaticResource DefautChartOffsetBottom}">
-                                <ContentControl Template="{StaticResource BackgroundControl}"/>
-                                <Grid Margin="{StaticResource DefautChartMargin}">
-                                    <chartingToolkit:Chart Style="{StaticResource ChartStyleHideLegend}" TitleStyle="{StaticResource ChartTitleStyle}"
+                                <Grid Margin="{StaticResource DefautChartOffsetBottom}">
+                                    <ContentControl Template="{StaticResource BackgroundControl}"/>
+                                    <Grid Margin="{StaticResource DefautChartMargin}">
+                                        <chartingToolkit:Chart Style="{StaticResource ChartStyleHideLegend}" TitleStyle="{StaticResource ChartTitleStyle}"
                                                            Title="{x:Static properties:Resources.IBUToABV}" Height="500" >
-                                        <chartingToolkit:Chart.Axes>
-                                            <chartingToolkit:LinearAxis Orientation="X" Title="{x:Static properties:Resources.ABV}" ShowGridLines="True"/>
-                                            <chartingToolkit:LinearAxis Orientation="Y" Title="{x:Static properties:Resources.IBU}" ShowGridLines="True"/>
-                                        </chartingToolkit:Chart.Axes>
-                                        <chartingToolkit:ScatterSeries DependentValuePath="Value" IndependentValuePath="Key" helpers:DataPointSeriesExtensions.Register="True"
+                                            <chartingToolkit:Chart.Axes>
+                                                <chartingToolkit:LinearAxis Orientation="X" Title="{x:Static properties:Resources.ABV}" ShowGridLines="True"/>
+                                                <chartingToolkit:LinearAxis Orientation="Y" Title="{x:Static properties:Resources.IBU}" ShowGridLines="True"/>
+                                            </chartingToolkit:Chart.Axes>
+                                            <chartingToolkit:ScatterSeries DependentValuePath="Value" IndependentValuePath="Key" helpers:DataPointSeriesExtensions.Register="True"
                                                                        ItemsSource="{Binding StatisticsProject.IBUToABV, IsAsync=True}"
                                                                        DataPointStyle="{StaticResource ScatterDataPointStyle}"/>
-                                    </chartingToolkit:Chart>
+                                        </chartingToolkit:Chart>
+                                    </Grid>
+                                    <controls:Loading VisibilityImageAwesome="Collapsed" AutoCollapsed="True" LoadedContainer="{Binding ElementName=MainLoadControl}"/>
                                 </Grid>
-                                <controls:Loading VisibilityImageAwesome="Collapsed" AutoCollapsed="True" LoadedContainer="{Binding ElementName=MainLoadControl}"/>
-                            </Grid>
-                            <Grid Margin="{StaticResource DefautChartOffsetBottom}">
-                                <ContentControl Template="{StaticResource BackgroundControl}"/>
-                                <Grid Margin="{StaticResource DefautChartMargin}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition Width="10"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <chartingToolkit:Chart Grid.Column="0" Style="{StaticResource RatingScoreChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
+                                <Grid Margin="{StaticResource DefautChartOffsetBottom}">
+                                    <ContentControl Template="{StaticResource BackgroundControl}"/>
+                                    <Grid Margin="{StaticResource DefautChartMargin}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="10"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <chartingToolkit:Chart Grid.Column="0" Style="{StaticResource RatingScoreChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
                                                            Title="{x:Static properties:Resources.ABV}" Height="300">
-                                        <chartingToolkit:PieSeries DependentValuePath="Value" IndependentValuePath="Key"
+                                            <chartingToolkit:PieSeries DependentValuePath="Value" IndependentValuePath="Key"
                                                                    ItemsSource="{Binding StatisticsProject.ABVCount, IsAsync=True}"
                                                                    LegendItemStyle="{StaticResource LegendItemStyle}" DataPointStyle="{StaticResource PipeDataPointStyle}"/>
-                                    </chartingToolkit:Chart>
-                                    <chartingToolkit:Chart Grid.Column="2" Style="{StaticResource RatingScoreChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
+                                        </chartingToolkit:Chart>
+                                        <chartingToolkit:Chart Grid.Column="2" Style="{StaticResource RatingScoreChartStyle}" TitleStyle="{StaticResource ChartTitleStyle}"
                                                            Title="{x:Static properties:Resources.IBU}" Height="300">
-                                        <chartingToolkit:PieSeries DependentValuePath="Value" IndependentValuePath="Key"
+                                            <chartingToolkit:PieSeries DependentValuePath="Value" IndependentValuePath="Key"
                                                                    ItemsSource="{Binding StatisticsProject.IBUCount, IsAsync=True}"
                                                                    LegendItemStyle="{StaticResource LegendItemStyle}" DataPointStyle="{StaticResource PipeDataPointStyle}"/>
-                                    </chartingToolkit:Chart>
+                                        </chartingToolkit:Chart>
+                                    </Grid>
+                                    <controls:Loading VisibilityImageAwesome="Collapsed" AutoCollapsed="True" LoadedContainer="{Binding ElementName=MainLoadControl}"/>
                                 </Grid>
-                                <controls:Loading VisibilityImageAwesome="Collapsed" AutoCollapsed="True" LoadedContainer="{Binding ElementName=MainLoadControl}"/>
-                            </Grid>
-                        </StackPanel>
-                        <b:Interaction.Behaviors>
-                            <behaviors:ParentScrollingBehavior ParentScrollViewer="{StaticResource ScrollingToken}" />
-                        </b:Interaction.Behaviors>
-                    </ScrollViewer>
+                            </StackPanel>
+                            <b:Interaction.Behaviors>
+                                <behaviors:ParentScrollingBehavior ParentScrollViewer="{StaticResource ScrollingToken}" />
+                            </b:Interaction.Behaviors>
+                        </ScrollViewer>
+                        <controls:ScrollTopButton Style="{StaticResource ScrollTopButtonStyle}"  Margin="20, 5"/>
+                    </Grid>
                 </TabItem>
                 <TabItem Header="{x:Static properties:Resources.Map}">
-                    <ScrollViewer  VerticalScrollBarVisibility="Auto">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Grid Grid.Row="0">
-                                <StackPanel>
-                                    <Grid>
-                                        <ContentControl Template="{StaticResource BackgroundControl}"/>
-                                        <ContentControl ContentTemplate="{StaticResource ChartTitle}" Content="{x:Static properties:Resources.CountryCount}"/>
-                                    </Grid>
-                                    <geoMap:GeoMap HeatMap="{Binding StatisticsProject.BeerCountryCountMap, IsAsync=True}"
+                    <Grid>
+                        <ScrollViewer  VerticalScrollBarVisibility="Auto">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <StackPanel>
+                                        <Grid>
+                                            <ContentControl Template="{StaticResource BackgroundControl}"/>
+                                            <ContentControl ContentTemplate="{StaticResource ChartTitle}" Content="{x:Static properties:Resources.CountryCount}"/>
+                                        </Grid>
+                                        <geoMap:GeoMap HeatMap="{Binding StatisticsProject.BeerCountryCountMap, IsAsync=True}"
                                                    Height="400" LanguagePack="{Binding StatisticsProject.CountryLanguagePack}"
                                                    GradientHelper="{Binding Source={StaticResource GradientHelper}}" LandBordeThickness="5" 
                                                    Background="{StaticResource BackgroundMap}" BackgroundGrid="{StaticResource BackgroundMapGrid}"
                                                    VisibilityData="True" EnableZoomingAndPanning="True">
-                                        <b:Interaction.Behaviors>
-                                            <behaviors:SynchronisedMapBehavior RegisterToken="{StaticResource MapToken}"/>
-                                        </b:Interaction.Behaviors>
-                                    </geoMap:GeoMap>
-                                </StackPanel>
-                                <controls:Loading VisibilityImageAwesome="Collapsed" AutoCollapsed="True" LoadedContainer="{Binding ElementName=MainLoadControl}"/>
-                            </Grid>
-                            <Grid Grid.Row="1">
-                                <StackPanel>
-                                    <Grid Margin="{StaticResource DefautChartOffsetBottom}">
-                                        <ContentControl Template="{StaticResource BackgroundControl}"/>
-                                        <ContentControl ContentTemplate="{StaticResource ChartTitle}" Content="{x:Static properties:Resources.CountryRating}"/>
-                                    </Grid>
-                                    <geoMap:GeoMap HeatMap="{Binding StatisticsProject.BeerCountryRatingMap, IsAsync=True}"
+                                            <b:Interaction.Behaviors>
+                                                <behaviors:SynchronisedMapBehavior RegisterToken="{StaticResource MapToken}"/>
+                                            </b:Interaction.Behaviors>
+                                        </geoMap:GeoMap>
+                                    </StackPanel>
+                                    <controls:Loading VisibilityImageAwesome="Collapsed" AutoCollapsed="True" LoadedContainer="{Binding ElementName=MainLoadControl}"/>
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <StackPanel>
+                                        <Grid Margin="{StaticResource DefautChartOffsetBottom}">
+                                            <ContentControl Template="{StaticResource BackgroundControl}"/>
+                                            <ContentControl ContentTemplate="{StaticResource ChartTitle}" Content="{x:Static properties:Resources.CountryRating}"/>
+                                        </Grid>
+                                        <geoMap:GeoMap HeatMap="{Binding StatisticsProject.BeerCountryRatingMap, IsAsync=True}"
                                                    Height="400" LanguagePack="{Binding StatisticsProject.CountryLanguagePack, IsAsync=True}"
                                                    GradientHelper="{Binding Source={StaticResource GradientHelper}}" LandBordeThickness="5" 
                                                    Background="{StaticResource BackgroundMap}" BackgroundGrid="{StaticResource BackgroundMapGrid}"
                                                    VisibilityData="True" EnableZoomingAndPanning="True">
-                                        <b:Interaction.Behaviors>
-                                            <behaviors:SynchronisedMapBehavior RegisterToken="{StaticResource MapToken}" />
-                                        </b:Interaction.Behaviors>
-                                    </geoMap:GeoMap>
-                                </StackPanel>
-                                <controls:Loading VisibilityImageAwesome="Collapsed" AutoCollapsed="True" LoadedContainer="{Binding ElementName=MainLoadControl}"/>
+                                            <b:Interaction.Behaviors>
+                                                <behaviors:SynchronisedMapBehavior RegisterToken="{StaticResource MapToken}" />
+                                            </b:Interaction.Behaviors>
+                                        </geoMap:GeoMap>
+                                    </StackPanel>
+                                    <controls:Loading VisibilityImageAwesome="Collapsed" AutoCollapsed="True" LoadedContainer="{Binding ElementName=MainLoadControl}"/>
+                                </Grid>
                             </Grid>
-                        </Grid>
-                    </ScrollViewer>
+                        </ScrollViewer>
+                        <controls:ScrollTopButton Style="{StaticResource ScrollTopButtonStyle}" Margin="20, 5"/>
+                    </Grid>
                 </TabItem>
             </TabControl>
         </Grid>

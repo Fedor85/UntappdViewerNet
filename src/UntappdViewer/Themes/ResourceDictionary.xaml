@@ -38,7 +38,7 @@
         <Setter Property="Size" Value="35"/>
         <Setter Property="BackgroundEllipse" Value="{StaticResource MainSolidBrushDark}"/>
         <Setter Property="BackgroundPointer" Value="{StaticResource BackgroundPointerBrush}"/>
-        <Setter Property="BackgroundStroke" Value="#000000"/>
-        <Setter Property="StrokeThickness" Value="0.3"/>
+        <Setter Property="BackgroundStroke" Value="#ffffff"/>
+        <Setter Property="StrokeThickness" Value="1"/>
     </Style>
 </ResourceDictionary>

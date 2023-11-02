@@ -85,7 +85,10 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Name="TableCaption" Content="Count()" FontWeight="Bold"/>
-            <DataGrid Grid.Row="1" Name="TableCheckins" ItemsSource="{Binding Checkins}" IsReadOnly="True" CanUserSortColumns="False" Opacity="0.8"/>
+            <Grid  Grid.Row="1" >
+                <DataGrid Name="TableCheckins" ItemsSource="{Binding Checkins}" IsReadOnly="True" CanUserSortColumns="False" Opacity="0.8"/>
+                <controls:ScrollTopButton Style="{StaticResource ScrollTopButtonStyle}"/>
+            </Grid>
         </Grid>
         <Button  Grid.Row="2" Content="{x:Static properties:Resources.Ok}" Command="{Binding OkButtonCommand}" 
                  Width="60" Height="20" HorizontalAlignment="Right" VerticalAlignment="Center" IsDefault="True" Margin="0,0,5,0"/>
