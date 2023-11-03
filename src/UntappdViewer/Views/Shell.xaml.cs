@@ -6,7 +6,7 @@ namespace UntappdViewer.Views
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class Shell : Window
-    {s
+    {
         public Shell()
         {
             InitializeComponent();
