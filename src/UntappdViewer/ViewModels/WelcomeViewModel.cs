@@ -200,41 +200,23 @@ namespace UntappdViewer.ViewModels
 
         private BitmapSource GetAvatarImage()
         {
-            UpdateDevAvatarImage();
+            UpdateDevImage(webApiClient.GetDevAvatarImageUrl, "avatarImageUrl", "avatarImage");
             return devEntityDbService.GetBitmapSource("avatarImage");
         }
 
         private BitmapSource GetProfileHeaderImage()
         {
-            UpdateDevProfileHeaderImage();
+            UpdateDevImage(webApiClient.GetDevProfileHeaderImageUrl, "profileHeaderImageUrl", "profileHeaderImage");
             return devEntityDbService.GetBitmapSource("profileHeaderImage");
         }
 
-        private void UpdateDevAvatarImage()
+        private void UpdateDevImage(Func<string> funcGetImage, string imageUrl, string imageName)
         {
-            string avatarImageUrl = webApiClient.GetDevAvatarImageUrl();
-            if (String.IsNullOrEmpty(avatarImageUrl))
-                return;
-
-            string avatarImageUrlDb = devEntityDbService.GetValue<string>("avatarImageUrl");
-            if (avatarImageUrl.Equals(avatarImageUrlDb))
-                return;
-
-            Stream stream = webDownloader.DownloadToStream(avatarImageUrl);
-            if (stream == null)
-                return;
-
-            devEntityDbService.Add("avatarImageUrl", avatarImageUrl);
-            devEntityDbService.AddFile("avatarImage", stream);
-        }
-
-        private void UpdateDevProfileHeaderImage()
-        {
-            string profileHeaderImage = webApiClient.GetDevProfileHeaderImageUrl();
+            string profileHeaderImage = funcGetImage.Invoke();
             if (String.IsNullOrEmpty(profileHeaderImage))
                 return;
 
-            string profileHeaderImageDb = devEntityDbService.GetValue<string>("profileHeaderImageUrl");
+            string profileHeaderImageDb = devEntityDbService.GetValue<string>(imageUrl);
             if (profileHeaderImage.Equals(profileHeaderImageDb))
                 return;
 
@@ -242,8 +224,8 @@ namespace UntappdViewer.ViewModels
             if (stream == null)
                 return;
 
-            devEntityDbService.Add("profileHeaderImageUrl", profileHeaderImage);
-            devEntityDbService.AddFile("profileHeaderImage", stream);
+            devEntityDbService.Add(imageUrl, profileHeaderImage);
+            devEntityDbService.AddFile(imageName, stream);
         }
     }
 }
