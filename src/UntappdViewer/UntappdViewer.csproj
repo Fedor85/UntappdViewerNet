@@ -476,5 +476,8 @@
   <ItemGroup>
     <Resource Include="Resources\delete.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\untappd_logo_ds.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

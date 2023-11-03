@@ -1071,6 +1071,16 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap untappd_logo_ds {
+            get {
+                object obj = ResourceManager.GetObject("untappd_logo_ds", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Untappd page.
         /// </summary>
         public static string UntappdPage {

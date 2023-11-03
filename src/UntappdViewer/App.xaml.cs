@@ -1,5 +1,6 @@
 ﻿//using System.Diagnostics;
 
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
@@ -46,6 +47,13 @@ namespace UntappdViewer
 
             argumentsProvider.Arguments.AddRange(e.Args.ToList());
             base.OnStartup(e);
+        }
+
+        protected override void InitializeModules()
+        {
+            SplashScreen splashScreen = new SplashScreen(@"Resources/untappd_logo_ds.png");
+            splashScreen.Show(true, true);
+            base.InitializeModules();
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
