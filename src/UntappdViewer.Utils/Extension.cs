@@ -12,15 +12,14 @@ namespace UntappdViewer.Utils
             return list.OrderBy(item => random.Next());
         }
 
-        public static List<T> MoveToBottom<T>(this List<T> list, T item)
+        public static void MoveToBottom<T>(this List<T> list, T item)
         {
             int index =  list.IndexOf(item);
             if (index < 0)
-                return list;
+                return ;
 
             list.RemoveAt(index);
             list.Add(item);
-            return list;
         }
     }
 }

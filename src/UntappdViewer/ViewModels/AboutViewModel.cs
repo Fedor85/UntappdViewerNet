@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.IO;
 using Prism.Mvvm;
 using UntappdViewer.Helpers;
@@ -11,7 +11,7 @@ namespace UntappdViewer.ViewModels
     {
         private IUntappdService untappdService;
 
-        private ObservableCollection<string> imagePaths;
+        private List<string> imagePaths;
 
         string version;
 
@@ -20,13 +20,10 @@ namespace UntappdViewer.ViewModels
             get { return StringHelper.GetEmailUrl(Properties.Resources.Email); }
         }
 
-        public ObservableCollection<string> ImagePaths
+        public List<string> ImagePaths
         {
             get { return imagePaths; }
-            set
-            {
-                SetProperty(ref imagePaths, value);
-            }
+            set { SetProperty(ref imagePaths, value); }
         }
 
         public string Version
@@ -46,10 +43,10 @@ namespace UntappdViewer.ViewModels
                 ImagePaths = GetImagePaths();
         }
 
-        private ObservableCollection<string> GetImagePaths()
+        private List<string> GetImagePaths()
         {
             string directory = untappdService.GetBadgeImageDirectory();
-            ObservableCollection<string> imagePaths = new ObservableCollection<string>();
+            List<string> imagePaths = new List<string>();
             if (Directory.Exists(directory))
                 imagePaths.AddRange(Directory.GetFiles(directory).Shuffle());
 

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Timers;
@@ -14,33 +13,18 @@ namespace UntappdViewer.UI.Controls
     /// </summary>
     public partial class LoopAutoScrollImageListBox : UserControl
     {
-        public static readonly DependencyProperty DependencyProperty = DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(LoopAutoScrollImageListBox), new FrameworkPropertyMetadata(null, SetItemsSource));
-
-        private static object SetItemsSource(DependencyObject dependencyObject, object items)
-        {
-            if (items != null)
-                ((LoopAutoScrollImageListBox)dependencyObject).ItemsSource = (IEnumerable)items;
-
-            return items;
-        }
-
-        private ObservableCollection<string> items;
+        public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(List<string>), typeof(LoopAutoScrollImageListBox), new PropertyMetadata(null, SetItemsSource));
 
         private Timer timer;
 
-        private int minItemsCount;
-
         private int speed;
 
-        public int MinItemsCount
-        {
-            get { return minItemsCount; }
-            set
-            {
-                minItemsCount = value;
-                RunTimer();
-            }
-        }
+        private ObservableCollection<string> collection;
+
+        private int collectionCount;
+
+        public int MinItemsCount { get; set; }
+
 
         public int Speed
         {
@@ -52,40 +36,35 @@ namespace UntappdViewer.UI.Controls
             }
         }
 
-        public IEnumerable ItemsSource
+        public List<string> ItemsSource
         {
-            set
-            {
-                ObservableCollection<string> itemsSource = value as ObservableCollection<string>;
-                if (itemsSource.Count >= MinItemsCount)
-                {
-                    items = itemsSource;
-                    ListBox.ItemsSource = items;
-                }
-                else
-                {
-                    items.Clear();
-                }
-                RunTimer();
-            }
+            get { return (List<string>)GetValue(ItemsSourceProperty); }
+            set { SetValue(ItemsSourceProperty, value); }
         }
+
 
         public LoopAutoScrollImageListBox()
         {
             InitializeComponent();
+            MinItemsCount = 2;
+            ItemsSource = new List<string>();
+
             Loaded += WindowLoaded;
 
             timer = new Timer();
             timer.Elapsed += TimerElapsed;
-
-            items = new ObservableCollection<string>();
-            MinItemsCount = 1;
         }
 
-        private void RunTimer()
+        private void Run()
         {
-            if (items.Count >= Math.Max(MinItemsCount, 2))
-                timer.Start();
+            if (ItemsSource == null || ItemsSource.Count <= MinItemsCount)
+                return;
+
+            collection = new ObservableCollection<string>(ItemsSource);
+            collectionCount = collection.Count - 1;
+
+            ListBox.ItemsSource = collection;
+            timer.Start();
         }
 
         private void WindowLoaded(object sender, RoutedEventArgs e)
@@ -99,18 +78,17 @@ namespace UntappdViewer.UI.Controls
         private void WindowClosing(object sender, CancelEventArgs e)
         {
             timer.Stop();
-            items.Clear();
+            ItemsSource.Clear();
         }
 
         private void TimerElapsed(object sender, ElapsedEventArgs e)
         {
-            Dispatcher.Invoke(MoveItems);
+            Dispatcher.Invoke(()=> collection.Move(0, collectionCount));
         }
 
-        private void MoveItems()
+        private static void SetItemsSource(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
-            if (items.Count > 2)
-                items.Move(0, items.Count - 1);
+            ((LoopAutoScrollImageListBox)dependencyObject).Run();
         }
     }
 }
