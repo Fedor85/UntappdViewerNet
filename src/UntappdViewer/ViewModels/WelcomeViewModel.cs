@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
@@ -41,11 +42,17 @@ namespace UntappdViewer.ViewModels
 
         private BitmapSource profileHeaderImage;
 
+        private List<FileItem> fileItems;
+
         public ICommand OpenFileCommand { get; }
 
         public ICommand DropFileCommand { get; }
 
         public ICommand CreateProjectCommand { get; }
+
+        public ICommand OpenRecentFileCommand { get; }
+
+        public ICommand DeleteRecentFileByListCommand { get; }
 
         public string EmailUrl
         {
@@ -55,18 +62,21 @@ namespace UntappdViewer.ViewModels
         public BitmapSource AvatarImage
         {
             get { return avatarImage; }
-            set
-            {
-                SetProperty(ref avatarImage, value);
-            }
+            set { SetProperty(ref avatarImage, value); }
         }
 
         public BitmapSource ProfileHeaderImage
         {
             get { return profileHeaderImage; }
+            set { SetProperty(ref profileHeaderImage, value); }
+        }
+
+        public List<FileItem> FileItems
+        {
+            get { return fileItems; }
             set
             {
-                SetProperty(ref profileHeaderImage, value);
+                SetProperty(ref fileItems, value);
             }
         }
 
@@ -92,25 +102,24 @@ namespace UntappdViewer.ViewModels
             OpenFileCommand = new DelegateCommand(OpenFile);
             DropFileCommand = new DelegateCommand<DragEventArgs>(DropFile);
             CreateProjectCommand = new DelegateCommand(CreateProject);
+            OpenRecentFileCommand = new DelegateCommand<string>(OpenRecentFile);
+            DeleteRecentFileByListCommand = new DelegateCommand<string>(DeleteRecentFileByList);
         }
 
         protected override void Activate()
         {
             base.Activate();
 
+            FileItems = FileHelper.GetExistsParseFilePaths(settingService.GetRecentFilePaths());
             settingService.SetStartWelcomeView(true);
             untappdService.CleanUpUntappd();
-            eventAggregator.GetEvent<OpenFileEvent>().Subscribe(RunUntappd);
-            moduleManager.LoadModule(typeof(RecentFilesModule).Name);
-            ActivateView(RegionNames.RecentFilesRegion, typeof(RecentFiles));
             SetDevData();
         }
 
         protected override void DeActivate()
         {
             base.DeActivate();
-            eventAggregator.GetEvent<OpenFileEvent>().Unsubscribe(RunUntappd);
-            DeActivateAllViews(RegionNames.RecentFilesRegion);
+            FileItems.Clear();
         }
 
         private void OpenFile()
@@ -143,6 +152,19 @@ namespace UntappdViewer.ViewModels
             moduleManager.LoadModule(typeof(MainModule).Name);
             ActivateView(RegionNames.RootRegion, typeof(Main));
             interactionRequestService.ClearMessageOnStatusBar();
+        }
+
+        private void OpenRecentFile(string filePath)
+        {
+            FileHelper.AddFile(FileItems, filePath, settingService.GetMaxRecentFilePaths());
+            RunUntappd(filePath);
+        }
+
+        private void DeleteRecentFileByList(string filePath)
+        {
+            FileHelper.RemoveFilePath(FileItems, filePath);
+            settingService.SetRecentFilePaths(FileHelper.GetMergedFilePaths(FileItems));
+            FileItems = FileHelper.GetExistsParseFilePaths(settingService.GetRecentFilePaths());
         }
 
         private void RunUntappd(string filePath)

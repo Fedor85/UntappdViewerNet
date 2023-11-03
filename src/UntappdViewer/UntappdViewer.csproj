@@ -110,7 +110,6 @@
     <Compile Include="Different\Helpers\ConverterHelper.cs" />
     <Compile Include="Different\DefaultValues.cs" />
     <Compile Include="Different\Events\ChekinUpdateEvent.cs" />
-    <Compile Include="Different\Events\OpenFileEvent.cs" />
     <Compile Include="Different\Events\RequestCheckinsEvent.cs" />
     <Compile Include="Different\Events\SaveUntappdToFileEvent.cs" />
     <Compile Include="Different\Helpers\CommunicationHelper.cs" />
@@ -140,7 +139,6 @@
     <Compile Include="Modules\MainModule.cs" />
     <Compile Include="Modules\MenuBarModule.cs" />
     <Compile Include="Modules\CheckinLoadingModule.cs" />
-    <Compile Include="Modules\RecentFilesModule.cs" />
     <Compile Include="Modules\StatusBarModule.cs" />
     <Compile Include="Modules\TreeModue.cs" />
     <Compile Include="Modules\UntappdModule.cs" />
@@ -159,7 +157,6 @@
     <Compile Include="ViewModels\InteractionRequest\TextBoxDialogViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MenuBarViewModel.cs" />
-    <Compile Include="ViewModels\RecentFilesViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\StatusBarViewModel.cs" />
     <Compile Include="ViewModels\TreeViewModel.cs" />
@@ -199,9 +196,6 @@
     </Compile>
     <Compile Include="Views\MenuBar.xaml.cs">
       <DependentUpon>MenuBar.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\RecentFiles.xaml.cs">
-      <DependentUpon>RecentFiles.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StatisticsProject.xaml.cs">
       <DependentUpon>StatisticsProject.xaml</DependentUpon>
@@ -266,10 +260,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MenuBar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\RecentFiles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

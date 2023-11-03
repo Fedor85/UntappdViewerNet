@@ -7,6 +7,7 @@
              xmlns:properties="clr-namespace:UntappdViewer.Properties"
              xmlns:local="clr-namespace:UntappdViewer"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:controls="clr-namespace:UntappdViewer.UI.Controls;assembly=UntappdViewer.UI"
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="600" d:DesignWidth="800"  Background="{StaticResource MainGradient2}"
@@ -79,7 +80,44 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                <ContentControl prism:RegionManager.RegionName="{x:Static local:RegionNames.RecentFilesRegion}"/>
+                <ItemsControl ItemsSource="{Binding FileItems}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <controls:ClippingBorder x:Name="BackgroundBorder" BorderBrush="#ffffff" BorderThickness="1.5" Opacity="0" CornerRadius="11.5">
+                                    <Grid>
+                                        <Grid x:Name="BackgroundGrid" Background="#000000" Opacity="0.4"/>
+                                        <Grid HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,-0.5,0">
+                                            <Ellipse Width="20" Height="20" Fill="#ffffff" Stroke="#ffffff"/>
+                                            <Image Height="13" Width="13" Source="..\Resources\delete.png">
+                                                <b:Interaction.Triggers>
+                                                    <b:EventTrigger EventName="MouseLeftButtonDown">
+                                                        <b:InvokeCommandAction Command="{Binding DataContext.DeleteRecentFileByListCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                                   CommandParameter="{Binding Path=FilePath}"/>
+                                                    </b:EventTrigger>
+                                                </b:Interaction.Triggers>
+                                            </Image>
+                                        </Grid>
+                                    </Grid>
+                                </controls:ClippingBorder>
+                                <TextBlock HorizontalAlignment="Center" Margin="0,3,0,5">
+                        <Hyperlink Foreground="#ffffff"
+                                   Command="{Binding DataContext.OpenRecentFileCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                   CommandParameter="{Binding Path=FilePath}">
+                            <Hyperlink.Inlines>
+                                <Run Text="{Binding Path=FileName}" ToolTip="{Binding Path=FilePath}"/>
+                            </Hyperlink.Inlines>
+                        </Hyperlink>
+                                </TextBlock>
+                            </Grid>
+                            <DataTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="BackgroundBorder" Property="Opacity" Value="1" />
+                                </Trigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
                 <Label Content="{x:Static properties:Resources.OpenFileCaption}" HorizontalAlignment="Center" VerticalAlignment="Bottom"
                        FontSize="15" Foreground="#ffffff"/>
             </StackPanel>

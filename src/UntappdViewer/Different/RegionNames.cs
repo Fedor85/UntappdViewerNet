@@ -14,8 +14,6 @@
 
         public const string ContentRegion = "ContentRegion";
 
-        public const string RecentFilesRegion = "RecentFilesRegion";
-
         public const string LoadingRegion = "LoadingRegion";
 
         public const string CheckinLoadingRegion = "CheckinLoadingRegion";
