@@ -87,6 +87,7 @@ namespace UntappdViewer.UI.Controls
             InitializeComponent();
 
             Loaded += ThisLoaded;
+            Unloaded += ThisUnloaded;
             MouseLeftButtonUp += ThisMouseLeftButtonUp;
 
             SetBinding(UserControl.WidthProperty, new Binding { Path = new PropertyPath(SizeProperty), Source = this });
@@ -107,15 +108,21 @@ namespace UntappdViewer.UI.Controls
         {
             ScrollViewer = scrollViewer;
 
-            if (scrollViewer != null)
+            if (ScrollViewer != null)
             {
-                Visibility = scrollViewer.IsVisible && !MathHelper.DoubleCompare(scrollViewer.VerticalOffset, 0) ? Visibility.Visible : Visibility.Collapsed;
-                scrollViewer.ScrollChanged += ScrollChanged;
+                Visibility = ScrollViewer.IsVisible && !MathHelper.DoubleCompare(ScrollViewer.VerticalOffset, 0) ? Visibility.Visible : Visibility.Collapsed;
+                ScrollViewer.ScrollChanged += ScrollChanged;
             }
             else
             {
                 Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void ThisUnloaded(object sender, RoutedEventArgs e)
+        {
+            if(ScrollViewer != null)
+                ScrollViewer.ScrollChanged -= ScrollChanged;
         }
 
         private void ThisLoaded(object sender, RoutedEventArgs e)
@@ -136,9 +143,9 @@ namespace UntappdViewer.UI.Controls
 
         private void ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            Visibility = !MathHelper.DoubleCompare(e.VerticalOffset, 0) ? Visibility.Visible : Visibility.Collapsed;
+            if (!MathHelper.DoubleCompare(e.VerticalChange, 0))
+                Visibility = !MathHelper.DoubleCompare(e.VerticalOffset, 0) ? Visibility.Visible : Visibility.Collapsed;
         }
-
 
         private static void InitializeScrollViewer(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
