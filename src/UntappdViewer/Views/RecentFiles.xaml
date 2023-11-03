@@ -10,14 +10,26 @@
     <ItemsControl ItemsSource="{Binding FileItems}">
         <ItemsControl.ItemTemplate>
             <DataTemplate>
-                <TextBlock HorizontalAlignment="Center">
-                    <Hyperlink Command="{Binding Path=DataContext.OpenRecentFileCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                               CommandParameter="{Binding}" Foreground="#ffffff">
-                        <Hyperlink.Inlines>
-                            <Run Text="{Binding Path=FileName}" ToolTip="{Binding Path=FilePath}"/>
-                        </Hyperlink.Inlines>
-                    </Hyperlink>
-                </TextBlock>
+                <Grid>
+                    <Border x:Name="BackgroundBorder" BorderBrush="#ffffff" BorderThickness="1.5" Opacity="0" CornerRadius="8">
+                        <Grid>
+                            <Grid  x:Name="BackgroundGrid" Background="{StaticResource MainSolidBrushDark}" Opacity="0.8"/>
+                        </Grid>
+                    </Border>
+                    <TextBlock HorizontalAlignment="Center" Margin="0,2,0,5">
+                        <Hyperlink Command="{Binding Path=DataContext.OpenRecentFileCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                   CommandParameter="{Binding Path=FilePath}" Foreground="#ffffff">
+                            <Hyperlink.Inlines>
+                                <Run Text="{Binding Path=FileName}" ToolTip="{Binding Path=FilePath}"/>
+                            </Hyperlink.Inlines>
+                        </Hyperlink>
+                    </TextBlock>
+                </Grid>
+                <DataTemplate.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter TargetName="BackgroundBorder" Property="Opacity" Value="1" />
+                    </Trigger>
+                </DataTemplate.Triggers>
             </DataTemplate>
         </ItemsControl.ItemTemplate>
     </ItemsControl>

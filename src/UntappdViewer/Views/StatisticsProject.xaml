@@ -253,7 +253,7 @@
                    FontWeight="Bold" HorizontalAlignment="Center"/>
         </DataTemplate>
         <ControlTemplate x:Key="BackgroundControl" TargetType="{x:Type ContentControl}">
-            <ItemsControl Background="#ffffff" Opacity="0.5"/>
+            <Grid Background="#ffffff" Opacity="0.5"/>
         </ControlTemplate>
         <ObjectDataProvider x:Key="GradientHelper"  ObjectType="{x:Type helpers:GradientHelper}">
             <ObjectDataProvider.ConstructorParameters>
@@ -277,7 +277,7 @@
             <RowDefinition/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-        <ItemsControl Background="#000000" Opacity="0.1"/>
+        <Grid Background="#000000" Opacity="0.1"/>
         <Grid Grid.Row="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>

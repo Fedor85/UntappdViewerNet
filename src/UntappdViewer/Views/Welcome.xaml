@@ -23,7 +23,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <ItemsControl Background="White" Opacity="0.8"/>
+            <Grid Background="#ffff" Opacity="0.8"/>
             <Image Source="{Binding ProfileHeaderImage}" Stretch="UniformToFill"  VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="0.5">
                 <Image.Effect>
                     <BlurEffect Radius="5"/>
@@ -41,7 +41,7 @@
                     </Ellipse.Fill>
                 </Ellipse>
                 <Grid>
-                    <ItemsControl Background="Black" Opacity="0.2"/>
+                    <Grid Background="#0000" Opacity="0.2"/>
                     <TextBlock >
                         <Hyperlink NavigateUri="{Binding Source={x:Static local:DefaultValues.DeveloperProfileUrl}}"
                                    TextDecorations="" RequestNavigate="HyperlinkOnRequestNavigate">
@@ -51,7 +51,7 @@
                 </Grid>
             </StackPanel>
         </Grid>
-        <ItemsControl Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock HorizontalAlignment="Center">
                 <Hyperlink NavigateUri="{Binding Source={x:Static local:DefaultValues.UntappdtUrl}}"
                            TextDecorations="" RequestNavigate="HyperlinkOnRequestNavigate">
@@ -72,7 +72,7 @@
                 </TextBlock>
                 <Label Grid.Column="2" Content="{x:Static properties:Resources.Signature2}" FontSize="15" Foreground="#ffffff"/>
             </Grid>
-        </ItemsControl>
+        </StackPanel>
         <Grid Grid.Row="3">
             <Grid.RowDefinitions>
                 <RowDefinition/>
