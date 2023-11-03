@@ -9,8 +9,8 @@
     <UserControl.Resources>
         <helpers:PathImageReSizeWidthConverter  x:Key="ImageReSizeWidthConverter"/>
     </UserControl.Resources>
-        <Grid>
-        <ItemsControl Background="#ffffff" Opacity="0.3"/>
+    <Grid>
+        <Grid Background="#ffffff" Opacity="0.3"/>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/>
