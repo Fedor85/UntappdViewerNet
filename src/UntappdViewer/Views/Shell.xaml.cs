@@ -24,6 +24,8 @@ namespace UntappdViewer.Views
         private void ShellContentRendered(object sender, System.EventArgs e)
         {
             WindowState = WindowState.Normal;
+            SizeChanged -= ShellSizeChanged;
+            ContentRendered -= ShellContentRendered;
         }
     }
 }
