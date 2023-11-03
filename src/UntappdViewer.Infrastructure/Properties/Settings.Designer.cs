@@ -121,5 +121,29 @@ namespace UntappdViewer.Infrastructure.Properties {
                 this["IsStartWelcomeView"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsCheckedSaveAccessToken {
+            get {
+                return ((bool)(this["IsCheckedSaveAccessToken"]));
+            }
+            set {
+                this["IsCheckedSaveAccessToken"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string AccessToken {
+            get {
+                return ((string)(this["AccessToken"]));
+            }
+            set {
+                this["AccessToken"] = value;
+            }
+        }
     }
 }

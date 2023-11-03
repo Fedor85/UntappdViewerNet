@@ -26,6 +26,14 @@
 
         void SetSelectedTreeItemId(long itemId);
 
+        bool GetIsCheckedSaveAccessToken();
+
+        void SetIsCheckedSaveAccessToken(bool isChecked);
+
+        string GetAccessToken();
+
+        void SetAccessToken(string accessToken);
+
         long GetOffsetUpdateBeer();
 
         void SetOffsetUpdateBeer(long offSet);

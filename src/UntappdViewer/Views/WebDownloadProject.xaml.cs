@@ -14,6 +14,8 @@ namespace UntappdViewer.Views
     {
         private bool? isAccessToken;
 
+        private Window window;
+
         public WebDownloadProject()
         {
             InitializeComponent();
@@ -30,7 +32,8 @@ namespace UntappdViewer.Views
             if (!String.IsNullOrEmpty(TokenTextBox.Text))
                 AccessTokenButton.IsEnabled = true;
 
-            Window window = UIHelper.GetWindow(this);
+            window = UIHelper.GetWindow(this);
+
             if (window != null)
             {
                 window.KeyDown += WindowKeyStatesChanged;
@@ -46,7 +49,6 @@ namespace UntappdViewer.Views
             ToEndDownloadCheckinsButton.IsEnabled = false;
             UpdateBeersPanelEnabled(false);
 
-            Window window = UIHelper.GetWindow(this);
             if (window != null)
             {
                 window.KeyDown -= WindowKeyStatesChanged;

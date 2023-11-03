@@ -22,16 +22,6 @@ namespace UntappdViewer.ViewModels
 {
     public class WebDownloadProjectViewModel : LoadingBaseModel
     {
-        private bool? accessToken;
-
-        private string offsetUpdateBeer;
-
-        private bool isEnabledFillServingTypeButton;
-
-        private bool isEnabledCollaborationButton;
-
-        private List<Checkin> checkins;
-
         private IUntappdService untappdService;
 
         private IWebApiClient webApiClient;
@@ -44,6 +34,61 @@ namespace UntappdViewer.ViewModels
 
         private IInteractionRequestService interactionRequestService;
 
+        private bool? accessToken;
+
+        private bool isCheckedSaveAccessToken;
+
+        private string offsetUpdateBeer;
+
+        private bool isEnabledFillServingTypeButton;
+
+        private bool isEnabledCollaborationButton;
+
+        private List<Checkin> checkins;
+
+        public bool? AccessToken
+        {
+            get { return accessToken; }
+            set { SetProperty(ref accessToken, value); }
+        }
+
+        public bool IsCheckedSaveAccessToken
+        {
+            get { return isCheckedSaveAccessToken; }
+            set { SetProperty(ref isCheckedSaveAccessToken, value); }
+        }
+
+        public string OffsetUpdateBeer
+        {
+            get { return offsetUpdateBeer; }
+            set { SetProperty(ref offsetUpdateBeer, value); }
+        }
+
+        public bool IsEnabledFillServingTypeButton
+        {
+            get { return isEnabledFillServingTypeButton; }
+            set { SetProperty(ref isEnabledFillServingTypeButton, value); }
+        }
+
+        public bool IsEnabledCollaborationButton
+        {
+            get { return isEnabledCollaborationButton; }
+            set { SetProperty(ref isEnabledCollaborationButton, value); }
+        }
+
+        public List<Checkin> Checkins
+        {
+            get
+            {
+                return checkins;
+            }
+            set
+            {
+                SetProperty(ref checkins, value);
+                SetVisibilityFillServingTypeButton(value);
+                SetVisibilityCollaborationButton();
+            }
+        }
         private ICancellationToken<Checkin> webClientCancellation;
 
         public ICommand CheckAccessTokenCommand { get; }
@@ -62,61 +107,6 @@ namespace UntappdViewer.ViewModels
 
         public ICommand OkButtonCommand { get; }
 
-        public bool? AccessToken
-        {
-            get
-            {
-                return accessToken;
-            }
-            set
-            {
-                SetProperty(ref accessToken, value);
-            }
-        }
-
-        public string OffsetUpdateBeer
-        {
-            get
-            {
-                return offsetUpdateBeer;
-            }
-            set
-            {
-                SetProperty(ref offsetUpdateBeer, value);
-            }
-        }
-
-        public bool IsEnabledFillServingTypeButton
-        {
-            get { return isEnabledFillServingTypeButton; }
-            set
-            {
-                SetProperty(ref isEnabledFillServingTypeButton, value);
-            }
-        }
-
-        public bool IsEnabledCollaborationButton
-        {
-            get { return isEnabledCollaborationButton; }
-            set
-            {
-                SetProperty(ref isEnabledCollaborationButton, value);
-            }
-        }
-
-        public List<Checkin> Checkins
-        {
-            get
-            {
-                return checkins;
-            }
-            set
-            {
-                SetProperty(ref checkins, value);
-                SetVisibilityFillServingTypeButton(value);
-                SetVisibilityCollaborationButton();
-            }
-        }
 
         public WebDownloadProjectViewModel(IRegionManager regionManager, IUntappdService untappdService,
                                                                          IWebApiClient webApiClient,
@@ -153,12 +143,18 @@ namespace UntappdViewer.ViewModels
             Checkins = new List<Checkin>(untappdService.GetCheckins());
             webApiClient.UploadedProgress += interactionRequestService.ShowMessageOnLoading;
             interactionRequestService.ClearMessageOnStatusBar();
+            if (settingService.GetIsCheckedSaveAccessToken())
+            {
+                IsCheckedSaveAccessToken = true;
+                CheckAccessToken(settingService.GetAccessToken(), false);
+            }
         }
 
         protected override void DeActivate()
         {
             base.DeActivate();
             Checkins.Clear();
+            IsCheckedSaveAccessToken = false;
             AccessToken = null;
             OffsetUpdateBeer = String.Empty;
             webApiClient.UploadedProgress -= interactionRequestService.ShowMessageOnStatusBar;
@@ -167,11 +163,16 @@ namespace UntappdViewer.ViewModels
 
         private void CheckAccessToken(string token)
         {
-            LoadingChangeActivity(true);
-            CheckAccessTokenAsync(token);
+            CheckAccessToken(token, true);
         }
 
-        private async void CheckAccessTokenAsync(string token)
+        private void CheckAccessToken(string token, bool uateTokenSetting)
+        {
+            LoadingChangeActivity(true);
+            CheckAccessTokenAsync(token, uateTokenSetting);
+        }
+
+        private async void CheckAccessTokenAsync(string token, bool uateTokenSetting)
         {
             AccessToken = null;
             webApiClient.Initialize(token);
@@ -186,6 +187,9 @@ namespace UntappdViewer.ViewModels
 
                     SetVisibilityCollaborationButton();
                 }
+
+                if (uateTokenSetting)
+                    UpdateAccessTokenSetting(token);
             }
             catch (Exception ex)
             {
@@ -419,6 +423,28 @@ namespace UntappdViewer.ViewModels
             IsEnabledCollaborationButton = AccessToken.HasValue && AccessToken.Value && beers != null && beers.Any(item => item.Collaboration.State == CollaborationState.Undefined);
         }
 
+        private void UpdateAccessTokenSetting(string accessToken)
+        {
+            if (AccessToken.HasValue && AccessToken.Value)
+            {
+                if (IsCheckedSaveAccessToken)
+                    SetAccessTokenSetting(accessToken);
+                else if (settingService.GetIsCheckedSaveAccessToken())
+                    SetAccessTokenSetting(String.Empty);
+            }
+            else
+            {
+                if (IsCheckedSaveAccessToken)
+                    SetAccessTokenSetting(String.Empty);
+            }
+        }
+
+        private void SetAccessTokenSetting(string accessToken)
+        {
+            settingService.SetIsCheckedSaveAccessToken(!String.IsNullOrEmpty(accessToken));
+            settingService.SetAccessToken(accessToken);
+        }
+
         private void Exit()
         {
             if (AccessToken.HasValue && AccessToken.Value)
@@ -427,6 +453,9 @@ namespace UntappdViewer.ViewModels
                 if (offset != settingService.GetOffsetUpdateBeer())
                     settingService.SetOffsetUpdateBeer(offset);
             }
+
+            if (!IsCheckedSaveAccessToken)
+                SetAccessTokenSetting(String.Empty);
 
             moduleManager.LoadModule(typeof(UntappdModule).Name);
             ActivateView(RegionNames.MainRegion, typeof(Untappd));

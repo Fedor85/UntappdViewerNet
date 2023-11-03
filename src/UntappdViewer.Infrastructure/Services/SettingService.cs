@@ -69,6 +69,28 @@ namespace UntappdViewer.Infrastructure.Services
             Settings.Default.Save();
         }
 
+        public bool GetIsCheckedSaveAccessToken()
+        {
+            return Settings.Default.IsCheckedSaveAccessToken;
+        }
+
+        public void SetIsCheckedSaveAccessToken(bool isChecked)
+        {
+            Settings.Default.IsCheckedSaveAccessToken = isChecked;
+            Settings.Default.Save();
+        }
+
+        public string GetAccessToken()
+        {
+            return Settings.Default.AccessToken;
+        }
+
+        public void SetAccessToken(string accessToken)
+        {
+            Settings.Default.AccessToken = accessToken;
+            Settings.Default.Save();
+        }
+
         public long GetOffsetUpdateBeer()
         {
             return Settings.Default.OffsetUpdateBeer;

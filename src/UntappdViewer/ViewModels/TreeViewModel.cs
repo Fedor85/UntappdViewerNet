@@ -37,10 +37,7 @@ namespace UntappdViewer.ViewModels
         public string TreeViewCaption
         {
             get { return treeViewCaption; }
-            set
-            {
-                SetProperty(ref treeViewCaption, value);
-            }
+            set { SetProperty(ref treeViewCaption, value); }
         }
 
         public string Search
@@ -56,19 +53,13 @@ namespace UntappdViewer.ViewModels
         public bool IsCheckedUniqueCheckBox
         {
             get { return isCheckedUniqueCheckBox; }
-            set
-            {
-                SetProperty(ref isCheckedUniqueCheckBox, value);
-            }
+            set { SetProperty(ref isCheckedUniqueCheckBox, value); }
         }
 
         public ObservableCollection<TreeItemViewModel> TreeItems
         {
             get { return treeItems; }
-            set
-            {
-                SetProperty(ref treeItems, value);
-            }
+            set { SetProperty(ref treeItems, value); }
         }
 
         public TreeItemViewModel SelectedTreeItem

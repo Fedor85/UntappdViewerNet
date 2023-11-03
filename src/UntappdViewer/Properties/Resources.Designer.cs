@@ -943,6 +943,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to save.
+        /// </summary>
+        public static string SaveLower {
+            get {
+                return ResourceManager.GetString("SaveLower", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Serving Type/Count.
         /// </summary>
         public static string ServingTypeCount {
