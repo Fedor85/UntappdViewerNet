@@ -18,6 +18,8 @@ namespace UntappdViewer.ViewModels
 
         public ICommand OpenRecentFileCommand { get; }
 
+        public ICommand DeleteRecentFileByListCommand { get; }
+
         public List<FileItem> FileItems
         {
             get { return fileItems; }
@@ -32,8 +34,10 @@ namespace UntappdViewer.ViewModels
             this.settingService = settingService;
             this.eventAggregator = eventAggregator;
 
-            OpenRecentFileCommand = new DelegateCommand<FileItem>(OpenRecentFile);
+            OpenRecentFileCommand = new DelegateCommand<string>(OpenRecentFile);
+            DeleteRecentFileByListCommand = new DelegateCommand<string>(DeleteRecentFileByList);
         }
+
 
         protected override void Activate()
         {
@@ -47,10 +51,17 @@ namespace UntappdViewer.ViewModels
             FileItems.Clear();
         }
 
-        private void OpenRecentFile(FileItem entity)
+        private void OpenRecentFile(string filePath)
         {
-            FileHelper.AddFile(FileItems, entity.FilePath, settingService.GetMaxRecentFilePaths());
-            eventAggregator.GetEvent<OpenFileEvent>().Publish(entity.FilePath);
+            FileHelper.AddFile(FileItems, filePath, settingService.GetMaxRecentFilePaths());
+            eventAggregator.GetEvent<OpenFileEvent>().Publish(filePath);
+        }
+
+        private void DeleteRecentFileByList(string filePath)
+        {
+            FileHelper.RemoveFilePath(FileItems, filePath);
+            settingService.SetRecentFilePaths(FileHelper.GetMergedFilePaths(FileItems));
+            FileItems = FileHelper.GetExistsParseFilePaths(settingService.GetRecentFilePaths());
         }
     }
 }

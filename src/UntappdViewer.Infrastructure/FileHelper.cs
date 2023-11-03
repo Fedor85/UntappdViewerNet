@@ -87,6 +87,12 @@ namespace UntappdViewer.Infrastructure
             return GetMergedFilePaths(fileItems);
         }
 
+        public static void RemoveFilePath(List<FileItem> fileItems, string filePat)
+        {
+            fileItems.Remove(fileItems.FirstOrDefault(item => item.FilePath.Equals(filePat)));
+            UpdateFileItemIndex(fileItems);
+        }
+
         public static void AddFile(List<FileItem> fileItems, string filePath, int maxItems)
         {
             FileItem fileItem = fileItems.Find(item => item.FilePath.Equals(filePath));
