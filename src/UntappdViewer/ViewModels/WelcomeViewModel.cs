@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -194,20 +195,33 @@ namespace UntappdViewer.ViewModels
 
         private void SetDevData()
         {
-            AvatarImage = GetAvatarImage();
-            ProfileHeaderImage = GetProfileHeaderImage();
+            FillAvatarImage();
+            FillProfileHeaderImage();
         }
 
-        private BitmapSource GetAvatarImage()
+        private async void FillAvatarImage()
         {
-            UpdateDevImage(webApiClient.GetDevAvatarImageUrl, "avatarImageUrl", "avatarImage");
-            return devEntityDbService.GetBitmapSource("avatarImage");
+            try
+            {
+                await Task.Run(() => UpdateDevImage(webApiClient.GetDevAvatarImageUrl, "avatarImageUrl", "avatarImage"));
+            }
+            finally
+            {
+                AvatarImage = devEntityDbService.GetBitmapSource("avatarImage");
+            }
         }
 
-        private BitmapSource GetProfileHeaderImage()
+
+        private async void FillProfileHeaderImage()
         {
-            UpdateDevImage(webApiClient.GetDevProfileHeaderImageUrl, "profileHeaderImageUrl", "profileHeaderImage");
-            return devEntityDbService.GetBitmapSource("profileHeaderImage");
+            try
+            {
+                await Task.Run(() => UpdateDevImage(webApiClient.GetDevProfileHeaderImageUrl, "profileHeaderImageUrl", "profileHeaderImage"));
+            }
+            finally
+            {
+                ProfileHeaderImage = devEntityDbService.GetBitmapSource("profileHeaderImage");
+            }
         }
 
         private void UpdateDevImage(Func<string> funcGetImage, string imageUrl, string imageName)
