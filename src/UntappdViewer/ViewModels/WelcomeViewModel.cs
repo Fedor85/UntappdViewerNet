@@ -5,11 +5,9 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using Prism.Commands;
-using Prism.Events;
 using Prism.Modularity;
 using Prism.Regions;
 using UntappdViewer.Domain;
-using UntappdViewer.Events;
 using UntappdViewer.Helpers;
 using UntappdViewer.Infrastructure;
 using UntappdViewer.Interfaces.Services;
@@ -29,8 +27,6 @@ namespace UntappdViewer.ViewModels
         private ISettingService settingService;
 
         private IModuleManager moduleManager;
-
-        private IEventAggregator eventAggregator;
 
         private IDevEntityDbService devEntityDbService;
 
@@ -84,7 +80,6 @@ namespace UntappdViewer.ViewModels
                                                                 ISettingService settingService,
                                                                 IModuleManager moduleManager,
                                                                 IRegionManager regionManager,
-                                                                IEventAggregator eventAggregator,
                                                                 IDevEntityDbService devEntityDbService,
                                                                 IWebApiClient webApiClient,
                                                                 IWebDownloader webDownloader) : base(regionManager)
@@ -94,7 +89,6 @@ namespace UntappdViewer.ViewModels
             this.settingService = settingService;
             this.moduleManager = moduleManager;
             this.settingService = settingService;
-            this.eventAggregator = eventAggregator;
             this.devEntityDbService = devEntityDbService;
             this.webApiClient = webApiClient;
             this.webDownloader = webDownloader;
