@@ -143,7 +143,7 @@ namespace UntappdViewer.ViewModels
             Checkins = new List<Checkin>(untappdService.GetCheckins());
             webApiClient.UploadedProgress += interactionRequestService.ShowMessageOnLoading;
             interactionRequestService.ClearMessageOnStatusBar();
-            if (settingService.GetIsCheckedSaveAccessToken())
+            if (settingService.IsCheckedSaveAccessToken())
             {
                 IsCheckedSaveAccessToken = true;
                 CheckAccessToken(settingService.GetAccessToken(), false);
@@ -429,7 +429,7 @@ namespace UntappdViewer.ViewModels
             {
                 if (IsCheckedSaveAccessToken)
                     SetAccessTokenSetting(accessToken);
-                else if (settingService.GetIsCheckedSaveAccessToken())
+                else if (settingService.IsCheckedSaveAccessToken())
                     SetAccessTokenSetting(String.Empty);
             }
             else

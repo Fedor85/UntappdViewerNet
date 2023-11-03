@@ -47,7 +47,7 @@ namespace UntappdViewer.Infrastructure.Services
             return Settings.Default.MaxRecentFilePaths;
         }
 
-        public bool GetIsCheckedUniqueCheckBox()
+        public bool IsCheckedUniqueCheckBox()
         {
             return Settings.Default.IsCheckedUniqueCheckBox;
         }
@@ -69,7 +69,7 @@ namespace UntappdViewer.Infrastructure.Services
             Settings.Default.Save();
         }
 
-        public bool GetIsCheckedSaveAccessToken()
+        public bool IsCheckedSaveAccessToken()
         {
             return Settings.Default.IsCheckedSaveAccessToken;
         }

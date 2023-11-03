@@ -89,7 +89,7 @@ namespace UntappdViewer.ViewModels
         {
             base.Activate();
             eventAggregator.GetEvent<RequestCheckinsEvent>().Subscribe(ReturnVisibleChekins);
-            IsCheckedUniqueCheckBox = settingService.GetIsCheckedUniqueCheckBox();
+            IsCheckedUniqueCheckBox = settingService.IsCheckedUniqueCheckBox();
             UpdateTree(IsCheckedUniqueCheckBox, settingService.GetSelectedTreeItemId());
         }
 

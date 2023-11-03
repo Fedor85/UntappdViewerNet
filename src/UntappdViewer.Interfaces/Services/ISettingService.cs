@@ -18,7 +18,7 @@
 
         int GetMaxRecentFilePaths();
 
-        bool GetIsCheckedUniqueCheckBox();
+        bool IsCheckedUniqueCheckBox();
 
         void SetIsCheckedUniqueCheckBox(bool isChecked);
 
@@ -26,7 +26,7 @@
 
         void SetSelectedTreeItemId(long itemId);
 
-        bool GetIsCheckedSaveAccessToken();
+        bool IsCheckedSaveAccessToken();
 
         void SetIsCheckedSaveAccessToken(bool isChecked);
 
