@@ -95,13 +95,32 @@ namespace UntappdViewer.UI.Controls
 
         private void OnPreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
+            if (e.Delta == 0)
+                return;
+
             ScrollViewer scrollViewer = (ScrollViewer)sender;
-            scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset - e.Delta);
-            e.Handled = true;
+            if (!double.IsNaN(scrollViewer.Height))
+            {
+                scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset - e.Delta);
+                e.Handled = true;
+            }
 
             ScrollViewer parentScrollViewer = UIHelper.FindParent<ScrollViewer>(this);
-            if (parentScrollViewer != null && parentScrollViewer.ComputedVerticalScrollBarVisibility == Visibility.Visible)
-                parentScrollViewer.ScrollToVerticalOffset(parentScrollViewer.VerticalOffset - e.Delta); ;
+            if (parentScrollViewer != null)
+            {
+                if (parentScrollViewer.ComputedVerticalScrollBarVisibility == Visibility.Visible)
+                    parentScrollViewer.ScrollToVerticalOffset(parentScrollViewer.VerticalOffset - e.Delta);
+            }
+            else
+            {
+                FrameworkElement frameworkElement = UIHelper.FindParent<FrameworkElement>(this);
+                if (frameworkElement != null)
+                {
+                    MouseWheelEventArgs mouseWheelEventArgs = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta);
+                    mouseWheelEventArgs.RoutedEvent = UIElement.MouseWheelEvent;
+                    frameworkElement.RaiseEvent(mouseWheelEventArgs);
+                }
+            }
         }
 
         private static void UpdateResources(DependencyObject d, DependencyPropertyChangedEventArgs e)
