@@ -100,6 +100,8 @@
     <Compile Include="Different\Behaviors\Synchronised\SynchronisedWidthBehavior.cs" />
     <Compile Include="Different\Behaviors\Synchronised\SynchronisedWidthToken.cs" />
     <Compile Include="Different\CallBackConteiner.cs" />
+    <Compile Include="Different\Events\ChekinOffsetEvent.cs" />
+    <Compile Include="Different\Helpers\IValueConverters\MouseWheelEventArgsToDeltaConverter.cs" />
     <Compile Include="Different\Helpers\Extensions\DataPointSeriesExtensions.cs" />
     <Compile Include="Different\Helpers\ColorPalette.cs" />
     <Compile Include="Different\Events\LoadingActivateCancel.cs" />

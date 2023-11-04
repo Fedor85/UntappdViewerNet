@@ -10,6 +10,8 @@
              xmlns:controls="clr-namespace:UntappdViewer.UI.Controls;assembly=UntappdViewer.UI"
              xmlns:viewControls="clr-namespace:UntappdViewer.Views.Controls"
              xmlns:helpers="clr-namespace:UntappdViewer.Helpers"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:valueConverters="clr-namespace:UntappdViewer.ValueConverters"
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="450" d:DesignWidth="450">
@@ -22,6 +24,7 @@
                 <Rectangle Height="3" Fill="#ffffff" Margin="0, 2, 0, 2" Opacity="0.8"/>
             </StackPanel>
         </DataTemplate>
+        <valueConverters:MouseWheelEventArgsToDeltaConverter x:Key="EventArgsToDeltaConverter"/>
     </UserControl.Resources>
     <UserControl.Background>
         <SolidColorBrush Opacity="0.3" Color="#ffffff"/>
@@ -85,6 +88,11 @@
                             <controls:SliderImagesControl ItemsSource="{Binding Checkin.Badges}" ArrowsSize="10"/>
                         </GroupBox>
                     </Grid>
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="MouseWheel">
+                            <b:InvokeCommandAction Command="{Binding CheckinOffsetCommand}" EventArgsConverter="{StaticResource EventArgsToDeltaConverter}"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
                 </StackPanel>
                 <GroupBox Grid.Row="1" Header="{x:Static properties:Resources.Photo}">
                     <Grid>

@@ -4,7 +4,7 @@ using System.Windows.Data;
 using FamFamFam.Flags.Wpf;
 using UntappdViewer.Infrastructure;
 
-namespace UntappdViewer.Different.Helpers
+namespace UntappdViewer.ValueConverters
 {
     public class CountryNameToFlagConverter : IValueConverter
     {

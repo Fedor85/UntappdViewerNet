@@ -89,6 +89,7 @@ namespace UntappdViewer.ViewModels
         {
             base.Activate();
             eventAggregator.GetEvent<RequestCheckinsEvent>().Subscribe(ReturnVisibleChekins);
+            eventAggregator.GetEvent<ChekinOffsetEvent>().Subscribe(ChekinOffset);
             IsCheckedUniqueCheckBox = settingService.IsCheckedUniqueCheckBox();
             UpdateTree(IsCheckedUniqueCheckBox, settingService.GetSelectedTreeItemId());
         }
@@ -97,10 +98,25 @@ namespace UntappdViewer.ViewModels
         {
             base.DeActivate();
             eventAggregator.GetEvent<RequestCheckinsEvent>().Unsubscribe(ReturnVisibleChekins);
+            eventAggregator.GetEvent<ChekinOffsetEvent>().Unsubscribe(ChekinOffset);
             SaveSettings();
             DeActivateAllViews(RegionNames.ContentRegion);
             TreeItems.Clear();
             Search =String.Empty;
+        }
+
+        private void ChekinOffset(int offset)
+        {
+            if(SelectedTreeItem == null)
+                return;
+
+            List<TreeItemViewModel> visibilityTreeItemViewModels = TreeItems.Where(item => item.Visibility).ToList();
+            int index = visibilityTreeItemViewModels.IndexOf(SelectedTreeItem);
+            int newIndex = index + offset;
+            if (newIndex < 0 || newIndex > visibilityTreeItemViewModels.Count -1)
+                return;
+
+            SelectedTreeItem = visibilityTreeItemViewModels[newIndex];
         }
 
         private void ReturnVisibleChekins(CallBackConteiner<List<long>> callBackConteiner)
@@ -143,11 +159,10 @@ namespace UntappdViewer.ViewModels
 
             LoadingChangeActivity(false);
         }
-
         private ObservableCollection<TreeItemViewModel> GeTreeViewItems(bool isUniqueCheckins)
         {
             ObservableCollection<TreeItemViewModel> treeViewItems = new ObservableCollection<TreeItemViewModel>();
-            int treeItemNameMaxLength =  settingService.GetTreeItemNameMaxLength();
+            int treeItemNameMaxLength = settingService.GetTreeItemNameMaxLength();
             List<Checkin> checkins = untappdService.GetCheckins(isUniqueCheckins);
             for (int i = 0; i < checkins.Count; i++)
             {

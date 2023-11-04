@@ -6,7 +6,7 @@ using UntappdViewer.Domain;
 using UntappdViewer.Helpers;
 using UntappdViewer.Models.Different;
 
-namespace UntappdViewer.Different.Helpers
+namespace UntappdViewer.ValueConverters
 {
     public class PieSeriesBackgroundConverter : IValueConverter
     {

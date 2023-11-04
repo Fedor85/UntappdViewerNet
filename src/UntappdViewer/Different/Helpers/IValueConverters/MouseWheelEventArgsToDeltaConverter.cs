@@ -1,20 +1,24 @@
 ﻿using System;
 using System.Globalization;
-using System.Windows;
 using System.Windows.Data;
+using System.Windows.Input;
 
 namespace UntappdViewer.ValueConverters
 {
-    public class BoolToVisibilityConverter : IValueConverter
+   public class MouseWheelEventArgsToDeltaConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value is Boolean && (bool) value ? Visibility.Visible : Visibility.Collapsed;
+            MouseWheelEventArgs eventArgs = value as MouseWheelEventArgs;
+            if (eventArgs == null)
+                return null;
+
+            return eventArgs.Delta;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value is Visibility && (Visibility)value == Visibility.Visible;
+            return null;
         }
     }
 }

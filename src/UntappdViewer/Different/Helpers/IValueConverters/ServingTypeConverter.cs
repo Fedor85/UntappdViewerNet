@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Data;
 using UntappdViewer.Helpers;
 
-namespace UntappdViewer.Different.Helpers
+namespace UntappdViewer.ValueConverters
 {
     public class ServingTypeConverter : IValueConverter
     {

@@ -33,6 +33,9 @@ namespace UntappdViewer.ViewModels
             set { SetProperty(ref checkin, value); }
         }
 
+
+        public ICommand CheckinOffsetCommand { get; }
+
         public ICommand CheckinVenueLocationCommand { get; }
 
 
@@ -48,7 +51,17 @@ namespace UntappdViewer.ViewModels
 
             loadingModuleName = typeof(CheckinLoadingModule).Name;
             loadingRegionName = RegionNames.CheckinLoadingRegion;
+            CheckinOffsetCommand = new DelegateCommand<int?>(CheckinOffset);
             CheckinVenueLocationCommand  = new DelegateCommand(CheckinVenueLocation);
+        }
+
+        private void CheckinOffset(int? delta)
+        {
+            if (!delta.HasValue || delta.Value == 0)
+                return;
+
+            int offset = delta.Value > 0 ? 1 : -1;
+            eventAggregator.GetEvent<ChekinOffsetEvent>().Publish(offset);
         }
 
         private void CheckinVenueLocation()
