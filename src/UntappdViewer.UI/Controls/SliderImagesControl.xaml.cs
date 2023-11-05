@@ -14,17 +14,13 @@ namespace UntappdViewer.UI.Controls
     /// </summary>
     public partial class SliderImagesControl : UserControl
     {
-        public static readonly DependencyProperty DependencyProperty = DependencyProperty.Register("ItemsSource", typeof(IList), typeof(SliderImagesControl), new FrameworkPropertyMetadata(null, SetItemsSource));
+        public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(IList), typeof(SliderImagesControl), new PropertyMetadata(SetItemsSource));
 
-        private static object SetItemsSource(DependencyObject dependencyObject, object items)
+        public IList ItemsSource
         {
-            if (items != null)
-                ((SliderImagesControl)dependencyObject).ItemsSource = (IList)items;
-
-            return items;
+            get { return (IList)GetValue(ItemsSourceProperty); }
+            set { SetValue(ItemsSourceProperty, value); }
         }
-
-        private IList items;
 
         private int index;
 
@@ -54,26 +50,17 @@ namespace UntappdViewer.UI.Controls
             }
         }
 
-        public IList ItemsSource
-        {
-            set
-            {
-                items = value;
-                InitializeItemsSource();
-            }
-        }
-
         private void InitializeItemsSource()
         {
             index = 0;
             LabelGrid.Visibility = Visibility.Hidden;
             NavigationGrid.Visibility = Visibility.Hidden;
             Image.Source = null;
-            if (items.Count == 0)
+            if (ItemsSource == null || ItemsSource.Count == 0)
                 return;
 
             InitializeItem();
-            if (items.Count > 1)
+            if (ItemsSource.Count > 1)
             {
                 LabelGrid.Visibility = Visibility.Visible;
                 NavigationGrid.Visibility = Visibility.Visible;
@@ -82,10 +69,10 @@ namespace UntappdViewer.UI.Controls
 
         private void InitializeItem()
         {
-            if (index > items.Count - 1 || index < 0)
+            if (index > ItemsSource.Count - 1 || index < 0)
                 return;
 
-            object item = items[index];
+            object item = ItemsSource[index];
 
             PropertyInfo imagePathPropertyInfo = item.GetType().GetProperty("ImagePath");
             if (imagePathPropertyInfo != null)
@@ -108,14 +95,14 @@ namespace UntappdViewer.UI.Controls
 
         private void SetCounterLabel()
         {
-            CounterLabel.Content = String.Format("{0}/{1}", index + 1, items.Count);
+            CounterLabel.Content = String.Format("{0}/{1}", index + 1, ItemsSource.Count);
         }
 
         private void LeftClick(object sender, RoutedEventArgs e)
         {
             index--;
             if (index < 0)
-                index = items.Count - 1;
+                index = ItemsSource.Count - 1;
 
             InitializeItem();
         }
@@ -123,10 +110,14 @@ namespace UntappdViewer.UI.Controls
         private void RightClick(object sender, RoutedEventArgs e)
         {
             index++;
-            if (index > items.Count - 1)
+            if (index > ItemsSource.Count - 1)
                 index = 0;
 
             InitializeItem();
+        }
+        private static void SetItemsSource(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+        {
+            ((SliderImagesControl)dependencyObject).InitializeItemsSource();
         }
     }
 }
