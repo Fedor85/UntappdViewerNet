@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mvvm="http://prismlibrary.com/"
              xmlns:properties="clr-namespace:UntappdViewer.Properties"
-             xmlns:controls1="clr-namespace:UntappdViewer.Views.Controls;assembly=UntappdViewer.UI"
              xmlns:controls="clr-namespace:UntappdViewer.UI.Controls;assembly=UntappdViewer.UI"
              mc:Ignorable="d"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
@@ -16,7 +15,7 @@
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <controls1:RecyclerView ItemsSource="{Binding Items}" ItemsSourceChanged="ItemsSourceChanged"/>
+            <controls:RecyclerView ItemsSource="{Binding Items}" ItemsSourceChanged="ItemsSourceChanged"/>
             <controls:ScrollTopButton Style="{StaticResource ScrollTopButtonStyle}" Margin="25,10"/>
         </Grid>
         <DockPanel Grid.Row="1">
