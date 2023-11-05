@@ -67,6 +67,9 @@
     <Compile Include="Controls\GeoMap\GradientScale.xaml.cs">
       <DependentUpon>GradientScale.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ImageEllipseClip.xaml.cs">
+      <DependentUpon>ImageEllipseClip.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ListViewExpander.xaml.cs">
       <DependentUpon>ListViewExpander.xaml</DependentUpon>
     </Compile>
@@ -133,6 +136,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\GeoMap\GradientScale.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ImageEllipseClip.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
