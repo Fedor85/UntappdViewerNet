@@ -93,7 +93,7 @@
                                                 <b:Interaction.Triggers>
                                                     <b:EventTrigger EventName="MouseLeftButtonDown">
                                                         <b:InvokeCommandAction Command="{Binding DataContext.DeleteRecentFileByListCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                                                                   CommandParameter="{Binding Path=FilePath}"/>
+                                                                               CommandParameter="{Binding Path=FilePath}"/>
                                                     </b:EventTrigger>
                                                 </b:Interaction.Triggers>
                                             </Image>

@@ -17,8 +17,7 @@
             <Path.Data>
                 <CombinedGeometry GeometryCombineMode="Exclude">
                     <CombinedGeometry.Geometry1>
-                        <EllipseGeometry Center="50, 50" RadiusX="50" RadiusY="50">
-                        </EllipseGeometry>
+                        <EllipseGeometry Center="50, 50" RadiusX="50" RadiusY="50"/>
                     </CombinedGeometry.Geometry1>
                     <CombinedGeometry.Geometry2>
                         <PathGeometry Figures="{StaticResource PointerPathFigure}"/>
