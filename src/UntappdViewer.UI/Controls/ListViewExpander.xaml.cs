@@ -14,9 +14,9 @@ namespace UntappdViewer.UI.Controls
     {
         private static readonly DependencyProperty ExpanderHeaderProperty = DependencyProperty.Register("ExpanderHeader", typeof(string), typeof(ListViewExpander), new PropertyMetadata(Properties.Resources.Others));
 
-        private static readonly DependencyProperty ItemDataTemplateProperty = DependencyProperty.Register("ItemDataTemplate", typeof(DataTemplate), typeof(ListViewExpander), new PropertyMetadataParameter<string>(UpdateResources, "ContentTemplate"));
+        private static readonly DependencyProperty ItemDataTemplateProperty = DependencyProperty.Register("ItemDataTemplate", typeof(DataTemplate), typeof(ListViewExpander));
 
-        private static readonly DependencyProperty SeparatorTemplateProperty = DependencyProperty.Register("SeparatorTemplate", typeof(DataTemplate), typeof(ListViewExpander), new PropertyMetadataParameter<string>(UpdateResources, "SeparatorTemplate"));
+        private static readonly DependencyProperty SeparatorTemplateProperty = DependencyProperty.Register("SeparatorTemplate", typeof(DataTemplate), typeof(ListViewExpander));
 
         private static readonly DependencyProperty OthersItemCountProperty = DependencyProperty.Register("OthersItemCount", typeof(int), typeof(ListViewExpander));
 
@@ -57,7 +57,6 @@ namespace UntappdViewer.UI.Controls
         {
             InitializeComponent();
             Expander.SetBinding(Expander.HeaderProperty, new Binding { Path = new PropertyPath(ExpanderHeaderProperty), Source = this });
-            MainView.SetBinding(ContentControl.ContentTemplateProperty, new Binding { Path = new PropertyPath(ItemDataTemplateProperty), Source = this });
         }
 
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -121,13 +120,6 @@ namespace UntappdViewer.UI.Controls
                     frameworkElement.RaiseEvent(mouseWheelEventArgs);
                 }
             }
-        }
-
-        private static void UpdateResources(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            PropertyMetadataParameter<string> propertyMetadata = e.Property.GetMetadata(d) as PropertyMetadataParameter<string>;
-            ListViewExpander listControl = d as ListViewExpander;
-            listControl.Resources[propertyMetadata.Parameter] = e.NewValue;
         }
     }
 }
