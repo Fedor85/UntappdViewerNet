@@ -43,9 +43,24 @@ namespace UntappdViewer.UI.Controls
             if (Child == null)
                 return;
 
+            FrameworkElement frameworkElement = Child as FrameworkElement;
+            if (frameworkElement != null && !frameworkElement.IsLoaded)
+                frameworkElement.Loaded += ChildLoaded;
+            else
+                ChildClip();
+        }
+
+        private void ChildClip()
+        {
             clipRect.RadiusX = clipRect.RadiusY = Math.Max(0.0, CornerRadius.TopLeft - BorderThickness.Left * 0.5);
             clipRect.Rect = new Rect(Child.RenderSize);
             Child.Clip = clipRect;
+        }
+
+        private void ChildLoaded(object sender, RoutedEventArgs e)
+        {
+            ChildClip();
+            ((FrameworkElement)sender).Loaded -= ChildLoaded;
         }
     }
 }
