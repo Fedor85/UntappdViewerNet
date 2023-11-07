@@ -28,4 +28,16 @@
         <Setter Property="BorderStarColor" Value="#000000"/>
         <Setter Property="ForegroundStarColor" Value="{StaticResource MainSolidBrushLight}"/>
     </Style>
+    <Style x:Key="ListViewItemNoSelect" TargetType="{x:Type ListViewItem}">
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Grid Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalAlignment}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

@@ -9,18 +9,6 @@
              d:DesignHeight="250" d:DesignWidth="500" DataContextChanged="OnDataContextChanged"
              x:Name="ThisControl">
     <UserControl.Resources>
-        <Style x:Key="ListViewItemStyle" TargetType="ContentControl">
-            <Setter Property="Focusable" Value="false"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ContentControl">
-                        <Grid Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalAlignment}"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
         <valueConverters:IndexToVisibilityConverter x:Key="ITVConverter"/>
     </UserControl.Resources>
     <ScrollViewer x:Name="ScrollViewer" Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Border}},Path=ActualHeight}" 
@@ -28,7 +16,7 @@
         <StackPanel>
             <ContentControl x:Name="MainView" Content="{Binding}" Background="Transparent" ContentTemplate="{Binding ElementName=ThisControl, Path=ItemDataTemplate}"/>
             <Expander  x:Name="Expander" Header="{x:Static properties:Resources.Others}" Visibility="Hidden" VerticalContentAlignment="Stretch">
-                <ListView x:Name="OthersView" Background="Transparent" BorderThickness="0" ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                <ListView x:Name="OthersView" Background="Transparent" BorderThickness="0" ItemContainerStyle="{StaticResource ListViewItemNoSelect}"
                            ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                     <ListView.ItemTemplate>
                         <DataTemplate>

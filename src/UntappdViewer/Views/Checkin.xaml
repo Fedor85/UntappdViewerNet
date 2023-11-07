@@ -87,10 +87,6 @@
                                                         DataContext="{Binding Checkin.Venues}" Margin="10, 0, 0, 0"/>
                             </DockPanel>
                         </StackPanel>
-                        <GroupBox Grid.Column="1" Header="{x:Static properties:Resources.Badges}" Width="100"
-                                  Visibility="{Binding Checkin.VisibilityBadges, Converter={StaticResource BTVConverter}}">
-                            <controls:SliderContentControl ItemsSource="{Binding Checkin.Badges}" ArrowsSize="10" ItemDataTemplate="{StaticResource BadgeTemplateControl}"/>
-                        </GroupBox>
                     </Grid>
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="MouseWheel">
@@ -110,6 +106,16 @@
                         </controls:ZoomBorder>
                         <Image Source="..\Resources\facebook-like-beer.png" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Bottom"
                                Visibility="{Binding Checkin.VisibilityLikeBeer, Converter={StaticResource BTVConverter}}"/>
+                        <controls:ListViewNoSelect HorizontalAlignment="Right"  ItemsSource="{Binding Checkin.Badges}" Caption="{x:Static properties:Resources.Badges}">
+                            <controls:ListViewNoSelect.ItemDataTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <images:EllipseClipImageControl ImageSource="{Binding}" Width="70" Height="70"/>
+                                        <Separator Height="2" Background="Transparent"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </controls:ListViewNoSelect.ItemDataTemplate>
+                        </controls:ListViewNoSelect>
                     </Grid>
                 </GroupBox>
             </Grid>
