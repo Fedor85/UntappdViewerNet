@@ -3,10 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:UntappdViewer.UI.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="450">
     <StackPanel>
-        <Label x:Name="CaptionControl" HorizontalAlignment="Center"/>
+        <Grid>
+            <controls:ClippingBorder Background="#ffffff" CornerRadius="10" Opacity="0.2"/>
+            <Label x:Name="CaptionControl" HorizontalAlignment="Center"/>
+        </Grid>
         <ListView x:Name="ListView" Background="Transparent" BorderThickness="0" ItemContainerStyle="{StaticResource ListViewItemNoSelect}"/>
     </StackPanel>
 </UserControl>
