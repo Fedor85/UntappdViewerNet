@@ -10,7 +10,7 @@ namespace UntappdViewer.UI.Controls
     /// </summary>
     public partial class ImageEllipseClip : UserControl
     {
-        private static readonly DependencyProperty ImageSourceProperty = DependencyProperty.Register("ImageSource", typeof(BitmapSource), typeof(ImageEllipseClip));
+        public static readonly DependencyProperty ImageSourceProperty = DependencyProperty.Register("ImageSource", typeof(BitmapSource), typeof(ImageEllipseClip));
 
         public BitmapSource ImageSource
         {

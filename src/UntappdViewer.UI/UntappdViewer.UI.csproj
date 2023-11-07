@@ -54,12 +54,6 @@
     <Compile Include="Controls\Images\BorderImageControl.xaml.cs">
       <DependentUpon>BorderImageControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Images\EllipseClipImageControl.xaml.cs">
-      <DependentUpon>EllipseClipImageControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Images\SimpleImageControl.xaml.cs">
-      <DependentUpon>SimpleImageControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\GeoMap\Data\GeoData.cs" />
     <Compile Include="Controls\GeoMap\Data\LvcMap.cs" />
     <Compile Include="Controls\GeoMap\Data\MapData.cs" />
@@ -79,6 +73,8 @@
     <Compile Include="Controls\ImageEllipseClip.xaml.cs">
       <DependentUpon>ImageEllipseClip.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Images\EllipseClipImageControl.cs" />
+    <Compile Include="Controls\Images\SimpleImageControl.cs" />
     <Compile Include="Controls\ListViewExpander.xaml.cs">
       <DependentUpon>ListViewExpander.xaml</DependentUpon>
     </Compile>
@@ -145,14 +141,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\Images\BorderImageControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Images\EllipseClipImageControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Images\SimpleImageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
