@@ -9,7 +9,7 @@ namespace UntappdViewer.UI.Controls.RecyclerView
     /// <summary>
     /// Interaction logic for RecyclerView.xaml
     /// </summary>
-    public partial class RecyclerView : ListBox
+    public partial class RecyclerView : ListView
     {
         public event Action<IEnumerable> ItemsSourceChanged;
 

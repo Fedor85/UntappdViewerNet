@@ -1,4 +1,4 @@
-﻿<ListBox x:Class="UntappdViewer.UI.Controls.RecyclerView.RecyclerView"
+﻿<ListView x:Class="UntappdViewer.UI.Controls.RecyclerView.RecyclerView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,7 +9,7 @@
              xmlns:controlsviewModeRecyclerView="clr-namespace:UntappdViewer.UI.Controls.RecyclerView.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="450" Background="Transparent"
-             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+             ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemContainerStyle="{StaticResource ListViewItemNoSelect}">
     <ItemsControl.ItemsPanel>
         <ItemsPanelTemplate>
             <controls:VirtualizingWrapPanel HorizontalAlignment="Center"/>
@@ -29,4 +29,4 @@
             <controlsviewModeRecyclerView:ContentByEllipseClipImageControl />
         </DataTemplate>
     </ListBox.Resources>
-</ListBox>
+</ListView>
