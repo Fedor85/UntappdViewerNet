@@ -2,13 +2,11 @@
 
 namespace UntappdViewer.UI.Controls.ViewModel
 {
-    public class ImageViewModel
+    public class ImageViewModel: BaseImageViewModel
     {
         public string Caption { get; set; }
 
         public bool VisibilityCaption { get { return !String.IsNullOrEmpty(Caption); } }
-
-        public string ImagePath { get;  set; }
 
         public string Signature { get; set; }
 

@@ -96,6 +96,7 @@
       <DependentUpon>ScrollTopButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\TextBlockJoin.cs" />
+    <Compile Include="Controls\ViewModel\BaseImageViewModel.cs" />
     <Compile Include="Controls\ViewModel\RatingImageViewModel.cs" />
     <Compile Include="Controls\ZoomEventArgs.cs" />
     <Compile Include="Controls\LoopAutoScrollImageListBox.xaml.cs">

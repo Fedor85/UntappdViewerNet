@@ -3,6 +3,7 @@ using System.IO;
 using Prism.Mvvm;
 using UntappdViewer.Helpers;
 using UntappdViewer.Interfaces.Services;
+using UntappdViewer.UI.Controls.ViewModel;
 using UntappdViewer.Utils;
 
 namespace UntappdViewer.ViewModels
@@ -11,7 +12,7 @@ namespace UntappdViewer.ViewModels
     {
         private IUntappdService untappdService;
 
-        private List<string> imagePaths;
+        private List<BaseImageViewModel> imagePaths;
 
         string version;
 
@@ -20,7 +21,7 @@ namespace UntappdViewer.ViewModels
             get { return StringHelper.GetEmailUrl(Properties.Resources.Email); }
         }
 
-        public List<string> ImagePaths
+        public List<BaseImageViewModel> ImagePaths
         {
             get { return imagePaths; }
             set { SetProperty(ref imagePaths, value); }
@@ -29,28 +30,30 @@ namespace UntappdViewer.ViewModels
         public string Version
         {
             get { return version; }
-            set
-            {
-                SetProperty(ref version, value);
-            }
+            set { SetProperty(ref version, value); }
         }
 
         public AboutViewModel(IUntappdService untappdService)
         {
             this.untappdService = untappdService;
             Version = CommunicationHelper.GetTitle();
-            if (untappdService.IsUNTPProject())
-                ImagePaths = GetImagePaths();
+            ImagePaths = GetImageViewModels();
         }
 
-        private List<string> GetImagePaths()
+        private List<BaseImageViewModel> GetImageViewModels()
         {
             string directory = untappdService.GetBadgeImageDirectory();
-            List<string> imagePaths = new List<string>();
-            if (Directory.Exists(directory))
-                imagePaths.AddRange(Directory.GetFiles(directory).Shuffle());
+            List<BaseImageViewModel> imageViewModels = new List<BaseImageViewModel>();
+            if (!Directory.Exists(directory))
+                return imageViewModels;
 
-            return imagePaths;
+            foreach (string imagePath in Directory.GetFiles(directory).Shuffle())
+            {
+                BaseImageViewModel imageViewModel = new BaseImageViewModel();
+                imageViewModel.ImagePath = imagePath;
+                imageViewModels.Add(imageViewModel);
+            }
+            return imageViewModels;
         }
     }
 }

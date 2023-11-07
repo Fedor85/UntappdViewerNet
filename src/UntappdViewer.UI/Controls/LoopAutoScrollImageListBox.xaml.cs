@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using UntappdViewer.UI.Helpers;
 
 namespace UntappdViewer.UI.Controls
@@ -13,13 +16,15 @@ namespace UntappdViewer.UI.Controls
     /// </summary>
     public partial class LoopAutoScrollImageListBox : UserControl
     {
-        public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(List<string>), typeof(LoopAutoScrollImageListBox), new PropertyMetadata(null, SetItemsSource));
+        public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(IList), typeof(LoopAutoScrollImageListBox), new PropertyMetadata(SetItemsSource));
+
+        private static readonly DependencyProperty ItemDataTemplateProperty = DependencyProperty.Register("ItemDataTemplate", typeof(DataTemplate), typeof(LoopAutoScrollImageListBox));
 
         private Timer timer;
 
         private int speed;
 
-        private ObservableCollection<string> collection;
+        private ObservableCollection<object> collection;
 
         private int collectionCount;
 
@@ -36,18 +41,25 @@ namespace UntappdViewer.UI.Controls
             }
         }
 
-        public List<string> ItemsSource
+        public IList ItemsSource
         {
-            get { return (List<string>)GetValue(ItemsSourceProperty); }
+            get { return (IList)GetValue(ItemsSourceProperty); }
             set { SetValue(ItemsSourceProperty, value); }
         }
 
+        public DataTemplate ItemDataTemplate
+        {
+            get { return (DataTemplate)GetValue(ItemDataTemplateProperty); }
+            set { SetValue(ItemDataTemplateProperty, value); }
+        }
 
         public LoopAutoScrollImageListBox()
         {
             InitializeComponent();
+            MainListBox.SetBinding(ListBox.ItemTemplateProperty, new Binding { Path = new PropertyPath(ItemDataTemplateProperty), Source = this });
+
             MinItemsCount = 2;
-            ItemsSource = new List<string>();
+            ItemsSource = new List<object>();
 
             Loaded += WindowLoaded;
 
@@ -60,10 +72,10 @@ namespace UntappdViewer.UI.Controls
             if (ItemsSource == null || ItemsSource.Count <= MinItemsCount)
                 return;
 
-            collection = new ObservableCollection<string>(ItemsSource);
+            collection = new ObservableCollection<object>(ItemsSource.Cast<object>());
             collectionCount = collection.Count - 1;
 
-            ListBox.ItemsSource = collection;
+            MainListBox.ItemsSource = collection;
             timer.Start();
         }
 
@@ -71,14 +83,22 @@ namespace UntappdViewer.UI.Controls
         {
             UserControl thisControl = e.OriginalSource as UserControl;
             Window window = UIHelper.GetWindow(thisControl);
-            if (window != null)
-                window.Closing += WindowClosing;
+            if (window == null)
+                return;
+
+            window.Closing += WindowClosing;
+            window.Unloaded += WindowUnloaded;
+        }
+
+        private void WindowUnloaded(object sender, RoutedEventArgs e)
+        {  
+            ItemsSource?.Clear();
+            collection?.Clear();
         }
 
         private void WindowClosing(object sender, CancelEventArgs e)
         {
             timer.Stop();
-            ItemsSource.Clear();
         }
 
         private void TimerElapsed(object sender, ElapsedEventArgs e)
@@ -88,7 +108,8 @@ namespace UntappdViewer.UI.Controls
 
         private static void SetItemsSource(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
-            ((LoopAutoScrollImageListBox)dependencyObject).Run();
+            if(e.NewValue != null)
+                ((LoopAutoScrollImageListBox)dependencyObject).Run();
         }
     }
 }

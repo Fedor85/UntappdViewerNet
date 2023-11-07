@@ -7,26 +7,33 @@
         xmlns:properties="clr-namespace:UntappdViewer.Properties"
         xmlns:local="clr-namespace:UntappdViewer"
         xmlns:controls1="clr-namespace:UntappdViewer.UI.Controls;assembly=UntappdViewer.UI"
+        xmlns:images="clr-namespace:UntappdViewer.UI.Controls.Images;assembly=UntappdViewer.UI"
         mc:Ignorable="d"
         mvvm:ViewModelLocator.AutoWireViewModel="True"
-        Title="{x:Static properties:Resources.AboutTitle}" Height="250" Width="500"  Background="{StaticResource MainGradient2}"
+        Title="{x:Static properties:Resources.AboutTitle}" Height="220" Width="475"  Background="{StaticResource MainGradient2}"
         WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
     <Grid Background="{StaticResource MainBackground}">
-        <controls1:LoopAutoScrollImageListBox Height="150" Speed="100" MinItemsCount="4" Opacity="0.6" ItemsSource="{Binding ImagePaths, IsAsync=True}"/>
+        <controls1:LoopAutoScrollImageListBox Height="150" Speed="100" MinItemsCount="4" Opacity="0.6" ItemsSource="{Binding ImagePaths, IsAsync=True}">
+            <controls1:LoopAutoScrollImageListBox.ItemDataTemplate>
+                <DataTemplate>
+                    <images:EllipseClipImageControl/>
+                </DataTemplate>
+            </controls1:LoopAutoScrollImageListBox.ItemDataTemplate>
+        </controls1:LoopAutoScrollImageListBox>
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
             <Grid Background="#000000" Opacity="0.2"/>
             <StackPanel>
                 <TextBlock HorizontalAlignment="Center">
-                        <Hyperlink NavigateUri="{Binding Source={x:Static local:DefaultValues.UntappdtUrl}}" TextDecorations="" RequestNavigate="HyperlinkOnRequestNavigate">
-                            <Image Height="40" Width="200" Source="..\Resources\pbu_320_white.png"/>
-                        </Hyperlink>
+                    <Hyperlink NavigateUri="{Binding Source={x:Static local:DefaultValues.UntappdtUrl}}" TextDecorations="" RequestNavigate="HyperlinkOnRequestNavigate">
+                        <Image Height="40" Width="200" Source="..\Resources\pbu_320_white.png"/>
+                    </Hyperlink>
                 </TextBlock>
                 <Label Content="{Binding Version}" FontSize="15" Foreground="#ffffff" HorizontalAlignment="Center"/>
                 <TextBlock HorizontalAlignment="Center">
-                        <Hyperlink NavigateUri="{Binding EmailUrl}" TextDecorations="" RequestNavigate="HyperlinkOnRequestNavigate">
-                            <TextBlock Text="{x:Static properties:Resources.Email}" FontSize="15" Foreground="#ffffff"/>
-                        </Hyperlink>
-                    </TextBlock>
+                    <Hyperlink NavigateUri="{Binding EmailUrl}" TextDecorations="" RequestNavigate="HyperlinkOnRequestNavigate">
+                        <TextBlock Text="{x:Static properties:Resources.Email}" FontSize="15" Foreground="#ffffff"/>
+                    </Hyperlink>
+                </TextBlock>
             </StackPanel>
         </Grid>
     </Grid>
