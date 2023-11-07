@@ -7941,6 +7941,11 @@
             Compares two objects, returning true if they are equal
             </summary>
         </member>
+        <member name="M:NUnit.Framework.Constraints.EqualityAdapter.AreEqual(System.Object,System.Object,NUnit.Framework.Constraints.Tolerance@)">
+            <summary>
+            Compares two objects, within a tolerance returning true if they are equal
+            </summary>
+        </member>
         <member name="M:NUnit.Framework.Constraints.EqualityAdapter.CanCompare(System.Object,System.Object)">
             <summary>
             Returns true if the two objects can be compared by this adapter.
@@ -15631,6 +15636,63 @@
             </summary>
             <value>Element name</value>
         </member>
+        <member name="T:NUnit.Framework.Internal.Filters.PartitionFilter">
+             <summary>
+             PartitionFilter filter matches a subset of tests based upon a chosen partition number and partition count
+            
+             This is helpful when you may want to run a subset of tests (eg, across 3 machines - or partitions), each with a separately assigned partition number and fixed partition count
+             </summary>
+        </member>
+        <member name="P:NUnit.Framework.Internal.Filters.PartitionFilter.PartitionNumber">
+            <summary>
+            The matching partition number (between 1 and Partition Count, inclusive) this filter should match on
+            </summary>
+        </member>
+        <member name="P:NUnit.Framework.Internal.Filters.PartitionFilter.PartitionCount">
+            <summary>
+            The number of partitions available to use when assigning a matching partition number for each test this filter should match on
+            </summary>
+        </member>
+        <member name="M:NUnit.Framework.Internal.Filters.PartitionFilter.#ctor(System.UInt32,System.UInt32)">
+            <summary>
+            Construct a PartitionFilter that matches tests that have the assigned partition number from the total partition count
+            </summary>
+            <param name="partitionNumber">The partition number this filter will recognize and match on.</param>
+            <param name="partitionCount">The total number of partitions that should be configured when assigning each test to a partition number.</param>
+        </member>
+        <member name="M:NUnit.Framework.Internal.Filters.PartitionFilter.TryCreate(System.String,NUnit.Framework.Internal.Filters.PartitionFilter@)">
+            <summary>
+            Create a new PartitionFilter from the provided string value, or return false if the value could not be parsed
+            </summary>
+            <param name="value">The partition value (eg, 1/10 to indicate partition 1 of 10)</param>
+            <param name="partitionFilter">The created PartitionFilter if the parsing succeeded</param>
+            <returns>True on successful parsing, or False if there is an error</returns>
+        </member>
+        <member name="M:NUnit.Framework.Internal.Filters.PartitionFilter.Match(NUnit.Framework.Interfaces.ITest)">
+            <summary>
+            Match a test against a single value.
+            </summary>
+        </member>
+        <member name="M:NUnit.Framework.Internal.Filters.PartitionFilter.AddToXml(NUnit.Framework.Interfaces.TNode,System.Boolean)">
+            <summary>
+            Adds a PartitionFilter XML node to the provided parentNode
+            </summary>
+            <param name="parentNode">Parent node</param>
+            <param name="recursive">True if recursive</param>
+            <returns>The added XML node</returns>
+        </member>
+        <member name="M:NUnit.Framework.Internal.Filters.PartitionFilter.ComputePartitionNumber(NUnit.Framework.Interfaces.ITest)">
+            <summary>
+            Computes the Partition Number that has been assigned to the provided ITest value (based upon the configured Partition Count)
+            </summary>
+            <param name="value">A partition value between 1 and PartitionCount, inclusive</param>
+            <returns>A partition value between 1 and PartitionCount, inclusive</returns>
+        </member>
+        <member name="M:NUnit.Framework.Internal.Filters.PartitionFilter.ComputeHashValue(System.String)">
+            <summary>
+            Computes an unsigned integer hash value based upon the provided string
+            </summary>
+        </member>
         <member name="T:NUnit.Framework.Internal.Filters.PropertyFilter">
             <summary>
             PropertyFilter is able to select or exclude tests
@@ -18956,6 +19018,13 @@
             </summary>
             <param name="reason">The reason the test is not runnable</param>
         </member>
+        <member name="M:NUnit.Framework.Internal.Test.MakeInvalid(System.Exception,System.String)">
+            <summary>
+            Mark the test as Invalid (not runnable) specifying a reason and an exception.
+            </summary>
+            <param name="exception">The exception that was the cause.</param>
+            <param name="reason">The reason the test is not runnable</param>
+        </member>
         <member name="M:NUnit.Framework.Internal.Test.GetCustomAttributes``1(System.Boolean)">
             <summary>
             Get custom attributes applied to a test
@@ -19070,6 +19139,13 @@
             </summary>
             <param name="fixture">The <see cref="T:NUnit.Framework.Internal.TestFixture"/> to copy.</param>
             <param name="filter">Determines which descendants are copied.</param>
+        </member>
+        <member name="M:NUnit.Framework.Internal.TestFixture.#ctor(NUnit.Framework.Interfaces.ITypeInfo,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NUnit.Framework.Internal.TestFixture"/> class that failed to load.
+            </summary>
+            <param name="fixtureType">Type of the fixture.</param>
+            <param name="ex">Exception that was thrown during test discovery.</param>
         </member>
         <member name="P:NUnit.Framework.Internal.TestFixture.TypeInfo">
             <summary>

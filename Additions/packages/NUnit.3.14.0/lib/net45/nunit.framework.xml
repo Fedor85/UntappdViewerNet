@@ -553,7 +553,10 @@
         </member>
         <member name="M:NUnit.Framework.Api.NUnitTestAssemblyRunner.WrapInNUnitCallContext(System.Action)">
             <summary>
-            This method is a no-op in .NET Standard builds.
+            Executes the action within an <see cref="T:NUnit.Framework.Internal.NUnitCallContext" />
+            which ensures the <see cref="T:System.Runtime.Remoting.Messaging.CallContext"/> is cleaned up
+            suitably at the end of the test run. This method only has an effect running
+            the full .NET Framework.
             </summary>
         </member>
         <member name="T:NUnit.Framework.Assert">
@@ -7938,6 +7941,11 @@
             Compares two objects, returning true if they are equal
             </summary>
         </member>
+        <member name="M:NUnit.Framework.Constraints.EqualityAdapter.AreEqual(System.Object,System.Object,NUnit.Framework.Constraints.Tolerance@)">
+            <summary>
+            Compares two objects, within a tolerance returning true if they are equal
+            </summary>
+        </member>
         <member name="M:NUnit.Framework.Constraints.EqualityAdapter.CanCompare(System.Object,System.Object)">
             <summary>
             Returns true if the two objects can be compared by this adapter.
@@ -12743,7 +12751,8 @@
         </member>
         <member name="M:NUnit.Framework.Internal.AssemblyHelper.Load(System.String)">
             <summary>
-            Loads an assembly given a string, which is the AssemblyName
+            Loads an assembly given a string, which may be the
+            path to the assembly or the AssemblyName
             </summary>
         </member>
         <member name="M:NUnit.Framework.Internal.AssemblyHelper.GetAssemblyPathFromCodeBase(System.String)">
@@ -13708,13 +13717,6 @@
             <param name="innerCommand">The inner command</param>
             <param name="timeout">Timeout value</param>
             <param name="debugger">An <see cref="T:NUnit.Framework.Internal.Abstractions.IDebugger" /> instance</param>
-        </member>
-        <member name="M:NUnit.Framework.Internal.Commands.TimeoutCommand.Execute(NUnit.Framework.Internal.TestExecutionContext)">
-            <summary>
-            Runs the test, saving a TestResult in the supplied TestExecutionContext.
-            </summary>
-            <param name="context">The context in which the test should run.</param>
-            <returns>A TestResult</returns>
         </member>
         <member name="T:NUnit.Framework.Internal.ConstraintUtils">
             <summary>
@@ -15634,6 +15636,63 @@
             </summary>
             <value>Element name</value>
         </member>
+        <member name="T:NUnit.Framework.Internal.Filters.PartitionFilter">
+             <summary>
+             PartitionFilter filter matches a subset of tests based upon a chosen partition number and partition count
+            
+             This is helpful when you may want to run a subset of tests (eg, across 3 machines - or partitions), each with a separately assigned partition number and fixed partition count
+             </summary>
+        </member>
+        <member name="P:NUnit.Framework.Internal.Filters.PartitionFilter.PartitionNumber">
+            <summary>
+            The matching partition number (between 1 and Partition Count, inclusive) this filter should match on
+            </summary>
+        </member>
+        <member name="P:NUnit.Framework.Internal.Filters.PartitionFilter.PartitionCount">
+            <summary>
+            The number of partitions available to use when assigning a matching partition number for each test this filter should match on
+            </summary>
+        </member>
+        <member name="M:NUnit.Framework.Internal.Filters.PartitionFilter.#ctor(System.UInt32,System.UInt32)">
+            <summary>
+            Construct a PartitionFilter that matches tests that have the assigned partition number from the total partition count
+            </summary>
+            <param name="partitionNumber">The partition number this filter will recognize and match on.</param>
+            <param name="partitionCount">The total number of partitions that should be configured when assigning each test to a partition number.</param>
+        </member>
+        <member name="M:NUnit.Framework.Internal.Filters.PartitionFilter.TryCreate(System.String,NUnit.Framework.Internal.Filters.PartitionFilter@)">
+            <summary>
+            Create a new PartitionFilter from the provided string value, or return false if the value could not be parsed
+            </summary>
+            <param name="value">The partition value (eg, 1/10 to indicate partition 1 of 10)</param>
+            <param name="partitionFilter">The created PartitionFilter if the parsing succeeded</param>
+            <returns>True on successful parsing, or False if there is an error</returns>
+        </member>
+        <member name="M:NUnit.Framework.Internal.Filters.PartitionFilter.Match(NUnit.Framework.Interfaces.ITest)">
+            <summary>
+            Match a test against a single value.
+            </summary>
+        </member>
+        <member name="M:NUnit.Framework.Internal.Filters.PartitionFilter.AddToXml(NUnit.Framework.Interfaces.TNode,System.Boolean)">
+            <summary>
+            Adds a PartitionFilter XML node to the provided parentNode
+            </summary>
+            <param name="parentNode">Parent node</param>
+            <param name="recursive">True if recursive</param>
+            <returns>The added XML node</returns>
+        </member>
+        <member name="M:NUnit.Framework.Internal.Filters.PartitionFilter.ComputePartitionNumber(NUnit.Framework.Interfaces.ITest)">
+            <summary>
+            Computes the Partition Number that has been assigned to the provided ITest value (based upon the configured Partition Count)
+            </summary>
+            <param name="value">A partition value between 1 and PartitionCount, inclusive</param>
+            <returns>A partition value between 1 and PartitionCount, inclusive</returns>
+        </member>
+        <member name="M:NUnit.Framework.Internal.Filters.PartitionFilter.ComputeHashValue(System.String)">
+            <summary>
+            Computes an unsigned integer hash value based upon the provided string
+            </summary>
+        </member>
         <member name="T:NUnit.Framework.Internal.Filters.PropertyFilter">
             <summary>
             PropertyFilter is able to select or exclude tests
@@ -16243,6 +16302,13 @@
         </member>
         <member name="M:NUnit.Framework.Internal.MethodWrapper.GetHashCode">
             <inheritdoc />
+        </member>
+        <member name="T:NUnit.Framework.Internal.NUnitCallContext">
+            <summary>
+            This class ensures the <see cref="T:System.Runtime.Remoting.Messaging.CallContext"/> is correctly cleared
+            or restored around framework actions. This is important if running multiple assemblies within the same
+            process, to ensure no leakage from one assembly to the next. See https://github.com/nunit/nunit-console/issues/325
+            </summary>
         </member>
         <member name="T:NUnit.Framework.Internal.NUnitException">
             <summary>
@@ -18952,6 +19018,13 @@
             </summary>
             <param name="reason">The reason the test is not runnable</param>
         </member>
+        <member name="M:NUnit.Framework.Internal.Test.MakeInvalid(System.Exception,System.String)">
+            <summary>
+            Mark the test as Invalid (not runnable) specifying a reason and an exception.
+            </summary>
+            <param name="exception">The exception that was the cause.</param>
+            <param name="reason">The reason the test is not runnable</param>
+        </member>
         <member name="M:NUnit.Framework.Internal.Test.GetCustomAttributes``1(System.Boolean)">
             <summary>
             Get custom attributes applied to a test
@@ -19066,6 +19139,13 @@
             </summary>
             <param name="fixture">The <see cref="T:NUnit.Framework.Internal.TestFixture"/> to copy.</param>
             <param name="filter">Determines which descendants are copied.</param>
+        </member>
+        <member name="M:NUnit.Framework.Internal.TestFixture.#ctor(NUnit.Framework.Interfaces.ITypeInfo,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NUnit.Framework.Internal.TestFixture"/> class that failed to load.
+            </summary>
+            <param name="fixtureType">Type of the fixture.</param>
+            <param name="ex">Exception that was thrown during test discovery.</param>
         </member>
         <member name="P:NUnit.Framework.Internal.TestFixture.TypeInfo">
             <summary>
@@ -19279,6 +19359,55 @@
             <summary>
             ThreadUtility provides a set of static methods convenient
             for working with threads.
+            </summary>
+        </member>
+        <member name="M:NUnit.Framework.Internal.ThreadUtility.Delay(System.Int32,System.Threading.WaitCallback,System.Object)">
+            <summary>
+            Pre-Task compatibility
+            </summary>
+        </member>
+        <member name="M:NUnit.Framework.Internal.ThreadUtility.Abort(System.Threading.Thread,System.Int32)">
+            <summary>
+            Abort a thread, helping to dislodging it if it is blocked in native code
+            </summary>
+            <param name="thread">The thread to abort</param>
+            <param name="nativeId">The native thread id (if known), otherwise 0.
+            If provided, allows the thread to be killed if it's in a message pump native blocking wait.
+            This must have previously been captured by calling <see cref="M:NUnit.Framework.Internal.ThreadUtility.GetCurrentThreadNativeId"/> from the running thread itself.</param>
+        </member>
+        <member name="M:NUnit.Framework.Internal.ThreadUtility.Kill(System.Threading.Thread,System.Int32)">
+            <summary>
+            Do our best to kill a thread
+            </summary>
+            <param name="thread">The thread to kill</param>
+            <param name="nativeId">The native thread id (if known), otherwise 0.
+            If provided, allows the thread to be killed if it's in a message pump native blocking wait.
+            This must have previously been captured by calling <see cref="M:NUnit.Framework.Internal.ThreadUtility.GetCurrentThreadNativeId"/> from the running thread itself.</param>
+        </member>
+        <member name="M:NUnit.Framework.Internal.ThreadUtility.Kill(System.Threading.Thread,System.Object,System.Int32)">
+            <summary>
+            Do our best to kill a thread, passing state info
+            </summary>
+            <param name="thread">The thread to kill</param>
+            <param name="stateInfo">Info for the ThreadAbortException handler</param>
+            <param name="nativeId">The native thread id (if known), otherwise 0.
+            If provided, allows the thread to be killed if it's in a message pump native blocking wait.
+            This must have previously been captured by calling <see cref="M:NUnit.Framework.Internal.ThreadUtility.GetCurrentThreadNativeId"/> from the running thread itself.</param>
+        </member>
+        <member name="M:NUnit.Framework.Internal.ThreadUtility.DislodgeThreadInNativeMessageWait(System.Threading.Thread,System.Int32)">
+            <summary>
+            Schedule a thread pool thread to check on the aborting thread in case it's in a message pump native blocking wait
+            </summary>
+        </member>
+        <member name="M:NUnit.Framework.Internal.ThreadUtility.GetCurrentThreadNativeId">
+            <summary>
+            Captures the current thread's native id. If provided to <see cref="M:NUnit.Framework.Internal.ThreadUtility.Kill(System.Threading.Thread,System.Int32)"/> later, allows the thread to be killed if it's in a message pump native blocking wait.
+            </summary>
+        </member>
+        <member name="M:NUnit.Framework.Internal.ThreadUtility.PostThreadCloseMessage(System.Int32)">
+            <summary>
+            Sends a message to the thread to dislodge it from native code and allow a return to managed code, where a ThreadAbortException can be generated.
+            The message is meaningless (WM_CLOSE without a window handle) but it will end any blocking message wait.
             </summary>
         </member>
         <member name="M:NUnit.Framework.Internal.ThreadUtility.GetCurrentThreadPrincipal">
@@ -21272,24 +21401,6 @@
         </member>
         <member name="P:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.ParameterValue">
             <summary>Gets the condition parameter value.</summary>
-        </member>
-        <member name="T:System.Web.UI.ICallbackEventHandler">
-            <summary>
-            A shim of the .NET interface for platforms that do not support it.
-            Used to indicate that a control can be the target of a callback event on the server.
-            </summary>
-        </member>
-        <member name="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)">
-            <summary>
-            Processes a callback event that targets a control.
-            </summary>
-            <param name="report"></param>
-        </member>
-        <member name="M:System.Web.UI.ICallbackEventHandler.GetCallbackResult">
-            <summary>
-            Returns the results of a callback event that targets a control.
-            </summary>
-            <returns></returns>
         </member>
     </members>
 </doc>
