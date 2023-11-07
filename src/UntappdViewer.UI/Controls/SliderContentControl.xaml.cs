@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections;
-using System.IO;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using UntappdViewer.UI.Helpers;
-using UntappdViewer.Utils;
+using System.Windows.Data;
 
 namespace UntappdViewer.UI.Controls
 {
     /// <summary>
-    /// Interaction logic for SliderImagesControl.xaml
+    /// Interaction logic for SliderContentControl.xaml
     /// </summary>
-    public partial class SliderImagesControl : UserControl
+    public partial class SliderContentControl : UserControl
     {
-        public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(IList), typeof(SliderImagesControl), new PropertyMetadata(SetItemsSource));
+        public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(IList), typeof(SliderContentControl), new PropertyMetadata(SetItemsSource));
+
+        private static readonly DependencyProperty ItemDataTemplateProperty = DependencyProperty.Register("ItemDataTemplate", typeof(DataTemplate), typeof(SliderContentControl));
 
         public IList ItemsSource
         {
@@ -22,12 +21,19 @@ namespace UntappdViewer.UI.Controls
             set { SetValue(ItemsSourceProperty, value); }
         }
 
+        public DataTemplate ItemDataTemplate
+        {
+            get { return (DataTemplate)GetValue(ItemDataTemplateProperty); }
+            set { SetValue(ItemDataTemplateProperty, value); }
+        }
+
         private int index;
 
-        public SliderImagesControl()
+        public SliderContentControl()
         {
             InitializeComponent();
-            ToolTipService.SetShowDuration(Image, Int32.MaxValue);
+
+            ContentControl.SetBinding(ContentControl.ContentTemplateProperty, new Binding { Path = new PropertyPath(ItemDataTemplateProperty), Source = this });
             LabelGrid.Visibility = Visibility.Hidden;
             NavigationGrid.Visibility = Visibility.Hidden;
         }
@@ -55,7 +61,7 @@ namespace UntappdViewer.UI.Controls
             index = 0;
             LabelGrid.Visibility = Visibility.Hidden;
             NavigationGrid.Visibility = Visibility.Hidden;
-            Image.Source = null;
+            ContentControl.DataContext = null;
             if (ItemsSource == null || ItemsSource.Count == 0)
                 return;
 
@@ -73,23 +79,7 @@ namespace UntappdViewer.UI.Controls
                 return;
 
             object item = ItemsSource[index];
-
-            PropertyInfo imagePathPropertyInfo = item.GetType().GetProperty("ImagePath");
-            if (imagePathPropertyInfo != null)
-            {
-                string imagePath = imagePathPropertyInfo.GetValue(item, null).ToString();
-                if (!String.IsNullOrEmpty(imagePath) && File.Exists(imagePath))
-                    Image.Source = ImageConverter.GetBitmapSource(imagePath);
-            }
-
-            PropertyInfo imageDescriptionPropertyInfo = item.GetType().GetProperty("ImageDescription");
-            if (imageDescriptionPropertyInfo != null)
-            {
-                string imageDescription = imageDescriptionPropertyInfo.GetValue(item, null).ToString();
-                Image.ToolTip = StringHelper.GetSplitByLength(imageDescription, 50);
-                ToolTipService.SetIsEnabled(Image, !String.IsNullOrEmpty(imageDescription));
-            }
-
+            ContentControl.DataContext = item;
             SetCounterLabel();
         }
 
@@ -115,9 +105,10 @@ namespace UntappdViewer.UI.Controls
 
             InitializeItem();
         }
+
         private static void SetItemsSource(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
-            ((SliderImagesControl)dependencyObject).InitializeItemsSource();
+            ((SliderContentControl)dependencyObject).InitializeItemsSource();
         }
     }
 }

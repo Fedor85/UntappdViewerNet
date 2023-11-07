@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="UntappdViewer.UI.Controls.SliderImagesControl"
+﻿<UserControl x:Class="UntappdViewer.UI.Controls.SliderContentControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="450">
     <Grid>
-        <Image Name="Image"/>
+        <ContentControl Name="ContentControl" Content="{Binding}"/>
         <Grid Name="LabelGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Name="RowCounterLabel" Height="50"/>

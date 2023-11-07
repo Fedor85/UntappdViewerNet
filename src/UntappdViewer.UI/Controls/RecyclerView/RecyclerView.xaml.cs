@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Windows.Controls;
 using WpfToolkit.Controls;
 
-namespace UntappdViewer.UI.Controls
+namespace UntappdViewer.UI.Controls.RecyclerView
 { 
     /// <summary>
     /// Interaction logic for RecyclerView.xaml

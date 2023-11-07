@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CountryNameHelper.cs" />
+    <Compile Include="DefaultValues.cs" />
     <Compile Include="Enums\FileStatus.cs" />
     <Compile Include="FileHelper.cs" />
     <Compile Include="FileItem.cs" />

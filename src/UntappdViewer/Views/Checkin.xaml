@@ -12,6 +12,7 @@
              xmlns:helpers="clr-namespace:UntappdViewer.Helpers"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:valueConverters="clr-namespace:UntappdViewer.ValueConverters"
+             xmlns:images="clr-namespace:UntappdViewer.UI.Controls.Images;assembly=UntappdViewer.UI"
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="450" d:DesignWidth="450">
@@ -23,6 +24,9 @@
             <StackPanel>
                 <Rectangle Height="3" Fill="#ffffff" Margin="0, 2, 0, 2" Opacity="0.8"/>
             </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="BadgeTemplateControl">
+            <images:EllipseClipImageControl/>
         </DataTemplate>
         <valueConverters:MouseWheelEventArgsToDeltaConverter x:Key="EventArgsToDeltaConverter"/>
     </UserControl.Resources>
@@ -55,7 +59,7 @@
                         <StackPanel Grid.Column="0">
                             <GroupBox Header="{x:Static properties:Resources.Brewery}">
                                 <controls:ListViewExpander DataContext="{Binding Checkin.BeerViewModel.BreweryViewModels}" ItemDataTemplate="{StaticResource BreweryControl}"
-                                                       SeparatorTemplate="{StaticResource SeparatorControl}" ScrollViewerDisable="True">
+                                                           SeparatorTemplate="{StaticResource SeparatorControl}" ScrollViewerDisable="True">
                                     <controls:ListViewExpander.ExpanderHeader>
                                         <MultiBinding StringFormat="{}{0} ({1} {2}):">
                                             <Binding Source="{x:Static properties:Resources.CollaborationWith}"/>
@@ -67,8 +71,8 @@
                             </GroupBox>
                             <DockPanel>
                                 <starRating:StarRatingControl Rating="{Binding Checkin.Rating}" Style="{StaticResource StarRatingStyle}"
-                                                          Visibility="{Binding Checkin.VisibilityRating, Converter={StaticResource BooleanConverter}}"/>
-                                <TextBlock Text="  " />
+                                                              Visibility="{Binding Checkin.VisibilityRating, Converter={StaticResource BooleanConverter}}"/>
+                                <TextBlock Text="  "/>
                                 <Image Source="{Binding Checkin.ServingType, TargetNullValue={x:Null}}" Width="25" Height="25" HorizontalAlignment="Left"/>
                             </DockPanel>
                             <DockPanel>
@@ -80,12 +84,12 @@
                             </Image.InputBindings>
                         </Image>-->
                                 <controls:TextBlockJoin TextWrapping="Wrap" VerticalAlignment="Center" Separator="{Binding Source={x:Static local:DefaultValues.Separator}}"
-                                                DataContext="{Binding Checkin.Venues}" Margin="10, 0, 0, 0"/>
+                                                        DataContext="{Binding Checkin.Venues}" Margin="10, 0, 0, 0"/>
                             </DockPanel>
                         </StackPanel>
                         <GroupBox Grid.Column="1" Header="{x:Static properties:Resources.Badges}" Width="100"
-                              Visibility="{Binding Checkin.VisibilityBadges, Converter={StaticResource BTVConverter}}">
-                            <controls:SliderImagesControl ItemsSource="{Binding Checkin.Badges}" ArrowsSize="10"/>
+                                  Visibility="{Binding Checkin.VisibilityBadges, Converter={StaticResource BTVConverter}}">
+                            <controls:SliderContentControl ItemsSource="{Binding Checkin.Badges}" ArrowsSize="10" ItemDataTemplate="{StaticResource BadgeTemplateControl}"/>
                         </GroupBox>
                     </Grid>
                     <b:Interaction.Triggers>
@@ -105,7 +109,7 @@
                             <Image Source="{Binding Checkin.Photo, TargetNullValue={x:Null}}"/>
                         </controls:ZoomBorder>
                         <Image Source="..\Resources\facebook-like-beer.png" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                           Visibility="{Binding Checkin.VisibilityLikeBeer, Converter={StaticResource BTVConverter}}"/>
+                               Visibility="{Binding Checkin.VisibilityLikeBeer, Converter={StaticResource BTVConverter}}"/>
                     </Grid>
                 </GroupBox>
             </Grid>

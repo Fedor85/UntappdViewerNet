@@ -108,7 +108,6 @@
     <Compile Include="Different\Events\LoadingCancel.cs" />
     <Compile Include="Different\Helpers\GradientHelper.cs" />
     <Compile Include="Different\Helpers\Extensions\HyperlinkExtensions.cs" />
-    <Compile Include="Different\Helpers\IValueConverters\BoolToVisibilityConverter.cs" />
     <Compile Include="Different\Helpers\ConverterHelper.cs" />
     <Compile Include="Different\DefaultValues.cs" />
     <Compile Include="Different\Events\ChekinUpdateEvent.cs" />

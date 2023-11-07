@@ -51,6 +51,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\ClippingBorder.cs" />
+    <Compile Include="Controls\Images\BorderImageControl.xaml.cs">
+      <DependentUpon>BorderImageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Images\EllipseClipImageControl.xaml.cs">
+      <DependentUpon>EllipseClipImageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Images\SimpleImageControl.xaml.cs">
+      <DependentUpon>SimpleImageControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\GeoMap\Data\GeoData.cs" />
     <Compile Include="Controls\GeoMap\Data\LvcMap.cs" />
     <Compile Include="Controls\GeoMap\Data\MapData.cs" />
@@ -73,27 +82,33 @@
     <Compile Include="Controls\ListViewExpander.xaml.cs">
       <DependentUpon>ListViewExpander.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\RecyclerView\Controls\ContentByBorderImageControl.xaml.cs">
+      <DependentUpon>ContentByBorderImageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RecyclerView\Controls\ContentByEllipseClipImageControl.xaml.cs">
+      <DependentUpon>ContentByEllipseClipImageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RecyclerView\Controls\ContentByLongImageControl.cs" />
+    <Compile Include="Controls\RecyclerView\Controls\ContentByRatingImageControl.cs" />
+    <Compile Include="Controls\RecyclerView\ViewModel\EllipseImageViewModel.cs" />
+    <Compile Include="Controls\RecyclerView\ViewModel\LongImageViewModel.cs" />
     <Compile Include="Controls\ScrollTopButton.xaml.cs">
       <DependentUpon>ScrollTopButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\TextBlockJoin.cs" />
+    <Compile Include="Controls\ViewModel\RatingImageViewModel.cs" />
     <Compile Include="Controls\ZoomEventArgs.cs" />
     <Compile Include="Controls\LoopAutoScrollImageListBox.xaml.cs">
       <DependentUpon>LoopAutoScrollImageListBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\RecyclerView\DataTemplates\ImageDataTemplate.xaml.cs">
-      <DependentUpon>ImageDataTemplate.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\RecyclerView\DataTemplates\RatingDataTemplate.xaml.cs">
-      <DependentUpon>RatingDataTemplate.xaml</DependentUpon>
+    <Compile Include="Controls\RecyclerView\Controls\ContentDataControl.xaml.cs">
+      <DependentUpon>ContentDataControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\RecyclerView\RecyclerView.xaml.cs">
       <DependentUpon>RecyclerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\RecyclerView\ViewModel\ImageViewModel.cs" />
-    <Compile Include="Controls\RecyclerView\ViewModel\RatingViewModel.cs" />
-    <Compile Include="Controls\SliderImagesControl.xaml.cs">
-      <DependentUpon>SliderImagesControl.xaml</DependentUpon>
+    <Compile Include="Controls\SliderContentControl.xaml.cs">
+      <DependentUpon>SliderContentControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\SmartTextBox.xaml.cs">
       <DependentUpon>SmartTextBox.xaml</DependentUpon>
@@ -106,13 +121,14 @@
       <DependentUpon>StarRatingControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ViewModel\Entity.cs" />
-    <Compile Include="Controls\ViewModel\ImageItemViewModel.cs" />
+    <Compile Include="Controls\ViewModel\ImageViewModel.cs" />
     <Compile Include="Controls\ViewModel\TreeItemViewModel.cs" />
     <Compile Include="Controls\ZoomBorder.cs" />
     <Compile Include="Helpers\ImageConverter.cs" />
-    <Compile Include="Helpers\IndexToVisibilityConverter.cs" />
-    <Compile Include="Helpers\PathImageReSizeWidthConverter.cs" />
-    <Compile Include="Helpers\PercentageChangeValueConverter.cs" />
+    <Compile Include="Helpers\IValueConverters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Helpers\IValueConverters\IndexToVisibilityConverter.cs" />
+    <Compile Include="Helpers\IValueConverters\PathImageReSizeWidthConverter.cs" />
+    <Compile Include="Helpers\IValueConverters\PercentageChangeValueConverter.cs" />
     <Compile Include="Helpers\PropertyMetadataParameter.cs" />
     <Compile Include="Helpers\UIHelper.cs" />
     <Compile Include="Helpers\ZoomHelper.cs" />
@@ -127,6 +143,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\Images\BorderImageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Images\EllipseClipImageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Images\SimpleImageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\GeoMap\GeoDataTooltip.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -151,13 +179,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\RecyclerView\DataTemplates\ImageDataTemplate.xaml">
+    <Page Include="Controls\RecyclerView\Controls\ContentDataControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\RecyclerView\DataTemplates\RatingDataTemplate.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Controls\RecyclerView\Controls\ContentByBorderImageControl.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\RecyclerView\Controls\ContentByEllipseClipImageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\RecyclerView\RecyclerView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -167,7 +199,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\SliderImagesControl.xaml">
+    <Page Include="Controls\SliderContentControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -206,6 +238,10 @@
     <Resource Include="Resources\Show.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\UntappdViewer.Infrastructure\UntappdViewer.Infrastructure.csproj">
+      <Project>{bdc0b7dd-2833-4b95-9b93-ea520003ebe1}</Project>
+      <Name>UntappdViewer.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UntappdViewer.Interfaces\UntappdViewer.Interfaces.csproj">
       <Project>{bb613be0-ae21-4a41-836a-c904d16444f6}</Project>
       <Name>UntappdViewer.Interfaces</Name>
@@ -229,5 +265,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\World.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace UntappdViewer.UI.Helpers
+namespace UntappdViewer.UI.ValueConverters
 {
     public class PercentageChangeValueConverter : IValueConverter
     {

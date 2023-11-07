@@ -30,7 +30,7 @@ namespace UntappdViewer.ViewModels.Controls
 
         public List<string> Venues { get; }
 
-        public List<ImageItemViewModel>  Badges { get; }
+        public List<ImageViewModel>  Badges { get; }
 
         public bool VisibilityBadges
         {
@@ -50,7 +50,7 @@ namespace UntappdViewer.ViewModels.Controls
         {
             IsNotEmpty = true;
             Venues = new List<string>();
-            Badges = new List<ImageItemViewModel>();
+            Badges = new List<ImageViewModel>();
             BeerViewModel = new BeerViewModel(); 
         }
 

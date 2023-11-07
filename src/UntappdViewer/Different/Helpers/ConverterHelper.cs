@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using UntappdViewer.Infrastructure;
 using UntappdViewer.Models;
 using UntappdViewer.Models.Different;
+using UntappdViewer.UI.Controls.RecyclerView.ViewModel;
 using UntappdViewer.UI.Controls.ViewModel;
 using UntappdViewer.Utils;
 
@@ -39,50 +41,57 @@ namespace UntappdViewer.Helpers
 
         #region GalleryProject
 
-        public static RatingViewModel GetCheckinViewModel(Checkin checkin, string photoPath)
+        public static LongImageViewModel GetCheckinViewModel(Checkin checkin, string photoPath)
         {
-            RatingViewModel ratingViewModel = new RatingViewModel();
-            ratingViewModel.Caption = checkin.Beer.Name;
-            ratingViewModel.ImagePath = File.Exists(photoPath) ? photoPath : DefaultValues.NoImageIconResources;
-            ratingViewModel.RatingScore = checkin.RatingScore ?? 0;
-            return ratingViewModel;
+            LongImageViewModel imageViewModel = new LongImageViewModel();
+            imageViewModel.Signature = checkin.Beer.Name;
+            imageViewModel.ImagePath = File.Exists(photoPath) ? photoPath : DefaultValues.NoImageIconResources;
+            imageViewModel.RatingScore = checkin.RatingScore ?? 0;
+            imageViewModel.ToolTip = StringHelper.GetSplitByLength(checkin.Beer.Name, DefaultValues.MaxToolTipLineLength);
+            return imageViewModel;
         }
 
-        public static RatingViewModel GetBeerViewModel(Beer beer, string labelPath)
+        public static RatingImageViewModel GetBeerViewModel(Beer beer, string labelPath)
         {
-            RatingViewModel ratingViewModel = new RatingViewModel();
-            ratingViewModel.Caption = beer.Name;
-            if (File.Exists(labelPath))
-                ratingViewModel.ImagePath = labelPath;
-
-            ratingViewModel.RatingScore = beer.GlobalRatingScore;
-            return ratingViewModel;
+            RatingImageViewModel imageViewModel = new RatingImageViewModel();
+            imageViewModel.Signature = beer.Name;
+            imageViewModel.ImagePath = labelPath;
+            imageViewModel.RatingScore = Math.Round(beer.GlobalRatingScore, 2);
+            imageViewModel.ToolTip = StringHelper.GetSplitByLength(beer.Name, DefaultValues.MaxToolTipLineLength);
+            return imageViewModel;
         }
 
         public static ImageViewModel GetBreweryViewModel(Brewery brewery, string labelPath)
         {
             ImageViewModel imageViewModel = new ImageViewModel();
-            imageViewModel.Caption = brewery.Name;
+            imageViewModel.Signature = brewery.Name;
             if (File.Exists(labelPath))
                 imageViewModel.ImagePath = labelPath;
 
+            StringBuilder description = new StringBuilder();
+            description.AppendLine(StringHelper.GetSplitByLength(brewery.Name, DefaultValues.MaxToolTipLineLength));
             if (brewery.Venue != null && !String.IsNullOrEmpty(brewery.Venue.Country))
-                imageViewModel.Description = brewery.Venue.Country;
+                description.Append(brewery.Venue.Country);
 
+            imageViewModel.ToolTip = description.ToString().Trim();
             return imageViewModel;
         }
 
-        public static ImageViewModel GetBadgeViewModel(Badge badge, string imagePath)
+
+        public static EllipseImageViewModel GetBadgeViewModel(Badge badge, string imagePath)
         {
-            ImageViewModel imageViewModel = new ImageViewModel();
-            imageViewModel.Caption = badge.Name;
-            if (File.Exists(imagePath))
-                imageViewModel.ImagePath = imagePath;
+            EllipseImageViewModel captionImageViewModel = new EllipseImageViewModel();
+            captionImageViewModel.Signature = badge.Name;
+            captionImageViewModel.ImagePath = imagePath;
 
+            StringBuilder description = new StringBuilder();
+            description.AppendLine(badge.Name);
             if (!String.IsNullOrEmpty(badge.Description))
-                imageViewModel.Description = StringHelper.GetSplitByLength(badge.Description, 40);
+                description.Append(badge.Description);
 
-            return imageViewModel;
+            captionImageViewModel.ToolTip = StringHelper.GetSplitByLength(description.ToString().Trim(), DefaultValues.MaxToolTipLineLength);
+
+            return captionImageViewModel;
         }
 
         public static Dictionary<T1, T3> KeyValueToDirectory<T1, T2, T3>(List<KeyValue<T1, T2>> values)

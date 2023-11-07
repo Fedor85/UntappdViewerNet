@@ -14,7 +14,7 @@ namespace UntappdViewer.ValueConverters
 
         public PieSeriesBackgroundConverter()
         {
-            gradientHelper = new GradientHelper(DefaultValues.MainGradient3);
+            gradientHelper = new GradientHelper(Infrastructure.DefaultValues.MainGradient3);
         }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

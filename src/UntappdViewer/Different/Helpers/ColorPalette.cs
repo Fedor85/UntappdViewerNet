@@ -20,9 +20,9 @@ namespace UntappdViewer.Helpers
         {
             ColorPalette colorPalette = new ColorPalette();
 
-            colorPalette.MainColorLight = DefaultValues.MainColorLight;
-            colorPalette.MainColorDark = DefaultValues.MainColorDark;
-            colorPalette.GradientHelper = new GradientHelper(DefaultValues.MainGradient3);
+            colorPalette.MainColorLight = Infrastructure.DefaultValues.MainColorLight;
+            colorPalette.MainColorDark = Infrastructure.DefaultValues.MainColorDark;
+            colorPalette.GradientHelper = new GradientHelper(Infrastructure.DefaultValues.MainGradient3);
 
             return colorPalette;
         }

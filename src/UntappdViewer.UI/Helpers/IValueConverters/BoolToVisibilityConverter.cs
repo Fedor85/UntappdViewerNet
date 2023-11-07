@@ -1,22 +1,20 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 
-namespace UntappdViewer.UI.Helpers
+namespace UntappdViewer.UI.ValueConverters
 {
-    public class IndexToVisibilityConverter : IValueConverter
+    public class BoolToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Selector selector = parameter as Selector;
-            return selector.Items.IndexOf(value) == selector.Items.Count - 1 ? Visibility.Collapsed : Visibility.Visible;
+            return value is Boolean && (bool) value ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return Visibility.Visible;
+            return value is Visibility && (Visibility)value == Visibility.Visible;
         }
     }
 }

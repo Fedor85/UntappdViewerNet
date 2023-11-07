@@ -1,39 +1,17 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:UntappdViewer"
-                    xmlns:starRating="clr-namespace:UntappdViewer.UI.Controls.StarRating;assembly=UntappdViewer.UI"
                     xmlns:controls="clr-namespace:UntappdViewer.UI.Controls;assembly=UntappdViewer.UI"
                     xmlns:valueConverters="clr-namespace:UntappdViewer.ValueConverters">
-    <SolidColorBrush  x:Key="MainSolidBrushLight" Color="{x:Static local:DefaultValues.MainColorLight}"/>
-    <SolidColorBrush  x:Key="MainSolidBrushDark" Color="{x:Static local:DefaultValues.MainColorDark}"/>
-    <LinearGradientBrush x:Key="MainGradient2" SpreadMethod="Reflect" EndPoint="0,1">
-        <GradientStop Color="{x:Static local:DefaultValues.MainColorLight}" Offset="0" />
-        <GradientStop Color="{x:Static local:DefaultValues.MainColorDark}" Offset="1" />
-    </LinearGradientBrush>
-    <SolidColorBrush  x:Key="BackgroundPointerBrush"  Color="{x:Static local:DefaultValues.MainColorLight}" Opacity="0.5"/>
-        <ImageBrush x:Key="MainBackground" ImageSource="..\Resources\untappd_bottles.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0 0 80 80" Opacity="0.4">
+    <ImageBrush x:Key="MainBackground" ImageSource="..\Resources\untappd_bottles.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0 0 80 80" Opacity="0.4">
         <ImageBrush.Transform>
             <RotateTransform Angle="-45"/>
         </ImageBrush.Transform>
     </ImageBrush>
-    <valueConverters:BoolToVisibilityConverter x:Key="BTVConverter"/>
     <valueConverters:PieSeriesBackgroundConverter  x:Key="PieBackgroundConverter"/>
     <valueConverters:ServingTypeConverter  x:Key="ServingTypeConverter"/>
     <valueConverters:CountryNameToFlagConverter x:Key="FlagConverter"/>
     <BooleanToVisibilityConverter x:Key="BooleanConverter" />
-    <Style x:Key="StarRatingStyle" TargetType="{x:Type starRating:StarRatingControl}">
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="StarCount" Value="5"/>
-        <Setter Property="StarSize" Value="20"/>
-        <Setter Property="BorderStarThickness" Value="5"/>
-        <Setter Property="ViewStarsColor" Value="#ffffff"/>
-        <Setter Property="ViewStarsOpacity" Value="0.3"/>
-        <Setter Property="BackgroundStarColor" Value="#ffffff"/>
-        <Setter Property="BackgroundStarOpacity" Value="1"/>
-        <Setter Property="BorderStarColor" Value="#000000"/>
-        <Setter Property="ForegroundStarColor" Value="{StaticResource MainSolidBrushLight}"/>
-    </Style>
     <Style x:Key="ScrollTopButtonStyle" TargetType="{x:Type controls:ScrollTopButton}">
         <Setter Property="Size" Value="35"/>
         <Setter Property="BackgroundEllipse" Value="{StaticResource MainSolidBrushDark}"/>

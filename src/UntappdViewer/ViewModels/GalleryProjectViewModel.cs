@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Windows.Input;
 using Prism.Commands;
@@ -9,6 +10,7 @@ using UntappdViewer.Helpers;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
 using UntappdViewer.Modules;
+using UntappdViewer.UI.Controls.RecyclerView.ViewModel;
 using UntappdViewer.UI.Controls.ViewModel;
 using Checkin = UntappdViewer.Models.Checkin;
 using Untappd = UntappdViewer.Views.Untappd;
@@ -32,19 +34,13 @@ namespace UntappdViewer.ViewModels
         public IEnumerable Items
         {
             get { return items; }
-            set
-            {
-                SetProperty(ref items, value);
-            }
+            set { SetProperty(ref items, value); }
         }
 
         public IEnumerable DisplayTypeItems
         {
             get { return displayTypeItems; }
-            set
-            {
-                SetProperty(ref displayTypeItems, value);
-            }
+            set { SetProperty(ref displayTypeItems, value); }
         }
 
         public Entity SelectTypeDisplayItem
@@ -54,7 +50,6 @@ namespace UntappdViewer.ViewModels
             {
                 SetItems(value);
                 SetProperty(ref selectTypeDisplayItem, value);
-
             }
         }
 
@@ -113,43 +108,45 @@ namespace UntappdViewer.ViewModels
 
         private IEnumerable GetCheckinItems()
         {
-            List<RatingViewModel> viewModels = new List<RatingViewModel>();
+            List<LongImageViewModel> imageViewModels = new List<LongImageViewModel>();
             foreach (Checkin checkin in untappdService.GetCheckins())
-            {
-                string photoPath = untappdService.GetCheckinPhotoFilePath(checkin);
-                viewModels.Add(ConverterHelper.GetCheckinViewModel(checkin, photoPath));
-            }
-            return viewModels;
+                imageViewModels.Add(ConverterHelper.GetCheckinViewModel(checkin, untappdService.GetCheckinPhotoFilePath(checkin)));
+
+            return imageViewModels;
         }
 
         private IEnumerable GetBeerItems()
         {
-            List<RatingViewModel> viewModels = new List<RatingViewModel>();
+            List<RatingImageViewModel> imageViewModels = new List<RatingImageViewModel>();
             foreach (Beer beer in untappdService.GetBeers())
             {
                 string labelPath = untappdService.GetBeerLabelFilePath(beer);
-                viewModels.Add(ConverterHelper.GetBeerViewModel(beer, labelPath));
+                if (String.IsNullOrEmpty(labelPath))
+                    continue;
+
+                imageViewModels.Add(ConverterHelper.GetBeerViewModel(beer, labelPath));
             }
-            return viewModels;
+            return imageViewModels;
         }
 
         private IEnumerable GetBreweryItems()
         {
             List<ImageViewModel> viewModels = new List<ImageViewModel>();
             foreach (Brewery brewery in untappdService.GetFullBreweries())
-            {
-                string labelPath = untappdService.GetBreweryLabelFilePath(brewery);
-                viewModels.Add(ConverterHelper.GetBreweryViewModel(brewery, labelPath));
-            }
+                viewModels.Add(ConverterHelper.GetBreweryViewModel(brewery, untappdService.GetBreweryLabelFilePath(brewery)));
+
             return viewModels;
         }
 
         private IEnumerable GetBadgeItems()
         {
-            List<ImageViewModel> viewModels = new List<ImageViewModel>();
+            List<EllipseImageViewModel> viewModels = new List<EllipseImageViewModel>();
             foreach (Badge badge in untappdService.GetBadges())
             {
                 string imagePath = untappdService.GetBadgeImageFilePath(badge);
+                if (String.IsNullOrEmpty(imagePath))
+                    continue;
+
                 viewModels.Add(ConverterHelper.GetBadgeViewModel(badge, imagePath));
             }
             return viewModels;

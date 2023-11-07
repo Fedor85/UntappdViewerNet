@@ -12,7 +12,6 @@ namespace UntappdViewer.Helpers
 {
     public static class Mapper
     {
-
         public static CheckinViewModel GetCheckinViewModel(IUntappdService untappdService, Checkin checkin)
         {
             CheckinViewModel checkinViewModel = new CheckinViewModel();
@@ -92,8 +91,13 @@ namespace UntappdViewer.Helpers
             foreach (Badge badge in checkin.Badges)
             {
                 string badgeImagePath = untappdService.GetBadgeImageFilePath(badge);
-                if (!String.IsNullOrEmpty(badgeImagePath))
-                    checkinViewModel.Badges.Add(new ImageItemViewModel(badgeImagePath, $"{badge.Name}\n{badge.Description}"));
+                if (!String.IsNullOrEmpty(badgeImagePath) && File.Exists(badgeImagePath))
+                {
+                    ImageViewModel imageViewModel = new ImageViewModel();
+                    imageViewModel.ImagePath = badgeImagePath;
+                    imageViewModel.ToolTip = $"{badge.Name}\n{StringHelper.GetSplitByLength(badge.Description, DefaultValues.MaxToolTipLineLength)}";
+                    checkinViewModel.Badges.Add(imageViewModel);
+                }
             }
         }
 
@@ -122,7 +126,7 @@ namespace UntappdViewer.Helpers
                 return null;
 
             string description = StringHelper.GetRemoveEmptyLines(text);
-            return StringHelper.GetSplitByLength(description, 50);
+            return StringHelper.GetSplitByLength(description, DefaultValues.MaxToolTipLineLength);
         }
     }
 }

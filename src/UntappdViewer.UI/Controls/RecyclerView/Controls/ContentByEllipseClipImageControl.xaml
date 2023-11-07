@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="UntappdViewer.UI.Controls.RecyclerView.Controls.ContentByEllipseClipImageControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:images="clr-namespace:UntappdViewer.UI.Controls.Images"
+             xmlns:controls="clr-namespace:UntappdViewer.UI.Controls.RecyclerView.Controls"
+             mc:Ignorable="d" Height="150" Width="150">
+    <controls:ContentDataControl>
+        <controls:ContentDataControl.ItemDataTemplate>
+            <DataTemplate>
+                <images:EllipseClipImageControl/>
+            </DataTemplate>
+        </controls:ContentDataControl.ItemDataTemplate>
+    </controls:ContentDataControl>
+</UserControl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

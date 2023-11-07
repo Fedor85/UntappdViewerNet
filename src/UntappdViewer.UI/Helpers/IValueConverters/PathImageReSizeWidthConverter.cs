@@ -3,7 +3,7 @@ using System.IO;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 
-namespace UntappdViewer.UI.Helpers
+namespace UntappdViewer.UI.ValueConverters
 {
     public class PathImageReSizeWidthConverter : IValueConverter
     {

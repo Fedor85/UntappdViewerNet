@@ -15,6 +15,7 @@
              xmlns:geoMap="clr-namespace:UntappdViewer.UI.Controls.GeoMap;assembly=UntappdViewer.UI"
              xmlns:helpers="clr-namespace:UntappdViewer.Helpers"
              xmlns:controls="clr-namespace:UntappdViewer.UI.Controls;assembly=UntappdViewer.UI"
+             xmlns:infrastructure="clr-namespace:UntappdViewer.Infrastructure;assembly=UntappdViewer.Infrastructure"
              mc:Ignorable="d" 
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="2450" d:DesignWidth="800">
@@ -182,7 +183,7 @@
             <Grid>
                 <Border Opacity="0.8">
                     <Border.Background>
-                        <LinearGradientBrush GradientStops="{x:Static local:DefaultValues.MainGradient3}"/>
+                        <LinearGradientBrush GradientStops="{x:Static infrastructure:DefaultValues.MainGradient3}"/>
                     </Border.Background>
                 </Border>
                 <Border  BorderBrush="{StaticResource MainSolidBrushDark}" BorderThickness="2"/>
@@ -257,11 +258,11 @@
         </ControlTemplate>
         <ObjectDataProvider x:Key="GradientHelper"  ObjectType="{x:Type helpers:GradientHelper}">
             <ObjectDataProvider.ConstructorParameters>
-                <x:Static Member="local:DefaultValues.MainGradient3"/>
+                <x:Static Member="infrastructure:DefaultValues.MainGradient3"/>
             </ObjectDataProvider.ConstructorParameters>
         </ObjectDataProvider>
-        <SolidColorBrush x:Key="BackgroundMap" Color="{x:Static local:DefaultValues.MainColorLight}" Opacity="0.2" />
-        <SolidColorBrush x:Key="BackgroundMapGrid"  Color="{x:Static local:DefaultValues.MainColorDark}"/>
+        <SolidColorBrush x:Key="BackgroundMap" Color="{x:Static infrastructure:DefaultValues.MainColorLight}" Opacity="0.2" />
+        <SolidColorBrush x:Key="BackgroundMapGrid"  Color="{x:Static infrastructure:DefaultValues.MainColorDark}"/>
         <system:Double x:Key="DefautChartHeight">300</system:Double>
         <system:Double x:Key="MaxRating">5</system:Double>
         <Thickness x:Key="DefautChartMargin">5,0,5,0</Thickness>

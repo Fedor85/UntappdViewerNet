@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:helpers="clr-namespace:UntappdViewer.UI.Helpers"
              xmlns:properties="clr-namespace:UntappdViewer.UI.Properties"
+             xmlns:valueConverters="clr-namespace:UntappdViewer.UI.ValueConverters"
              mc:Ignorable="d" 
              d:DesignHeight="250" d:DesignWidth="500" DataContextChanged="OnDataContextChanged"
              x:Name="ThisControl">
@@ -21,7 +21,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <helpers:IndexToVisibilityConverter x:Key="ITVConverter"/>
+        <valueConverters:IndexToVisibilityConverter x:Key="ITVConverter"/>
     </UserControl.Resources>
     <ScrollViewer x:Name="ScrollViewer" Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Border}},Path=ActualHeight}" 
                   VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" PreviewMouseWheel="OnPreviewMouseWheel">
