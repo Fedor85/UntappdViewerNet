@@ -66,7 +66,6 @@ namespace UntappdViewer.ViewModels
 
         private void CheckinVenueLocation()
         {
-
         }
 
         protected override void Activate()

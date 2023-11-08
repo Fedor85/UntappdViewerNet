@@ -11,7 +11,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
-        <Image Width="60" Source="{Binding LabelPath, TargetNullValue={x:Null}}" Margin="0, 0, 10, 0"
+        <Image Width="60" Source="{Binding LabelPath, IsAsync=True}" Margin="0, 0, 10, 0"
                Visibility="{Binding VisibilityLabel, Converter={StaticResource BooleanConverter}}"/>
         <StackPanel>
             <TextBlock Visibility="{Binding VisibilityUrl, Converter={StaticResource BooleanConverter}}">

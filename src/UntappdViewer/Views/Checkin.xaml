@@ -38,11 +38,12 @@
         </Image>
         <Grid>
             <controls:ZoomBorder ClipToBounds="True">
-                <Image Source="{Binding Checkin.PhotoPath, TargetNullValue={x:Null}}"/>
+                <Image Source="{Binding Checkin.PhotoPath, IsAsync=True}"/>
             </controls:ZoomBorder>
             <Image Source="..\Resources\facebook-like-beer.png" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Bottom"
                                Visibility="{Binding Checkin.VisibilityLikeBeer, Converter={StaticResource BTVConverter}}" Margin="10, 0, 0, 10"/>
-            <controls:ClippingBorder  VerticalAlignment="Bottom" HorizontalAlignment="Right"   Margin="0, 0, 10, 10" CornerRadius="10">
+            <controls:ClippingBorder  VerticalAlignment="Bottom" HorizontalAlignment="Right"   Margin="0, 0, 10, 10" CornerRadius="10"
+                                      Visibility="{Binding Checkin.VisibilityPhoto, Converter={StaticResource BTVConverter}}">
                 <Grid>
                     <Grid Background="#ffffff" Opacity="0.2"/>
                     <StackPanel Opacity="0.5">

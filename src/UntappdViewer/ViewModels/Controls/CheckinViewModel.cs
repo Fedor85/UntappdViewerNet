@@ -38,6 +38,11 @@ namespace UntappdViewer.ViewModels.Controls
 
         public string PhotoPath { get; set; }
 
+        public bool VisibilityPhoto
+        {
+            get { return !String.IsNullOrEmpty(PhotoPath); }
+        }
+
         public bool VisibilityLikeBeer
         {
             get { return VisibilityRating && Rating.Value >= DefaultValues.MinCheckinRatingByLikeBeer; }
