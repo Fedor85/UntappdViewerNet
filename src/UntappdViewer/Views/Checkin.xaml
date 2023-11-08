@@ -31,99 +31,97 @@
         <valueConverters:MouseWheelEventArgsToDeltaConverter x:Key="EventArgsToDeltaConverter"/>
     </UserControl.Resources>
     <Grid>
-        <ContentControl prism:RegionManager.RegionName="{x:Static local:RegionNames.CheckinLoadingRegion}"/>
+        <Image Source="{Binding Checkin.Photo}" Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center"  Opacity="0.5">
+            <Image.Effect>
+                <BlurEffect Radius="2"/>
+            </Image.Effect>
+        </Image>
         <Grid>
-            <Image Source="{Binding Checkin.Photo}" Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center"  Opacity="0.5">
-                <Image.Effect>
-                    <BlurEffect Radius="2"/>
-                </Image.Effect>
-            </Image>
-            <Grid>
-                <controls:ZoomBorder ClipToBounds="True">
-                    <Image Source="{Binding Checkin.Photo, TargetNullValue={x:Null}}"/>
-                </controls:ZoomBorder>
-                <Image Source="..\Resources\facebook-like-beer.png" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+            <controls:ZoomBorder ClipToBounds="True">
+                <Image Source="{Binding Checkin.Photo, TargetNullValue={x:Null}}"/>
+            </controls:ZoomBorder>
+            <Image Source="..\Resources\facebook-like-beer.png" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Bottom"
                                Visibility="{Binding Checkin.VisibilityLikeBeer, Converter={StaticResource BTVConverter}}" Margin="10, 0, 0, 10"/>
-                <controls:ClippingBorder  VerticalAlignment="Bottom" HorizontalAlignment="Right"   Margin="0, 0, 10, 10" CornerRadius="10">
-                    <Grid>
-                        <Grid Background="#ffffff" Opacity="0.2"/>
-                        <StackPanel Opacity="0.5">
-                            <Label Content="{x:Static properties:Resources.ZoomBorderScrollUse}" FontSize="10"/>
-                            <Label Content="{x:Static properties:Resources.ZoomBorderLeftMouseButtonUse}" FontSize="10"/>
-                            <Label Content="{x:Static properties:Resources.ZoomBorderRightMouseButtonUse}" FontSize="10"/>
-                        </StackPanel>
-                    </Grid>
-                </controls:ClippingBorder>
-            </Grid>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid  Grid.Row="0" >
-                    <Grid Background="#ffffff" Opacity="0.5"/>
-                    <StackPanel Grid.Row="0">
-                        <GroupBox Header="{Binding Checkin.Header}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+            <controls:ClippingBorder  VerticalAlignment="Bottom" HorizontalAlignment="Right"   Margin="0, 0, 10, 10" CornerRadius="10">
+                <Grid>
+                    <Grid Background="#ffffff" Opacity="0.2"/>
+                    <StackPanel Opacity="0.5">
+                        <Label Content="{x:Static properties:Resources.ZoomBorderScrollUse}" FontSize="10"/>
+                        <Label Content="{x:Static properties:Resources.ZoomBorderLeftMouseButtonUse}" FontSize="10"/>
+                        <Label Content="{x:Static properties:Resources.ZoomBorderRightMouseButtonUse}" FontSize="10"/>
+                    </StackPanel>
+                </Grid>
+            </controls:ClippingBorder>
+        </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid  Grid.Row="0" >
+                <Grid Background="#ffffff" Opacity="0.5"/>
+                <StackPanel Grid.Row="0">
+                    <GroupBox Header="{Binding Checkin.Header}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                         Visibility="{Binding Checkin.IsNotEmpty, Converter={StaticResource BooleanConverter}}">
-                            <StackPanel>
-                                <TextBlock Visibility="{Binding Checkin.VisibilityUrl, Converter={StaticResource BooleanConverter}}">
+                        <StackPanel>
+                            <TextBlock Visibility="{Binding Checkin.VisibilityUrl, Converter={StaticResource BooleanConverter}}">
                                 <Hyperlink NavigateUri="{Binding Checkin.Url}" helpers:HyperlinkExtensions.IsExternal="true">
                                     <TextBlock Text="{x:Static properties:Resources.UntappdPage}"/>
                                 </Hyperlink>
                             </TextBlock>
-                                <GroupBox Header="{x:Static properties:Resources.Beer}">
-                                    <viewControls:BeerControl DataContext="{Binding Checkin.BeerViewModel}"/>
-                                </GroupBox>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <StackPanel Grid.Column="0">
-                                        <GroupBox Header="{x:Static properties:Resources.Brewery}">
-                                            <controls:ListViewExpander DataContext="{Binding Checkin.BeerViewModel.BreweryViewModels}" ItemDataTemplate="{StaticResource BreweryControl}"
+                            <GroupBox Header="{x:Static properties:Resources.Beer}">
+                                <viewControls:BeerControl DataContext="{Binding Checkin.BeerViewModel}"/>
+                            </GroupBox>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <GroupBox Header="{x:Static properties:Resources.Brewery}">
+                                        <controls:ListViewExpander DataContext="{Binding Checkin.BeerViewModel.BreweryViewModels}" ItemDataTemplate="{StaticResource BreweryControl}"
                                                            SeparatorTemplate="{StaticResource SeparatorControl}" ScrollViewerDisable="True">
-                                                <controls:ListViewExpander.ExpanderHeader>
-                                                    <MultiBinding StringFormat="{}{0} ({1} {2}):">
-                                                        <Binding Source="{x:Static properties:Resources.CollaborationWith}"/>
-                                                        <Binding RelativeSource="{RelativeSource Mode=Self}" Path="OthersItemCount"/>
-                                                        <Binding Source="{x:Static properties:Resources.PCS}"/>
-                                                    </MultiBinding>
-                                                </controls:ListViewExpander.ExpanderHeader>
-                                            </controls:ListViewExpander>
-                                        </GroupBox>
-                                        <DockPanel>
-                                            <starRating:StarRatingControl Rating="{Binding Checkin.Rating}" Style="{StaticResource StarRatingStyle}"
+                                            <controls:ListViewExpander.ExpanderHeader>
+                                                <MultiBinding StringFormat="{}{0} ({1} {2}):">
+                                                    <Binding Source="{x:Static properties:Resources.CollaborationWith}"/>
+                                                    <Binding RelativeSource="{RelativeSource Mode=Self}" Path="OthersItemCount"/>
+                                                    <Binding Source="{x:Static properties:Resources.PCS}"/>
+                                                </MultiBinding>
+                                            </controls:ListViewExpander.ExpanderHeader>
+                                        </controls:ListViewExpander>
+                                    </GroupBox>
+                                    <DockPanel>
+                                        <starRating:StarRatingControl Rating="{Binding Checkin.Rating}" Style="{StaticResource StarRatingStyle}"
                                                               Visibility="{Binding Checkin.VisibilityRating, Converter={StaticResource BooleanConverter}}"/>
-                                            <TextBlock Text="  "/>
-                                            <Image Source="{Binding Checkin.ServingType, TargetNullValue={x:Null}}" Width="25" Height="25" HorizontalAlignment="Left"/>
-                                        </DockPanel>
-                                        <DockPanel>
-                                            <controls:TextBlockJoin TextWrapping="Wrap" VerticalAlignment="Center" Separator="{Binding Source={x:Static local:DefaultValues.Separator}}"
+                                        <TextBlock Text="  "/>
+                                        <Image Source="{Binding Checkin.ServingType, TargetNullValue={x:Null}}" Width="25" Height="25" HorizontalAlignment="Left"/>
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <controls:TextBlockJoin TextWrapping="Wrap" VerticalAlignment="Center" Separator="{Binding Source={x:Static local:DefaultValues.Separator}}"
                                                         DataContext="{Binding Checkin.Venues}" Margin="10, 0, 0, 0"/>
-                                        </DockPanel>
-                                    </StackPanel>
-                                </Grid>
-                            </StackPanel>
-                        </GroupBox>
-                    </StackPanel>
-                    <b:Interaction.Triggers>
-                        <b:EventTrigger EventName="MouseWheel">
-                            <b:InvokeCommandAction Command="{Binding CheckinOffsetCommand}" EventArgsConverter="{StaticResource EventArgsToDeltaConverter}"/>
-                        </b:EventTrigger>
-                    </b:Interaction.Triggers>
-                </Grid>
-                <controls:ListViewNoSelect Grid.Row="1" HorizontalAlignment="Right"  ItemsSource="{Binding Checkin.Badges}" Margin="5">
-                    <controls:ListViewNoSelect.ItemDataTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <images:EllipseClipImageControl ImageSource="{Binding}" Width="70" Height="70"/>
-                                <Separator Height="2" Background="Transparent"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </controls:ListViewNoSelect.ItemDataTemplate>
-                </controls:ListViewNoSelect>
+                                    </DockPanel>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="MouseWheel">
+                        <b:InvokeCommandAction Command="{Binding CheckinOffsetCommand}" EventArgsConverter="{StaticResource EventArgsToDeltaConverter}"/>
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
             </Grid>
+            <controls:ListViewNoSelect Grid.Row="1" HorizontalAlignment="Right"  ItemsSource="{Binding Checkin.Badges}" Margin="5">
+                <controls:ListViewNoSelect.ItemDataTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <images:EllipseClipImageControl ImageSource="{Binding}" Width="70" Height="70"/>
+                            <Separator Height="2" Background="Transparent"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </controls:ListViewNoSelect.ItemDataTemplate>
+            </controls:ListViewNoSelect>
         </Grid>
+        <ContentControl prism:RegionManager.RegionName="{x:Static local:RegionNames.CheckinLoadingRegion}"/>
     </Grid>
 </UserControl>
