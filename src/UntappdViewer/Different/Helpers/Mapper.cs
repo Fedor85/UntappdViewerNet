@@ -1,10 +1,8 @@
 ﻿using System;
 using System.IO;
-using System.Windows.Media.Imaging;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
 using UntappdViewer.UI.Controls.ViewModel;
-using UntappdViewer.UI.Helpers;
 using UntappdViewer.Utils;
 using UntappdViewer.ViewModels.Controls;
 
@@ -26,7 +24,7 @@ namespace UntappdViewer.Helpers
                 checkinViewModel.AddVenue(checkin.Venue.City);
             }
             checkinViewModel.ServingType = ConverterHelper.GetServingTypeImagePath(checkin.ServingType);
-            checkinViewModel.Photo = GetCheckinPhoto(untappdService, checkin);
+            checkinViewModel.PhotoPath = GetCheckinPhoto(untappdService, checkin);
             FillBadges(untappdService, checkin, checkinViewModel);
             checkinViewModel.BeerViewModel = GetBeerViewModel(untappdService, checkin.Beer);
             return checkinViewModel;
@@ -35,7 +33,7 @@ namespace UntappdViewer.Helpers
         private static BeerViewModel GetBeerViewModel(IUntappdService untappdService, Beer beer)
         {
             BeerViewModel beerViewModel = new BeerViewModel();
-            beerViewModel.Label = GetBeerLabel(untappdService, beer);
+            beerViewModel.LabelPath = untappdService.GetBeerLabelFilePath(beer);
             beerViewModel.Url = beer.Url;
             beerViewModel.Name = beer.Name;
             beerViewModel.Type = beer.Type;
@@ -52,7 +50,7 @@ namespace UntappdViewer.Helpers
             foreach (Brewery brewery in beer.GetFullBreweries())
             {
                 BreweryViewModel breweryViewModel = Mapper.GetBreweryViewModels(brewery);
-                breweryViewModel.Label = GetBreweryLabel(untappdService, brewery);
+                breweryViewModel.LabelPath = untappdService.GetBreweryLabelFilePath(brewery);
                 beerViewModel.BreweryViewModels.Add(breweryViewModel);
             }
         }
@@ -79,13 +77,12 @@ namespace UntappdViewer.Helpers
             return $"{Properties.Resources.Checkin}: {checkinCreatedDate}";
         }
 
-        private static BitmapSource GetCheckinPhoto(IUntappdService untappdService, Checkin checkin)
+        private static string GetCheckinPhoto(IUntappdService untappdService, Checkin checkin)
         {
             string photoPath = untappdService.GetCheckinPhotoFilePath(checkin);
-
-            return String.IsNullOrEmpty(photoPath) ? ImageConverter.GetBitmapSource(Properties.Resources.no_image_icon) :
-                                                     ImageConverter.GetBitmapSource(photoPath);
+            return !String.IsNullOrEmpty(photoPath) ? photoPath : DefaultValues.NoImageIconResources;
         }
+
         private static void FillBadges(IUntappdService untappdService, Checkin checkin, CheckinViewModel checkinViewModel)
         {
             foreach (Badge badge in checkin.Badges)
@@ -99,20 +96,6 @@ namespace UntappdViewer.Helpers
                     checkinViewModel.Badges.Add(imageViewModel);
                 }
             }
-        }
-
-        private static BitmapSource GetBeerLabel(IUntappdService untappdService, Beer beer)
-        {
-            string labelPath = untappdService.GetBeerLabelFilePath(beer);
-            return !String.IsNullOrEmpty(labelPath) && !Path.GetFileNameWithoutExtension(labelPath).Equals(DefaultValues.DefaultBeerLabelName) ?
-                    ImageConverter.GetBitmapSource(labelPath) : null;
-        }
-
-        private static BitmapSource GetBreweryLabel(IUntappdService untappdService, Brewery brewery)
-        {
-            string labelPath = untappdService.GetBreweryLabelFilePath(brewery);
-            return !String.IsNullOrEmpty(labelPath) && !Path.GetFileNameWithoutExtension(labelPath).Equals(DefaultValues.DefaultBreweryLabelName) ?
-                ImageConverter.GetBitmapSource(labelPath) : null;
         }
 
         /// <summary>

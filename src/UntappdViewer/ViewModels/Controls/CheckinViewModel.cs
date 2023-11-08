@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Media.Imaging;
 using UntappdViewer.UI.Controls.ViewModel;
 
 namespace UntappdViewer.ViewModels.Controls
@@ -37,7 +36,7 @@ namespace UntappdViewer.ViewModels.Controls
             get { return Badges.Count > 0; }
         }
 
-        public BitmapSource Photo { get; set; }
+        public string PhotoPath { get; set; }
 
         public bool VisibilityLikeBeer
         {

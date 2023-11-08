@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Media.Imaging;
-
 namespace UntappdViewer.ViewModels.Controls
 {
     public class BeerViewModel
@@ -15,11 +13,11 @@ namespace UntappdViewer.ViewModels.Controls
 
         public string Name { get; set; }
 
-        public BitmapSource Label { get; set; }
+        public string LabelPath { get; set; }
 
         public bool VisibilityLabel
         {
-            get { return Label != null; }
+            get { return !String.IsNullOrEmpty(LabelPath); }
         }
 
         public string Type { get; set; }

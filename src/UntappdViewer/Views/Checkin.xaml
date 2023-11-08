@@ -31,14 +31,14 @@
         <valueConverters:MouseWheelEventArgsToDeltaConverter x:Key="EventArgsToDeltaConverter"/>
     </UserControl.Resources>
     <Grid>
-        <Image Source="{Binding Checkin.Photo}" Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center"  Opacity="0.5">
+        <Image Source="{Binding Checkin.PhotoPath}" Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center"  Opacity="0.5">
             <Image.Effect>
                 <BlurEffect Radius="2"/>
             </Image.Effect>
         </Image>
         <Grid>
             <controls:ZoomBorder ClipToBounds="True">
-                <Image Source="{Binding Checkin.Photo, TargetNullValue={x:Null}}"/>
+                <Image Source="{Binding Checkin.PhotoPath, TargetNullValue={x:Null}}"/>
             </controls:ZoomBorder>
             <Image Source="..\Resources\facebook-like-beer.png" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Bottom"
                                Visibility="{Binding Checkin.VisibilityLikeBeer, Converter={StaticResource BTVConverter}}" Margin="10, 0, 0, 10"/>
