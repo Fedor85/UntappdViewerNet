@@ -59,53 +59,51 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Grid  Grid.Row="0" >
+            <Grid  Grid.Row="0" Margin="5, 5, 5, 0">
                 <Grid Background="#ffffff" Opacity="0.5"/>
-                <StackPanel Grid.Row="0">
-                    <GroupBox Header="{Binding Checkin.Header}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                <GroupBox Header="{Binding Checkin.Header}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                                         Visibility="{Binding Checkin.IsNotEmpty, Converter={StaticResource BooleanConverter}}">
-                        <StackPanel>
-                            <TextBlock Visibility="{Binding Checkin.VisibilityUrl, Converter={StaticResource BooleanConverter}}">
+                    <StackPanel>
+                        <TextBlock Visibility="{Binding Checkin.VisibilityUrl, Converter={StaticResource BooleanConverter}}">
                                 <Hyperlink NavigateUri="{Binding Checkin.Url}" helpers:HyperlinkExtensions.IsExternal="true">
                                     <TextBlock Text="{x:Static properties:Resources.UntappdPage}"/>
                                 </Hyperlink>
                             </TextBlock>
-                            <GroupBox Header="{x:Static properties:Resources.Beer}">
-                                <viewControls:BeerControl DataContext="{Binding Checkin.BeerViewModel}"/>
-                            </GroupBox>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="0">
-                                    <GroupBox Header="{x:Static properties:Resources.Brewery}">
-                                        <controls:ListViewExpander DataContext="{Binding Checkin.BeerViewModel.BreweryViewModels}" ItemDataTemplate="{StaticResource BreweryControl}"
+                        <GroupBox Header="{x:Static properties:Resources.Beer}">
+                            <viewControls:BeerControl DataContext="{Binding Checkin.BeerViewModel}"/>
+                        </GroupBox>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <GroupBox Header="{x:Static properties:Resources.Brewery}">
+                                    <controls:ListViewExpander DataContext="{Binding Checkin.BeerViewModel.BreweryViewModels}" ItemDataTemplate="{StaticResource BreweryControl}"
                                                            SeparatorTemplate="{StaticResource SeparatorControl}" ScrollViewerDisable="True">
-                                            <controls:ListViewExpander.ExpanderHeader>
-                                                <MultiBinding StringFormat="{}{0} ({1} {2}):">
-                                                    <Binding Source="{x:Static properties:Resources.CollaborationWith}"/>
-                                                    <Binding RelativeSource="{RelativeSource Mode=Self}" Path="OthersItemCount"/>
-                                                    <Binding Source="{x:Static properties:Resources.PCS}"/>
-                                                </MultiBinding>
-                                            </controls:ListViewExpander.ExpanderHeader>
-                                        </controls:ListViewExpander>
-                                    </GroupBox>
-                                    <DockPanel>
-                                        <starRating:StarRatingControl Rating="{Binding Checkin.Rating}" Style="{StaticResource StarRatingStyle}"
+                                        <controls:ListViewExpander.ExpanderHeader>
+                                            <MultiBinding StringFormat="{}{0} ({1} {2}):">
+                                                <Binding Source="{x:Static properties:Resources.CollaborationWith}"/>
+                                                <Binding RelativeSource="{RelativeSource Mode=Self}" Path="OthersItemCount"/>
+                                                <Binding Source="{x:Static properties:Resources.PCS}"/>
+                                            </MultiBinding>
+                                        </controls:ListViewExpander.ExpanderHeader>
+                                    </controls:ListViewExpander>
+                                </GroupBox>
+                                <DockPanel>
+                                    <starRating:StarRatingControl Rating="{Binding Checkin.Rating}" Style="{StaticResource StarRatingStyle}"
                                                               Visibility="{Binding Checkin.VisibilityRating, Converter={StaticResource BooleanConverter}}"/>
-                                        <TextBlock Text="  "/>
-                                        <Image Source="{Binding Checkin.ServingType, TargetNullValue={x:Null}}" Width="25" Height="25" HorizontalAlignment="Left"/>
-                                    </DockPanel>
-                                    <DockPanel>
-                                        <controls:TextBlockJoin TextWrapping="Wrap" VerticalAlignment="Center" Separator="{Binding Source={x:Static local:DefaultValues.Separator}}"
+                                    <TextBlock Text="  "/>
+                                    <Image Source="{Binding Checkin.ServingType, TargetNullValue={x:Null}}" Width="25" Height="25" HorizontalAlignment="Left"/>
+                                </DockPanel>
+                                <DockPanel>
+                                    <controls:TextBlockJoin TextWrapping="Wrap" VerticalAlignment="Center" Separator="{Binding Source={x:Static local:DefaultValues.Separator}}"
                                                         DataContext="{Binding Checkin.Venues}" Margin="10, 0, 0, 0"/>
-                                    </DockPanel>
-                                </StackPanel>
-                            </Grid>
-                        </StackPanel>
-                    </GroupBox>
-                </StackPanel>
+                                </DockPanel>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
                 <b:Interaction.Triggers>
                     <b:EventTrigger EventName="MouseWheel">
                         <b:InvokeCommandAction Command="{Binding CheckinOffsetCommand}" EventArgsConverter="{StaticResource EventArgsToDeltaConverter}"/>
