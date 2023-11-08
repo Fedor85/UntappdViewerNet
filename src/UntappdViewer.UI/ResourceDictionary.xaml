@@ -21,8 +21,6 @@
         <Setter Property="StarCount" Value="5"/>
         <Setter Property="StarSize" Value="20"/>
         <Setter Property="BorderStarThickness" Value="5"/>
-        <Setter Property="ViewStarsColor" Value="#ffffff"/>
-        <Setter Property="ViewStarsOpacity" Value="0.3"/>
         <Setter Property="BackgroundStarColor" Value="#ffffff"/>
         <Setter Property="BackgroundStarOpacity" Value="1"/>
         <Setter Property="BorderStarColor" Value="#000000"/>

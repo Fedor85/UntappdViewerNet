@@ -29,8 +29,7 @@
             <TextBlock Grid.Row="2" Text="{Binding Signature}" Style="{StaticResource TextBlockStyle}"
                        Visibility="{Binding VisibilitySignature, Converter={StaticResource BTVConverter}}"/>
             <starRating:StarRatingControl Grid.Row="3" Rating="{Binding RatingScore}" Style="{StaticResource StarRatingStyle}" HorizontalAlignment="Center"
-                                          Visibility="{Binding VisibilityRatingScore, Converter={StaticResource BooleanConverter}, FallbackValue=Collapsed}"
-                                          ViewStarsColor="Transparent"/>
+                                          Visibility="{Binding VisibilityRatingScore, Converter={StaticResource BooleanConverter}, FallbackValue=Collapsed}"/>
         </Grid>
     </Grid>
 </UserControl>

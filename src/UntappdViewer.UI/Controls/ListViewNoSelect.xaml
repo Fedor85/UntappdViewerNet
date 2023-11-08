@@ -7,10 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="450">
     <StackPanel>
-        <Grid>
-            <controls:ClippingBorder Background="#ffffff" CornerRadius="10" Opacity="0.2"/>
-            <Label x:Name="CaptionControl" HorizontalAlignment="Center"/>
-        </Grid>
+        <Label x:Name="CaptionControl" HorizontalAlignment="Center"/>
         <ListView x:Name="ListView" Background="Transparent" BorderThickness="0" ItemContainerStyle="{StaticResource ListViewItemNoSelect}"/>
     </StackPanel>
 </UserControl>
