@@ -12,14 +12,8 @@ namespace UntappdViewer.Behaviors
 
         public TToken RegisterToken
         {
-            get
-            {
-                return (TToken)GetValue(DependencyProperty);
-            }
-            set
-            {
-                SetValue(DependencyProperty, value);
-            }
+            get { return (TToken) GetValue(DependencyProperty); }
+            set { SetValue(DependencyProperty, value); }
         }
 
         protected override void OnAttached()

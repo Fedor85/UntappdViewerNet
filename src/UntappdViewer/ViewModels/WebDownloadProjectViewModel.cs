@@ -89,6 +89,7 @@ namespace UntappdViewer.ViewModels
                 SetVisibilityCollaborationButton();
             }
         }
+
         private ICancellationToken<Checkin> webClientCancellation;
 
         public ICommand CheckAccessTokenCommand { get; }

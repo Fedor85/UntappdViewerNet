@@ -71,10 +71,7 @@ namespace UntappdViewer.ViewModels
         public List<FileItem> FileItems
         {
             get { return fileItems; }
-            set
-            {
-                SetProperty(ref fileItems, value);
-            }
+            set { SetProperty(ref fileItems, value); }
         }
 
         public WelcomeViewModel(IUntappdService untappdService, IInteractionRequestService interactionRequestService,

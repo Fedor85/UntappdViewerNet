@@ -37,10 +37,7 @@ namespace UntappdViewer.ViewModels
         public string Title
         {
             get { return title; }
-            set
-            {
-                SetProperty(ref title, value);
-            }
+            set { SetProperty(ref title, value); }
         }
 
         public bool LoadedWindow

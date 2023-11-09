@@ -1,31 +1,31 @@
-﻿using System.ComponentModel;
+﻿using System;
 
-namespace UntappdViewer.UI.Controls.ViewModel
+namespace UntappdViewer.Models
 {
-    public class TreeItemViewModel : INotifyPropertyChanged
+    public class TreeItemViewModel : BasePropertyChanged
     {
         private bool visibility;
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public long Id { get; }
 
         public string Name { get; }
 
+
+        public string NameToLower { get; }
+
+        public bool IsUniqueCheckin { get; set; }
+
         public bool Visibility
         {
             get { return visibility; }
-            set
-            {
-                visibility = value;
-                OnPropertyChanged("Visibility");
-            }
+            private set { SetProperty(ref visibility, value); }
         }
 
         public TreeItemViewModel(long id, string name)
         {
             Id = id;
             Name = name;
+            NameToLower = Name.Trim().ToLower();
             Visibility = true;
         }
 
@@ -42,11 +42,6 @@ namespace UntappdViewer.UI.Controls.ViewModel
         public override string ToString()
         {
             return Name;
-        }
-
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

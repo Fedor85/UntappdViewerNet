@@ -84,306 +84,204 @@ namespace UntappdViewer.ViewModels.Controls
         public IEnumerable ChekinRatingScore
         {
             get { return chekinRatingScore; }
-            set
-            {
-                SetProperty(ref chekinRatingScore, value);
-            }
+            set { SetProperty(ref chekinRatingScore, value); }
         }
 
         public IEnumerable BeerRatingScore
         {
             get { return beerRatingScore; }
-            set
-            {
-                SetProperty(ref beerRatingScore, value);
-            }
+            set { SetProperty(ref beerRatingScore, value); }
         }
 
         public IEnumerable DateChekinsCount
         {
             get { return dateChekinsCount; }
-            set
-            {
-                SetProperty(ref dateChekinsCount, value);
-            }
+            set { SetProperty(ref dateChekinsCount, value); }
         }
 
         public IEnumerable DateChekinsAccumulateCount
         {
             get { return dateChekinsAccumulateCount; }
-            set
-            {
-                SetProperty(ref dateChekinsAccumulateCount, value);
-            }
+            set { SetProperty(ref dateChekinsAccumulateCount, value); }
         }
 
         public IEnumerable BeerTypeCount
         {
             get { return beerTypeCount; }
-            set
-            {
-                SetProperty(ref beerTypeCount, value);
-            }
+            set { SetProperty(ref beerTypeCount, value); }
         }
 
         public IEnumerable BeerTypeRating
         {
             get { return beerTypeRating; }
-            set
-            {
-                SetProperty(ref beerTypeRating, value);
-            }
+            set { SetProperty(ref beerTypeRating, value); }
         }
 
         public IEnumerable BeerCountryCount
         {
             get { return beerCountryCount; }
-            set
-            {
-                SetProperty(ref beerCountryCount, value);
-            }
+            set { SetProperty(ref beerCountryCount, value); }
         }
 
         public IEnumerable BeerCountryRating
         {
             get { return beerCountryRating; }
-            set
-            {
-                SetProperty(ref beerCountryRating, value);
-            }
+            set { SetProperty(ref beerCountryRating, value); }
         }
 
         public IEnumerable BeerCountryCountMap
         {
             get { return beerCountryCountMap; }
-            set
-            {
-                SetProperty(ref beerCountryCountMap, value);
-            }
+            set { SetProperty(ref beerCountryCountMap, value); }
         }
 
         public IEnumerable BeerCountryRatingMap
         {
             get { return beerCountryRatingMap; }
-            set
-            {
-                SetProperty(ref beerCountryRatingMap, value);
-            }
+            set { SetProperty(ref beerCountryRatingMap, value); }
         }
 
         public IEnumerable CountryLanguagePack
         {
             get { return countryLanguagePack; }
-            set
-            {
-                SetProperty(ref countryLanguagePack, value);
-            }
+            set { SetProperty(ref countryLanguagePack, value); }
         }
 
         public IEnumerable ServingTypeCount
         {
             get { return servingTypeCount; }
-            set
-            {
-                SetProperty(ref servingTypeCount, value);
-            }
+            set { SetProperty(ref servingTypeCount, value); }
         }
 
         public IEnumerable ServingTypeRating
         {
             get { return servingTypeRating; }
-            set
-            {
-                SetProperty(ref servingTypeRating, value);
-            }
+            set { SetProperty(ref servingTypeRating, value); }
         }
 
         public IEnumerable IBUToABV
         {
             get { return ibuToAbv; }
-            set
-            {
-                SetProperty(ref ibuToAbv, value);
-            }
+            set { SetProperty(ref ibuToAbv, value); }
         }
 
         public IEnumerable ABVCount
         {
             get { return aBVCount; }
-            set
-            {
-                SetProperty(ref aBVCount, value);
-            }
+            set { SetProperty(ref aBVCount, value); }
         }
 
         public IEnumerable IBUCount
         {
             get { return iBUCount; }
-            set
-            {
-                SetProperty(ref iBUCount, value);
-            }
+            set { SetProperty(ref iBUCount, value); }
         }
 
         public int TotalCheckinsCount
         {
             get { return totalCheckinsCount; }
-            set
-            {
-                SetProperty(ref totalCheckinsCount, value);
-            }
+            set { SetProperty(ref totalCheckinsCount, value); }
         }
 
         public int UniqueCheckinsCount
         {
             get { return uniqueCheckinsCount; }
-            set
-            {
-                SetProperty(ref uniqueCheckinsCount, value);
-            }
+            set { SetProperty(ref uniqueCheckinsCount, value); }
         }
 
         public int BreweriesMainCount
         {
             get { return breweriesMainCount; }
-            set
-            {
-                SetProperty(ref breweriesMainCount, value);
-            }
+            set { SetProperty(ref breweriesMainCount, value); }
         }
 
         public int BreweriesCollaborationCount
         {
             get { return breweriesCollaborationCount; }
-            set
-            {
-                SetProperty(ref breweriesCollaborationCount, value);
-            }
+            set { SetProperty(ref breweriesCollaborationCount, value); }
         }
 
         public int CountriesCount
         {
             get { return countriesCount; }
-            set
-            {
-                SetProperty(ref countriesCount, value);
-            }
+            set { SetProperty(ref countriesCount, value); }
         }
 
         public int MaxYAxisRatingScore
         {
             get { return maxYAxisRatingScore; }
-            set
-            {
-                SetProperty(ref maxYAxisRatingScore, value);
-            }
+            set { SetProperty(ref maxYAxisRatingScore, value); }
         }
 
         public double MinWidthChartDateChekins
         {
             get { return minWidthChartDateChekins; }
-            set
-            {
-                SetProperty(ref minWidthChartDateChekins, value);
-            }
+            set { SetProperty(ref minWidthChartDateChekins, value); }
         }
 
         public int MaxXAxisBeerTypeCount
         {
             get { return maxXAxisBeerTypeCount; }
-            set
-            {
-                SetProperty(ref maxXAxisBeerTypeCount, value);
-            }
+            set { SetProperty(ref maxXAxisBeerTypeCount, value); }
         }
 
         public int HeightChartBeerType
         {
             get { return heightChartBeerType; }
-            set
-            {
-                SetProperty(ref heightChartBeerType, value);
-            }
+            set { SetProperty(ref heightChartBeerType, value); }
         }
 
         public int MaxXAxisBeerCountryCount
         {
             get { return maxXAxisBeerCountryCount; }
-            set
-            {
-                SetProperty(ref maxXAxisBeerCountryCount, value);
-            }
+            set { SetProperty(ref maxXAxisBeerCountryCount, value); }
         }
 
         public int HeightChartBeerCountry
         {
             get { return heightChartBeerCountry; }
-            set
-            {
-                SetProperty(ref heightChartBeerCountry, value);
-            }
+            set { SetProperty(ref heightChartBeerCountry, value); }
         }
 
         public double AverageChekinRating
         {
             get { return averageChekinRating; }
-            set
-            {
-                SetProperty(ref averageChekinRating, value);
-            }
+            set { SetProperty(ref averageChekinRating, value); }
         }
 
         public double AverageBeerRating
         {
             get { return averageBeerRating; }
-            set
-            {
-                SetProperty(ref averageBeerRating, value);
-            }
+            set { SetProperty(ref averageBeerRating, value); }
         }
 
         public int TotalDays
         {
             get { return totalDays; }
-            set
-            {
-                SetProperty(ref totalDays, value);
-            }
+            set { SetProperty(ref totalDays, value); }
         }
 
         public double AverageChekinsQuantity
         {
             get { return averageChekinsQuantity; }
-            set
-            {
-                SetProperty(ref averageChekinsQuantity, value);
-            }
+            set { SetProperty(ref averageChekinsQuantity, value); }
         }
 
         public double AverageUniqueChekinsQuantity
         {
             get { return averageUniqueChekinsQuantity; }
-            set
-            {
-                SetProperty(ref averageUniqueChekinsQuantity, value);
-            }
+            set { SetProperty(ref averageUniqueChekinsQuantity, value); }
         }
         public int MaxXAxisServingTypeCount
         {
             get { return maxXAxisServingTypeCount; }
-            set
-            {
-                SetProperty(ref maxXAxisServingTypeCount, value);
-            }
+            set { SetProperty(ref maxXAxisServingTypeCount, value); }
         }
 
         public int HeightChartServingType
         {
             get { return heightChartServingType; }
-            set
-            {
-                SetProperty(ref heightChartServingType, value);
-            }
+            set { SetProperty(ref heightChartServingType, value); }
         }
 
         private IStatisticsCalculation statisticsCalculation;

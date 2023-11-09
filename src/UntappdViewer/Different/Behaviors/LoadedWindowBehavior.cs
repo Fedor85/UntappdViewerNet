@@ -9,14 +9,8 @@ namespace UntappdViewer.Behaviors
 
         public bool LoadedWindow
         {
-            get
-            {
-                return (bool)GetValue(DependencyProperty);
-            }
-            set
-            {
-                SetValue(DependencyProperty, value);
-            }
+            get { return (bool) GetValue(DependencyProperty); }
+            set { SetValue(DependencyProperty, value); }
         }
 
         protected override void OnAttached()

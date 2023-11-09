@@ -28,10 +28,7 @@ namespace UntappdViewer.ViewModels
         public string Message
         {
             get { return message; }
-            set
-            {
-                SetProperty(ref message, value);
-            }
+            set { SetProperty(ref message, value); }
         }
 
         public LoadingViewModel(IEventAggregator eventAggregator, IInteractionRequestService interactionRequestService)

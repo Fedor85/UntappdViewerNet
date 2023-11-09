@@ -40,12 +40,11 @@
         <StackPanel  Grid.Row="0">
             <controls:SmartTextBox HintText="{x:Static properties:Resources.Filter}"
                                    TextBinding="{Binding Search, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <CheckBox IsChecked="{Binding IsCheckedUniqueCheckBox}" Content="{x:Static properties:Resources.UniqueCheckBoxContent}"
-                      Command="{Binding UniqueCheckedCommand}" CommandParameter="{Binding Path=IsChecked, RelativeSource={RelativeSource Self}}"/>
+            <CheckBox IsChecked="{Binding IsCheckedUniqueCheckBox}" Content="{x:Static properties:Resources.UniqueCheckBoxContent}"/>
             <Label Content="{Binding TreeViewCaption}" FontWeight="Bold"/>
         </StackPanel>
         <Grid Grid.Row="1">
-            <TreeView ItemsSource ="{Binding TreeItems}"  Background="Transparent" BorderBrush="Transparent" PreviewMouseWheel="OnPreviewMouseWheel"
+            <TreeView ItemsSource ="{Binding TreeItems, IsAsync=True}"  Background="Transparent" BorderBrush="Transparent" PreviewMouseWheel="OnPreviewMouseWheel"
                       Style="{StaticResource TreeViewStyle}">
                 <TreeView.ItemContainerStyle>
                     <Style TargetType="{x:Type TreeViewItem}">

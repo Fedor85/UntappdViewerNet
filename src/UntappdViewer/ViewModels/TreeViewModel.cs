@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using Prism.Commands;
 using Prism.Events;
 using Prism.Modularity;
 using Prism.Regions;
@@ -12,7 +11,6 @@ using UntappdViewer.Events;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
 using UntappdViewer.Modules;
-using UntappdViewer.UI.Controls.ViewModel;
 
 namespace UntappdViewer.ViewModels
 {
@@ -31,8 +29,6 @@ namespace UntappdViewer.ViewModels
         private string search;
 
         private bool isCheckedUniqueCheckBox;
-
-        public ICommand UniqueCheckedCommand { get; }
    
         public string TreeViewCaption
         {
@@ -43,11 +39,7 @@ namespace UntappdViewer.ViewModels
         public string Search
         {
             get { return search; }
-            set
-            {
-                SetProperty(ref search, value);
-                AppFilter(value);
-            }
+            set { SetProperty(ref search, value); }
         }
 
         public bool IsCheckedUniqueCheckBox
@@ -81,17 +73,20 @@ namespace UntappdViewer.ViewModels
             this.eventAggregator = eventAggregator;
             this.settingService = settingService;
 
-            UniqueCheckedCommand = new DelegateCommand<bool?>(UniqueChecked);
             TreeItems = new ObservableCollection<TreeItemViewModel>();
         }
+
 
         protected override void Activate()
         {
             base.Activate();
             eventAggregator.GetEvent<RequestCheckinsEvent>().Subscribe(ReturnVisibleChekins);
             eventAggregator.GetEvent<ChekinOffsetEvent>().Subscribe(ChekinOffset);
+
             IsCheckedUniqueCheckBox = settingService.IsCheckedUniqueCheckBox();
-            UpdateTree(IsCheckedUniqueCheckBox, settingService.GetSelectedTreeItemId());
+
+            LoadTreeItems();
+            PropertyChanged += TreeViewModelPropertyChanged;
         }
 
         protected override void DeActivate()
@@ -99,10 +94,75 @@ namespace UntappdViewer.ViewModels
             base.DeActivate();
             eventAggregator.GetEvent<RequestCheckinsEvent>().Unsubscribe(ReturnVisibleChekins);
             eventAggregator.GetEvent<ChekinOffsetEvent>().Unsubscribe(ChekinOffset);
+            PropertyChanged -= TreeViewModelPropertyChanged;
+
             SaveSettings();
-            DeActivateAllViews(RegionNames.ContentRegion);
             TreeItems.Clear();
-            Search =String.Empty;
+            Search = String.Empty;
+
+            DeActivateAllViews(RegionNames.ContentRegion);
+        }
+
+        private void LoadTreeItems()
+        {
+            LoadTreeItemsAsync();
+        }
+
+        private async void LoadTreeItemsAsync()
+        {
+            TreeItems = await Task.Run(() => GetTreeItems());
+            ApplyFilter();
+            if (TreeItems.Count > 0)
+                UpdateSelectedTreeItem(settingService.GetSelectedTreeItemId());
+
+            UpdateTreeViewCaption();
+        }
+
+        private ObservableCollection<TreeItemViewModel> GetTreeItems()
+        {
+            ObservableCollection<TreeItemViewModel> treeViewItems = new ObservableCollection<TreeItemViewModel>();
+            int treeItemNameMaxLength = settingService.GetTreeItemNameMaxLength();
+            List<Checkin> uniqueCheckins = untappdService.GetCheckins(true);
+            List<Checkin> checkins = untappdService.GetCheckins();
+            for (int i = 0; i < checkins.Count; i++)
+            {
+                Checkin checkin = checkins[i];
+                TreeItemViewModel treeItem = new TreeItemViewModel(checkin.Id, untappdService.GetTreeViewCheckinDisplayName(checkin, i + 1, treeItemNameMaxLength));
+                treeItem.IsUniqueCheckin = uniqueCheckins.Contains(checkin);
+                treeViewItems.Add(treeItem);
+            }
+            return treeViewItems;
+        }
+
+        private void TreeViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName.Equals("IsCheckedUniqueCheckBox") || e.PropertyName.Equals("Search"))
+                ApplyFilterAsync();
+        }
+
+        private void ApplyFilter()
+        {
+            if (TreeItems == null)
+                return;
+
+            List<TreeItemViewModel> viewModels = new List<TreeItemViewModel>(TreeItems);
+            if (IsCheckedUniqueCheckBox)
+                viewModels.RemoveAll(item => !item.IsUniqueCheckin);
+
+            if (!String.IsNullOrEmpty(Search))
+                viewModels.RemoveAll(item => !item.NameToLower.Contains(Search.ToLower()));
+
+            foreach (TreeItemViewModel itemView in TreeItems.Where(item => viewModels.Contains(item) && !item.Visibility))
+                itemView.Visible();
+
+            foreach (TreeItemViewModel itemView in TreeItems.Where(item => !viewModels.Contains(item) && item.Visibility))
+                itemView.Hide();
+        }
+
+        private async void ApplyFilterAsync()
+        {
+            await Task.Run(() => ApplyFilter());
+            UpdateTreeViewCaption();
         }
 
         private void ChekinOffset(int offset)
@@ -122,8 +182,7 @@ namespace UntappdViewer.ViewModels
         private void ReturnVisibleChekins(CallBackConteiner<List<long>> callBackConteiner)
         {
             callBackConteiner.Content = new List<long>();
-            foreach (TreeItemViewModel treeItemViewModel in TreeItems.Where(item => item.Visibility))
-                callBackConteiner.Content.Add(treeItemViewModel.Id);
+            callBackConteiner.Content.AddRange(TreeItems.Where(item => item.Visibility).Select(item => item.Id).ToList());
         }
 
         private void UpdateContent()
@@ -134,42 +193,6 @@ namespace UntappdViewer.ViewModels
             moduleManager.LoadModule(typeof(CheckinModule).Name);
             ActivateView(RegionNames.ContentRegion, typeof(Views.Checkin));
             eventAggregator.GetEvent<ChekinUpdateEvent>().Publish(untappdService.GetCheckin(SelectedTreeItem.Id));
-        }
-
-        private void UniqueChecked(bool? isChecked)
-        {
-            if (isChecked.HasValue)
-                UpdateTree(isChecked.Value, SelectedTreeItem?.Id);
-        }
-
-        private void UpdateTree(bool isUniqueCheckins, long? selectedTreeItemId)
-        {
-            LoadingChangeActivity(true);
-            UpdateTreeAsync(isUniqueCheckins, selectedTreeItemId);
-        }
-
-        private async void UpdateTreeAsync(bool isUniqueCheckins, long? selectedTreeItemId)
-        {
-            TreeItems = await Task.Run(() => GeTreeViewItems(isUniqueCheckins));
-            AppFilter(Search);
-            UpdateTreeViewCaption();
-
-            if (TreeItems.Count > 0)
-                UpdateSelectedTreeItem(selectedTreeItemId);
-
-            LoadingChangeActivity(false);
-        }
-        private ObservableCollection<TreeItemViewModel> GeTreeViewItems(bool isUniqueCheckins)
-        {
-            ObservableCollection<TreeItemViewModel> treeViewItems = new ObservableCollection<TreeItemViewModel>();
-            int treeItemNameMaxLength = settingService.GetTreeItemNameMaxLength();
-            List<Checkin> checkins = untappdService.GetCheckins(isUniqueCheckins);
-            for (int i = 0; i < checkins.Count; i++)
-            {
-                Checkin checkin = checkins[i];
-                treeViewItems.Add(new TreeItemViewModel(checkin.Id, untappdService.GetTreeViewCheckinDisplayName(checkin, i + 1, treeItemNameMaxLength)));
-            }
-            return treeViewItems;
         }
 
         private void UpdateTreeViewCaption()
@@ -187,37 +210,6 @@ namespace UntappdViewer.ViewModels
                 findSelectedTreeItem = TreeItems.FirstOrDefault(item => item.Visibility);
 
             SelectedTreeItem = findSelectedTreeItem;
-        }
-
-        private void AppFilter(string filter)
-        {
-            AppFilterAsync(filter);
-        }
-
-        private async void AppFilterAsync(string filter)
-        {
-            await Task.Run(() => SetFilter(filter));
-        }
-
-        private void SetFilter(string filter)
-        {
-            if (String.IsNullOrEmpty(filter) || String.IsNullOrEmpty(filter.Trim()))
-            {
-                foreach (TreeItemViewModel model in TreeItems.Where(item => !item.Visibility))
-                    model.Visible();
-            }
-            else
-            {
-                string lowerFilter = filter.ToLower();
-                foreach (TreeItemViewModel model in TreeItems)
-                {
-                    if (!model.Name.ToLower().Contains(lowerFilter))
-                        model.Hide();
-                    else
-                        model.Visible();
-                }
-            }
-            UpdateTreeViewCaption();
         }
 
         private void SaveSettings()

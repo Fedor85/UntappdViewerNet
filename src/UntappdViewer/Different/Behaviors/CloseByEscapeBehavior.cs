@@ -12,14 +12,8 @@ namespace UntappdViewer.Behaviors
 
         public Window Window
         {
-            get
-            {
-                return (Window)GetValue(DependencyProperty);
-            }
-            set
-            {
-                SetValue(DependencyProperty, value);
-            }
+            get { return (Window) GetValue(DependencyProperty); }
+            set { SetValue(DependencyProperty, value); }
         }
 
         protected override void OnAttached()

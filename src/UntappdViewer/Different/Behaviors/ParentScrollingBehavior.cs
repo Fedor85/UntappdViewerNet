@@ -12,26 +12,14 @@ namespace UntappdViewer.Behaviors
 
         public ParentScrollingToken ParentScrollViewer
         {
-            get
-            {
-                return (ParentScrollingToken)GetValue(ParentDependencyProperty);
-            }
-            set
-            {
-                SetValue(ParentDependencyProperty, value);
-            }
+            get { return (ParentScrollingToken) GetValue(ParentDependencyProperty); }
+            set { SetValue(ParentDependencyProperty, value); }
         }
 
         public ParentScrollingToken ChildScrollViewer
         {
-            get
-            {
-                return (ParentScrollingToken)GetValue(ChildDependencyProperty);
-            }
-            set
-            {
-                SetValue(ChildDependencyProperty, value);
-            }
+            get { return (ParentScrollingToken) GetValue(ChildDependencyProperty); }
+            set { SetValue(ChildDependencyProperty, value); }
         }
 
         protected override void OnAttached()

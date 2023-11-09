@@ -16,14 +16,8 @@ namespace UntappdViewer.Behaviors
 
         public bool? AccessToken
         {
-            get
-            {
-                return (bool?)GetValue(DependencyProperty);
-            }
-            set
-            {
-                SetValue(DependencyProperty, value);
-            }
+            get { return (bool?) GetValue(DependencyProperty); }
+            set { SetValue(DependencyProperty, value); }
         }
     }
 }

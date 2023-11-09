@@ -24,10 +24,7 @@ namespace UntappdViewer.ViewModels
         public GridLength TreeRegionWidth
         {
             get { return treeRegionWidth; }
-            set
-            {
-                SetProperty(ref treeRegionWidth, value);
-            }
+            set { SetProperty(ref treeRegionWidth, value); }
         }
 
         public UntappdViewModel(IUntappdService untappdService, IModuleManager moduleManager,

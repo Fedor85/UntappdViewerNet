@@ -12,10 +12,7 @@ namespace UntappdViewer.ViewModels
         public string Message
         {
             get { return message; }
-            set
-            {
-                SetProperty(ref message, value);
-            }
+            set { SetProperty(ref message, value); }
         }
 
         public StatusBarViewModel(IInteractionRequestService interactionRequestService)

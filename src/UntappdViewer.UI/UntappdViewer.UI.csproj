@@ -119,7 +119,6 @@
     </Compile>
     <Compile Include="Controls\ViewModel\Entity.cs" />
     <Compile Include="Controls\ViewModel\ImageViewModel.cs" />
-    <Compile Include="Controls\ViewModel\TreeItemViewModel.cs" />
     <Compile Include="Controls\ZoomBorder.cs" />
     <Compile Include="Helpers\ImageConverter.cs" />
     <Compile Include="Helpers\IValueConverters\BoolToVisibilityConverter.cs" />
