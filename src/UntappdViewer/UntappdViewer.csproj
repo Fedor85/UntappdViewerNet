@@ -122,9 +122,11 @@
     <Compile Include="Different\Helpers\Mapper.cs" />
     <Compile Include="Different\UntappdEntity.cs" />
     <Compile Include="Modules\EmptyContentModule.cs" />
+    <Compile Include="Modules\SettingsModule.cs" />
     <Compile Include="Modules\StatisticsProjectModule.cs" />
     <Compile Include="ViewModels\Controls\CheckinViewModel.cs" />
     <Compile Include="ViewModels\Controls\StatisticsProjectViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="Views\Controls\BeerControl.xaml.cs">
       <DependentUpon>BeerControl.xaml</DependentUpon>
     </Compile>
@@ -198,6 +200,9 @@
     <Compile Include="Views\MenuBar.xaml.cs">
       <DependentUpon>MenuBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\StatisticsProject.xaml.cs">
       <DependentUpon>StatisticsProject.xaml</DependentUpon>
     </Compile>
@@ -261,6 +266,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MenuBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

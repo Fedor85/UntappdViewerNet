@@ -394,7 +394,8 @@ namespace UntappdViewer.ViewModels
 
         private void Settings()
         {
-
+            moduleManager.LoadModule(typeof(SettingsModule).Name);
+            ActivateView(RegionNames.MainRegion, typeof(Settings));
         }
 
         private void About()
