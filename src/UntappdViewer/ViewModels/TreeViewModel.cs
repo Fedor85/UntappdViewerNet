@@ -105,6 +105,7 @@ namespace UntappdViewer.ViewModels
 
         private void LoadTreeItems()
         {
+            LoadingChangeActivity(true);
             LoadTreeItemsAsync();
         }
 
@@ -116,6 +117,7 @@ namespace UntappdViewer.ViewModels
                 UpdateSelectedTreeItem(settingService.GetSelectedTreeItemId());
 
             UpdateTreeViewCaption();
+            LoadingChangeActivity(false);
         }
 
         private ObservableCollection<TreeItemViewModel> GetTreeItems()
