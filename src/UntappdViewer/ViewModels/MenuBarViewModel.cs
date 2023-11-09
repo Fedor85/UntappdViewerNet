@@ -61,7 +61,9 @@ namespace UntappdViewer.ViewModels
 
         public ICommand StatisticsProjectReportCommand { get; }
 
-        public ICommand HelpCommand { get; }
+        public ICommand SettingsCommand { get; }
+
+        public ICommand AboutCommand { get; }
 
         public MenuBarViewModel(IUntappdService untappdService,  IInteractionRequestService interactionRequestService,
                                                                  IStatisticsCalculation statisticsCalculation,
@@ -92,7 +94,8 @@ namespace UntappdViewer.ViewModels
             StatisticsProjectCommand = new DelegateCommand(StatisticsProject);
             CheckinsProjectReportCommand = new DelegateCommand(CheckinsProjectReport);
             StatisticsProjectReportCommand = new DelegateCommand(StatisticsProjectReport);
-            HelpCommand = new DelegateCommand(Help);
+            SettingsCommand = new DelegateCommand(Settings);
+            AboutCommand = new DelegateCommand(About);
         }
 
         protected override void Activate()
@@ -389,7 +392,12 @@ namespace UntappdViewer.ViewModels
             }
         }
 
-        private void Help()
+        private void Settings()
+        {
+
+        }
+
+        private void About()
         {
             About about = new About();
             about.ShowDialog();

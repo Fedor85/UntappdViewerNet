@@ -76,6 +76,17 @@
                 </MenuItem>
             </MenuItem>
         </MenuItem>
-        <MenuItem Header="{x:Static properties:Resources.HelpMenuItem}" Command="{Binding HelpCommand}"/>
+        <MenuItem Header="{x:Static properties:Resources.HelpMenuItem}">
+            <MenuItem Header="{x:Static properties:Resources.Settings}" Command="{Binding SettingsCommand}">
+                <MenuItem.Icon>
+                    <Image Source="../Resources/settings.ico"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="{x:Static properties:Resources.AboutTitle}" Command="{Binding AboutCommand}">
+                <MenuItem.Icon>
+                    <Image Source="../Resources/info.ico"/>
+                </MenuItem.Icon>
+            </MenuItem>
+        </MenuItem>
     </Menu>
 </UserControl>
