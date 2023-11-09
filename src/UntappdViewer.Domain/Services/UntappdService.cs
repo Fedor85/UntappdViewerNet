@@ -68,6 +68,7 @@ namespace UntappdViewer.Domain.Services
             try
             {
                 Untappd = FileHelper.OpenFile<Untappd>(filePath);
+                Untappd.CheckinsContainer.AttachedEvents();
             }
             catch (Exception e)
             {

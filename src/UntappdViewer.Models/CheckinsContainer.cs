@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 namespace UntappdViewer.Models
@@ -57,20 +58,20 @@ namespace UntappdViewer.Models
 
         public void AddCheckin(Checkin checkin)
         {
-            checkin.Changed += ItemChanged;
+            checkin.PropertyChanged += ItemPropertyChanged;
             Checkins.Add(checkin);
             IsСhanges = true;
         }
 
         public void AddBeer(Beer beer)
         {
-            beer.Changed += ItemChanged;
-            beer.Collaboration.Changed += ItemChanged;
+            beer.PropertyChanged += ItemPropertyChanged;
+            beer.Collaboration.PropertyChanged += ItemPropertyChanged;
             Beers.Add(beer);
             IsСhanges = true;
         }
 
-        private void ItemChanged()
+        private void ItemPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             IsСhanges = true;
         }
@@ -85,6 +86,18 @@ namespace UntappdViewer.Models
         {
             venues.Add(venue);
             IsСhanges = true;
+        }
+
+        public void AttachedEvents()
+        {
+            foreach (Checkin checkin in Checkins)
+                checkin.PropertyChanged += ItemPropertyChanged;
+
+            foreach (Beer beer in Beers)
+            {
+                beer.PropertyChanged += ItemPropertyChanged;
+                beer.Collaboration.PropertyChanged += ItemPropertyChanged;
+            }
         }
     }
 }

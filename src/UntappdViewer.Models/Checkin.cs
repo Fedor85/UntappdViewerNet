@@ -33,15 +33,8 @@ namespace UntappdViewer.Models
         /// </summary>
         public string ServingType
         {
-            get
-            {
-                return servingType; 
-            }
-            set
-            {
-                servingType = value;
-                OnPropertyChanged();
-            }
+            get { return servingType; }
+            set { SetProperty(ref servingType, value); }
         }
 
         /// <summary>

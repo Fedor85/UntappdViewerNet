@@ -7,7 +7,13 @@ namespace UntappdViewer.Models
     [Serializable]
     public class Collaboration : BasePropertyChanged
     {
-        public CollaborationState State { get; private set; }
+        private CollaborationState state;
+
+        public CollaborationState State
+        {
+            get { return state; }
+            private set { SetProperty(ref state, value); }
+        }
 
         public List<Brewery> Brewerys { get; }
 
@@ -26,7 +32,6 @@ namespace UntappdViewer.Models
         public void SetDefined()
         {
             State = CollaborationState.Defined;
-            OnPropertyChanged();
         }
     }
 }

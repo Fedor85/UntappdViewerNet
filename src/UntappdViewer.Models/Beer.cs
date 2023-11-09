@@ -33,11 +33,7 @@ namespace UntappdViewer.Models
         public string Description
         {
             get { return description; }
-            set
-            {
-                description = value;
-                OnPropertyChanged();
-            }
+            set { SetProperty(ref description, value); }
         }
 
         /// <summary>
@@ -46,11 +42,7 @@ namespace UntappdViewer.Models
         public double GlobalRatingScore
         {
             get { return globalRatingScore; }
-            set
-            {
-                globalRatingScore = value;
-                OnPropertyChanged();
-            }
+            set { SetProperty(ref globalRatingScore, value); }
         }
 
         /// <summary>
@@ -69,11 +61,7 @@ namespace UntappdViewer.Models
         public long? IBU
         {
             get { return ibu; }
-            set
-            {
-                ibu = value;
-                OnPropertyChanged();
-            }
+            set { SetProperty(ref ibu, value); }
         }
 
         /// <summary>
