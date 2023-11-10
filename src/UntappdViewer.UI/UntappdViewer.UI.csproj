@@ -260,6 +260,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\World.xml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Controls\SmartTextBox\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
