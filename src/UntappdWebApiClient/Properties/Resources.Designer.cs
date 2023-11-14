@@ -70,6 +70,15 @@ namespace UntappdWebApiClient.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Empty Url..
+        /// </summary>
+        internal static string EmptyUrl {
+            get {
+                return ResourceManager.GetString("EmptyUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error update..
         /// </summary>
         internal static string ErrorUpdate {
@@ -102,6 +111,15 @@ namespace UntappdWebApiClient.Properties {
         internal static string FillServingType {
             get {
                 return ResourceManager.GetString("FillServingType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Service is not authorized..
+        /// </summary>
+        internal static string ServiceIsNotAuthorized {
+            get {
+                return ResourceManager.GetString("ServiceIsNotAuthorized", resourceCulture);
             }
         }
         

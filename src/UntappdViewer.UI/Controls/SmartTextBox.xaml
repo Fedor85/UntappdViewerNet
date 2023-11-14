@@ -18,7 +18,7 @@
                 <Image  Source="..\Resources\close_icon.ico"/>
             </Button>
         </Grid>
-        <Image Grid.Column="1" x:Name="ImgShowHidePassword"  Visibility="Hidden" HorizontalAlignment="Right" Stretch="Fill" VerticalAlignment="Center" Width="20"
-                Source="..\Resources\Show.jpg"/>
+        <Image Grid.Column="1" x:Name="ImgShowHidePassword"  Visibility="Hidden" HorizontalAlignment="Right" Stretch="Fill"
+               VerticalAlignment="Center" Width="20" Source="..\Resources\Show.jpg" Margin="2,0,0,0"/>
     </Grid>
 </UserControl>

@@ -121,6 +121,10 @@
     <value>Chek</value>
     <comment>en-en</comment>
   </data>
+  <data name="EmptyUrl" xml:space="preserve">
+    <value>Empty Url.</value>
+    <comment>en-en</comment>
+  </data>
   <data name="ErrorUpdate" xml:space="preserve">
     <value>Error update.</value>
     <comment>en-en</comment>
@@ -135,6 +139,10 @@
   </data>
   <data name="FillServingType" xml:space="preserve">
     <value>FillServingType -&gt; </value>
+    <comment>en-en</comment>
+  </data>
+  <data name="ServiceIsNotAuthorized" xml:space="preserve">
+    <value>Service is not authorized.</value>
     <comment>en-en</comment>
   </data>
   <data name="Total" xml:space="preserve">

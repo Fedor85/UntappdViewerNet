@@ -20,20 +20,20 @@ namespace UntappdViewer.Test
         {
             checkinsContainer = TestHelper.GetCheckinsContainer();
             webApiClient = new Client();
-            webApiClient.Initialize(AccessToken);
+            webApiClient.LogOn(AccessToken);
         }
 
         [Test, Ignore(AccessToken)]
         public void TestFillFullCheckins()
         {
-            Assert.True(webApiClient.Check());
+            Assert.True(webApiClient.IsLogOn);
             webApiClient.FillFullCheckins(checkinsContainer);
         }
 
         [Test, Ignore(AccessToken)]
         public void TestUpdateBeers()
         {
-            Assert.True(webApiClient.Check());
+            Assert.True(webApiClient.IsLogOn);
             long offset = 0;
             webApiClient.UpdateBeers(checkinsContainer.Beers.Where(TestHelper.IsUpdateBeer).ToList(), TestHelper.IsUpdateBeer, ref offset);
             Assert.AreNotEqual(offset, 0);
@@ -53,7 +53,7 @@ namespace UntappdViewer.Test
         [Test, Ignore(AccessToken)]
         public void FillCollaboration()
         {
-            Assert.True(webApiClient.Check());
+            Assert.True(webApiClient.IsLogOn);
             webApiClient.FillCollaboration(checkinsContainer.Beers, checkinsContainer.Brewerys);
         }
 

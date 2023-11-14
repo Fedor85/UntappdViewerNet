@@ -1,6 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:UntappdViewer"
                     xmlns:controls="clr-namespace:UntappdViewer.UI.Controls;assembly=UntappdViewer.UI"
                     xmlns:valueConverters="clr-namespace:UntappdViewer.ValueConverters">
     <ImageBrush x:Key="MainBackground" ImageSource="..\Resources\untappd_bottles.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0 0 80 80" Opacity="0.4">

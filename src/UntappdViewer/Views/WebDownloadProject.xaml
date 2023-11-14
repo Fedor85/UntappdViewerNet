@@ -5,94 +5,102 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mvvm="http://prismlibrary.com/"
              xmlns:properties="clr-namespace:UntappdViewer.Properties"
-             xmlns:behaviors="clr-namespace:UntappdViewer.Behaviors"
-             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:controls="clr-namespace:UntappdViewer.UI.Controls;assembly=UntappdViewer.UI"
+             xmlns:controls1="clr-namespace:UntappdViewer.Views.Controls"
              mc:Ignorable="d"
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="600" d:DesignWidth="800">
-    <b:Interaction.Behaviors>
-        <behaviors:AccessTokenBehavior AccessToken="{Binding AccessToken, Mode=TwoWay}"/>
-    </b:Interaction.Behaviors>
     <UserControl.Background>
         <SolidColorBrush Opacity="0.2" Color="#ffffff"/>
     </UserControl.Background>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="170"/>
-            <RowDefinition/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="150"/>
+            <RowDefinition />
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" >
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-            </Grid.RowDefinitions>
-            <Image Grid.Row="0" Height="40" Width="40" Source="..\Resources\ut_connection_default.png" VerticalAlignment="Bottom"/>
-            <DockPanel Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0">
-                <controls:SmartTextBox x:Name="TokenTextBox" PasswordMode="True" HintText="{x:Static properties:Resources.EnterAccessToken}" Height="20" Width="320"/>
-                <Button Name="AccessTokenButton"  Command="{Binding CheckAccessTokenCommand}" CommandParameter="{Binding ElementName=TokenTextBox, Path=Text}"
-                        IsEnabled="False"  Height="20" Width="70" HorizontalAlignment="Left" Margin="5,0,0,0" >
-                    <DockPanel>
-                        <Image Name="CheckStatusImg" Height="15" Width="15" Visibility="Hidden" Source="..\Resources\red-x.png" Margin="0,0,2,0"/>
-                        <TextBlock Text="{x:Static properties:Resources.Check}"/>
-                    </DockPanel>
-                </Button>
-                <CheckBox IsChecked="{Binding IsCheckedSaveAccessToken}" VerticalAlignment="Center" Margin="5,0,0,0" />
-                <Label Content="{x:Static properties:Resources.SaveLower}" VerticalAlignment="Center" Margin="-4,0,0,2"/>
-            </DockPanel>
-            <DockPanel Grid.Row="2" HorizontalAlignment="Center">
-                <Button Name="FulllDownloadCheckinsButton" Content="{x:Static properties:Resources.Full}" IsEnabled="False"
-                        Command="{Binding FullDownloadButtonCommand}" Width="60" Height="20" IsDefault="True"/>
-                <Separator Width="10" Visibility="Hidden"/>
-                <Grid Width="90">
-                    <Grid Background="#000000" Opacity="0.1"/>
-                    <DockPanel HorizontalAlignment="Center">
-                        <Border Name="MarkFillFullFirstCheckins" BorderThickness="1" BorderBrush="Black" Background="#FFFF4500" CornerRadius="10" MinWidth="10" Height="10"/>
-                        <Separator Width="6" Visibility="Hidden"/>
-                        <Button Name="FirstDownloadCheckinsButton" Content="{x:Static properties:Resources.First}" IsEnabled="False"
-                                Command="{Binding FirstDownloadButtonCommand}" Width="60" Height="20" IsDefault="True"/>
-                    </DockPanel>
-                </Grid>
-                <Separator Width="10" Visibility="Hidden"/>
-                <Button Name="ToEndDownloadCheckinsButton" Content="{x:Static properties:Resources.ToEnd}" IsEnabled="False"
-                        Command="{Binding ToEndDownloadButtonCommand}" Width="60" Height="20" IsDefault="True"/>
-                <Separator Width="10" Visibility="Hidden"/>
-                <Grid>
-                    <Grid Background="#000000" Opacity="0.1"/>
-                    <DockPanel>
-                        <Button Name="UpdateBeersButton" Content="{x:Static properties:Resources.BeerUpdate}" IsEnabled="False" Margin="5,0,0,0"
-                                Command="{Binding BeerUpdateButtonCommand}" Width="100" Height="20" IsDefault="True"/>
-                        <Separator Width="10" Visibility="Hidden"/>
-                        <controls:SmartTextBox x:Name="OffsetUpdateBeersTextBox" HintText="{x:Static properties:Resources.Offset}" IsEnabled="False" Height="20" Width="55" Margin="0,0,5,0"
-                                               Text="{Binding OffsetUpdateBeer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Mask="\d+" MaxLength="5"/>
-                    </DockPanel>
-                </Grid>
-            </DockPanel>
-            <DockPanel Grid.Row="3" HorizontalAlignment="Center">
-                <Image Width="20" Height="20" Source="..\Resources\web.ico" Opacity="0.8"/>
-                <Separator Width="15" Visibility="Hidden"/>
-                <Button  Content="{x:Static properties:Resources.FillServingType}" Command="{Binding FillServingTypeButtonCommand}" Width="110" Height="20" IsDefault="True"
-                         IsEnabled="{Binding IsEnabledFillServingTypeButton}"/>
-                <Separator Width="10" Visibility="Hidden"/>
-                <Button  Content="{x:Static properties:Resources.FillCollaboration}" Command="{Binding FillCollaborationButtonCommand}" Width="110" Height="20" IsDefault="True"
-                         IsEnabled="{Binding IsEnabledCollaborationButton}"/>
-            </DockPanel>
+            <Image Height="50" Width="50" Source="..\Resources\globe_orange.png" Opacity="0.9"/>
+            <Image Height="50" Width="50" Source="..\Resources\untappd_bottles.png" Margin="0,-7,0,0"/>
         </Grid>
-        <Grid Grid.Row="1" >
+        <Grid Grid.Row="1">
+            <Grid Background="#ffffff" Opacity="0.2"/>
+            <Grid  Visibility="{Binding IsVisibilityLogInControl, Converter={StaticResource BooleanConverter}}">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <controls1:AccessToken Token="{Binding AccessToken, Mode=TwoWay}" AccessTokenCheck="{Binding WebApiClientLogInCommand}"
+                                           ButtonText="{x:Static properties:Resources.LogIn}"
+                                           IsShowPassword="{Binding IsShowPassword, Mode=TwoWay}" IsValidAccessToken="{Binding IsValidAccessToken, Mode=TwoWay}"/>
+                    <DockPanel HorizontalAlignment="Right" Margin="0,0,21,0">
+                        <CheckBox IsChecked="{Binding IsCheckedSaveAccessToken}" VerticalAlignment="Center" Margin="5,0,0,0" />
+                        <Label Content="{x:Static properties:Resources.SaveLower}" VerticalAlignment="Center"/>
+                    </DockPanel>
+                </StackPanel>
+                <Button Width="70" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,15,5"
+                        Content="{x:Static properties:Resources.Continue}" Command="{Binding ContinueButtonCommand}"/>
+            </Grid>
+            <Grid Visibility="{Binding IsVisibilityDownloadControl, Converter={StaticResource BooleanConverter}}">
+                <DockPanel  HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <GroupBox Header="{x:Static properties:Resources.APIUntappd}"  IsEnabled="{Binding IsEnabledAPIUntappd}">
+                        <StackPanel Margin="5">
+                            <TextBlock Text="{x:Static properties:Resources.FillCheckins}"/>
+                            <Separator Width="5" Visibility="Hidden"/>
+                            <DockPanel HorizontalAlignment="Left">
+                                <Grid Width="90">
+                                    <Grid Background="#000000" Opacity="0.1"/>
+                                    <DockPanel>
+                                        <Button Content="{x:Static properties:Resources.First}" Command="{Binding FirstDownloadButtonCommand}" Width="60" Height="20" IsDefault="True"/>
+                                        <Border Name="MarkFillFullFirstCheckins" BorderThickness="1" BorderBrush="Black" Background="#FFFF4500" CornerRadius="10" Width="10" Height="10"/>
+                                    </DockPanel>
+                                </Grid>
+                                <Separator Width="10" Visibility="Hidden"/>
+                                <Button Content="{x:Static properties:Resources.ToEnd}" Command="{Binding ToEndDownloadButtonCommand}" Width="60" Height="20" IsDefault="True"/>
+                                <Separator Width="10" Visibility="Hidden"/>
+                                <Button Content="{x:Static properties:Resources.Full}" Command="{Binding FullDownloadButtonCommand}" Width="60" Height="20" IsDefault="True"/>
+                            </DockPanel>
+                            <Separator Width="10" Visibility="Hidden"/>
+                            <DockPanel HorizontalAlignment="Left">
+                                <Grid>
+                                    <Grid Background="#000000" Opacity="0.1"/>
+                                    <DockPanel>
+                                        <Button Content="{x:Static properties:Resources.BeerUpdate}" Command="{Binding BeerUpdateButtonCommand}" Width="100" Height="20" IsDefault="True"/>
+                                        <Separator Width="10" Visibility="Hidden"/>
+                                        <controls:SmartTextBox HintText="{x:Static properties:Resources.Offset}" Height="20" Width="55" Margin="0,0,5,0" ImgSize="0"
+                                                               Text="{Binding OffsetUpdateBeer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Mask="\d+" MaxLength="5"/>
+                                    </DockPanel>
+                                </Grid>
+                            </DockPanel>
+                        </StackPanel>
+                    </GroupBox>
+                    <Separator Width="10" Visibility="Hidden"/>
+                    <GroupBox Header="{x:Static properties:Resources.WebsiteUntappd}">
+                        <StackPanel Margin="5">
+                            <TextBlock Text="{x:Static properties:Resources.Fill}"/>
+                            <Separator Width="5" Visibility="Hidden"/>
+                            <Button  Content="{x:Static properties:Resources.ServingType}" Command="{Binding FillServingTypeButtonCommand}" Width="100" Height="20" IsDefault="True"
+                                     IsEnabled="{Binding IsEnabledFillServingTypeButton}"/>
+                            <Separator Width="10" Visibility="Hidden"/>
+                            <Button  Content="{x:Static properties:Resources.Collaboration}" Command="{Binding FillCollaborationButtonCommand}" Width="100" Height="20" IsDefault="True"
+                                     IsEnabled="{Binding IsEnabledCollaborationButton}"/>
+                        </StackPanel>
+                    </GroupBox>
+                </DockPanel>
+                <Button Width="70" Height="20" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="15,0,0,5"
+                        Content="{x:Static properties:Resources.Back}" Command="{Binding BackButtonCommand}"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Name="TableCaption" Content="Count()" FontWeight="Bold"/>
+            <Label Grid.Row="0" Content="{Binding TableCaption}" FontWeight="Bold"/>
             <Grid  Grid.Row="1" >
-                <DataGrid Name="TableCheckins" ItemsSource="{Binding Checkins}" IsReadOnly="True" CanUserSortColumns="False" Opacity="0.8"/>
+                <DataGrid ItemsSource="{Binding Checkins}" IsReadOnly="True" CanUserSortColumns="False" Opacity="0.8"/>
                 <controls:ScrollTopButton Style="{StaticResource ScrollTopButtonStyle}"/>
             </Grid>
         </Grid>
-        <Button  Grid.Row="2" Content="{x:Static properties:Resources.Ok}" Command="{Binding OkButtonCommand}" 
+        <Button  Grid.Row="3" Content="{x:Static properties:Resources.Ok}" Command="{Binding OkButtonCommand}" 
                  Width="60" Height="20" HorizontalAlignment="Right" VerticalAlignment="Center" IsDefault="True" Margin="0, 0, 5, 0"/>
     </Grid>
 </UserControl>

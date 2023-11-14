@@ -8,9 +8,11 @@ namespace UntappdViewer.Interfaces.Services
     {
         event Action<string> UploadedProgress;
 
-        void Initialize(string accessToken);
+        bool LogOn(string accessToken);
 
-        bool Check();
+        void LogOff();
+
+        bool IsLogOn { get; }
 
         void FillFullCheckins(CheckinsContainer checkinsContainer, ICancellationToken<Checkin> cancellation = null);
 

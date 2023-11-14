@@ -26,10 +26,6 @@
 
         void SetSelectedTreeItemId(long itemId);
 
-        bool IsCheckedSaveAccessToken();
-
-        void SetIsCheckedSaveAccessToken(bool isChecked);
-
         string GetAccessToken();
 
         void SetAccessToken(string accessToken);

@@ -153,6 +153,11 @@ namespace UntappdViewer.Utils
             return message;
         }
 
+        public static bool AreEqual(string text1, string text2)
+        {
+            return string.IsNullOrEmpty(text1) ? string.IsNullOrEmpty(text2) : String.Equals(text1, text2);
+        }
+
         public static string GetEmailUrl(string email)
         {
             return $"mailto:{email}";

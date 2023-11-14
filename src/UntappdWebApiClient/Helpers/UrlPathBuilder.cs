@@ -10,6 +10,9 @@ namespace UntappdWebApiClient
 
         public UrlPathBuilder(string baseUrl, string accessToken)
         {
+            if (String.IsNullOrEmpty(baseUrl))
+                throw new ArgumentException(Properties.Resources.EmptyUrl);
+
             this.baseUrl = new Uri(baseUrl);
             authenticationUri = $"&access_token={accessToken}";
         }

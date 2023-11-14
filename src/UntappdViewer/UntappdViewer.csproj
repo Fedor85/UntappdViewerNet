@@ -87,7 +87,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Different\Behaviors\AccessTokenBehavior.cs" />
     <Compile Include="Different\Behaviors\CloseByEscapeBehavior.cs" />
     <Compile Include="Different\Behaviors\LoadedWindowBehavior.cs" />
     <Compile Include="Different\Behaviors\ParentScrollingBehavior.cs" />
@@ -127,6 +126,9 @@
     <Compile Include="ViewModels\Controls\CheckinViewModel.cs" />
     <Compile Include="ViewModels\Controls\StatisticsProjectViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="Views\Controls\AccessToken.xaml.cs">
+      <DependentUpon>AccessToken.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Controls\BeerControl.xaml.cs">
       <DependentUpon>BeerControl.xaml</DependentUpon>
     </Compile>
@@ -226,6 +228,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Checkin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\AccessToken.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -494,6 +500,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\info.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\globe_orange.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

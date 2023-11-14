@@ -120,6 +120,7 @@
     <Compile Include="Controls\ViewModel\Entity.cs" />
     <Compile Include="Controls\ViewModel\ImageViewModel.cs" />
     <Compile Include="Controls\ZoomBorder.cs" />
+    <Compile Include="Helpers\BindingExtensions.cs" />
     <Compile Include="Helpers\ImageConverter.cs" />
     <Compile Include="Helpers\IValueConverters\BoolToVisibilityConverter.cs" />
     <Compile Include="Helpers\IValueConverters\IndexToVisibilityConverter.cs" />

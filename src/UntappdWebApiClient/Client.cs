@@ -30,27 +30,32 @@ namespace UntappdWebApiClient
 
         public event Action<string> UploadedProgress;
 
+        public bool IsLogOn { get; private set; }
+
         public Client()
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-        }
-
-        public void Initialize(string accessToken)
-        {
-            urlPathBuilder = new UrlPathBuilder(UriConstants.BaseAPIUrl, accessToken);
-
             jsonSerializerSettings = new JsonSerializerSettings();
             jsonSerializerSettings.NullValueHandling = NullValueHandling.Ignore;
             jsonSerializerSettings.MissingMemberHandling = MissingMemberHandling.Ignore;
         }
 
-        public bool Check()
+        public void LogOff()
         {
-            HttpResponseMessage httpResponse = GetHttpResponse("checkin/recent/?");
+            IsLogOn = false;
+            urlPathBuilder = null;
+        }
+
+        public bool LogOn(string accessToken)
+        {
+            urlPathBuilder = new UrlPathBuilder(UriConstants.BaseAPIUrl, accessToken);
+
+            HttpResponseMessage httpResponse = GetHttpResponse("checkin/recent/?", true);
             if ((long)httpResponse.StatusCode == 429)
                 throw new ArgumentException(httpResponse.ReasonPhrase);
 
-            return httpResponse.IsSuccessStatusCode;
+            IsLogOn = httpResponse.IsSuccessStatusCode;
+            return IsLogOn;
         }
 
         public void FillFullCheckins(CheckinsContainer checkinsContainer, ICancellationToken<Checkin> cancellation = null)
@@ -351,8 +356,11 @@ namespace UntappdWebApiClient
                 checkinsContainer.AddVenue(checkin.Venue);
         }
 
-        private HttpResponseMessage GetHttpResponse(string methodName)
+        private HttpResponseMessage GetHttpResponse(string methodName, bool isLogOnRequest = false)
         {
+            if(!isLogOnRequest && !IsLogOn)
+                throw new ArgumentException(Properties.Resources.ServiceIsNotAuthorized);
+
             using (HttpClient httpClient = new HttpClient())
             {
                 string url = urlPathBuilder.GetUrl(methodName);

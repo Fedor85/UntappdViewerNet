@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using UntappdViewer.UI.Helpers;
+using UntappdViewer.Utils;
 
 namespace UntappdViewer.UI.Controls
 {
@@ -15,9 +16,25 @@ namespace UntappdViewer.UI.Controls
     /// </summary>
     public partial class SmartTextBox : UserControl
     {
-        public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(SmartTextBox), new PropertyMetadata(String.Empty));
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(SmartTextBox), new PropertyMetadata(String.Empty, UpdateTextBinding));
 
         public static readonly DependencyProperty HintTextProperty = DependencyProperty.Register("HintText", typeof(string), typeof(SmartTextBox), new PropertyMetadata(String.Empty));
+
+        public static readonly DependencyProperty IsShowPasswordModeProperty = DependencyProperty.Register("IsShowPasswordMode", typeof(bool), typeof(SmartTextBox), new PropertyMetadata(true, UpdatePasswordUIVisibility));
+
+        private static void UpdatePasswordUIVisibility(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+        {
+            SmartTextBox smartTextBox = dependencyObject as SmartTextBox;
+            smartTextBox.SetPasswordUIVisibility(smartTextBox.MainText);
+        }
+
+        public static readonly DependencyProperty IsCheckValidBindingProperty = DependencyProperty.Register("IsCheckValidBinding", typeof(bool), typeof(SmartTextBox), new PropertyMetadata(true));
+
+        private static void UpdateTextBinding(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+        {
+            SmartTextBox smartTextBox = dependencyObject as SmartTextBox;
+            smartTextBox.SetTextBinding();
+        }
 
         public string Text
         {
@@ -25,14 +42,25 @@ namespace UntappdViewer.UI.Controls
             set { SetValue(TextProperty, value); }
         }
 
-
         public string HintText
         {
             get { return (string)GetValue(HintTextProperty); }
             set { SetValue(HintTextProperty, value); }
         }
 
-        private string mainText;
+        public bool IsShowPasswordMode
+        {
+            get { return (bool)GetValue(IsShowPasswordModeProperty); }
+            set { SetValue(IsShowPasswordModeProperty, value); }
+        }
+
+        public bool IsCheckValidBinding
+        {
+            get { return (bool)GetValue(IsCheckValidBindingProperty); }
+            set { SetValue(IsCheckValidBindingProperty, value); }
+        }
+
+        public string MainText { get; private set; }
 
         private bool isUpdateBinding;
 
@@ -90,15 +118,27 @@ namespace UntappdViewer.UI.Controls
             AttachedEvents();
 
             isUpdateBinding = GetIsUpdateBinding();
-            CheckValidText();
 
-            SetText(Text, TextSource.Binding);
+            SetTextBinding();
+
+            SetPasswordUIVisibility(MainText);
+            SetHintTextVisibility(MainText);
+            SetClearButtonVisibility(MainText);
+        }
+
+        private void SetTextBinding()
+        {
+            if (!IsLoaded || StringHelper.AreEqual(MainText, Text))
+                return;
+
+            string text = IsCheckValidBinding ? CheckValidText(Text) : Text;
+            SetText(text, TextSource.General);
         }
 
         private void SmartTextBoxUnloaded(object sender, RoutedEventArgs e)
         {
             DetachingEvents();
-            mainText = String.Empty;
+            MainText = String.Empty;
         }
 
         private void AttachedEvents()
@@ -138,24 +178,22 @@ namespace UntappdViewer.UI.Controls
         private bool GetIsUpdateBinding()
         {
             BindingExpression bindingExpression = GetBindingExpression(TextProperty);
-            return bindingExpression != null && (bindingExpression.ParentBinding.Mode == BindingMode.TwoWay ||
-                                                 bindingExpression.ParentBinding.Mode == BindingMode.OneWayToSource);
+            return bindingExpression != null && bindingExpression.ParentBinding.Mode == BindingMode.TwoWay;
         }
 
-        private void CheckValidText()
+        private string CheckValidText(string text)
         {
-            if(String.IsNullOrEmpty(Text))
-                return;
+            string currentText = text;
+            if (String.IsNullOrEmpty(currentText))
+                return currentText;
 
-            string currentText = Text;
             if (MaxLength > 0 && MaxLength < currentText.Length)
                 currentText = currentText.Remove(MaxLength);
 
             if (!IsUpdateText(currentText))
                 currentText = String.Empty;
 
-            if (!Equals(Text, currentText))
-                Text = currentText;
+            return currentText;
         }
 
         private bool IsUpdateText(string text)
@@ -170,21 +208,21 @@ namespace UntappdViewer.UI.Controls
 
         public void Clear()
         {
-           SetText(String.Empty, TextSource.Clear);
+           SetText(String.Empty, TextSource.General);
         }
 
         private void TextPasswordBoxPasswordChanged(object sender, RoutedEventArgs e)
         {
             string currentText = TextPasswordBox.Password;
-            if (currentText.Equals(mainText))
+            if (currentText.Equals(MainText))
                 return;
 
             if (!IsUpdateText(currentText))
             {
                 int currentIndex = GetPasswordBoxCurrentIndex();
-                int delta = TextPasswordBox.Password.Length - mainText.Length;
+                int delta = TextPasswordBox.Password.Length - MainText.Length;
 
-                TextPasswordBox.Password = mainText;
+                TextPasswordBox.Password = MainText;
 
                 int currentCurrentIndex = currentIndex - delta;
                 if(currentCurrentIndex >= 0)
@@ -225,13 +263,13 @@ namespace UntappdViewer.UI.Controls
         private void VisibleTextChanged(object sender, TextChangedEventArgs e)
         {
             string currentText = TextVisiblePasswordBox.Text;
-            if (currentText.Equals(mainText) || e.Changes.Count == 0)
+            if (currentText.Equals(MainText) || e.Changes.Count == 0)
                 return;
 
             if (!IsUpdateText(currentText))
             {
                 int currentIndex = e.Changes.ToList()[0].Offset;
-                TextVisiblePasswordBox.Text = mainText;
+                TextVisiblePasswordBox.Text = MainText;
                 TextVisiblePasswordBox.CaretIndex = currentIndex;
             }
             else
@@ -242,28 +280,29 @@ namespace UntappdViewer.UI.Controls
 
         private void SetText(string text, TextSource textSource)
         {
+            MainText = text;
 
-            mainText = text;
+           DetachingEvents();
 
-            DetachingEvents();
+            if ((textSource == TextSource.TextBox || textSource == TextSource.General) && passwordMode)
+                TextPasswordBox.Password = MainText;
 
-            if ((textSource == TextSource.TextBox || textSource == TextSource.Clear || textSource == TextSource.Binding) && passwordMode)
-                TextPasswordBox.Password = mainText;
+            if (textSource == TextSource.PasswordBox || textSource == TextSource.General)
+                TextVisiblePasswordBox.Text = MainText;
 
-            if (textSource == TextSource.PasswordBox || textSource == TextSource.Clear || textSource == TextSource.Binding)
-
-                TextVisiblePasswordBox.Text = mainText;
-
-            if (textSource != TextSource.Binding && isUpdateBinding)
-                Text = mainText;
+            if (!String.Equals(Text, MainText) && isUpdateBinding)
+            {
+                SetValue(TextProperty, MainText);
+                this.UpdateSource(TextProperty, MainText);
+            }
 
             AttachedEvents();
 
-            SetPasswordUIVisibility(mainText);
-            SetHintTextVisibility(mainText);
-            SetClearButtonVisibility(mainText);
+            SetPasswordUIVisibility(MainText);
+            SetHintTextVisibility(MainText);
+            SetClearButtonVisibility(MainText);
 
-            TextChanged?.Invoke(mainText);
+            TextChanged?.Invoke(MainText);
         }
 
         private void SetHintTextVisibility(string text)
@@ -279,7 +318,7 @@ namespace UntappdViewer.UI.Controls
         private void SetPasswordUIVisibility(string text)
         {
             TextPasswordBox.Visibility = PasswordMode ? Visibility.Visible : Visibility.Collapsed;
-            ImgShowHidePassword.Visibility = passwordMode && !String.IsNullOrEmpty(text) ? Visibility.Visible : Visibility.Hidden;
+            ImgShowHidePassword.Visibility = PasswordMode && IsShowPasswordMode && !String.IsNullOrEmpty(text) ? Visibility.Visible : Visibility.Hidden;
         }
 
         private void HintTextBoxGotFocus(object sender, RoutedEventArgs e)
@@ -297,7 +336,7 @@ namespace UntappdViewer.UI.Controls
 
         private void TextBoxLostFocus(object sender, RoutedEventArgs e)
         {
-            SetHintTextVisibility(mainText);
+            SetHintTextVisibility(MainText);
         }
 
         private void HidePasswordHandler(object sender, MouseEventArgs e)
@@ -322,8 +361,7 @@ namespace UntappdViewer.UI.Controls
         {
             TextBox,
             PasswordBox,
-            Clear,
-            Binding
+            General
         }
     }
 }
