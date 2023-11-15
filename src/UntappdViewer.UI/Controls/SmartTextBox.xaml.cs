@@ -108,7 +108,7 @@ namespace UntappdViewer.UI.Controls
         {
             InitializeComponent();
             HintTextBox.SetBinding(TextBox.TextProperty, new Binding { Path = new PropertyPath(HintTextProperty), Source = this });
-            
+
             Loaded += SmartTextBoxLoaded;
             Unloaded += SmartTextBoxUnloaded;
         }
@@ -318,7 +318,8 @@ namespace UntappdViewer.UI.Controls
         private void SetPasswordUIVisibility(string text)
         {
             TextPasswordBox.Visibility = PasswordMode ? Visibility.Visible : Visibility.Collapsed;
-            ImgShowHidePassword.Visibility = PasswordMode && IsShowPasswordMode && !String.IsNullOrEmpty(text) ? Visibility.Visible : Visibility.Hidden;
+            ImgShowHidePassword.Visibility = PasswordMode && IsShowPasswordMode && !String.IsNullOrEmpty(text) ? Visibility.Visible : 
+                                                                             PasswordMode ? Visibility.Hidden : Visibility.Collapsed;
         }
 
         private void HintTextBoxGotFocus(object sender, RoutedEventArgs e)

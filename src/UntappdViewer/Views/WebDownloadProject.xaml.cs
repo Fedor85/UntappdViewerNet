@@ -16,6 +16,7 @@ namespace UntappdViewer.Views
         public WebDownloadProject()
         {
             InitializeComponent();
+
             Loaded += WebDownloadProjectLoaded;
             Unloaded += WebDownloadProjectUnloaded;    
         }
