@@ -11,7 +11,6 @@ namespace UntappdViewer.UI.Controls.RecyclerView.Controls
     {
         private static readonly DependencyProperty ItemDataTemplateProperty = DependencyProperty.Register("ItemDataTemplate", typeof(DataTemplate), typeof(ContentDataControl));
 
-
         public DataTemplate ItemDataTemplate
         {
             get { return (DataTemplate)GetValue(ItemDataTemplateProperty); }
