@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace UntappdViewer.UI.Controls.GeoMap
+namespace UntappdViewer.UI.Controls.Maps.GeoMap
 {
     /// <summary>
     /// Interaction logic for GradientScale.xaml

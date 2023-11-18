@@ -9,12 +9,12 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using UntappdViewer.Interfaces;
-using UntappdViewer.UI.Controls.GeoMap.Data;
+using UntappdViewer.UI.Controls.Maps.GeoMap.Data;
 using UntappdViewer.UI.Helpers;
 using UntappdViewer.Utils;
 using Path = System.Windows.Shapes.Path;
 
-namespace UntappdViewer.UI.Controls.GeoMap
+namespace UntappdViewer.UI.Controls.Maps.GeoMap
 {
     /// <summary>
     /// Interaction logic for GeoMap.xaml

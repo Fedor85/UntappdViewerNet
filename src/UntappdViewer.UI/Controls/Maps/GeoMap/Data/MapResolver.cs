@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Xml;
 
-namespace UntappdViewer.UI.Controls.GeoMap.Data
+namespace UntappdViewer.UI.Controls.Maps.GeoMap.Data
 {
     public static class MapResolver
     {

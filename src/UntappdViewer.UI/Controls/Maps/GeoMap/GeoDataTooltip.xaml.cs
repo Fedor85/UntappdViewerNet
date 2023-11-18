@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using UntappdViewer.UI.Controls.GeoMap.Data;
+using UntappdViewer.UI.Controls.Maps.GeoMap.Data;
 
-namespace UntappdViewer.UI.Controls.GeoMap
+namespace UntappdViewer.UI.Controls.Maps.GeoMap
 {
     /// <summary>
     /// Interaction logic for GeoDataTooltip.xaml

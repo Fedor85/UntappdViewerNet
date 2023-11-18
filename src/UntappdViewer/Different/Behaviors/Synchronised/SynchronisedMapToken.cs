@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 using UntappdViewer.UI.Controls;
-using UntappdViewer.UI.Controls.GeoMap;
+using UntappdViewer.UI.Controls.Maps.GeoMap;
 
 namespace UntappdViewer.Behaviors
 {

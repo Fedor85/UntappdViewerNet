@@ -54,20 +54,20 @@
     <Compile Include="Controls\Images\BorderImageControl.xaml.cs">
       <DependentUpon>BorderImageControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\GeoMap\Data\GeoData.cs" />
-    <Compile Include="Controls\GeoMap\Data\LvcMap.cs" />
-    <Compile Include="Controls\GeoMap\Data\MapData.cs" />
-    <Compile Include="Controls\GeoMap\Elements\GridLines.cs" />
-    <Compile Include="Controls\GeoMap\Elements\ScaleLine.cs" />
-    <Compile Include="Controls\GeoMap\Elements\ScaleText.cs" />
-    <Compile Include="Controls\GeoMap\GeoDataTooltip.xaml.cs">
+    <Compile Include="Controls\Maps\GeoMap\Data\GeoData.cs" />
+    <Compile Include="Controls\Maps\GeoMap\Data\LvcMap.cs" />
+    <Compile Include="Controls\Maps\GeoMap\Data\MapData.cs" />
+    <Compile Include="Controls\Maps\GeoMap\Elements\GridLines.cs" />
+    <Compile Include="Controls\Maps\GeoMap\Elements\ScaleLine.cs" />
+    <Compile Include="Controls\Maps\GeoMap\Elements\ScaleText.cs" />
+    <Compile Include="Controls\Maps\GeoMap\GeoDataTooltip.xaml.cs">
       <DependentUpon>GeoDataTooltip.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\GeoMap\GeoMap.xaml.cs">
+    <Compile Include="Controls\Maps\GeoMap\GeoMap.xaml.cs">
       <DependentUpon>GeoMap.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\GeoMap\Data\MapResolver.cs" />
-    <Compile Include="Controls\GeoMap\GradientScale.xaml.cs">
+    <Compile Include="Controls\Maps\GeoMap\Data\MapResolver.cs" />
+    <Compile Include="Controls\Maps\GeoMap\GradientScale.xaml.cs">
       <DependentUpon>GradientScale.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ImageEllipseClip.xaml.cs">
@@ -147,15 +147,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\GeoMap\GeoDataTooltip.xaml">
+    <Page Include="Controls\Maps\GeoMap\GeoDataTooltip.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\GeoMap\GeoMap.xaml">
+    <Page Include="Controls\Maps\GeoMap\GeoMap.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\GeoMap\GradientScale.xaml">
+    <Page Include="Controls\Maps\GeoMap\GradientScale.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -261,8 +261,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\World.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls\SmartTextBox\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

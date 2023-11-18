@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Media;
 
-namespace UntappdViewer.UI.Controls.GeoMap
+namespace UntappdViewer.UI.Controls.Maps.GeoMap
 {
     public class GridLines : FrameworkElement
     {

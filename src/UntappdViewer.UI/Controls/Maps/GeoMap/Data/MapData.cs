@@ -1,4 +1,4 @@
-﻿namespace UntappdViewer.UI.Controls.GeoMap.Data
+﻿namespace UntappdViewer.UI.Controls.Maps.GeoMap.Data
 {
     public class MapData
     {

@@ -12,10 +12,10 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:behaviors="clr-namespace:UntappdViewer.Behaviors"
-             xmlns:geoMap="clr-namespace:UntappdViewer.UI.Controls.GeoMap;assembly=UntappdViewer.UI"
              xmlns:helpers="clr-namespace:UntappdViewer.Helpers"
              xmlns:controls="clr-namespace:UntappdViewer.UI.Controls;assembly=UntappdViewer.UI"
              xmlns:infrastructure="clr-namespace:UntappdViewer.Infrastructure;assembly=UntappdViewer.Infrastructure"
+             xmlns:geoMap="clr-namespace:UntappdViewer.UI.Controls.Maps.GeoMap;assembly=UntappdViewer.UI"
              mc:Ignorable="d" 
              mvvm:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="2450" d:DesignWidth="800">

@@ -1,4 +1,4 @@
-﻿using UntappdViewer.UI.Controls.GeoMap;
+﻿using UntappdViewer.UI.Controls.Maps.GeoMap;
 
 namespace UntappdViewer.Behaviors
 {
