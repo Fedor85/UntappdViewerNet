@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using Prism.Commands;
 using UntappdViewer.UI.Controls;
 using UntappdViewer.UI.Helpers;
 
@@ -61,18 +62,17 @@ namespace UntappdViewer.Views.Controls
             Unloaded += AccessTokenUnloaded;
             TokenTextBox.SetBinding(SmartTextBox.TextProperty, new Binding { Path = new PropertyPath(TokenProperty), Mode = BindingMode.TwoWay, Source = this });
             TokenTextBox.SetBinding(SmartTextBox.IsShowPasswordModeProperty, new Binding { Path = new PropertyPath(IsShowPasswordProperty), Source = this });
+            TokenTextBox.TextChanged = new DelegateCommand<string>(TokenTextBoxOnTextChanged);
             ButtonTextControl.SetBinding(TextBlock.TextProperty, new Binding { Path = new PropertyPath(ButtonTextProperty), Source = this });
         }
 
         private void AccessTokenLoaded(object sender, RoutedEventArgs e)
         {
-            TokenTextBox.TextChanged += TokenTextBoxOnTextChanged;
             UpdateCheckStatus();
         }
 
         private void AccessTokenUnloaded(object sender, RoutedEventArgs e)
         {
-            TokenTextBox.TextChanged -= TokenTextBoxOnTextChanged;
             TokenTextBox.Clear();
         }
 

@@ -490,6 +490,7 @@
   </data>
   <data name="CountriesCountLabel" xml:space="preserve">
     <value>Countries count:</value>
+    <comment>en-en</comment>
   </data>
   <data name="ChekinsAccumulateCountDate" xml:space="preserve">
     <value>Chekins Accumulate Count/Date</value>
@@ -623,6 +624,17 @@
   </data>
   <data name="VenueCheckins" xml:space="preserve">
     <value>Venue/Checkins</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="bing_Fluent_Logo_Text" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bing_Fluent_Logo_Text.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CredentialsProviderCaption" xml:space="preserve">
+    <value>Credentials Provider:</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="EnterCredentialsProvider" xml:space="preserve">
+    <value>Enter Credentials Provider</value>
     <comment>en-en</comment>
   </data>
 </root>

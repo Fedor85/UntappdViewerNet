@@ -22,13 +22,9 @@ namespace UntappdViewer.UI.Controls
 
         public static readonly DependencyProperty IsShowPasswordModeProperty = DependencyProperty.Register("IsShowPasswordMode", typeof(bool), typeof(SmartTextBox), new PropertyMetadata(true, UpdatePasswordUIVisibility));
 
-        private static void UpdatePasswordUIVisibility(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
-        {
-            SmartTextBox smartTextBox = dependencyObject as SmartTextBox;
-            smartTextBox.SetPasswordUIVisibility(smartTextBox.MainText);
-        }
-
         public static readonly DependencyProperty IsCheckValidBindingProperty = DependencyProperty.Register("IsCheckValidBinding", typeof(bool), typeof(SmartTextBox), new PropertyMetadata(true));
+
+        public static readonly DependencyProperty TextChangedProperty = DependencyProperty.Register("TextChanged", typeof(ICommand), typeof(SmartTextBox));
 
         private static void UpdateTextBinding(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
@@ -60,6 +56,12 @@ namespace UntappdViewer.UI.Controls
             set { SetValue(IsCheckValidBindingProperty, value); }
         }
 
+        public ICommand TextChanged
+        {
+            get { return (ICommand)GetValue(TextChangedProperty); }
+            set { SetValue(TextChangedProperty, value); }
+        }
+
         public string MainText { get; private set; }
 
         private bool isUpdateBinding;
@@ -69,8 +71,6 @@ namespace UntappdViewer.UI.Controls
         private string mask;
 
         private int maxLength;
-
-        public event Action<string> TextChanged;
 
         public double ImgSize
         {
@@ -138,7 +138,6 @@ namespace UntappdViewer.UI.Controls
         private void SmartTextBoxUnloaded(object sender, RoutedEventArgs e)
         {
             DetachingEvents();
-            MainText = String.Empty;
         }
 
         private void AttachedEvents()
@@ -302,7 +301,7 @@ namespace UntappdViewer.UI.Controls
             SetHintTextVisibility(MainText);
             SetClearButtonVisibility(MainText);
 
-            TextChanged?.Invoke(MainText);
+            TextChanged?.Execute(MainText);
         }
 
         private void SetHintTextVisibility(string text)
@@ -357,6 +356,12 @@ namespace UntappdViewer.UI.Controls
         {
             Clear();
         }
+        private static void UpdatePasswordUIVisibility(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+        {
+            SmartTextBox smartTextBox = dependencyObject as SmartTextBox;
+            smartTextBox.SetPasswordUIVisibility(smartTextBox.MainText);
+        }
+
 
         enum TextSource
         {

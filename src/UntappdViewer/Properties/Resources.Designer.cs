@@ -226,6 +226,16 @@ namespace UntappdViewer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap bing_Fluent_Logo_Text {
+            get {
+                object obj = ResourceManager.GetObject("bing_Fluent_Logo_Text", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap bottle_3x {
             get {
                 object obj = ResourceManager.GetObject("bottle_3x", resourceCulture);
@@ -435,6 +445,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Credentials Provider:.
+        /// </summary>
+        public static string CredentialsProviderCaption {
+            get {
+                return ResourceManager.GetString("CredentialsProviderCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap crowler {
@@ -556,6 +575,15 @@ namespace UntappdViewer.Properties {
         public static string EnterAccessToken {
             get {
                 return ResourceManager.GetString("EnterAccessToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter Credentials Provider.
+        /// </summary>
+        public static string EnterCredentialsProvider {
+            get {
+                return ResourceManager.GetString("EnterCredentialsProvider", resourceCulture);
             }
         }
         

@@ -504,5 +504,8 @@
   <ItemGroup>
     <Resource Include="Resources\globe_orange.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\bing_Fluent_Logo_Text.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

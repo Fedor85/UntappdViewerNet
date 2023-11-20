@@ -28,6 +28,8 @@ namespace UntappdViewer.ViewModels
 
         private bool isShowPassword;
 
+        private bool isShowCredentialsProviderBing;
+
         public string AccessToken
         {
             get { return accessToken; }
@@ -46,7 +48,15 @@ namespace UntappdViewer.ViewModels
             set { SetProperty(ref isShowPassword, value); }
         }
 
+        public bool IsShowCredentialsProviderBing
+        {
+            get { return isShowCredentialsProviderBing; }
+            set { SetProperty(ref isShowCredentialsProviderBing, value); }
+        }
+
         public ICommand CheckAccessTokenCommand { get; }
+
+        public ICommand CredentialsProviderBingChangedCommand { get; }
 
         public ICommand CancelButtonCommand { get; }
 
@@ -64,8 +74,14 @@ namespace UntappdViewer.ViewModels
             this.interactionRequestService = interactionRequestService;
 
             CheckAccessTokenCommand = new DelegateCommand<string>(CheckAccessToken);
+            CredentialsProviderBingChangedCommand = new DelegateCommand<string>(CredentialsProviderBingChanged);
             CancelButtonCommand = new DelegateCommand(Exit);
             OkButtonCommand = new DelegateCommand(Ok);
+        }
+
+        private void CredentialsProviderBingChanged(string credentialsProvider)
+        {
+            IsShowCredentialsProviderBing = IsShowCredentialsProviderBing || String.IsNullOrEmpty(credentialsProvider);
         }
 
         protected override void Activate()
