@@ -15,7 +15,17 @@ namespace UntappdViewer.ViewModels
     {
         private IModuleManager moduleManager;
 
+        private ISettingService settingService;
+
+        private string credentialsProviderBing;
+
         private StatisticsProjectVM statisticsProject;
+
+        public string CredentialsProviderBing
+        {
+            get { return credentialsProviderBing; }
+            set { SetProperty(ref credentialsProviderBing, value); }
+        }
 
         public StatisticsProjectVM StatisticsProject
         {
@@ -26,9 +36,11 @@ namespace UntappdViewer.ViewModels
         public ICommand OkButtonCommand { get; }
  
         public StatisticsProjectViewModel(IRegionManager regionManager, IModuleManager moduleManager,
+                                                                        ISettingService settingService,
                                                                         IStatisticsCalculation statisticsCalculation) : base(regionManager)
         {
             this.moduleManager = moduleManager;
+            this.settingService = settingService;
 
             StatisticsProject = new StatisticsProjectVM(statisticsCalculation);
             OkButtonCommand = new DelegateCommand(Exit);
@@ -38,11 +50,13 @@ namespace UntappdViewer.ViewModels
         {
             base.Activate();
             FillStatisticsAsync(FillStatistics);
+            CredentialsProviderBing = settingService.GetCredentialsProviderBing();
         }
 
         protected override void DeActivate()
         {
             base.DeActivate();
+            CredentialsProviderBing = String.Empty;
             StatisticsProject.Clear();
         }
 
