@@ -91,6 +91,17 @@ namespace UntappdViewer.Infrastructure.Services
             Settings.Default.Save();
         }
 
+        public string GetCredentialsProviderBing()
+        {
+            return Settings.Default.CredentialsProviderBing;
+        }
+
+        public void SetCredentialsProviderBing(string credentialsProvider)
+        {
+            Settings.Default.CredentialsProviderBing = credentialsProvider;
+            Settings.Default.Save();
+        }
+
         public long GetOffsetUpdateBeer()
         {
             return Settings.Default.OffsetUpdateBeer;

@@ -26,7 +26,9 @@ namespace UntappdViewer.ViewModels
 
         private bool? isValidAccessToken;
 
-        private bool isShowPassword;
+        private bool isShowAccessToken;
+
+        private string credentialsProviderBing;
 
         private bool isShowCredentialsProviderBing;
 
@@ -42,10 +44,16 @@ namespace UntappdViewer.ViewModels
             set { SetProperty(ref isValidAccessToken, value); }
         }
 
-        public bool IsShowPassword
+        public bool IsShowAccessToken
         {
-            get { return isShowPassword; }
-            set { SetProperty(ref isShowPassword, value); }
+            get { return isShowAccessToken; }
+            set { SetProperty(ref isShowAccessToken, value); }
+        }
+
+        public string CredentialsProviderBing
+        {
+            get { return credentialsProviderBing; }
+            set { SetProperty(ref credentialsProviderBing, value); }
         }
 
         public bool IsShowCredentialsProviderBing
@@ -77,6 +85,9 @@ namespace UntappdViewer.ViewModels
             CredentialsProviderBingChangedCommand = new DelegateCommand<string>(CredentialsProviderBingChanged);
             CancelButtonCommand = new DelegateCommand(Exit);
             OkButtonCommand = new DelegateCommand(Ok);
+
+            isShowAccessToken = true;
+            IsShowCredentialsProviderBing = true;
         }
 
         private void CredentialsProviderBingChanged(string credentialsProvider)
@@ -88,14 +99,18 @@ namespace UntappdViewer.ViewModels
         {
             base.Activate();
             FillAccessToken();
+            FillCredentialsProviderBing();
         }
 
         protected override void DeActivate()
         {
             base.DeActivate();
 
-            IsShowPassword = true;
+            isShowAccessToken = true;
             AccessToken = String.Empty;
+
+            IsShowCredentialsProviderBing = true;
+            CredentialsProviderBing = String.Empty;
         }
 
         private void FillAccessToken()
@@ -104,8 +119,18 @@ namespace UntappdViewer.ViewModels
             if (String.IsNullOrEmpty(accessToken))
                 return;
 
-            IsShowPassword = false;
+            IsShowAccessToken = false;
             AccessToken = accessToken;
+        }
+
+        private void FillCredentialsProviderBing()
+        {
+            string credentialsProvider = settingService.GetCredentialsProviderBing();
+            if (String.IsNullOrEmpty(credentialsProvider))
+                return;
+
+            IsShowCredentialsProviderBing = false;
+            CredentialsProviderBing = credentialsProvider;
         }
 
         private void CheckAccessToken(string token)
@@ -135,6 +160,8 @@ namespace UntappdViewer.ViewModels
         {
             if (IsValidAccessToken.HasValue && IsValidAccessToken.Value || String.IsNullOrEmpty(AccessToken))
                 settingService.SetAccessToken(AccessToken);
+
+            settingService.SetCredentialsProviderBing(CredentialsProviderBing);
 
             Exit();
         }

@@ -30,6 +30,10 @@
 
         void SetAccessToken(string accessToken);
 
+        string GetCredentialsProviderBing();
+
+        void SetCredentialsProviderBing(string credentialsProvider);
+
         long GetOffsetUpdateBeer();
 
         void SetOffsetUpdateBeer(long offSet);
