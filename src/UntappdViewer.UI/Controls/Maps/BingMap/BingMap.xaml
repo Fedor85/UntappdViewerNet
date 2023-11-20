@@ -16,15 +16,21 @@
         </DataTemplate>
         <iValueConverters:LocationConverter x:Key="LocationConverter"/>
     </UserControl.Resources>
-    <wpf:Map x:Name="MapControl">
-        <wpf:MapItemsControl x:Name="MapItemsControl">
-            <wpf:MapItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <ContentControl ContentTemplate="{DynamicResource DefaultItemMapTemplate}"
-                                    wpf:MapLayer.Position="{Binding Location, Converter={StaticResource LocationConverter}}"
-                                    wpf:MapLayer.PositionOrigin="Center"  ToolTip="{Binding ToolTip}"/>
-                </DataTemplate>
-            </wpf:MapItemsControl.ItemTemplate>
-        </wpf:MapItemsControl>
-    </wpf:Map>
+    <Grid>
+        <wpf:Map x:Name="MapControl">
+            <wpf:MapItemsControl x:Name="MapItemsControl">
+                <wpf:MapItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ContentControl ContentTemplate="{DynamicResource DefaultItemMapTemplate}"
+                                        wpf:MapLayer.Position="{Binding Location, Converter={StaticResource LocationConverter}}"
+                                        wpf:MapLayer.PositionOrigin="Center"  ToolTip="{Binding ToolTip}"/>
+                    </DataTemplate>
+                </wpf:MapItemsControl.ItemTemplate>
+            </wpf:MapItemsControl>
+        </wpf:Map>
+        <Grid x:Name ="ErrorControl" Visibility="Hidden">
+            <Grid Background="#000000" Opacity="0.6"/>
+            <TextBlock x:Name ="ErrorMessageControl" HorizontalAlignment="Center"  VerticalAlignment="Center" TextAlignment="Center" Foreground="#ffffff"/>
+        </Grid>
+    </Grid>
 </UserControl>

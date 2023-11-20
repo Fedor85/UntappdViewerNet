@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using LinqToXaml;
 using Microsoft.Maps.MapControl.WPF;
 using UntappdViewer.UI.Helpers;
 using UntappdViewer.UI.IValueConverters;
@@ -58,15 +60,47 @@ namespace UntappdViewer.UI.Controls.Maps.BingMap
             set { SetValue(ItemDataTemplateProperty, value); }
         }
 
+        public bool IsBlockParentScroll { get; set; }
+
         public BingMap()
         {
             InitializeComponent();
+            IsBlockParentScroll = true;
+
             MapControl.SetBinding(Map.CredentialsProviderProperty, new Binding { Path = new PropertyPath(CredentialsProviderProperty), Converter = new CredentialsProviderConverter(), Source = this });
             MapControl.Center = Center.GetMapLocation();
             MapControl.ZoomLevel = defaultZoomLevel;
+            MapControl.LayoutUpdated += MapControlLayoutUpdated;
 
             MapItemsControl.SetBinding(MapItemsControl.ItemsSourceProperty, new Binding { Path = new PropertyPath(ItemsSourceProperty), Source = this });
+
             MouseRightButtonDown += MapBingMouseRightButtonDown;
+            MouseWheel += BingMapMouseWheel;
+        }
+
+        private void MapControlLayoutUpdated(object sender, EventArgs e)
+        {
+            FrameworkElement frameworkElement = MapControl.DescendantsAndSelf().OfType<FrameworkElement>().SingleOrDefault(d => d.Name.ToLower().Contains("errormessage"));
+
+            if (frameworkElement != null)
+            {
+                TextBlock textBlock = frameworkElement as TextBlock;
+                if (textBlock != null)
+                    ErrorMessageControl.Text = textBlock.Text;
+
+                ErrorControl.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                ErrorMessageControl.Text = String.Empty;
+                ErrorControl.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void BingMapMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        {
+            if (IsBlockParentScroll)
+                e.Handled = true;
         }
 
         private void MapBingMouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
