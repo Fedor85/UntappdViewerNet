@@ -621,4 +621,8 @@
     <value>Website Untappd</value>
     <comment>en-en</comment>
   </data>
+  <data name="VenueCheckins" xml:space="preserve">
+    <value>Venue/Checkins</value>
+    <comment>en-en</comment>
+  </data>
 </root>
