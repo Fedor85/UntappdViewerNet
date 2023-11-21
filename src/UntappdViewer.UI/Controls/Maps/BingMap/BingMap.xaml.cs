@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using LinqToXaml;
 using Microsoft.Maps.MapControl.WPF;
+using Microsoft.Maps.MapControl.WPF.Overlays;
+using UntappdViewer.UI.Controls.Maps.BingMap.ViewModel;
 using UntappdViewer.UI.Helpers;
 using UntappdViewer.UI.IValueConverters;
 using LocationVM = UntappdViewer.UI.Controls.Maps.BingMap.ViewModel.Location;
@@ -28,6 +32,8 @@ namespace UntappdViewer.UI.Controls.Maps.BingMap
         private static readonly DependencyProperty CenterProperty = DependencyProperty.Register("Center", typeof(LocationVM), typeof(BingMap), new PropertyMetadata(defaultCenter, UpdateCenter));
 
         private static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(BingMap));
+
+        private static readonly DependencyProperty MainLocationItemProperty = DependencyProperty.Register("MainLocationItem", typeof(LocationItem), typeof(BingMap), new PropertyMetadata(SetMainLocationItem));
 
         private static readonly DependencyProperty ItemDataTemplateProperty = DependencyProperty.Register("ItemDataTemplate", typeof(DataTemplate), typeof(BingMap), new PropertyMetadata(UpdateItemDataTemplate));
 
@@ -54,6 +60,13 @@ namespace UntappdViewer.UI.Controls.Maps.BingMap
             get { return (IEnumerable)GetValue(ItemsSourceProperty); }
             set { SetValue(ItemsSourceProperty, value); }
         }
+
+        public LocationItem MainLocationItem
+        {
+            get { return (LocationItem)GetValue(MainLocationItemProperty); }
+            set { SetValue(ItemDataTemplateProperty, value); }
+        }
+
         public DataTemplate ItemDataTemplate
         {
             get { return (DataTemplate)GetValue(ItemDataTemplateProperty); }
@@ -62,14 +75,21 @@ namespace UntappdViewer.UI.Controls.Maps.BingMap
 
         public bool IsBlockParentScroll { get; set; }
 
+        public bool IsVisibleLogoAndSing { get; set; }
+
+        public bool IsVisibleScale { get; set; }
+
         public BingMap()
         {
             InitializeComponent();
             IsBlockParentScroll = true;
+            IsVisibleLogoAndSing = true;
+            IsVisibleScale = true;
 
             MapControl.SetBinding(Map.CredentialsProviderProperty, new Binding { Path = new PropertyPath(CredentialsProviderProperty), Converter = new CredentialsProviderConverter(), Source = this });
             MapControl.Center = Center.GetMapLocation();
             MapControl.ZoomLevel = defaultZoomLevel;
+            MapControl.Loaded += MapControlLoaded;
             MapControl.LayoutUpdated += MapControlLayoutUpdated;
 
             MapItemsControl.SetBinding(MapItemsControl.ItemsSourceProperty, new Binding { Path = new PropertyPath(ItemsSourceProperty), Source = this });
@@ -78,10 +98,55 @@ namespace UntappdViewer.UI.Controls.Maps.BingMap
             MouseWheel += BingMapMouseWheel;
         }
 
+        private void MapControlLoaded(object sender, RoutedEventArgs e)
+        {
+            if (!IsVisibleLogoAndSing)
+                HideLogo();
+
+            if(!IsVisibleScale)
+                HideScale();
+        }
+
         private void MapControlLayoutUpdated(object sender, EventArgs e)
         {
-            FrameworkElement frameworkElement = MapControl.DescendantsAndSelf().OfType<FrameworkElement>().SingleOrDefault(d => d.Name.ToLower().Contains("errormessage"));
+            if (!IsVisibleLogoAndSing)
+                HideCopyrightSing();
 
+            UpdateErrorControl();
+        }
+
+        private void HideLogo()
+        {
+            IEnumerable<Image> images = MapControl.DescendantsAndSelf().OfType<Image>();
+            if (!images.Any())
+                return;
+
+            PropertyInfo baseUriProperty = typeof(Image).GetProperty("BaseUri", BindingFlags.Instance | BindingFlags.NonPublic);
+            foreach (Image image in images)
+            {
+                string baseUri = baseUriProperty.GetValue(image)?.ToString().ToLower();
+                if (!String.IsNullOrEmpty(baseUri) && baseUri.Contains("logo"))
+                    image.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void HideCopyrightSing()
+        {
+            IEnumerable<TextBlock> copyrightTextBlocks = MapControl.DescendantsAndSelf().OfType<TextBlock>().Where(d => d.Text.ToLower().Contains("©"));
+            foreach (TextBlock textBlock in copyrightTextBlocks)
+                textBlock.Visibility = Visibility.Hidden;
+        }
+
+        private void HideScale()
+        {
+            IEnumerable<Scale> scales = MapControl.DescendantsAndSelf().OfType<Scale>();
+            foreach (Scale scale in scales)
+                scale.Visibility = Visibility.Hidden;
+        }
+
+        private void UpdateErrorControl()
+        {
+            FrameworkElement frameworkElement = MapControl.DescendantsAndSelf().OfType<FrameworkElement>().SingleOrDefault(d => d.Name.ToLower().Contains("errormessage"));
             if (frameworkElement != null)
             {
                 TextBlock textBlock = frameworkElement as TextBlock;
@@ -111,20 +176,30 @@ namespace UntappdViewer.UI.Controls.Maps.BingMap
 
         private static void UpdateZoomLevel(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
-            BingMap mapBing = dependencyObject as BingMap;
-            mapBing.MapControl.ZoomLevel = Convert.ToDouble(e.NewValue ?? 0);
+            BingMap bingMap = dependencyObject as BingMap;
+            bingMap.MapControl.ZoomLevel = Convert.ToDouble(e.NewValue ?? 0);
         }
 
         private static void UpdateCenter(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
-            BingMap mapBing = dependencyObject as BingMap;
-            mapBing.MapControl.Center = mapBing.Center.GetMapLocation();
+            BingMap bingMap = dependencyObject as BingMap;
+            bingMap.MapControl.Center = bingMap.Center.GetMapLocation();
+        }
+        private static void SetMainLocationItem(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+        {
+            LocationItem locationItem = e.NewValue as LocationItem;
+            if (locationItem == null)
+                return;
+            ;
+            BingMap bingMap = dependencyObject as BingMap;
+            bingMap.Center = locationItem.Location;
+            bingMap.ItemsSource = new List<LocationItem> { locationItem };
         }
 
         private static void UpdateItemDataTemplate(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
-            BingMap mapBing = dependencyObject as BingMap;
-            mapBing.Resources["DefaultItemMapTemplate"] = e.NewValue as DataTemplate;
+            BingMap bingMap = dependencyObject as BingMap;
+            bingMap.Resources["DefaultItemMapTemplate"] = e.NewValue as DataTemplate;
         }
     }
 }

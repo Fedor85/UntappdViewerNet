@@ -30,7 +30,7 @@
         </wpf:Map>
         <Grid x:Name ="ErrorControl" Visibility="Hidden">
             <Grid Background="#000000" Opacity="0.6"/>
-            <TextBlock x:Name ="ErrorMessageControl" HorizontalAlignment="Center"  VerticalAlignment="Center" TextAlignment="Center" Foreground="#ffffff"/>
+            <TextBlock x:Name ="ErrorMessageControl" HorizontalAlignment="Center"  VerticalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Foreground="#ffffff"/>
         </Grid>
     </Grid>
 </UserControl>
