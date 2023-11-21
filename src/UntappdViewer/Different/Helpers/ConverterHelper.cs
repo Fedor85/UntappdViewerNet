@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using UntappdViewer.Domain;
 using UntappdViewer.Infrastructure;
 using UntappdViewer.Models;
 using UntappdViewer.Models.Different;
+using UntappdViewer.UI.Controls.Maps.BingMap.ViewModel;
 using UntappdViewer.UI.Controls.RecyclerView.ViewModel;
 using UntappdViewer.UI.Controls.ViewModel;
 using UntappdViewer.Utils;
@@ -92,6 +94,20 @@ namespace UntappdViewer.Helpers
             captionImageViewModel.ToolTip = StringHelper.GetSplitByLength(description.ToString().Trim(), DefaultValues.MaxToolTipLineLength);
 
             return captionImageViewModel;
+        }
+
+        public static List<LocationItem> GetLocationItems(List<KeyValueParam<long, List<string>>> venues)
+        {
+            List<LocationItem> locationItems = new List<LocationItem>();
+            foreach (KeyValueParam<long, List<string>> keyValueParam in venues)
+            {
+                LocationItem locationItem = new LocationItem(keyValueParam.Parameters.Get<double>(ParameterNames.Latitude),
+                                                             keyValueParam.Parameters.Get<double>(ParameterNames.Longitude));
+
+                locationItem.ToolTip = $"{String.Join("; ", keyValueParam.Value)} ({keyValueParam.Parameters.Get<int>(ParameterNames.Count)})";
+                locationItems.Add(locationItem);
+            }
+            return locationItems;
         }
 
         public static Dictionary<T1, T3> KeyValueToDirectory<T1, T2, T3>(List<KeyValue<T1, T2>> values)

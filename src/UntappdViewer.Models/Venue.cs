@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace UntappdViewer.Models
 {
@@ -62,6 +63,22 @@ namespace UntappdViewer.Models
         public override string ToString()
         {
             return $"{GetDispayParameter("Name", Name)}/{GetDispayParameter("Country", Country)}/{GetDispayParameter("State", State)}/{GetDispayParameter("City", City)}";
+        }
+
+        public List<string> ToList()
+        {
+            List<string> vanues = new List<string>();
+            vanues.Add(Name);
+            vanues.Add(Country);
+            vanues.Add(State);
+            vanues.Add(City);
+            vanues.RemoveAll(String.IsNullOrEmpty);
+            return vanues;
+        }
+
+        public bool IsValidLocation()
+        {
+            return Latitude.HasValue && Longitude.HasValue;
         }
 
         private string GetDispayParameter(string caption, string valaue)

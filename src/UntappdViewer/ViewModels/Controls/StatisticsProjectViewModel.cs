@@ -45,6 +45,8 @@ namespace UntappdViewer.ViewModels.Controls
 
         private IEnumerable iBUCount;
 
+        private IEnumerable venueCheckinsMap;
+
         private int totalCheckinsCount;
 
         private int uniqueCheckinsCount;
@@ -139,6 +141,12 @@ namespace UntappdViewer.ViewModels.Controls
         {
             get { return beerCountryRatingMap; }
             set { SetProperty(ref beerCountryRatingMap, value); }
+        }
+
+        public IEnumerable VenueCheckinsMap
+        {
+            get { return venueCheckinsMap; }
+            set { SetProperty(ref venueCheckinsMap, value); }
         }
 
         public IEnumerable CountryLanguagePack
@@ -401,6 +409,12 @@ namespace UntappdViewer.ViewModels.Controls
             Dictionary<string, double> beerCountryNameRatingtMap = ConverterHelper.KeyValueToDirectory<string, double, double>(beerCountryRating);
             Dictionary<string, double> beerCountryCodeRatingtMap = ConverterHelper.ConvertCountryNameToCode(beerCountryNameRatingtMap);
             BeerCountryRatingMap = beerCountryCodeRatingtMap;
+        }
+
+        public void SetVenueCheckinsMap()
+        {
+            List<KeyValueParam<long, List<string>>> venueChekins = statisticsCalculation.GetVenueCheckins();
+            VenueCheckinsMap = ConverterHelper.GetLocationItems(venueChekins);
         }
 
         public void Clear()

@@ -260,6 +260,27 @@ namespace UntappdViewer.Domain
             MergeByMore(ibuCount, maxValue);
             return GetRangeNameToCount(ibuCount);
         }
+
+        public List<KeyValueParam<long, List<string>>> GetVenueCheckins()
+        {
+            List<KeyValueParam<long, List<string>>> keyValues = new List<KeyValueParam<long, List<string>>>();
+            IEnumerable<IGrouping<Venue, Checkin>> venueCheckins = untappdService.GetCheckins().Where(item => item.Venue != null && item.Venue.IsValidLocation())
+                                                                                               .GroupBy(item => item.Venue);
+            foreach (IGrouping<Venue, Checkin> grouping in venueCheckins)
+            {
+                List<string> vanueList = grouping.Key.ToList();
+                if (vanueList.Count == 0)
+                    continue;
+
+                KeyValueParam<long, List<string>> keyValue = new KeyValueParam<long, List<string>>(grouping.Key.Id, vanueList);
+                keyValue.Parameters.Add(ParameterNames.Count, grouping.Count());
+                keyValue.Parameters.Add(ParameterNames.Latitude, grouping.Key.Latitude.Value);
+                keyValue.Parameters.Add(ParameterNames.Longitude, grouping.Key.Longitude.Value);
+                keyValues.Add(keyValue);
+            }
+            return keyValues;
+        }
+
         private void MergeByMore(List<KeyValue<double, int>> keyValues, double maxValue)
         {
             List<KeyValue<double, int>> moreCount = keyValues.Where(item => item.Key > maxValue).ToList();

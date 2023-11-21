@@ -5,5 +5,9 @@
         public const string Index = "index";
 
         public const string Count = "count";
+
+        public const string Latitude = "latitude";
+
+        public const string Longitude = "longitude";
     }
 }
