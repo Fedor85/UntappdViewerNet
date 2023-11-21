@@ -263,19 +263,39 @@ namespace UntappdViewer.Domain
 
         public List<KeyValueParam<long, List<string>>> GetVenueCheckins()
         {
-            return GetVenue(item => item.Venue != null && item.Venue.IsValidLocation(), item => item.Venue);
+            return GetVenue(untappdService.GetCheckins(), item => item.Venue != null && item.Venue.IsValidLocation(), item => item.Venue);
         }
 
         public List<KeyValueParam<long, List<string>>> GetVenuePurchases()
         {
-            return GetVenue(item => item.VenuePurchase != null && item.VenuePurchase.IsValidLocation(), item=> item.VenuePurchase);
+            return GetVenue(untappdService.GetCheckins(), item => item.VenuePurchase != null && item.VenuePurchase.IsValidLocation(), item=> item.VenuePurchase);
         }
 
-        private List<KeyValueParam<long, List<string>>> GetVenue(Func<Checkin, bool> predicate, Func<Checkin, Venue> keySelector)
+        public List<KeyValueParam<long, List<string>>> GetVenueBreweries()
         {
             List<KeyValueParam<long, List<string>>> keyValues = new List<KeyValueParam<long, List<string>>>();
-            IEnumerable<IGrouping<Venue, Checkin>> venueCheckins = untappdService.GetCheckins().Where(predicate).GroupBy(keySelector);
-            foreach (IGrouping<Venue, Checkin> grouping in venueCheckins)
+            IEnumerable<Brewery> breweries = untappdService.GetFullBreweries().Where(item => item.Venue != null && item.Venue.IsValidLocation());
+            foreach (Brewery brewery in breweries)
+            {
+                List<string> vanueList = brewery.Venue.ToList();
+                if (vanueList.Count == 0)
+                    continue;
+
+                KeyValueParam<long, List<string>> keyValue = new KeyValueParam<long, List<string>>(brewery.Id, vanueList);
+                keyValue.Parameters.Add(ParameterNames.Name, brewery.Name);
+                keyValue.Parameters.Add(ParameterNames.Count, untappdService.GetCheckins(brewery.Id).Count);
+                keyValue.Parameters.Add(ParameterNames.Latitude, brewery.Venue.Latitude.Value);
+                keyValue.Parameters.Add(ParameterNames.Longitude, brewery.Venue.Longitude.Value);
+                keyValues.Add(keyValue);
+            }
+            return keyValues;
+        }
+
+        private List<KeyValueParam<long, List<string>>> GetVenue<T>(List<T>items, Func<T, bool> predicate, Func<T, Venue> keySelector)
+        {
+            List<KeyValueParam<long, List<string>>> keyValues = new List<KeyValueParam<long, List<string>>>();
+            IEnumerable<IGrouping<Venue, T>> venueCheckins = items.Where(predicate).GroupBy(keySelector);
+            foreach (IGrouping<Venue, T> grouping in venueCheckins)
             {
                 List<string> vanueList = grouping.Key.ToList();
                 if (vanueList.Count == 0)

@@ -641,4 +641,8 @@
     <value>Venue/Purchase</value>
     <comment>en-en</comment>
   </data>
+  <data name="VenueBreweries" xml:space="preserve">
+    <value>Venue/Breweries</value>
+    <comment>en-en</comment>
+  </data>
 </root>

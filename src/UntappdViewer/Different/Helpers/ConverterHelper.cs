@@ -104,7 +104,16 @@ namespace UntappdViewer.Helpers
                 LocationItem locationItem = new LocationItem(keyValueParam.Parameters.Get<double>(ParameterNames.Latitude),
                                                              keyValueParam.Parameters.Get<double>(ParameterNames.Longitude));
 
-                locationItem.ToolTip = $"{String.Join("; ", keyValueParam.Value)} ({keyValueParam.Parameters.Get<int>(ParameterNames.Count)})";
+                StringBuilder toolTip = new StringBuilder();
+                if (keyValueParam.Parameters.Contains(ParameterNames.Name))
+                    toolTip.AppendLine(keyValueParam.Parameters.Get<string>(ParameterNames.Name));
+
+                toolTip.Append(String.Join("; ", keyValueParam.Value));
+
+                if (keyValueParam.Parameters.Contains(ParameterNames.Count))
+                    toolTip.Append($" ({keyValueParam.Parameters.Get<int>(ParameterNames.Count)})");
+
+                locationItem.ToolTip = toolTip.ToString();
                 locationItems.Add(locationItem);
             }
             return locationItems;

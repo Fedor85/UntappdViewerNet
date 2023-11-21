@@ -49,6 +49,8 @@ namespace UntappdViewer.ViewModels.Controls
 
         private IEnumerable venuePurchasesMap;
 
+        private IEnumerable venueBreweriesMap;
+
         private int totalCheckinsCount;
 
         private int uniqueCheckinsCount;
@@ -155,6 +157,12 @@ namespace UntappdViewer.ViewModels.Controls
         {
             get { return venuePurchasesMap; }
             set { SetProperty(ref venuePurchasesMap, value); }
+        }
+
+        public IEnumerable VenueBreweriesMap
+        {
+            get { return venueBreweriesMap; }
+            set { SetProperty(ref venueBreweriesMap, value); }
         }
 
         public IEnumerable CountryLanguagePack
@@ -429,6 +437,12 @@ namespace UntappdViewer.ViewModels.Controls
         {
             List<KeyValueParam<long, List<string>>> venueChekins = statisticsCalculation.GetVenuePurchases();
             VenuePurchasesMap = ConverterHelper.GetLocationItems(venueChekins);
+        }
+
+        public void SetVenueBreweriesMap()
+        {
+            List<KeyValueParam<long, List<string>>> venueChekins = statisticsCalculation.GetVenueBreweries();
+            VenueBreweriesMap = ConverterHelper.GetLocationItems(venueChekins);
         }
 
         public void Clear()

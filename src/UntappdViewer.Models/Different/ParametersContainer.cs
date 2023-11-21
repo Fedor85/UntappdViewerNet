@@ -19,9 +19,14 @@ namespace UntappdViewer.Models.Different
                 parameters.Add(name, value);
         }
 
+        public bool Contains(string name)
+        {
+            return parameters.ContainsKey(name);
+        }
+
         public T Get<T>(string name)
         {
-            return parameters.ContainsKey(name) ? (T) parameters[name] : default(T);
+            return Contains(name) ? (T) parameters[name] : default(T);
         }
     }
 }

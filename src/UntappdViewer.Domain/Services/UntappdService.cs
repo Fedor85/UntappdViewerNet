@@ -202,6 +202,11 @@ namespace UntappdViewer.Domain.Services
             return isUniqueCheckins ? GetUniqueCheckins() : Untappd.CheckinsContainer.Checkins;
         }
 
+        public List<Checkin> GetCheckins(long breweryId)
+        {
+            return GetCheckins().Where(item => item.Beer.GetFullBreweries().Any(bw => bw.Id == breweryId)).ToList();
+        }
+
         public Checkin GetCheckin(long checkinId)
         {
             return GetCheckins().FirstOrDefault(item => item.Id.Equals(checkinId));

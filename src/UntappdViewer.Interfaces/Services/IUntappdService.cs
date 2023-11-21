@@ -56,6 +56,8 @@ namespace UntappdViewer.Interfaces.Services
 
         List<Checkin> GetCheckins(bool isUniqueCheckins = false);
 
+        List<Checkin> GetCheckins(long breweryId);
+
         Checkin GetCheckin(long checkinId);
 
         List<Beer> GetBeers();

@@ -50,5 +50,7 @@ namespace UntappdViewer.Interfaces.Services
         List<KeyValueParam<long, List<string>>> GetVenueCheckins();
 
         List<KeyValueParam<long, List<string>>> GetVenuePurchases();
+
+        List<KeyValueParam<long, List<string>>> GetVenueBreweries();
     }
 }

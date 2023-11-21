@@ -75,6 +75,7 @@ namespace UntappdViewer.ViewModels
             FillStatisticsAsync(StatisticsProject.SetBeerCountryRatingMap);
             FillStatisticsAsync(StatisticsProject.SetVenueCheckinsMap);
             //FillStatisticsAsync(StatisticsProject.SetVenuePurchasesMap);
+            FillStatisticsAsync(StatisticsProject.SetVenueBreweriesMap);
         }
 
         private async void FillStatisticsAsync(Action action)
