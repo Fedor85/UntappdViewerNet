@@ -397,9 +397,6 @@
     <Resource Include="Resources\save.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\icons8-location-24.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\no-image-icon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -506,6 +503,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\bing_Fluent_Logo_Text.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons-location.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
