@@ -47,6 +47,8 @@ namespace UntappdViewer.ViewModels.Controls
 
         private IEnumerable venueCheckinsMap;
 
+        private IEnumerable venuePurchasesMap;
+
         private int totalCheckinsCount;
 
         private int uniqueCheckinsCount;
@@ -147,6 +149,12 @@ namespace UntappdViewer.ViewModels.Controls
         {
             get { return venueCheckinsMap; }
             set { SetProperty(ref venueCheckinsMap, value); }
+        }
+
+        public IEnumerable VenuePurchasesMap
+        {
+            get { return venuePurchasesMap; }
+            set { SetProperty(ref venuePurchasesMap, value); }
         }
 
         public IEnumerable CountryLanguagePack
@@ -417,6 +425,12 @@ namespace UntappdViewer.ViewModels.Controls
             VenueCheckinsMap = ConverterHelper.GetLocationItems(venueChekins);
         }
 
+        public void SetVenuePurchasesMap()
+        {
+            List<KeyValueParam<long, List<string>>> venueChekins = statisticsCalculation.GetVenuePurchases();
+            VenuePurchasesMap = ConverterHelper.GetLocationItems(venueChekins);
+        }
+
         public void Clear()
         {
             TotalCheckinsCount = 0;
@@ -451,6 +465,9 @@ namespace UntappdViewer.ViewModels.Controls
             BeerCountryCountMap = null;
             BeerCountryRatingMap = null;
             CountryLanguagePack = null;
+
+            VenueCheckinsMap = null;
+            VenuePurchasesMap = null;
 
             MaxXAxisServingTypeCount = 0;
             HeightChartServingType = 0;

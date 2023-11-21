@@ -637,4 +637,8 @@
     <value>Enter Credentials Provider</value>
     <comment>en-en</comment>
   </data>
+  <data name="VenuePurchase" xml:space="preserve">
+    <value>Venue/Purchase</value>
+    <comment>en-en</comment>
+  </data>
 </root>

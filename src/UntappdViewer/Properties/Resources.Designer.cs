@@ -1276,6 +1276,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Venue/Purchase.
+        /// </summary>
+        public static string VenuePurchase {
+            get {
+                return ResourceManager.GetString("VenuePurchase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Warning..
         /// </summary>
         public static string Warning {

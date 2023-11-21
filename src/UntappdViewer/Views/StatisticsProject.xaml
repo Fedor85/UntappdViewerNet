@@ -620,6 +620,7 @@
                                     <RowDefinition/>
                                     <RowDefinition/>
                                     <RowDefinition/>
+                                    <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <Grid Grid.Row="0">
                                     <StackPanel>
@@ -657,7 +658,7 @@
                                     </StackPanel>
                                     <controls:Loading VisibilityImageAwesome="Collapsed" AutoCollapsed="True" LoadedContainer="{Binding ElementName=MainLoadControl}"/>
                                 </Grid>
-                                <Grid Grid.Row="3">
+                                <Grid Grid.Row="2">
                                     <StackPanel>
                                         <Grid Margin="{StaticResource DefautChartOffsetBottom}">
                                             <ContentControl Template="{StaticResource BackgroundControl}"/>
@@ -665,6 +666,18 @@
                                         </Grid>
                                         <bingMap:BingMap Height="400" ZoomLevel="1.3" CredentialsProvider="{Binding CredentialsProviderBing}"
                                                          ItemsSource="{Binding StatisticsProject.VenueCheckinsMap, IsAsync=True}"
+                                                         ItemDataTemplate="{StaticResource MapLocationTemplate}"/>
+                                    </StackPanel>
+                                    <controls:Loading VisibilityImageAwesome="Collapsed" AutoCollapsed="True" LoadedContainer="{Binding ElementName=MainLoadControl}"/>
+                                </Grid>
+                                <Grid Grid.Row="3" Visibility="Collapsed">
+                                    <StackPanel>
+                                        <Grid Margin="{StaticResource DefautChartOffsetBottom}">
+                                            <ContentControl Template="{StaticResource BackgroundControl}"/>
+                                            <ContentControl ContentTemplate="{StaticResource ChartTitle}" Content="{x:Static properties:Resources.VenuePurchase}"/>
+                                        </Grid>
+                                        <bingMap:BingMap Height="400" ZoomLevel="1.3" CredentialsProvider="{Binding CredentialsProviderBing}"
+                                                         ItemsSource="{Binding StatisticsProject.VenuePurchasesMap, IsAsync=True}"
                                                          ItemDataTemplate="{StaticResource MapLocationTemplate}"/>
                                     </StackPanel>
                                     <controls:Loading VisibilityImageAwesome="Collapsed" AutoCollapsed="True" LoadedContainer="{Binding ElementName=MainLoadControl}"/>

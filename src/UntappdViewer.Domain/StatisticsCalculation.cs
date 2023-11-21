@@ -263,9 +263,18 @@ namespace UntappdViewer.Domain
 
         public List<KeyValueParam<long, List<string>>> GetVenueCheckins()
         {
+            return GetVenue(item => item.Venue != null && item.Venue.IsValidLocation(), item => item.Venue);
+        }
+
+        public List<KeyValueParam<long, List<string>>> GetVenuePurchases()
+        {
+            return GetVenue(item => item.VenuePurchase != null && item.VenuePurchase.IsValidLocation(), item=> item.VenuePurchase);
+        }
+
+        private List<KeyValueParam<long, List<string>>> GetVenue(Func<Checkin, bool> predicate, Func<Checkin, Venue> keySelector)
+        {
             List<KeyValueParam<long, List<string>>> keyValues = new List<KeyValueParam<long, List<string>>>();
-            IEnumerable<IGrouping<Venue, Checkin>> venueCheckins = untappdService.GetCheckins().Where(item => item.Venue != null && item.Venue.IsValidLocation())
-                                                                                               .GroupBy(item => item.Venue);
+            IEnumerable<IGrouping<Venue, Checkin>> venueCheckins = untappdService.GetCheckins().Where(predicate).GroupBy(item => item.Venue);
             foreach (IGrouping<Venue, Checkin> grouping in venueCheckins)
             {
                 List<string> vanueList = grouping.Key.ToList();

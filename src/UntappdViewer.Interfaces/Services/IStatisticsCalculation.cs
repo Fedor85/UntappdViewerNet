@@ -48,5 +48,7 @@ namespace UntappdViewer.Interfaces.Services
         List<KeyValueParam<string, int>> GetRangeIBUByCount(double range, double maxValue);
 
         List<KeyValueParam<long, List<string>>> GetVenueCheckins();
+
+        List<KeyValueParam<long, List<string>>> GetVenuePurchases();
     }
 }
