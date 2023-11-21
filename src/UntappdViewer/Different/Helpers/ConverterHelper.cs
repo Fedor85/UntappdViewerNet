@@ -108,10 +108,7 @@ namespace UntappdViewer.Helpers
                 if (keyValueParam.Parameters.Contains(ParameterNames.Name))
                     toolTip.AppendLine(keyValueParam.Parameters.Get<string>(ParameterNames.Name));
 
-                toolTip.Append(String.Join("; ", keyValueParam.Value));
-
-                if (keyValueParam.Parameters.Contains(ParameterNames.Count))
-                    toolTip.Append($" ({keyValueParam.Parameters.Get<int>(ParameterNames.Count)})");
+                    toolTip.Append($"{String.Join("; ", keyValueParam.Value)} ({keyValueParam.Parameters.Get<int>(ParameterNames.Count)})");
 
                 locationItem.ToolTip = toolTip.ToString();
                 locationItems.Add(locationItem);

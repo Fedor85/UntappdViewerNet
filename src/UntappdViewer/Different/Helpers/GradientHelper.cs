@@ -9,6 +9,7 @@ namespace UntappdViewer.Helpers
     public class GradientHelper : IGradientHelper
     {
         private Dispatcher dispatcher = Dispatcher.CurrentDispatcher;
+
         private GradientStopCollection gradientStopCollection;
 
         public GradientHelper(GradientStopCollection gradientStopCollection)
@@ -50,7 +51,6 @@ namespace UntappdViewer.Helpers
 
             return gradientStopCollection[index].Color;
         }
-
 
         private Color GetRelativeColorDispatcher(double offset)
         {
