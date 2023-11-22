@@ -8,7 +8,6 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using LinqToXaml;
 using Microsoft.Maps.MapControl.WPF;
-using Microsoft.Maps.MapControl.WPF.Overlays;
 using UntappdViewer.UI.Controls.Maps.BingMap.ViewModel;
 using UntappdViewer.UI.Helpers;
 using UntappdViewer.UI.IValueConverters;
@@ -36,6 +35,8 @@ namespace UntappdViewer.UI.Controls.Maps.BingMap
         private static readonly DependencyProperty MainLocationItemProperty = DependencyProperty.Register("MainLocationItem", typeof(LocationItem), typeof(BingMap), new PropertyMetadata(SetMainLocationItem));
 
         private static readonly DependencyProperty ItemDataTemplateProperty = DependencyProperty.Register("ItemDataTemplate", typeof(DataTemplate), typeof(BingMap), new PropertyMetadata(UpdateItemDataTemplate));
+
+        private static readonly DependencyProperty ScaleVisibilityProperty = DependencyProperty.Register("ScaleVisibility", typeof(Visibility), typeof(BingMap), new PropertyMetadata(UpdateItemDataTemplate));
 
         public string CredentialsProvider
         {
@@ -73,20 +74,25 @@ namespace UntappdViewer.UI.Controls.Maps.BingMap
             set { SetValue(ItemDataTemplateProperty, value); }
         }
 
+        public Visibility ScaleVisibility
+        {
+            get { return (Visibility)GetValue(ScaleVisibilityProperty); }
+            set { SetValue(ScaleVisibilityProperty, value); }
+        }
+
         public bool IsBlockParentScroll { get; set; }
 
         public bool IsVisibleLogoAndSing { get; set; }
-
-        public bool IsVisibleScale { get; set; }
 
         public BingMap()
         {
             InitializeComponent();
             IsBlockParentScroll = true;
             IsVisibleLogoAndSing = true;
-            IsVisibleScale = true;
 
             MapControl.SetBinding(Map.CredentialsProviderProperty, new Binding { Path = new PropertyPath(CredentialsProviderProperty), Converter = new CredentialsProviderConverter(), Source = this });
+            MapControl.SetBinding(Map.ScaleVisibilityProperty, new Binding { Path = new PropertyPath(ScaleVisibilityProperty), Source = this });
+
             MapControl.Center = Center.GetMapLocation();
             MapControl.ZoomLevel = defaultZoomLevel;
             MapControl.Loaded += MapControlLoaded;
@@ -102,9 +108,6 @@ namespace UntappdViewer.UI.Controls.Maps.BingMap
         {
             if (!IsVisibleLogoAndSing)
                 HideLogo();
-
-            if(!IsVisibleScale)
-                HideScale();
         }
 
         private void MapControlLayoutUpdated(object sender, EventArgs e)
@@ -135,13 +138,6 @@ namespace UntappdViewer.UI.Controls.Maps.BingMap
             IEnumerable<TextBlock> copyrightTextBlocks = MapControl.DescendantsAndSelf().OfType<TextBlock>().Where(d => d.Text.ToLower().Contains("©"));
             foreach (TextBlock textBlock in copyrightTextBlocks)
                 textBlock.Visibility = Visibility.Hidden;
-        }
-
-        private void HideScale()
-        {
-            IEnumerable<Scale> scales = MapControl.DescendantsAndSelf().OfType<Scale>();
-            foreach (Scale scale in scales)
-                scale.Visibility = Visibility.Hidden;
         }
 
         private void UpdateErrorControl()
@@ -190,7 +186,7 @@ namespace UntappdViewer.UI.Controls.Maps.BingMap
             LocationItem locationItem = e.NewValue as LocationItem;
             if (locationItem == null)
                 return;
-            ;
+
             BingMap bingMap = dependencyObject as BingMap;
             bingMap.Center = locationItem.Location;
             bingMap.ItemsSource = new List<LocationItem> { locationItem };
