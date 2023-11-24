@@ -92,15 +92,14 @@ namespace UntappdViewer.UI.Controls
             Expander.Visibility = Visibility.Collapsed;
         }
 
-        private void OnPreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        private void ElementOnMouseWheel(object sender, MouseWheelEventArgs e)
         {
             if (e.Delta == 0)
                 return;
 
-            ScrollViewer scrollViewer = (ScrollViewer)sender;
-            if (!double.IsNaN(scrollViewer.Height))
+            if (!double.IsNaN(ScrollViewer.Height))
             {
-                scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset - e.Delta);
+                ScrollViewer.ScrollToVerticalOffset(ScrollViewer.VerticalOffset - e.Delta);
                 e.Handled = true;
             }
 

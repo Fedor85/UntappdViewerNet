@@ -12,9 +12,10 @@
         <valueConverters:IndexToVisibilityConverter x:Key="ITVConverter"/>
     </UserControl.Resources>
     <ScrollViewer x:Name="ScrollViewer" Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Border}},Path=ActualHeight}" 
-                  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" PreviewMouseWheel="OnPreviewMouseWheel">
+                  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
         <StackPanel>
-            <ContentControl x:Name="MainView" Content="{Binding}" Background="Transparent" ContentTemplate="{Binding ElementName=ThisControl, Path=ItemDataTemplate}"/>
+            <ContentControl x:Name="MainView" Content="{Binding}" Background="Transparent" ContentTemplate="{Binding ElementName=ThisControl, Path=ItemDataTemplate}"
+                            MouseWheel="ElementOnMouseWheel"/>
             <Expander  x:Name="Expander" Header="{x:Static properties:Resources.Others}" Visibility="Hidden" VerticalContentAlignment="Stretch">
                 <ListView x:Name="OthersView" Background="Transparent" BorderThickness="0" ItemContainerStyle="{StaticResource ListViewItemNoSelect}"
                            ScrollViewer.HorizontalScrollBarVisibility="Disabled">
@@ -27,6 +28,13 @@
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
+                    <ListView.Template>
+                        <ControlTemplate>
+                            <ScrollViewer>
+                                <ItemsPresenter MouseWheel="ElementOnMouseWheel"/>
+                            </ScrollViewer>
+                        </ControlTemplate>
+                    </ListView.Template>
                 </ListView>
             </Expander>
         </StackPanel>
