@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UntappdViewer.UI.Controls.Maps.BingMap.ViewModel;
 
 namespace UntappdViewer.ViewModels.Controls
 {
@@ -24,6 +25,13 @@ namespace UntappdViewer.ViewModels.Controls
         public string VenueCountryFlag { get; set; }
 
         public List<string> Venues { get; }
+
+        public LocationItem LocationItem { get; set; }
+
+        public bool VisibilityLocationItem
+        {
+            get { return LocationItem!= null; }
+        }
 
         public BreweryViewModel()
         {

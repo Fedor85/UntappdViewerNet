@@ -13,6 +13,7 @@
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:valueConverters="clr-namespace:UntappdViewer.ValueConverters"
              xmlns:images="clr-namespace:UntappdViewer.UI.Controls.Images;assembly=UntappdViewer.UI"
+             xmlns:bingMap="clr-namespace:UntappdViewer.UI.Controls.Maps.BingMap;assembly=UntappdViewer.UI"
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="450" d:DesignWidth="450">
@@ -97,8 +98,13 @@
                                     <Image Source="{Binding Checkin.ServingType, TargetNullValue={x:Null}}" Width="25" Height="25" HorizontalAlignment="Left"/>
                                 </DockPanel>
                                 <DockPanel>
+                                    <DockPanel Visibility="{Binding Checkin.VisibilityLocationItem, Converter={StaticResource BTVConverter}}">
+                                        <bingMap:LocationBingMapControl Width="25" Height="25" HorizontalAlignment="Left" DataContext="{Binding Checkin}"
+                                                                        ItemDataTemplate="{StaticResource MapLocationTemplate}"/>
+                                        <Separator Width="5" Visibility="Hidden"/>
+                                    </DockPanel>
                                     <controls:TextBlockJoin TextWrapping="Wrap" VerticalAlignment="Center" Separator="{Binding Source={x:Static local:DefaultValues.Separator}}"
-                                                        DataContext="{Binding Checkin.Venues}" Margin="10, 0, 0, 0"/>
+                                                        DataContext="{Binding Checkin.Venues}"/>
                                 </DockPanel>
                             </StackPanel>
                         </Grid>

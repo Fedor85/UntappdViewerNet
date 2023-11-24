@@ -2,6 +2,7 @@
 using System.IO;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
+using UntappdViewer.UI.Controls.Maps.BingMap.ViewModel;
 using UntappdViewer.UI.Controls.ViewModel;
 using UntappdViewer.Utils;
 using UntappdViewer.ViewModels.Controls;
@@ -22,6 +23,8 @@ namespace UntappdViewer.Helpers
                 checkinViewModel.AddVenue(checkin.Venue.Country);
                 checkinViewModel.AddVenue(checkin.Venue.State);
                 checkinViewModel.AddVenue(checkin.Venue.City);
+                if (IsValidVenue(checkin.Venue))
+                    checkinViewModel.LocationItem = new LocationItem(checkin.Venue.Latitude.Value, checkin.Venue.Longitude.Value);
             }
             checkinViewModel.ServingType = ConverterHelper.GetServingTypeImagePath(checkin.ServingType);
             checkinViewModel.PhotoPath = GetCheckinPhoto(untappdService, checkin);
@@ -68,6 +71,8 @@ namespace UntappdViewer.Helpers
                 breweryViewModels.AddVenue(brewery.Venue.Country);
                 breweryViewModels.AddVenue(brewery.Venue.State);
                 breweryViewModels.AddVenue(brewery.Venue.City);
+                if (IsValidVenue(brewery.Venue))
+                    breweryViewModels.LocationItem = new LocationItem(brewery.Venue.Latitude.Value, brewery.Venue.Longitude.Value);
             }
             return breweryViewModels;
         }
@@ -110,6 +115,11 @@ namespace UntappdViewer.Helpers
 
             string description = StringHelper.GetRemoveEmptyLines(text);
             return StringHelper.GetSplitByLength(description, DefaultValues.MaxToolTipLineLength);
+        }
+
+        private static bool IsValidVenue(Venue venue)
+        {
+            return venue.IsValidLocation() && !MathHelper.DoubleCompare(venue.Latitude.Value, 0) && !MathHelper.DoubleCompare(venue.Longitude.Value, 0);
         }
     }
 }

@@ -10,6 +10,7 @@ using UntappdViewer.Helpers;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
 using UntappdViewer.Modules;
+using UntappdViewer.UI.Controls.Maps.BingMap;
 using UntappdViewer.Utils;
 using CheckinVM = UntappdViewer.ViewModels.Controls.CheckinViewModel;
 
@@ -20,6 +21,8 @@ namespace UntappdViewer.ViewModels
         private IUntappdService untappdService;
 
         private IWebDownloader webDownloader;
+
+        private ISettingService settingService;
 
         private IInteractionRequestService interactionRequestService;
 
@@ -43,10 +46,12 @@ namespace UntappdViewer.ViewModels
                                                                 IEventAggregator eventAggregator,
                                                                 IModuleManager moduleManager,
                                                                 IRegionManager regionManager,
+                                                                ISettingService settingService,
                                                                 IInteractionRequestService interactionRequestService) : base(moduleManager, regionManager, eventAggregator)
         {
             this.untappdService = untappdService;
             this.webDownloader = webDownloader;
+            this.settingService = settingService;
             this.interactionRequestService = interactionRequestService;
 
             loadingModuleName = typeof(CheckinLoadingModule).Name;
@@ -71,6 +76,7 @@ namespace UntappdViewer.ViewModels
         protected override void Activate()
         {
             base.Activate();
+            BingMapService.InitializeCredentialsProvider(settingService.GetCredentialsProviderBing());
             eventAggregator.GetEvent<ChekinUpdateEvent>().Subscribe(FillChekin);
         }
 

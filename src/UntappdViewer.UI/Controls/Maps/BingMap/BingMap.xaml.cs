@@ -34,9 +34,9 @@ namespace UntappdViewer.UI.Controls.Maps.BingMap
 
         private static readonly DependencyProperty MainLocationItemProperty = DependencyProperty.Register("MainLocationItem", typeof(LocationItem), typeof(BingMap), new PropertyMetadata(SetMainLocationItem));
 
-        private static readonly DependencyProperty ItemDataTemplateProperty = DependencyProperty.Register("ItemDataTemplate", typeof(DataTemplate), typeof(BingMap), new PropertyMetadata(UpdateItemDataTemplate));
+        public static readonly DependencyProperty ItemDataTemplateProperty = DependencyProperty.Register("ItemDataTemplate", typeof(DataTemplate), typeof(BingMap), new PropertyMetadata(UpdateItemDataTemplate));
 
-        private static readonly DependencyProperty ScaleVisibilityProperty = DependencyProperty.Register("ScaleVisibility", typeof(Visibility), typeof(BingMap), new PropertyMetadata(UpdateItemDataTemplate));
+        private static readonly DependencyProperty ScaleVisibilityProperty = DependencyProperty.Register("ScaleVisibility", typeof(Visibility), typeof(BingMap));
 
         public string CredentialsProvider
         {
@@ -106,6 +106,7 @@ namespace UntappdViewer.UI.Controls.Maps.BingMap
 
         private void MapControlLoaded(object sender, RoutedEventArgs e)
         {
+            BingMapService.SetCredentialsProvider(this);
             if (!IsVisibleLogoAndSing)
                 HideLogo();
         }
@@ -150,6 +151,7 @@ namespace UntappdViewer.UI.Controls.Maps.BingMap
                     ErrorMessageControl.Text = textBlock.Text;
 
                 ErrorControl.Visibility = Visibility.Visible;
+                BingMapService.UpdateCredentialsProvider(this);
             }
             else
             {

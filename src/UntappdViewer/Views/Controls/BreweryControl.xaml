@@ -7,6 +7,7 @@
              xmlns:helpers="clr-namespace:UntappdViewer.Helpers"
              xmlns:controls="clr-namespace:UntappdViewer.UI.Controls;assembly=UntappdViewer.UI"
              xmlns:untappdViewer="clr-namespace:UntappdViewer"
+             xmlns:bingMap="clr-namespace:UntappdViewer.UI.Controls.Maps.BingMap;assembly=UntappdViewer.UI"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
@@ -20,6 +21,11 @@
             </TextBlock>
             <TextBlock TextWrapping="Wrap" Text="{Binding Name}" FontWeight="Bold"/>
             <DockPanel>
+                <DockPanel Visibility="{Binding VisibilityLocationItem, Converter={StaticResource BTVConverter}}">
+                    <bingMap:LocationBingMapControl Width="25" Height="25" HorizontalAlignment="Left"
+                                                    ItemDataTemplate="{StaticResource MapLocationTemplate}"/>
+                     <Separator Width="5" Visibility="Hidden"/> 
+                </DockPanel>
                 <Image Source="{Binding VenueCountryFlag, Converter={StaticResource FlagConverter}}" Stretch="None"/>
                 <controls:TextBlockJoin TextWrapping="Wrap" VerticalAlignment="Center" Separator="{Binding Source={x:Static untappdViewer:DefaultValues.Separator}}"
                                         DataContext="{Binding Venues}" Margin="10, 0, 0, 0"/>

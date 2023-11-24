@@ -18,4 +18,11 @@
         <Setter Property="BackgroundStroke" Value="#ffffff"/>
         <Setter Property="StrokeThickness" Value="1"/>
     </Style>
+    <DataTemplate x:Key="MapLocationTemplate">
+        <Grid x:Name="GridG">
+            <Ellipse  Width="15" Height="15" Fill="{StaticResource MainSolidBrushLight}" Opacity="0.2"/>
+            <Ellipse  Width="10" Height="10" Fill="{StaticResource MainSolidBrushLight}" Opacity="0.6"/>
+            <Ellipse  Width="10" Height="10" Fill="Transparent" Stroke="#000000" StrokeThickness="1"/>
+        </Grid>
+    </DataTemplate>
 </ResourceDictionary>

@@ -11,6 +11,7 @@
     </LinearGradientBrush>
     <SolidColorBrush  x:Key="BackgroundPointerBrush"  Color="{x:Static infrastructure:DefaultValues.MainColorLight}" Opacity="0.5"/>
     <valueConverters:BoolToVisibilityConverter x:Key="BTVConverter"/>
+    <valueConverters:PercentageChangeValueConverter x:Key="ChangeValueConverter"/>
     <Style x:Key="StyleLoadingControl" TargetType="{x:Type Grid}">
         <Setter Property="Background" Value="#000000"/>
         <Setter Property="Opacity" Value="0.5"/>

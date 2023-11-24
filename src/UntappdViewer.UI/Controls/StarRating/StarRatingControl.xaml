@@ -6,9 +6,6 @@
              xmlns:valueConverters="clr-namespace:UntappdViewer.UI.ValueConverters"
              mc:Ignorable="d" x:Name="StarRating"
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.Resources>
-        <valueConverters:PercentageChangeValueConverter x:Key="ChangeValueConverter"/>
-    </UserControl.Resources>
     <Viewbox Name="ViewStars">
         <Grid x:Name="MainGrid">
             <DockPanel Name="BackgroundPanel"/>

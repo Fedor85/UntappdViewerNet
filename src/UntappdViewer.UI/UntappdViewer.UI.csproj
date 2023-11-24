@@ -63,6 +63,10 @@
     <Compile Include="Controls\Maps\BingMap\BingMap.xaml.cs">
       <DependentUpon>BingMap.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Maps\BingMap\BingMapService.cs" />
+    <Compile Include="Controls\Maps\BingMap\LocationBingMapControl.xaml.cs">
+      <DependentUpon>LocationBingMapControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Maps\BingMap\ViewModel\Location.cs" />
     <Compile Include="Controls\Maps\BingMap\ViewModel\LocationItem.cs" />
     <Compile Include="Controls\Maps\GeoMap\Data\GeoData.cs" />
@@ -162,6 +166,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Maps\BingMap\BingMap.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Maps\BingMap\LocationBingMapControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -279,6 +287,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\World.xml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\icons-location.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -264,13 +264,6 @@
         </ObjectDataProvider>
         <SolidColorBrush x:Key="BackgroundMap" Color="{x:Static infrastructure:DefaultValues.MainColorLight}" Opacity="0.2" />
         <SolidColorBrush x:Key="BackgroundMapGrid"  Color="{x:Static infrastructure:DefaultValues.MainColorDark}"/>
-        <DataTemplate x:Key="MapLocationTemplate">
-            <Grid x:Name="GridG">
-                <Ellipse  Width="15" Height="15" Fill="{StaticResource MainSolidBrushLight}" Opacity="0.2"/>
-                <Ellipse  Width="10" Height="10" Fill="{StaticResource MainSolidBrushLight}" Opacity="0.6"/>
-                <Ellipse  Width="10" Height="10" Fill="Transparent" Stroke="#000000" StrokeThickness="1"/>
-            </Grid>
-        </DataTemplate>
         <system:Double x:Key="DefautChartHeight">300</system:Double>
         <system:Double x:Key="MaxRating">5</system:Double>
         <Thickness x:Key="DefautChartMargin">5,0,5,0</Thickness>
