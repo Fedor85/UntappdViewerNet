@@ -20,8 +20,8 @@ namespace UntappdViewer.Models
             if (Equals(storage, value))
                 return false;
 
-            OnPropertyChanged(propertyName);
             storage = value;
+            OnPropertyChanged(propertyName);
             return true;
         }
     }
