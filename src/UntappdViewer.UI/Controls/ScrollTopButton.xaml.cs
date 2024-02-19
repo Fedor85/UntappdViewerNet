@@ -128,7 +128,7 @@ namespace UntappdViewer.UI.Controls
         private void ThisLoaded(object sender, RoutedEventArgs e)
         {
             DependencyObject parent = VisualTreeHelper.GetParent(this);
-            SetScrollViewer(UIHelper.FindFirstChild<ScrollViewer>(parent));
+            SetScrollViewer(UIHelper.FindVisualFirstChild<ScrollViewer>(parent));
         }
 
         private void ThisMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -138,7 +138,7 @@ namespace UntappdViewer.UI.Controls
 
         private void ScrollViewerConteinerLoaded(object sender, RoutedEventArgs e)
         {
-            SetScrollViewer(UIHelper.FindFirstChild<ScrollViewer>(sender as DependencyObject));
+            SetScrollViewer(UIHelper.FindVisualFirstChild<ScrollViewer>(sender as DependencyObject));
         }
 
         private void ScrollChanged(object sender, ScrollChangedEventArgs e)
