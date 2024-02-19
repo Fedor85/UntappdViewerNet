@@ -13,3 +13,6 @@ src/*/bin/
 
 #build
 build/*
+
+#Temp Files
+~*
