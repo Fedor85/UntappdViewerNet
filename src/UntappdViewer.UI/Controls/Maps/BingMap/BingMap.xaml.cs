@@ -6,7 +6,6 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using LinqToXaml;
 using Microsoft.Maps.MapControl.WPF;
 using UntappdViewer.UI.Controls.Maps.BingMap.ViewModel;
 using UntappdViewer.UI.Helpers;
@@ -121,7 +120,7 @@ namespace UntappdViewer.UI.Controls.Maps.BingMap
 
         private void HideLogo()
         {
-            IEnumerable<Image> images = MapControl.DescendantsAndSelf().OfType<Image>();
+            IEnumerable<Image> images = MapControl.FindVisualChildren<Image>();
             if (!images.Any())
                 return;
 
@@ -136,14 +135,14 @@ namespace UntappdViewer.UI.Controls.Maps.BingMap
 
         private void HideCopyrightSing()
         {
-            IEnumerable<TextBlock> copyrightTextBlocks = MapControl.DescendantsAndSelf().OfType<TextBlock>().Where(d => d.Text.ToLower().Contains("©"));
+            IEnumerable<TextBlock> copyrightTextBlocks = MapControl.FindVisualChildren<TextBlock>().Where(d => d.Text.ToLower().Contains("©"));
             foreach (TextBlock textBlock in copyrightTextBlocks)
                 textBlock.Visibility = Visibility.Hidden;
         }
 
         private void UpdateErrorControl()
         {
-            FrameworkElement frameworkElement = MapControl.DescendantsAndSelf().OfType<FrameworkElement>().SingleOrDefault(d => d.Name.ToLower().Contains("errormessage"));
+            FrameworkElement frameworkElement = MapControl.FindVisualChildren<FrameworkElement>().SingleOrDefault(d => d.Name.ToLower().Contains("errormessage"));
             if (frameworkElement != null)
             {
                 TextBlock textBlock = frameworkElement as TextBlock;
