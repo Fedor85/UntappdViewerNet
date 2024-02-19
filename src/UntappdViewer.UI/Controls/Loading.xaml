@@ -5,11 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:properties="clr-namespace:UntappdViewer.UI.Properties"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:fa5="http://schemas.fontawesome.com/icons/"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="200">
     <Grid>
         <Grid x:Name="BackgroundControl" Style="{StaticResource StyleLoadingControl}"/>
         <Label Content="{x:Static properties:Resources.Loading}" HorizontalAlignment="Center" VerticalAlignment ="Center" FontSize="16" FontWeight="Bold"  Foreground="#ffffff"/>
-        <fa:ImageAwesome x:Name="ImageAwesome" Grid.Row="0" Icon="CircleOutlineNotch" Spin="True" SpinDuration="2" Height="100" Width="100" Foreground="#ffffff"/>
+        <fa5:ImageAwesome x:Name="ImageAwesome" Grid.Row="0" Icon="Solid_CircleNotch" Spin="True" SpinDuration="2" Height="100" Width="100" Foreground="#ffffff"/>
     </Grid>
 </UserControl>
