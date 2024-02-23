@@ -127,6 +127,9 @@
     <Compile Include="Controls\ListViewExpander.xaml.cs">
       <DependentUpon>ListViewExpander.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Maps\GMapNet\GMapNet.xaml.cs">
+      <DependentUpon>GMapNet.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\RecyclerView\Controls\ContentByBorderImageControl.xaml.cs">
       <DependentUpon>ContentByBorderImageControl.xaml</DependentUpon>
     </Compile>
@@ -230,6 +233,10 @@
     <Page Include="Controls\LoopAutoScrollImageListBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Maps\GMapNet\GMapNet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\RecyclerView\Controls\ContentDataControl.xaml">
       <Generator>MSBuild:Compile</Generator>
