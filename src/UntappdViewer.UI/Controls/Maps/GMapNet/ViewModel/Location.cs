@@ -1,4 +1,4 @@
-﻿namespace UntappdViewer.UI.Controls.Maps.BingMap.ViewModel
+﻿namespace UntappdViewer.UI.Controls.Maps.GMapNet.ViewModel
 {
     [System.ComponentModel.TypeConverter(typeof(LocationConverter))]
     public class Location

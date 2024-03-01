@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using UntappdViewer.UI.Controls.Maps.BingMap.ViewModel;
+using UntappdViewer.UI.Controls.Maps.GMapNet.ViewModel;
 using UntappdViewer.UI.Controls.ViewModel;
 
 namespace UntappdViewer.ViewModels.Controls

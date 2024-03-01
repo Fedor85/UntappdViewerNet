@@ -10,10 +10,10 @@ using System.Windows.Media;
 using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsPresentation;
-using UntappdViewer.UI.Controls.Maps.BingMap.ViewModel;
+using UntappdViewer.UI.Controls.Maps.GMapNet.ViewModel;
 using UntappdViewer.UI.Helpers;
 using UntappdViewer.Utils;
-using LocationVM = UntappdViewer.UI.Controls.Maps.BingMap.ViewModel.Location;
+using Location = UntappdViewer.UI.Controls.Maps.GMapNet.ViewModel.Location;
 
 namespace UntappdViewer.UI.Controls.Maps.GMapNet
 {
@@ -26,11 +26,11 @@ namespace UntappdViewer.UI.Controls.Maps.GMapNet
 
         private const int minZoom = 1;
 
-        private static readonly LocationVM defaultCenter = new LocationVM(0, 0);
+        private static readonly Location defaultCenter = new Location(0, 0);
 
         private static readonly DependencyProperty ZoomLevelProperty = DependencyProperty.Register("ZoomLevel", typeof(double), typeof(GMapNet), new PropertyMetadata(defaultZoomLevel, UpdateZoomLevel));
 
-        private static readonly DependencyProperty CenterProperty = DependencyProperty.Register("Center", typeof(LocationVM), typeof(GMapNet), new PropertyMetadata(defaultCenter, UpdateCenter));
+        private static readonly DependencyProperty CenterProperty = DependencyProperty.Register("Center", typeof(Location), typeof(GMapNet), new PropertyMetadata(defaultCenter, UpdateCenter));
 
         private static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(GMapNet), new PropertyMetadata(UpdateItemsSource));
 
@@ -46,9 +46,9 @@ namespace UntappdViewer.UI.Controls.Maps.GMapNet
             set { SetValue(ZoomLevelProperty, value); }
         }
 
-        public LocationVM Center
+        public Location Center
         {
-            get { return (LocationVM)GetValue(CenterProperty); }
+            get { return (Location)GetValue(CenterProperty); }
             set { SetValue(CenterProperty, value); }
         }
 
@@ -75,7 +75,6 @@ namespace UntappdViewer.UI.Controls.Maps.GMapNet
             get { return (Brush)GetValue(EmptyMapBackgroundProperty); }
             set { SetValue(EmptyMapBackgroundProperty, value); }
         }
-        public LocationVM Test { get; set; }
 
         public bool IsBlockParentScroll { get; set; }
 

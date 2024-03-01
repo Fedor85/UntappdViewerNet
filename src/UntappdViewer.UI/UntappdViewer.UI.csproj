@@ -95,16 +95,9 @@
     <Compile Include="Controls\Images\BorderImageControl.xaml.cs">
       <DependentUpon>BorderImageControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Maps\BingMap\BingMap.xaml.cs">
-      <DependentUpon>BingMap.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Maps\BingMap\BingMapService.cs" />
-    <Compile Include="Controls\Maps\BingMap\LocationBingMapControl.xaml.cs">
-      <DependentUpon>LocationBingMapControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Maps\BingMap\ViewModel\Location.cs" />
-    <Compile Include="Controls\Maps\BingMap\ViewModel\LocationConverter.cs" />
-    <Compile Include="Controls\Maps\BingMap\ViewModel\LocationItem.cs" />
+    <Compile Include="Controls\Maps\GMapNet\ViewModel\Location.cs" />
+    <Compile Include="Controls\Maps\GMapNet\ViewModel\LocationConverter.cs" />
+    <Compile Include="Controls\Maps\GMapNet\ViewModel\LocationItem.cs" />
     <Compile Include="Controls\Maps\GeoMap\Data\GeoData.cs" />
     <Compile Include="Controls\Maps\GeoMap\Data\LvcMap.cs" />
     <Compile Include="Controls\Maps\GeoMap\Data\MapData.cs" />
@@ -184,7 +177,6 @@
     <Compile Include="Helpers\IValueConverters\BoolToVisibilityConverter.cs" />
     <Compile Include="Helpers\IValueConverters\CredentialsProviderConverter.cs" />
     <Compile Include="Helpers\IValueConverters\IndexToVisibilityConverter.cs" />
-    <Compile Include="Helpers\IValueConverters\LocationConverter.cs" />
     <Compile Include="Helpers\IValueConverters\PathImageReSizeWidthConverter.cs" />
     <Compile Include="Helpers\IValueConverters\PercentageChangeValueConverter.cs" />
     <Compile Include="Helpers\PropertyMetadataParameter.cs" />
@@ -205,14 +197,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\Images\BorderImageControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Maps\BingMap\BingMap.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Maps\BingMap\LocationBingMapControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

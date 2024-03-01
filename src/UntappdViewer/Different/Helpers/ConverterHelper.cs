@@ -6,7 +6,7 @@ using UntappdViewer.Domain;
 using UntappdViewer.Infrastructure;
 using UntappdViewer.Models;
 using UntappdViewer.Models.Different;
-using UntappdViewer.UI.Controls.Maps.BingMap.ViewModel;
+using UntappdViewer.UI.Controls.Maps.GMapNet.ViewModel;
 using UntappdViewer.UI.Controls.RecyclerView.ViewModel;
 using UntappdViewer.UI.Controls.ViewModel;
 using UntappdViewer.Utils;

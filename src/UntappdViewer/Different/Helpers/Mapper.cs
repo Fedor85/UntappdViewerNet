@@ -2,7 +2,7 @@
 using System.IO;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
-using UntappdViewer.UI.Controls.Maps.BingMap.ViewModel;
+using UntappdViewer.UI.Controls.Maps.GMapNet.ViewModel;
 using UntappdViewer.UI.Controls.ViewModel;
 using UntappdViewer.Utils;
 using UntappdViewer.ViewModels.Controls;

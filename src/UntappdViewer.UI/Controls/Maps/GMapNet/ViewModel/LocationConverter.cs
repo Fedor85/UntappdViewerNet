@@ -1,8 +1,9 @@
 ﻿using System;
+using System.ComponentModel;
 
-namespace UntappdViewer.UI.Controls.Maps.BingMap.ViewModel
+namespace UntappdViewer.UI.Controls.Maps.GMapNet.ViewModel
 {
-    public  class LocationConverter : System.ComponentModel.TypeConverter
+    public class LocationConverter :TypeConverter
     {
         public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType)
         {

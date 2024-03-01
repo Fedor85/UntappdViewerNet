@@ -10,7 +10,6 @@ using UntappdViewer.Helpers;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
 using UntappdViewer.Modules;
-using UntappdViewer.UI.Controls.Maps.BingMap;
 using UntappdViewer.Utils;
 using CheckinVM = UntappdViewer.ViewModels.Controls.CheckinViewModel;
 
@@ -76,7 +75,6 @@ namespace UntappdViewer.ViewModels
         protected override void Activate()
         {
             base.Activate();
-            BingMapService.InitializeCredentialsProvider(settingService.GetCredentialsProviderBing());
             eventAggregator.GetEvent<ChekinUpdateEvent>().Subscribe(FillChekin);
         }
 
