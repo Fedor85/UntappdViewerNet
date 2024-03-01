@@ -1,5 +1,7 @@
 ﻿using GMap.NET;
-using Microsoft.Maps.MapControl.WPF;
+using UntappdViewer.UI.Controls.Maps.BingMap.ViewModel;
+using UntappdViewer.UI.Controls.Maps.GMapNet;
+using Location = Microsoft.Maps.MapControl.WPF.Location;
 using LocationVM = UntappdViewer.UI.Controls.Maps.BingMap.ViewModel.Location;
 
 namespace UntappdViewer.UI.Helpers
@@ -21,9 +23,9 @@ namespace UntappdViewer.UI.Helpers
             return new PointLatLng(location.Latitude, location.Longitude);
         }
 
-        public static LocationVM GetWPFLocation(this PointLatLng location)
+        public static MapMarker GetMapMarker(this LocationItem locationItem)
         {
-            return new LocationVM(location.Lat, location.Lng);
+            return new MapMarker(locationItem.Location.GetGMapPosition()) {ToolTip = locationItem.ToolTip};
         }
     }
 }

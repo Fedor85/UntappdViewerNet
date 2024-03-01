@@ -36,6 +36,7 @@
     <Reference Include="System.Globalization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CloneHelper.cs" />
     <Compile Include="ControlChar.cs" />
     <Compile Include="Extension.cs" />
     <Compile Include="MathHelper.cs" />

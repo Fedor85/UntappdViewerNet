@@ -482,6 +482,7 @@ namespace UntappdViewer.ViewModels.Controls
 
             VenueCheckinsMap = null;
             VenuePurchasesMap = null;
+            VenueBreweriesMap = null;
 
             MaxXAxisServingTypeCount = 0;
             HeightChartServingType = 0;

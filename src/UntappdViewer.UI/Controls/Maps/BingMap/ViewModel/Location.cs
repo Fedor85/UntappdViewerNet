@@ -1,5 +1,6 @@
 ﻿namespace UntappdViewer.UI.Controls.Maps.BingMap.ViewModel
 {
+    [System.ComponentModel.TypeConverter(typeof(LocationConverter))]
     public class Location
     {
         public double Latitude { get; set; }

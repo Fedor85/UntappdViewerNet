@@ -7,7 +7,7 @@
              xmlns:helpers="clr-namespace:UntappdViewer.Helpers"
              xmlns:controls="clr-namespace:UntappdViewer.UI.Controls;assembly=UntappdViewer.UI"
              xmlns:untappdViewer="clr-namespace:UntappdViewer"
-             xmlns:bingMap="clr-namespace:UntappdViewer.UI.Controls.Maps.BingMap;assembly=UntappdViewer.UI"
+             xmlns:gMapNet="clr-namespace:UntappdViewer.UI.Controls.Maps.GMapNet;assembly=UntappdViewer.UI"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
@@ -22,7 +22,7 @@
             <TextBlock TextWrapping="Wrap" Text="{Binding Name}" FontWeight="Bold"/>
             <DockPanel>
                 <DockPanel Visibility="{Binding VisibilityLocationItem, Converter={StaticResource BTVConverter}}">
-                    <bingMap:LocationBingMapControl Width="25" Height="25" HorizontalAlignment="Left"
+                    <gMapNet:LocationGMapNetControl Width="25" Height="25" HorizontalAlignment="Left"
                                                     ItemDataTemplate="{StaticResource MapLocationTemplate}"/>
                      <Separator Width="5" Visibility="Hidden"/> 
                 </DockPanel>

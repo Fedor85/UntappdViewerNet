@@ -103,6 +103,7 @@
       <DependentUpon>LocationBingMapControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Maps\BingMap\ViewModel\Location.cs" />
+    <Compile Include="Controls\Maps\BingMap\ViewModel\LocationConverter.cs" />
     <Compile Include="Controls\Maps\BingMap\ViewModel\LocationItem.cs" />
     <Compile Include="Controls\Maps\GeoMap\Data\GeoData.cs" />
     <Compile Include="Controls\Maps\GeoMap\Data\LvcMap.cs" />
@@ -131,6 +132,10 @@
     <Compile Include="Controls\Maps\GMapNet\GMapNet.xaml.cs">
       <DependentUpon>GMapNet.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Maps\GMapNet\LocationGMapNetControl.xaml.cs">
+      <DependentUpon>LocationGMapNetControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Maps\GMapNet\MapMarker.cs" />
     <Compile Include="Controls\RecyclerView\Controls\ContentByBorderImageControl.xaml.cs">
       <DependentUpon>ContentByBorderImageControl.xaml</DependentUpon>
     </Compile>
@@ -236,6 +241,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\Maps\GMapNet\GMapNet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Maps\GMapNet\LocationGMapNetControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -13,7 +13,7 @@
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:valueConverters="clr-namespace:UntappdViewer.ValueConverters"
              xmlns:images="clr-namespace:UntappdViewer.UI.Controls.Images;assembly=UntappdViewer.UI"
-             xmlns:bingMap="clr-namespace:UntappdViewer.UI.Controls.Maps.BingMap;assembly=UntappdViewer.UI"
+             xmlns:gMapNet="clr-namespace:UntappdViewer.UI.Controls.Maps.GMapNet;assembly=UntappdViewer.UI"
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="450" d:DesignWidth="450">
@@ -99,7 +99,7 @@
                                 </DockPanel>
                                 <DockPanel>
                                     <DockPanel Visibility="{Binding Checkin.VisibilityLocationItem, Converter={StaticResource BTVConverter}}">
-                                        <bingMap:LocationBingMapControl Width="25" Height="25" HorizontalAlignment="Left" DataContext="{Binding Checkin}"
+                                        <gMapNet:LocationGMapNetControl Width="25" Height="25" HorizontalAlignment="Left" DataContext="{Binding Checkin}"
                                                                         ItemDataTemplate="{StaticResource MapLocationTemplate}"/>
                                         <Separator Width="5" Visibility="Hidden"/>
                                     </DockPanel>
