@@ -54,9 +54,6 @@
     <Reference Include="GMap.NET.WindowsPresentation, Version=2.1.7.0, Culture=neutral, PublicKeyToken=b85b9027b614afef, processorArchitecture=MSIL">
       <HintPath>..\packages\GMap.NET.WinPresentation.2.1.7\lib\net48\GMap.NET.WindowsPresentation.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Maps.MapControl.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Maps.MapControl.WPF.1.0.0.3\lib\net40-Client\Microsoft.Maps.MapControl.WPF.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -175,7 +172,6 @@
     <Compile Include="Helpers\Extension.cs" />
     <Compile Include="Helpers\ImageConverter.cs" />
     <Compile Include="Helpers\IValueConverters\BoolToVisibilityConverter.cs" />
-    <Compile Include="Helpers\IValueConverters\CredentialsProviderConverter.cs" />
     <Compile Include="Helpers\IValueConverters\IndexToVisibilityConverter.cs" />
     <Compile Include="Helpers\IValueConverters\PathImageReSizeWidthConverter.cs" />
     <Compile Include="Helpers\IValueConverters\PercentageChangeValueConverter.cs" />
