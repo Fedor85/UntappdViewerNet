@@ -28,10 +28,6 @@ namespace UntappdViewer.ViewModels
 
         private bool isShowAccessToken;
 
-        private string credentialsProviderBing;
-
-        private bool isShowCredentialsProviderBing;
-
         public string AccessToken
         {
             get { return accessToken; }
@@ -50,21 +46,7 @@ namespace UntappdViewer.ViewModels
             set { SetProperty(ref isShowAccessToken, value); }
         }
 
-        public string CredentialsProviderBing
-        {
-            get { return credentialsProviderBing; }
-            set { SetProperty(ref credentialsProviderBing, value); }
-        }
-
-        public bool IsShowCredentialsProviderBing
-        {
-            get { return isShowCredentialsProviderBing; }
-            set { SetProperty(ref isShowCredentialsProviderBing, value); }
-        }
-
         public ICommand CheckAccessTokenCommand { get; }
-
-        public ICommand CredentialsProviderBingChangedCommand { get; }
 
         public ICommand CancelButtonCommand { get; }
 
@@ -82,24 +64,16 @@ namespace UntappdViewer.ViewModels
             this.interactionRequestService = interactionRequestService;
 
             CheckAccessTokenCommand = new DelegateCommand<string>(CheckAccessToken);
-            CredentialsProviderBingChangedCommand = new DelegateCommand<string>(CredentialsProviderBingChanged);
             CancelButtonCommand = new DelegateCommand(Exit);
             OkButtonCommand = new DelegateCommand(Ok);
 
             isShowAccessToken = true;
-            IsShowCredentialsProviderBing = true;
-        }
-
-        private void CredentialsProviderBingChanged(string credentialsProvider)
-        {
-            IsShowCredentialsProviderBing = IsShowCredentialsProviderBing || String.IsNullOrEmpty(credentialsProvider);
         }
 
         protected override void Activate()
         {
             base.Activate();
             FillAccessToken();
-            FillCredentialsProviderBing();
         }
 
         protected override void DeActivate()
@@ -108,9 +82,6 @@ namespace UntappdViewer.ViewModels
 
             isShowAccessToken = true;
             AccessToken = String.Empty;
-
-            IsShowCredentialsProviderBing = true;
-            CredentialsProviderBing = String.Empty;
         }
 
         private void FillAccessToken()
@@ -121,16 +92,6 @@ namespace UntappdViewer.ViewModels
 
             IsShowAccessToken = false;
             AccessToken = accessToken;
-        }
-
-        private void FillCredentialsProviderBing()
-        {
-            string credentialsProvider = settingService.GetCredentialsProviderBing();
-            if (String.IsNullOrEmpty(credentialsProvider))
-                return;
-
-            IsShowCredentialsProviderBing = false;
-            CredentialsProviderBing = credentialsProvider;
         }
 
         private void CheckAccessToken(string token)
@@ -160,8 +121,6 @@ namespace UntappdViewer.ViewModels
         {
             if (IsValidAccessToken.HasValue && IsValidAccessToken.Value || String.IsNullOrEmpty(AccessToken))
                 settingService.SetAccessToken(AccessToken);
-
-            settingService.SetCredentialsProviderBing(CredentialsProviderBing);
 
             Exit();
         }

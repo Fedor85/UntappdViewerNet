@@ -39,16 +39,8 @@
                     <Image Grid.Column="0" Grid.Row="0"  Height="55" Width="55" Source="..\Resources\untappd_bottles.png" VerticalAlignment="Bottom"/>
                     <controls1:AccessToken Grid.Column="1" Grid.Row="0" Token="{Binding AccessToken, Mode=TwoWay}" AccessTokenCheck="{Binding CheckAccessTokenCommand}"
                                            IsValidAccessToken="{Binding IsValidAccessToken, Mode=TwoWay}" IsShowPassword="{Binding IsShowAccessToken, Mode=TwoWay}"/>
-                    
-                    <Image Grid.Column="0" Grid.Row="1"  Height="40" Width="60" Margin="0,0,5,0" Source="..\Resources\bing_Fluent_Logo_Text.png" VerticalAlignment="Bottom"/>
-                    <StackPanel Grid.Column="1" Grid.Row="1" >
-                        <Label Content="{x:Static properties:Resources.CredentialsProviderCaption}" VerticalAlignment="Bottom"/>
-                        <controls:SmartTextBox PasswordMode="True" Height="20" Width="340" HorizontalAlignment="Left" IsShowPasswordMode="{Binding IsShowCredentialsProviderBing, Mode=TwoWay}"
-                                               HintText="{x:Static properties:Resources.EnterCredentialsProvider}"
-                                               Text="{Binding CredentialsProviderBing, Mode=TwoWay}" TextChanged="{Binding CredentialsProviderBingChangedCommand}"/>
-                    </StackPanel>
-                </Grid>
 
+                </Grid>
             </Grid>
         </Grid>
         <DockPanel Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" >

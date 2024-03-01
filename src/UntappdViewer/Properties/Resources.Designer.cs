@@ -445,15 +445,6 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Credentials Provider:.
-        /// </summary>
-        public static string CredentialsProviderCaption {
-            get {
-                return ResourceManager.GetString("CredentialsProviderCaption", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap crowler {

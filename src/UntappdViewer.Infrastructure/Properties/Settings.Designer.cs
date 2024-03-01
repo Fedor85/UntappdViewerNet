@@ -145,17 +145,5 @@ namespace UntappdViewer.Infrastructure.Properties {
                 this["AccessToken"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string CredentialsProviderBing {
-            get {
-                return ((string)(this["CredentialsProviderBing"]));
-            }
-            set {
-                this["CredentialsProviderBing"] = value;
-            }
-        }
     }
 }
