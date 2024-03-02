@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -361,7 +362,7 @@ namespace UntappdViewer.ViewModels
             try
             {
                 string reportPath = await reportingService.CreateStatisticsReportAsync(statisticsCalculation, untappdService.GetReportsDirectory());
-                System.Diagnostics.Process.Start(reportPath);
+                ProcessStartHelper.ProcessStart(reportPath);
             }
             catch (Exception ex)
             {
@@ -380,7 +381,8 @@ namespace UntappdViewer.ViewModels
             {
                 string reportPath = await reportingService.CreateAllCheckinsReportrAsync(untappdService.GetCheckins(),
                                                                                          untappdService.GetReportsDirectory());
-                System.Diagnostics.Process.Start(reportPath);
+
+                ProcessStartHelper.ProcessStart(reportPath);
             }
             catch (Exception ex)
             {

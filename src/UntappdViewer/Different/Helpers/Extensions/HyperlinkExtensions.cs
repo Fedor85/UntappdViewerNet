@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Windows;
 using System.Windows.Documents;
+using UntappdViewer.Infrastructure;
 
 namespace UntappdViewer.Helpers
 {
@@ -31,7 +32,7 @@ namespace UntappdViewer.Helpers
         private static void HyperlinkRequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
         {
             if (!e.Uri.AbsoluteUri.Equals(DefaultValues.DefaultUrl))
-                Process.Start(e.Uri.AbsoluteUri);
+                ProcessStartHelper.ProcessStart(e.Uri.AbsoluteUri);
 
             e.Handled = true;
         }
