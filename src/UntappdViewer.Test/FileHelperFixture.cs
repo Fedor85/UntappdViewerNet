@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using UntappdViewer.Domain;
 using UntappdViewer.Infrastructure;
 using UntappdViewer.Models;
@@ -19,35 +20,35 @@ namespace UntappdViewer.Test
             string filePathEmpty = string.Empty;
 
             FileStatus fileStatusEmpty = FileHelper.Check(filePathEmpty, extensions);
-            Assert.AreEqual(FileStatus.IsEmptyPath, fileStatusEmpty);
+            ClassicAssert.AreEqual(FileStatus.IsEmptyPath, fileStatusEmpty);
 
             string filePath = TestHelper.GetTempFilePath(Resources.ResourcesTestFileName);
             FileStatus fileStatus1= FileHelper.Check(filePath, extensions);
-            Assert.AreEqual(FileStatus.Available, fileStatus1);
+            ClassicAssert.AreEqual(FileStatus.Available, fileStatus1);
 
             using (FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Write))
             {
                 FileStatus fileStatus2 = FileHelper.Check(filePath, extensions);
-                Assert.AreEqual(FileStatus.IsLocked, fileStatus2);
+                ClassicAssert.AreEqual(FileStatus.IsLocked, fileStatus2);
             }
 
             string filePathNoSupported = Path.ChangeExtension(filePath, ".xls");
             File.Copy(filePath, filePathNoSupported);
             FileStatus noSupported = FileHelper.Check(filePathNoSupported, extensions);
-            Assert.AreEqual(FileStatus.NoSupported, noSupported);
+            ClassicAssert.AreEqual(FileStatus.NoSupported, noSupported);
 
             File.Delete(filePathNoSupported);
             File.Delete(filePath);
 
             FileStatus fileStatus3 = FileHelper.Check(filePath, extensions);
-            Assert.AreEqual(FileStatus.NotExists, fileStatus3);
+            ClassicAssert.AreEqual(FileStatus.NotExists, fileStatus3);
         }
 
         [Test]
         public void ParseFilePaths()
         {
             List<FileItem> fileEmptyItems = FileHelper.GetParseFilePaths(String.Empty);
-            Assert.AreEqual(0, fileEmptyItems.Count);
+            ClassicAssert.AreEqual(0, fileEmptyItems.Count);
 
             List<string> filePaths = new List<string>();
             filePaths.Add(@"1*C:\Windows\System32\AERTAC64.dll");
@@ -59,28 +60,28 @@ namespace UntappdViewer.Test
 
             allPath = allPath.Remove(allPath.Length - 1, 1);
             List<FileItem> fileItems = FileHelper.GetParseFilePaths(allPath);
-            Assert.AreEqual(3, fileItems.Count);
-            Assert.AreEqual("AERTAC64.dll", fileItems[0].FileName);
-            Assert.AreEqual("vsjitdebuggerui.dll", fileItems[1].FileName);
-            Assert.AreEqual("DAX2.sdf", fileItems[2].FileName);
+            ClassicAssert.AreEqual(3, fileItems.Count);
+            ClassicAssert.AreEqual("AERTAC64.dll", fileItems[0].FileName);
+            ClassicAssert.AreEqual("vsjitdebuggerui.dll", fileItems[1].FileName);
+            ClassicAssert.AreEqual("DAX2.sdf", fileItems[2].FileName);
 
-            Assert.AreEqual(String.Empty, FileHelper.GetMergedFilePaths(new List<FileItem>()));
-            Assert.AreEqual(allPath, FileHelper.GetMergedFilePaths(fileItems));
+            ClassicAssert.AreEqual(String.Empty, FileHelper.GetMergedFilePaths(new List<FileItem>()));
+            ClassicAssert.AreEqual(allPath, FileHelper.GetMergedFilePaths(fileItems));
 
             FileHelper.AddFile(fileItems, @"C:\Windows\System32\DAX2\DRTAIODAT2.DAT", 3);
-            Assert.AreEqual(3, fileItems.Count);
-            Assert.AreEqual("DRTAIODAT2.DAT", fileItems[0].FileName);
-            Assert.AreEqual("AERTAC64.dll", fileItems[1].FileName);
-            Assert.AreEqual("vsjitdebuggerui.dll", fileItems[2].FileName);
+            ClassicAssert.AreEqual(3, fileItems.Count);
+            ClassicAssert.AreEqual("DRTAIODAT2.DAT", fileItems[0].FileName);
+            ClassicAssert.AreEqual("AERTAC64.dll", fileItems[1].FileName);
+            ClassicAssert.AreEqual("vsjitdebuggerui.dll", fileItems[2].FileName);
 
             string file = @"C:\Windows\System32\AERTAC64.dll";
             FileHelper.AddFile(fileItems, file, 3);
-            Assert.AreEqual(3, fileItems.Count);
-            Assert.AreEqual("AERTAC64.dll", fileItems[0].FileName);
-            Assert.AreEqual("DRTAIODAT2.DAT", fileItems[1].FileName);
-            Assert.AreEqual("vsjitdebuggerui.dll", fileItems[2].FileName);
+            ClassicAssert.AreEqual(3, fileItems.Count);
+            ClassicAssert.AreEqual("AERTAC64.dll", fileItems[0].FileName);
+            ClassicAssert.AreEqual("DRTAIODAT2.DAT", fileItems[1].FileName);
+            ClassicAssert.AreEqual("vsjitdebuggerui.dll", fileItems[2].FileName);
 
-            Assert.AreEqual(file, FileHelper.GetFirstFileItemPath(FileHelper.GetMergedFilePaths(fileItems)));
+            ClassicAssert.AreEqual(file, FileHelper.GetFirstFileItemPath(FileHelper.GetMergedFilePaths(fileItems)));
         }
 
         [Test, Ignore("для удаления чекинов")]

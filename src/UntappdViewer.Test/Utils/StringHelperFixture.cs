@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using UntappdViewer.Utils;
 
 namespace UntappdViewer.Test
@@ -25,14 +26,14 @@ namespace UntappdViewer.Test
             foreach (string fullName in fullNames)
                 shortNames.Add(StringHelper.GetShortName(fullName));
 
-            Assert.AreEqual("LIDSKAE Nulevachka", shortNames[0]);
-            Assert.AreEqual("Golden Bumblebee Blackberry Ale", shortNames[1]);
-            Assert.AreEqual("Stary Melnik Iz Bochonka Myagkoe", shortNames[2]);
-            Assert.AreEqual("Seven Brewers Cheshskoe Original", shortNames[3]);
-            Assert.AreEqual("Lidski Gingerbread kvass", shortNames[4]);
-            Assert.AreEqual("Paulaner Hefe-Weizen", shortNames[5]);
-            Assert.AreEqual("Hoegaarden Wit", shortNames[6]);
-            Assert.AreEqual("Spaten München", shortNames[7]);
+            ClassicAssert.AreEqual("LIDSKAE Nulevachka", shortNames[0]);
+            ClassicAssert.AreEqual("Golden Bumblebee Blackberry Ale", shortNames[1]);
+            ClassicAssert.AreEqual("Stary Melnik Iz Bochonka Myagkoe", shortNames[2]);
+            ClassicAssert.AreEqual("Seven Brewers Cheshskoe Original", shortNames[3]);
+            ClassicAssert.AreEqual("Lidski Gingerbread kvass", shortNames[4]);
+            ClassicAssert.AreEqual("Paulaner Hefe-Weizen", shortNames[5]);
+            ClassicAssert.AreEqual("Hoegaarden Wit", shortNames[6]);
+            ClassicAssert.AreEqual("Spaten München", shortNames[7]);
         }
 
         [Test]
@@ -40,45 +41,45 @@ namespace UntappdViewer.Test
         {
             string name1 = "Imperial Rye Porter Aged In Jack Daniels Barrels Batch #2";
             string resultName11 = StringHelper.GeBreakForLongName(name1, 30, 5);
-            Assert.AreEqual("Imperial Rye Porter Aged In\n     Jack Daniels Barrels Batch #2", resultName11);
+            ClassicAssert.AreEqual("Imperial Rye Porter Aged In\n     Jack Daniels Barrels Batch #2", resultName11);
 
             string resultName12 = StringHelper.GeBreakForLongName(name1, 30, 0);
-            Assert.AreEqual("Imperial Rye Porter Aged In\nJack Daniels Barrels Batch #2", resultName12);
+            ClassicAssert.AreEqual("Imperial Rye Porter Aged In\nJack Daniels Barrels Batch #2", resultName12);
 
             string name2 = "LIDSKAE Nulevachka";
             string resultName2 = StringHelper.GeBreakForLongName(name2, 30, 5);
-            Assert.AreEqual(name2, resultName2);
+            ClassicAssert.AreEqual(name2, resultName2);
         }
 
         [Test]
         public void TestGetGroupByList()
         {
             List<string> beerTypes = TestHelper.GetBeerTypes();
-            Assert.AreEqual(beerTypes.Count, 205);
+            ClassicAssert.AreEqual(beerTypes.Count, 205);
             Dictionary<string, List<string>> group = StringHelper.GetGroupByList(TestHelper.GetBeerTypes(), "/", "-");
-            Assert.AreEqual(group.Count, 66);
+            ClassicAssert.AreEqual(group.Count, 66);
 
             KeyValuePair<string, List<string>> val1 = group.ElementAt(0);
-            Assert.AreEqual(val1.Key, "Altbier");
-            Assert.AreEqual(val1.Value.Count, 1);
+            ClassicAssert.AreEqual(val1.Key, "Altbier");
+            ClassicAssert.AreEqual(val1.Value.Count, 1);
 
             KeyValuePair<string, List<string>> val2 = group.ElementAt(2);
-            Assert.AreEqual(val2.Key, "Barleywine");
-            Assert.AreEqual(val2.Value.Count, 3);
+            ClassicAssert.AreEqual(val2.Key, "Barleywine");
+            ClassicAssert.AreEqual(val2.Value.Count, 3);
 
             KeyValuePair<string, List<string>> val3 = group.ElementAt(10);
-            Assert.AreEqual(val3.Key, "Brown Ale");
-            Assert.AreEqual(val3.Value.Count, 5);
+            ClassicAssert.AreEqual(val3.Key, "Brown Ale");
+            ClassicAssert.AreEqual(val3.Value.Count, 5);
         }
 
         [Test]
         public void TestGetCutByFirstChars()
         {
-            Assert.AreEqual("China / People's Republic of China", StringHelper.GetCutByFirstChars("China / People's Republic of China"));
-            Assert.AreEqual("China / People's Republic of China", StringHelper.GetCutByFirstChars("China / People's Republic of China", ";"));
-            Assert.AreEqual("China", StringHelper.GetCutByFirstChars("China / People's Republic of China", "/"));
-            Assert.AreEqual("Chi", StringHelper.GetCutByFirstChars("China / People's Republic of China", "/", "n"));
-            Assert.AreEqual("", StringHelper.GetCutByFirstChars("China / People's Republic of China", "/", "C"));
+            ClassicAssert.AreEqual("China / People's Republic of China", StringHelper.GetCutByFirstChars("China / People's Republic of China"));
+            ClassicAssert.AreEqual("China / People's Republic of China", StringHelper.GetCutByFirstChars("China / People's Republic of China", ";"));
+            ClassicAssert.AreEqual("China", StringHelper.GetCutByFirstChars("China / People's Republic of China", "/"));
+            ClassicAssert.AreEqual("Chi", StringHelper.GetCutByFirstChars("China / People's Republic of China", "/", "n"));
+            ClassicAssert.AreEqual("", StringHelper.GetCutByFirstChars("China / People's Republic of China", "/", "C"));
         }
     }
 }

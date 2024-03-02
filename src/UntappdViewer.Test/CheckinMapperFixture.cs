@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using UntappdViewer.Models;
 
 namespace UntappdViewer.Test
@@ -10,7 +11,7 @@ namespace UntappdViewer.Test
         public void CheckinTextMapperTest()
         {
             CheckinsContainer checkinsContainer = TestHelper.GetCheckinsContainer();
-            Assert.IsTrue(checkinsContainer.Checkins.Count > 0);
+            ClassicAssert.IsTrue(checkinsContainer.Checkins.Count > 0);
         }
     }
 }

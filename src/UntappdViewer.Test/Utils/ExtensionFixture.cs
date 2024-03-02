@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using UntappdViewer.Utils;
 
 namespace UntappdViewer.Test.Utils
@@ -18,14 +19,14 @@ namespace UntappdViewer.Test.Utils
             list1.Add("1234");
 
             list1.MoveToBottom("ffff");
-            Assert.AreEqual("1234", list1[4]);
+            ClassicAssert.AreEqual("1234", list1[4]);
             list1.MoveToBottom("bbbb");
-            Assert.AreEqual("bbbb", list1[4]);
+            ClassicAssert.AreEqual("bbbb", list1[4]);
             list1.Add("cccc");
             list1.Add("----");
             list1.MoveToBottom("cccc");
-            Assert.AreEqual("cccc", list1[4]);
-            Assert.AreEqual("cccc", list1[6]);
+            ClassicAssert.AreEqual("cccc", list1[4]);
+            ClassicAssert.AreEqual("cccc", list1[6]);
 
             List<int> list2 = new List<int>();
             list2.Add(1);
@@ -35,7 +36,7 @@ namespace UntappdViewer.Test.Utils
             list2.Add(4);
 
             list2.MoveToBottom(55);
-            Assert.AreEqual(55, list2[4]);
+            ClassicAssert.AreEqual(55, list2[4]);
         }
    
     }
