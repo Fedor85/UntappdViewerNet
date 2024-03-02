@@ -1,82 +1,34 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4329B0DB-7CDF-4695-A54C-3CF230A0011F}</ProjectGuid>
+    <TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UntappdViewer.Domain</RootNamespace>
-    <AssemblyName>UntappdViewer.Domain</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AssemblyTitle>UntappdViewer.Domain</AssemblyTitle>
+    <Product>UntappdViewer.Domain</Product>
+    <Copyright>Copyright ©  2020</Copyright>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Different\DefaultValues.cs" />
-    <Compile Include="Different\Extensions.cs" />
-    <Compile Include="Different\ParameterNames.cs" />
-    <Compile Include="Mappers\CheckinCSVMapper.cs" />
-    <Compile Include="Mappers\CheckinParser\CheckinParser.cs" />
-    <Compile Include="Mappers\CheckinParser\CheckinParserFactory.cs" />
-    <Compile Include="Mappers\CheckinParser\ParameterNames.cs" />
-    <Compile Include="Mappers\CheckinParser\ParameterNumber.cs" />
-    <Compile Include="Mappers\CheckinParser\ParameterValue.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
+    <Compile Update="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\UntappdService.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StatisticsCalculation.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UntappdViewer.Infrastructure\UntappdViewer.Infrastructure.csproj">
-      <Project>{BDC0B7DD-2833-4B95-9B93-EA520003EBE1}</Project>
-      <Name>UntappdViewer.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\UntappdViewer.Interfaces\UntappdViewer.Interfaces.csproj">
-      <Project>{bb613be0-ae21-4a41-836a-c904d16444f6}</Project>
-      <Name>UntappdViewer.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\UntappdViewer.Models\UntappdViewer.Models.csproj">
-      <Project>{b1584484-7648-4349-b8f8-47352dd85ff1}</Project>
-      <Name>UntappdViewer.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\UntappdViewer.Utils\UntappdViewer.Utils.csproj">
-      <Project>{5fa116c9-7571-494c-a74d-7e121857ffe9}</Project>
-      <Name>UntappdViewer.Utils</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\UntappdViewer.Infrastructure\UntappdViewer.Infrastructure.csproj" />
+    <ProjectReference Include="..\UntappdViewer.Interfaces\UntappdViewer.Interfaces.csproj" />
+    <ProjectReference Include="..\UntappdViewer.Models\UntappdViewer.Models.csproj" />
+    <ProjectReference Include="..\UntappdViewer.Utils\UntappdViewer.Utils.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
+    <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
+  </ItemGroup>
 </Project>

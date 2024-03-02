@@ -1,27 +1,27 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.852
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UntappdViewer", "UntappdViewer\UntappdViewer.csproj", "{0BFB86F3-F42B-4617-A2E4-DA2549F2EC75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UntappdViewer", "UntappdViewer\UntappdViewer.csproj", "{0BFB86F3-F42B-4617-A2E4-DA2549F2EC75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UntappdViewer.Interfaces", "UntappdViewer.Interfaces\UntappdViewer.Interfaces.csproj", "{BB613BE0-AE21-4A41-836A-C904D16444F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UntappdViewer.Interfaces", "UntappdViewer.Interfaces\UntappdViewer.Interfaces.csproj", "{BB613BE0-AE21-4A41-836A-C904D16444F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UntappdViewer.Models", "UntappdViewer.Models\UntappdViewer.Models.csproj", "{B1584484-7648-4349-B8F8-47352DD85FF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UntappdViewer.Models", "UntappdViewer.Models\UntappdViewer.Models.csproj", "{B1584484-7648-4349-B8F8-47352DD85FF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UntappdViewer.Infrastructure", "UntappdViewer.Infrastructure\UntappdViewer.Infrastructure.csproj", "{BDC0B7DD-2833-4B95-9B93-EA520003EBE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UntappdViewer.Infrastructure", "UntappdViewer.Infrastructure\UntappdViewer.Infrastructure.csproj", "{BDC0B7DD-2833-4B95-9B93-EA520003EBE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UntappdViewer.Test", "UntappdViewer.Test\UntappdViewer.Test.csproj", "{06F02650-0E3E-4828-BCBB-9C50B24A0794}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UntappdViewer.Test", "UntappdViewer.Test\UntappdViewer.Test.csproj", "{06F02650-0E3E-4828-BCBB-9C50B24A0794}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UntappdViewer.Utils", "UntappdViewer.Utils\UntappdViewer.Utils.csproj", "{5FA116C9-7571-494C-A74D-7E121857FFE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UntappdViewer.Utils", "UntappdViewer.Utils\UntappdViewer.Utils.csproj", "{5FA116C9-7571-494C-A74D-7E121857FFE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UntappdViewer.Domain", "UntappdViewer.Domain\UntappdViewer.Domain.csproj", "{4329B0DB-7CDF-4695-A54C-3CF230A0011F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UntappdViewer.Domain", "UntappdViewer.Domain\UntappdViewer.Domain.csproj", "{4329B0DB-7CDF-4695-A54C-3CF230A0011F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UntappdWebApiClient", "UntappdWebApiClient\UntappdWebApiClient.csproj", "{B0D9F698-52DB-4794-8600-18153ABA3D36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UntappdWebApiClient", "UntappdWebApiClient\UntappdWebApiClient.csproj", "{B0D9F698-52DB-4794-8600-18153ABA3D36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UntappdViewer.Reporting", "UntappdViewer.Reporting\UntappdViewer.Reporting.csproj", "{F1BBFAF1-B399-436B-A644-A2CB462C0589}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UntappdViewer.Reporting", "UntappdViewer.Reporting\UntappdViewer.Reporting.csproj", "{F1BBFAF1-B399-436B-A644-A2CB462C0589}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UntappdViewer.UI", "UntappdViewer.UI\UntappdViewer.UI.csproj", "{1D82FDEC-28E3-4689-B6F8-ED402B1C5294}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UntappdViewer.UI", "UntappdViewer.UI\UntappdViewer.UI.csproj", "{1D82FDEC-28E3-4689-B6F8-ED402B1C5294}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

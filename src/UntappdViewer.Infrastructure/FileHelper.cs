@@ -70,7 +70,6 @@ namespace UntappdViewer.Infrastructure
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
         }
-
         public static T OpenFile<T>(string filePath)
         {
             using (Stream stream = File.Open(filePath, FileMode.Open))
