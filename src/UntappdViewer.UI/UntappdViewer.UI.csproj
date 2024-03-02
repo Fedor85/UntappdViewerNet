@@ -33,15 +33,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FontAwesome5" Version="2.1.11" />
-    <PackageReference Include="GMap.NET.Core" Version="2.1.7" />
     <PackageReference Include="GMap.NET.WinPresentation" Version="2.1.7" />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
-    <PackageReference Include="System.Data.SQLite" Version="1.0.115.5" />
-    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.115.5" />
-    <PackageReference Include="System.Data.SQLite.EF6" Version="1.0.115.5" />
     <PackageReference Include="VirtualizingWrapPanel" Version="1.5.8" />
-    <PackageReference Include="EntityFramework" Version="6.4.4" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 </Project>
