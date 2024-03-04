@@ -63,12 +63,12 @@ namespace UntappdViewer.Views
 
         private void SetImageAwesome(Visibility visibility)
         {
-            Dispatcher.Invoke(() => LoadingImageAwesome.VisibilityImageAwesome = visibility);
+            Dispatcher.InvokeAsync(() => LoadingImageAwesome.VisibilityImageAwesome = visibility);
         }
 
         private void SetStatusTimeBar(object content)
         {
-            Dispatcher.Invoke(() => StatusTimeBar.Content = content);
+            Dispatcher.InvokeAsync(() => StatusTimeBar.Content = content);
         }
     }
 }

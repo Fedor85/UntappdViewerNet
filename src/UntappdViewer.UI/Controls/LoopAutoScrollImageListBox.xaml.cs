@@ -103,7 +103,7 @@ namespace UntappdViewer.UI.Controls
 
         private void TimerElapsed(object sender, ElapsedEventArgs e)
         {
-            Dispatcher.Invoke(()=> collection.Move(0, collectionCount));
+            Dispatcher.InvokeAsync(()=> collection.Move(0, collectionCount));
         }
 
         private static void SetItemsSource(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
