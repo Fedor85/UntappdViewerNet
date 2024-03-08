@@ -16,3 +16,6 @@ build/*
 
 #Temp Files
 ~*
+
+#tools
+tools/NuGetPackagesBackup/Log.txt
