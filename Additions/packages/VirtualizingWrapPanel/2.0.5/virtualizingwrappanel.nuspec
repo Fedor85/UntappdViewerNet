@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>VirtualizingWrapPanel</id>
+    <version>2.0.5</version>
+    <title>VirtualizingWrapPanel</title>
+    <authors>S. Bäumlisbergerr</authors>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <readme>README.md</readme>
+    <projectUrl>https://github.com/sbaeumlisberger/VirtualizingWrapPanel</projectUrl>
+    <description>Implementation of a VirtualizingWrapPanel for WPF.</description>
+    <releaseNotes>- Fix: Exception when changing the items collection while bringing container into view</releaseNotes>
+    <copyright>© S. Bäumlisberger</copyright>
+    <tags>VirtualizingWrapPanel, VirtualizingPanel, WrapPanel, GridView, Virtualization, WPF, XAML, .NET</tags>
+    <repository type="git" url="https://github.com/sbaeumlisberger/VirtualizingWrapPanel" commit="515bb9ab078999edb8be94d34cfd62715250d3ca" />
+    <dependencies>
+      <group targetFramework=".NETFramework4.6.2" />
+      <group targetFramework="net6.0-windows7.0" />
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net6.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WPF" />
+      </group>
+      <group targetFramework=".NETFramework4.6.2" />
+    </frameworkReferences>
+  </metadata>
+</package>

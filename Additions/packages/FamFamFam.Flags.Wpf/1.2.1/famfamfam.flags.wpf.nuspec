@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>FamFamFam.Flags.Wpf</id>
+    <version>1.2.1</version>
+    <authors>Drew Noakes, Mark James</authors>
+    <owners>Drew Noakes, Mark James</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">Apache-2.0</license>
+    <licenseUrl>https://licenses.nuget.org/Apache-2.0</licenseUrl>
+    <icon>logo.png</icon>
+    <projectUrl>https://github.com/drewnoakes/famfamfam-flags-wpf</projectUrl>
+    <description>Provides a WPF value converter that converts an ISO 3166-1 alpha-2 country code into a WPF Image of that country's flag.</description>
+    <copyright>Drew Noakes 2009-2019</copyright>
+    <tags>wpf famfamfam icons flags flag icons</tags>
+    <repository type="git" url="https://github.com/drewnoakes/famfamfam-flags-wpf.git" />
+    <dependencies>
+      <group targetFramework=".NETFramework3.5" />
+      <group targetFramework=".NETCoreApp3.0" />
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework=".NETCoreApp3.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WPF" />
+      </group>
+    </frameworkReferences>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="PresentationCore" targetFramework=".NETFramework3.5" />
+      <frameworkAssembly assemblyName="PresentationFramework" targetFramework=".NETFramework3.5" />
+      <frameworkAssembly assemblyName="System" targetFramework=".NETFramework3.5" />
+      <frameworkAssembly assemblyName="WindowsBase" targetFramework=".NETFramework3.5" />
+    </frameworkAssemblies>
+  </metadata>
+</package>
