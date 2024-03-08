@@ -37,7 +37,7 @@ namespace UntappdViewer.Infrastructure.Services.DataBase
                 collection.Update(keyValue);
             }
 
-            database.Checkpoint();
+            database.Commit();
         }
 
         public void AddFile(string key, string filePath)
@@ -53,7 +53,7 @@ namespace UntappdViewer.Infrastructure.Services.DataBase
                 database.FileStorage.Delete(Key);
 
             database.FileStorage.Upload(Key, Key, fileStream);
-            database.Checkpoint();
+            database.Commit();
         }
 
         public TV GetValue<TV>(string key)
