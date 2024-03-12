@@ -6,7 +6,6 @@ namespace UntappdViewer.UI.Helpers
 {
     public static class Extension
     {
-
         public static PointLatLng GetGMapPosition(this Location location)
         {
             return new PointLatLng(location.Latitude, location.Longitude);
