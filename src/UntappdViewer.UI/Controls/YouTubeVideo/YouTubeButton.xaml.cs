@@ -1,6 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media;
+using UntappdViewer.UI.Controls.Maps.GeoMap;
 
 namespace UntappdViewer.UI.Controls.YouTubeVideo
 {
@@ -10,6 +13,8 @@ namespace UntappdViewer.UI.Controls.YouTubeVideo
     public partial class YouTubeButton : UserControl
     {
         public static readonly DependencyProperty CommandProperty = DependencyProperty.Register("Command", typeof(ICommand), typeof(YouTubeButton));
+
+        private static readonly DependencyProperty BackgroundProperty = DependencyProperty.Register("Background", typeof(Brush), typeof(YouTubeButton), new PropertyMetadata(new SolidColorBrush(Color.FromRgb(255, 255, 255)) { Opacity = 0.3 }));
 
         public event RoutedEventHandler Click;
 
@@ -23,10 +28,17 @@ namespace UntappdViewer.UI.Controls.YouTubeVideo
             set { SetValue(CommandProperty, value); }
         }
 
+        public Brush Background
+        {
+            get { return (Brush)GetValue(BackgroundProperty); }
+            set { SetValue(BackgroundProperty, value); }
+        }
+
         public YouTubeButton()
         {
             InitializeComponent();
             isRunPlaySatus = true;
+            BackgroundGrid.SetBinding(Grid.BackgroundProperty, new Binding { Path = new PropertyPath(BackgroundProperty), Source = this });
             MouseLeftButtonUp += YouTubeButtonMouseLeftButtonUp;
             Unloaded += YouTubeButtonUnloaded;
         }

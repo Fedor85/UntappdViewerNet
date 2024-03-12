@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d"  Height="30" Width="40">
     <Grid>
-        <Grid Background="#ffff" Opacity="0.3"/>
+        <Grid x:Name="BackgroundGrid"/>
         <Image x:Name="CloseButton" Source="..\..\Resources\close_icon.ico" Visibility="Collapsed"/>
         <Image x:Name="PlayButton" Source="..\..\Resources\youtube-logo.png"/>
     </Grid>
