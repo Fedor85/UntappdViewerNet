@@ -12,7 +12,9 @@ namespace UntappdViewer.UI.Controls.YouTubeVideo
     public partial class YouTubeVideo : UserControl
     {
         private static readonly DependencyProperty YouTubeVideoIdProperty = DependencyProperty.Register("YouTubeVideoId", typeof(string), typeof(YouTubeVideo), new PropertyMetadata(SetYouTubeVideoId));
-        
+
+        public event RoutedEventHandler CloseClick;
+
         public string YouTubeVideoId
         {
             get { return (string)GetValue(YouTubeVideoIdProperty); }
@@ -22,7 +24,6 @@ namespace UntappdViewer.UI.Controls.YouTubeVideo
         public bool IsVisibleCloseButton { get; set; }
 
         public bool IsCollapseByCLose { get; set; }
-
 
         public YouTubeVideo()
         {
@@ -53,9 +54,10 @@ namespace UntappdViewer.UI.Controls.YouTubeVideo
             Visibility = IsCollapseByCLose && String.IsNullOrEmpty(source) ? Visibility = Visibility.Collapsed : Visibility.Visible;
         }
 
-        private void GridPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void ClosewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.UpdateSource(YouTubeVideoIdProperty, String.Empty);
+            CloseClick?.Invoke(sender, e);
         }
 
         private static void SetYouTubeVideoId(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
