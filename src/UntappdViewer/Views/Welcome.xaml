@@ -8,6 +8,7 @@
              xmlns:local="clr-namespace:UntappdViewer"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:controls="clr-namespace:UntappdViewer.UI.Controls;assembly=UntappdViewer.UI"
+             xmlns:youTubeVideo="clr-namespace:UntappdViewer.UI.Controls.YouTubeVideo;assembly=UntappdViewer.UI"
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="600" d:DesignWidth="800"  Background="{StaticResource MainGradient2}"
@@ -51,7 +52,12 @@
                     </TextBlock>
                 </Grid>
             </StackPanel>
+            <youTubeVideo:YouTubeButton VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,10"
+                                        Command="{Binding RunYoutubeVideoCommand}"
+                                        Visibility="{Binding VisibilityYouTubeVideoButton, Converter={StaticResource BooleanConverter}}"/>
         </Grid>
+        <youTubeVideo:YouTubeVideo Grid.Row="1" YouTubeVideoId="{Binding YouTubeVideoId}"
+                                   Visibility="Collapsed" IsCollapseByCLose="True"/>
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock HorizontalAlignment="Center">
                 <Hyperlink NavigateUri="{Binding Source={x:Static local:DefaultValues.UntappdtUrl}}"
@@ -74,7 +80,7 @@
                 <Label Grid.Column="2" Content="{x:Static properties:Resources.Signature2}" FontSize="15" Foreground="#ffffff"/>
             </Grid>
         </StackPanel>
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>

@@ -41,6 +41,12 @@ namespace UntappdViewer.ViewModels
 
         private List<FileItem> fileItems;
 
+        private string youTubeVideoId;
+
+        private bool visibilityYouTubeVideoButton;
+
+        private string devYouTubeVideoId;
+
         public ICommand OpenFileCommand { get; }
 
         public ICommand DropFileCommand { get; }
@@ -50,6 +56,8 @@ namespace UntappdViewer.ViewModels
         public ICommand OpenRecentFileCommand { get; }
 
         public ICommand DeleteRecentFileByListCommand { get; }
+
+        public ICommand RunYoutubeVideoCommand { get; }
 
         public string EmailUrl
         {
@@ -74,6 +82,18 @@ namespace UntappdViewer.ViewModels
             set { SetProperty(ref fileItems, value); }
         }
 
+        public string YouTubeVideoId
+        {
+            get { return youTubeVideoId; }
+            set { SetProperty(ref youTubeVideoId, value); }
+        }
+
+        public bool VisibilityYouTubeVideoButton
+        {
+            get { return visibilityYouTubeVideoButton; }
+            set { SetProperty(ref visibilityYouTubeVideoButton, value); }
+        }
+
         public WelcomeViewModel(IUntappdService untappdService, IInteractionRequestService interactionRequestService,
                                                                 ISettingService settingService,
                                                                 IModuleManager moduleManager,
@@ -91,17 +111,20 @@ namespace UntappdViewer.ViewModels
             this.webApiClient = webApiClient;
             this.webDownloader = webDownloader;
 
+            devYouTubeVideoId = "QXjzrG-UKh4";
+
             OpenFileCommand = new DelegateCommand(OpenFile);
             DropFileCommand = new DelegateCommand<DragEventArgs>(DropFile);
             CreateProjectCommand = new DelegateCommand(CreateProject);
             OpenRecentFileCommand = new DelegateCommand<string>(OpenRecentFile);
             DeleteRecentFileByListCommand = new DelegateCommand<string>(DeleteRecentFileByList);
+            RunYoutubeVideoCommand = new DelegateCommand<bool?>(RunYoutubeVideo);
         }
 
         protected override void Activate()
         {
             base.Activate();
-
+            VisibilityYouTubeVideoButton = !String.IsNullOrEmpty(devYouTubeVideoId);
             FileItems = FileHelper.GetExistsParseFilePaths(settingService.GetRecentFilePaths());
             settingService.SetStartWelcomeView(true);
             untappdService.CleanUpUntappd();
@@ -111,6 +134,8 @@ namespace UntappdViewer.ViewModels
         protected override void DeActivate()
         {
             base.DeActivate();
+            VisibilityYouTubeVideoButton = false;
+            RunYoutubeVideo(false);
             FileItems.Clear();
         }
 
@@ -157,6 +182,11 @@ namespace UntappdViewer.ViewModels
             FileHelper.RemoveFilePath(FileItems, filePath);
             settingService.SetRecentFilePaths(FileHelper.GetMergedFilePaths(FileItems));
             FileItems = FileHelper.GetExistsParseFilePaths(settingService.GetRecentFilePaths());
+        }
+
+        private void RunYoutubeVideo(bool? isRunPlay)
+        {
+            YouTubeVideoId = isRunPlay.HasValue && isRunPlay.Value ? devYouTubeVideoId: String.Empty;
         }
 
         private void RunUntappd(string filePath)
