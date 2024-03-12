@@ -49,5 +49,15 @@ namespace UntappdViewer.Views
         {
             ProcessStartHelper.ProcessStart(e.Uri.ToString());
         }
+
+        private void YouTubeButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            player.Stop();
+        }
+
+        private void YouTubeVideoOnCloseClick(object sender, RoutedEventArgs e)
+        {
+            player.PlayLooping();
+        }
     }
 }

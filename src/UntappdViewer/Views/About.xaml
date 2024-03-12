@@ -8,6 +8,7 @@
         xmlns:local="clr-namespace:UntappdViewer"
         xmlns:controls1="clr-namespace:UntappdViewer.UI.Controls;assembly=UntappdViewer.UI"
         xmlns:images="clr-namespace:UntappdViewer.UI.Controls.Images;assembly=UntappdViewer.UI"
+        xmlns:youTubeVideo="clr-namespace:UntappdViewer.UI.Controls.YouTubeVideo;assembly=UntappdViewer.UI"
         mc:Ignorable="d"
         mvvm:ViewModelLocator.AutoWireViewModel="True"
         Title="{x:Static properties:Resources.AboutTitle}" Height="220" Width="475"  Background="{StaticResource MainGradient2}"
@@ -34,7 +35,12 @@
                         <TextBlock Text="{x:Static properties:Resources.Email}" FontSize="15" Foreground="#ffffff"/>
                     </Hyperlink>
                 </TextBlock>
+                <youTubeVideo:YouTubeButton IsSimpleMode="True" Command="{Binding RunYoutubeVideoCommand}" Click="YouTubeButtonOnClick" Background="Transparent"
+                                            Visibility="{Binding VisibilityYouTubeVideoButton, Converter={StaticResource BooleanConverter}}"/>
             </StackPanel>
         </Grid>
+        <youTubeVideo:YouTubeVideo YouTubeVideoId="{Binding YouTubeVideoId}"
+                                   Visibility="Collapsed" IsCollapseByCLose="True" IsVisibleCloseButton="True"
+                                   CloseClick="YouTubeVideoOnCloseClick"/>
     </Grid>
 </Window>
