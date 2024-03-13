@@ -9,10 +9,8 @@
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Resources\youtube-logo.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\close_icon.ico" />
+    <Resource Include="Resources\Like1710325911165.json" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Show.jpg" />
@@ -38,6 +36,7 @@
   <ItemGroup>
     <PackageReference Include="FontAwesome5" Version="2.1.11" />
     <PackageReference Include="GMap.NET.WinPresentation" Version="2.1.7" />
+    <PackageReference Include="LottieSharp" Version="2.3.0" />
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2365.46" />
     <PackageReference Include="VirtualizingWrapPanel" Version="2.0.5" />
   </ItemGroup>
