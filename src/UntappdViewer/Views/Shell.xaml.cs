@@ -20,7 +20,6 @@ namespace UntappdViewer.Views
             WindowState = WindowState.Minimized;
         }
 
-
         private void ShellContentRendered(object sender, System.EventArgs e)
         {
             WindowState = WindowState.Normal;
