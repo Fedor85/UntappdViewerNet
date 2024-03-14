@@ -150,4 +150,7 @@
   <data name="Like1710325911165" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Like1710325911165.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Bubbles1710337492265" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Bubbles1710337492265.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

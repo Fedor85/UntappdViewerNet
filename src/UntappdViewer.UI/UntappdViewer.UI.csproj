@@ -9,6 +9,10 @@
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Resources\Bubbles1710337492265.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Bubbles1710337492265.json" />
     <Resource Include="Resources\close_icon.ico" />
     <Resource Include="Resources\Like1710325911165.json" />
   </ItemGroup>
