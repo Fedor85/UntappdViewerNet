@@ -14,6 +14,7 @@
              xmlns:valueConverters="clr-namespace:UntappdViewer.ValueConverters"
              xmlns:images="clr-namespace:UntappdViewer.UI.Controls.Images;assembly=UntappdViewer.UI"
              xmlns:gMapNet="clr-namespace:UntappdViewer.UI.Controls.Maps.GMapNet;assembly=UntappdViewer.UI"
+             xmlns:lottie="clr-namespace:UntappdViewer.UI.Controls.Lottie;assembly=UntappdViewer.UI"
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="450" d:DesignWidth="450">
@@ -39,7 +40,7 @@
                 <Image Source="{Binding Checkin.PhotoPath, IsAsync=True}"/>
             </controls:ZoomBorder>
             <Grid Visibility="{Binding Checkin.VisibilityLikeBeer, Converter={StaticResource BTVConverter}}">
-                <controls:LikeLottieAnimation Height="600" Width="200" Margin="-50,0,0,-150"
+                <lottie:LikeLottieAnimation Height="600" Width="200" Margin="-50,0,0,-150"
                                               HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
                 <Image Source="..\Resources\facebook-like-beer.png" Width="40" Height="40"
                        HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10"/>

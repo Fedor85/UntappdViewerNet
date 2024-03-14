@@ -3,7 +3,7 @@ using System;
 using System.Windows.Controls;
 using UntappdViewer.UI.Helpers;
 
-namespace UntappdViewer.UI.Controls
+namespace UntappdViewer.UI.Controls.Lottie
 {
     /// <summary>
     /// Interaction logic for BubblesLottieAnimation.xaml
