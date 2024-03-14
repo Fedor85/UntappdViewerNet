@@ -1,6 +1,4 @@
 ﻿using System.Windows.Controls;
-using System.Windows.Navigation;
-using UntappdViewer.Infrastructure;
 
 namespace UntappdViewer.Views
 {
@@ -12,11 +10,6 @@ namespace UntappdViewer.Views
         public Welcome()
         {
             InitializeComponent();
-        }
-
-        private void HyperlinkOnRequestNavigate(object sender, RequestNavigateEventArgs e)
-        {
-            ProcessStartHelper.ProcessStart(e.Uri.ToString());
         }
     }
 }

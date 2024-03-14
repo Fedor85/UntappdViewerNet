@@ -6,6 +6,7 @@
              xmlns:properties="clr-namespace:UntappdViewer.Properties"
              xmlns:untappdViewer="clr-namespace:UntappdViewer"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             xmlns:helpers="clr-namespace:UntappdViewer.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -14,7 +15,7 @@
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <TextBlock HorizontalAlignment="Center">
             <Hyperlink NavigateUri="{Binding Source={x:Static untappdViewer:DefaultValues.UntappdtUrl}}"
-                       TextDecorations="" RequestNavigate="HyperlinkOnRequestNavigate">
+                       TextDecorations=""  helpers:HyperlinkExtensions.IsExternal="true">
                 <Image Height="100" Width="414" Source="..\..\Resources\pbu_320_white.png"/>
             </Hyperlink>
         </TextBlock>
@@ -26,7 +27,7 @@
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" Content="{x:Static properties:Resources.Signature1}" FontSize="{StaticResource FontSize}" Foreground="#ffffff"/>
             <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Hyperlink NavigateUri="{Binding EmailUrl}" TextDecorations="" RequestNavigate="HyperlinkOnRequestNavigate">
+                <Hyperlink NavigateUri="{Binding EmailUrl}" TextDecorations="" helpers:HyperlinkExtensions.IsExternal="true">
                     <TextBlock Text="{x:Static properties:Resources.Email}" FontSize="{StaticResource FontSize}" Foreground="#ffffff"/>
                 </Hyperlink>
             </TextBlock>

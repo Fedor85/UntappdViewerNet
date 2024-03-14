@@ -2,9 +2,7 @@
 using System.Media;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Navigation;
 using System.Windows.Resources;
-using UntappdViewer.Infrastructure;
 
 namespace UntappdViewer.Views
 {
@@ -43,11 +41,6 @@ namespace UntappdViewer.Views
         private void WindowClosed(object sender, EventArgs e)
         {
             player.Stop();
-        }
-
-        private void HyperlinkOnRequestNavigate(object sender, RequestNavigateEventArgs e)
-        {
-            ProcessStartHelper.ProcessStart(e.Uri.ToString());
         }
 
         private void YouTubeButtonOnClick(object sender, RoutedEventArgs e)

@@ -9,6 +9,7 @@
         xmlns:controls1="clr-namespace:UntappdViewer.UI.Controls;assembly=UntappdViewer.UI"
         xmlns:images="clr-namespace:UntappdViewer.UI.Controls.Images;assembly=UntappdViewer.UI"
         xmlns:youTubeVideo="clr-namespace:UntappdViewer.UI.Controls.YouTubeVideo;assembly=UntappdViewer.UI"
+        xmlns:helpers="clr-namespace:UntappdViewer.Helpers"
         mc:Ignorable="d"
         mvvm:ViewModelLocator.AutoWireViewModel="True"
         Title="{x:Static properties:Resources.AboutTitle}" Height="220" Width="475"  Background="{StaticResource MainGradient2}"
@@ -25,13 +26,14 @@
             <Grid Background="#000000" Opacity="0.2"/>
             <StackPanel>
                 <TextBlock HorizontalAlignment="Center">
-                    <Hyperlink NavigateUri="{Binding Source={x:Static local:DefaultValues.UntappdtUrl}}" TextDecorations="" RequestNavigate="HyperlinkOnRequestNavigate">
+                    <Hyperlink NavigateUri="{Binding Source={x:Static local:DefaultValues.UntappdtUrl}}"
+                               TextDecorations="" helpers:HyperlinkExtensions.IsExternal="true">
                         <Image Height="40" Width="200" Source="..\Resources\pbu_320_white.png"/>
                     </Hyperlink>
                 </TextBlock>
                 <Label Content="{Binding Version}" FontSize="15" Foreground="#ffffff" HorizontalAlignment="Center"/>
                 <TextBlock HorizontalAlignment="Center">
-                    <Hyperlink NavigateUri="{Binding EmailUrl}" TextDecorations="" RequestNavigate="HyperlinkOnRequestNavigate">
+                    <Hyperlink NavigateUri="{Binding EmailUrl}" TextDecorations="" helpers:HyperlinkExtensions.IsExternal="true">
                         <TextBlock Text="{x:Static properties:Resources.Email}" FontSize="15" Foreground="#ffffff"/>
                     </Hyperlink>
                 </TextBlock>
