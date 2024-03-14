@@ -8,6 +8,7 @@
         xmlns:behaviors="clr-namespace:UntappdViewer.Behaviors"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:controls="clr-namespace:UntappdViewer.Views.Controls"
+        xmlns:controls1="clr-namespace:UntappdViewer.UI.Controls;assembly=UntappdViewer.UI"
         mc:Ignorable="d"
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="{Binding Title}" Height="850" Width="800" MinHeight="600" MinWidth="800" Background="{StaticResource MainGradient2}" WindowStartupLocation ="CenterScreen">
@@ -20,6 +21,7 @@
         </b:EventTrigger>
     </b:Interaction.Triggers>
     <Grid Background="{StaticResource MainBackground}">
+        <controls1:BubblesLottieAnimation/>
         <controls:TitleControl/>
         <ContentControl prism:RegionManager.RegionName="{x:Static local:RegionNames.RootRegion}"/>
         <ContentControl prism:RegionManager.RegionName="{x:Static local:RegionNames.LoadingRegion}"/>
