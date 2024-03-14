@@ -88,7 +88,7 @@ namespace UntappdViewer.UI.Controls
 
             Loaded += ThisLoaded;
             Unloaded += ThisUnloaded;
-            MouseLeftButtonDown += ThisMouseLeftButtonDown;
+            MouseLeftButtonUp += ThisMouseLeftButtonUp;
 
             SetBinding(UserControl.WidthProperty, new Binding { Path = new PropertyPath(SizeProperty), Source = this });
             SetBinding(UserControl.HeightProperty, new Binding { Path = new PropertyPath(SizeProperty), Source = this });
@@ -131,7 +131,7 @@ namespace UntappdViewer.UI.Controls
             SetScrollViewer(UIHelper.FindVisualFirstChild<ScrollViewer>(parent));
         }
 
-        private void ThisMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void ThisMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             ScrollViewer?.ScrollToVerticalOffset(0);
         }
