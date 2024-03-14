@@ -14,8 +14,8 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ContentControl Grid.Column="0" prism:RegionManager.RegionName="{x:Static untappdViewer:RegionNames.TreeRegion}"/>
+        <ContentControl Grid.Column="0"  ClipToBounds="True" prism:RegionManager.RegionName="{x:Static untappdViewer:RegionNames.TreeRegion}"/>
         <GridSplitter Grid.Column="1" ShowsPreview="False" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch" />
-        <ContentControl Grid.Column="2" prism:RegionManager.RegionName="{x:Static untappdViewer:RegionNames.ContentRegion}"/>
+        <ContentControl Grid.Column="2"  ClipToBounds="True" prism:RegionManager.RegionName="{x:Static untappdViewer:RegionNames.ContentRegion}"/>
     </Grid>
 </UserControl>
