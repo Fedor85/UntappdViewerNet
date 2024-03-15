@@ -36,12 +36,13 @@
             </Image.Effect>
         </Image>
         <Grid>
-            <controls:ZoomBorder ClipToBounds="True">
+            <controls:ZoomBorder x:Name="PhotoZoomBorder" ClipToBounds="True">
                 <Image Source="{Binding Checkin.PhotoPath, IsAsync=True}"/>
             </controls:ZoomBorder>
             <Grid Visibility="{Binding Checkin.VisibilityLikeBeer, Converter={StaticResource BTVConverter}}">
                 <lottie:LikeLottieAnimation Height="600" Width="200" Margin="-50,0,0,-150"
-                                              HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                                              HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                                              RoutedControl="{Binding  ElementName=PhotoZoomBorder}"/>
                 <Image Source="..\Resources\facebook-like-beer.png" Width="40" Height="40"
                        HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10"/>
             </Grid>
