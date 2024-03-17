@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
+using UserControl = System.Windows.Controls.UserControl;
 
 namespace UntappdViewer.UI.Helpers
 {
@@ -63,6 +64,12 @@ namespace UntappdViewer.UI.Helpers
                     queue.Enqueue(child);
                 }
             }
+        }
+
+        public static bool IsMouseOver(UIElement element, MouseEventArgs mouseEventArgs)
+        {
+            Point pt = mouseEventArgs.GetPosition(element);
+            return VisualTreeHelper.HitTest(element, pt) != null;
         }
     }
 }

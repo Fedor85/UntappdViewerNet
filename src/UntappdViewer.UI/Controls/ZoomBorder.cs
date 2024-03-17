@@ -26,41 +26,42 @@ namespace UntappdViewer.UI.Controls
             }
         }
 
+        public bool IsInitializeEvent { get; set; } = true;
+
         private void Initialize(UIElement element)
         {
             child = element;
-            if (child == null)
-                return;
 
             ZoomHelper.InitializeTransformGroup(child);
-
-            MouseWheel += ChildMouse;
-            MouseLeftButtonDown += ChildMouseLeft;
-            MouseLeftButtonUp += ChildMouseLeftButtonUp;
-            MouseMove += ChildMouseMove;
-            PreviewMouseRightButtonDown += ChildPreviewMouseRightButtonDown;
+            if (IsInitializeEvent)
+            {
+                MouseWheel += ChildMouseWheel;
+                MouseLeftButtonDown += ChildMouseLeftButtonDown;
+                MouseLeftButtonUp += ChildMouseLeftButtonUp;
+                MouseMove += ChildMouseMove;
+                PreviewMouseRightButtonDown += ChildPreviewMouseRightButtonDown;
+            }
         }
 
-        #region Child Events
-
-        private void ChildMouse(object sender, MouseWheelEventArgs e)
+        public void ZoomChild(MouseWheelEventArgs mouseEventArgs)
         {
-            ZoomHelper.Zoom(child, e.Delta, e.GetPosition(child));
+            if (child != null && UIHelper.IsMouseOver(child, mouseEventArgs))
+                ZoomHelper.Zoom(child, mouseEventArgs.Delta, mouseEventArgs.GetPosition(child));
         }
 
-        private void ChildMouseLeft(object sender, MouseButtonEventArgs e)
+        public void ChildMouseLeftButtonDown(MouseButtonEventArgs mouseEventArgs)
         {
-            if (child == null)
+            if (child == null || !UIHelper.IsMouseOver(child, mouseEventArgs))
                 return;
 
             TranslateTransform translateTransform = ZoomHelper.GetTranslateTransform(child);
-            start = e.GetPosition(this);
+            start = mouseEventArgs.GetPosition(this);
             origin = new Point(translateTransform.X, translateTransform.Y);
             Cursor = Cursors.Hand;
             child.CaptureMouse();
         }
 
-        private void ChildMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        public void ChildMouseLeftButtonUp(MouseButtonEventArgs mouseEventArgs)
         {
             if (child == null)
                 return;
@@ -69,20 +70,47 @@ namespace UntappdViewer.UI.Controls
             Cursor = Cursors.Arrow;
         }
 
-        private void ChildPreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            ZoomHelper.Reset(child);
-        }
-
-        private void ChildMouseMove(object sender, MouseEventArgs e)
+        public void MoveChild(MouseEventArgs mouseEventArgs)
         {
             if (child == null || !child.IsMouseCaptured)
                 return;
 
             TranslateTransform translateTransform = ZoomHelper.GetTranslateTransform(child);
-            Vector v = start - e.GetPosition(this);
+            Vector v = start - mouseEventArgs.GetPosition(this);
             translateTransform.X = origin.X - v.X;
             translateTransform.Y = origin.Y - v.Y;
+        }
+
+        public void ZoomChildReset()
+        {
+            ZoomHelper.Reset(child);
+        }
+
+        #region Child Events
+
+        private void ChildMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            ZoomChild(e);
+        }
+
+        private void ChildMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            ChildMouseLeftButtonDown(e);
+        }
+
+        private void ChildMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            ChildMouseLeftButtonUp(e);
+        }
+
+        private void ChildMouseMove(object sender, MouseEventArgs e)
+        {
+            MoveChild(e);
+        }
+
+        private void ChildPreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            ZoomChildReset();
         }
 
         #endregion
