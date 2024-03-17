@@ -15,6 +15,7 @@
              xmlns:images="clr-namespace:UntappdViewer.UI.Controls.Images;assembly=UntappdViewer.UI"
              xmlns:gMapNet="clr-namespace:UntappdViewer.UI.Controls.Maps.GMapNet;assembly=UntappdViewer.UI"
              xmlns:lottie="clr-namespace:UntappdViewer.UI.Controls.Lottie;assembly=UntappdViewer.UI"
+             xmlns:zoom="clr-namespace:UntappdViewer.UI.Controls.Zoom;assembly=UntappdViewer.UI"
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="450" d:DesignWidth="450">
@@ -36,9 +37,9 @@
             </Image.Effect>
         </Image>
         <Grid>
-            <controls:ZoomBorder x:Name="PhotoZoomBorder" ClipToBounds="True">
+            <zoom:ZoomBorderGrid x:Name="PhotoZoomBorder">
                 <Image Source="{Binding Checkin.PhotoPath, IsAsync=True}"/>
-            </controls:ZoomBorder>
+            </zoom:ZoomBorderGrid>
             <Grid Visibility="{Binding Checkin.VisibilityLikeBeer, Converter={StaticResource BTVConverter}}">
                 <lottie:LikeLottieAnimation Height="600" Width="200" Margin="-50,0,0,-150"
                                               HorizontalAlignment="Left" VerticalAlignment="Bottom"

@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace UntappdViewer.UI.Controls
+namespace UntappdViewer.UI.Controls.Zoom
 {
     /// <summary>
     /// Interaction logic for ZoomBorderGrid.xaml

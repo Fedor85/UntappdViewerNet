@@ -4,7 +4,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using UntappdViewer.UI.Helpers;
 
-namespace UntappdViewer.UI.Controls
+namespace UntappdViewer.UI.Controls.Zoom
 {
     public class ZoomBorder : Border
     {
