@@ -19,7 +19,7 @@ namespace UntappdViewer.UI.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -61,6 +61,16 @@ namespace UntappdViewer.UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] Bubbles1710337492265 {
+            get {
+                object obj = ResourceManager.GetObject("Bubbles1710337492265", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         public static System.Drawing.Icon close_icon {
@@ -87,6 +97,16 @@ namespace UntappdViewer.UI.Properties {
             get {
                 object obj = ResourceManager.GetObject("icons_location", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] Like1710325911165 {
+            get {
+                object obj = ResourceManager.GetObject("Like1710325911165", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -149,6 +169,43 @@ namespace UntappdViewer.UI.Properties {
         public static string World {
             get {
                 return ResourceManager.GetString("World", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap youtube_logo {
+            get {
+                object obj = ResourceManager.GetObject("youtube-logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to left mouse button: moving.
+        /// </summary>
+        public static string ZoomBorderLeftMouseButtonUse {
+            get {
+                return ResourceManager.GetString("ZoomBorderLeftMouseButtonUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to right mouse button: reset.
+        /// </summary>
+        public static string ZoomBorderRightMouseButtonUse {
+            get {
+                return ResourceManager.GetString("ZoomBorderRightMouseButtonUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to scroll whell: zoom.
+        /// </summary>
+        public static string ZoomBorderScrollUse {
+            get {
+                return ResourceManager.GetString("ZoomBorderScrollUse", resourceCulture);
             }
         }
     }

@@ -37,7 +37,7 @@
             </Image.Effect>
         </Image>
         <Grid>
-            <zoom:ZoomBorderGrid x:Name="PhotoZoomBorder">
+            <zoom:ZoomBorderGrid x:Name="PhotoZoomBorder" VisibilityClue="{Binding Checkin.VisibilityPhoto}">
                 <Image Source="{Binding Checkin.PhotoPath, IsAsync=True}"/>
             </zoom:ZoomBorderGrid>
             <Grid Visibility="{Binding Checkin.VisibilityLikeBeer, Converter={StaticResource BTVConverter}}">
@@ -47,17 +47,6 @@
                 <Image Source="..\Resources\facebook-like-beer.png" Width="40" Height="40"
                        HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10"/>
             </Grid>
-            <controls:ClippingBorder  VerticalAlignment="Bottom" HorizontalAlignment="Right"   Margin="0, 0, 10, 10" CornerRadius="10"
-                                      Visibility="{Binding Checkin.VisibilityPhoto, Converter={StaticResource BTVConverter}}">
-                <Grid>
-                    <Grid Background="#ffffff" Opacity="0.2"/>
-                    <StackPanel Opacity="0.5">
-                        <Label Content="{x:Static properties:Resources.ZoomBorderScrollUse}" FontSize="10"/>
-                        <Label Content="{x:Static properties:Resources.ZoomBorderLeftMouseButtonUse}" FontSize="10"/>
-                        <Label Content="{x:Static properties:Resources.ZoomBorderRightMouseButtonUse}" FontSize="10"/>
-                    </StackPanel>
-                </Grid>
-            </controls:ClippingBorder>
         </Grid>
         <Grid>
             <Grid.RowDefinitions>

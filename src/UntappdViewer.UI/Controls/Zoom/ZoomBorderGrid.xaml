@@ -4,9 +4,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:zoom="clr-namespace:UntappdViewer.UI.Controls.Zoom"
+        xmlns:controls="clr-namespace:UntappdViewer.UI.Controls"
+        xmlns:properties="clr-namespace:UntappdViewer.UI.Properties"
         mc:Ignorable="d" 
         d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="Transparent">
         <zoom:ZoomBorder x:Name="ZoomBorderControl" ClipToBounds="True"/>
+        <controls:ClippingBorder x:Name="Clue" VerticalAlignment="Bottom" HorizontalAlignment="Right"   Margin="0, 0, 10, 10"
+                                 CornerRadius="10" Visibility="Collapsed">
+            <Grid>
+                <Grid Background="#ffffff" Opacity="0.2"/>
+                <StackPanel Opacity="0.5">
+                    <Label Content="{x:Static properties:Resources.ZoomBorderScrollUse}" FontSize="10"/>
+                    <Label Content="{x:Static properties:Resources.ZoomBorderLeftMouseButtonUse}" FontSize="10"/>
+                    <Label Content="{x:Static properties:Resources.ZoomBorderRightMouseButtonUse}" FontSize="10"/>
+                </StackPanel>
+            </Grid>
+        </controls:ClippingBorder>
     </Grid>
 </Border>

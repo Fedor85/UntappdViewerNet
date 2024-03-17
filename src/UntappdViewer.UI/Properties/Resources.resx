@@ -153,4 +153,16 @@
   <data name="Bubbles1710337492265" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Bubbles1710337492265.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="ZoomBorderLeftMouseButtonUse" xml:space="preserve">
+    <value>left mouse button: moving</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="ZoomBorderRightMouseButtonUse" xml:space="preserve">
+    <value>right mouse button: reset</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="ZoomBorderScrollUse" xml:space="preserve">
+    <value>scroll whell: zoom</value>
+    <comment>en-en</comment>
+  </data>
 </root>

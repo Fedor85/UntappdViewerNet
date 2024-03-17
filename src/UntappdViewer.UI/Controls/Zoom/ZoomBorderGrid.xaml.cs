@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -9,6 +10,14 @@ namespace UntappdViewer.UI.Controls.Zoom
     /// </summary>
     public partial class ZoomBorderGrid : Border
     {
+        private static readonly DependencyProperty VisibilityClueProperty = DependencyProperty.Register("VisibilityClue", typeof(bool), typeof(ZoomBorderGrid), new PropertyMetadata(false, VisibilityClueChanged));
+
+        public bool VisibilityClue
+        {
+            get { return (bool)GetValue(VisibilityClueProperty); }
+            set { SetValue(VisibilityClueProperty, value); }
+        }
+        
         public override UIElement Child
         {
             get { return base.Child; }
@@ -30,6 +39,7 @@ namespace UntappdViewer.UI.Controls.Zoom
         public ZoomBorderGrid()
         {
             InitializeComponent();
+
             ZoomBorderControl.IsInitializeEvent = false;
 
             MouseWheel += ZoomBorderGridMouseWheel;
@@ -61,6 +71,12 @@ namespace UntappdViewer.UI.Controls.Zoom
         private void ZoomBorderGridPreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             ZoomBorderControl.ZoomChildReset();
+        }
+
+        private static void VisibilityClueChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+        {
+            ZoomBorderGrid zoomBorderGrid = dependencyObject as ZoomBorderGrid;
+            zoomBorderGrid.Clue.Visibility = Convert.ToBoolean(e.NewValue) ? Visibility.Visible : Visibility.Collapsed;
         }
     }
 }
