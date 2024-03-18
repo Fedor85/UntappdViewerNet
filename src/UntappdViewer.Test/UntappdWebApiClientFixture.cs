@@ -41,7 +41,7 @@ namespace UntappdViewer.Test
         }
 
         [Test]
-        public void TestUpdateServing()
+        public void TestUpdateServingType()
         {
             foreach (Checkin checkin in checkinsContainer.Checkins)
                 checkin.ServingType = String.Empty;

@@ -4,7 +4,7 @@ using NUnit.Framework;
 using NUnit.Framework.Legacy;
 using UntappdViewer.Utils;
 
-namespace UntappdViewer.Test
+namespace UntappdViewer.Test.Utils
 {
     [TestFixture]
     public class StringHelperFixture
