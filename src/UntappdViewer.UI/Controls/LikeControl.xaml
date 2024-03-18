@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="200">
     <Grid>
-        <lottie:LikeLottieAnimation HorizontalAlignment="Left" VerticalAlignment="Bottom"
+        <lottie:LikeLottieAnimation x:Name="LottieAnimation" HorizontalAlignment="Left" VerticalAlignment="Bottom"
                                     Margin="-50,0,0,-40"/>
         <Image Source="..\Resources\facebook-like-beer.png" Width="40" Height="40"
                HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
