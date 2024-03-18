@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Linq;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework.Legacy;
 using UntappdViewer.Models;
 using UntappdWebApiClient;
 
 namespace UntappdViewer.Test
 {
-    [TestFixture]
+    [TestClass]
     public class UntappdWebApiClientFixture
     {
         //access_token
@@ -24,14 +24,14 @@ namespace UntappdViewer.Test
             webApiClient.LogOn(AccessToken);
         }
 
-        [Test, Ignore(AccessToken)]
+        [TestMethod, Ignore(AccessToken)]
         public void TestFillFullCheckins()
         {
             ClassicAssert.True(webApiClient.IsLogOn);
             webApiClient.FillFullCheckins(checkinsContainer);
         }
 
-        [Test, Ignore(AccessToken)]
+        [TestMethod, Ignore(AccessToken)]
         public void TestUpdateBeers()
         {
             ClassicAssert.True(webApiClient.IsLogOn);
@@ -40,7 +40,7 @@ namespace UntappdViewer.Test
             ClassicAssert.AreNotEqual(offset, 0);
         }
 
-        [Test]
+        [TestMethod]
         public void TestUpdateServingType()
         {
             foreach (Checkin checkin in checkinsContainer.Checkins)
@@ -51,14 +51,14 @@ namespace UntappdViewer.Test
             ClassicAssert.AreNotEqual(servingTypeCount, 0);
         }
 
-        [Test, Ignore(AccessToken)]
+        [TestMethod, Ignore(AccessToken)]
         public void FillCollaboration()
         {
             ClassicAssert.True(webApiClient.IsLogOn);
             webApiClient.FillCollaboration(checkinsContainer.Beers, checkinsContainer.Brewerys);
         }
 
-        [Test]
+        [TestMethod]
         public void TestDevProfileData()
         {
             ClassicAssert.True(!String.IsNullOrEmpty(webApiClient.GetDevAvatarImageUrl()));

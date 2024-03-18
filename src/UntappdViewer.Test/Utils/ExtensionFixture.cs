@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework.Legacy;
 using UntappdViewer.Utils;
 
 namespace UntappdViewer.Test.Utils
 {
-    [TestFixture]
+    [TestClass]
     public class ExtensionFixture
     {
-        [Test]
+        [TestMethod]
         public void TestListMove()
         {
             List<string> list1 = new List<string>();
@@ -38,6 +38,6 @@ namespace UntappdViewer.Test.Utils
             list2.MoveToBottom(55);
             ClassicAssert.AreEqual(55, list2[4]);
         }
-   
+  
     }
 }

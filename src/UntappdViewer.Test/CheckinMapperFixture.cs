@@ -1,13 +1,13 @@
-﻿using NUnit.Framework;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework.Legacy;
 using UntappdViewer.Models;
 
 namespace UntappdViewer.Test
 {
-    [TestFixture]
+    [TestClass]
     public class CheckinMapperFixture
     {
-        [Test]
+        [TestMethod]
         public void CheckinTextMapperTest()
         {
             CheckinsContainer checkinsContainer = TestHelper.GetCheckinsContainer();

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework.Legacy;
 using UntappdViewer.Domain;
 using UntappdViewer.Infrastructure;
@@ -10,10 +10,10 @@ using UntappdViewer.Test.Properties;
 
 namespace UntappdViewer.Test
 {
-    [TestFixture]
+    [TestClass]
     public class FileHelperFixture
     {
-        [Test]
+        [TestMethod]
         public void TestFile()
         {
             List<string> extensions = Extensions.GetSupportExtensions();
@@ -44,7 +44,7 @@ namespace UntappdViewer.Test
             ClassicAssert.AreEqual(FileStatus.NotExists, fileStatus3);
         }
 
-        [Test]
+        [TestMethod]
         public void ParseFilePaths()
         {
             List<FileItem> fileEmptyItems = FileHelper.GetParseFilePaths(String.Empty);
@@ -84,7 +84,7 @@ namespace UntappdViewer.Test
             ClassicAssert.AreEqual(file, FileHelper.GetFirstFileItemPath(FileHelper.GetMergedFilePaths(fileItems)));
         }
 
-        [Test, Ignore("для удаления чекинов")]
+        [TestMethod, Ignore("для удаления чекинов")]
         public void CheckinsRemove()
         {
             string filePath = @"";

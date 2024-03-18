@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework.Legacy;
 using UntappdViewer.Utils;
 
 namespace UntappdViewer.Test.Utils
 {
-    [TestFixture]
+    [TestClass]
     public class MathHelperFixture
     {
-        [Test]
+        [TestMethod]
         public void TestDoubleCompare()
         {
             ClassicAssert.True(MathHelper.DoubleCompare(234.234, 234.234));
@@ -19,7 +19,7 @@ namespace UntappdViewer.Test.Utils
             ClassicAssert.False(MathHelper.DoubleCompare(1, 1.002));
         }
 
-        [Test]
+        [TestMethod]
         public void TestCeilingByStep()
         {
             ClassicAssert.AreEqual(250, MathHelper.GetCeilingByStep(53, 250));
@@ -32,7 +32,7 @@ namespace UntappdViewer.Test.Utils
         }
 
 
-        [Test]
+        [TestMethod]
         public void TestRoundByStep()
         {
             ClassicAssert.AreEqual(0, MathHelper.GetRoundByStep(0.01, 0.25));
@@ -44,8 +44,7 @@ namespace UntappdViewer.Test.Utils
             ClassicAssert.AreEqual(4.25, MathHelper.GetRoundByStep(4.256, 0.25));
         }
 
-
-        [Test]
+        [TestMethod]
         public void TestAverageValue()
         {
             Dictionary<double, int> dictionary = new Dictionary<double, int>();
@@ -63,7 +62,7 @@ namespace UntappdViewer.Test.Utils
             ClassicAssert.AreEqual(1.31, Math.Round(MathHelper.GetAverageValue(dictionary), 2));
         }
 
-        [Test]
+        [TestMethod]
         public void TestGetPercentageOf()
         {
             ClassicAssert.AreEqual(0, MathHelper.GetPercentageOf(0, 10));

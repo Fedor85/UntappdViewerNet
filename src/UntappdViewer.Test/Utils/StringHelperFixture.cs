@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework.Legacy;
 using UntappdViewer.Utils;
 
 namespace UntappdViewer.Test.Utils
 {
-    [TestFixture]
+    [TestClass]
     public class StringHelperFixture
     {
-        [Test]
+        [TestMethod]
         public void TestGetShortName()
         {
             List<string> fullNames = new List<string>();
@@ -36,7 +36,7 @@ namespace UntappdViewer.Test.Utils
             ClassicAssert.AreEqual("Spaten München", shortNames[7]);
         }
 
-        [Test]
+        [TestMethod]
         public void TestGeBreakForLongName()
         {
             string name1 = "Imperial Rye Porter Aged In Jack Daniels Barrels Batch #2";
@@ -51,7 +51,7 @@ namespace UntappdViewer.Test.Utils
             ClassicAssert.AreEqual(name2, resultName2);
         }
 
-        [Test]
+        [TestMethod]
         public void TestGetGroupByList()
         {
             List<string> beerTypes = TestHelper.GetBeerTypes();
@@ -72,7 +72,7 @@ namespace UntappdViewer.Test.Utils
             ClassicAssert.AreEqual(val3.Value.Count, 5);
         }
 
-        [Test]
+        [TestMethod]
         public void TestGetCutByFirstChars()
         {
             ClassicAssert.AreEqual("China / People's Republic of China", StringHelper.GetCutByFirstChars("China / People's Republic of China"));

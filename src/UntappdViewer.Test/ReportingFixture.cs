@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UntappdViewer.Domain.Mappers;
 using UntappdViewer.Models;
 using UntappdViewer.Reporting;
@@ -9,10 +9,10 @@ using UntappdViewer.Test.Properties;
 
 namespace UntappdViewer.Test
 {
-    [TestFixture]
+    [TestClass]
     public class ReportingFixture
     {
-        [Test]
+        [TestMethod]
         public void TestReport()
         {
             ReportingService reportingService = new ReportingService();

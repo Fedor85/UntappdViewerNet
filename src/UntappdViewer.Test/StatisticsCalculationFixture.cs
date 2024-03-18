@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework.Legacy;
 using UntappdViewer.Domain;
 using UntappdViewer.Infrastructure;
@@ -12,7 +12,7 @@ using UntappdViewer.Utils;
 
 namespace UntappdViewer.Test
 {
-    [TestFixture]
+    [TestClass]
     public class  StatisticsCalculationFixture
     {
         private CheckinsContainer checkinsContainer;
@@ -26,14 +26,14 @@ namespace UntappdViewer.Test
             statisticsCalculation = new StatisticsCalculation(untappdService);
         }
 
-        [Test]
+        [TestMethod]
         public void TestGetCountrysCount()
         {
             int countrysCount = statisticsCalculation.GetCountriesCount();
             ClassicAssert.AreEqual(38, countrysCount);
         }
 
-        [Test]
+        [TestMethod]
         public void TestGetChekinsRatingByCount()
         {
             List<KeyValue<double, int>> chekinsRating = statisticsCalculation.GetChekinsRatingByCount();
@@ -45,7 +45,7 @@ namespace UntappdViewer.Test
             ClassicAssert.AreEqual(44, chekinsRating[30].Value);
         }
 
-        [Test]
+        [TestMethod]
         public void TestGetBeersRatingByCount()
         {
             List<KeyValue<double, int>> beersRating = statisticsCalculation.GetBeersRatingByCount();
@@ -57,7 +57,7 @@ namespace UntappdViewer.Test
             ClassicAssert.AreEqual(15, beersRating[10].Value);
         }
 
-        [Test]
+        [TestMethod]
         public void TesGetDateChekinsByCount()
         {
             List<KeyValue<string, int>> dateChekinsCount = statisticsCalculation.GetDateChekinsByCount();
@@ -69,20 +69,20 @@ namespace UntappdViewer.Test
             ClassicAssert.AreEqual(0, dateChekinsCount[64].Value);
         }
 
-        [Test]
+        [TestMethod]
         public void TestGetTotalDaysByNow()
         {
             ClassicAssert.AreEqual(GetTotalDay(), statisticsCalculation.GetTotalDaysByNow());
         }
 
-        [Test]
+        [TestMethod]
         public void TestGetAverageCountByNow()
         {
             double averageCount = Math.Round(statisticsCalculation.GetAverageCountByNow(), 2);
             ClassicAssert.AreEqual(averageCount, Math.Round(MathHelper.GetAverageCountByNow(checkinsContainer.Checkins.Select(item => item.CreatedDate).ToList()), 2));
         }
 
-        [Test]
+        [TestMethod]
         public void TestGetBeerTypesByCheckinIdsGroupByCount()
         {
             List<KeyValue<string, List<long>>> beerTypeCheckinIds = statisticsCalculation.GetBeerTypesByCheckinIdsGroupByCount(statisticsCalculation.BeerTypeCountByOther);
@@ -94,7 +94,7 @@ namespace UntappdViewer.Test
             ClassicAssert.AreEqual(26, beerTypeCheckinIds[15].Value.Count);
         }
 
-        [Test]
+        [TestMethod]
         public void TestGetCountrysByCheckinIds()
         {
             List<KeyValue<string, List<long>>> beerCountryCheckinIds = statisticsCalculation.GetCountriesByCheckinIds();
@@ -106,7 +106,7 @@ namespace UntappdViewer.Test
             ClassicAssert.AreEqual(2, beerCountryCheckinIds[37].Value.Count);
         }
 
-        [Test]
+        [TestMethod]
         public void TestGetListCount()
         {
             List<KeyValue<string, List<long>>> beerTypeCheckinIds = statisticsCalculation.GetBeerTypesByCheckinIdsGroupByCount(statisticsCalculation.BeerTypeCountByOther);
@@ -128,7 +128,7 @@ namespace UntappdViewer.Test
             ClassicAssert.AreEqual(2, beerCountrysCount[37].Value);
         }
 
-        [Test]
+        [TestMethod]
         public void TestGetAccumulateValues()
         {
             List<KeyValue<string, int>> dataChekins = statisticsCalculation.GetDateChekinsByCount();
@@ -159,7 +159,7 @@ namespace UntappdViewer.Test
             ClassicAssert.AreEqual(checkinsContainer.Checkins.Count, dateChekinsAccumulateCount[64].Value);
         }
 
-        [Test]
+        [TestMethod]
         public void TestGetAverageRatingByCheckinIds()
         {
             List<KeyValue<string, List<long>>> beerTypeCheckinIds = statisticsCalculation.GetBeerTypesByCheckinIdsGroupByCount(statisticsCalculation.BeerTypeCountByOther);
@@ -181,7 +181,7 @@ namespace UntappdViewer.Test
             ClassicAssert.AreEqual(4.25, beerCountryRating[37].Value);
         }
 
-        [Test]
+        [TestMethod]
         public void TestGetServingTypeByCheckinIds()
         {
             List<KeyValue<string, List<long>>> servingTypeCheckinIds = statisticsCalculation.GetServingTypeByCheckinIds(statisticsCalculation.DefaultServingType);
