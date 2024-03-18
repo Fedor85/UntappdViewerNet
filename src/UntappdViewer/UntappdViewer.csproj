@@ -126,9 +126,6 @@
     <Resource Include="Resources\beer_glass.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\facebook-like-beer.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\delete.png" />
   </ItemGroup>
   <ItemGroup>

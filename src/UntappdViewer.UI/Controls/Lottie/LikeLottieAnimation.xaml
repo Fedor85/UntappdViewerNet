@@ -4,12 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:wpf="clr-namespace:LottieSharp.WPF;assembly=LottieSharp"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="80">
-    <wpf:LottieAnimationView
+             mc:Ignorable="d">
+    <wpf:LottieAnimationView Height="350" Width="175"
         HorizontalAlignment="Stretch"
         VerticalAlignment="Stretch"
         AutoPlay="True"
         RepeatCount="-1"
-        ResourcePath="pack://application:,,,/UntappdViewer.UI;component/Resources/Like1710325911165.json"/>
+        ResourcePath="pack://application:,,,/UntappdViewer.UI;component/Resources/Like1710325911165.json">
+    </wpf:LottieAnimationView>
 </UserControl>
