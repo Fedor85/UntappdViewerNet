@@ -24,6 +24,6 @@
     <EmbeddedResource Include="Resources\StatisticsTemplate.xlsx" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FreeSpire.XLS" Version="12.7.0" />
+    <PackageReference Include="FreeSpire.XLS" Version="14.2.0" />
   </ItemGroup>
 </Project>
