@@ -24,12 +24,12 @@ namespace UntappdWebApiClient
 
         public static string GetСheckinUrl(long checkinId)
         {
-            return String.Concat(UriConstants.СheckinUrl, checkinId);
+            return String.Concat(UrlConstants.СheckinUrl, checkinId);
         }
 
         public static string GetBeerUrl(long beerId)
         {
-            return String.Concat(UriConstants.BeerUrl, beerId);
+            return String.Concat(UrlConstants.BeerUrl, beerId);
         }
     }
 }

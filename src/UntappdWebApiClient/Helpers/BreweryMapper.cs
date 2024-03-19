@@ -9,7 +9,7 @@ namespace UntappdWebApiClient
         {
             brewery.Id = breweryWeb.BreweryId;
             brewery.Name = breweryWeb.BreweryName;
-            brewery.Url = $"{UriConstants.BaseUri}brewery/{breweryWeb.BreweryId}";
+            brewery.Url = $"{UrlConstants.BaseUri}brewery/{breweryWeb.BreweryId}";
             brewery.Venue.Country = breweryWeb.CountryName;
             brewery.Venue.City = breweryWeb.Location.BreweryCity;
             brewery.Venue.State = breweryWeb.Location.BreweryState;

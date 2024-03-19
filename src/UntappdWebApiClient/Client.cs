@@ -48,7 +48,7 @@ namespace UntappdWebApiClient
 
         public bool LogOn(string accessToken)
         {
-            urlPathBuilder = new UrlPathBuilder(UriConstants.BaseAPIUrl, accessToken);
+            urlPathBuilder = new UrlPathBuilder(UrlConstants.BaseAPIUrl, accessToken);
 
             HttpResponseMessage httpResponse = GetHttpResponse("checkin/recent/?", true);
             if ((long)httpResponse.StatusCode == 429)
@@ -210,7 +210,7 @@ namespace UntappdWebApiClient
 
         public string GetDevAvatarImageUrl()
         {
-            HtmlDocument htmlDoc = GetHtmlDocument(UriConstants.DeveloperProfileUrl);
+            HtmlDocument htmlDoc = GetHtmlDocument(UrlConstants.DeveloperProfileUrl);
             if (htmlDoc == null)
                 return String.Empty;
 
@@ -220,7 +220,7 @@ namespace UntappdWebApiClient
 
         public string GetDevProfileHeaderImageUrl()
         {
-            HtmlDocument htmlDoc = GetHtmlDocument(UriConstants.DeveloperProfileUrl);
+            HtmlDocument htmlDoc = GetHtmlDocument(UrlConstants.DeveloperProfileUrl);
             if (htmlDoc == null)
                 return String.Empty;
 
