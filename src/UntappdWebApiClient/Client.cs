@@ -368,35 +368,6 @@ namespace UntappdWebApiClient
             }
         }
 
-        private string GetFillCountMessage(int count)
-        {
-            return $"{Properties.Resources.Uploaded}: {count}";
-        }
-
-        private string GetChekUpdateMessage(long countChek, long countUpdate)
-        {
-            int percent = countChek > 0 ? (int) Math.Truncate((double) countUpdate / countChek * 100) : 0;
-            return $"{Properties.Resources.Chek}:{countChek} / {Properties.Resources.Update}:{countUpdate} [{percent}%]";
-        }
-
-        private string GetTotalUpdateMessage(long total, long countUpdate)
-        {
-            int percent = total > 0 ? (int)Math.Truncate((double)countUpdate / total * 100) : 0;
-            return $"{Properties.Resources.Total}:{total} / {Properties.Resources.Update}:{countUpdate} [{percent}%]";
-        }
-
-        private string GetTotaAndCheklUpdateMessage(long total, long countChek, long countUpdate)
-        {
-            int percentChek = total > 0 ? (int)Math.Truncate((double)countChek / total * 100) : 0;
-            int percentUpdate = countChek > 0 ? (int)Math.Truncate((double)countUpdate / countChek * 100) : 0;
-            return $"{Properties.Resources.Total}:{total} / {Properties.Resources.Chek}:{countChek} [{percentChek}%] / {Properties.Resources.Update}:{countUpdate} [{percentUpdate}%]";
-        }
-
-        private void UploadedProgressByMessage(string message)
-        {
-            UploadedProgress?.Invoke(message);
-        }
-
         private bool TryServingType(string checkinUrl, string defaultServingType, out string servingType)
         {
             servingType = String.Empty;
@@ -465,5 +436,38 @@ namespace UntappdWebApiClient
                 }
             }
         }
+
+        #region Message
+
+        private string GetFillCountMessage(int count)
+        {
+            return $"{Properties.Resources.Uploaded}: {count}";
+        }
+
+        private string GetChekUpdateMessage(long countChek, long countUpdate)
+        {
+            int percent = countChek > 0 ? (int)Math.Truncate((double)countUpdate / countChek * 100) : 0;
+            return $"{Properties.Resources.Chek}:{countChek} / {Properties.Resources.Update}:{countUpdate} [{percent}%]";
+        }
+
+        private string GetTotalUpdateMessage(long total, long countUpdate)
+        {
+            int percent = total > 0 ? (int)Math.Truncate((double)countUpdate / total * 100) : 0;
+            return $"{Properties.Resources.Total}:{total} / {Properties.Resources.Update}:{countUpdate} [{percent}%]";
+        }
+
+        private string GetTotaAndCheklUpdateMessage(long total, long countChek, long countUpdate)
+        {
+            int percentChek = total > 0 ? (int)Math.Truncate((double)countChek / total * 100) : 0;
+            int percentUpdate = countChek > 0 ? (int)Math.Truncate((double)countUpdate / countChek * 100) : 0;
+            return $"{Properties.Resources.Total}:{total} / {Properties.Resources.Chek}:{countChek} [{percentChek}%] / {Properties.Resources.Update}:{countUpdate} [{percentUpdate}%]";
+        }
+
+        private void UploadedProgressByMessage(string message)
+        {
+            UploadedProgress?.Invoke(message);
+        }
+
+        #endregion
     }
 }
