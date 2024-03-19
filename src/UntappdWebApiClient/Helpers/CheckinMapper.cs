@@ -24,7 +24,7 @@ namespace UntappdWebApiClient
         {
             Checkin checkin = new Checkin();
             checkin.Id = checkinsItem.CheckinId;
-            checkin.Url = $"{UrlConstants.BaseUrl}c/{checkinsItem.CheckinId}";
+            checkin.Url = UrlPathBuilder.GetСheckinUrl(checkinsItem.CheckinId);
             checkin.CreatedDate = DateTime.Parse(checkinsItem.CreatedAt);
             checkin.Comment = checkinsItem.CheckinComment;
             checkin.RatingScore = checkinsItem.RatingScore;
@@ -67,7 +67,7 @@ namespace UntappdWebApiClient
             beer.Name = beerWeb.BeerName;
             beer.Type = beerWeb.BeerStyle;
             beer.ABV = beerWeb.BeerAbv;
-            beer.Url = $"{UrlConstants.BaseUrl}beer/{beerWeb.Bid}";
+            beer.Url = UrlPathBuilder.GetBeerUrl(beerWeb.Bid);
             beer.LabelUrl = beerWeb.BeerLabel.ToString();
         }
 
