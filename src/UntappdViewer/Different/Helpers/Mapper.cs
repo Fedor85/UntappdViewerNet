@@ -2,6 +2,7 @@
 using System.IO;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Models;
+using UntappdViewer.Models.Different;
 using UntappdViewer.UI.Controls.Maps.GMapNet.ViewModel;
 using UntappdViewer.UI.Controls.ViewModel;
 using UntappdViewer.Utils;
@@ -52,7 +53,7 @@ namespace UntappdViewer.Helpers
         {
             foreach (Brewery brewery in beer.GetFullBreweries())
             {
-                BreweryViewModel breweryViewModel = Mapper.GetBreweryViewModels(brewery);
+                BreweryViewModel breweryViewModel = GetBreweryViewModels(brewery);
                 breweryViewModel.LabelPath = untappdService.GetBreweryLabelFilePath(brewery);
                 beerViewModel.BreweryViewModels.Add(breweryViewModel);
             }
@@ -73,6 +74,8 @@ namespace UntappdViewer.Helpers
                 breweryViewModels.AddVenue(brewery.Venue.City);
                 if (IsValidVenue(brewery.Venue))
                     breweryViewModels.LocationItem = new LocationItem(brewery.Venue.Latitude.Value, brewery.Venue.Longitude.Value);
+
+                breweryViewModels.IsNeedsUpdating = brewery.IsNeedsUpdating();
             }
             return breweryViewModels;
         }

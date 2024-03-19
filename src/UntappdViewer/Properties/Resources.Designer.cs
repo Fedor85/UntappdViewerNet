@@ -19,7 +19,7 @@ namespace UntappdViewer.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -598,16 +598,6 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap facebook_like_beer {
-            get {
-                object obj = ResourceManager.GetObject("facebook_like_beer", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Fill:.
         /// </summary>
         public static string Fill {
@@ -1090,7 +1080,7 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to (с) 2023.
+        ///   Looks up a localized string similar to (с) 2024.
         /// </summary>
         public static string Signature2 {
             get {
@@ -1219,6 +1209,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to UPDATE.
+        /// </summary>
+        public static string UpdateUpper {
+            get {
+                return ResourceManager.GetString("UpdateUpper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         public static System.Drawing.Icon upload_photo {
@@ -1327,33 +1326,6 @@ namespace UntappdViewer.Properties {
             get {
                 object obj = ResourceManager.GetObject("zip_file_icon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to left mouse button: moving.
-        /// </summary>
-        public static string ZoomBorderLeftMouseButtonUse {
-            get {
-                return ResourceManager.GetString("ZoomBorderLeftMouseButtonUse", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to right mouse button: reset.
-        /// </summary>
-        public static string ZoomBorderRightMouseButtonUse {
-            get {
-                return ResourceManager.GetString("ZoomBorderRightMouseButtonUse", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to scroll whell: zoom.
-        /// </summary>
-        public static string ZoomBorderScrollUse {
-            get {
-                return ResourceManager.GetString("ZoomBorderScrollUse", resourceCulture);
             }
         }
     }

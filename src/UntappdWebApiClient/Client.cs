@@ -193,7 +193,7 @@ namespace UntappdWebApiClient
                             if (brewery == null)
                                 continue;
 
-                           breweries.Add(brewery);
+                            breweries.Add(brewery);
                         }
                         beer.Collaboration.AddBrewery(brewery);
                     }
@@ -402,6 +402,11 @@ namespace UntappdWebApiClient
         }
 
         private Brewery GetBrewery(long breweryId)
+        {
+            return IsLogOn ? GetBreweryByApi(breweryId) : new Brewery { Id = breweryId };
+        }
+
+        private Brewery GetBreweryByApi(long breweryId)
         {
             HttpResponseMessage httpResponse = GetHttpResponse($"brewery/info/{breweryId}/?");
             long statusCode = (long) httpResponse.StatusCode;

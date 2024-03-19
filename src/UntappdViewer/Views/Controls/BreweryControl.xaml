@@ -10,26 +10,32 @@
              xmlns:gMapNet="clr-namespace:UntappdViewer.UI.Controls.Maps.GMapNet;assembly=UntappdViewer.UI"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <DockPanel>
-        <Image Width="50" Source="{Binding LabelPath, IsAsync=True}" Margin="0, 0, 10, 0"
-               Visibility="{Binding VisibilityLabel, Converter={StaticResource BooleanConverter}}"/>
-        <StackPanel>
-            <TextBlock Visibility="{Binding VisibilityUrl, Converter={StaticResource BooleanConverter}}" >
-                <Hyperlink NavigateUri="{Binding Url}" helpers:HyperlinkExtensions.IsExternal="true">
-                    <TextBlock Text="{x:Static properties:Resources.UntappdPage}"/>
-                </Hyperlink>
-            </TextBlock>
-            <TextBlock TextWrapping="Wrap" Text="{Binding Name}" FontWeight="Bold"/>
-            <DockPanel>
-                <DockPanel Visibility="{Binding VisibilityLocationItem, Converter={StaticResource BTVConverter}}">
-                    <gMapNet:LocationGMapNetControl Width="25" Height="25" HorizontalAlignment="Left"
-                                                    ItemDataTemplate="{StaticResource MapLocationTemplate}"/>
-                     <Separator Width="5" Visibility="Hidden"/> 
+    <Grid>
+        <DockPanel>
+            <Image Width="50" Source="{Binding LabelPath, IsAsync=True}" Margin="0, 0, 10, 0"
+                   Visibility="{Binding VisibilityLabel, Converter={StaticResource BooleanConverter}}"/>
+            <StackPanel>
+                <TextBlock Visibility="{Binding VisibilityUrl, Converter={StaticResource BooleanConverter}}" >
+                    <Hyperlink NavigateUri="{Binding Url}" helpers:HyperlinkExtensions.IsExternal="true">
+                        <TextBlock Text="{x:Static properties:Resources.UntappdPage}"/>
+                    </Hyperlink>
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap" Text="{Binding Name}" FontWeight="Bold"/>
+                <DockPanel>
+                    <DockPanel Visibility="{Binding VisibilityLocationItem, Converter={StaticResource BTVConverter}}">
+                        <gMapNet:LocationGMapNetControl Width="25" Height="25" HorizontalAlignment="Left"
+                                                        ItemDataTemplate="{StaticResource MapLocationTemplate}"/>
+                        <Separator Width="5" Visibility="Hidden"/>
+                    </DockPanel>
+                    <Image Source="{Binding VenueCountryFlag, Converter={StaticResource FlagConverter}}" Stretch="None"/>
+                    <controls:TextBlockJoin TextWrapping="Wrap" VerticalAlignment="Center" Separator="{Binding Source={x:Static untappdViewer:DefaultValues.Separator}}"
+                                            DataContext="{Binding Venues}" Margin="10, 0, 0, 0"/>
                 </DockPanel>
-                <Image Source="{Binding VenueCountryFlag, Converter={StaticResource FlagConverter}}" Stretch="None"/>
-                <controls:TextBlockJoin TextWrapping="Wrap" VerticalAlignment="Center" Separator="{Binding Source={x:Static untappdViewer:DefaultValues.Separator}}"
-                                        DataContext="{Binding Venues}" Margin="10, 0, 0, 0"/>
-            </DockPanel>
-        </StackPanel>
-    </DockPanel>
+            </StackPanel>
+        </DockPanel>
+        <Grid  Visibility="{Binding IsNeedsUpdating, Converter={StaticResource BTVConverter}}">
+            <Grid Background="{StaticResource MainSolidBrushDark}" Opacity="0.8"/>
+            <Label Content="{x:Static properties:Resources.UpdateUpper}" HorizontalAlignment="Center" VerticalAlignment ="Center" FontWeight="Bold"  Foreground="#ffffff"/>
+        </Grid>
+    </Grid>
 </UserControl>

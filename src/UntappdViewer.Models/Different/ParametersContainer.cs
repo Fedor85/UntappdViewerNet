@@ -4,12 +4,7 @@ namespace UntappdViewer.Models.Different
 {
     public class ParametersContainer
     {
-        private Dictionary<string, object> parameters;
-
-        public ParametersContainer()
-        {
-            parameters = new Dictionary<string, object>();
-        }
+        private readonly Dictionary<string, object> parameters = new();
 
         public void Add(string name, object value)
         {

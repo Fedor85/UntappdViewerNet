@@ -51,10 +51,9 @@ namespace UntappdViewer.Test
             ClassicAssert.AreNotEqual(servingTypeCount, 0);
         }
 
-        [TestMethod, Ignore(AccessToken)]
+        [TestMethod]
         public void FillCollaboration()
         {
-            ClassicAssert.True(webApiClient.IsLogOn);
             webApiClient.FillCollaboration(checkinsContainer.Beers, checkinsContainer.Brewerys);
         }
 

@@ -14,7 +14,7 @@ namespace UntappdWebApiClient
             foreach (BeerWeb webBeer in webBeers)
             {
                 Beer beer = beers.FirstOrDefault(item => item.Id == webBeer.Bid);
-                if (beer != null && (UpdateBeer(beer, webBeer)))
+                if (beer != null && UpdateBeer(beer, webBeer))
                     counter++;
             }
             return counter;
@@ -41,6 +41,7 @@ namespace UntappdWebApiClient
                 beer.Description = webBeer.BeerDescription;
                 isUpdate = true;
             }
+
             return isUpdate;
         }
     }

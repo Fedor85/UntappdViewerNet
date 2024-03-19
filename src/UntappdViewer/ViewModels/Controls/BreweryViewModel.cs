@@ -33,6 +33,8 @@ namespace UntappdViewer.ViewModels.Controls
             get { return LocationItem!= null; }
         }
 
+        public bool IsNeedsUpdating { get; set; }
+
         public BreweryViewModel()
         {
             Venues = new List<string>();

@@ -623,4 +623,8 @@
     <value>Venue/Breweries</value>
     <comment>en-en</comment>
   </data>
+  <data name="UpdateUpper" xml:space="preserve">
+    <value>UPDATE</value>
+    <comment>en-en</comment>
+  </data>
 </root>
