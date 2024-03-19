@@ -22,6 +22,8 @@ namespace UntappdViewer.Interfaces.Services
 
         void UpdateBeers(List<Beer> beers, Func<Beer, bool> predicate, ref long offset, IBaseCancellationToken cancellation = null);
 
+        void UpdateBreweries(List<Brewery> breweries, IBaseCancellationToken cancellation = null);
+
         void FillServingType(List<Checkin> checkins, string defaultServingType, IBaseCancellationToken cancellation = null);
 
         void FillCollaboration(List<Beer> beers, List<Brewery> breweries, IBaseCancellationToken cancellation = null);

@@ -3,8 +3,10 @@
 namespace UntappdViewer.Models
 {
     [Serializable]
-    public class Brewery
+    public class Brewery: BasePropertyChanged
     {
+        private string name;
+
         /// <summary>
         /// id пивоварни
         /// </summary>
@@ -13,7 +15,11 @@ namespace UntappdViewer.Models
         /// <summary>
         /// наименавине пивоварни
         /// </summary>
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return name; }
+            set { SetProperty(ref name, value); }
+        }
 
         /// <summary>
         /// url пивоварни

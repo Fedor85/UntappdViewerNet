@@ -627,4 +627,8 @@
     <value>UPDATE</value>
     <comment>en-en</comment>
   </data>
+  <data name="BreweryUpdate" xml:space="preserve">
+    <value>Brewery Update</value>
+    <comment>en-en</comment>
+  </data>
 </root>

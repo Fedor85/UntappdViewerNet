@@ -91,6 +91,9 @@
                                     </DockPanel>
                                 </Grid>
                             </DockPanel>
+                            <Separator Style="{StaticResource SeparatorHeight}"/>
+                            <Button Content="{x:Static properties:Resources.BreweryUpdate}" IsEnabled="{Binding IsEnabledBreweryUpdateButton}"
+                                    Command="{Binding BreweryUpdateButtonCommand}" HorizontalAlignment="Left" Width="93" Height="20" />
                         </StackPanel>
                     </Grid>
                     <Separator Style="{StaticResource SeparatorWidth}"/>

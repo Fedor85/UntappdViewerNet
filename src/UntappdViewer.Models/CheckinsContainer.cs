@@ -78,6 +78,7 @@ namespace UntappdViewer.Models
 
         public void AddBrewery(Brewery brewery)
         {
+            brewery.PropertyChanged += ItemPropertyChanged;
             Brewerys.Add(brewery);
             IsСhanges = true;
         }
@@ -98,6 +99,9 @@ namespace UntappdViewer.Models
                 beer.PropertyChanged += ItemPropertyChanged;
                 beer.Collaboration.PropertyChanged += ItemPropertyChanged;
             }
+
+            foreach (Brewery brewery in Brewerys)
+                brewery.PropertyChanged += ItemPropertyChanged;
         }
     }
 }

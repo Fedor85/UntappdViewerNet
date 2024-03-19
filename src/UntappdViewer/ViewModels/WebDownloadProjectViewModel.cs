@@ -52,6 +52,8 @@ namespace UntappdViewer.ViewModels
 
         private string offsetUpdateBeer;
 
+        private bool isEnabledBreweryUpdateButton;
+
         private bool isEnabledFillServingTypeButton;
 
         private bool isEnabledCollaborationButton;
@@ -112,6 +114,12 @@ namespace UntappdViewer.ViewModels
             set { SetProperty(ref offsetUpdateBeer, value); }
         }
 
+        public bool IsEnabledBreweryUpdateButton
+        {
+            get { return isEnabledBreweryUpdateButton; }
+            set { SetProperty(ref isEnabledBreweryUpdateButton, value); }
+        }
+
         public bool IsEnabledFillServingTypeButton
         {
             get { return isEnabledFillServingTypeButton; }
@@ -143,6 +151,8 @@ namespace UntappdViewer.ViewModels
         public ICommand ToEndDownloadButtonCommand { get; }
         
         public ICommand BeerUpdateButtonCommand { get; }
+
+        public ICommand BreweryUpdateButtonCommand { get; }
 
         public ICommand FillServingTypeButtonCommand { get; }
 
@@ -177,6 +187,7 @@ namespace UntappdViewer.ViewModels
             FirstDownloadButtonCommand = new DelegateCommand(FirstDownloadCheckins);
             ToEndDownloadButtonCommand = new DelegateCommand(ToEndDownloadCheckins);
             BeerUpdateButtonCommand = new DelegateCommand(UpdateBeers);
+            BreweryUpdateButtonCommand = new DelegateCommand(UpdateBreweries);
 
             FillServingTypeButtonCommand = new DelegateCommand(FillServingType);
             FillCollaborationButtonCommand = new DelegateCommand(FillCollaboration);
@@ -356,6 +367,16 @@ namespace UntappdViewer.ViewModels
             UpdateBeers(beers);
         }
 
+        private void UpdateBreweries()
+        {
+            List<Brewery> breweries = untappdService.GetFullBreweries().Where(item => item.IsNeedsUpdating()).ToList();
+            if (!breweries.Any())
+                return;
+
+            LoadingChangeActivity(true, true);
+            UpdateBreweries(breweries);
+        }
+
         private void FillServingType()
         {
             List<Checkin> checkins = untappdService.GetCheckins().Where(item => String.IsNullOrEmpty(item.ServingType)).ToList();
@@ -413,6 +434,23 @@ namespace UntappdViewer.ViewModels
             }
         }
 
+        private async void UpdateBreweries(List<Brewery> breweries)
+        {
+            BeforeRunWebClient();
+            try
+            {
+                await Task.Run(() => webApiClient.UpdateBreweries(breweries, webClientCancellation));
+            }
+            catch (Exception ex)
+            {
+                interactionRequestService.ShowError(Properties.Resources.Error, StringHelper.GetFullExceptionMessage(ex));
+            }
+            finally
+            {
+                AfterRunWebClient();
+            }
+        }
+
         private async void FillServingType(List<Checkin> checkins)
         {
             BeforeRunWebClient();
@@ -461,6 +499,7 @@ namespace UntappdViewer.ViewModels
 
             untappdService.SortDataDescCheckins();
             SetCheckins();
+            SetEnabledBreweryUpdateButton();
             SetEnabledFillServingTypeButton();
             SetEnabledCollaborationButton();
 
@@ -487,7 +526,8 @@ namespace UntappdViewer.ViewModels
                 IsEnabledAPIUntappd = false;
                 OffsetUpdateBeer = String.Empty;
             }
-               
+
+            SetEnabledBreweryUpdateButton();
             SetEnabledFillServingTypeButton();
             SetEnabledCollaborationButton();
 
@@ -512,6 +552,12 @@ namespace UntappdViewer.ViewModels
         {
             long offset = settingService.GetOffsetUpdateBeer();
             OffsetUpdateBeer = offset > 0 ? offset.ToString() : String.Empty;
+        }
+
+        private void SetEnabledBreweryUpdateButton()
+        {
+            List<Brewery> breweries = untappdService.GetFullBreweries();
+            IsEnabledBreweryUpdateButton = breweries.Any(item => item.IsNeedsUpdating());
         }
 
         private void SetEnabledFillServingTypeButton()

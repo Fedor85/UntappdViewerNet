@@ -262,6 +262,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Brewery Update.
+        /// </summary>
+        public static string BreweryUpdate {
+            get {
+                return ResourceManager.GetString("BreweryUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap can_3x {

@@ -16,6 +16,7 @@ using UntappdViewer.Models.Different;
 using BeerWeb = QuickType.Beers.WebModels.Beer;
 using Beer = UntappdViewer.Models.Beer;
 using Brewery = UntappdViewer.Models.Brewery;
+using BreweryWeb = QuickType.Common.WebModels.Brewery;
 using Venue = UntappdViewer.Models.Venue;
 
 namespace UntappdWebApiClient
@@ -122,6 +123,19 @@ namespace UntappdWebApiClient
 
                 if (cancellation != null && cancellation.Cancel)
                     isRun = false;
+            }
+        }
+
+        public void UpdateBreweries(List<Brewery> breweries, IBaseCancellationToken cancellation = null)
+        {
+            foreach (Brewery brewery in breweries)
+            {
+                BreweryWeb breweryWeb = GetBreweryByApi(brewery.Id);
+                if (breweryWeb != null)
+                    BreweryMapper.FillBrewery(brewery, breweryWeb);
+
+                if (cancellation != null && cancellation.Cancel)
+                    return;
             }
         }
 
@@ -403,10 +417,19 @@ namespace UntappdWebApiClient
 
         private Brewery GetBrewery(long breweryId)
         {
-            return IsLogOn ? GetBreweryByApi(breweryId) : new Brewery { Id = breweryId };
+            if(!IsLogOn)
+                return new Brewery { Id = breweryId };
+
+            BreweryWeb breweryWeb =  GetBreweryByApi(breweryId);
+            if (breweryWeb == null)
+                return null;
+
+            Brewery brewery = new Brewery();
+            BreweryMapper.FillBrewery(brewery, breweryWeb);
+            return brewery;
         }
 
-        private Brewery GetBreweryByApi(long breweryId)
+        private BreweryWeb GetBreweryByApi(long breweryId)
         {
             HttpResponseMessage httpResponse = GetHttpResponse($"brewery/info/{breweryId}/?");
             long statusCode = (long) httpResponse.StatusCode;
@@ -419,9 +442,7 @@ namespace UntappdWebApiClient
             string responseBody = httpResponse.Content.ReadAsStringAsync().Result;
             BreweryQuickType checkinsQuickType = JsonConvert.DeserializeObject<BreweryQuickType>(responseBody);
 
-            Brewery brewery = new Brewery();
-            BreweryMapper.FillBrewery(brewery, checkinsQuickType.Response.Brewery);
-            return brewery;
+            return checkinsQuickType.Response.Brewery;
         }
 
         private HtmlDocument GetHtmlDocument(string url)
