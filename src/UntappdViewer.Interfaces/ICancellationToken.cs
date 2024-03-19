@@ -2,10 +2,8 @@
 
 namespace UntappdViewer.Interfaces
 {
-    public interface ICancellationToken<T>
+    public interface ICancellationToken<T>: IBaseCancellationToken
     {
         List<T> Items { get; }
-
-        bool Cancel { get; set; }
     }
 }

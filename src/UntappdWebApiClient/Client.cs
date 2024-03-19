@@ -73,7 +73,7 @@ namespace UntappdWebApiClient
             FillCheckins(checkinsContainer, checkinsContainer.Checkins.Min(item => item.Id), null, cancellation);
         }
 
-        public void UpdateBeers(List<Beer> beers, Func<Beer, bool> predicate, ref long offset, ICancellationToken<Checkin> cancellation = null)
+        public void UpdateBeers(List<Beer> beers, Func<Beer, bool> predicate, ref long offset, IBaseCancellationToken cancellation = null)
         {
             if (beers.Count == 0)
                 return;
@@ -125,7 +125,7 @@ namespace UntappdWebApiClient
             }
         }
 
-        public void FillServingType(List<Checkin> checkins, string defaultServingType, ICancellationToken<Checkin> cancellation = null)
+        public void FillServingType(List<Checkin> checkins, string defaultServingType, IBaseCancellationToken cancellation = null)
         {
             long countTotal = checkins.Count;
             long countUpdate = 0;
@@ -155,7 +155,7 @@ namespace UntappdWebApiClient
             }
         }
 
-        public void FillCollaboration(List<Beer> beers, List<Brewery> breweries, ICancellationToken<Checkin> cancellation = null)
+        public void FillCollaboration(List<Beer> beers, List<Brewery> breweries, IBaseCancellationToken cancellation = null)
         {
             long countTotal = beers.Count;
             long countCheck = 0;

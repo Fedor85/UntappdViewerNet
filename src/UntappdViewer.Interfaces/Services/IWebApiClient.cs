@@ -20,11 +20,11 @@ namespace UntappdViewer.Interfaces.Services
 
         void FillToEndCheckins(CheckinsContainer checkinsContainer, ICancellationToken<Checkin> cancellation = null);
 
-        void UpdateBeers(List<Beer> beers, Func<Beer, bool> predicate, ref long offset, ICancellationToken<Checkin> cancellation = null);
+        void UpdateBeers(List<Beer> beers, Func<Beer, bool> predicate, ref long offset, IBaseCancellationToken cancellation = null);
 
-        void FillServingType(List<Checkin> checkins, string defaultServingType, ICancellationToken<Checkin> cancellation = null);
+        void FillServingType(List<Checkin> checkins, string defaultServingType, IBaseCancellationToken cancellation = null);
 
-        void FillCollaboration(List<Beer> beers, List<Brewery> breweries, ICancellationToken<Checkin> cancellation = null);
+        void FillCollaboration(List<Beer> beers, List<Brewery> breweries, IBaseCancellationToken cancellation = null);
 
         string GetDevAvatarImageUrl();
 

@@ -5,13 +5,8 @@ namespace UntappdWebApiClient
 {
     public class CancellationToken<T> : ICancellationToken<T>
     {
-        public List<T> Items { get;  private set; }
+        public List<T> Items { get; } = new();
 
         public bool Cancel { get;  set; }
-
-        public CancellationToken()
-        {
-            Items = new List<T>();
-        }
     }
 }
