@@ -39,17 +39,18 @@ namespace UntappdWebApiClient
             jsonSerializerSettings = new JsonSerializerSettings();
             jsonSerializerSettings.NullValueHandling = NullValueHandling.Ignore;
             jsonSerializerSettings.MissingMemberHandling = MissingMemberHandling.Ignore;
+            urlPathBuilder = new UrlPathBuilder();
         }
 
         public void LogOff()
         {
             IsLogOn = false;
-            urlPathBuilder = null;
+            urlPathBuilder.ResetAccessToken();
         }
 
         public bool LogOn(string accessToken)
         {
-            urlPathBuilder = new UrlPathBuilder(UrlConstants.BaseAPIUrl, accessToken);
+            urlPathBuilder.InitializeAccessToken(accessToken);
 
             HttpResponseMessage httpResponse = GetHttpResponse("checkin/recent/?", true);
             if ((long)httpResponse.StatusCode == 429)
@@ -377,7 +378,7 @@ namespace UntappdWebApiClient
 
             using (HttpClient httpClient = new HttpClient())
             {
-                string url = urlPathBuilder.GetUrl(methodName);
+                string url = urlPathBuilder.GetAPIUrl(methodName);
                 return httpClient.GetAsync(url).Result;
             }
         }

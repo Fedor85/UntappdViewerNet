@@ -4,22 +4,24 @@ namespace UntappdWebApiClient
 {
     public class UrlPathBuilder
     {
-        private Uri baseUrl;
+        private string access_token;
 
-        private string authenticationUri;
-
-        public UrlPathBuilder(string baseUrl, string accessToken)
+        public void InitializeAccessToken(string accessToken)
         {
-            if (String.IsNullOrEmpty(baseUrl))
-                throw new ArgumentException(Properties.Resources.EmptyUrl);
-
-            this.baseUrl = new Uri(baseUrl);
-            authenticationUri = $"&access_token={accessToken}";
+            access_token = $"&access_token={accessToken}";
         }
 
-        public string GetUrl(string methodName)
+        public void ResetAccessToken()
         {
-            return String.Concat(baseUrl, methodName, authenticationUri);
+            access_token = String.Empty;
+        }
+
+        public string GetAPIUrl(string methodName)
+        {
+            if (String.IsNullOrEmpty(access_token))
+                throw new ArgumentException("accessToken is not specified");
+
+            return String.Concat(UrlConstants.BaseAPIUrl, methodName, access_token);
         }
 
         public static string GetСheckinUrl(long checkinId)
