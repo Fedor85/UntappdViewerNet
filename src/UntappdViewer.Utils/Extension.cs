@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 
 namespace UntappdViewer.Utils
 {
@@ -20,6 +21,20 @@ namespace UntappdViewer.Utils
 
             list.RemoveAt(index);
             list.Add(item);
+        }
+
+        public static bool TryParseJson(this string strInput, out JsonDocument output)
+        {
+            output = null;
+            try
+            {
+                output = JsonDocument.Parse(strInput);
+                return true;
+            }
+            catch (Exception exc)
+            {
+                return false;
+            }
         }
     }
 }

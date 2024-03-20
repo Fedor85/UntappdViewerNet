@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework.Legacy;
+using UntappdViewer.Interfaces;
 using UntappdViewer.Models;
 using UntappdWebApiClient;
 
@@ -12,6 +13,14 @@ namespace UntappdViewer.Test
     {
         //access_token
         private const string AccessToken = "access_token";
+
+        //clientID
+        private const string ClientID = "clientID";
+
+        //clientSecret
+        private const string ClientSecret = "clientSecret";
+
+        private const string RedirectUrl = "http://localhost";
 
         private CheckinsContainer checkinsContainer;
 
@@ -62,6 +71,15 @@ namespace UntappdViewer.Test
         {
             ClassicAssert.True(!String.IsNullOrEmpty(webApiClient.GetDevAvatarImageUrl()));
             ClassicAssert.True(!String.IsNullOrEmpty(webApiClient.GetDevProfileHeaderImageUrl()));
+        }
+
+        [TestMethod, Ignore(AccessToken)]
+        public void TestGetAccessToken()
+        {
+            IResponseMessage authenticaResponseMessage = webApiClient.CheckAuthenticateUrl(ClientID, RedirectUrl);
+            ClassicAssert.AreEqual(200, authenticaResponseMessage.Code);
+
+            IResponseMessage authenticaAccessToken = webApiClient.GetAccessToken(ClientID, ClientSecret, RedirectUrl, "");
         }
     }
 }

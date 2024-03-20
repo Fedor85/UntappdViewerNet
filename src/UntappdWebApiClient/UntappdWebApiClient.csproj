@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\UntappdViewer.Interfaces\UntappdViewer.Interfaces.csproj" />
     <ProjectReference Include="..\UntappdViewer.Models\UntappdViewer.Models.csproj" />
+    <ProjectReference Include="..\UntappdViewer.Utils\UntappdViewer.Utils.csproj" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx">

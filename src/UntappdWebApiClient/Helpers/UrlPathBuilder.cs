@@ -24,6 +24,16 @@ namespace UntappdWebApiClient
             return String.Concat(UrlConstants.BaseAPIUrl, methodName, access_token);
         }
 
+        public static string GetAuthenticateUrl(string clientId, string redirectUrl)
+        {
+            return String.Concat(UrlConstants.AuthenticateUrl, $"?client_id={clientId}", "&response_type=code", $"&redirect_url={redirectUrl}");
+        }
+
+        public static string GetAuthorizecateUrl(string clientId,string clientSecret, string redirectUrl, string code)
+        {
+            return String.Concat(UrlConstants.AuthorizeUrl, $"?client_id={clientId}", $"&client_secret={clientSecret}", "&response_type=code", $"&redirect_url={redirectUrl}", $"&code={code}");
+        }
+
         public static string GetСheckinUrl(long checkinId)
         {
             return String.Concat(UrlConstants.СheckinUrl, checkinId);

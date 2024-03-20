@@ -18,6 +18,10 @@ using Beer = UntappdViewer.Models.Beer;
 using Brewery = UntappdViewer.Models.Brewery;
 using BreweryWeb = QuickType.Common.WebModels.Brewery;
 using Venue = UntappdViewer.Models.Venue;
+using System.Text.Json;
+using UntappdViewer.Utils;
+using System.Text.Json.Nodes;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace UntappdWebApiClient
 {
@@ -42,6 +46,32 @@ namespace UntappdWebApiClient
             urlPathBuilder = new UrlPathBuilder();
         }
 
+        public IResponseMessage CheckAuthenticateUrl(string clientId, string redirectUrl)
+        {
+            string authenticateUrl = UrlPathBuilder.GetAuthenticateUrl(clientId, redirectUrl);
+            HttpResponseMessage responseMessage = GetHttpResponse(authenticateUrl);
+            string responseBody = responseMessage.Content.ReadAsStringAsync().Result;
+            if (!responseBody.TryParseJson(out JsonDocument jsonDocument))
+                return new ResponseMessage((int)responseMessage.StatusCode) { Message = authenticateUrl };
+
+            JsonNode data = JsonSerializer.Deserialize<JsonNode>(responseBody);
+            int httpCode = data["meta"]["http_code"].GetValue<int>();
+            string message = data["meta"]["error_detail"].GetValue<string>();
+            return new ResponseMessage(httpCode) {Message = message};
+        }
+
+        public IResponseMessage GetAccessToken(string clientId, string clientSecret, string redirectUrl, string code)
+        {
+            string authorizecateUrl = UrlPathBuilder.GetAuthorizecateUrl(clientId, clientSecret, redirectUrl, code);
+            HttpResponseMessage responseMessage = GetHttpResponse(authorizecateUrl);
+            string responseBody = responseMessage.Content.ReadAsStringAsync().Result;
+            JsonNode data = JsonSerializer.Deserialize<JsonNode>(responseBody);
+            int httpCode = data["meta"]["http_code"].GetValue<int>();
+            string message = httpCode == (int)HttpStatusCode.OK ? data["response"]["access_token"].GetValue<string>()
+                                                                : data["meta"]["error_detail"].GetValue<string>();
+            return new ResponseMessage(httpCode) { Message = message };
+        }
+
         public void LogOff()
         {
             IsLogOn = false;
@@ -52,7 +82,7 @@ namespace UntappdWebApiClient
         {
             urlPathBuilder.InitializeAccessToken(accessToken);
 
-            HttpResponseMessage httpResponse = GetHttpResponse("checkin/recent/?", true);
+            HttpResponseMessage httpResponse = GetHttpApiResponse("checkin/recent/?", true);
             if ((long)httpResponse.StatusCode == 429)
                 throw new ArgumentException(httpResponse.ReasonPhrase);
 
@@ -85,7 +115,7 @@ namespace UntappdWebApiClient
             bool isRun = true;
             while (isRun)
             {
-                HttpResponseMessage httpResponse = GetHttpResponse($"user/beers/?offset={offset}&limit=50");
+                HttpResponseMessage httpResponse = GetHttpApiResponse($"user/beers/?offset={offset}&limit=50");
                 if ((long)httpResponse.StatusCode == 429)
                     throw new ArgumentException(httpResponse.ReasonPhrase);
 
@@ -255,7 +285,7 @@ namespace UntappdWebApiClient
             bool isRun = true;
             while (isRun)
             {
-                HttpResponseMessage httpResponse = GetHttpResponse($"user/checkins/?max_id={currentId}&limit=50");
+                HttpResponseMessage httpResponse = GetHttpApiResponse($"user/checkins/?max_id={currentId}&limit=50");
                 if ((long)httpResponse.StatusCode == 429)
                     throw new ArgumentException(httpResponse.ReasonPhrase);
 
@@ -338,7 +368,7 @@ namespace UntappdWebApiClient
             int counter = 0;
             foreach (Beer beer in beers)
             {
-                HttpResponseMessage httpResponse = GetHttpResponse($"beer/info/{beer.Id}/?");
+                HttpResponseMessage httpResponse = GetHttpApiResponse($"beer/info/{beer.Id}/?");
                 if ((long)httpResponse.StatusCode == 429)
                     throw new ArgumentException(httpResponse.ReasonPhrase);
 
@@ -371,16 +401,18 @@ namespace UntappdWebApiClient
                 checkinsContainer.AddVenue(checkin.Venue);
         }
 
-        private HttpResponseMessage GetHttpResponse(string methodName, bool isLogOnRequest = false)
+        private HttpResponseMessage GetHttpApiResponse(string methodName, bool isLogOnRequest = false)
         {
             if(!isLogOnRequest && !IsLogOn)
                 throw new ArgumentException(Properties.Resources.ServiceIsNotAuthorized);
 
-            using (HttpClient httpClient = new HttpClient())
-            {
-                string url = urlPathBuilder.GetAPIUrl(methodName);
-                return httpClient.GetAsync(url).Result;
-            }
+            return GetHttpResponse(urlPathBuilder.GetAPIUrl(methodName));
+        }
+
+        private HttpResponseMessage GetHttpResponse(string url)
+        {
+            using HttpClient httpClient = new HttpClient();
+            return httpClient.GetAsync(url).Result;
         }
 
         private bool TryServingType(string checkinUrl, string defaultServingType, out string servingType)
@@ -432,7 +464,7 @@ namespace UntappdWebApiClient
 
         private BreweryWeb GetBreweryByApi(long breweryId)
         {
-            HttpResponseMessage httpResponse = GetHttpResponse($"brewery/info/{breweryId}/?");
+            HttpResponseMessage httpResponse = GetHttpApiResponse($"brewery/info/{breweryId}/?");
             long statusCode = (long) httpResponse.StatusCode;
             if (statusCode == 429)
                 throw new ArgumentException(httpResponse.ReasonPhrase);
@@ -448,19 +480,17 @@ namespace UntappdWebApiClient
 
         private HtmlDocument GetHtmlDocument(string url)
         {
-            using (WebClient client = new WebClient())
+            using WebClient client = new WebClient();
+            try
             {
-                try
-                {
-                    string htmlPage = client.DownloadString(url);
-                    HtmlDocument htmlDoc = new HtmlDocument();
-                    htmlDoc.LoadHtml(htmlPage);
-                    return htmlDoc;
-                }
-                catch (Exception ex)
-                {
-                    return null;
-                }
+                string htmlPage = client.DownloadString(url);
+                HtmlDocument htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(htmlPage);
+                return htmlDoc;
+            }
+            catch (Exception ex)
+            {
+                return null;
             }
         }
 

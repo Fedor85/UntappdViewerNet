@@ -6,6 +6,10 @@
 
         public const string BaseUrl = @"https://untappd.com/";
 
+        public const string AuthenticateUrl = BaseUrl + "oauth/authenticate/";
+
+        public const string AuthorizeUrl = BaseUrl + "oauth/authorize/";
+
         public const string СheckinUrl = BaseUrl + @"c/";
 
         public const string BeerUrl = BaseUrl + @"beer/";

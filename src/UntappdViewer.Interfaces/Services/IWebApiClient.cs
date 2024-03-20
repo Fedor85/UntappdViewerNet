@@ -8,6 +8,10 @@ namespace UntappdViewer.Interfaces.Services
     {
         event Action<string> UploadedProgress;
 
+        IResponseMessage CheckAuthenticateUrl(string clientId, string redirectUrl);
+
+        IResponseMessage GetAccessToken(string clientId, string clientSecret, string redirectUrl, string code);
+
         bool LogOn(string accessToken);
 
         void LogOff();
