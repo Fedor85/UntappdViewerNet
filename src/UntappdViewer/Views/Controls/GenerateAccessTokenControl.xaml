@@ -6,7 +6,7 @@
              xmlns:controls="clr-namespace:UntappdViewer.UI.Controls;assembly=UntappdViewer.UI"
              xmlns:properties="clr-namespace:UntappdViewer.Properties"
              xmlns:helpers="clr-namespace:UntappdViewer.Helpers"
-             xmlns:untappdViewer="clr-namespace:UntappdViewer"
+             xmlns:untappdWebApiClient="clr-namespace:UntappdWebApiClient;assembly=UntappdWebApiClient"
              mc:Ignorable="d">
     <UserControl.Resources>
         <Style x:Key="SeparatorHeight" TargetType="{x:Type Separator}">
@@ -22,13 +22,13 @@
         <UniformGrid  Rows="1" Columns="3" Margin="0, 5">
             <Image Height="60" Width="60" Source="..\..\Resources\oauth-2-sm-logo.png"/>
             <TextBlock VerticalAlignment="Center" TextAlignment="Center">
-                <Hyperlink NavigateUri="{Binding Source={x:Static untappdViewer:DefaultValues.AuthenticationAPIDocumentationUrl}}"
+                <Hyperlink NavigateUri="{Binding Source={x:Static untappdWebApiClient:UrlConstants.AuthenticationAPIDocumentationUrl}}"
                            TextDecorations="" helpers:HyperlinkExtensions.IsExternal="true">
                     <TextBlock  Text="{x:Static properties:Resources.AuthenticationAPIDocumentation}" FontWeight="Bold" Foreground="#000"/>
                 </Hyperlink>
             </TextBlock>
             <TextBlock VerticalAlignment="Center" TextAlignment="Center">
-                <Hyperlink NavigateUri="{Binding Source={x:Static untappdViewer:DefaultValues.YourAppsAPICentralUrl}}"
+                <Hyperlink NavigateUri="{Binding Source={x:Static untappdWebApiClient:UrlConstants.YourAppsAPICentralUrl}}"
                            TextDecorations="" helpers:HyperlinkExtensions.IsExternal="true">
                     <TextBlock  Text="{x:Static properties:Resources.YourAppsAPICentral}" FontWeight="Bold" Foreground="#000"/>
                 </Hyperlink>

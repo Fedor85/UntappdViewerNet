@@ -2,20 +2,24 @@
 {
     public static class UrlConstants
     {
-        public const string BaseAPIUrl = @"https://api.untappd.com/v4/";
+        public const string UntappdtAPIUrl = @"https://api.untappd.com/v4/";
 
-        public const string BaseUrl = @"https://untappd.com/";
+        public const string UntappdtUrl = @"https://untappd.com/";
 
-        public const string AuthenticateUrl = BaseUrl + "oauth/authenticate/";
+        public const string AuthenticateUrl = UntappdtUrl + "oauth/authenticate/";
 
-        public const string AuthorizeUrl = BaseUrl + "oauth/authorize/";
+        public const string AuthorizeUrl = UntappdtUrl + "oauth/authorize/";
 
-        public const string СheckinUrl = BaseUrl + @"c/";
+        public const string AuthenticationAPIDocumentationUrl = UntappdtUrl + "api/docs#authentication";
 
-        public const string BeerUrl = BaseUrl + @"beer/";
+        public const string YourAppsAPICentralUrl = UntappdtUrl + "api/dashboard";
 
-        public const string BreweryUrl = BaseUrl + @"brewery/";
+        public const string DeveloperProfileUrl = UntappdtUrl + @"user/Feador";
 
-        public const string DeveloperProfileUrl = BaseUrl + @"user/Feador";
+        public const string СheckinUrl = UntappdtUrl + @"c/";
+
+        public const string BeerUrl = UntappdtUrl + @"beer/";
+
+        public const string BreweryUrl = UntappdtUrl + @"brewery/";
     }
 }

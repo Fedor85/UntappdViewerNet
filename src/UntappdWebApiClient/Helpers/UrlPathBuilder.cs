@@ -21,7 +21,7 @@ namespace UntappdWebApiClient
             if (String.IsNullOrEmpty(access_token))
                 throw new ArgumentException("accessToken is not specified");
 
-            return String.Concat(UrlConstants.BaseAPIUrl, methodName, access_token);
+            return String.Concat(UrlConstants.UntappdtAPIUrl, methodName, access_token);
         }
 
         public static string GetAuthenticateUrl(string clientId, string redirectUrl)

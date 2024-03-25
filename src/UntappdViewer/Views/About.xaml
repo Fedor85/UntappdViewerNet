@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mvvm="http://prismlibrary.com/"
         xmlns:properties="clr-namespace:UntappdViewer.Properties"
-        xmlns:local="clr-namespace:UntappdViewer"
         xmlns:controls1="clr-namespace:UntappdViewer.UI.Controls;assembly=UntappdViewer.UI"
         xmlns:images="clr-namespace:UntappdViewer.UI.Controls.Images;assembly=UntappdViewer.UI"
         xmlns:youTubeVideo="clr-namespace:UntappdViewer.UI.Controls.YouTubeVideo;assembly=UntappdViewer.UI"
         xmlns:helpers="clr-namespace:UntappdViewer.Helpers"
+        xmlns:untappdWebApiClient="clr-namespace:UntappdWebApiClient;assembly=UntappdWebApiClient"
         mc:Ignorable="d"
         mvvm:ViewModelLocator.AutoWireViewModel="True"
         Title="{x:Static properties:Resources.AboutTitle}" Height="220" Width="475"  Background="{StaticResource MainGradient2}"
@@ -26,7 +26,7 @@
             <Grid Background="#000000" Opacity="0.2"/>
             <StackPanel>
                 <TextBlock HorizontalAlignment="Center">
-                    <Hyperlink NavigateUri="{Binding Source={x:Static local:DefaultValues.UntappdtUrl}}"
+                    <Hyperlink NavigateUri="{Binding Source={x:Static untappdWebApiClient:UrlConstants.UntappdtUrl}}"
                                TextDecorations="" helpers:HyperlinkExtensions.IsExternal="true">
                         <Image Height="40" Width="200" Source="..\Resources\pbu_320_white.png"/>
                     </Hyperlink>
