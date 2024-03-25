@@ -65,6 +65,9 @@ namespace UntappdWebApiClient
             string authorizecateUrl = UrlPathBuilder.GetAuthorizecateUrl(clientId, clientSecret, redirectUrl, code);
             HttpResponseMessage responseMessage = GetHttpResponse(authorizecateUrl);
             string responseBody = responseMessage.Content.ReadAsStringAsync().Result;
+            if (!responseBody.TryParseJson(out JsonDocument jsonDocument))
+                return new ResponseMessage((int)responseMessage.StatusCode) { Message = Properties.Resources.InvalidUrl };
+
             JsonNode data = JsonSerializer.Deserialize<JsonNode>(responseBody);
             int httpCode = data["meta"]["http_code"].GetValue<int>();
             string message = httpCode == (int)HttpStatusCode.OK ? data["response"]["access_token"].GetValue<string>()
