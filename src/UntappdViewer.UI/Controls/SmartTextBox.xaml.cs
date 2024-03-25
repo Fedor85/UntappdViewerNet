@@ -151,6 +151,7 @@ namespace UntappdViewer.UI.Controls
             TextVisiblePasswordBox.GotFocus += TextBoxGotFocus;
             TextVisiblePasswordBox.LostFocus += TextBoxLostFocus;
             TextVisiblePasswordBox.TextChanged += VisibleTextChanged;
+            TextVisiblePasswordBox.IsEnabledChanged += VisibleTextEnabledChanged;
 
             ImgShowHidePassword.MouseLeave += HidePasswordHandler;
             ImgShowHidePassword.PreviewMouseUp += HidePasswordHandler;
@@ -168,6 +169,7 @@ namespace UntappdViewer.UI.Controls
             TextVisiblePasswordBox.GotFocus -= TextBoxGotFocus;
             TextVisiblePasswordBox.LostFocus -= TextBoxLostFocus;
             TextVisiblePasswordBox.TextChanged -= VisibleTextChanged;
+            TextVisiblePasswordBox.IsEnabledChanged -= VisibleTextEnabledChanged;
 
             ImgShowHidePassword.MouseLeave -= HidePasswordHandler;
             ImgShowHidePassword.PreviewMouseUp -= HidePasswordHandler;
@@ -349,7 +351,13 @@ namespace UntappdViewer.UI.Controls
         private void ShowPasswordHandler(object sender, MouseEventArgs e)
         {
             ImgShowHidePassword.Source = ImageConverter.GetBitmapSource(Properties.Resources.Hide);
-            TextPasswordBox.Visibility = Visibility.Hidden;
+            TextPasswordBox.Visibility = Visibility.Collapsed;
+        }
+
+        private void VisibleTextEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if(PasswordMode)
+                TextVisiblePasswordBox.Visibility = (bool)e.NewValue ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void СlearClick(object sender, RoutedEventArgs e)
