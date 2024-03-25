@@ -141,6 +141,10 @@
     <value>FillServingType -&gt; </value>
     <comment>en-en</comment>
   </data>
+  <data name="InvalidUrl" xml:space="preserve">
+    <value>Invalid Url</value>
+    <comment>en-en</comment>
+  </data>
   <data name="ServiceIsNotAuthorized" xml:space="preserve">
     <value>Service is not authorized.</value>
     <comment>en-en</comment>

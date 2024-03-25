@@ -608,13 +608,6 @@
     <value>Venue/Checkins</value>
     <comment>en-en</comment>
   </data>
-  <data name="bing_Fluent_Logo_Text" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\bing_Fluent_Logo_Text.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="EnterCredentialsProvider" xml:space="preserve">
-    <value>Enter Credentials Provider</value>
-    <comment>en-en</comment>
-  </data>
   <data name="VenuePurchase" xml:space="preserve">
     <value>Venue/Purchase</value>
     <comment>en-en</comment>
@@ -629,6 +622,59 @@
   </data>
   <data name="BreweryUpdate" xml:space="preserve">
     <value>Brewery Update</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="Generate" xml:space="preserve">
+    <value>Generate :</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="EnterClientID" xml:space="preserve">
+    <value>Enter client ID</value>
+    <comment>en-ne</comment>
+  </data>
+  <data name="oauth-2-sm-logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\oauth-2-sm-logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AuthenticationAPIDocumentation" xml:space="preserve">
+    <value>Authentication
+API Documentation</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="YourAppsAPICentral" xml:space="preserve">
+    <value>Your Apps
+API Central</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="GetCode" xml:space="preserve">
+    <value>Get code</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="EnterRedirectUrl" xml:space="preserve">
+    <value>Enter redirect Url</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="EnterClientSecret" xml:space="preserve">
+    <value>Enter client secret</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="EnterCode" xml:space="preserve">
+    <value>Enter code</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="GetAccessToken" xml:space="preserve">
+    <value>Get access token</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="AccessTokenIsFill" xml:space="preserve">
+    <value>Access token is fill.</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="CopyTheCodeFromWebBrowser" xml:space="preserve">
+    <value>Copy the code from web browser.</value>
+    <comment>en-en</comment>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
     <comment>en-en</comment>
   </data>
 </root>

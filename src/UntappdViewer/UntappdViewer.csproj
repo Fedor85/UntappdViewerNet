@@ -11,6 +11,10 @@
     <ApplicationIcon>Themes\untappd_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Resources\oauth-2-sm-logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\oauth-2-sm-logo.png" />
     <Resource Include="Themes\untappd_icon.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -139,9 +143,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\globe_orange.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\bing_Fluent_Logo_Text.png" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="DotNetProjects.WpfToolkit.DataVisualization" Version="6.1.94" />

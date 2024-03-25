@@ -1,4 +1,5 @@
-﻿using UntappdViewer.Interfaces;
+﻿using System.Net;
+using UntappdViewer.Interfaces;
 
 namespace UntappdWebApiClient
 {
@@ -7,5 +8,10 @@ namespace UntappdWebApiClient
         public int Code { get; private set; } = Code;
 
         public string Message { get; set; }
+        
+        public bool IsValid
+        {
+            get { return Code == (int)HttpStatusCode.OK; }
+        }
     }
 }

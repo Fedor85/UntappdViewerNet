@@ -5,5 +5,7 @@
         public int Code { get; }
 
         public string Message { get; set; }
+
+        public bool IsValid { get; }
     }
 }

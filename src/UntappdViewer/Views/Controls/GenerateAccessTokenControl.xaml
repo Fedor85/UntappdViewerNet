@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="UntappdViewer.Views.Controls.GenerateAccessTokenControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:UntappdViewer.UI.Controls;assembly=UntappdViewer.UI"
+             xmlns:properties="clr-namespace:UntappdViewer.Properties"
+             xmlns:helpers="clr-namespace:UntappdViewer.Helpers"
+             xmlns:untappdViewer="clr-namespace:UntappdViewer"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style x:Key="SeparatorHeight" TargetType="{x:Type Separator}">
+            <Setter Property="Height" Value="5" />
+            <Setter Property="Visibility" Value="Hidden"/>
+        </Style>
+        <Style x:Key="SeparatorWidth" TargetType="{x:Type Separator}">
+            <Setter Property="Width" Value="5" />
+            <Setter Property="Visibility" Value="Hidden"/>
+        </Style>
+    </UserControl.Resources>
+    <StackPanel>
+        <UniformGrid  Rows="1" Columns="3" Margin="0, 5">
+            <Image Height="60" Width="60" Source="..\..\Resources\oauth-2-sm-logo.png"/>
+            <TextBlock VerticalAlignment="Center" TextAlignment="Center">
+                <Hyperlink NavigateUri="{Binding Source={x:Static untappdViewer:DefaultValues.AuthenticationAPIDocumentationUrl}}"
+                           TextDecorations="" helpers:HyperlinkExtensions.IsExternal="true">
+                    <TextBlock  Text="{x:Static properties:Resources.AuthenticationAPIDocumentation}" FontWeight="Bold" Foreground="#000"/>
+                </Hyperlink>
+            </TextBlock>
+            <TextBlock VerticalAlignment="Center" TextAlignment="Center">
+                <Hyperlink NavigateUri="{Binding Source={x:Static untappdViewer:DefaultValues.YourAppsAPICentralUrl}}"
+                           TextDecorations="" helpers:HyperlinkExtensions.IsExternal="true">
+                    <TextBlock  Text="{x:Static properties:Resources.YourAppsAPICentral}" FontWeight="Bold" Foreground="#000"/>
+                </Hyperlink>
+            </TextBlock>
+        </UniformGrid>
+        <StackPanel>
+            <Button Height="20" HorizontalAlignment="Right" Padding="5,0" 
+                    Content="{x:Static properties:Resources.Reset}" Click="ResetClick"/>
+            <Separator Style="{StaticResource SeparatorHeight}"/>
+            <StackPanel x:Name="SourceDataByCode">
+                <controls:SmartTextBox x:Name="ClientIDTextBox" PasswordMode="True"
+                                       HintText="{x:Static properties:Resources.EnterClientID}"/>
+                <Separator Style="{StaticResource SeparatorHeight}"/>
+                <controls:SmartTextBox x:Name="RedirectUrlTextBox" PasswordMode="True" 
+                                       HintText="{x:Static properties:Resources.EnterRedirectUrl}"/>
+            </StackPanel>
+            <Separator Style="{StaticResource SeparatorHeight}"/>
+            <DockPanel>
+                <TextBlock x:Name="AuthenticateUrlMessage" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="5,0,0,0"/>
+                <Separator Style="{StaticResource SeparatorWidth}"/>
+                <Button x:Name="GetCodeButton"  Click="GetCodeButtonClick" HorizontalAlignment="Right" VerticalAlignment="Top"
+                        IsEnabled="False"  Height="20" Margin="2,0,0,0">
+                    <DockPanel>
+                        <Image x:Name="AuthenticateUrlStatusImg" Height="15" Width="15" Visibility="Hidden"
+                               Source="..\..\Resources\red-x.png" Margin="0,0,5,0"/>
+                        <TextBlock Text="{x:Static properties:Resources.GetCode}" Margin="0,0,5,0"/>
+                    </DockPanel>
+                </Button>
+            </DockPanel>
+            <Separator Style="{StaticResource SeparatorHeight}"/>
+            <StackPanel x:Name="SourceDataByAccessToken" IsEnabled="False">
+                <controls:SmartTextBox x:Name="CodeTextBox" PasswordMode="True" 
+                                       HintText="{x:Static properties:Resources.EnterCode}"/>
+                <Separator Style="{StaticResource SeparatorHeight}"/>
+                <controls:SmartTextBox x:Name="ClientSecretTextBox" PasswordMode="True"
+                                       HintText="{x:Static properties:Resources.EnterClientSecret}"/>
+                <Separator Style="{StaticResource SeparatorHeight}"/>
+                <DockPanel>
+                    <TextBlock x:Name="AccessTokenMessage" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="5,0,0,0"/>
+                    <Separator Style="{StaticResource SeparatorWidth}"/>
+                    <Button x:Name="GetAccessTokenButton"  Click="GetAccessTokenButtonClick" HorizontalAlignment="Right" VerticalAlignment="Top"
+                            IsEnabled="False"  Height="20" Margin="2,0,0,0">
+                        <DockPanel>
+                            <Image x:Name="AccessTokenStatusImg" Height="15" Width="15" Visibility="Hidden"
+                                   Source="..\..\Resources\red-x.png" Margin="0,0,5,0"/>
+                            <TextBlock Text="{x:Static properties:Resources.GetAccessToken}" Margin="0,0,5,0"/>
+                        </DockPanel>
+                    </Button>
+                </DockPanel>
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

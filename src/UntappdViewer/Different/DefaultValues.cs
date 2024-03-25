@@ -10,6 +10,10 @@
 
         public const string DeveloperProfileUrl = UntappdtUrl + @"user/Feador";
 
+        public const string AuthenticationAPIDocumentationUrl = UntappdtUrl + "api/docs#authentication";
+
+        public const string YourAppsAPICentralUrl = UntappdtUrl + "api/dashboard";
+
         public const string EmptyImage = @"..\Resources\empty_1x1.png";
 
         public const string DefaultFlag = @"..\Resources\earth_planet.png";

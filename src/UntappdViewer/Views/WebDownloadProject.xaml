@@ -49,9 +49,9 @@
                         <controls1:AccessToken Token="{Binding AccessToken, Mode=TwoWay}" AccessTokenCheck="{Binding WebApiClientLogInCommand}"
                                                ButtonText="{x:Static properties:Resources.LogIn}"
                                                IsShowPassword="{Binding IsShowPassword, Mode=TwoWay}" IsValidAccessToken="{Binding IsValidAccessToken, Mode=TwoWay}"/>
-                        <DockPanel HorizontalAlignment="Right" Margin="0,0,21,0">
-                            <CheckBox IsChecked="{Binding IsCheckedSaveAccessToken}" VerticalAlignment="Center" Margin="5,0,0,0" />
-                            <Label Content="{x:Static properties:Resources.SaveLower}" VerticalAlignment="Center"/>
+                        <DockPanel HorizontalAlignment="Right">
+                            <CheckBox IsChecked="{Binding IsCheckedSaveAccessToken}" VerticalAlignment="Center"/>
+                            <Label Content="{x:Static properties:Resources.SaveLower}" VerticalAlignment="Center" Margin="0,0,-5,4"/>
                         </DockPanel>
                     </StackPanel>
                 </Grid>
@@ -71,7 +71,7 @@
                                     <ContentControl Template="{StaticResource BackgroundBlackGrid}"/>
                                     <DockPanel>
                                         <Button Content="{x:Static properties:Resources.First}" Command="{Binding FirstDownloadButtonCommand}" Width="60" Height="20" IsDefault="True"/>
-                                        <Border Name="MarkFillFullFirstCheckins" BorderThickness="1" BorderBrush="Black" Background="#FFFF4500" CornerRadius="10" Width="10" Height="10"/>
+                                        <Border Name="MarkFillFullFirstCheckins" BorderThickness="1" BorderBrush="Black" CornerRadius="10" Width="10" Height="10"/>
                                     </DockPanel>
                                 </Grid>
                                 <Separator Style="{StaticResource SeparatorWidth}"/>

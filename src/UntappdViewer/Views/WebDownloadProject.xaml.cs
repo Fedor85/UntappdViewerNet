@@ -13,10 +13,12 @@ namespace UntappdViewer.Views
     {
         private Window window;
 
+        private static readonly SolidColorBrush DefaultMarkFillFullFirstCheckinsBackground = Brushes.OrangeRed;
+
         public WebDownloadProject()
         {
             InitializeComponent();
-
+            MarkFillFullFirstCheckins.Background = DefaultMarkFillFullFirstCheckinsBackground;
             Loaded += WebDownloadProjectLoaded;
             Unloaded += WebDownloadProjectUnloaded;    
         }
@@ -43,7 +45,7 @@ namespace UntappdViewer.Views
 
         private void WindowKeyStatesChanged(object sender, KeyEventArgs e)
         {
-            MarkFillFullFirstCheckins.Background = Keyboard.IsKeyDown(Key.LeftCtrl) ? Brushes.GreenYellow : Brushes.OrangeRed;
+            MarkFillFullFirstCheckins.Background = Keyboard.IsKeyDown(Key.LeftCtrl) ? Brushes.GreenYellow : DefaultMarkFillFullFirstCheckinsBackground;
         }
     }
 }

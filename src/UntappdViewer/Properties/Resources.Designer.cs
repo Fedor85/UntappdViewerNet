@@ -97,6 +97,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Access token is fill..
+        /// </summary>
+        public static string AccessTokenIsFill {
+            get {
+                return ResourceManager.GetString("AccessTokenIsFill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to API Untappd.
         /// </summary>
         public static string APIUntappd {
@@ -147,6 +156,16 @@ namespace UntappdViewer.Properties {
         public static string AskSaveСhangesUntappdProject {
             get {
                 return ResourceManager.GetString("AskSaveСhangesUntappdProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Authentication
+        ///API Documentation.
+        /// </summary>
+        public static string AuthenticationAPIDocumentation {
+            get {
+                return ResourceManager.GetString("AuthenticationAPIDocumentation", resourceCulture);
             }
         }
         
@@ -220,16 +239,6 @@ namespace UntappdViewer.Properties {
         public static string BeerUpdate {
             get {
                 return ResourceManager.GetString("BeerUpdate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap bing_Fluent_Logo_Text {
-            get {
-                object obj = ResourceManager.GetObject("bing_Fluent_Logo_Text", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -409,6 +418,15 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy the code from web browser..
+        /// </summary>
+        public static string CopyTheCodeFromWebBrowser {
+            get {
+                return ResourceManager.GetString("CopyTheCodeFromWebBrowser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Count.
         /// </summary>
         public static string Count {
@@ -579,11 +597,38 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter Credentials Provider.
+        ///   Looks up a localized string similar to Enter client ID.
         /// </summary>
-        public static string EnterCredentialsProvider {
+        public static string EnterClientID {
             get {
-                return ResourceManager.GetString("EnterCredentialsProvider", resourceCulture);
+                return ResourceManager.GetString("EnterClientID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter client secret.
+        /// </summary>
+        public static string EnterClientSecret {
+            get {
+                return ResourceManager.GetString("EnterClientSecret", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter code.
+        /// </summary>
+        public static string EnterCode {
+            get {
+                return ResourceManager.GetString("EnterCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter redirect Url.
+        /// </summary>
+        public static string EnterRedirectUrl {
+            get {
+                return ResourceManager.GetString("EnterRedirectUrl", resourceCulture);
             }
         }
         
@@ -676,6 +721,33 @@ namespace UntappdViewer.Properties {
         public static string General {
             get {
                 return ResourceManager.GetString("General", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generate :.
+        /// </summary>
+        public static string Generate {
+            get {
+                return ResourceManager.GetString("Generate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get access token.
+        /// </summary>
+        public static string GetAccessToken {
+            get {
+                return ResourceManager.GetString("GetAccessToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get code.
+        /// </summary>
+        public static string GetCode {
+            get {
+                return ResourceManager.GetString("GetCode", resourceCulture);
             }
         }
         
@@ -857,6 +929,16 @@ namespace UntappdViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap oauth_2_sm_logo {
+            get {
+                object obj = ResourceManager.GetObject("oauth-2-sm-logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to offset.
         /// </summary>
         public static string Offset {
@@ -964,6 +1046,15 @@ namespace UntappdViewer.Properties {
         public static string Reports {
             get {
                 return ResourceManager.GetString("Reports", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        public static string Reset {
+            get {
+                return ResourceManager.GetString("Reset", resourceCulture);
             }
         }
         
@@ -1325,6 +1416,16 @@ namespace UntappdViewer.Properties {
         public static string WebsiteUntappd {
             get {
                 return ResourceManager.GetString("WebsiteUntappd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your Apps
+        ///API Central.
+        /// </summary>
+        public static string YourAppsAPICentral {
+            get {
+                return ResourceManager.GetString("YourAppsAPICentral", resourceCulture);
             }
         }
         

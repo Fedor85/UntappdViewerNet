@@ -222,7 +222,6 @@ namespace UntappdViewer.ViewModels
 
             IsVisibilityLogInControl = true;
             IsCheckedSaveAccessToken = false;
-            AccessToken = null;
 
             IsVisibilityDownloadControl = false;
             OffsetUpdateBeer = String.Empty;
@@ -239,19 +238,17 @@ namespace UntappdViewer.ViewModels
 
         private void LogIn()
         {
-            if (webApiClient.IsLogOn)
-            {
-                InitializeDownloadControl(true);
-                return;
-            }
-
             string accessToken = settingService.GetAccessToken();
             if (String.IsNullOrEmpty(accessToken))
                 return;
 
             AccessToken = accessToken;
             IsShowPassword = false;
-            WebApiClientLogIn(accessToken);
+
+            if (webApiClient.IsLogOn)
+                InitializeDownloadControl(true);
+            else
+                WebApiClientLogIn(accessToken);
         }
 
         private void WebApiClientLogIn(string token)
