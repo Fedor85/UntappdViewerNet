@@ -168,4 +168,10 @@
   <data name="facebook-like-beer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\facebook-like-beer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="green-checkmark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\green-checkmark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="red-x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\red-x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

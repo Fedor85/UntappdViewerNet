@@ -93,6 +93,16 @@ namespace UntappdViewer.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap green_checkmark {
+            get {
+                object obj = ResourceManager.GetObject("green-checkmark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Hide {
             get {
                 object obj = ResourceManager.GetObject("Hide", resourceCulture);
@@ -145,6 +155,16 @@ namespace UntappdViewer.UI.Properties {
         public static string Others {
             get {
                 return ResourceManager.GetString("Others", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap red_x {
+            get {
+                object obj = ResourceManager.GetObject("red-x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

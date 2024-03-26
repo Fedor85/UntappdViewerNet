@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows;
 using System.Windows.Data;
-using UntappdViewer.UI.Helpers;
+using UntappdViewer.UI.Controls;
 
 namespace UntappdViewer.Views.Controls
 {
@@ -18,11 +18,11 @@ namespace UntappdViewer.Views.Controls
 
         public static readonly DependencyProperty GetAccessTokenClickProperty = DependencyProperty.Register("GetAccessTokenClick", typeof(ICommand), typeof(GenerateAccessTokenControl));
 
-        public static readonly DependencyProperty IsValidAuthenticateUrlProperty = DependencyProperty.Register("IsValidAuthenticateUrl", typeof(bool?), typeof(GenerateAccessTokenControl), new PropertyMetadata(null, UpdateAuthenticateUrlStatus));
+        public static readonly DependencyProperty IsValidAuthenticateUrlProperty = DependencyProperty.Register("IsValidAuthenticateUrl", typeof(bool?), typeof(GenerateAccessTokenControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, UpdateAuthenticateUrlStatus));
 
         public static readonly DependencyProperty AuthenticateUrlMessageTextProperty = DependencyProperty.Register("AuthenticateUrlMessageText", typeof(string), typeof(GenerateAccessTokenControl), new FrameworkPropertyMetadata(String.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
-        public static readonly DependencyProperty IsValidGenerateAccessTokenProperty = DependencyProperty.Register("IsValidGenerateAccessToken", typeof(bool?), typeof(GenerateAccessTokenControl), new PropertyMetadata(null, UpdateGenerateAccessTokenStatus));
+        public static readonly DependencyProperty IsValidGenerateAccessTokenProperty = DependencyProperty.Register("IsValidGenerateAccessToken", typeof(bool?), typeof(GenerateAccessTokenControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, UpdateGenerateAccessTokenStatus));
 
         public static readonly DependencyProperty GenerateAccessTokenMessageTextProperty = DependencyProperty.Register("GenerateAccessTokenMessageText", typeof(string), typeof(GenerateAccessTokenControl), new FrameworkPropertyMetadata(String.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
@@ -65,8 +65,12 @@ namespace UntappdViewer.Views.Controls
         public GenerateAccessTokenControl()
         {
             InitializeComponent();
-            AuthenticateUrlMessage.SetBinding(TextBlock.TextProperty, new Binding { Path = new PropertyPath(AuthenticateUrlMessageTextProperty), Source = this, Mode = BindingMode.TwoWay});
+
+            AuthenticateUrlMessage.SetBinding(TextBlock.TextProperty, new Binding { Path = new PropertyPath(AuthenticateUrlMessageTextProperty), Source = this, Mode = BindingMode.TwoWay });
             AccessTokenMessage.SetBinding(TextBlock.TextProperty, new Binding { Path = new PropertyPath(GenerateAccessTokenMessageTextProperty), Source = this, Mode = BindingMode.TwoWay });
+
+            GetCodeButton.SetBinding(StatusButton.IsValidStatusProperty, new Binding { Path = new PropertyPath(IsValidAuthenticateUrlProperty), Source = this, Mode = BindingMode.TwoWay });
+            GetAccessTokenButton.SetBinding(StatusButton.IsValidStatusProperty, new Binding { Path = new PropertyPath(IsValidGenerateAccessTokenProperty), Source = this, Mode = BindingMode.TwoWay });
 
             ClientIDTextBox.TextChanged = new DelegateCommand(InitialDataByClientIDTextChanged);
             RedirectUrlTextBox.TextChanged = new DelegateCommand(InitialDataByClientIDTextChanged);
@@ -78,36 +82,25 @@ namespace UntappdViewer.Views.Controls
         {
             if (status.HasValue)
             {
-                AuthenticateUrlStatusImg.Visibility = Visibility.Visible;
-                AuthenticateUrlStatusImg.Source = ImageConverter.GetBitmapSource(status.Value ? Properties.Resources.green_checkmark : Properties.Resources.red_x);
                 SourceDataByCode.IsEnabled = !status.Value;
                 SourceDataByAccessToken.IsEnabled = status.Value;
             }
             else
             {
-                AuthenticateUrlStatusImg.Visibility = Visibility.Hidden;
                 AuthenticateUrlMessage.Text = String.Empty;
                 SourceDataByCode.IsEnabled = true;
                 SourceDataByAccessToken.IsEnabled = false;
             }
 
-            UpdateAccessTokenStatus(null);
+            IsValidGenerateAccessToken = null;
             ClientSecretTextBox.Clear();
             CodeTextBox.Clear();
         }
 
-        private void UpdateAccessTokenStatus(bool? status)
+        private void ClearAccessTokenMessage(bool? status)
         {
-            if (status.HasValue)
-            {
-                AccessTokenStatusImg.Visibility = Visibility.Visible;
-                AccessTokenStatusImg.Source = ImageConverter.GetBitmapSource(status.Value ? Properties.Resources.green_checkmark : Properties.Resources.red_x);
-            }
-            else
-            {
-                AccessTokenMessage.Text = string.Empty;
-                AccessTokenStatusImg.Visibility = Visibility.Hidden;
-            }
+            if (!status.HasValue)
+                AccessTokenMessage.Text = String.Empty;
         }
 
         private void InitialDataByClientIDTextChanged()
@@ -134,7 +127,7 @@ namespace UntappdViewer.Views.Controls
         {
             ClientIDTextBox.Clear();
             RedirectUrlTextBox.Clear();
-            UpdateAuthenticateUrlStatus(null);
+            IsValidAuthenticateUrl = null;
         }
 
         private static void UpdateAuthenticateUrlStatus(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
@@ -147,7 +140,7 @@ namespace UntappdViewer.Views.Controls
         private static void UpdateGenerateAccessTokenStatus(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
             GenerateAccessTokenControl generateAccessToken = dependencyObject as GenerateAccessTokenControl;
-            generateAccessToken.UpdateAccessTokenStatus(e.NewValue as bool?);
+            generateAccessToken.ClearAccessTokenMessage(e.NewValue as bool?);
         }
     }
 }

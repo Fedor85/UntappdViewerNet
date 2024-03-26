@@ -11,12 +11,16 @@
   <ItemGroup>
     <None Remove="Resources\Bubbles1710337492265.json" />
     <None Remove="Resources\facebook-like-beer.png" />
+    <None Remove="Resources\green-checkmark.png" />
+    <None Remove="Resources\red-x.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Bubbles1710337492265.json" />
     <Resource Include="Resources\close_icon.ico" />
     <Resource Include="Resources\facebook-like-beer.png" />
+    <Resource Include="Resources\green-checkmark.png" />
     <Resource Include="Resources\Like1710325911165.json" />
+    <Resource Include="Resources\red-x.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Show.jpg" />

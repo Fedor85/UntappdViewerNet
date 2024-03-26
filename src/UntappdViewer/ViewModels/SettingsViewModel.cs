@@ -169,8 +169,8 @@ namespace UntappdViewer.ViewModels
                                                                                         initialDataByGetAccessToken[2], initialDataByGetAccessToken[3]);
             if (!accessTokenResponseMessage.IsValid)
             {
-                GenerateAccessTokenMessageText = accessTokenResponseMessage.Message;
                 IsValidGenerateAccessToken = false;
+                GenerateAccessTokenMessageText = accessTokenResponseMessage.Message;
                 return;
             }
 

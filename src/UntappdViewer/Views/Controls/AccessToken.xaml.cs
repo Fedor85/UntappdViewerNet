@@ -18,7 +18,7 @@ namespace UntappdViewer.Views.Controls
 
         public static readonly DependencyProperty ButtonTextProperty = DependencyProperty.Register("ButtonText", typeof(string), typeof(AccessToken), new PropertyMetadata(Properties.Resources.Check, BindingExtensions.UpdateSource));
 
-        public static readonly DependencyProperty IsValidAccessTokenProperty = DependencyProperty.Register("IsValidAccessToken", typeof(bool?), typeof(AccessToken), new PropertyMetadata(null, UpdateCheckStatus));
+        public static readonly DependencyProperty IsValidAccessTokenProperty = DependencyProperty.Register("IsValidAccessToken", typeof(bool?), typeof(AccessToken));
 
         public static readonly DependencyProperty AccessTokenCheckProperty = DependencyProperty.Register("AccessTokenCheck", typeof(ICommand), typeof(AccessToken));
 
@@ -35,7 +35,6 @@ namespace UntappdViewer.Views.Controls
             get { return (string)GetValue(ButtonTextProperty); }
             set { SetValue(ButtonTextProperty, value); }
         }
-
 
         public bool? IsValidAccessToken
         {
@@ -58,18 +57,16 @@ namespace UntappdViewer.Views.Controls
         public AccessToken()
         {
             InitializeComponent();
-            Loaded += AccessTokenLoaded;
             Unloaded += AccessTokenUnloaded;
+
             TokenTextBox.SetBinding(SmartTextBox.TextProperty, new Binding { Path = new PropertyPath(TokenProperty), Mode = BindingMode.TwoWay, Source = this });
             TokenTextBox.SetBinding(SmartTextBox.IsShowPasswordModeProperty, new Binding { Path = new PropertyPath(IsShowPasswordProperty), Source = this });
             TokenTextBox.TextChanged = new DelegateCommand<string>(TokenTextBoxOnTextChanged);
-            ButtonTextControl.SetBinding(TextBlock.TextProperty, new Binding { Path = new PropertyPath(ButtonTextProperty), Source = this });
+
+            StatusButtonControl.SetBinding(StatusButton.ButtonTextProperty, new Binding { Path = new PropertyPath(ButtonTextProperty), Source = this });
+            StatusButtonControl.SetBinding(StatusButton.IsValidStatusProperty, new Binding { Path = new PropertyPath(IsValidAccessTokenProperty), Source = this });
         }
 
-        private void AccessTokenLoaded(object sender, RoutedEventArgs e)
-        {
-            UpdateCheckStatus();
-        }
 
         private void AccessTokenUnloaded(object sender, RoutedEventArgs e)
         {
@@ -78,38 +75,15 @@ namespace UntappdViewer.Views.Controls
 
         private void TokenTextBoxOnTextChanged(string text)
         {
-            if (IsValidAccessToken.HasValue)
-                IsValidAccessToken = null;
-            else
-                UpdateCheckStatus();
-
+            IsValidAccessToken = null;
             IsShowPassword = IsShowPassword || String.IsNullOrEmpty(TokenTextBox.MainText);
-        }
+            StatusButtonControl.IsEnabled = !String.IsNullOrEmpty(TokenTextBox.MainText);
 
-        private void UpdateCheckStatus()
-        {
-            if (IsValidAccessToken.HasValue)
-            {
-                CheckStatusImg.Source = ImageConverter.GetBitmapSource(IsValidAccessToken.Value ? Properties.Resources.green_checkmark : Properties.Resources.red_x);
-                CheckStatusImg.Visibility = Visibility.Visible;
-                AccessTokenButton.IsEnabled = false;
-            }
-            else
-            {
-                CheckStatusImg.Visibility = Visibility.Hidden;
-                AccessTokenButton.IsEnabled = !String.IsNullOrEmpty(TokenTextBox.MainText) && TokenTextBox.MainText.Length > 0;
-            }
         }
 
         private void AccessTokenButtonOnClick(object sender, RoutedEventArgs e)
         {
             AccessTokenCheck?.Execute(TokenTextBox.MainText);
-        }
-
-        private static void UpdateCheckStatus(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
-        {
-            AccessToken accessToken = dependencyObject as AccessToken;
-            accessToken.UpdateCheckStatus();
         }
     }
 }

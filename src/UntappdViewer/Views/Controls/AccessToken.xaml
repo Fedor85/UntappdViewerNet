@@ -11,14 +11,7 @@
         <DockPanel HorizontalAlignment="Left">
             <controls:SmartTextBox x:Name="TokenTextBox" PasswordMode="True" Width="340"
                                    HintText="{x:Static properties:Resources.EnterAccessToken}"/>
-            <Button x:Name="AccessTokenButton"  Click="AccessTokenButtonOnClick"
-                    IsEnabled="False" Margin="5,0,0,0">
-                <DockPanel>
-                    <Image x:Name="CheckStatusImg" Height="15" Width="15" Visibility="Visible"
-                           Source="..\..\Resources\red-x.png" Margin="0,0,5,0"/>
-                    <TextBlock x:Name="ButtonTextControl" Margin="0,0,5,0"/>
-                </DockPanel>
-            </Button>
+            <controls:StatusButton x:Name="StatusButtonControl" Click="AccessTokenButtonOnClick" Margin="5,0,0,0"/>
         </DockPanel>
     </StackPanel>
 
