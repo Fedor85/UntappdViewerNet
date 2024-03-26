@@ -39,7 +39,7 @@
         </Grid.RowDefinitions>
         <StackPanel  Grid.Row="0">
             <controls:SmartTextBox HintText="{x:Static properties:Resources.Filter}"
-                                   Text="{Binding Search, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                   TextBinding="{Binding Search, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <CheckBox IsChecked="{Binding IsCheckedUniqueCheckBox}" Content="{x:Static properties:Resources.UniqueCheckBoxContent}"/>
             <Label Content="{Binding TreeViewCaption}" FontWeight="Bold"/>
         </StackPanel>

@@ -87,7 +87,7 @@
                                         <Button Content="{x:Static properties:Resources.BeerUpdate}" Command="{Binding BeerUpdateButtonCommand}" Width="93" Height="20" IsDefault="True"/>
                                         <Separator Width="6" Visibility="Hidden"/>
                                         <controls:SmartTextBox HintText="{x:Static properties:Resources.Offset}" Height="20" Width="62" ImgSize="0"
-                                                               Text="{Binding OffsetUpdateBeer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Mask="\d+" MaxLength="5"/>
+                                                               TextBinding="{Binding OffsetUpdateBeer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Mask="\d+" MaxLength="5"/>
                                     </DockPanel>
                                 </Grid>
                             </DockPanel>

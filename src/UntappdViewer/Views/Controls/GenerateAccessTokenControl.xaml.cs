@@ -1,10 +1,10 @@
 ﻿using System;
-using Prism.Commands;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows;
 using System.Windows.Data;
 using UntappdViewer.UI.Controls;
+using UntappdViewer.UI.Helpers;
 
 namespace UntappdViewer.Views.Controls
 {
@@ -72,10 +72,14 @@ namespace UntappdViewer.Views.Controls
             GetCodeButton.SetBinding(StatusButton.IsValidStatusProperty, new Binding { Path = new PropertyPath(IsValidAuthenticateUrlProperty), Source = this, Mode = BindingMode.TwoWay });
             GetAccessTokenButton.SetBinding(StatusButton.IsValidStatusProperty, new Binding { Path = new PropertyPath(IsValidGenerateAccessTokenProperty), Source = this, Mode = BindingMode.TwoWay });
 
-            ClientIDTextBox.TextChanged = new DelegateCommand(InitialDataByClientIDTextChanged);
-            RedirectUrlTextBox.TextChanged = new DelegateCommand(InitialDataByClientIDTextChanged);
-            ClientSecretTextBox.TextChanged = new DelegateCommand(InitialDataByAccessTokenTextChanged);
-            CodeTextBox.TextChanged = new DelegateCommand(InitialDataByAccessTokenTextChanged);
+
+            EnabledButtonController enabledGetCodeButton = new EnabledButtonController(GetCodeButton);
+            enabledGetCodeButton.RegisterTextControl(ClientIDTextBox);
+            enabledGetCodeButton.RegisterTextControl(RedirectUrlTextBox);
+
+            EnabledButtonController enabledGetAccessTokenButton = new EnabledButtonController(GetAccessTokenButton);
+            enabledGetAccessTokenButton.RegisterTextControl(ClientSecretTextBox);
+            enabledGetAccessTokenButton.RegisterTextControl(CodeTextBox);
         }
 
         private void UpdateAuthenticateUrlStatus(bool? status)
@@ -103,24 +107,14 @@ namespace UntappdViewer.Views.Controls
                 AccessTokenMessage.Text = String.Empty;
         }
 
-        private void InitialDataByClientIDTextChanged()
-        {
-            GetCodeButton.IsEnabled = !String.IsNullOrEmpty(ClientIDTextBox.MainText) && !String.IsNullOrEmpty(RedirectUrlTextBox.MainText);
-        }
-
-        private void InitialDataByAccessTokenTextChanged()
-        {
-            GetAccessTokenButton.IsEnabled = !String.IsNullOrEmpty(ClientSecretTextBox.MainText) && !String.IsNullOrEmpty(CodeTextBox.MainText);
-        }
-
         private void GetCodeButtonClick(object sender, RoutedEventArgs e)
         {
-            GetCodeClick?.Execute(new[] { ClientIDTextBox.MainText, RedirectUrlTextBox.MainText});
+            GetCodeClick?.Execute(new[] { ClientIDTextBox.Text, RedirectUrlTextBox.Text});
         }
 
         private void GetAccessTokenButtonClick(object sender, RoutedEventArgs e)
         {
-            GetAccessTokenClick?.Execute(new[] { ClientIDTextBox.MainText, ClientSecretTextBox.MainText, RedirectUrlTextBox.MainText, CodeTextBox.MainText});
+            GetAccessTokenClick?.Execute(new[] { ClientIDTextBox.Text, ClientSecretTextBox.Text, RedirectUrlTextBox.Text, CodeTextBox.Text});
         }
 
         private void ResetClick(object sender, RoutedEventArgs e)

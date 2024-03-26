@@ -59,14 +59,16 @@ namespace UntappdViewer.Views.Controls
             InitializeComponent();
             Unloaded += AccessTokenUnloaded;
 
-            TokenTextBox.SetBinding(SmartTextBox.TextProperty, new Binding { Path = new PropertyPath(TokenProperty), Mode = BindingMode.TwoWay, Source = this });
+            TokenTextBox.SetBinding(SmartTextBox.TextBindingProperty, new Binding { Path = new PropertyPath(TokenProperty), Mode = BindingMode.TwoWay, Source = this });
             TokenTextBox.SetBinding(SmartTextBox.IsShowPasswordModeProperty, new Binding { Path = new PropertyPath(IsShowPasswordProperty), Source = this });
             TokenTextBox.TextChanged = new DelegateCommand<string>(TokenTextBoxOnTextChanged);
 
             StatusButtonControl.SetBinding(StatusButton.ButtonTextProperty, new Binding { Path = new PropertyPath(ButtonTextProperty), Source = this });
             StatusButtonControl.SetBinding(StatusButton.IsValidStatusProperty, new Binding { Path = new PropertyPath(IsValidAccessTokenProperty), Source = this });
-        }
 
+            EnabledButtonController enabledButtonController = new EnabledButtonController(StatusButtonControl);
+            enabledButtonController.RegisterTextControl(TokenTextBox);
+        }
 
         private void AccessTokenUnloaded(object sender, RoutedEventArgs e)
         {
@@ -76,14 +78,12 @@ namespace UntappdViewer.Views.Controls
         private void TokenTextBoxOnTextChanged(string text)
         {
             IsValidAccessToken = null;
-            IsShowPassword = IsShowPassword || String.IsNullOrEmpty(TokenTextBox.MainText);
-            StatusButtonControl.IsEnabled = !String.IsNullOrEmpty(TokenTextBox.MainText);
-
+            IsShowPassword = IsShowPassword || String.IsNullOrEmpty(TokenTextBox.Text);
         }
 
         private void AccessTokenButtonOnClick(object sender, RoutedEventArgs e)
         {
-            AccessTokenCheck?.Execute(TokenTextBox.MainText);
+            AccessTokenCheck?.Execute(TokenTextBox.Text);
         }
     }
 }
