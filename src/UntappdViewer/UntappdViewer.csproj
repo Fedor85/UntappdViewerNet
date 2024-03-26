@@ -88,12 +88,6 @@
     <Resource Include="Resources\ut_connection_default.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\green-checkmark.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\red-x.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\download_media.ico" />
   </ItemGroup>
   <ItemGroup>
