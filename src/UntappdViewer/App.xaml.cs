@@ -14,6 +14,7 @@ using UntappdViewer.Domain.Services;
 using UntappdViewer.Helpers;
 using UntappdViewer.Infrastructure.Services;
 using UntappdViewer.Infrastructure.Services.DataBase;
+using UntappdViewer.Interfaces;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Interfaces.Services.DataBase;
 using UntappdViewer.Modules;
@@ -78,6 +79,7 @@ namespace UntappdViewer
 
             containerRegistry.Register<IWebDownloader, WebDownloader>();
             containerRegistry.Register<IWebApiClient, Client>();
+            containerRegistry.Register<IUntappdWindowsServiceClient, UntappdWindowsServiceClient>();
 
             IDbContext untappdDbContext = new DbContext("Untappd");
             IDevEntityDbService devEntityDbService = new DevEntityDbService(untappdDbContext);

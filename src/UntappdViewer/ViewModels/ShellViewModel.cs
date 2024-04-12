@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows.Input;
 using Prism.Commands;
 using Prism.Modularity;
@@ -8,6 +9,7 @@ using Prism.Regions;
 using UntappdViewer.Domain;
 using UntappdViewer.Helpers;
 using UntappdViewer.Infrastructure;
+using UntappdViewer.Interfaces;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Modules;
 using UntappdViewer.Utils;
@@ -27,6 +29,8 @@ namespace UntappdViewer.ViewModels
         private IModuleManager moduleManager;
 
         private IArgumentsProvider argumentsProvider;
+
+        private IUntappdWindowsServiceClient untappdWindowsServiceClient;
 
         private string title;
 
@@ -55,7 +59,8 @@ namespace UntappdViewer.ViewModels
                                                               IRegionManager regionManager,
                                                               ISettingService settingService,
                                                               IModuleManager moduleManager,
-                                                              IArgumentsProvider argumentsProvider)
+                                                              IArgumentsProvider argumentsProvider,
+                                                              IUntappdWindowsServiceClient untappdWindowsServiceClient)
         {
             this.untappdService = untappdService;
             this.interactionRequestService = interactionRequestService;
@@ -63,6 +68,7 @@ namespace UntappdViewer.ViewModels
             this.settingService = settingService;
             this.moduleManager = moduleManager;
             this.argumentsProvider = argumentsProvider;
+            this.untappdWindowsServiceClient = untappdWindowsServiceClient;
 
             ClosingCommand = new DelegateCommand<CancelEventArgs>(Closing);
             untappdService.UpdateUntappdUserNameEvent += UpdateTitle;
@@ -104,13 +110,15 @@ namespace UntappdViewer.ViewModels
                 return;
             }
 
-            string name = settingService.GetDefaultUserName();
             FileStatus fileStatus = FileHelper.Check(filePath, Extensions.GetSupportExtensions());
             if (EnumsHelper.IsValidFileStatus(fileStatus))
             {
                 try
                 {
-                    untappdService.Initialize(filePath, name);
+                    untappdService.Initialize(filePath, settingService.GetDefaultUserName());
+                    if (!untappdService.IsUNTPProject())
+                        untappdWindowsServiceClient.SetTempFilesByProcessesIdAsync(Process.GetCurrentProcess().Id, FileHelper.TempDirectory);
+
                     if (isUsedArgument)
                         settingService.SetRecentFilePaths(FileHelper.AddFilePath(settingService.GetRecentFilePaths(), filePath, settingService.GetMaxRecentFilePaths()));
 

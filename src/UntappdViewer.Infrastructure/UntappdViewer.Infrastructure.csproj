@@ -26,5 +26,6 @@
     <PackageReference Include="LiteDB" Version="5.0.19" />
     <PackageReference Include="Nager.Country" Version="3.1.1" />
     <PackageReference Include="System.Drawing.Common" Version="8.0.4" />
+    <PackageReference Include="UntappdWindowsService.Client" Version="1.0.0" />
   </ItemGroup>
 </Project>

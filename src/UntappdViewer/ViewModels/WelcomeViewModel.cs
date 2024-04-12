@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,6 +12,7 @@ using Prism.Regions;
 using UntappdViewer.Domain;
 using UntappdViewer.Helpers;
 using UntappdViewer.Infrastructure;
+using UntappdViewer.Interfaces;
 using UntappdViewer.Interfaces.Services;
 using UntappdViewer.Interfaces.Services.DataBase;
 using UntappdViewer.Modules;
@@ -34,6 +36,8 @@ namespace UntappdViewer.ViewModels
         private IWebApiClient webApiClient;
 
         private IWebDownloader webDownloader;
+
+        private IUntappdWindowsServiceClient untappdWindowsServiceClient;
 
         private BitmapSource avatarImage;
 
@@ -100,7 +104,8 @@ namespace UntappdViewer.ViewModels
                                                                 IRegionManager regionManager,
                                                                 IDevEntityDbService devEntityDbService,
                                                                 IWebApiClient webApiClient,
-                                                                IWebDownloader webDownloader) : base(regionManager)
+                                                                IWebDownloader webDownloader,
+                                                                IUntappdWindowsServiceClient untappdWindowsServiceClient) : base(regionManager)
         {
             this.untappdService = untappdService;
             this.interactionRequestService = interactionRequestService;
@@ -110,6 +115,7 @@ namespace UntappdViewer.ViewModels
             this.devEntityDbService = devEntityDbService;
             this.webApiClient = webApiClient;
             this.webDownloader = webDownloader;
+            this.untappdWindowsServiceClient = untappdWindowsServiceClient;
 
             devYouTubeVideoId = "QXjzrG-UKh4";
 
@@ -207,6 +213,8 @@ namespace UntappdViewer.ViewModels
                 }
 
                 untappdService.Initialize(filePath, untappdUserName);
+                if (!untappdService.IsUNTPProject())
+                    untappdWindowsServiceClient.SetTempFilesByProcessesIdAsync(Process.GetCurrentProcess().Id, FileHelper.TempDirectory);
             }
             catch (ArgumentException ex)
             {
