@@ -10,6 +10,6 @@
         <Border.Effect>
             <DropShadowEffect ShadowDepth="1"/>
         </Border.Effect>
-        <Image Source="{Binding ImagePath}" ToolTip="{Binding ToolTip}" Stretch="Uniform"/>
+        <Image Source="{Binding ImagePath, Converter={StaticResource PathToImageConverter}}" ToolTip="{Binding ToolTip}" Stretch="Uniform"/>
     </controls:ClippingBorder>
 </UserControl>

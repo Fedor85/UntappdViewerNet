@@ -5,7 +5,7 @@ using System.Windows.Media.Imaging;
 
 namespace UntappdViewer.UI.ValueConverters
 {
-    public class PathImageReSizeWidthConverter : IValueConverter
+    public class PathToImageReSizeWidthConverter : IValueConverter
     {
         private const int defaultDecodeWidth = 100;
 

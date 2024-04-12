@@ -19,7 +19,7 @@ namespace UntappdViewer.UI.Helpers
             return Imaging.CreateBitmapSourceFromHBitmap(bitmap.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
         }
 
-        public static BitmapSource GerBitmapSource(Icon icon)
+        public static BitmapSource GetBitmapSource(Icon icon)
         {
             return Imaging.CreateBitmapSourceFromHIcon(icon.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
         }

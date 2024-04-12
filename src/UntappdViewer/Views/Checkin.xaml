@@ -30,14 +30,15 @@
         <valueConverters:MouseWheelEventArgsToDeltaConverter x:Key="EventArgsToDeltaConverter"/>
     </UserControl.Resources>
     <Grid>
-        <Image Source="{Binding Checkin.PhotoPath, IsAsync=True}" Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center"  Opacity="0.5">
+        <Image Source="{Binding Checkin.PhotoPath, IsAsync=True, Converter={StaticResource PathToImageConverter}}" 
+               Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center"  Opacity="0.5">
             <Image.Effect>
                 <BlurEffect Radius="2"/>
             </Image.Effect>
         </Image>
         <Grid>
             <zoom:ZoomBorderGrid x:Name="PhotoZoomBorder" VisibilityClue="{Binding Checkin.VisibilityPhoto}">
-                <Image Source="{Binding Checkin.PhotoPath, IsAsync=True}"/>
+                <Image Source="{Binding Checkin.PhotoPath, IsAsync=True, Converter={StaticResource PathToImageConverter}}"/>
             </zoom:ZoomBorderGrid>
             <controls:LikeControl Visibility="{Binding Checkin.VisibilityLikeBeer, Converter={StaticResource BTVConverter}}"
                                   Margin="10" RoutedControl="{Binding ElementName=PhotoZoomBorder}"/>

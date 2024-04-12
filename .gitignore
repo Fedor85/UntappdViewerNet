@@ -1,4 +1,5 @@
 # Visual Studiocache/options directory
+.vs/
 src/.vs/
 
 #NuGet packages
