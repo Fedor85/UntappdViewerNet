@@ -30,7 +30,7 @@
         <valueConverters:MouseWheelEventArgsToDeltaConverter x:Key="EventArgsToDeltaConverter"/>
     </UserControl.Resources>
     <Grid>
-        <Image Source="{Binding Checkin.PhotoPath}" Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center"  Opacity="0.5">
+        <Image Source="{Binding Checkin.PhotoPath, IsAsync=True}" Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center"  Opacity="0.5">
             <Image.Effect>
                 <BlurEffect Radius="2"/>
             </Image.Effect>
