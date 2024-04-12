@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>CoreWCF.Primitives</id>
+    <version>1.5.2</version>
+    <authors>CoreWCF contributors</authors>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <projectUrl>https://github.com/CoreWCF/CoreWCF</projectUrl>
+    <description>CoreWCF is a port of the service side of Windows Communication Foundation (WCF) to .NET Core. The goal of this project is to enable existing WCF services to move to .NET Core.</description>
+    <copyright>.NET Foundation</copyright>
+    <tags>WCF .net core, CoreWCF</tags>
+    <repository type="git" url="https://github.com/CoreWCF/CoreWCF" commit="3bd127552da41ad13cbfc811313c68072c7ff2d9" />
+    <dependencies>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="Microsoft.AspNetCore.Authentication" version="2.1.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Authorization" version="2.1.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.DataProtection" version="2.1.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.DataProtection.Abstractions" version="2.1.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Hosting.Abstractions" version="2.1.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Hosting.Server.Abstractions" version="2.1.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Http" version="2.1.34" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Http.Abstractions" version="2.1.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Bcl.AsyncInterfaces" version="6.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Caching.Memory" version="2.1.23" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.DependencyInjection.Abstractions" version="2.1.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Logging.Abstractions" version="2.1.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.ObjectPool" version="2.1.6" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.IdentityModel.Protocols.WsFederation" version="6.23.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.IdentityModel.Tokens" version="6.23.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.IdentityModel.Tokens.Saml" version="6.23.1" exclude="Build,Analyzers" />
+        <dependency id="System.DirectoryServices" version="6.0.1" exclude="Build,Analyzers" />
+        <dependency id="System.DirectoryServices.Protocols" version="6.0.2" exclude="Build,Analyzers" />
+        <dependency id="System.Reflection.DispatchProxy" version="4.7.1" exclude="Build,Analyzers" />
+        <dependency id="System.Security.Cryptography.ProtectedData" version="6.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.Security.Cryptography.Xml" version="6.0.1" exclude="Build,Analyzers" />
+        <dependency id="System.Security.Principal.Windows" version="5.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.Threading.Tasks.Extensions" version="4.5.4" exclude="Build,Analyzers" />
+        <dependency id="System.Web.Services.Description" version="4.10.3" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <contentFiles>
+      <files include="CoreWCFWebApplicationExtensions.cs" buildAction="Content" />
+    </contentFiles>
+  </metadata>
+</package>

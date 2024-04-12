@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>CoreWCF.Http</id>
+    <version>1.5.2</version>
+    <authors>CoreWCF contributors</authors>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <projectUrl>https://github.com/CoreWCF/CoreWCF</projectUrl>
+    <description>CoreWCF is a port of the service side of Windows Communication Foundation (WCF) to .NET Core. The goal of this project is to enable existing WCF services to move to .NET Core.</description>
+    <copyright>.NET Foundation</copyright>
+    <tags>WCF .net core, CoreWCF</tags>
+    <repository type="git" url="https://github.com/CoreWCF/CoreWCF" commit="3bd127552da41ad13cbfc811313c68072c7ff2d9" />
+    <dependencies>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="CoreWCF.Primitives" version="1.5.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Authentication" version="2.1.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Authorization" version="2.1.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.WebSockets" version="2.1.7" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.DependencyInjection.Abstractions" version="2.1.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Logging.Abstractions" version="2.1.1" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

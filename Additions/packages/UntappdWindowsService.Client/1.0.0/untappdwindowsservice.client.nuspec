@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>UntappdWindowsService.Client</id>
+    <version>1.0.0</version>
+    <authors>UntappdWindowsService.Client</authors>
+    <description>Client by Untappd Windows Service.</description>
+    <repository type="git" commit="d7db866fa87213d8160293359787b08aae455781" />
+    <dependencies>
+      <group targetFramework="net8.0-windows10.0.22621">
+        <dependency id="UntappdWindowsService.Extension" version="1.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.ServiceModel.Http" version="8.0.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <contentFiles>
+      <files include="any/net8.0-windows10.0.22621/UntappdWindowsService.Extension.dll.Example.config" buildAction="Content" />
+    </contentFiles>
+  </metadata>
+</package>

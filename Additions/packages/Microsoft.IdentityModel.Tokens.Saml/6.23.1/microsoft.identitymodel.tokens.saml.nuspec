@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.IdentityModel.Tokens.Saml</id>
+    <version>6.23.1</version>
+    <authors>Microsoft</authors>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <projectUrl>https://github.com/AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet</projectUrl>
+    <description>Includes types that provide support for SamlTokens version 1 and 2.</description>
+    <copyright>© Microsoft Corporation. All rights reserved.</copyright>
+    <tags>.NET Windows Authentication Identity SamlTokens Saml Token Saml2 Token</tags>
+    <serviceable>true</serviceable>
+    <repository type="git" url="https://github.com/AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet" commit="a502b0fc2d50ff7c9500062b098cfd056a81d283" />
+    <dependencies>
+      <group targetFramework=".NETFramework4.5">
+        <dependency id="Microsoft.IdentityModel.Tokens" version="6.23.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.IdentityModel.Xml" version="6.23.1" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETFramework4.6.1">
+        <dependency id="Microsoft.IdentityModel.Tokens" version="6.23.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.IdentityModel.Xml" version="6.23.1" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETFramework4.7.2">
+        <dependency id="Microsoft.IdentityModel.Tokens" version="6.23.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.IdentityModel.Xml" version="6.23.1" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net6.0">
+        <dependency id="Microsoft.IdentityModel.Tokens" version="6.23.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.IdentityModel.Xml" version="6.23.1" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="Microsoft.IdentityModel.Tokens" version="6.23.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.IdentityModel.Xml" version="6.23.1" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>
