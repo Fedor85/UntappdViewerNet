@@ -117,7 +117,7 @@ namespace UntappdViewer.ViewModels
                 {
                     untappdService.Initialize(filePath, settingService.GetDefaultUserName());
                     if (!untappdService.IsUNTPProject())
-                        untappdWindowsServiceClient.SetTempFilesByProcessesIdAsync(Process.GetCurrentProcess().Id, FileHelper.TempDirectory);
+                        untappdWindowsServiceClient.SetTempDirectoryByProcessIdAsync(Process.GetCurrentProcess().Id, FileHelper.TempDirectory);
 
                     if (isUsedArgument)
                         settingService.SetRecentFilePaths(FileHelper.AddFilePath(settingService.GetRecentFilePaths(), filePath, settingService.GetMaxRecentFilePaths()));

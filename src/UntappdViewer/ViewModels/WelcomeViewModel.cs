@@ -214,7 +214,7 @@ namespace UntappdViewer.ViewModels
 
                 untappdService.Initialize(filePath, untappdUserName);
                 if (!untappdService.IsUNTPProject())
-                    untappdWindowsServiceClient.SetTempFilesByProcessesIdAsync(Process.GetCurrentProcess().Id, FileHelper.TempDirectory);
+                    untappdWindowsServiceClient.SetTempDirectoryByProcessIdAsync(Process.GetCurrentProcess().Id, FileHelper.TempDirectory);
             }
             catch (ArgumentException ex)
             {

@@ -4,6 +4,6 @@ namespace UntappdViewer.Interfaces
 {
     public interface IUntappdWindowsServiceClient
     {
-        Task SetTempFilesByProcessesIdAsync(int processeId, string tempFilesPath);
+        Task SetTempDirectoryByProcessIdAsync(int processId, string tempDirectory);
     }
 }

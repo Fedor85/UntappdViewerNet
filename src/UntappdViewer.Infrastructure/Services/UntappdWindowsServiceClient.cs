@@ -8,9 +8,9 @@ namespace UntappdViewer.Infrastructure.Services
         private UntappdWindowsService.Extension.Interfaces.IUntappdWindowsServiceClient client =
                                                 new UntappdWindowsService.Client.UntappdWindowsServiceClient();
 
-        public Task SetTempFilesByProcessesIdAsync(int processeId, string tempFilesPath)
+        public Task SetTempDirectoryByProcessIdAsync(int processId, string tempDirectory)
         {
-            return client.SetTempFilesByProcessesIdAsync(processeId, tempFilesPath);
+            return client.SetTempDirectoryByProcessIdAsync(processId, tempDirectory);
         }
     }
 }
