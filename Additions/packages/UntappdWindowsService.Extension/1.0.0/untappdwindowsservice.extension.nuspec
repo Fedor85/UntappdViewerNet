@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>UntappdWindowsService.Extension</id>
+    <version>1.0.0</version>
+    <authors>UntappdWindowsService.Extension</authors>
+    <description>Package Description</description>
+    <repository type="git" commit="4f124fc721f50ff213927a657ab811e38f3035ab" />
+    <dependencies>
+      <group targetFramework="net8.0-windows10.0.22621">
+        <dependency id="CoreWCF.Http" version="1.5.2" exclude="Build,Analyzers" />
+        <dependency id="System.Configuration.ConfigurationManager" version="8.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.ServiceModel.Primitives" version="8.0.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>
